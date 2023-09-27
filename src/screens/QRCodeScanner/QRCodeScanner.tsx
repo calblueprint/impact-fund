@@ -6,6 +6,7 @@ function QRCodeScannerScreen() {
   return (
     <View style={styles.container}>
       <Text>This is the QR Code Scanner screen!</Text>
+      <Text>do nothing</Text>
     </View>
   );
 }
