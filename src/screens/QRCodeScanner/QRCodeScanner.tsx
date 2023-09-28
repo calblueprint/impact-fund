@@ -3,21 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import styles from '../../app/styles';
 
-enum permissions {
-  UNDETERMINED,
-  DENIED,
-  GRANTED,
-}
-=======
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import React from 'react';
-import { Text, View } from 'react-native';
-=======
-import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
->>>>>>> b349e79 (wip)
->>>>>>> 8f6e63e (made no progress)
 
 enum permissions {
   UNDETERMINED,
