@@ -13,4 +13,8 @@ export default StyleSheet.create({
     backgroundColor: '#339FFF',
     padding: 10,
   },
+  scanner: {
+    height: 50,
+    width: 50,
+  }
 });
