@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -8,6 +9,12 @@ enum permissions {
   DENIED,
   GRANTED,
 }
+=======
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import React from 'react';
+import { Text, View } from 'react-native';
+import styles from './styles';
+>>>>>>> 8f6e63e (made no progress)
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
@@ -37,12 +44,17 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       <Text>This buhis the QR Code Scanner screen!</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
         style={[StyleSheet.absoluteFillObject, styles.scanner]}
       />
       <Text>{data}</Text>
+=======
+      <Text>This is the QR Code Scanner screen!</Text>
+      <BarCodeScanner />
+>>>>>>> 8f6e63e (made no progress)
     </View>
   );
 }
