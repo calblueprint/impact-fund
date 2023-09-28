@@ -51,6 +51,7 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       <Text>Add a new case</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
@@ -71,6 +72,10 @@ function QRCodeScannerScreen() {
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
+=======
+      <Text>This is the QR Code Scanner screen!</Text>
+      <BarCodeScanner />
+>>>>>>> 93e502f (made no progress)
     </View>
   );
 }
