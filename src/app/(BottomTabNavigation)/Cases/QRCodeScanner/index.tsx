@@ -2,7 +2,6 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
 
 enum permissions {
   UNDETERMINED,
