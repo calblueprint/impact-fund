@@ -18,8 +18,6 @@
     "@react-navigation/native-stack": "^6.9.14",
     "@supabase/supabase-js": "^2.38.0",
     "expo": "~49.0.11",
-    "expo-barcode-scanner": "~12.5.3",
-    "expo-camera": "~13.4.4",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.0",
@@ -52,7 +50,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.3"
   },
   "private": true
 }
