@@ -52,6 +52,7 @@ function QRCodeScannerScreen() {
   return (
     <View style={styles.container}>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Text>Add a new case</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
@@ -76,6 +77,14 @@ function QRCodeScannerScreen() {
       <Text>This is the QR Code Scanner screen!</Text>
       <BarCodeScanner />
 >>>>>>> 93e502f (made no progress)
+=======
+      <Text>This buhis the QR Code Scanner screen!</Text>
+      <BarCodeScanner
+        onBarCodeScanned={handleBarCodeScanned}
+        style={[StyleSheet.absoluteFillObject, styles.scanner]}
+      />
+      <Text>{data}</Text>
+>>>>>>> b044d9a (wip)
     </View>
   );
 }
