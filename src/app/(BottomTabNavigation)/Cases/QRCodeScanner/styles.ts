@@ -7,4 +7,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  scanner: {
+    overflow: 'hidden',
+    borderRadius: 10,
+  },
 });
