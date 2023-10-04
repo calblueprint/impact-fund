@@ -2,12 +2,12 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
 
-function UpdatesScreen() {
+function CasesScreen() {
   return (
     <View style={styles.container}>
-      <Text>This is the updates screen!</Text>
+      <Text>This is the cases screen!</Text>
     </View>
   );
 }
 
-export default UpdatesScreen;
+export default CasesScreen;
