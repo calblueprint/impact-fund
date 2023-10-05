@@ -16,5 +16,5 @@ export default StyleSheet.create({
   scanner: {
     height: 50,
     width: 50,
-  }
+  },
 });

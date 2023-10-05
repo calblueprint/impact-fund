@@ -34,6 +34,7 @@
       ]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     ],
     "scheme": "your-app-scheme"
 =======
@@ -43,5 +44,8 @@
     ],
     "scheme": "your-app-scheme"
 >>>>>>> 4bca331 (bruh)
+=======
+    ]
+>>>>>>> 1eaa208 (fixing package issues)
   }
 }

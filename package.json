@@ -31,16 +31,16 @@
     "react-native-screens": "~3.22.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-native-url-polyfill": "^2.0.0",
 =======
 >>>>>>> b044d9a (wip)
 =======
 >>>>>>> 9fd1e6e (wip)
+=======
+>>>>>>> 1eaa208 (fixing package issues)
     "expo-barcode-scanner": "~12.5.3",
     "expo-camera": "~13.4.4"
-=======
-    "expo-barcode-scanner": "~12.5.3"
->>>>>>> a271f00 (wip)
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
