@@ -9,10 +9,17 @@ export default StyleSheet.create({
   },
 
   scanner: {
+<<<<<<< HEAD
     height: 300,
     width: 300,
     border: 'solid',
     borderWidth: 3,
+=======
+    height: 400,
+    width: 400,
+    border: 'solid',
+    borderWidth: 5,
+>>>>>>> 8f58980 (HELPPP)
   },
 
   button: {
@@ -20,5 +27,13 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#339FFF',
     padding: 10,
+<<<<<<< HEAD
+=======
+  },
+
+  crosshair: {
+    height: 400,
+    width: 400,
+>>>>>>> 8f58980 (HELPPP)
   },
 });

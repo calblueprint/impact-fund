@@ -35,6 +35,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     ],
     "scheme": "your-app-scheme"
 =======
@@ -47,5 +48,9 @@
 =======
     ]
 >>>>>>> 1eaa208 (fixing package issues)
+=======
+    ],
+    "scheme": "your-app-scheme"
+>>>>>>> 8f58980 (HELPPP)
   }
 }

@@ -32,6 +32,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-native-url-polyfill": "^2.0.0",
 =======
 >>>>>>> b044d9a (wip)
@@ -39,6 +40,12 @@
 >>>>>>> 9fd1e6e (wip)
 =======
 >>>>>>> 1eaa208 (fixing package issues)
+=======
+    "expo-router": "^2.0.0",
+    "expo-linking": "~5.0.2",
+    "expo-constants": "~14.4.2",
+    "react-native-gesture-handler": "~2.12.0",
+>>>>>>> 8f58980 (HELPPP)
     "expo-barcode-scanner": "~12.5.3",
     "expo-camera": "~13.4.4"
   },
