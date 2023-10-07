@@ -2,13 +2,19 @@ import { Tabs } from 'expo-router/tabs';
 
 export default function AppLayout() {
   return (
-    <Tabs initialRouteName="home" screenOptions={{ headerShown: false }}>
+    <Tabs screenOptions={{ headerShown: true }}>
       <Tabs.Screen
-        name="home"
+        name="Cases"
         options={{
-          href: '/home',
-          tabBarLabel: 'Home',
-          title: 'Home',
+          tabBarLabel: 'Cases',
+          title: 'Cases',
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        options={{
+          tabBarLabel: 'Profile',
+          title: 'Profile',
         }}
       />
     </Tabs>
