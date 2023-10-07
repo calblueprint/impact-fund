@@ -5,7 +5,7 @@ import styles from './styles';
 function CasesScreen() {
   return (
     <View style={styles.container}>
-      <Text>This is the cases screen!</Text>
+      <Text>This is the /Cases/index cases screen!</Text>
     </View>
   );
 }

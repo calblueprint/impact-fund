@@ -24,6 +24,9 @@ function StartScreen() {
       <DummyQueries />
     </View>
   );
+
+  // function StartScreen() {
+  //   return <Redirect href="/(BottomTabNavigation)/Cases" />;
 }
 
 export default StartScreen;
