@@ -9,10 +9,10 @@ export default StyleSheet.create({
   },
 
   scanner: {
-    height: 400,
-    width: 400,
+    height: 300,
+    width: 300,
     border: 'solid',
-    borderWidth: 5,
+    borderWidth: 3,
   },
 
   button: {
@@ -23,7 +23,10 @@ export default StyleSheet.create({
   },
 
   crosshair: {
-    height: 400,
-    width: 400,
+    position: 'absolute',
+    top: 120,
+    left: -90,
+    height: 600,
+    width: 600,
   },
 });
