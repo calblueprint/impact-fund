@@ -10,6 +10,7 @@ export default StyleSheet.create({
 
   scanner: {
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 300,
     width: 300,
     border: 'solid',
@@ -20,6 +21,12 @@ export default StyleSheet.create({
     border: 'solid',
     borderWidth: 5,
 >>>>>>> 8f58980 (HELPPP)
+=======
+    height: 300,
+    width: 300,
+    border: 'solid',
+    borderWidth: 3,
+>>>>>>> db747ee (did branch)
   },
 
   button: {
@@ -32,8 +39,16 @@ export default StyleSheet.create({
   },
 
   crosshair: {
+<<<<<<< HEAD
     height: 400,
     width: 400,
 >>>>>>> 8f58980 (HELPPP)
+=======
+    position: 'absolute',
+    top: 120,
+    left: -90,
+    height: 600,
+    width: 600,
+>>>>>>> db747ee (did branch)
   },
 });

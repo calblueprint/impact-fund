@@ -2,9 +2,13 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Text, TouchableOpacity, View } from 'react-native';
 =======
 import { Image, StyleSheet, Text, View } from 'react-native';
+=======
+import { Image, Text, View } from 'react-native';
+>>>>>>> db747ee (did branch)
 import { TouchableOpacity } from 'react-native-gesture-handler';
 >>>>>>> 8f58980 (HELPPP)
 import styles from './styles';
@@ -64,6 +68,7 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         style={[styles.scanner]}
       />
 =======
@@ -97,6 +102,11 @@ function QRCodeScannerScreen() {
 >>>>>>> b044d9a (wip)
 =======
       <Image style={styles.crosshair} source={require('./img/silly.png')} />
+=======
+        style={[styles.scanner]} // StyleSheet.absoluteFillObject,
+      />
+      <Image style={styles.crosshair} source={require('./img/crosshair.png')} />
+>>>>>>> db747ee (did branch)
 
       <Text>Current Scanning: {data}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
