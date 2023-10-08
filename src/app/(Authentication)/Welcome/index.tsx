@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import StyledButton from '../../../components/StyledButton';
 import styles from './styles';
 
 function WelcomeScreen() {
@@ -12,8 +13,8 @@ function WelcomeScreen() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <StyledButton text="LOG IN" />
-        <StyledButton text="CREATE ACCOUNT" />
+        <StyledButton text="LOG IN" file="/Login" />
+        <StyledButton text="CREATE ACCOUNT" file="/SignUp" />
       </View>
     </View>
   );
