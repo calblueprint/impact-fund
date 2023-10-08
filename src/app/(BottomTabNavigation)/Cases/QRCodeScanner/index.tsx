@@ -42,12 +42,16 @@ function QRCodeScannerScreen() {
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
 <<<<<<< HEAD
+<<<<<<< HEAD
         style={[styles.scanner]}
       />
 =======
         style={[StyleSheet.absoluteFillObject]}
+=======
+        style={[styles.scanner]} // StyleSheet.absoluteFillObject,
+>>>>>>> a3b118f (did branch)
       />
-      <Image style={styles.crosshair} source={require('./img/silly.png')} />
+      <Image style={styles.crosshair} source={require('./img/crosshair.png')} />
 
 >>>>>>> 4bca331 (bruh)
       <Text>Current Scanning: {data}</Text>
