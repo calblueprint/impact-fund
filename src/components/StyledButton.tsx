@@ -1,28 +1,13 @@
-import { Link } from 'expo-router';
 import React from 'react';
-import { Pressable, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
-function StyledButton({ text, file }: { text: string; file: string }) {
+function StyledButton({ text }: { text: string }) {
   return (
-    <Link href={file} asChild>
-      <Pressable>
-        <TouchableOpacity style={[styles.buttonContainer]} activeOpacity={0.7}>
-          <Text style={[styles.buttonText]}>{text}</Text>
-        </TouchableOpacity>
-      </Pressable>
-    </Link>
+    <TouchableOpacity style={[styles.buttonContainer]} activeOpacity={0.7}>
+      <Text style={[styles.buttonText]}>{text}</Text>
+    </TouchableOpacity>
   );
 }
 
 export default StyledButton;
-
-/* 
-<Link href={file} asChild>
-      <Pressable>
-        <TouchableOpacity style={[styles.buttonContainer]} activeOpacity={0.7}>
-          <Text style={[styles.buttonText]}>{text}</Text>
-        </TouchableOpacity>
-      </Pressable>
-    </Link>
-    */

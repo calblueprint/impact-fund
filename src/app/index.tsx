@@ -1,5 +1,6 @@
 import { Link } from 'expo-router';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 
 function StartScreen() {
