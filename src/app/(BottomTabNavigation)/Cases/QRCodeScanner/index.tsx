@@ -26,10 +26,23 @@ function QRCodeScannerScreen() {
     getBarCodeScannerPermissions();
   }, []);
 
+  const isValidBarcode = (caseId: string) =>
+    caseId === 'NOTHING' || caseId === 'NOT A VALID BARCODE';
+
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     if (!scanned) {
-      setScanned(true);
       setData(result.data);
+      if (isValidBarcode(data)) {
+        setScanned(true);
+        router.push({
+          pathname: '/Cases/QRCodeScanner/AddCase',
+          params: { caseId: data },
+        });
+        setData('NOTHING');
+        setScanned(false); // Allow for more scanning
+      } else {
+        setData('NOT A VALID BARCODE');
+      }
     }
   };
 
