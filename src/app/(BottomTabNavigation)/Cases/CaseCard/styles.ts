@@ -20,8 +20,12 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  caseStatus: {
-    height: 40,
+  imagePlaceholder: {
+    flex: 0.4,
+    borderRadius: 10,
+  },
+  statusContainer: {
+    flex: 0.4,
     width: 'auto',
     backgroundColor: '#dcdcdc',
     borderRadius: 10,
@@ -29,15 +33,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imagePlaceholder: {
-    flex: 0.4,
-    backgroundColor: '#dcdcdc',
-    borderRadius: 10,
-  },
-  titleText: {
-    fontSize: 20,
-  },
   statusText: {
     fontSize: 16,
+  },
+  titleText: {
+    flex: 0.6,
   },
 });

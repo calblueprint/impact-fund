@@ -10,8 +10,16 @@ function CasesScreen() {
         <Text>This is the cases screen!</Text>
       </View>
       <View style={styles.casesContainer}>
-        <CaseCard />
-        <CaseCard />
+        <CaseCard
+          title="State of California v. JUUL Labs, Inc."
+          status="In Progress"
+          imageURL="https://reactnative.dev/img/tiny_logo.png"
+        />
+        <CaseCard
+          title="State of California v. Ford Motor Co."
+          status="Settled"
+          imageURL="https://reactnative.dev/img/tiny_logo.png"
+        />
       </View>
     </View>
   );
