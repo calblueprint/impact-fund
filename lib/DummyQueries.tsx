@@ -31,5 +31,5 @@ export default function DummyQueries() {
     const { error } = await supabase.from('Cases').insert(dummyCase);
   }
 
-  return <Button title="Get Case Data" onPress={() => addCase()} />;
+  return <Button title="Get Case Data" onPress={() => allCases()} />;
 }
