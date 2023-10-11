@@ -1,6 +1,8 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 
 enum permissions {
@@ -12,7 +14,7 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [scanned, setScanned] = useState<boolean>(false);
-  const [data, setData] = useState('NO INFO YET!');
+  const [data, setData] = useState('NOTHING');
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -37,12 +39,17 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>This buhis the QR Code Scanner screen!</Text>
+      <Text>Add a new case</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
-        style={[StyleSheet.absoluteFillObject, styles.scanner]}
+        style={[StyleSheet.absoluteFillObject]}
       />
-      <Text>{data}</Text>
+      <Image style={styles.crosshair} source={require('./img/silly.png')} />
+
+      <Text>Current Scanning: {data}</Text>
+      <TouchableOpacity onPress={() => router.back()} style={styles.button}>
+        <Text>Go Back</Text>
+      </TouchableOpacity>
     </View>
   );
 }

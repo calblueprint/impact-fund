@@ -32,6 +32,7 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
       ]
-    ]
+    ],
+    "scheme": "your-app-scheme"
   }
 }
