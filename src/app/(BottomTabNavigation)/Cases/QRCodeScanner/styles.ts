@@ -21,12 +21,4 @@ export default StyleSheet.create({
     backgroundColor: '#339FFF',
     padding: 10,
   },
-
-  crosshair: {
-    position: 'absolute',
-    top: 120,
-    left: -90,
-    height: 600,
-    width: 600,
-  },
 });
