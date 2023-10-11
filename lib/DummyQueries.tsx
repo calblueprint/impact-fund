@@ -1,6 +1,5 @@
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from '../src/app/styles';
 import supabase from './supabase';
 

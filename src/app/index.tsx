@@ -1,6 +1,5 @@
 import { Link } from 'expo-router';
-import { Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity, View } from 'react-native';
 import DummyQueries from '../../lib/DummyQueries';
 import styles from './styles';
 
