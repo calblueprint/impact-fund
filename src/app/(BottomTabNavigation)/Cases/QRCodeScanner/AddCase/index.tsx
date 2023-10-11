@@ -27,7 +27,7 @@ function AddCase() {
       <Image style={styles.image} source={{ uri: dummyData.image }} />
       <Text style={styles.blurb}>{dummyData.blurb}</Text>
       <TouchableOpacity onPress={addToCases} style={styles.button}>
-        <Text>ADD TO CASES</Text>
+        <Text>ADD TO CASES {caseId}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>CANCEL</Text>
