@@ -41,8 +41,15 @@ function QRCodeScannerScreen() {
       <Text>Add a new case</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
+<<<<<<< HEAD
         style={[styles.scanner]}
       />
+=======
+        style={[StyleSheet.absoluteFillObject]}
+      />
+      <Image style={styles.crosshair} source={require('./img/silly.png')} />
+
+>>>>>>> 4bca331 (bruh)
       <Text>Current Scanning: {data}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>

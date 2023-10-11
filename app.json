@@ -33,10 +33,15 @@
         }
       ]
 <<<<<<< HEAD
+<<<<<<< HEAD
     ],
     "scheme": "your-app-scheme"
 =======
     ]
 >>>>>>> 9c76ec6 (fixinggg..)
+=======
+    ],
+    "scheme": "your-app-scheme"
+>>>>>>> 4bca331 (bruh)
   }
 }
