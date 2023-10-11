@@ -1,5 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styles from '../src/app/styles';
 import supabase from './supabase';
 
