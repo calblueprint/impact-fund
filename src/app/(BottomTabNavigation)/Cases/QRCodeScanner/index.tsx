@@ -1,16 +1,7 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Text, TouchableOpacity, View } from 'react-native';
-=======
-import { Image, StyleSheet, Text, View } from 'react-native';
-=======
-import { Image, Text, View } from 'react-native';
->>>>>>> db747ee (did branch)
-import { TouchableOpacity } from 'react-native-gesture-handler';
->>>>>>> 8f58980 (HELPPP)
 import styles from './styles';
 
 enum permissions {
@@ -60,59 +51,15 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       <Text>Add a new case</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         style={[styles.scanner]}
       />
-=======
-        style={[StyleSheet.absoluteFillObject]}
-=======
-        style={[styles.scanner]} // StyleSheet.absoluteFillObject,
->>>>>>> a3b118f (did branch)
-      />
-      <Image style={styles.crosshair} source={require('./img/crosshair.png')} />
-
->>>>>>> 4bca331 (bruh)
       <Text>Current Scanning: {data}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-=======
-      <Text>This is the QR Code Scanner screen!</Text>
-      <BarCodeScanner />
->>>>>>> 93e502f (made no progress)
-=======
-      <Text>This buhis the QR Code Scanner screen!</Text>
-=======
-      <Text>Add a new case</Text>
->>>>>>> 8f58980 (HELPPP)
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={[StyleSheet.absoluteFillObject]}
-      />
-<<<<<<< HEAD
-      <Text>{data}</Text>
->>>>>>> b044d9a (wip)
-=======
-      <Image style={styles.crosshair} source={require('./img/silly.png')} />
-=======
-        style={[styles.scanner]} // StyleSheet.absoluteFillObject,
-      />
-      <Image style={styles.crosshair} source={require('./img/crosshair.png')} />
->>>>>>> db747ee (did branch)
-
-      <Text>Current Scanning: {data}</Text>
-      <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-        <Text>Go Back</Text>
-      </TouchableOpacity>
->>>>>>> 8f58980 (HELPPP)
     </View>
   );
 }
