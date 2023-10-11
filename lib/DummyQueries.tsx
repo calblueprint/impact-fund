@@ -1,3 +1,4 @@
+import { View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import supabase from './supabase';
 
@@ -41,12 +42,12 @@ export default function DummyQueries() {
   }
 
   return (
-    <div>
+    <View>
       <Button title="Get Case Data" onPress={() => allCases()} />
       <Button title="Get Case Data" onPress={() => approvedCases()} />
       <Button title="Get Case Data" onPress={() => unapprovedCases()} />
       <Button title="Get Case Data" onPress={() => addCase()} />
-      <Text>{queryHolder ? "": queryHolder}</Text>
-    </div>
-  )
+      <Text>{queryHolder ? '' : queryHolder}</Text>
+    </View>
+  );
 }
