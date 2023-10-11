@@ -1,5 +1,7 @@
 import { View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { Text } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import styles from '../src/app/styles';
 import supabase from './supabase';
 
 export default function DummyQueries() {
@@ -43,10 +45,18 @@ export default function DummyQueries() {
 
   return (
     <View>
-      <Button title="Get Case Data" onPress={() => allCases()} />
-      <Button title="Get Case Data" onPress={() => approvedCases()} />
-      <Button title="Get Case Data" onPress={() => unapprovedCases()} />
-      <Button title="Get Case Data" onPress={() => addCase()} />
+      <TouchableOpacity style={styles.button} onPress={() => allCases()}>
+        <Text>Get All Cases</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => approvedCases()}>
+        <Text>Get Approved Cases</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => unapprovedCases()}>
+        <Text>Get Unapproved Cases</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => addCase()}>
+        <Text>Add a Dummy Case</Text>
+      </TouchableOpacity>
       <Text>{queryHolder ? '' : queryHolder}</Text>
     </View>
   );
