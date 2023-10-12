@@ -1,7 +1,6 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 function WelcomeScreen() {
