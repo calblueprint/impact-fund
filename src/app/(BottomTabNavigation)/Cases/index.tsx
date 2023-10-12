@@ -15,8 +15,9 @@ function CasesScreen() {
   const [cases, setCases] = useState<Case[]>([]);
 
   useEffect(() => {
-    const fetchedCases = fetchListViewCases();
-    setCases(fetchedCases);
+    fetchListViewCases().then(data => {
+      setCases(data);
+    });
   }, []);
 
   return (

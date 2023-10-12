@@ -1,14 +1,39 @@
 import { allCases } from '../../../../lib/cases';
 
-export default async function fetchListViewCases() {
-  let result;
+export type Case = {
+  uid: string;
+  title: string;
+  status: string;
+  imageUrl: string;
+};
 
-  await allCases().then(data => {
-    result = data;
+export default async function fetchListViewCases() {
+  let fetchedData;
+
+  await allCases().then((data: Case[] | null | undefined) => {
+    fetchedData = data;
   });
 
-  // eslint-disable-next-line no-console
-  console.log(result);
+  if (!fetchedData) {
+    return;
+  }
 
-  return result;
+  const formattedData = [];
+  for (let i = 0; i < 10; i += 1) {
+    // eslint-disable-next-line camelcase
+    const { title, image, caseStatus } = fetchedData[i];
+    // eslint-disable-next-line no-console
+    console.log(title);
+
+    formattedData.push({
+      title,
+      status: caseStatus,
+      imageUrl: image,
+    });
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(formattedData);
+
+  return formattedData;
 }
