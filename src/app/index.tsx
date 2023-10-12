@@ -6,11 +6,6 @@ import styles from './styles';
 function StartScreen() {
   return (
     <View style={styles.container}>
-      <Link href="/Welcome" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text>Welcome Screen</Text>
-        </TouchableOpacity>
-      </Link>
       <Link href="/Cases" asChild>
         <TouchableOpacity style={styles.button}>
           <Text>Cases Screen</Text>
@@ -21,12 +16,14 @@ function StartScreen() {
           <Text>Profile Screen</Text>
         </TouchableOpacity>
       </Link>
+      <Link href="/Updates" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text>Updates Screen</Text>
+        </TouchableOpacity>
+      </Link>
       <DummyQueries />
     </View>
   );
-
-  // function StartScreen() {
-  //   return <Redirect href="/(BottomTabNavigation)/Cases" />;
 }
 
 export default StartScreen;
