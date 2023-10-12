@@ -17,6 +17,13 @@ export default function AppLayout() {
           title: 'Profile',
         }}
       />
+      <Tabs.Screen
+        name="Updates"
+        options={{
+          tabBarLabel: 'Updates',
+          title: 'Updates',
+        }}
+      />
     </Tabs>
   );
 }
