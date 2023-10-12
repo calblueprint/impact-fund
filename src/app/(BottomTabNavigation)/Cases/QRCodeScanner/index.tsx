@@ -26,20 +26,18 @@ function QRCodeScannerScreen() {
     getBarCodeScannerPermissions();
   }, []);
 
-  const isValidBarcode = (caseId: string) =>
-    caseId === 'NOTHING' || caseId === 'NOT A VALID BARCODE';
+  const isValidBarcode = (caseId: string) => true;
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     if (!scanned) {
       setData(result.data);
+
       if (isValidBarcode(data)) {
         setScanned(true);
         router.push({
-          pathname: '/Cases/QRCodeScanner/AddCase',
+          pathname: '/Cases/QRCodeScanner/AddCase', // theres actually no mf way its this hard to pass some information to a page bruh
           params: { caseId: data },
         });
-        setData('NOTHING');
-        setScanned(false); // Allow for more scanning
       } else {
         setData('NOT A VALID BARCODE');
       }
