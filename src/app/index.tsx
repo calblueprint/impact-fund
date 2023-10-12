@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
-import DummyQueries from '../../lib/DummyQueries';
+import DummyQueries from '../supabase/queries/DummyQueries';
 import styles from './styles';
 
 function StartScreen() {
