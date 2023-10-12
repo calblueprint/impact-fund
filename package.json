@@ -32,7 +32,6 @@
     "react-native-url-polyfill": "^2.0.0",
     "expo-camera": "~13.4.4",
     "expo-barcode-scanner": "~12.5.3"
-
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
