@@ -11,7 +11,7 @@ function StartScreen() {
           <Text>Welcome Screen</Text>
         </TouchableOpacity>
       </Link>
-      <Link href="/Cases" asChild>
+      <Link href="/Cases/QRCodeScanner" asChild>
         <TouchableOpacity style={styles.button}>
           <Text>Cases Screen</Text>
         </TouchableOpacity>
