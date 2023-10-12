@@ -5,11 +5,11 @@ import styles from './styles';
 type caseCardProps = {
   title: string;
   status: string;
-  imageURL?: string;
+  imageUrl?: string;
   // navigationURL?: string;
 };
 
-function CaseCard({ title, status, imageURL }: caseCardProps) {
+function CaseCard({ title, status, imageUrl }: caseCardProps) {
   return (
     <TouchableOpacity style={styles.caseCard}>
       <View style={styles.infoContainer}>
@@ -23,7 +23,7 @@ function CaseCard({ title, status, imageURL }: caseCardProps) {
       <Image
         style={styles.imagePlaceholder}
         source={{
-          uri: imageURL,
+          uri: imageUrl,
         }}
       />
     </TouchableOpacity>
