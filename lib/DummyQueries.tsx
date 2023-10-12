@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from '../src/app/styles';
 import supabase from './supabase';

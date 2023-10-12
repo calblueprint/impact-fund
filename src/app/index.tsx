@@ -1,4 +1,5 @@
 import { Link } from 'expo-router';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import DummyQueries from '../../lib/DummyQueries';
 import styles from './styles';
