@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
-import { fetchListViewCases } from './utils';
+import fetchListViewCases from './utils';
 
 export type Case = {
   uid: string;
