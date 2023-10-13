@@ -32,13 +32,14 @@ export default function DummyQueries() {
       title: 'Dummy Case',
       summary: 'Testing intializing db',
       image: 'no.jpg',
-      case_status: 'In Progress',
-      claim_link: 'berkeley.edu',
-      case_site: 'berkeley.edu',
-      opt_out_link: 'berkeley.edu',
+      caseStatus: 'In Progress',
+      claimLink: 'berkeley.edu',
+      caseSite: 'berkeley.edu',
+      optOutLink: 'berkeley.edu',
     };
     const { error } = await supabase.from('Cases').insert(dummyCase);
     queryHolder = error;
+    console.log(error);
   }
 
   return (
