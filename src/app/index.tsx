@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import DummyQueries from '../supabase/DummyQueries';
+import { signInUser, signUpUser } from '../supabase/auth';
 
 function StartScreen() {
   return (
@@ -23,6 +24,12 @@ function StartScreen() {
         </TouchableOpacity>
       </Link>
       <DummyQueries />
+      <TouchableOpacity style={styles.button} onPress={() => signUpUser()}>
+        <Text>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => signInUser()}>
+        <Text>Sign In</Text>
+      </TouchableOpacity>
     </View>
   );
 }
