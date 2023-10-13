@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
 import DummyQueries from '../supabase/DummyQueries';
+import { signInUser, signUpUser } from '../supabase/auth';
 import styles from './styles';
 
 function StartScreen() {
@@ -22,6 +23,12 @@ function StartScreen() {
         </TouchableOpacity>
       </Link>
       <DummyQueries />
+      <TouchableOpacity style={styles.button} onPress={() => signUpUser()}>
+        <Text>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => signInUser()}>
+        <Text>Sign In</Text>
+      </TouchableOpacity>
     </View>
   );
 }
