@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import styles from '../src/app/styles';
-import supabase from './supabase';
+import supabase from '../../lib/supabase';
+import styles from '../app/styles';
 
 export default function DummyQueries() {
   let queryHolder;
