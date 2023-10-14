@@ -6,11 +6,6 @@ import styles from './styles';
 function StartScreen() {
   return (
     <View style={styles.container}>
-      <Link href="/Welcome" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text>Welcome Screen</Text>
-        </TouchableOpacity>
-      </Link>
       <Link href="/Cases/QRCodeScanner" asChild>
         <TouchableOpacity style={styles.button}>
           <Text>QR Code Scanner</Text>
