@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "allowJs": true
   },
   "extends": "expo/tsconfig.base"
 }
