@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import styles from '../src/app/styles';
-import supabase from './supabase';
+import styles from '../app/styles';
+import supabase from './createClient';
 
 export default function DummyQueries() {
   let queryHolder;
@@ -33,13 +33,14 @@ export default function DummyQueries() {
       title: 'Dummy Case',
       summary: 'Testing intializing db',
       image: 'no.jpg',
-      case_status: 'In Progress',
-      claim_link: 'berkeley.edu',
-      case_site: 'berkeley.edu',
-      opt_out_link: 'berkeley.edu',
+      caseStatus: 'In Progress',
+      claimLink: 'berkeley.edu',
+      caseSite: 'berkeley.edu',
+      optOutLink: 'berkeley.edu',
     };
     const { error } = await supabase.from('Cases').insert(dummyCase);
     queryHolder = error;
+    console.log(error);
   }
 
   return (

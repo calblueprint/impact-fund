@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import DummyQueries from '../../lib/DummyQueries';
+import DummyQueries from '../supabase/DummyQueries';
 import styles from './styles';
 
 function StartScreen() {
@@ -12,7 +12,7 @@ function StartScreen() {
           <Text>Welcome Screen</Text>
         </TouchableOpacity>
       </Link>
-      <Link href="/Cases" asChild>
+      <Link href="/Cases/QRCodeScanner" asChild>
         <TouchableOpacity style={styles.button}>
           <Text>Cases Screen</Text>
         </TouchableOpacity>

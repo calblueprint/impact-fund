@@ -1,4 +1,4 @@
-import supabase from './supabase';
+import supabase from './createClient';
 
 export async function allCases() {
   const { data } = await supabase.from('Cases').select();

@@ -1,4 +1,4 @@
-import { allCases } from '../../../../lib/cases';
+import { allCases } from '../../../supabase/cases';
 
 export type Case = {
   uid: string;
