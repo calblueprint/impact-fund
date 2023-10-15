@@ -1,18 +1,23 @@
-import { getCaseByCaseId } from '../../../supabase/cases';
-import { CaseCardProps } from './types';
+import { getCasesByIds } from '../../../supabase/cases';
+import { CaseCardProps, CaseId, UserUid } from './types';
 
-export default async function fetchListViewCases(): Promise<CaseCardProps[]> {
-  // try {
-  // const fetchedData = await allCases();
-  const fetchedData = await getCaseByCaseId(1);
-
-  if (!fetchedData) {
+export default async function fetchListViewCases(
+  userUid: UserUid,
+): Promise<CaseCardProps[]> {
+  if (!userUid) {
     throw new Error();
   }
 
-  const formattedData = fetchedData.map(item => {
+  const caseIds: CaseId[] = [1, 2, 3];
+  const rawData = await getCasesByIds(caseIds);
+
+  if (!rawData) {
+    throw new Error();
+  }
+
+  const formattedData = rawData.map(item => {
     const formattedCase: CaseCardProps = {
-      uid: item.id,
+      id: item.id,
       title: item.title,
       status: item.caseStatus,
       imageUrl: item.image,

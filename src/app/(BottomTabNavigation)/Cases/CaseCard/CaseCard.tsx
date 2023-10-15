@@ -3,7 +3,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { CaseCardProps } from '../types';
 import styles from './styles';
 
-function CaseCard({ uid, title, status, imageUrl }: CaseCardProps) {
+function CaseCard({ id, title, status, imageUrl }: CaseCardProps) {
   return (
     <TouchableOpacity style={styles.caseCard}>
       <View style={styles.infoContainer}>

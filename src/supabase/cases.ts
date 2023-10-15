@@ -1,3 +1,4 @@
+import { CaseId } from '../app/(BottomTabNavigation)/Cases/types';
 import supabase from './createClient';
 
 export async function allCases() {
@@ -11,9 +12,12 @@ export async function allCases() {
   }
 }
 
-export async function getCaseByCaseId(caseId: number) {
+// export async function getCaseIdsFromUserId(userId: UserUid);
+
+export async function getCasesByIds(caseIds: CaseId[]) {
   try {
-    const { data } = await supabase.from('Cases').select().eq('id', caseId);
+    // query cases that match a list of ids
+    const { data } = await supabase.from('Cases').select().in('id', caseIds);
     return data;
   } catch (error) {
     // eslint-disable-next-line no-console

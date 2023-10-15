@@ -1,5 +1,8 @@
+export type CaseId = number;
+export type UserUid = string;
+
 export type CaseCardProps = {
-  uid: number;
+  id: CaseId;
   title: string;
   status: string;
   imageUrl?: string;

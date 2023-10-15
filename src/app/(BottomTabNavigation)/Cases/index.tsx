@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
-import { CaseCardProps } from './types';
+import { CaseCardProps, UserUid } from './types';
 import fetchListViewCases from './utils';
 
 function CasesScreen() {
   const [cases, setCases] = useState<CaseCardProps[]>([]);
 
+  const userUid: UserUid = '51e151b4-b7e6-4c35-adcc-f91a3614ad9b';
+
   useEffect(() => {
-    fetchListViewCases().then(data => {
+    fetchListViewCases(userUid).then(data => {
       setCases(data);
     });
   }, []);
@@ -24,13 +26,13 @@ function CasesScreen() {
           data={cases}
           renderItem={({ item }) => (
             <CaseCard
-              uid={item.uid}
+              id={item.id}
               title={item.title}
               status={item.status}
               imageUrl={item.imageUrl}
             />
           )}
-          keyExtractor={item => String(item.uid)}
+          keyExtractor={item => String(item.id)}
         />
       </View>
     </View>
