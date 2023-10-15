@@ -1,4 +1,4 @@
-import { CaseId } from '../app/(BottomTabNavigation)/Cases/types';
+import { CaseId, UserUid } from '../app/(BottomTabNavigation)/Cases/types';
 import supabase from './createClient';
 
 export async function allCases() {
@@ -12,13 +12,31 @@ export async function allCases() {
   }
 }
 
-// export async function getCaseIdsFromUserId(userId: UserUid);
-
 export async function getCasesByIds(caseIds: CaseId[]) {
   try {
     // query cases that match a list of ids
     const { data } = await supabase.from('Cases').select().in('id', caseIds);
     return data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error querying database');
+    throw error;
+  }
+}
+
+export async function getCaseIdsFromUserId(userId: UserUid): Promise<CaseId[]> {
+  try {
+    // query cases that match a list of ids
+    const { data } = await supabase
+      .from('status')
+      .select('caseId')
+      .eq('userId', userId);
+
+    if (!data) {
+      throw new Error();
+    }
+
+    return data.map(item => item.caseId as CaseId);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('error querying database');

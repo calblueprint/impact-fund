@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
+// import { v4, validate } from 'uuid';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
 import { CaseCardProps, UserUid } from './types';

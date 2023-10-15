@@ -1,5 +1,5 @@
-import { getCasesByIds } from '../../../supabase/cases';
-import { CaseCardProps, CaseId, UserUid } from './types';
+import { getCaseIdsFromUserId, getCasesByIds } from '../../../supabase/cases';
+import { CaseCardProps, UserUid } from './types';
 
 export default async function fetchListViewCases(
   userUid: UserUid,
@@ -8,7 +8,8 @@ export default async function fetchListViewCases(
     throw new Error();
   }
 
-  const caseIds: CaseId[] = [1, 2, 3];
+  const caseIds = await getCaseIdsFromUserId(userUid);
+
   const rawData = await getCasesByIds(caseIds);
 
   if (!rawData) {
