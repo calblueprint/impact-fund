@@ -9,6 +9,7 @@ import fetchListViewCases from './utils';
 function CasesScreen() {
   const [cases, setCases] = useState<CaseCardProps[]>([]);
 
+  // TODO: fetch user Uid from context/state
   const userUid: UserUid = '51e151b4-b7e6-4c35-adcc-f91a3614ad9b';
 
   useEffect(() => {

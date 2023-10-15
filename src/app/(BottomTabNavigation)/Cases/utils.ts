@@ -4,30 +4,19 @@ import { CaseCardProps, UserUid } from './types';
 export default async function fetchListViewCases(
   userUid: UserUid,
 ): Promise<CaseCardProps[]> {
-  if (!userUid) {
-    throw new Error();
+  try {
+    if (!userUid) {
+      throw new Error(`Invalid user uid: ${userUid}`);
+    }
+
+    const caseIds = await getCaseIdsFromUserId(userUid);
+    const caseData = await getCasesByIds(caseIds);
+    // eslint-disable-next-line no-console
+    console.log(caseData);
+    return caseData;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(fetchListViewCases)', error);
+    throw error;
   }
-
-  const caseIds = await getCaseIdsFromUserId(userUid);
-
-  const rawData = await getCasesByIds(caseIds);
-
-  if (!rawData) {
-    throw new Error();
-  }
-
-  const formattedData = rawData.map(item => {
-    const formattedCase: CaseCardProps = {
-      id: item.id,
-      title: item.title,
-      status: item.caseStatus,
-      imageUrl: item.image,
-    };
-    return formattedCase;
-  });
-
-  // eslint-disable-next-line no-console
-  console.log(formattedData);
-
-  return formattedData;
 }
