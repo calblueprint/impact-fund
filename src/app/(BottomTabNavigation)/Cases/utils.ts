@@ -1,36 +1,23 @@
 import { allCases } from '../../../supabase/cases';
+import { caseCardProps } from './types';
 
-export type Case = {
-  uid: string;
-  title: string;
-  status: string;
-  imageUrl: string;
-};
-
-export default async function fetchListViewCases() {
-  let fetchedData;
-
-  await allCases().then((data: Case[] | null | undefined) => {
-    fetchedData = data;
-  });
+export default async function fetchListViewCases(): Promise<caseCardProps[]> {
+  // try {
+  const fetchedData = await allCases();
 
   if (!fetchedData) {
-    return;
+    throw new Error();
   }
 
-  const formattedData = [];
-  for (let i = 0; i < 10; i += 1) {
-    // eslint-disable-next-line camelcase
-    const { title, image, caseStatus } = fetchedData[i];
-    // eslint-disable-next-line no-console
-    console.log(title);
-
-    formattedData.push({
-      title,
-      status: caseStatus,
-      imageUrl: image,
-    });
-  }
+  const formattedData = fetchedData.map(item => {
+    const formattedCase: caseCardProps = {
+      uid: item.id,
+      title: item.title,
+      status: item.caseStatus,
+      imageUrl: item.image,
+    };
+    return formattedCase;
+  });
 
   // eslint-disable-next-line no-console
   console.log(formattedData);

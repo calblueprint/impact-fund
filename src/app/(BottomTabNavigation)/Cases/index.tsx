@@ -2,17 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
+import { caseCardProps } from './types';
 import fetchListViewCases from './utils';
 
-export type Case = {
-  uid: string;
-  title: string;
-  status: string;
-  imageUrl: string;
-};
-
 function CasesScreen() {
-  const [cases, setCases] = useState<Case[]>([]);
+  const [cases, setCases] = useState<caseCardProps[]>([]);
 
   useEffect(() => {
     fetchListViewCases().then(data => {
@@ -30,12 +24,13 @@ function CasesScreen() {
           data={cases}
           renderItem={({ item }) => (
             <CaseCard
+              uid={item.uid}
               title={item.title}
               status={item.status}
               imageUrl={item.imageUrl}
             />
           )}
-          keyExtractor={item => item.uid}
+          keyExtractor={item => String(item.uid)}
         />
       </View>
     </View>

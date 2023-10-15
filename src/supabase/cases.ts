@@ -1,8 +1,14 @@
 import supabase from './createClient';
 
 export async function allCases() {
-  const { data } = await supabase.from('Cases').select();
-  return data;
+  try {
+    const { data } = await supabase.from('Cases').select();
+    return data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error querying database');
+    throw error;
+  }
 }
 
 export async function addCase() {
