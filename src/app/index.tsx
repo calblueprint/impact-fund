@@ -12,9 +12,14 @@ function StartScreen() {
           <Text>Welcome Screen</Text>
         </TouchableOpacity>
       </Link>
-      <Link href="/Cases/QRCodeScanner" asChild>
+      <Link href="/Cases" asChild>
         <TouchableOpacity style={styles.button}>
           <Text>Cases Screen</Text>
+        </TouchableOpacity>
+      </Link>
+      <Link href="/QRCodeScanner" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text>QR Code Scanner</Text>
         </TouchableOpacity>
       </Link>
       <Link href="/Profile" asChild>
