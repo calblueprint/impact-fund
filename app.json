@@ -32,25 +32,7 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
       ]
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     ],
     "scheme": "your-app-scheme"
-=======
-    ]
->>>>>>> 9c76ec6 (fixinggg..)
-=======
-    ],
-    "scheme": "your-app-scheme"
->>>>>>> 4bca331 (bruh)
-=======
-    ]
->>>>>>> 1eaa208 (fixing package issues)
-=======
-    ],
-    "scheme": "your-app-scheme"
->>>>>>> 8f58980 (HELPPP)
   }
 }

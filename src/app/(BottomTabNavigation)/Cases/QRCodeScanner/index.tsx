@@ -33,9 +33,10 @@ function QRCodeScannerScreen() {
 
       if (isValidBarcode(data)) {
         setScanned(true);
+        console.log('DATA IS:', data);
         router.push({
-          pathname: '/Cases/QRCodeScanner/AddCase', // theres actually no mf way its this hard to pass some information to a page bruh
-          params: { caseId: data },
+          pathname: '/Cases/QRCodeScanner/AddCase', // theres actually no way its this hard to pass some information to a page bruh
+          params: { caseId: 1 },
         });
       } else {
         setData('NOT A VALID BARCODE');

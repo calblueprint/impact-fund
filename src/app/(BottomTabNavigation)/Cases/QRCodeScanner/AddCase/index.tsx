@@ -1,32 +1,31 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Image, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import supabase from '../../../../../../lib/supabase';
 import styles from './styles';
 
 function AddCase() {
   const local = useLocalSearchParams();
-  console.log(local);
   const { caseId } = local;
+  const router = useRouter();
+
+  console.log('CASE ID IS:', caseId);
   useEffect(() => {
     const getData = async () => {
       const { data, error } = await supabase
         .from('Cases')
         .select()
-        .filter('id', 'is', caseId);
-      // .eq('id', caseId);
+        .eq('id', caseId);
+
+      if (error) {
+        console.log(error);
+        router.back();
+      }
+
+      console.log(data);
     };
-    // getData();
+    getData();
   }, []);
-
-  // error handling
-  // if (error) {
-  //   console.log('UH OH!');
-  //   router.back();
-  // }
-
-  // console.log(data);
 
   const dummyData = {
     image:
