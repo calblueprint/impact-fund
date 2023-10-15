@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
-import { caseCardProps } from './types';
+import { CaseCardProps } from './types';
 import fetchListViewCases from './utils';
 
 function CasesScreen() {
-  const [cases, setCases] = useState<caseCardProps[]>([]);
+  const [cases, setCases] = useState<CaseCardProps[]>([]);
 
   useEffect(() => {
     fetchListViewCases().then(data => {

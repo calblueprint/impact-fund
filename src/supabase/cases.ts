@@ -11,6 +11,17 @@ export async function allCases() {
   }
 }
 
+export async function getCaseByCaseId(caseId: number) {
+  try {
+    const { data } = await supabase.from('Cases').select().eq('id', caseId);
+    return data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error querying database');
+    throw error;
+  }
+}
+
 export async function addCase() {
   const dummyCase = {
     approved: false,

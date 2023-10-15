@@ -1,4 +1,4 @@
-export type caseCardProps = {
+export type CaseCardProps = {
   uid: number;
   title: string;
   status: string;

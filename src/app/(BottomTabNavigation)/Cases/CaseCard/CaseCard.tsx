@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { caseCardProps } from '../types';
+import { CaseCardProps } from '../types';
 import styles from './styles';
 
-function CaseCard({ uid, title, status, imageUrl }: caseCardProps) {
+function CaseCard({ uid, title, status, imageUrl }: CaseCardProps) {
   return (
     <TouchableOpacity style={styles.caseCard}>
       <View style={styles.infoContainer}>
