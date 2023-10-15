@@ -12,8 +12,7 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [scanned, setScanned] = useState<boolean>(false);
-  const [data, setData] = useState('NOTHING');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -28,19 +27,13 @@ function QRCodeScannerScreen() {
   const isValidBarcode = (caseId: string) => true;
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (!scanned) {
-      setData(result.data);
-
-      if (isValidBarcode(data)) {
-        setScanned(true);
-        console.log('DATA IS:', data);
-        router.push({
-          pathname: '/Cases/QRCodeScanner/AddCase', // theres actually no way its this hard to pass some information to a page bruh
-          params: { caseId: 1 },
-        });
-      } else {
-        setData('NOT A VALID BARCODE');
-      }
+    if (isValidBarcode(result.data)) {
+      router.push({
+        pathname: '/Cases/QRCodeScanner/AddCase',
+        params: { caseId: result.data },
+      });
+    } else {
+      setStatus('INVALID QR CODE!');
     }
   };
 
@@ -55,7 +48,7 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text>Current Scanning: {data}</Text>
+      <Text>Current Scanning: {status}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
