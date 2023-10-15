@@ -5,7 +5,7 @@ import styles from './styles';
 function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text>This is the /Profile/index screen!</Text>
+      <Text>This is the /Updates/index update screen!</Text>
     </View>
   );
 }
