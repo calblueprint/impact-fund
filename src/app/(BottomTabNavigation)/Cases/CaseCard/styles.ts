@@ -4,9 +4,9 @@ export default StyleSheet.create({
   caseCard: {
     height: 137,
     width: 'auto',
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    marginBottom: 20,
+    marginLeft: 10,
+    marginRight: 10,
     borderWidth: 1,
     borderRadius: 10,
     padding: 20,
