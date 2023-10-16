@@ -10,6 +10,7 @@ enum caseStatus {
   Settled,
   Cancelled,
 }
+
 export interface Case {
   id: number;
   approved: boolean;
@@ -18,6 +19,7 @@ export interface Case {
   image: string;
   caseStatus: caseStatus;
 }
+
 function AddCase() {
   const local = useLocalSearchParams();
   const { caseId } = local;

@@ -12,7 +12,7 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [status, setStatus] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -33,7 +33,7 @@ function QRCodeScannerScreen() {
         params: { caseId: result.data },
       });
     } else {
-      setStatus('INVALID QR CODE!');
+      setMessage('INVALID QR CODE!');
     }
   };
 
@@ -48,7 +48,7 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text>Current Scanning: {status}</Text>
+      <Text>Current Scanning: {message}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
