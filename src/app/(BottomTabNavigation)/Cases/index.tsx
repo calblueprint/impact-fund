@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
@@ -34,11 +35,13 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
-          <View style={styles.circle}>
-            <Text>Camera</Text>
-          </View>
-        </TouchableOpacity>
+        <Link href="/QRCodeScanner" asChild>
+          <TouchableOpacity>
+            <View style={styles.circle}>
+              <Text>Camera</Text>
+            </View>
+          </TouchableOpacity>
+        </Link>
       </View>
       <View style={styles.casesContainer}>
         <FlatList
