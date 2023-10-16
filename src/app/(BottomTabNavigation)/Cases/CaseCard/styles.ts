@@ -38,5 +38,6 @@ export default StyleSheet.create({
   },
   titleText: {
     flex: 0.6,
+    fontSize: 17,
   },
 });
