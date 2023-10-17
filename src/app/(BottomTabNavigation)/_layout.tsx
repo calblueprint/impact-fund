@@ -11,10 +11,10 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="Profile"
+        name="Updates"
         options={{
-          tabBarLabel: 'Profile',
-          title: 'Profile',
+          tabBarLabel: 'Updates',
+          title: 'Updates',
         }}
       />
     </Tabs>
