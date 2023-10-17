@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import StyledButton from '../../../Components/StyledButton/StyledButton';
+
 import styles from './styles';
+import StyledButton from '../../../Components/StyledButton/StyledButton';
 
 function WelcomeScreen() {
   return (
