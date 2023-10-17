@@ -19,5 +19,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: 310,
+    borderRadius: 5,
+    borderColor: '#C5C5C5',
   },
 });
