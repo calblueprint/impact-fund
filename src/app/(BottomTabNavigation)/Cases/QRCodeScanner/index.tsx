@@ -2,6 +2,7 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { signOutUser } from '../../../../supabase/queries/auth';
 import styles from './styles';
 
 enum permissions {
@@ -46,6 +47,9 @@ function QRCodeScannerScreen() {
       <Text>Current Scanning: {data}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => signOutUser()} style={styles.button}>
+        <Text>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
