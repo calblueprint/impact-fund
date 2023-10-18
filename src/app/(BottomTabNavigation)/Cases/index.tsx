@@ -37,8 +37,8 @@ function CasesScreen() {
             <CaseCard
               id={item.id}
               title={item.title}
-              status={item.caseStatus}
-              imageUrl={item.image}
+              caseStatus={item.caseStatus}
+              image={item.image}
             />
           )}
           keyExtractor={item => String(item.id)}

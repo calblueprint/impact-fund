@@ -2,9 +2,16 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { Case } from '../../../../types/types';
+import { CaseUid } from '../../../../types/types';
 
-function CaseCard({ title, caseStatus, image }: Case) {
+type CaseCardProps = {
+  id: CaseUid;
+  title: string;
+  caseStatus: string;
+  image: string;
+};
+
+function CaseCard({ id, title, caseStatus, image }: CaseCardProps) {
   return (
     <TouchableOpacity style={styles.caseCard}>
       <View style={styles.infoContainer}>
