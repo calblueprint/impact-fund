@@ -5,15 +5,21 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
 import fetchListViewCases from './utils';
+import supabase from '../../../supabase/createClient';
 import { Case, UserUid } from '../../../types/types';
 
 function CasesScreen() {
   const [cases, setCases] = useState<Case[]>([]);
-
-  // TODO: fetch user Uid from context/state
-  const userUid: UserUid = 'f6f9223b-503a-4235-b4d9-3639d74a13d5';
+  const [userUid, setUserUid] = useState<UserUid>(
+    'f6f9223b-503a-4235-b4d9-3639d74a13d5',
+  );
 
   useEffect(() => {
+    supabase.auth.getUser().then(data => {
+      if (data.data.user) {
+        setUserUid(data.data.user?.id);
+      }
+    });
     fetchListViewCases(userUid).then(data => {
       setCases(data);
     });
