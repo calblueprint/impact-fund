@@ -29,4 +29,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    margin: 10,
+    alignItems: 'center',
+    backgroundColor: '#339FFF',
+    padding: 10,
+  },
 });

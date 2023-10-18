@@ -46,7 +46,7 @@ export default function SignUpScreen() {
       />
       <TextInput
         style={styles.input}
-        value={confirmPassword} // should this be another state variable
+        value={confirmPassword}
         onChangeText={setConfirmPassword}
         placeholder="Confirm Password"
         secureTextEntry
