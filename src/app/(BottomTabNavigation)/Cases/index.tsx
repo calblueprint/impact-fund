@@ -10,24 +10,31 @@ import { Case, UserUid } from '../../../types/types';
 
 function CasesScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [noCasesExist, setNoCasesExist] = useState<boolean>(false);
   const [cases, setCases] = useState<Case[]>([]);
-  const [userUid, setUserUid] = useState<UserUid>(
-    'f6f9223b-503a-4235-b4d9-3639d74a13d5',
-  );
+  const [userUid, setUserUid] = useState<UserUid>('');
 
-  function fetchCasesOnLoad(id: UserUid) {
-    // fetch user Uid and compare it to default value
-    console.log('DEBUG: userUid: ', id);
+  // fetch on load can be reused if user wants to reload
+  // would require changing function argument to UserUid state
+  async function fetchCasesOnLoad(id: UserUid) {
     fetchListViewCases(id).then(data => {
-      setCases(data);
+      // data fetched and ready for render
+      setIsLoading(false);
+      if (data.length > 0) {
+        setCases(data);
+      } else {
+        setNoCasesExist(true);
+      }
     });
   }
 
   useEffect(() => {
+    // TODO: fetches userUid on initial page render -- consider making this a state variable
     supabase.auth.getUser().then(data => {
-      if (data.data.user) {
+      // if condition ensures that the user exists and is logged in
+      // TODO: double check logic to ensure this a null user cannot occur
+      if (data.data.user?.id) {
         setUserUid(data.data.user.id);
-        setIsLoading(false);
         fetchCasesOnLoad(data.data.user.id);
       }
     });
@@ -45,18 +52,28 @@ function CasesScreen() {
         </Link>
       </View>
       <View style={styles.casesContainer}>
-        <FlatList
-          data={cases}
-          renderItem={({ item }) => (
-            <CaseCard
-              id={item.id}
-              title={item.title}
-              caseStatus={item.caseStatus}
-              image={item.image}
-            />
-          )}
-          keyExtractor={item => String(item.id)}
-        />
+        {isLoading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <>
+            {noCasesExist ? (
+              <Text>Scan your first case using the QR code above!</Text>
+            ) : (
+              <FlatList
+                data={cases}
+                renderItem={({ item }) => (
+                  <CaseCard
+                    id={item.id}
+                    title={item.title}
+                    caseStatus={item.caseStatus}
+                    image={item.image}
+                  />
+                )}
+                keyExtractor={item => String(item.id)}
+              />
+            )}
+          </>
+        )}
       </View>
     </View>
   );
