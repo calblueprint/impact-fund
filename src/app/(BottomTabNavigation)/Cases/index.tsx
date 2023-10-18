@@ -12,7 +12,6 @@ function CasesScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [noCasesExist, setNoCasesExist] = useState<boolean>(false);
   const [cases, setCases] = useState<Case[]>([]);
-  const [userUid, setUserUid] = useState<UserUid>('');
 
   // fetch on load can be reused if user wants to reload
   // would require changing function argument to UserUid state
@@ -34,7 +33,6 @@ function CasesScreen() {
       // if condition ensures that the user exists and is logged in
       // TODO: double check logic to ensure this a null user cannot occur
       if (data.data.user?.id) {
-        setUserUid(data.data.user.id);
         fetchCasesOnLoad(data.data.user.id);
       }
     });
