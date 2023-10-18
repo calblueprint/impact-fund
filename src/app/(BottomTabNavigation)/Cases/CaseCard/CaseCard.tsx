@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { CaseCardProps } from '../types';
+import { Case } from '../../../../types/types';
 
-function CaseCard({ id, title, status, imageUrl }: CaseCardProps) {
+function CaseCard({ title, caseStatus, image }: Case) {
   return (
     <TouchableOpacity style={styles.caseCard}>
       <View style={styles.infoContainer}>
@@ -12,13 +12,13 @@ function CaseCard({ id, title, status, imageUrl }: CaseCardProps) {
           {title}
         </Text>
         <View style={styles.statusContainer}>
-          <Text style={styles.statusText}>{status}</Text>
+          <Text style={styles.statusText}>{caseStatus}</Text>
         </View>
       </View>
       <Image
         style={styles.imagePlaceholder}
         source={{
-          uri: imageUrl,
+          uri: image,
         }}
       />
     </TouchableOpacity>

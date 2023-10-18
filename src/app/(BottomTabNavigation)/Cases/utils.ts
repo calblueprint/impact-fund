@@ -1,12 +1,12 @@
-import { CaseCardProps, UserUid } from './types';
 import {
   getCaseIdsFromUserId,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
+import { Case, UserUid } from '../../../types/types';
 
 export default async function fetchListViewCases(
   userUid: UserUid,
-): Promise<CaseCardProps[]> {
+): Promise<Case[]> {
   try {
     if (!userUid) {
       throw new Error(`Invalid user uid: ${userUid}`);

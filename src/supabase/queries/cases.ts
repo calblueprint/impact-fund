@@ -1,8 +1,4 @@
-import {
-  CaseCardProps,
-  CaseId,
-  UserUid,
-} from '../../app/(BottomTabNavigation)/Cases/types';
+import { Case, CaseUid, UserUid } from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -11,7 +7,9 @@ import supabase from '../createClient';
  * @param userId user Uuid
  * @returns array of `CaseId`s
  */
-export async function getCaseIdsFromUserId(userId: UserUid): Promise<CaseId[]> {
+export async function getCaseIdsFromUserId(
+  userId: UserUid,
+): Promise<CaseUid[]> {
   try {
     // fetch caseIds that match the specified userId
     const { data } = await supabase
@@ -25,7 +23,7 @@ export async function getCaseIdsFromUserId(userId: UserUid): Promise<CaseId[]> {
     }
 
     // cast raw sql data as an array of CaseIds
-    return data.map(item => item.caseId as CaseId);
+    return data.map(item => item.caseId as CaseUid);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCaseIdsFromUserId)', error);
@@ -39,15 +37,10 @@ export async function getCaseIdsFromUserId(userId: UserUid): Promise<CaseId[]> {
  * @param caseIds list of `CaseId`s
  * @returns array of `CaseCard` objects
  */
-export async function getCasesByIds(
-  caseIds: CaseId[],
-): Promise<CaseCardProps[]> {
+export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   try {
     // query cases contained in a list of caseIds
-    const { data } = await supabase
-      .from('Cases')
-      .select('id, title, image, caseStatus')
-      .in('id', caseIds);
+    const { data } = await supabase.from('Cases').select().in('id', caseIds);
 
     // throw error if supabase data is empty
     if (!data) {
@@ -56,11 +49,16 @@ export async function getCasesByIds(
 
     // cast raw sql data as CaseCardProps data type
     return data.map(item => {
-      const formattedCase: CaseCardProps = {
+      const formattedCase: Case = {
         id: item.id,
+        approved: item.approved,
         title: item.title,
-        status: item.caseStatus,
-        imageUrl: item.image,
+        summary: item.summary,
+        image: item.image,
+        caseSite: item.caseSite,
+        classClaimLink: item.classClaimLink,
+        individualClaimLink: item.individualClaimLink,
+        caseStatus: item.caseStatus,
       };
       return formattedCase;
     });

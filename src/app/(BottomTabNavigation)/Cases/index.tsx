@@ -4,11 +4,11 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
-import { CaseCardProps, UserUid } from './types';
 import fetchListViewCases from './utils';
+import { Case, UserUid } from '../../../types/types';
 
 function CasesScreen() {
-  const [cases, setCases] = useState<CaseCardProps[]>([]);
+  const [cases, setCases] = useState<Case[]>([]);
 
   // TODO: fetch user Uid from context/state
   const userUid: UserUid = 'f6f9223b-503a-4235-b4d9-3639d74a13d5';
@@ -37,8 +37,8 @@ function CasesScreen() {
             <CaseCard
               id={item.id}
               title={item.title}
-              status={item.status}
-              imageUrl={item.imageUrl}
+              status={item.caseStatus}
+              imageUrl={item.image}
             />
           )}
           keyExtractor={item => String(item.id)}
