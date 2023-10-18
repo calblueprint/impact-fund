@@ -1,7 +1,8 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { CaseCardProps } from '../types';
+
 import styles from './styles';
+import { CaseCardProps } from '../types';
 
 function CaseCard({ id, title, status, imageUrl }: CaseCardProps) {
   return (

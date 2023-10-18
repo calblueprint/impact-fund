@@ -1,5 +1,8 @@
-import { getCaseIdsFromUserId, getCasesByIds } from '../../../supabase/cases';
 import { CaseCardProps, UserUid } from './types';
+import {
+  getCaseIdsFromUserId,
+  getCasesByIds,
+} from '../../../supabase/queries/cases';
 
 export default async function fetchListViewCases(
   userUid: UserUid,
