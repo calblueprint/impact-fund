@@ -2,8 +2,9 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { signUpUser } from '../../../supabase/queries/auth';
+
 import styles from './styles';
+import { signUpUser } from '../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
   const [name, setName] = useState('');

@@ -1,9 +1,9 @@
+import supabase from './createClient';
 import {
   CaseCardProps,
   CaseId,
   UserUid,
 } from '../app/(BottomTabNavigation)/Cases/types';
-import supabase from './createClient';
 
 /**
  * Fetch an array of `CaseId`s associated with a specific user. Fetches ids from `status` table.
