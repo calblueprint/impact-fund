@@ -54,7 +54,6 @@ function AddCase() {
   }, []);
 
   const addToCases = async () => {
-    console.log('CLICKING BUTTON');
     const { error } = uploadCase(caseId);
     if (error) {
       console.log(error);
