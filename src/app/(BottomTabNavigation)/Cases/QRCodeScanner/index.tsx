@@ -49,9 +49,6 @@ function QRCodeScannerScreen() {
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => signOutUser()} style={styles.button}>
-        <Text>Sign out</Text>
-      </TouchableOpacity>
     </View>
   );
 }
