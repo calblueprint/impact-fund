@@ -55,10 +55,7 @@ function AddCase() {
   }, []);
 
   const addToCases = async () => {
-    const { error } = uploadCase(caseId);
-    if (error) {
-      console.log(error);
-    }
+    uploadCase(caseId);
   };
   return (
     <View style={styles.container}>
