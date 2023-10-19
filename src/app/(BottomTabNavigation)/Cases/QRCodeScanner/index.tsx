@@ -2,9 +2,7 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-
 import styles from './styles';
-import { signOutUser } from '../../../../supabase/queries/auth';
 
 enum permissions {
   UNDETERMINED,
@@ -14,8 +12,7 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [scanned, setScanned] = useState<boolean>(false);
-  const [data, setData] = useState('NOTHING');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -27,10 +24,16 @@ function QRCodeScannerScreen() {
     getBarCodeScannerPermissions();
   }, []);
 
+  const isValidBarcode = (caseId: string) => true;
+
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (!scanned) {
-      setScanned(true);
-      setData(result.data);
+    if (isValidBarcode(result.data)) {
+      router.push({
+        pathname: '/Cases/QRCodeScanner/AddCase',
+        params: { caseId: result.data },
+      });
+    } else {
+      setMessage('INVALID QR CODE!');
     }
   };
 
@@ -45,12 +48,9 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text>Current Scanning: {data}</Text>
+      <Text>Current Scanning: {message}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => signOutUser()} style={styles.button}>
-        <Text>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
