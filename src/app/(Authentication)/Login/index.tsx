@@ -1,8 +1,9 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { signInUser } from '../../../supabase/queries/auth';
+
 import styles from './styles';
+import { signInUser } from '../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
