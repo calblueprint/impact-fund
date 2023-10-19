@@ -2,9 +2,9 @@ import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
-import CaseCard from './CaseCard/CaseCard';
 import styles from './styles';
 import fetchListViewCases from './utils';
+import CaseCard from '../../../Components/CaseCard/CaseCard';
 import supabase from '../../../supabase/createClient';
 import { Case, UserUid } from '../../../types/types';
 
