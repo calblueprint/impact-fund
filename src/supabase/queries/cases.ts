@@ -48,25 +48,33 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
     }
 
     // cast raw sql data as CaseCardProps data type
-    return data.map(item => {
-      const formattedCase: Case = {
-        id: item.id,
-        approved: item.approved,
-        title: item.title,
-        summary: item.summary,
-        image: item.image,
-        caseSite: item.caseSite,
-        classClaimLink: item.classClaimLink,
-        individualClaimLink: item.individualClaimLink,
-        caseStatus: item.caseStatus,
-      };
-      return formattedCase;
-    });
+    return data.map(item => parseCase(item));
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCasesByIds)', error);
     throw error;
   }
+}
+
+/**
+ * Parse supabase case query and return Case object.
+ *
+ * @param item Case query result
+ * @returns `Case` object
+ */
+function parseCase(item: any): Case {
+  const formattedCase: Case = {
+    id: item.id,
+    approved: item.approved,
+    title: item.title,
+    summary: item.summary,
+    image: item.image,
+    caseSite: item.caseSite,
+    classClaimLink: item.classClaimLink,
+    individualClaimLink: item.individualClaimLink,
+    caseStatus: item.caseStatus,
+  };
+  return formattedCase;
 }
 
 export async function addCase() {
