@@ -41,7 +41,7 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Link href="/QRCodeScanner" asChild>
+        <Link href="/QRCodeScanner/index.tsx" asChild>
           <TouchableOpacity>
             <View style={styles.circle}>
               <Text>Camera</Text>

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { signOutUser } from '../../../supabase/queries/auth';
+import { signOutUser } from '../../../../supabase/queries/auth';
 
 enum permissions {
   UNDETERMINED,
