@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
@@ -41,13 +41,11 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Link href="/QRCodeScanner/index.tsx" asChild>
-          <TouchableOpacity>
-            <View style={styles.circle}>
-              <Text>Camera</Text>
-            </View>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity onPress={() => router.push('/Cases/QRCodeScanner')}>
+          <View style={styles.circle}>
+            <Text>Camera</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.casesContainer}>
         {isLoading ? (
