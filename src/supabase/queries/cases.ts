@@ -31,6 +31,19 @@ export async function getCaseIdsFromUserId(
   }
 }
 
+export async function getCaseById(caseId: CaseUid): Promise<Case> {
+  try {
+    const { data } = await supabase.from('Cases').select().eq('id', caseId);
+    if (!data) {
+      throw new Error('case not found');
+    }
+    return parseCase(data[0]);
+  } catch (error) {
+    console.warn('(getCaseById)', error);
+    throw error;
+  }
+}
+
 /**
  * Fetch an array of Case objects contained in an array of `CaseId`s. Fetches cases from `cases` table.
  *
