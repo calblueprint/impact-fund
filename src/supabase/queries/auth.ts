@@ -47,7 +47,7 @@ export const signOutUser = async () => {
     await supabase.auth.signOut();
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('(signOutError)', error);
+    console.error('(signOutUser)', error);
     throw error;
   }
 };
