@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
@@ -13,7 +14,10 @@ type CaseCardProps = {
 
 function CaseCard({ id, title, caseStatus, image }: CaseCardProps) {
   return (
-    <TouchableOpacity style={styles.caseCard}>
+    <TouchableOpacity
+      style={styles.caseCard}
+      onPress={() => router.push('/Cases/CaseScreen')}
+    >
       <View style={styles.infoContainer}>
         <Text style={styles.titleText} adjustsFontSizeToFit>
           {title}
