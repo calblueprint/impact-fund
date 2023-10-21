@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 export default function EligibilityCard() {
   return (
     <View>
-      <Text>EligibilityCard</Text>
+      <Text>EligibilityCar</Text>
     </View>
   );
 }
