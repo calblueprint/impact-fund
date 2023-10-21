@@ -23,7 +23,7 @@ function CasesScreen() {
         </TouchableOpacity>
       </View>
       <CaseStatusBar />
-      <CaseSummaryCard />
+      <CaseSummaryCard {...caseData} />
       <EligibilityCard />
       <FormsCard />
       <EducationalBar />
