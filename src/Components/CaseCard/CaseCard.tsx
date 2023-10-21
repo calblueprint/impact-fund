@@ -3,33 +3,31 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { CaseUid } from '../../types/types';
+import { Case } from '../../types/types';
 
-type CaseCardProps = {
-  id: CaseUid;
-  title: string;
-  caseStatus: string;
-  image: string;
-};
-
-function CaseCard({ id, title, caseStatus, image }: CaseCardProps) {
+function CaseCard(caseData: Case) {
   return (
     <TouchableOpacity
       style={styles.caseCard}
-      onPress={() => router.push('/Cases/CaseScreen')}
+      onPress={() =>
+        router.push({
+          pathname: '/Cases/CaseScreen',
+          params: { caseData },
+        })
+      }
     >
       <View style={styles.infoContainer}>
         <Text style={styles.titleText} adjustsFontSizeToFit>
-          {title}
+          {caseData.title}
         </Text>
         <View style={styles.statusContainer}>
-          <Text style={styles.statusText}>{caseStatus}</Text>
+          <Text style={styles.statusText}>{caseData.caseStatus}</Text>
         </View>
       </View>
       <Image
         style={styles.imagePlaceholder}
         source={{
-          uri: image,
+          uri: caseData.image,
         }}
       />
     </TouchableOpacity>
