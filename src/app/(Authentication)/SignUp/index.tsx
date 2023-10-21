@@ -7,7 +7,9 @@ import styles from './styles';
 import { signUpUser } from '../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +19,23 @@ export default function SignUpScreen() {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        value={name}
-        onChangeText={setName}
-        placeholder="Full name"
+        value={firstName}
+        onChangeText={setFirstName}
+        placeholder="First name"
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        value={middleName}
+        onChangeText={setMiddleName}
+        placeholder="Middle name"
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        value={lastName}
+        onChangeText={setLastName}
+        placeholder="Last name"
         autoCapitalize="words"
       />
       <TextInput
@@ -53,7 +69,9 @@ export default function SignUpScreen() {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => signUpUser(name, email, address, password)}
+        onPress={() =>
+          signUpUser(firstName, middleName, lastName, email, address, password)
+        }
       >
         <Text>Sign Up</Text>
       </TouchableOpacity>

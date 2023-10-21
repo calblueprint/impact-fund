@@ -1,7 +1,9 @@
 import supabase from '../createClient';
 
 export const signUpUser = async (
-  name: string,
+  firstName: string,
+  middleName: string | null,
+  lastName: string,
   email: string,
   address: string,
   password: string,
@@ -12,13 +14,17 @@ export const signUpUser = async (
       password,
       options: {
         data: {
-          name,
+          firstName,
+          middleName,
+          lastName,
           address,
         },
       },
     });
     await supabase.from('users').insert({
-      name,
+      firstName,
+      middleName,
+      lastName,
       email,
       address,
     });

@@ -33,7 +33,7 @@ export async function getCaseIdsFromUserId(
 
 export async function getCaseById(caseId: CaseUid): Promise<Case> {
   try {
-    const { data } = await supabase.from('Cases').select().eq('id', caseId);
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
     if (!data) {
       throw new Error('case not found');
     }
@@ -53,13 +53,15 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
 export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   try {
     // query cases contained in a list of caseIds
-    const { data } = await supabase.from('Cases').select().in('id', caseIds);
+    const { data } = await supabase
+      .from('cases')
+      .select()
+      .in('caseId', caseIds);
 
     // throw error if supabase data is empty
     if (!data) {
       throw new Error('no cases found');
     }
-
     // cast raw sql data as CaseCardProps data type
     return data.map(item => parseCase(item));
   } catch (error) {
@@ -75,32 +77,35 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
  * @param item Case query result
  * @returns `Case` object
  */
-function parseCase(item: any): Case {
+export function parseCase(item: any): Case {
   const formattedCase: Case = {
     id: item.id,
     approved: item.approved,
     title: item.title,
+    blurb: item.blurb,
     summary: item.summary,
     image: item.image,
     caseSite: item.caseSite,
-    classClaimLink: item.classClaimLink,
-    individualClaimLink: item.individualClaimLink,
-    caseStatus: item.caseStatus,
+    claimLink: item.claimLink,
+    optOutLink: item.optOutLink,
+    caseStatus: item.status,
+    date: item.date,
+    lawFirm: item.lawFirm,
   };
   return formattedCase;
 }
 
-export async function addCase() {
-  const dummyCase = {
-    approved: false,
-    title: 'Dummy Case',
-    summary: 'Testing intializing db',
-    image: 'no.jpg',
-    case_status: 'In Progress',
-    claim_link: 'berkeley.edu',
-    case_site: 'berkeley.edu',
-    opt_out_link: 'berkeley.edu',
-  };
-  const { error } = await supabase.from('Cases').insert(dummyCase);
-  return error;
-}
+// export async function addCase() {
+//   const dummyCase = {
+//     approved: false,
+//     title: 'Dummy Case',
+//     summary: 'Testing intializing db',
+//     image: 'no.jpg',
+//     case_status: 'In Progress',
+//     claim_link: 'berkeley.edu',
+//     case_site: 'berkeley.edu',
+//     opt_out_link: 'berkeley.edu',
+//   };
+//   const { error } = await supabase.from('Cases').insert(dummyCase);
+//   return error;
+// }
