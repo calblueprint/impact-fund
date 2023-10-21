@@ -11,7 +11,7 @@ function AddCase() {
     summary: string;
     image: string;
   }>();
-  console.log(id, title, summary, image);
+
   const router = useRouter();
 
   const addToCases = async () => {

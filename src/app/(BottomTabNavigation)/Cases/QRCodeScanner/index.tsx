@@ -2,7 +2,11 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { getCaseById } from '../../../../supabase/queries/cases';
+import supabase from '../../../../supabase/createClient';
+import {
+  containsDuplicateCase,
+  getCaseById,
+} from '../../../../supabase/queries/cases';
 import styles from './styles';
 
 enum permissions {
@@ -30,10 +34,15 @@ function QRCodeScannerScreen() {
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     if (isValidBarcode(result.data)) {
       const { id, title, summary, image } = await getCaseById(result.data);
-      router.push({
-        pathname: '/Cases/QRCodeScanner/AddCase',
-        params: { id, title, summary, image },
-      });
+      const duplicate = await containsDuplicateCase(id);
+      if (duplicate) {
+        console.log('YOU ALREADY HAVE THIS CASE!');
+      } else {
+        router.push({
+          pathname: '/Cases/QRCodeScanner/AddCase',
+          params: { id, title, summary, image },
+        });
+      }
     } else {
       setMessage('INVALID QR CODE!');
     }
