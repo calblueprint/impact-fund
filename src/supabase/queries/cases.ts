@@ -79,7 +79,7 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
  */
 export function parseCase(item: any): Case {
   const formattedCase: Case = {
-    id: item.id,
+    id: item.caseId,
     approved: item.approved,
     title: item.title,
     blurb: item.blurb,
