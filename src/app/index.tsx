@@ -12,15 +12,13 @@ function StartScreen() {
     //     router.replace('/Welcome');
     //   }
     // });
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (session) {
-          router.replace('/Cases');
-        } else {
-          router.replace('Welcome');
-        }
-      },
-    );
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        router.replace('/Cases');
+      } else {
+        router.replace('Welcome');
+      }
+    });
     // return () => authListener.subscription.unsubscribe();
   }, []);
 }

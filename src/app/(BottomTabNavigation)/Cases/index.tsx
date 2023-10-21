@@ -57,15 +57,8 @@ function CasesScreen() {
             ) : (
               <FlatList
                 data={cases}
-                renderItem={({ item }) => (
-                  <CaseCard
-                    id={item.id}
-                    title={item.title}
-                    caseStatus={item.caseStatus}
-                    image={item.image}
-                  />
-                )}
-                keyExtractor={item => String(item.id)}
+                renderItem={({ item }) => <CaseCard {...item} />}
+                keyExtractor={item => item.id}
               />
             )}
           </>
