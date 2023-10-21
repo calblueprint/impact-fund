@@ -15,23 +15,35 @@ export default StyleSheet.create({
     flex: 0.5,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderRadius: 10,
+    borderTopRightRadius: 9,
+    borderTopLeftRadius: 9,
   },
-  headerContainer: {
+  titleContainer: {
     flex: 0.4,
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    overflow: 'hidden',
   },
   bottomContainer: {
     flex: 0.1,
     borderTopWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.25)',
+    justifyContent: 'center',
   },
-  statusText: {
-    fontSize: 16,
+  inLineInfo: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   titleText: {
     flex: 0.6,
-    fontSize: 17,
+    fontSize: 20,
+    fontWeight: 700,
+  },
+  subText: {
+    fontSize: 12,
+    color: 'rgba(0, 0, 0, 0.50)',
   },
 });
