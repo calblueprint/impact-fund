@@ -71,7 +71,7 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
-export const uploadCase = async (caseId: any) => {
+export async function uploadCase(caseId: CaseUid) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -80,11 +80,24 @@ export const uploadCase = async (caseId: any) => {
 
   console.log(error);
   return { error };
-};
+}
 
-export const containsDuplicateCase = async (caseId: any) => {
-  return false;
-};
+export async function containsDuplicateCase(caseId: CaseUid) {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { data, error } = await supabase
+      .from('status')
+      .select()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    return data?.length === 0;
+  } catch (error) {
+    throw error;
+  }
+}
 
 /**
  * Parse supabase case query and return Case object.
