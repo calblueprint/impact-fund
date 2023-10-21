@@ -71,7 +71,7 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
-export async function uploadCase(caseId: CaseUid) {
+export async function uploadCase(caseId: CaseUid | undefined) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
