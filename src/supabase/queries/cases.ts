@@ -82,6 +82,10 @@ export const uploadCase = async (caseId: any) => {
   return { error };
 };
 
+export const containsDuplicateCase = async (caseId: any) => {
+  return false;
+};
+
 /**
  * Parse supabase case query and return Case object.
  *
