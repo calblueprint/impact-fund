@@ -18,6 +18,7 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [message, setMessage] = useState('');
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
