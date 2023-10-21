@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   summaryContainer: {
     width: 338,
-    height: 375,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',
@@ -12,22 +11,24 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   imageContainer: {
-    flex: 0.5,
+    height: 185,
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderTopRightRadius: 9,
     borderTopLeftRadius: 9,
   },
   titleContainer: {
-    flex: 0.4,
+    height: 'auto',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
     overflow: 'hidden',
   },
   bottomContainer: {
-    flex: 0.1,
+    height: 31,
     borderTopWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.25)',
     justifyContent: 'center',
@@ -38,9 +39,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   titleText: {
-    flex: 0.6,
     fontSize: 20,
-    fontWeight: 700,
+    fontWeight: '700',
   },
   subText: {
     fontSize: 12,
