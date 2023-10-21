@@ -13,8 +13,8 @@ export default StyleSheet.create({
   },
 
   image: {
-    height: 200,
-    width: 334,
+    height: '35%',
+    width: '100%',
     marginTop: 10,
     marginBottom: 10,
   },
@@ -33,8 +33,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#339FFF',
-    height: 75,
-    width: 334,
+    height: '10%',
+    width: '100%',
     borderRadius: 20,
   },
 });
