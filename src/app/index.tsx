@@ -14,7 +14,6 @@ function StartScreen() {
     // });
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        console.log(_event);
         if (session) {
           router.replace('/Cases');
         } else {

@@ -5,26 +5,22 @@ export interface Case {
   id: CaseUid;
   approved: boolean;
   title: string;
+  blurb: string;
   summary: string;
   image: string;
   caseSite: string;
-  classClaimLink: string;
-  individualClaimLink: string;
-  caseStatus: CaseStatus;
+  claimLink: string;
+  optOutLink: string;
+  caseStatus: string;
+  date: Date;
+  lawFirm: string;
 }
 
-export interface Profile {
+export interface User {
   id: UserUid;
   firstName: string;
   middleName: string | null;
   lastName: string;
   email: string;
-  mailingAddress: string;
-}
-
-export enum CaseStatus {
-  NotStarted = 'Not Started',
-  InProgress = 'In Progress',
-  Settled = 'Settled',
-  Canceled = 'Canceled',
+  addresss: string;
 }
