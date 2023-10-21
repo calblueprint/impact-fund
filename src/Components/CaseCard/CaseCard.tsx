@@ -11,7 +11,7 @@ function CaseCard(caseData: Case) {
       style={styles.caseCard}
       onPress={() =>
         router.push({
-          pathname: '/Cases/CaseScreen',
+          pathname: `/Cases/CaseScreen`,
           params: {
             id: caseData.id,
             approved: caseData.approved,
