@@ -15,6 +15,7 @@ export interface CasePartial {
   lawFirm: string;
 }
 
+<<<<<<< HEAD
 export interface Case extends CasePartial {
   imageUrl: string;
 }
@@ -28,6 +29,8 @@ export interface CaseSummaryProps {
   lawFirm: string;
 }
 
+=======
+>>>>>>> c4b9f38 ([schema] update code to reflect schema changes (#20))
 export interface User {
   id: UserUid;
   firstName: string;
@@ -35,6 +38,7 @@ export interface User {
   lastName: string;
   email: string;
   addresss: string;
+<<<<<<< HEAD
 }
 
 export type Status = {
@@ -48,4 +52,6 @@ export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
+=======
+>>>>>>> c4b9f38 ([schema] update code to reflect schema changes (#20))
 }
