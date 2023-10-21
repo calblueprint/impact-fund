@@ -1,7 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { getCase, uploadCase } from '../../../../../supabase/queries/case';
+import { uploadCase } from '../../../../../supabase/queries/cases';
 import { CaseUid } from '../../../../../types/types';
 import styles from './styles';
 

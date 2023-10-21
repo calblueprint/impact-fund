@@ -71,6 +71,17 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+export const uploadCase = async (caseId: any) => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const userId = user?.id;
+  const { error } = await supabase.from('status').insert({ caseId, userId });
+
+  console.log(error);
+  return { error };
+};
+
 /**
  * Parse supabase case query and return Case object.
  *
