@@ -12,7 +12,20 @@ function CaseCard(caseData: Case) {
       onPress={() =>
         router.push({
           pathname: '/Cases/CaseScreen',
-          params: { caseData },
+          params: {
+            id: caseData.id,
+            approved: caseData.approved,
+            title: caseData.title,
+            blurb: caseData.blurb,
+            summary: caseData.summary,
+            image: caseData.image,
+            caseSite: caseData.caseSite,
+            claimLink: caseData.claimLink,
+            optOutLink: caseData.optOutLink,
+            caseStatus: caseData.caseStatus,
+            date: caseData.date,
+            lawFirm: caseData.lawFirm,
+          },
         })
       }
     >
