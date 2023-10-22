@@ -1,23 +1,40 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import supabase from '../../../../supabase/createClient';
 import { signInUser } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displayError, setDisplayError] = useState(false);
+  const { email } = useLocalSearchParams<{ email: string }>();
+
+  async function signInFunc(email: string, pword: string) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      setDisplayError(true);
+    } else if (!data) {
+      setDisplayError(true);
+    } else {
+      setDisplayError(false);
+      signInUser(email, password);
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={email}
-        placeholder="Email address"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
+      <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+        <Text>Back</Text>
+      </TouchableOpacity>
+
+      <Text>Please enter your password.</Text>
+
       <TextInput
         style={styles.input}
         value={password}
@@ -27,13 +44,17 @@ export default function LoginScreen() {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => signInUser(email, password)}
+        onPress={() => signInFunc(email, password)}
       >
-        <Text>Sign In</Text>
+        <Text>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-        <Text>Go Back</Text>
-      </TouchableOpacity>
+
+      <Text>
+        {' '}
+        {displayError
+          ? 'Oh no! The password you entered is incorrect, please try again.'
+          : ' '}{' '}
+      </Text>
     </View>
   );
 }
