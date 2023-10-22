@@ -13,16 +13,10 @@ export default function CaseSummaryCard(caseData: Case) {
         router.push({
           pathname: `/Cases/CaseSummaryScreen`,
           params: {
-            id: caseData.id,
-            approved: caseData.approved,
-            title: caseData.title,
             blurb: caseData.blurb,
             summary: caseData.summary,
             image: caseData.image,
             caseSite: caseData.caseSite,
-            claimLink: caseData.claimLink,
-            optOutLink: caseData.optOutLink,
-            caseStatus: caseData.caseStatus,
             date: caseData.date,
             lawFirm: caseData.lawFirm,
           },
@@ -37,7 +31,7 @@ export default function CaseSummaryCard(caseData: Case) {
           }}
         />
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>{caseData.title}</Text>
+          <Text style={styles.blurbText}>{caseData.blurb}</Text>
         </View>
         <View style={styles.bottomContainer}>
           <View style={styles.inLineInfo}>

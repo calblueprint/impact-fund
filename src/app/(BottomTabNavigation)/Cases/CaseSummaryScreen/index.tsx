@@ -1,14 +1,14 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import styles from './styles';
 import { Case } from '../../../../types/types';
 
 function CasesScreen() {
-  const caseData = useLocalSearchParams() as unknown as Case;
+  const caseData = useLocalSearchParams();
 
-  console.log(caseData);
+  const { blurb, summary, image, caseSite, date, lawFirm } = caseData;
 
   return (
     <View style={styles.container}>
@@ -17,7 +17,17 @@ function CasesScreen() {
           <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
-      <Text>Case Summary Screen</Text>
+      <Image
+        style={styles.imageContainer}
+        source={{
+          uri: image,
+        }}
+      />
+      <Text>{blurb}</Text>
+      <Text>{date}</Text>
+      <Text>{lawFirm}</Text>
+      <Text>{summary}</Text>
+      <Text>{caseSite}</Text>
     </View>
   );
 }

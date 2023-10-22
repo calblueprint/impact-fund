@@ -12,6 +12,13 @@ export default StyleSheet.create({
     width: '100%',
     paddingRight: 30,
   },
+  imageContainer: {
+    height: 185,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderTopRightRadius: 9,
+    borderTopLeftRadius: 9,
+  },
   button: {
     margin: 10,
     alignItems: 'center',
