@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
-import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummarCard';
+import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';

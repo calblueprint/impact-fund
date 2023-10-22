@@ -16,7 +16,10 @@ function CasesScreen() {
           <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <Image
           style={styles.imageContainer}
           source={{
@@ -24,10 +27,10 @@ function CasesScreen() {
           }}
         />
         <View style={styles.blurbContainer}>
-          <Text>{blurb}</Text>
+          <Text style={styles.blurbText}>{blurb}</Text>
           <View style={styles.inLineSubInfo}>
-            <Text>{date}</Text>
-            <Text>{lawFirm}</Text>
+            <Text style={styles.subText}>{date}</Text>
+            <Text style={styles.subText}>{lawFirm}</Text>
           </View>
         </View>
         <Text style={styles.summaryText}>{summary}</Text>
