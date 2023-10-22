@@ -16,6 +16,15 @@ export interface Case {
   lawFirm: string;
 }
 
+export type CaseSummaryProps = {
+  blurb: string;
+  summary: string;
+  image: string;
+  caseSite: string;
+  date: Date;
+  lawFirm: string;
+};
+
 export interface User {
   id: UserUid;
   firstName: string;

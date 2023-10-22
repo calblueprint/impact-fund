@@ -13,6 +13,7 @@ export default StyleSheet.create({
     paddingRight: 30,
   },
   scrollContainer: {
+    minHeight: '100%',
     width: 317,
   },
   imageContainer: {
