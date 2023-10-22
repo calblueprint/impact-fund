@@ -40,6 +40,12 @@ export default StyleSheet.create({
     marginRight: 18,
     marginLeft: 18,
   },
+  instructionText: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: '800',
+    marginRight: 18,
+  },
   input: {
     marginTop: 5,
     height: 40,

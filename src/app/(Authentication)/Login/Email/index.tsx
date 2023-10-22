@@ -83,6 +83,13 @@ export default function LoginScreen() {
           <Text style={[styles.nextText]}>Next</Text>
         </TouchableOpacity>
       </View>
+
+      <Text style={styles.errorMessage}>
+        {' '}
+        {displayError
+          ? 'Oh no! The email you entered is incorrect, please try again'
+          : ' '}{' '}
+      </Text>
     </View>
   );
 }
