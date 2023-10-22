@@ -33,6 +33,12 @@ export default StyleSheet.create({
     fontSize: 13,
     opacity: 0.35,
   },
+  instructionText: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: '800',
+    marginRight: 18,
+  },
   input: {
     marginTop: 5,
     height: 40,
