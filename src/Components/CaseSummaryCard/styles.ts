@@ -38,7 +38,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  titleText: {
+  blurbText: {
     fontSize: 20,
     fontWeight: '700',
   },

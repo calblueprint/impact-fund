@@ -30,9 +30,8 @@ export default StyleSheet.create({
   inLineSubInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  summaryText: {
-    marginBottom: 20,
+    height: 20,
+    marginTop: 15,
   },
   button: {
     margin: 10,
@@ -40,12 +39,18 @@ export default StyleSheet.create({
     backgroundColor: '#339FFF',
     padding: 10,
   },
-  titleText: {
-    fontSize: 20,
+  blurbText: {
+    fontSize: 22,
     fontWeight: '700',
   },
   subText: {
     fontSize: 12,
     color: 'rgba(0, 0, 0, 0.50)',
+  },
+  summaryText: {
+    fontSize: 16,
+    fontWeight: '200',
+    lineHeight: 24,
+    marginBottom: 20,
   },
 });
