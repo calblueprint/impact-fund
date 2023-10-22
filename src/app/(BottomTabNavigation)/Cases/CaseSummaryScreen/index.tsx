@@ -3,11 +3,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 
 import styles from './styles';
+import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
+import { CaseSummaryProps } from '../../../../types/types';
 
 function CasesScreen() {
-  const caseData = useLocalSearchParams();
-
-  const { blurb, summary, image, caseSite, date, lawFirm } = caseData;
+  const caseData = useLocalSearchParams() as unknown as CaseSummaryProps;
 
   return (
     <View style={styles.container}>
@@ -23,18 +23,21 @@ function CasesScreen() {
         <Image
           style={styles.imageContainer}
           source={{
-            uri: image,
+            uri: caseData.image,
           }}
         />
         <View style={styles.blurbContainer}>
-          <Text style={styles.blurbText}>{blurb}</Text>
+          <Text style={styles.blurbText}>{caseData.blurb}</Text>
           <View style={styles.inLineSubInfo}>
-            <Text style={styles.subText}>{date}</Text>
-            <Text style={styles.subText}>{lawFirm}</Text>
+            <Text style={styles.subText}>{String(caseData.date)}</Text>
+            <Text style={styles.subText}>{caseData.lawFirm}</Text>
           </View>
         </View>
-        <Text style={styles.summaryText}>{summary}</Text>
-        <Text>{caseSite}</Text>
+        <Text style={styles.summaryText}>{caseData.summary}</Text>
+        <ExternalSiteLink
+          text="Learn more on case website"
+          url={caseData.caseSite}
+        />
       </ScrollView>
     </View>
   );
