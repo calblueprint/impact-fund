@@ -2,22 +2,37 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   headerContainer: {
-    flex: 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
     width: '100%',
     paddingRight: 30,
   },
+  scrollContainer: {
+    width: 317,
+  },
   imageContainer: {
     height: 185,
-    flexDirection: 'column',
+    width: 317,
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  blurbContainer: {
+    width: 317,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.25)',
+    marginBottom: 20,
+  },
+  inLineSubInfo: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    borderTopRightRadius: 9,
-    borderTopLeftRadius: 9,
+  },
+  summaryText: {
+    marginBottom: 20,
   },
   button: {
     margin: 10,
