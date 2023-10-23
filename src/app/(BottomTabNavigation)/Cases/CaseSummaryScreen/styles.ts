@@ -15,12 +15,12 @@ export default StyleSheet.create({
   scrollContainer: {
     minHeight: '100%',
     width: 317,
-    marginTop: 30,
   },
   imageContainer: {
     height: 185,
     width: 317,
     borderRadius: 5,
+    marginTop: 30,
     marginBottom: 20,
   },
   blurbContainer: {

@@ -13,9 +13,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // component normally hidden behind bottom tab nav bar with large text summaries
-    // TODO: delete when SafeAreaView configured
-    marginBottom: 140,
+    marginBottom: 30,
   },
   messageText: {
     fontSize: 16,
