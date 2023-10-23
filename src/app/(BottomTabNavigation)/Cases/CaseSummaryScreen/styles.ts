@@ -15,6 +15,7 @@ export default StyleSheet.create({
   scrollContainer: {
     minHeight: '100%',
     width: 317,
+    marginTop: 30,
   },
   imageContainer: {
     height: 185,

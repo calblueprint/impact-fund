@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function AppLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: true }}>
+    <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
         name="Cases"
         options={{
