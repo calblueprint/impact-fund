@@ -45,6 +45,7 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: '800',
     marginRight: 18,
+    marginLeft: 18,
   },
   input: {
     marginTop: 5,
