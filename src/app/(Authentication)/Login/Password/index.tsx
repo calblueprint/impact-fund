@@ -29,11 +29,11 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-        <Text>Back</Text>
+      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
 
-      <Text>Please enter your password.</Text>
+      <Text style={styles.instructionText}>Please enter your password.</Text>
 
       <TextInput
         style={styles.input}
@@ -43,13 +43,13 @@ export default function LoginScreen() {
         secureTextEntry
       />
       <TouchableOpacity
-        style={styles.button}
+        style={styles.nextButton}
         onPress={() => signInFunc(email, password)}
       >
         <Text>Next</Text>
       </TouchableOpacity>
 
-      <Text>
+      <Text style={styles.errorMessage}>
         {' '}
         {displayError
           ? 'Oh no! The password you entered is incorrect, please try again.'

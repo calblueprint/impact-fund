@@ -15,9 +15,9 @@ export default StyleSheet.create({
     fontWeight: '400',
   },
   backButton: {
-    marginTop: 120,
+    marginTop: 100,
     marginBottom: 40,
-    marginRight: 309,
+    marginRight: 280,
     padding: 10,
   },
   instructionText: {
@@ -25,10 +25,11 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: '800',
     marginRight: 18,
+    marginLeft: 18,
   },
   input: {
     marginTop: 100,
-    marginBottom: 100,
+    marginBottom: 60,
     height: 40,
     margin: 18,
     borderWidth: 1,
@@ -40,7 +41,7 @@ export default StyleSheet.create({
   nextButton: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    marginBottom: '20%',
+    marginBottom: 20,
     borderRadius: 3,
     borderColor: '#000000',
     borderWidth: 1,
@@ -54,5 +55,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     border: 30,
+    marginLeft: 20,
+    marginRight: 20,
   },
 });
