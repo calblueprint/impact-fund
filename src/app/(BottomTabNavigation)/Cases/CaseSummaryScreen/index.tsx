@@ -1,12 +1,12 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 
 import styles from './styles';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import { CaseSummaryProps } from '../../../../types/types';
 
-function CasesScreen() {
+export default function CaseSummaryScreen() {
   const caseData = useLocalSearchParams() as unknown as CaseSummaryProps;
 
   return (
@@ -37,5 +37,3 @@ function CasesScreen() {
     </View>
   );
 }
-
-export default CasesScreen;
