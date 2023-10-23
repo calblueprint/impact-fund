@@ -11,11 +11,6 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-          <Text>Go Back</Text>
-        </TouchableOpacity>
-      </View>
       <ScrollView
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
