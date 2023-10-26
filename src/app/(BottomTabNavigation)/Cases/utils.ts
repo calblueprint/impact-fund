@@ -21,3 +21,13 @@ export default async function fetchListViewCases(
     throw error;
   }
 }
+
+/**
+ * Formats date object according to a specified format.
+ * @param dateObject
+ * @returns readable date string
+ */
+export function formatDate(dateObject: Date) {
+  const date = new Date(dateObject).toDateString().split(' ');
+  return `${date[1]} ${date[2]}, ${date[3]}`;
+}
