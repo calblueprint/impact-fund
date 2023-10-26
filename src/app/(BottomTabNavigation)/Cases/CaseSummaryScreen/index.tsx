@@ -5,6 +5,7 @@ import { View, Text, Image, ScrollView } from 'react-native';
 import styles from './styles';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import { CaseSummaryProps } from '../../../../types/types';
+import { formatDate } from '../utils';
 
 export default function CaseSummaryScreen() {
   const caseData = useLocalSearchParams() as unknown as CaseSummaryProps;
@@ -24,7 +25,7 @@ export default function CaseSummaryScreen() {
         <View style={styles.blurbContainer}>
           <Text style={styles.blurbText}>{caseData.blurb}</Text>
           <View style={styles.inLineSubInfo}>
-            <Text style={styles.subText}>{String(caseData.date)}</Text>
+            <Text style={styles.subText}>{formatDate(caseData.date)}</Text>
             <Text style={styles.subText}>{caseData.lawFirm}</Text>
           </View>
         </View>

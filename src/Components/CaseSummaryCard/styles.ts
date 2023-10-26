@@ -7,7 +7,6 @@ export default StyleSheet.create({
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',
     backgroundColor: '#fff',
-
     flexDirection: 'column',
   },
   imageContainer: {

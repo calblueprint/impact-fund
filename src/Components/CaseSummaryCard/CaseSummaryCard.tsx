@@ -4,6 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import styles from './styles';
+import { formatDate } from '../../app/(BottomTabNavigation)/Cases/utils';
 import { Case } from '../../types/types';
 
 export default function CaseSummaryCard(caseData: Case) {
@@ -35,7 +36,7 @@ export default function CaseSummaryCard(caseData: Case) {
         </View>
         <View style={styles.bottomContainer}>
           <View style={styles.inLineInfo}>
-            <Text style={styles.subText}>{String(caseData.date)}</Text>
+            <Text style={styles.subText}>{formatDate(caseData.date)}</Text>
             <Text style={styles.subText}>{caseData.lawFirm}</Text>
             <Icon style={styles.subText} name="dots-three-horizontal" />
           </View>
