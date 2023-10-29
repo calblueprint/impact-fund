@@ -25,7 +25,7 @@ function CasesScreen() {
       <CaseStatusBar />
       <CaseSummaryCard />
       <EligibilityCard />
-      <FormsCard />
+      <FormsCard {...caseData} />
       <EducationalBar />
     </View>
   );
