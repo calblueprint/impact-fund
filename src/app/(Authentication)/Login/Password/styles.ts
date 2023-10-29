@@ -43,7 +43,7 @@ export default StyleSheet.create({
     borderColor: '#920E1A',
   },
   nextText: {
-    marginRight: 240,
+    marginRight: 200,
     fontSize: 14,
     opacity: 1,
     fontWeight: '400',
