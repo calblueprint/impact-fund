@@ -16,9 +16,11 @@ export interface Case {
   lawFirm: string;
 }
 
-export type CaseFormsProps = {
+export type Form = {
   id: CaseUid;
-  caseSite: string;
+  title: string;
+  date: Date;
+  pdfLink: string;
 };
 
 export interface User {
