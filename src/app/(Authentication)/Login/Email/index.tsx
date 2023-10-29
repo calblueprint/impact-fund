@@ -1,4 +1,4 @@
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -8,6 +8,18 @@ import supabase from '../../../../supabase/createClient';
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [displayError, setDisplayError] = useState(false);
+  const [displayEmail, setDisplayEmail] = useState(false);
+
+  function inputEmail(email: string) {
+    setDisplayEmail(true);
+    setEmail(email);
+  }
+
+  function removeEmail() {
+    if (email.trim() === '') {
+      setDisplayEmail(false);
+    }
+  }
 
   async function emailFind(email: string) {
     const { data, error } = await supabase
@@ -32,30 +44,37 @@ export default function LoginScreen() {
       <Text style={styles.instructionText}>
         Please enter your email address.
       </Text>
+      <Text style={styles.emailText}>
+        {displayEmail ? 'Email Address' : ' '}{' '}
+      </Text>
       <TextInput
         style={styles.input}
         value={email}
-        onChangeText={setEmail}
+        onChangeText={inputEmail}
+        onEndEditing={removeEmail}
         placeholder="Email address"
         keyboardType="email-address"
         autoCapitalize="none"
+        clearButtonMode="while-editing"
       />
+
+      <View style={styles.errorMessageBox}>
+        <Text style={styles.errorMessage}>
+          {' '}
+          {displayError
+            ? 'The email you entered is either incorrect or not registered with Impact Fund.'
+            : ' '}{' '}
+        </Text>
+      </View>
 
       <View>
         <TouchableOpacity
           style={[styles.nextButton]}
           onPress={() => emailFind(email)}
         >
-          <Text>Next</Text>
+          <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.errorMessage}>
-        {' '}
-        {displayError
-          ? 'Oh no! The email you entered is incorrect, please try again'
-          : ' '}{' '}
-      </Text>
     </View>
   );
 }
