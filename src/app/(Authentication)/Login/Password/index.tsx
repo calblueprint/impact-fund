@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import supabase from '../../../../supabase/createClient';
-import { signInUser } from '../../../../supabase/queries/auth';
+import { passwordExists, signInUser } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [displayError, setDisplayError] = useState(false);
-  const { email } = useLocalSearchParams<{ email: string }>();
+  const email = useLocalSearchParams() as unknown as string;
   const [displayPassword, setDisplayPassword] = useState(false);
   // const [isPasswordVisible, setPasswordVisible] = useState(false);
 
@@ -29,14 +28,9 @@ export default function LoginScreen() {
   };
   */
 
-  async function signInFunc(email: string, pword: string) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) {
-      setDisplayError(true);
-    } else if (!data) {
+  async function signInFunc(email: string, password: string) {
+    const isPassword = await passwordExists(email, password);
+    if (!isPassword) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
@@ -66,7 +60,9 @@ export default function LoginScreen() {
       <View style={styles.errorMessageBox}>
         <Text style={styles.errorMessage}>
           {' '}
-          {displayError ? 'The password you entered is incorrect.' : ' '}{' '}
+          {displayError
+            ? 'Oh no! The password you entered is incorrect, please try again.'
+            : ' '}{' '}
         </Text>
       </View>
 
