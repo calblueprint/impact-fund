@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import styles from './styles';
 import { Form } from '../../types/types';
 
 export default function FormListItem(formData: Form) {
@@ -19,8 +20,8 @@ export default function FormListItem(formData: Form) {
         })
       }
     >
-      <View>
-        <Text>View PDF</Text>
+      <View style={styles.formContainer}>
+        <Text>{formData.title}</Text>
       </View>
     </TouchableOpacity>
   );

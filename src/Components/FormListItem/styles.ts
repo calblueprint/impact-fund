@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  container: {
-    height: 40,
+  formContainer: {
+    height: 50,
     width: 338,
     justifyContent: 'center',
     alignItems: 'center',

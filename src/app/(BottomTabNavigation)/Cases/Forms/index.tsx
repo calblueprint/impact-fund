@@ -16,10 +16,12 @@ export default function FormsScreen() {
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-      <FlatList
-        data={pdfs}
-        renderItem={({ item }) => <FormListItem {...item} />}
-      />
+      <View style={styles.formsContainer}>
+        <FlatList
+          data={pdfs}
+          renderItem={({ item }) => <FormListItem {...item} />}
+        />
+      </View>
     </View>
   );
 }

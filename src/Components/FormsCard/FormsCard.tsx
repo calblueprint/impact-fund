@@ -22,7 +22,7 @@ export default function FormsCard(caseData: Case) {
         })
       }
     >
-      <View style={styles.summaryContainer}>
+      <View style={styles.container}>
         <Text>Route to Forms {'>'}</Text>
       </View>
     </TouchableOpacity>

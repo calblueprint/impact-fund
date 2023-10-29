@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+  },
+  formsContainer: {
+    flex: 0.8,
+    flexDirection: 'column',
     justifyContent: 'center',
   },
   button: {
