@@ -3,14 +3,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 
+import { Form } from '../../../../../types/types';
 import styles from '../styles';
 
-type FormParams = {
-  pdfLink: string;
-};
-
 export default function FormView() {
-  const formData = useLocalSearchParams() as FormParams;
+  const formData = useLocalSearchParams() as unknown as Form;
 
   return (
     <View style={styles.container}>

@@ -3,15 +3,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import styles from './styles';
-
-// import { CaseFormsProps } from '../../../../types/types';
+import { fetchPdfObjects } from './utils';
+import FormListItem from '../../../../Components/FormListItem/FormListItem';
+import { CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
-  // const caseData = useLocalSearchParams() as unknown as CaseFormsProps;
-  const pdfs = [
-    'https://www.africau.edu/images/default/sample.pdf',
-    'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-  ];
+  const id: CaseUid = 'asdfasdf';
+  const pdfs = fetchPdfObjects(id);
 
   return (
     <View style={styles.container}>
@@ -20,20 +18,7 @@ export default function FormsScreen() {
       </TouchableOpacity>
       <FlatList
         data={pdfs}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              router.push({
-                pathname: `Cases/Forms/FormView`,
-                params: {
-                  pdfLink: item,
-                },
-              })
-            }
-          >
-            <Text>View PDF</Text>
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) => <FormListItem {...item} />}
       />
     </View>
   );
