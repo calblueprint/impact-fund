@@ -10,7 +10,7 @@ export default function FormsCard(caseData: Case) {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: `/Cases/FormScreen`,
+          pathname: `/Cases/Forms`,
           params: {
             blurb: caseData.blurb,
             summary: caseData.summary,
