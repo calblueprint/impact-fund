@@ -36,8 +36,9 @@ export default function CaseSummaryCard(caseData: Case) {
         </View>
         <View style={styles.bottomContainer}>
           <View style={styles.inLineInfo}>
-            <Text style={styles.subText}>{formatDate(caseData.date)}</Text>
-            <Text style={styles.subText}>{caseData.lawFirm}</Text>
+            <Text style={styles.subText}>
+              {formatDate(caseData.date)} • {caseData.lawFirm}
+            </Text>
             <Icon style={styles.subText} name="dots-three-horizontal" />
           </View>
         </View>

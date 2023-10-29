@@ -25,8 +25,9 @@ export default function CaseSummaryScreen() {
         <View style={styles.blurbContainer}>
           <Text style={styles.blurbText}>{caseData.blurb}</Text>
           <View style={styles.inLineSubInfo}>
-            <Text style={styles.subText}>{formatDate(caseData.date)}</Text>
-            <Text style={styles.subText}>{caseData.lawFirm}</Text>
+            <Text style={styles.subText}>
+              {formatDate(caseData.date)} • {caseData.lawFirm}
+            </Text>
           </View>
         </View>
         <Text style={styles.summaryText}>{caseData.summary}</Text>

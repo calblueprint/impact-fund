@@ -27,13 +27,14 @@ export default StyleSheet.create({
     overflow: 'hidden',
   },
   bottomContainer: {
-    height: 31,
+    height: 41,
     borderTopWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.25)',
     justifyContent: 'center',
   },
   inLineInfo: {
     paddingHorizontal: 20,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
