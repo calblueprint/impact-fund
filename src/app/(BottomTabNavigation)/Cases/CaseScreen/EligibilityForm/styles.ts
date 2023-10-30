@@ -6,11 +6,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  insideContainer: {
+    justifyContent: 'space-evenly',
+    height: '70%',
+    width: '100%',
+  },
   textContainer: {
     flex: 0.7,
     width: '100%',
-    justifyContent: 'space-evenly',
-    paddingHorizontal: 40,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 50,
     paddingTop: 50,
   },
   buttonsContainer: {
@@ -30,18 +35,18 @@ export default StyleSheet.create({
   button: {
     width: '100%',
     height: '70%',
-    borderRadius: 4,
+    borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
   },
   buttonBottom: {
-    backgroundColor: 'black',
+    backgroundColor: '#2C2C2C',
   },
   buttonTop: {
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 0.5,
   },
   buttonBottomText: {
     color: '#fff',

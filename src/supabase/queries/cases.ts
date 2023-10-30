@@ -1,4 +1,4 @@
-import { Case, CaseUid, UserUid } from '../../types/types';
+import { Case, CaseUid, Eligibility, UserUid } from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -121,6 +121,31 @@ export function parseCase(item: any): Case {
     lawFirm: item.lawFirm,
   };
   return formattedCase;
+}
+/**
+ * Update a specific User/Case status
+ * @param caseId specified caseId
+ * @param status status to be updated in the specific User/Case row
+ * @returns nothing
+ */
+export async function updateCaseStatus(
+  caseId: CaseUid,
+  status: Eligibility,
+): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { error } = await supabase
+      .from('status')
+      .update({ eligibility: status })
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    console.log(error);
+  } catch (error) {
+    throw error;
+  }
 }
 
 // export async function addCase() {
