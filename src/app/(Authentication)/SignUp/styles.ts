@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../styles/colors';
+
 export default StyleSheet.create({
   container: {
-    height: '100%',
-    widtgh: '100%',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -22,6 +22,6 @@ export default StyleSheet.create({
     padding: 10,
     width: 310,
     borderRadius: 5,
-    borderColor: '#C5C5C5',
+    borderColor: colors.midGrey,
   },
 });
