@@ -12,7 +12,7 @@ import { Case, Eligibility } from '../../../../types/types';
 
 function CasesScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
-  const [status, setStatus] = useState(Eligibility.INELIGIBLE);
+  const [status, setStatus] = useState(Eligibility.ELIGIBLE);
   console.log(caseData);
 
   return (
