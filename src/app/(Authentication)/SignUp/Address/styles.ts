@@ -16,11 +16,12 @@ export default StyleSheet.create({
     padding: 10,
   },
   input: {
-    margin: 12,
     height: 40,
-    borderBottomWidth: 2,
+    margin: 12,
+    borderWidth: 1,
     padding: 10,
     width: 310,
-    borderColor: '#000000',
+    borderRadius: 5,
+    borderColor: '#C5C5C5',
   },
 });
