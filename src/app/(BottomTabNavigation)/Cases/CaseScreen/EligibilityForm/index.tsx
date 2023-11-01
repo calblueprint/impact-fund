@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import styles from './styles';
 import { updateCaseStatus } from '../../../../../supabase/queries/cases';
 import { CaseUid, Eligibility } from '../../../../../types/types';
+import Arrow from '../../../../../../assets/arrow.svg';
 
 export default function EligibilityForm() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function EligibilityForm() {
             }}
           >
             <Text>Yes, I am Eligible</Text>
-            <Text>{'->'}</Text>
+            <Arrow />
           </TouchableOpacity>
         </View>
         <View style={styles.buttonWrapperBottom}>

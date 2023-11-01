@@ -4,6 +4,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import { Case, Eligibility } from '../../types/types';
 import { useRouter } from 'expo-router';
+import Arrow from '../../../assets/arrow.svg';
+import Check from '../../../assets/check.svg';
+import Fileclaim from '../../../assets/file-claim.svg';
+import Optout from '../../../assets/opt-out.svg';
 
 interface EligibilityCardProps {
   caseData: Case;
@@ -28,11 +32,11 @@ export default function EligibilityCard({
           }}
         >
           <View style={styles.topText}>
-            <Text style={styles.text}>v</Text>
+            <Check />
             <View style={styles.center}>
               <Text style={styles.text}>Check Eligibility</Text>
             </View>
-            <Text style={styles.text}>{'->'}</Text>
+            <Arrow />
           </View>
 
           <Text>
@@ -48,11 +52,11 @@ export default function EligibilityCard({
         <View style={styles.inner}>
           <TouchableOpacity style={styles.button}>
             <View style={styles.topText}>
-              <Text style={styles.text}>{'->'}</Text>
+              <Fileclaim />
               <View style={styles.center}>
                 <Text style={styles.text}>File a Claim</Text>
               </View>
-              <Text style={styles.text}>{'->'}</Text>
+              <Arrow />
             </View>
 
             <Text>
@@ -64,11 +68,11 @@ export default function EligibilityCard({
         <View style={styles.inner}>
           <TouchableOpacity style={styles.button}>
             <View style={styles.topText}>
-              <Text style={styles.text}>{'->'}</Text>
+              <Optout />
               <View style={styles.center}>
                 <Text style={styles.text}>Opt Out</Text>
               </View>
-              <Text style={styles.text}>{'->'}</Text>
+              <Arrow />
             </View>
 
             <Text>

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { normalize } from 'yargs';
+import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   eligible: {
@@ -20,10 +21,10 @@ export default StyleSheet.create({
     height: '90%',
     width: '90%',
     border: 'solid',
-    borderColor: '#767676',
+    borderColor: colors.darkGrey,
     borderWidth: 0.5,
     borderRadius: 5,
-    background: '#FFF',
+    background: colors.white,
     margin: 5,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
@@ -37,7 +38,7 @@ export default StyleSheet.create({
     flex: 0.9,
   },
   text: {
-    color: '#2C2C2C',
+    color: colors.black,
     fontSize: 20,
     fontStyle: 'normal',
     fontWeight: '700',
