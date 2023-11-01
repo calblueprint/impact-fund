@@ -33,7 +33,7 @@ export type Status = {
 };
 
 export enum Eligibility {
-  ELIGIBLE,
-  INELIGIBLE,
-  UNDETERMINED,
+  ELIGIBLE = 'ELIGIBLE',
+  INELIGIBLE = 'INELIGIBLE',
+  UNDETERMINED = 'UNDETERMINED',
 }
