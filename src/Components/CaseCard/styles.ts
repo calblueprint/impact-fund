@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../styles/colors';
+
 export default StyleSheet.create({
   caseCard: {
     height: 137,
@@ -10,7 +12,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
 
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -27,9 +29,8 @@ export default StyleSheet.create({
   statusContainer: {
     flex: 0.4,
     width: 'auto',
-    backgroundColor: '#dcdcdc',
+    backgroundColor: colors.midGrey,
     borderRadius: 10,
-
     alignItems: 'center',
     justifyContent: 'center',
   },
