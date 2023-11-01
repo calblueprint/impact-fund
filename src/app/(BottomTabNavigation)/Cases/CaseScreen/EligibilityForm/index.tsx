@@ -34,7 +34,7 @@ export default function EligibilityForm() {
             style={[styles.button, styles.buttonTop]}
             onPress={() => {
               // Not sure why this is happening
-              updateCaseStatus(caseId, Eligibility.ELIGIBLE);
+              updateCaseStatus(caseId, Eligibility.INELIGIBLE);
             }}
           >
             <Text>Yes, I am Eligible</Text>
@@ -44,7 +44,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
             style={[styles.button, styles.buttonBottom]}
-            onPress={() => router.back()}
+            onPress={() => router.push('/Cases/CaseScreen/')}
           >
             <Text style={styles.buttonBottomText}>No, I'm not Eligible</Text>
             <Text style={styles.buttonBottomText}>X</Text>
