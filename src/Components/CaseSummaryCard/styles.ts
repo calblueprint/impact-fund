@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  summaryContainer: {
-    width: 338,
+  container: {
+    width: '92%',
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',
@@ -10,7 +10,8 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   imageContainer: {
-    height: 185,
+    aspectRatio: 1.9,
+    width: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderTopRightRadius: 9,

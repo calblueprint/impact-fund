@@ -24,7 +24,7 @@ export default function CaseSummaryCard(caseData: Case) {
         })
       }
     >
-      <View style={styles.summaryContainer}>
+      <View style={styles.container}>
         <Image
           style={styles.imageContainer}
           source={{
