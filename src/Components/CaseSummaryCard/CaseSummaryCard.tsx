@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 // import Icon from 'react-native-vector-icons/Entypo';
 
 import styles from './styles';
-import ThreeDots from '../../../assets/three-dots.svg';
+// import ThreeDots from '../../../assets/three-dots.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/Cases/utils';
 import { Case } from '../../types/types';
 
