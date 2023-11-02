@@ -57,3 +57,12 @@ export const signOutUser = async () => {
     throw error;
   }
 };
+
+export const getCurrentUser = async () => {
+  try {
+    const { data } = await supabase.auth.getSession();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
