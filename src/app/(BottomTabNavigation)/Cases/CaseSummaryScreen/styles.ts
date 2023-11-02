@@ -21,7 +21,7 @@ export default StyleSheet.create({
   blurbContainer: {
     width: '100%',
     borderBottomWidth: 1,
-    marginBottom: 20,
+    marginBottom: 28,
     borderColor: colors.midGrey,
   },
   inLineSubInfo: {
