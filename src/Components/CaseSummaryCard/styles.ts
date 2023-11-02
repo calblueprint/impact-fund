@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../styles/colors';
+
 export default StyleSheet.create({
   container: {
     width: '92%',
+    flexDirection: 'column',
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
-    backgroundColor: '#fff',
-    flexDirection: 'column',
+    borderColor: colors.midGrey,
+    backgroundColor: colors.white,
+    // shadowOffset: { width: 0.5, height: 1.25 },
+    // elevation: 1,
   },
   imageContainer: {
     aspectRatio: 1.9,
@@ -30,7 +34,7 @@ export default StyleSheet.create({
   bottomContainer: {
     height: 41,
     borderTopWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
+    borderColor: colors.midGrey,
     justifyContent: 'center',
   },
   inLineInfo: {
@@ -42,9 +46,10 @@ export default StyleSheet.create({
   blurbText: {
     fontSize: 20,
     fontWeight: '700',
+    color: colors.black,
   },
   subText: {
     fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.50)',
+    color: colors.darkGrey,
   },
 });
