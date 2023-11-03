@@ -93,3 +93,16 @@ export function parseCase(item: any): Case {
   };
   return formattedCase;
 }
+
+export async function getImageUrl(imagePath: string): Promise<string> {
+  try {
+    const { data } = supabase.storage
+      .from('caseImages')
+      .getPublicUrl(imagePath);
+    return data.publicUrl;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getImageUrl)', error);
+    throw error;
+  }
+}

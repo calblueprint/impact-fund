@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { fetchImageUrl } from '../../app/(BottomTabNavigation)/Cases/utils';
+import { getImageUrl } from '../../supabase/queries/cases';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
@@ -11,7 +11,7 @@ function CaseCard(caseData: Case) {
 
   useEffect(() => {
     const fetchImage = async () => {
-      const uri = await fetchImageUrl(caseData.id);
+      const uri = await getImageUrl(caseData.id);
       setImageUri(uri);
     };
     fetchImage();
