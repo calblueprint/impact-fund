@@ -84,7 +84,6 @@ export function parseCase(item: any): Case {
     title: item.title,
     blurb: item.blurb,
     summary: item.summary,
-    image: item.image,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,
