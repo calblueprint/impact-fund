@@ -1,4 +1,3 @@
-import supabase from '../../../supabase/createClient';
 import {
   getCaseIdsFromUserId,
   getCasesByIds,
@@ -17,19 +16,6 @@ export async function fetchListViewCases(userUid: UserUid): Promise<Case[]> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(fetchListViewCases)', error);
-    throw error;
-  }
-}
-
-export async function fetchImageUrl(imagePath: string): Promise<string> {
-  try {
-    const { data } = supabase.storage
-      .from('caseImages')
-      .getPublicUrl(imagePath);
-    return data.publicUrl;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(fetchImageUrl)', error);
     throw error;
   }
 }
