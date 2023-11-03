@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import fetchListViewCases from './utils';
+import { fetchListViewCases } from './utils';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import supabase from '../../../supabase/createClient';
 import { Case, UserUid } from '../../../types/types';
