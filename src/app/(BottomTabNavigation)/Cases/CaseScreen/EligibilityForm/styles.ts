@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -8,7 +9,7 @@ export default StyleSheet.create({
   },
   insideContainer: {
     justifyContent: 'space-evenly',
-    height: '70%',
+    height: '90%',
     width: '100%',
   },
   textContainer: {
@@ -50,5 +51,14 @@ export default StyleSheet.create({
   },
   buttonBottomText: {
     color: '#fff',
+  },
+  backButton: {
+    margin: 10,
+    alignItems: 'center',
+    backgroundColor: colors.midGrey,
+    padding: 10,
+    borderColor: 'black',
+    borderWidth: 0.5,
+    borderRadius: 5,
   },
 });

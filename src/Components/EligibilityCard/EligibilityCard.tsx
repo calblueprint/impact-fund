@@ -19,7 +19,10 @@ export default function EligibilityCard({
   status,
 }: EligibilityCardProps) {
   const router = useRouter();
-  if (status === Eligibility.ELIGIBLE || status === Eligibility.UNDETERMINED) {
+  if (
+    status === Eligibility.INELIGIBLE ||
+    status === Eligibility.UNDETERMINED
+  ) {
     return (
       <View style={[styles.container, styles.eligible]}>
         <TouchableOpacity
@@ -46,7 +49,7 @@ export default function EligibilityCard({
         </TouchableOpacity>
       </View>
     );
-  } else if (status === Eligibility.INELIGIBLE) {
+  } else if (status === Eligibility.ELIGIBLE) {
     return (
       <View style={[styles.container, styles.ineligible]}>
         <View style={styles.inner}>

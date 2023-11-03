@@ -17,6 +17,14 @@ export default function EligibilityForm() {
       <View style={styles.textContainer}>
         <View style={styles.insideContainer}>
           <View>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={styles.backButton}
+            >
+              <Text>Go Back</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
             <Text>The eligibility requirements are as follows:</Text>
           </View>
           <View>
@@ -33,10 +41,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperTop}>
           <TouchableOpacity
             style={[styles.button, styles.buttonTop]}
-            onPress={() => {
-              // Not sure why this is happening
-              updateCaseStatus(caseId, Eligibility.INELIGIBLE);
-            }}
+            onPress={() => updateCaseStatus(caseId, Eligibility.ELIGIBLE)}
           >
             <Text>Yes, I am Eligible</Text>
             <Arrow />
@@ -45,7 +50,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
             style={[styles.button, styles.buttonBottom]}
-            onPress={() => router.push('/Cases/CaseScreen/')}
+            onPress={() => updateCaseStatus(caseId, Eligibility.INELIGIBLE)}
           >
             <Text style={styles.buttonBottomText}>No, I'm not Eligible</Text>
             <Text style={styles.buttonBottomText}>X</Text>

@@ -31,12 +31,12 @@ function CasesScreen() {
           <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
-      {status === Eligibility.INELIGIBLE && (
+      {status === Eligibility.ELIGIBLE && (
         <EligibilityCard caseData={caseData} status={status} />
       )}
       <CaseStatusBar />
       <CaseSummaryCard />
-      {(status === Eligibility.ELIGIBLE ||
+      {(status === Eligibility.INELIGIBLE ||
         status === Eligibility.UNDETERMINED) && (
         <EligibilityCard caseData={caseData} status={status} />
       )}
