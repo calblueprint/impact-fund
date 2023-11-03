@@ -30,7 +30,6 @@ function CaseCard(caseData: Case) {
             title: caseData.title,
             blurb: caseData.blurb,
             summary: caseData.summary,
-            image: caseData.image,
             caseSite: caseData.caseSite,
             claimLink: caseData.claimLink,
             optOutLink: caseData.optOutLink,

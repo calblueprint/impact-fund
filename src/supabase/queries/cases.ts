@@ -84,7 +84,6 @@ export function parseCase(item: any): Case {
     title: item.title,
     blurb: item.blurb,
     summary: item.summary,
-    image: item.image,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,
@@ -94,18 +93,3 @@ export function parseCase(item: any): Case {
   };
   return formattedCase;
 }
-
-// export async function addCase() {
-//   const dummyCase = {
-//     approved: false,
-//     title: 'Dummy Case',
-//     summary: 'Testing intializing db',
-//     image: 'no.jpg',
-//     case_status: 'In Progress',
-//     claim_link: 'berkeley.edu',
-//     case_site: 'berkeley.edu',
-//     opt_out_link: 'berkeley.edu',
-//   };
-//   const { error } = await supabase.from('Cases').insert(dummyCase);
-//   return error;
-// }

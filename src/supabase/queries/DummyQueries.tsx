@@ -33,7 +33,6 @@ export default function DummyQueries() {
       approved: false,
       title: 'Dummy Case',
       summary: 'Testing intializing db',
-      image: 'no.jpg',
       caseStatus: 'In Progress',
       claimLink: 'berkeley.edu',
       caseSite: 'berkeley.edu',
