@@ -114,9 +114,8 @@ export async function getFormByCaseId(): Promise<string> {
   try {
     const { data } = supabase.storage
       .from('caseFiles')
-      .getPublicUrl(
-        'https://kvfpmjezholwvgdmabhr.supabase.co/storage/v1/object/public/caseFiles/test-order-motion-to-dismiss.pdf',
-      );
+      .getPublicUrl('test-order-motion-to-dismiss.pdf');
+    console.log(data.publicUrl);
     return data.publicUrl;
   } catch (error) {
     // eslint-disable-next-line no-console

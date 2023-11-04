@@ -17,6 +17,7 @@ export default StyleSheet.create({
   },
   formsContainer: {
     width: '82%',
+    height: '100%',
     flexDirection: 'column',
     justifyContent: 'center',
   },
