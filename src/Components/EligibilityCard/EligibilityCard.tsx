@@ -3,8 +3,8 @@ import { View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import { Case, Eligibility } from '../../types/types';
-import { useRouter } from 'expo-router';
-import Arrow from '../../../assets/arrow.svg';
+import { router } from 'expo-router';
+import Arrow from '../../../assets/next.svg';
 import Check from '../../../assets/check.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Optout from '../../../assets/opt-out.svg';
@@ -18,7 +18,6 @@ export default function EligibilityCard({
   caseData,
   status,
 }: EligibilityCardProps) {
-  const router = useRouter();
   if (
     status === Eligibility.INELIGIBLE ||
     status === Eligibility.UNDETERMINED
@@ -79,8 +78,8 @@ export default function EligibilityCard({
             </View>
 
             <Text>
-              Submit a claim by July 14, 2023 if you wish to receive a payment
-              from the settlement.
+              Submit a claim if you wish to receive a payment from the
+              settlement.
             </Text>
           </TouchableOpacity>
         </View>

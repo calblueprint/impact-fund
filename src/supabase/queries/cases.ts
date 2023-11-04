@@ -137,13 +137,13 @@ export async function updateCaseStatus(
       data: { user },
     } = await supabase.auth.getUser();
     const userId = user?.id;
-    const { error } = await supabase
+    await supabase
       .from('status')
       .update({ eligibility: status })
       .eq('userId', userId)
       .eq('caseId', caseId);
-    console.log(error);
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
@@ -154,13 +154,14 @@ export async function getCaseStatus(caseId: CaseUid) {
       data: { user },
     } = await supabase.auth.getUser();
     const userId = user?.id;
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('status')
       .select()
       .eq('userId', userId)
       .eq('caseId', caseId);
     return data[0].eligibility; //bruhhhh
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
