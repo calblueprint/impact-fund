@@ -8,11 +8,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
   },
+  headerContainer: {
+    height: '10%',
+    width: '82%',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
   formsContainer: {
-    flex: 0.8,
     width: '82%',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  headerText: {
+    fontSize: 32,
+    fontWeight: '800',
   },
   button: {
     margin: 10,

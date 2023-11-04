@@ -1,6 +1,5 @@
-import { router } from 'expo-router';
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import { fetchPdfObjects } from './utils';
@@ -13,9 +12,9 @@ export default function FormsScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-        <Text>Go Back</Text>
-      </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Documents</Text>
+      </View>
       <View style={styles.formsContainer}>
         <FlatList
           data={pdfs}

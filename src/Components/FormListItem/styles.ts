@@ -5,8 +5,7 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    aspectRatio: 6.3,
-    marginBottom: 10,
+    aspectRatio: 4.5,
 
     justifyContent: 'center',
     alignItems: 'center',
