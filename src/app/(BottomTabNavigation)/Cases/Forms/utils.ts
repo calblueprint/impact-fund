@@ -12,13 +12,13 @@ export async function fetchFormObjects(caseUid: CaseUid) {
   const pdfs: Form[] = [
     {
       id: 'adfasdf',
-      title: 'Motion Order to Dismiss -- Supabase Query',
+      title: 'Supabase Query',
       date: date1,
       pdfLink: formUrl,
     },
     {
       id: 'asdfaskdfasdlfkkj',
-      title: 'Motion Order to Dismiss -- Hard Code Test',
+      title: 'Hard Code Test',
       date: date2,
       pdfLink:
         'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
