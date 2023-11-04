@@ -3,8 +3,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 
+import styles from './styles';
 import { Form } from '../../../../../types/types';
-import styles from '../styles';
 
 export default function FormView() {
   const formData = useLocalSearchParams() as unknown as Form;
