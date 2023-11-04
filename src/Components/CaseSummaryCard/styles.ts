@@ -54,4 +54,8 @@ export default StyleSheet.create({
     fontSize: 12,
     color: colors.darkGrey,
   },
+  threeDots: {
+    justifyContent: 'center',
+    opacity: 0.5,
+  },
 });

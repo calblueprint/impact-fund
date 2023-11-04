@@ -22,4 +22,10 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
   },
+  iconContainer: {
+    height: 25,
+    width: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
