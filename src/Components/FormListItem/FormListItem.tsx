@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import PdfIcon from '../../../assets/pdf.svg';
 import { Form } from '../../types/types';
 
 export default function FormListItem(formData: Form) {
@@ -20,8 +21,14 @@ export default function FormListItem(formData: Form) {
         })
       }
     >
-      <View style={styles.formContainer}>
-        <Text>{formData.title}</Text>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <PdfIcon />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>{formData.title}</Text>
+          <Text style={styles.dateText}>{String(formData.date)}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
