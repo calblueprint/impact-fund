@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
-import { fetchPdfObjects } from './utils';
+import { fetchFormObjects } from './utils';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
-import { CaseUid } from '../../../../types/types';
+import { CaseUid, Form } from '../../../../types/types';
 
 export default function FormsScreen() {
   const id: CaseUid = 'asdfasdf';
-  const pdfs = fetchPdfObjects(id);
+  // const pdfs = await fetchPdfObjects(id);
+
+  // const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const [noCasesExist, setNoCasesExist] = useState<boolean>(false);
+  const [forms, setForms] = useState<Form[]>([]);
+
+  // fetch on load can be reused if user wants to reload
+  // would require changing function argument to UserUid state
+  async function fetchFormsOnLoad() {
+    fetchFormObjects(id).then(data => {
+      // data fetched and ready for render
+      // setIsLoading(false);
+      if (data.length > 0) {
+        setForms(data);
+      }
+      // } else {
+      //   setNoCasesExist(true);
+      // }
+    });
+  }
+
+  useEffect(() => {
+    fetchFormsOnLoad();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -17,7 +40,7 @@ export default function FormsScreen() {
       </View>
       <View style={styles.formsContainer}>
         <FlatList
-          data={pdfs}
+          data={forms}
           renderItem={({ item }) => <FormListItem {...item} />}
         />
       </View>
