@@ -31,7 +31,9 @@ export default function SignUpScreen() {
       setDisplayError(false);
       router.push({
         pathname: 'SignUp/Address',
-        params: { name, email, password },
+        params: name,
+        email,
+        password,
       });
     }
   };
@@ -49,15 +51,18 @@ export default function SignUpScreen() {
         placeholder="Full name"
         autoCapitalize="words"
         clearButtonMode="while-editing"
+        clearButtonMode="while-editing"
       />
       <TextInput
         style={styles.input}
         value={email}
         onChangeText={setEmail}
         textContentType="emailAddress"
+        textContentType="emailAddress"
         placeholder="Email address"
         keyboardType="email-address"
         autoCapitalize="none"
+        clearButtonMode="while-editing"
         clearButtonMode="while-editing"
       />
       <TextInput
@@ -65,10 +70,24 @@ export default function SignUpScreen() {
         value={password}
         onChangeText={setPassword}
         onEndEditing={handlePasswordChange}
+        onEndEditing={handlePasswordChange}
         placeholder="Password"
+        textContentType="password"
         textContentType="password"
         secureTextEntry
       />
+
+      <View>
+        <Text>
+          {' '}
+          {displayError
+            ? 'Your password needs at least six characters!'
+            : ' '}{' '}
+        </Text>
+      </View>
+
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text>Next</Text>
 
       <View>
         <Text>
