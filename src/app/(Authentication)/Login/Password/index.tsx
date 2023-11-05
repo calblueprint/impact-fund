@@ -12,7 +12,7 @@ export default function LoginScreen() {
   // const userEmail = email as string;
   const email = useLocalSearchParams<{ email: string }>();
   const [displayPassword, setDisplayPassword] = useState(false);
-  const [isPassword, setIsPassword] = useState(false);
+  // const [isPassword, setIsPassword] = useState(false);
   const [placeholder, setPlaceholder] = useState('Password');
   const [isFocused, setIsFocused] = useState(false);
 
@@ -32,9 +32,10 @@ export default function LoginScreen() {
       setDisplayPassword(false);
     }
     setPassword(password);
-    if (password.trim() !== '') {
+    /* if (password.trim() !== '') {
       setIsPassword(true);
     }
+    */
   }
 
   function removePassword() {
@@ -49,17 +50,18 @@ export default function LoginScreen() {
   */
 
   async function signInFunc() {
+    /*
     if (typeof email !== 'string') {
-      // Handle the error case - redirect back or show an error
-      router.push({ pathname: 'Login' });
+      router.push({ pathname: 'Login/Password', params: { email } });
       return;
     }
+    */
     const isPassword = await passwordExists(email, password);
     if (!isPassword) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      signInUser(email, password);
+      signInUser(userEmail, password);
     }
   }
 
@@ -95,7 +97,7 @@ export default function LoginScreen() {
 
       <View>
         <TouchableOpacity
-          style={[styles.nextButton, isPassword && styles.nextButtonOpacity]}
+          style={[styles.nextButton]}
           onPress={() => signInFunc()}
         >
           <Text style={styles.nextText}>Next</Text>

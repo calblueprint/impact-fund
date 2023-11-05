@@ -1,15 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../../styles/colors';
+
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   backText: {
-    color: '#000',
+    color: colors.lightGrey,
     fontSize: 16,
     opacity: 0.3,
     fontWeight: '400',
@@ -21,7 +23,7 @@ export default StyleSheet.create({
     padding: 10,
   },
   instructionText: {
-    color: '#000',
+    color: colors.black,
     fontSize: 24,
     fontWeight: '800',
     marginRight: 18,
@@ -39,8 +41,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     padding: 10,
     width: 310,
-    borderRadius: 5,
-    borderColor: '#000000',
+    borderColor: colors.black,
   },
   inputFocused: {
     marginTop: 5,
@@ -49,27 +50,16 @@ export default StyleSheet.create({
     padding: 10,
     width: 310,
     borderRadius: 5,
-    borderColor: '#920E1A',
+    borderColor: colors.darkRed,
   },
   nextText: {
-    marginRight: 200,
+    marginRight: 230,
     fontSize: 14,
     opacity: 1,
     fontWeight: '400',
   },
-  nextButton: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    marginBottom: 20,
-    borderRadius: 3,
-    borderColor: '#000000',
-    borderWidth: 1,
-    width: 310,
-    height: 50,
-    padding: 15,
-  },
-  nextButtonOpacity: {
-    backgroundColor: '#fff',
+  nextButtonGrey: {
+    backgroundColor: colors.white,
     alignItems: 'center',
     marginBottom: 20,
     borderRadius: 3,
@@ -80,14 +70,25 @@ export default StyleSheet.create({
     padding: 15,
     opacity: 0.3,
   },
+  nextButton: {
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 3,
+    borderColor: '#000000',
+    borderWidth: 1,
+    width: 310,
+    height: 50,
+    padding: 15,
+  },
   errorMessageBox: {
     height: 70,
     marginLeft: 20,
     marginRight: 20,
   },
   errorMessage: {
-    color: '#920E1A',
-    fontSize: 16,
+    color: colors.darkRed,
+    fontSize: 14,
     fontWeight: '400',
     marginLeft: 20,
     marginRight: 20,

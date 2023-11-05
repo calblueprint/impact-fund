@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../../styles/colors';
+
 export default StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -9,7 +11,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   backText: {
-    color: '#000',
+    color: colors.lightGrey,
     fontSize: 16,
     opacity: 0.3,
     fontWeight: '400',
@@ -21,7 +23,7 @@ export default StyleSheet.create({
     padding: 10,
   },
   instructionText: {
-    color: '#000',
+    color: colors.black,
     fontSize: 24,
     fontWeight: '800',
     marginRight: 18,
@@ -39,7 +41,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     padding: 10,
     width: 310,
-    borderColor: '#000000',
+    borderColor: colors.black,
   },
   inputFocused: {
     marginTop: 5,
@@ -47,30 +49,30 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     padding: 10,
     width: 310,
-    borderColor: '#920E1A',
+    borderColor: colors.darkRed,
   },
   nextText: {
     marginRight: 240,
     fontSize: 14,
     fontWeight: '400',
   },
-  nextButton: {
+  nextButtonGrey: {
     backgroundColor: '#fff',
     alignItems: 'center',
     borderRadius: 3,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: colors.black,
     width: 310,
     height: 50,
     padding: 15,
     opacity: 0.35,
   },
-  nextButtonOpacity: {
+  nextButton: {
     backgroundColor: '#fff',
     alignItems: 'center',
     borderRadius: 3,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: colors.black,
     width: 310,
     height: 50,
     padding: 15,
@@ -81,7 +83,7 @@ export default StyleSheet.create({
     marginRight: 20,
   },
   errorMessage: {
-    color: '#920E1A',
+    color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
     marginLeft: 20,

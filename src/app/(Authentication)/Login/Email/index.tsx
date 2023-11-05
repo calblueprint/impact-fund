@@ -37,7 +37,7 @@ export default function LoginScreen() {
     } else {
       setIsEmail(false);
     }
-    setIsEmail(isEmail);
+    setIsEmail(!isEmail);
   }
 
   async function emailFind() {
@@ -46,7 +46,9 @@ export default function LoginScreen() {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      router.push({ pathname: 'Login/Password', params: { email } });
+      if (typeof email === 'string') {
+        router.push({ pathname: 'Login/Password', params: { email } });
+      }
     }
   }
 
@@ -85,22 +87,13 @@ export default function LoginScreen() {
 
       <View>
         <TouchableOpacity
-          style={[styles.nextButton, isEmail ? styles.nextButtonOpacity : null]}
+          style={[styles.nextButton]}
           onPress={emailFind}
           // disabled={!isEmail}
         >
-          <Text style={[styles.nextText, isEmail ? styles.nextText : null]}>
-            Next
-          </Text>
+          <Text style={[styles.nextText]}>Next</Text>
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.errorMessage}>
-        {' '}
-        {displayError
-          ? 'Oh no! The email you entered is incorrect, please try again'
-          : ' '}{' '}
-      </Text>
     </View>
   );
 }
