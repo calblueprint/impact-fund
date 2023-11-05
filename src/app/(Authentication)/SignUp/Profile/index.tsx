@@ -31,9 +31,7 @@ export default function SignUpScreen() {
       setDisplayError(false);
       router.push({
         pathname: 'SignUp/Address',
-        params: name,
-        email,
-        password,
+        params: { name, email, password },
       });
     }
   };
