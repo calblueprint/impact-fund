@@ -40,6 +40,15 @@ export default StyleSheet.create({
     padding: 10,
     width: 310,
     borderRadius: 5,
+    borderColor: '#0000000',
+  },
+  inputFocused: {
+    marginTop: 5,
+    height: 40,
+    borderBottomWidth: 2,
+    padding: 10,
+    width: 310,
+    borderRadius: 5,
     borderColor: '#920E1A',
   },
   nextText: {
@@ -49,6 +58,17 @@ export default StyleSheet.create({
     fontWeight: '400',
   },
   nextButton: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 3,
+    borderColor: '#000000',
+    borderWidth: 1,
+    width: 310,
+    height: 50,
+    padding: 15,
+  },
+  nextButtonOpacity: {
     backgroundColor: '#fff',
     alignItems: 'center',
     marginBottom: 20,

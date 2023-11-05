@@ -7,8 +7,21 @@ import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
+  const [isEmail, setIsEmail] = useState(false);
   const [displayError, setDisplayError] = useState(false);
   const [displayEmail, setDisplayEmail] = useState(false);
+  const [placeholder, setPlaceholder] = useState('Email');
+  const [isFocused, setIsFocused] = useState(false);
+
+  const onClick = () => {
+    setPlaceholder('');
+    setIsFocused(true);
+  };
+
+  const offClick = () => {
+    setPlaceholder('Email');
+    setIsFocused(false);
+  };
 
   function inputEmail(email: string) {
     setDisplayEmail(true);
@@ -19,6 +32,13 @@ export default function LoginScreen() {
     if (email.trim() === '') {
       setDisplayEmail(false);
     }
+    console.log(email.trim());
+    if (email.trim() !== '') {
+      setIsEmail(true);
+    } else {
+      setIsEmail(false);
+    }
+    setIsEmail(isEmail);
   }
 
   async function emailFind() {
@@ -30,6 +50,7 @@ export default function LoginScreen() {
       router.push({ pathname: 'Login/Password', params: { email } });
     }
   }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
@@ -42,11 +63,13 @@ export default function LoginScreen() {
         {displayEmail ? 'Email Address' : ' '}{' '}
       </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, isFocused && styles.inputFocused]}
         value={email}
         onChangeText={inputEmail}
         onEndEditing={removeEmail}
-        placeholder="Email address"
+        onFocus={onClick}
+        onBlur={offClick}
+        placeholder={placeholder}
         keyboardType="email-address"
         autoCapitalize="none"
         clearButtonMode="while-editing"
@@ -62,8 +85,14 @@ export default function LoginScreen() {
       </View>
 
       <View>
-        <TouchableOpacity style={[styles.nextButton]} onPress={() => emailFind}>
-          <Text style={styles.nextText}>Next</Text>
+        <TouchableOpacity
+          style={[styles.nextButton, isEmail ? styles.nextButtonOpacity : null]}
+          onPress={emailFind}
+          disabled={!isEmail}
+        >
+          <Text style={[styles.nextText, isEmail ? styles.nextText : null]}>
+            Next
+          </Text>
         </TouchableOpacity>
       </View>
 

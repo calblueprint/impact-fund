@@ -75,7 +75,7 @@ export const passwordExists = async (
     email,
     password,
   });
-  if (!data) {
+  if (!data.user) {
     return false;
   } else {
     return true;

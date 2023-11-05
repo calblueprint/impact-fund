@@ -8,13 +8,33 @@ import { passwordExists, signInUser } from '../../../../supabase/queries/auth';
 export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [displayError, setDisplayError] = useState(false);
-  const email = useLocalSearchParams() as unknown as string;
+  // const { email } = useLocalSearchParams<{ email: string }>();
+  // const userEmail = email as string;
+  const email = useLocalSearchParams<{ email: string }>();
   const [displayPassword, setDisplayPassword] = useState(false);
-  // const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [placeholder, setPlaceholder] = useState('Password');
+  const [isFocused, setIsFocused] = useState(false);
+
+  const onClick = () => {
+    setPlaceholder('');
+    setIsFocused(true);
+  };
+
+  const offClick = () => {
+    setPlaceholder('Email');
+    setIsFocused(false);
+  };
 
   function inputPassword(password: string) {
+    if (password.trim() === '') {
+      setDisplayPassword(false);
+    }
     setDisplayPassword(true);
     setPassword(password);
+    if (password.trim() !== '') {
+      setIsPassword(true);
+    }
   }
 
   function removePassword() {
@@ -28,7 +48,12 @@ export default function LoginScreen() {
   };
   */
 
-  async function signInFunc(email: string, password: string) {
+  async function signInFunc() {
+    if (typeof email !== 'string') {
+      // Handle the error case - redirect back or show an error
+      router.push({ pathname: 'Login' });
+      return;
+    }
     const isPassword = await passwordExists(email, password);
     if (!isPassword) {
       setDisplayError(true);
@@ -48,11 +73,13 @@ export default function LoginScreen() {
         {displayPassword ? 'Password' : ' '}{' '}
       </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, isFocused && styles.inputFocused]}
         value={password}
         onChangeText={inputPassword}
         onEndEditing={removePassword}
-        placeholder="Password"
+        onFocus={onClick}
+        onBlur={offClick}
+        placeholder={placeholder}
         secureTextEntry
         clearButtonMode="never"
       />
@@ -68,8 +95,8 @@ export default function LoginScreen() {
 
       <View>
         <TouchableOpacity
-          style={[styles.nextButton]}
-          onPress={() => signInFunc(email, password)}
+          style={[styles.nextButton, isPassword && styles.nextButtonOpacity]}
+          onPress={() => signInFunc()}
         >
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
