@@ -16,22 +16,10 @@ export default StyleSheet.create({
     width: '100%',
     paddingRight: 30,
   },
-  casesContainer: {
-    flex: 0.8,
-    flexDirection: 'column',
-    width: '90%',
-  },
-  circle: {
-    width: 70,
-    height: 70,
-    borderRadius: 100 / 2,
-    backgroundColor: '#a9a9a9',
+  button: {
+    margin: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  scanner: {
-    overflow: 'hidden',
-    borderRadius: 10,
+    backgroundColor: '#339FFF',
+    padding: 10,
   },
 });

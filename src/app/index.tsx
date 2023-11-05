@@ -1,29 +1,26 @@
-import { Link } from 'expo-router';
-import { Text, TouchableOpacity, View } from 'react-native';
-import DummyQueries from '../supabase/DummyQueries';
-import styles from './styles';
+import { router } from 'expo-router';
+import { useEffect } from 'react';
+
+import supabase from '../supabase/createClient';
 
 function StartScreen() {
-  return (
-    <View style={styles.container}>
-      <Link href="/Welcome" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text>Welcome Screen</Text>
-        </TouchableOpacity>
-      </Link>
-      <Link href="/Cases/QRCodeScanner" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text>Cases Screen</Text>
-        </TouchableOpacity>
-      </Link>
-      <Link href="/Profile" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text>Profile Screen</Text>
-        </TouchableOpacity>
-      </Link>
-      <DummyQueries />
-    </View>
-  );
+  useEffect(() => {
+    // supabase.auth.getSession().then(({ data: { session } }) => {
+    //   if (session) {
+    //     router.replace('/Cases');
+    //   } else {
+    //     router.replace('/Welcome');
+    //   }
+    // });
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        router.replace('/Cases');
+      } else {
+        router.replace('Welcome');
+      }
+    });
+    // return () => authListener.subscription.unsubscribe();
+  }, []);
 }
 
 export default StartScreen;
