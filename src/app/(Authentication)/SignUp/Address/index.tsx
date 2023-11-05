@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,10 +7,15 @@ import styles from './styles';
 import { signUpUser } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
+  const name = useLocalSearchParams<{ name: string }>();
+  const email = useLocalSearchParams<{ email: string }>();
+  const password = useLocalSearchParams<{ password: string }>();
+
   const [streetAddress, setStreetAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zipcode, setZipcode] = useState('');
+  const address = streetAddress + ' ' + city + ' ' + state + ' ' + zipcode;
 
   return (
     <View style={styles.container}>
@@ -24,6 +29,7 @@ export default function SignUpScreen() {
         onChangeText={setStreetAddress}
         placeholder="Street Address"
         autoCapitalize="words"
+        clearButtonMode="while-editing"
       />
       <TextInput
         style={styles.input}
@@ -31,6 +37,7 @@ export default function SignUpScreen() {
         onChangeText={setCity}
         placeholder="City"
         autoCapitalize="words"
+        clearButtonMode="while-editing"
       />
       <TextInput
         style={styles.input}
@@ -38,16 +45,20 @@ export default function SignUpScreen() {
         onChangeText={setState}
         placeholder="State"
         autoCapitalize="words"
+        clearButtonMode="while-editing"
       />
       <TextInput
         style={styles.input}
+        maxLength={5}
         value={zipcode}
         onChangeText={setZipcode}
         placeholder="Zip Code"
+        keyboardType="numeric"
+        clearButtonMode="while-editing"
       />
       <TouchableOpacity
         style={styles.button}
-        // onPress={() => signUpUser(name, email, address, password)}
+        onPress={() => signUpUser(name, email, address, password)}
       >
         <Text>Sign Up</Text>
       </TouchableOpacity>

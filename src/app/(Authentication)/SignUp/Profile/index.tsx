@@ -1,4 +1,4 @@
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -31,9 +31,7 @@ export default function SignUpScreen() {
       setDisplayError(false);
       router.push({
         pathname: 'SignUp/Address',
-        params: name,
-        email,
-        password,
+        params: { name, email, password },
       });
     }
   };
