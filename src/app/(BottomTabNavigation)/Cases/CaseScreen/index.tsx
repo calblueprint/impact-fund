@@ -19,6 +19,7 @@ function CasesScreen() {
     const getStatus = async () => {
       const caseStatus = await getCaseStatus(caseData.id);
       setStatus(caseStatus);
+      console.log(caseStatus);
     };
     getStatus();
   }, []);

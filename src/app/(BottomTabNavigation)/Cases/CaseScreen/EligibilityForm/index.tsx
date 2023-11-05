@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -9,14 +9,11 @@ import Arrow from '../../../../../../assets/arrow.svg';
 
 export default function EligibilityForm() {
   const { caseId } = useLocalSearchParams() as unknown as { caseId: CaseUid };
-  const [eligibility, setEligibility] = useState(Eligibility.UNDETERMINED);
 
-  useEffect(() => {
-    const updateStatus = async () => {
-      await updateCaseStatus(caseId, eligibility);
-    };
-    updateStatus();
-  }, [eligibility]);
+  const updateEligibility = async (status: Eligibility) => {
+    await updateCaseStatus(caseId, status);
+    router.push('/Cases/CaseScreen');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -46,7 +43,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperTop}>
           <TouchableOpacity
             style={[styles.button, styles.buttonTop]}
-            onPress={() => setEligibility(Eligibility.ELIGIBLE)}
+            onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
           >
             <Text>Yes, I am Eligible</Text>
             <Arrow />
@@ -55,7 +52,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
             style={[styles.button, styles.buttonBottom]}
-            onPress={() => setEligibility(Eligibility.INELIGIBLE)}
+            onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
           >
             <Text style={styles.buttonBottomText}>No, I'm not Eligible</Text>
             <Text style={styles.buttonBottomText}>X</Text>
