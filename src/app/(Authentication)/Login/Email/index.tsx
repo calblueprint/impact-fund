@@ -16,6 +16,7 @@ export default function LoginScreen() {
   const onClick = () => {
     setPlaceholder('');
     setIsFocused(true);
+    setDisplayEmail(true);
   };
 
   const offClick = () => {
@@ -24,7 +25,6 @@ export default function LoginScreen() {
   };
 
   function inputEmail(email: string) {
-    setDisplayEmail(true);
     setEmail(email);
   }
 
@@ -32,7 +32,6 @@ export default function LoginScreen() {
     if (email.trim() === '') {
       setDisplayEmail(false);
     }
-    console.log(email.trim());
     if (email.trim() !== '') {
       setIsEmail(true);
     } else {
@@ -88,7 +87,7 @@ export default function LoginScreen() {
         <TouchableOpacity
           style={[styles.nextButton, isEmail ? styles.nextButtonOpacity : null]}
           onPress={emailFind}
-          disabled={!isEmail}
+          // disabled={!isEmail}
         >
           <Text style={[styles.nextText, isEmail ? styles.nextText : null]}>
             Next

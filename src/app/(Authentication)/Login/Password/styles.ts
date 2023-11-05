@@ -40,7 +40,7 @@ export default StyleSheet.create({
     padding: 10,
     width: 310,
     borderRadius: 5,
-    borderColor: '#0000000',
+    borderColor: '#000000',
   },
   inputFocused: {
     marginTop: 5,

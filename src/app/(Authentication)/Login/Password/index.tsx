@@ -19,6 +19,7 @@ export default function LoginScreen() {
   const onClick = () => {
     setPlaceholder('');
     setIsFocused(true);
+    setDisplayPassword(true);
   };
 
   const offClick = () => {
@@ -30,7 +31,6 @@ export default function LoginScreen() {
     if (password.trim() === '') {
       setDisplayPassword(false);
     }
-    setDisplayPassword(true);
     setPassword(password);
     if (password.trim() !== '') {
       setIsPassword(true);
