@@ -11,9 +11,8 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   backText: {
-    color: colors.lightGrey,
+    color: colors.midGrey,
     fontSize: 16,
-    opacity: 0.3,
     fontWeight: '400',
   },
   backButton: {
@@ -90,6 +89,6 @@ export default StyleSheet.create({
     fontWeight: '400',
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 25,
+    marginTop: 15,
   },
 });

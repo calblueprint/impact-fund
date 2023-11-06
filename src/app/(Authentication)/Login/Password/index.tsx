@@ -29,10 +29,6 @@ export default function LoginScreen() {
       setDisplayPassword(false);
     }
     setPassword(password);
-    /* if (password.trim() !== '') {
-      setIsPassword(true);
-    }
-    */
   }
 
   function removePassword() {
@@ -41,13 +37,14 @@ export default function LoginScreen() {
     }
   }
 
-  async function signInFunc() {
+  async function signIn() {
     const isPassword = await passwordExists(email, password);
     if (!isPassword) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
       signInUser(email, password);
+      setPassword('');
     }
   }
 
@@ -77,16 +74,13 @@ export default function LoginScreen() {
         <Text style={styles.errorMessage}>
           {' '}
           {displayError
-            ? 'Oh no! The password you entered is incorrect, please try again.'
+            ? 'Oh no! The password you entered is incorrect, \n please try again.'
             : ' '}{' '}
         </Text>
       </View>
 
       <View>
-        <TouchableOpacity
-          style={[styles.nextButton]}
-          onPress={() => signInFunc()}
-        >
+        <TouchableOpacity style={[styles.nextButton]} onPress={() => signIn()}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>

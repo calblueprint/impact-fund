@@ -39,7 +39,7 @@ export default StyleSheet.create({
     height: 40,
     borderBottomWidth: 1.5,
     padding: 10,
-    width: 310,
+    width: 315,
     borderColor: colors.black,
   },
   inputFocused: {

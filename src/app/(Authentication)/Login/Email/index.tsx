@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -43,6 +43,7 @@ export default function LoginScreen() {
     } else {
       setDisplayError(false);
       router.push({ pathname: 'Login/Password', params: { email } });
+      setEmail('');
     }
   }
 
@@ -74,7 +75,7 @@ export default function LoginScreen() {
         <Text style={styles.errorMessage}>
           {' '}
           {displayError
-            ? 'The email you entered is either incorrect or not registered with Impact Fund.'
+            ? 'The email you entered is either incorrect or not \n registered with Impact Fund.'
             : ' '}{' '}
         </Text>
       </View>
