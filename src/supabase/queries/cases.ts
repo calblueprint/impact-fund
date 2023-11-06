@@ -94,7 +94,6 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
-<<<<<<< HEAD
 /**
  * Update a specific User/Case status
  * @param caseId specified caseId
@@ -140,7 +139,10 @@ export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCaseStatus)', error);
-=======
+    throw error;
+  }
+}
+
 export async function getImageUrl(imagePath: string): Promise<string> {
   try {
     const { data } = supabase.storage
@@ -150,7 +152,6 @@ export async function getImageUrl(imagePath: string): Promise<string> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getImageUrl)', error);
->>>>>>> 349af2e (move to queries folder)
     throw error;
   }
 }
