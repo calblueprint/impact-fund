@@ -94,6 +94,12 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
+/**
+ * Fetch image from Supabase storage and return its public URL.
+ *
+ * @param imagePath image path
+ * @returns Image URL string
+ */
 export async function getImageUrl(imagePath: string): Promise<string> {
   try {
     const { data } = supabase.storage
