@@ -1,29 +1,21 @@
-import { getFormByCaseId } from '../../../../supabase/queries/cases';
+import { getFormsByCaseUid } from '../../../../supabase/queries/cases';
 import { CaseUid, Form } from '../../../../types/types';
 
 /** WIP: fetch and return a list of pdf links associated with a specific case */
 export async function fetchFormObjects(caseUid: CaseUid) {
-  const date1 = new Date('10-06-2023');
-  const date2 = new Date('10-06-2023');
+  const formUrls = await getFormsByCaseUid(caseUid);
+  console.log(formUrls);
 
-  // for testing supabase storage fetch
-  const formUrl = await getFormByCaseId();
-
-  const pdfs: Form[] = [
-    {
-      id: 'adfasdf',
-      title: 'Supabase Query',
-      date: date1,
-      pdfLink: formUrl,
-    },
-    {
-      id: 'asdfaskdfasdlfkkj',
-      title: 'Hard Code Test',
-      date: date2,
-      pdfLink:
-        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-    },
-  ];
+  const exampleDate = new Date('10-06-2023');
+  const pdfs: Form[] = [];
+  formUrls.map((item, index) => {
+    pdfs.push({
+      id: String(index),
+      title: `form ${index}`,
+      date: exampleDate,
+      pdfLink: item,
+    });
+  });
 
   return pdfs;
 }

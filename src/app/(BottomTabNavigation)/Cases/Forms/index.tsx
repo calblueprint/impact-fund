@@ -7,10 +7,9 @@ import FormListItem from '../../../../Components/FormListItem/FormListItem';
 import { CaseUid, Form } from '../../../../types/types';
 
 export default function FormsScreen() {
-  const id: CaseUid = 'asdfasdf';
+  const id: CaseUid = 'juul-case';
 
   // const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [noCasesExist, setNoCasesExist] = useState<boolean>(false);
   const [forms, setForms] = useState<Form[]>([]);
 
   async function fetchFormsOnLoad() {
@@ -19,9 +18,6 @@ export default function FormsScreen() {
       if (data.length > 0) {
         setForms(data);
       }
-      // } else {
-      //   setNoCasesExist(true);
-      // }
     });
   }
 

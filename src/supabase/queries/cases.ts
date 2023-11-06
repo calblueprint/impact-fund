@@ -95,31 +95,23 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
-// export async function addCase() {
-//   const dummyCase = {
-//     approved: false,
-//     title: 'Dummy Case',
-//     summary: 'Testing intializing db',
-//     image: 'no.jpg',
-//     case_status: 'In Progress',
-//     claim_link: 'berkeley.edu',
-//     case_site: 'berkeley.edu',
-//     opt_out_link: 'berkeley.edu',
-//   };
-//   const { error } = await supabase.from('Cases').insert(dummyCase);
-//   return error;
-// }
-
-export async function getFormByCaseId(): Promise<string> {
+export async function getFormsByCaseUid(caseUid: CaseUid): Promise<string[]> {
   try {
-    const { data } = supabase.storage
-      .from('caseFiles')
-      .getPublicUrl('test-order-motion-to-dismiss.pdf');
-    console.log(data.publicUrl);
-    return data.publicUrl;
+    // fetch the form objects from supabase storage
+    const { data } = await supabase.storage.from('caseFiles').list(caseUid);
+
+    // parse form objects and create a list of public urls
+    const formUrl: string[] = [];
+    data?.map(async item => {
+      const { data } = await supabase.storage
+        .from('caseFiles')
+        .getPublicUrl(item.name);
+      formUrl.push(data.publicUrl);
+    });
+    return formUrl;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.warn('(getImageUrl)', error);
+    console.warn('(getFormsByCaseUid)', error);
     throw error;
   }
 }
