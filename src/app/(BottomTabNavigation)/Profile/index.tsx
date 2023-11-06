@@ -1,27 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import { router } from 'expo-router';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { signOutUser, getCurrentUser } from '../../../supabase/queries/auth';
+import { signOutUser } from '../../../supabase/queries/auth';
 
 function ProfileScreen() {
-  const [currSession, setCurrSession] = useState(null);
-
-  useEffect(() => {
-    console.log('current User', getCurrentUser());
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text>This is the /Profile/index screen!</Text>
       <TouchableOpacity onPress={() => signOutUser()} style={styles.button}>
         <Text>Sign Out</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          router.push('/Profile/DeleteAccount');
+        }}
+      >
         <Text>Delete Account</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text>Edit Account</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push('/Profile/EditName')}
+      >
+        <Text>Edit Name</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push('/Profile/EditAddress')}
+      >
+        <Text>Edit Address</Text>
       </TouchableOpacity>
     </View>
   );

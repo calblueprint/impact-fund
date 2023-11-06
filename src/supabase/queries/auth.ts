@@ -1,3 +1,4 @@
+import supabaseAdmin from '../createAdminClient';
 import supabase from '../createClient';
 
 export const signUpUser = async (
@@ -20,13 +21,6 @@ export const signUpUser = async (
           address,
         },
       },
-    });
-    await supabase.from('users').insert({
-      firstName,
-      middleName,
-      lastName,
-      email,
-      address,
     });
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -58,10 +52,43 @@ export const signOutUser = async () => {
   }
 };
 
-export const getCurrentUser = async () => {
+export const deleteCurrentUser = async (userId: string) => {
   try {
-    const { data } = await supabase.auth.getSession();
-    return data;
+    await supabaseAdmin.auth.admin.deleteUser(userId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCurrentUserInfo = async () => {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateCurrUserName = async (
+  newFirstName: string,
+  newLastName: string,
+) => {
+  try {
+    await supabase.auth.updateUser({
+      data: { firstName: newFirstName, lastName: newLastName },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateCurrUserAddress = async (newAddress: string) => {
+  try {
+    supabase.auth.updateUser({
+      data: { address: newAddress },
+    });
   } catch (error) {
     throw error;
   }
