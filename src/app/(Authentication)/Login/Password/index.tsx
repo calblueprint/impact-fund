@@ -8,11 +8,8 @@ import { passwordExists, signInUser } from '../../../../supabase/queries/auth';
 export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [displayError, setDisplayError] = useState(false);
-  // const { email } = useLocalSearchParams<{ email: string }>();
-  // const userEmail = email as string;
-  const email = useLocalSearchParams<{ email: string }>();
+  const { email } = useLocalSearchParams() as unknown as { email: string };
   const [displayPassword, setDisplayPassword] = useState(false);
-  // const [isPassword, setIsPassword] = useState(false);
   const [placeholder, setPlaceholder] = useState('Password');
   const [isFocused, setIsFocused] = useState(false);
 
@@ -43,25 +40,14 @@ export default function LoginScreen() {
       setDisplayPassword(false);
     }
   }
-  /*
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!isPasswordVisible);
-  };
-  */
 
   async function signInFunc() {
-    /*
-    if (typeof email !== 'string') {
-      router.push({ pathname: 'Login/Password', params: { email } });
-      return;
-    }
-    */
     const isPassword = await passwordExists(email, password);
     if (!isPassword) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      signInUser(userEmail, password);
+      signInUser(email, password);
     }
   }
 
@@ -71,6 +57,7 @@ export default function LoginScreen() {
         <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
       <Text style={styles.instructionText}>Please enter your password.</Text>
+
       <Text style={styles.passwordText}>
         {displayPassword ? 'Password' : ' '}{' '}
       </Text>

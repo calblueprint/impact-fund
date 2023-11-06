@@ -24,10 +24,6 @@ export default function LoginScreen() {
     setIsFocused(false);
   };
 
-  function inputEmail(email: string) {
-    setEmail(email);
-  }
-
   function removeEmail() {
     if (email.trim() === '') {
       setDisplayEmail(false);
@@ -46,9 +42,7 @@ export default function LoginScreen() {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      if (typeof email === 'string') {
-        router.push({ pathname: 'Login/Password', params: { email } });
-      }
+      router.push({ pathname: 'Login/Password', params: { email } });
     }
   }
 
@@ -66,7 +60,7 @@ export default function LoginScreen() {
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
         value={email}
-        onChangeText={inputEmail}
+        onChangeText={setEmail}
         onEndEditing={removeEmail}
         onFocus={onClick}
         onBlur={offClick}
@@ -86,11 +80,7 @@ export default function LoginScreen() {
       </View>
 
       <View>
-        <TouchableOpacity
-          style={[styles.nextButton]}
-          onPress={emailFind}
-          // disabled={!isEmail}
-        >
+        <TouchableOpacity style={[styles.nextButton]} onPress={emailFind}>
           <Text style={[styles.nextText]}>Next</Text>
         </TouchableOpacity>
       </View>
