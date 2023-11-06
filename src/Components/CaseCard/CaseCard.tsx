@@ -7,7 +7,7 @@ import { getImageUrl } from '../../supabase/queries/cases';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
-  const [imageUri, setImageUri] = useState('');
+  const [imageUri, setImageUri] = useState<string>();
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -16,7 +16,6 @@ function CaseCard(caseData: Case) {
     };
     fetchImage();
   }, []);
-  console.log(imageUri);
 
   return (
     <TouchableOpacity
