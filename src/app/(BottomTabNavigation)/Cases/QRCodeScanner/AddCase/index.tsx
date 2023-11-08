@@ -16,7 +16,6 @@ function AddCase() {
   const addToCases = async () => {
     uploadCase(id);
     router.push('/Cases');
-    console.log('hello');
   };
   return (
     <View style={styles.container}>

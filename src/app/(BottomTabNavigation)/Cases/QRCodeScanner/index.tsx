@@ -18,6 +18,7 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [message, setMessage] = useState('');
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -32,8 +33,9 @@ function QRCodeScannerScreen() {
   const isValidBarcode = (caseId: string) => true;
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (isValidBarcode(result.data)) {
-      const { id, title, summary, image } = await getCaseById(result.data);
+    const caseId = result.data;
+    if (isValidBarcode(caseId)) {
+      const { id, title, summary, image } = await getCaseById(caseId);
       const duplicate = await containsDuplicateCase(id);
       if (duplicate) {
         console.log('YOU ALREADY HAVE THIS CASE!');
