@@ -13,7 +13,7 @@ import { getCaseStatus } from '../../../../supabase/queries/cases';
 
 function CasesScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
-  const [status, setStatus] = useState(Eligibility.UNDETERMINED);
+  const [status, setStatus] = useState<Eligibility>();
 
   useEffect(() => {
     const getStatus = async () => {
@@ -22,7 +22,7 @@ function CasesScreen() {
       console.log(caseStatus);
     };
     getStatus();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
@@ -31,10 +31,10 @@ function CasesScreen() {
           <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
+      <CaseStatusBar />
       {status === Eligibility.ELIGIBLE && (
         <EligibilityCard caseData={caseData} status={status} />
       )}
-      <CaseStatusBar />
       <CaseSummaryCard />
       {(status === Eligibility.INELIGIBLE ||
         status === Eligibility.UNDETERMINED) && (

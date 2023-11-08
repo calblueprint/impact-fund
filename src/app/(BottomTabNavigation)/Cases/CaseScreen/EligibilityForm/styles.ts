@@ -43,21 +43,21 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   buttonBottom: {
-    backgroundColor: '#2C2C2C',
+    backgroundColor: colors.black,
   },
   buttonTop: {
-    borderColor: 'black',
+    borderColor: colors.black,
     borderWidth: 0.5,
   },
   buttonBottomText: {
-    color: '#fff',
+    color: colors.white,
   },
   backButton: {
     margin: 10,
     alignItems: 'center',
     backgroundColor: colors.midGrey,
     padding: 10,
-    borderColor: 'black',
+    borderColor: colors.black,
     borderWidth: 0.5,
     borderRadius: 5,
   },
