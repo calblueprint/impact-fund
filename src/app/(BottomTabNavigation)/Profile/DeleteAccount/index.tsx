@@ -7,34 +7,25 @@ import {
   getCurrentUserInfo,
   signOutUser,
 } from '../../../../supabase/queries/auth';
+import { userInstance, User } from '../../../../types/types';
 import styles from '../styles';
 
 function DeleteAccountScreen() {
-  const [currSession, setCurrSession] = useState<any>(null);
+  const [currSession, setCurrSession] = useState<User>(userInstance);
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      if (result) {
-        const userInfo = {
-          email: result.email,
-          fullName: result.user_metadata.fullName,
-          mailingAddress: result.user_metadata.mailingAddress,
-          id: result.id,
-        };
-        setCurrSession(userInfo);
-      } else {
-        setCurrSession(null);
-      }
+      setCurrSession(result);
     });
   }, []);
   return (
     <View>
       <Text>
-        Are you sure you want to delete your account {currSession?.firstName}?
+        Are you sure you want to delete your account {currSession.firstName}?
       </Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          deleteCurrentUser(currSession?.id);
+          deleteCurrentUser(currSession.id);
           signOutUser();
         }}
       >

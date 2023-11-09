@@ -21,7 +21,7 @@ export type User = {
   middleName: string | null;
   lastName: string;
   email: string;
-  addresss: string;
+  address: string;
 };
 
 export type Status = {
@@ -36,3 +36,11 @@ export enum Eligibility {
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
 }
+export const userInstance: User = {
+  id: '',
+  firstName: '',
+  middleName: null,
+  lastName: '',
+  email: '',
+  address: '',
+};

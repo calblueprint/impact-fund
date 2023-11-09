@@ -7,30 +7,20 @@ import {
   getCurrentUserInfo,
   updateCurrUserAddress,
 } from '../../../../supabase/queries/auth';
+import { User, userInstance } from '../../../../types/types';
 
 function EditNameScreen() {
-  const [currSession, setCurrSession] = useState<any>(null);
+  const [currSession, setCurrSession] = useState<User>(userInstance);
   const [address, setAddress] = useState<string>();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      if (result) {
-        const userInfo = {
-          email: result.email,
-          firstName: result.user_metadata.firstName,
-          lastName: result.user_metadata.lastName,
-          address: result.user_metadata.address,
-          id: result.id,
-        };
-        setCurrSession(userInfo);
-        setAddress(userInfo.address);
-      } else {
-        setCurrSession(null);
-      }
+      setCurrSession(result);
+      setAddress(result.address);
     });
   }, []);
   return (
     <View>
-      <Text>Edit Address {currSession?.mailingAddress}</Text>
+      <Text>Edit Address {currSession.address}</Text>
       <TextInput
         style={styles.input}
         value={address}

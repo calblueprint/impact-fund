@@ -7,37 +7,35 @@ import {
   getCurrentUserInfo,
   updateCurrUserName,
 } from '../../../../supabase/queries/auth';
+import { User, userInstance } from '../../../../types/types';
 
 function EditNameScreen() {
-  const [currSession, setCurrSession] = useState<any>(null);
+  const [currSession, setCurrSession] = useState<User>(userInstance);
   const [firstName, setFirstName] = useState<string>();
+  const [middleName, setMiddleName] = useState<string | null>();
   const [lastName, setLastName] = useState<string>();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      if (result) {
-        const userInfo = {
-          email: result.email,
-          firstName: result.user_metadata.firstName,
-          lastName: result.user_metadata.lastName,
-          address: result.user_metadata.address,
-          id: result.id,
-        };
-        setCurrSession(userInfo);
-        setFirstName(userInfo.firstName);
-        setLastName(userInfo.lastName);
-      } else {
-        setCurrSession(null);
-      }
+      setCurrSession(result);
+      setFirstName(result.firstName);
+      setMiddleName(result.middleName);
+      setLastName(result.lastName);
     });
   }, []);
   return (
     <View>
-      <Text>Edit Name {currSession?.firstName}</Text>
+      <Text>Edit Name {currSession.firstName}</Text>
       <TextInput
         style={styles.input}
         value={firstName}
         onChangeText={setFirstName}
         placeholder="First Name"
+      />
+      <TextInput
+        style={styles.input}
+        value={middleName ? middleName : ''}
+        onChangeText={setMiddleName}
+        placeholder="Middle Name"
       />
       <TextInput
         style={styles.input}
@@ -49,7 +47,7 @@ function EditNameScreen() {
         style={styles.button}
         onPress={() => {
           if (firstName && lastName) {
-            updateCurrUserName(firstName, lastName);
+            updateCurrUserName(firstName, middleName, lastName);
             router.push('/Profile/');
           } else {
             router.push('/Profile/');

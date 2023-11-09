@@ -1,3 +1,4 @@
+import { User } from '../../types/types';
 import supabaseAdmin from '../createAdminClient';
 import supabase from '../createClient';
 
@@ -56,30 +57,50 @@ export const deleteCurrentUser = async (userId: string) => {
   try {
     await supabaseAdmin.auth.admin.deleteUser(userId);
   } catch (error) {
+    console.error('(deleteCurrentUser)', error);
     throw error;
   }
 };
 
-export const getCurrentUserInfo = async () => {
+export const getCurrentUserInfo = async (): Promise<User> => {
   try {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    return user;
+    if (user) {
+      const userInfo = {
+        email: user.user_metadata.email,
+        firstName: user.user_metadata.firstName,
+        middleName: user.user_metadata.middleName,
+        lastName: user.user_metadata.lastName,
+        address: user.user_metadata.address,
+        id: user.id,
+      };
+      return userInfo;
+    } else {
+      throw new Error('User not found');
+    }
   } catch (error) {
+    console.error('(getCurrentUserInfo)', error);
     throw error;
   }
 };
 
 export const updateCurrUserName = async (
   newFirstName: string,
+  newMiddleName: string | undefined | null,
   newLastName: string,
 ) => {
   try {
     await supabase.auth.updateUser({
-      data: { firstName: newFirstName, lastName: newLastName },
+      data: {
+        firstName: newFirstName,
+        middleName: newMiddleName,
+        lastName: newLastName,
+      },
     });
   } catch (error) {
+    console.error('(updateCurrUserName)', error);
     throw error;
   }
 };
@@ -90,6 +111,7 @@ export const updateCurrUserAddress = async (newAddress: string) => {
       data: { address: newAddress },
     });
   } catch (error) {
+    console.error('(updateCurrUserAddress)', error);
     throw error;
   }
 };
