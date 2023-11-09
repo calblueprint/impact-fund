@@ -1,4 +1,4 @@
-import { Case, CaseUid, UserUid } from '../../types/types';
+import { Case, CaseUid, Eligibility, UserUid } from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -84,7 +84,6 @@ export function parseCase(item: any): Case {
     title: item.title,
     blurb: item.blurb,
     summary: item.summary,
-    image: item.image,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,
@@ -95,17 +94,70 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
-// export async function addCase() {
-//   const dummyCase = {
-//     approved: false,
-//     title: 'Dummy Case',
-//     summary: 'Testing intializing db',
-//     image: 'no.jpg',
-//     case_status: 'In Progress',
-//     claim_link: 'berkeley.edu',
-//     case_site: 'berkeley.edu',
-//     opt_out_link: 'berkeley.edu',
-//   };
-//   const { error } = await supabase.from('Cases').insert(dummyCase);
-//   return error;
-// }
+/**
+ * Update a specific User/Case status
+ * @param caseId specified caseId
+ * @param status status to be updated in the specific User/Case row
+ * @returns nothing
+ */
+export async function updateCaseStatus(
+  caseId: CaseUid,
+  status: Eligibility,
+): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase
+      .from('status')
+      .update({ eligibility: status })
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(updateCaseStatus)', error);
+    throw error;
+  }
+}
+
+export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { data } = await supabase
+      .from('status')
+      .select()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    if (!data) {
+      throw new Error('Status not found');
+    }
+    return data[0].eligibility;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getCaseStatus)', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch image from Supabase storage and return its public URL.
+ *
+ * @param imagePath image path
+ * @returns Image URL string
+ */
+export async function getImageUrl(imagePath: string): Promise<string> {
+  try {
+    const { data } = supabase.storage
+      .from('caseImages')
+      .getPublicUrl(imagePath);
+    return data.publicUrl;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getImageUrl)', error);
+    throw error;
+  }
+}

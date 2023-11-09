@@ -1,11 +1,22 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import { getImageUrl } from '../../supabase/queries/cases';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
+  const [imageUri, setImageUri] = useState<string>();
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const uri = await getImageUrl(caseData.id);
+      setImageUri(uri);
+    };
+    fetchImage();
+  }, []);
+
   return (
     <TouchableOpacity
       style={styles.caseCard}
@@ -18,7 +29,6 @@ function CaseCard(caseData: Case) {
             title: caseData.title,
             blurb: caseData.blurb,
             summary: caseData.summary,
-            image: caseData.image,
             caseSite: caseData.caseSite,
             claimLink: caseData.claimLink,
             optOutLink: caseData.optOutLink,
@@ -40,7 +50,7 @@ function CaseCard(caseData: Case) {
       <Image
         style={styles.imagePlaceholder}
         source={{
-          uri: caseData.image,
+          uri: imageUri,
         }}
       />
     </TouchableOpacity>

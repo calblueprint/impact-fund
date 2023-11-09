@@ -21,7 +21,7 @@ export default StyleSheet.create({
   button: {
     margin: 10,
     alignItems: 'center',
-    backgroundColor: '#339FFF',
+    backgroundColor: colors.midGrey,
     padding: 10,
   },
 });
