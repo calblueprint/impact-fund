@@ -84,7 +84,6 @@ export function parseCase(item: any): Case {
     title: item.title,
     blurb: item.blurb,
     summary: item.summary,
-    image: item.image,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,
@@ -140,6 +139,25 @@ export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCaseStatus)', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch image from Supabase storage and return its public URL.
+ *
+ * @param imagePath image path
+ * @returns Image URL string
+ */
+export async function getImageUrl(imagePath: string): Promise<string> {
+  try {
+    const { data } = supabase.storage
+      .from('caseImages')
+      .getPublicUrl(imagePath);
+    return data.publicUrl;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getImageUrl)', error);
     throw error;
   }
 }

@@ -7,7 +7,6 @@ export type Case = {
   title: string;
   blurb: string;
   summary: string;
-  image: string;
   caseSite: string;
   claimLink: string;
   optOutLink: string;
