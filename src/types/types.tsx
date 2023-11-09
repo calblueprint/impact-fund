@@ -1,7 +1,7 @@
 export type CaseUid = string;
 export type UserUid = string;
 
-export interface Case {
+export type Case = {
   id: CaseUid;
   approved: boolean;
   title: string;
@@ -14,13 +14,26 @@ export interface Case {
   caseStatus: string;
   date: Date;
   lawFirm: string;
-}
+};
 
-export interface User {
+export type User = {
   id: UserUid;
   firstName: string;
   middleName: string | null;
   lastName: string;
   email: string;
   addresss: string;
+};
+
+export type Status = {
+  id: CaseUid;
+  userId: UserUid;
+  eligible: Eligibility;
+  excluded: boolean;
+};
+
+export enum Eligibility {
+  ELIGIBLE = 'ELIGIBLE',
+  INELIGIBLE = 'INELIGIBLE',
+  UNDETERMINED = 'UNDETERMINED',
 }
