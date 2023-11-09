@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -20,7 +20,7 @@ export default function LoginScreen() {
   };
 
   const offClick = () => {
-    setPlaceholder('Email');
+    setPlaceholder('Email address');
     setIsFocused(false);
   };
 
@@ -44,6 +44,7 @@ export default function LoginScreen() {
       setDisplayError(false);
       router.push({ pathname: 'Login/Password', params: { email } });
       setEmail('');
+      setDisplayEmail(false);
     }
   }
 
@@ -56,7 +57,7 @@ export default function LoginScreen() {
         Please enter your email address.
       </Text>
       <Text style={styles.emailText}>
-        {displayEmail ? 'Email Address' : ' '}{' '}
+        {displayEmail ? 'Email address' : ' '}{' '}
       </Text>
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
@@ -71,14 +72,11 @@ export default function LoginScreen() {
         clearButtonMode="while-editing"
       />
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessage}>
-          {' '}
-          {displayError
-            ? 'The email you entered is either incorrect or not \n registered with Impact Fund.'
-            : ' '}{' '}
-        </Text>
-      </View>
+      <Text style={styles.errorMessage}>
+        {displayError
+          ? 'The email you entered is either incorrect or not registered with the Impact Fund.'
+          : ' '}
+      </Text>
 
       <View>
         <TouchableOpacity style={[styles.nextButton]} onPress={emailFind}>

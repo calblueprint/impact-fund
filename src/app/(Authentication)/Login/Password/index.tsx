@@ -70,14 +70,11 @@ export default function LoginScreen() {
         clearButtonMode="never"
       />
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessage}>
-          {' '}
-          {displayError
-            ? 'Oh no! The password you entered is incorrect, \n please try again.'
-            : ' '}{' '}
-        </Text>
-      </View>
+      <Text style={styles.errorMessage}>
+        {displayError
+          ? 'Oh no! The password you entered is incorrect, please try again.'
+          : ' '}{' '}
+      </Text>
 
       <View>
         <TouchableOpacity style={[styles.nextButton]} onPress={() => signIn()}>
