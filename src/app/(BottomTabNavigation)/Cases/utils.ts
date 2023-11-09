@@ -4,9 +4,7 @@ import {
 } from '../../../supabase/queries/cases';
 import { Case, UserUid } from '../../../types/types';
 
-export default async function fetchListViewCases(
-  userUid: UserUid,
-): Promise<Case[]> {
+export async function fetchListViewCases(userUid: UserUid): Promise<Case[]> {
   try {
     if (!userUid) {
       throw new Error(`Invalid user uid: ${userUid}`);
