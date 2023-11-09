@@ -10,9 +10,11 @@ export async function fetchListViewCases(userUid: UserUid): Promise<Case[]> {
       throw new Error(`Invalid user uid: ${userUid}`);
     }
     const caseIds = await getCaseIdsFromUserId(userUid);
-    const caseData = await getCasesByIds(caseIds);
+    const cases = await getCasesByIds(caseIds);
 
-    return caseData;
+    console.log(cases);
+
+    return cases;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(fetchListViewCases)', error);

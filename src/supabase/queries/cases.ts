@@ -1,4 +1,10 @@
-import { Case, CaseUid, Eligibility, UserUid } from '../../types/types';
+import {
+  Case,
+  CasePartial,
+  CaseUid,
+  Eligibility,
+  UserUid,
+} from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -31,18 +37,18 @@ export async function getCaseIdsFromUserId(
   }
 }
 
-export async function getCaseById(caseId: CaseUid): Promise<Case> {
-  try {
-    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
-    if (!data) {
-      throw new Error('case not found');
-    }
-    return parseCase(data[0]);
-  } catch (error) {
-    console.warn('(getCaseById)', error);
-    throw error;
-  }
-}
+// export async function getCaseById(caseId: CaseUid): Promise<CasePartial> {
+//   try {
+//     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+//     if (!data) {
+//       throw new Error('case not found');
+//     }
+//     return parseCase(data[0]);
+//   } catch (error) {
+//     console.warn('(getCaseById)', error);
+//     throw error;
+//   }
+// }
 
 /**
  * Fetch an array of Case objects contained in an array of `CaseId`s. Fetches cases from `cases` table.
@@ -62,8 +68,18 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
     if (!data) {
       throw new Error('no cases found');
     }
-    // cast raw sql data as CaseCardProps data type
-    return data.map(item => parseCase(item));
+
+    return await Promise.all(
+      data.map(async item => {
+        const partialCase = formatCase(item);
+        const imageUrl = await getImageUrl(partialCase.id);
+        const caseData: Case = {
+          ...partialCase,
+          imageUrl,
+        };
+        return caseData;
+      }),
+    );
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCasesByIds)', error);
@@ -71,14 +87,35 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+// export async function getCaseById(caseIds: CaseUid[]): Promise<CasePartial[]> {
+//   try {
+//     // query cases contained in a list of caseIds
+//     const { data } = await supabase
+//       .from('cases')
+//       .select()
+//       .in('caseId', caseIds);
+
+//     // throw error if supabase data is empty
+//     if (!data) {
+//       throw new Error('no cases found');
+//     }
+//     // cast raw sql data as CaseCardProps data type
+//     return data.map(item => formatCase(item));
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.warn('(getCasesByIds)', error);
+//     throw error;
+//   }
+// }
+
 /**
  * Parse supabase case query and return Case object.
  *
  * @param item Case query result
  * @returns `Case` object
  */
-export function parseCase(item: any): Case {
-  const formattedCase: Case = {
+export function formatCase(item: any): CasePartial {
+  const formattedCase: CasePartial = {
     id: item.caseId,
     approved: item.approved,
     title: item.title,

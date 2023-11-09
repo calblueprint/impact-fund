@@ -19,7 +19,7 @@ export default function CaseSummaryScreen() {
         <Image
           style={styles.imageContainer}
           source={{
-            uri: caseData.image,
+            uri: caseData.imageUrl,
           }}
         />
         <View style={styles.blurbContainer}>

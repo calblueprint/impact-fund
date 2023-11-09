@@ -16,7 +16,7 @@ export default function CaseSummaryCard(caseData: Case) {
           params: {
             blurb: caseData.blurb,
             summary: caseData.summary,
-            image: caseData.image,
+            imageUrl: caseData.imageUrl,
             caseSite: caseData.caseSite,
             date: caseData.date,
             lawFirm: caseData.lawFirm,
@@ -28,7 +28,7 @@ export default function CaseSummaryCard(caseData: Case) {
         <Image
           style={styles.imageContainer}
           source={{
-            uri: caseData.image,
+            uri: caseData.imageUrl,
           }}
         />
         <View style={styles.blurbContainer}>
