@@ -95,23 +95,56 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
-export async function getFormsByCaseUid(caseUid: CaseUid): Promise<string[]> {
+export async function getFormUrl(filename: string): Promise<string> {
   try {
     // fetch the form objects from supabase storage
-    const { data } = await supabase.storage.from('caseFiles').list(caseUid);
-
-    // parse form objects and create a list of public urls
-    const formUrl: string[] = [];
-    data?.map(async item => {
-      const { data } = await supabase.storage
-        .from('caseFiles')
-        .getPublicUrl(item.name);
-      formUrl.push(data.publicUrl);
-    });
-    return formUrl;
+    const { data } = await supabase.storage
+      .from('caseFiles')
+      .getPublicUrl(filename);
+    return data.publicUrl;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getFormsByCaseUid)', error);
+    throw error;
+  }
+}
+
+type FormMetaData = {
+  id: CaseUid;
+  title: string;
+  filename: string;
+  date: Date;
+};
+
+export async function getFormObjects(
+  caseUid: CaseUid,
+): Promise<FormMetaData[]> {
+  try {
+    // fetch rows with the matching CaseUid
+    const { data } = await supabase
+      .from('caseForms')
+      .select()
+      .eq('caseId', caseUid);
+
+    if (!data) {
+      throw new Error(`no forms found for the given case: ${caseUid}`);
+    }
+
+    const forms: FormMetaData[] = [];
+
+    data.map(async item => {
+      const form: FormMetaData = {
+        id: item.formId,
+        title: item.title,
+        filename: item.filename,
+        date: item.date,
+      };
+      forms.push(form);
+    });
+    return forms;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getFormObjects)', error);
     throw error;
   }
 }

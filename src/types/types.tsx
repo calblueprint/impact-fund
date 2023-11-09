@@ -1,5 +1,7 @@
-export type CaseUid = string;
-export type UserUid = string;
+export type Uid = string;
+export type CaseUid = Uid;
+export type FormUid = Uid;
+export type UserUid = Uid;
 
 export interface Case {
   id: CaseUid;
@@ -16,12 +18,16 @@ export interface Case {
   lawFirm: string;
 }
 
-export type Form = {
-  id: CaseUid;
+export interface FormMetaData {
+  id: FormUid;
   title: string;
+  filename: string;
   date: Date;
-  pdfLink: string;
-};
+}
+
+export interface Form extends FormMetaData {
+  formUrl: string;
+}
 
 export interface User {
   id: UserUid;
