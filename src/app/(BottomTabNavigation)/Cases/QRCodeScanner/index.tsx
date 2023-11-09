@@ -1,13 +1,10 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import supabase from '../../../../supabase/createClient';
-import {
-  containsDuplicateCase,
-  getCaseById,
-} from '../../../../supabase/queries/cases';
+
 import styles from './styles';
+import { getCaseById, isValidCase } from '../../../../supabase/queries/cases';
 
 enum permissions {
   UNDETERMINED,
@@ -17,8 +14,15 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [message, setMessage] = useState('');
-  const [scanned, setScanned] = useState(false);
+  const [scanned, setScanned] = useState<boolean>(false);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', async () => {
+      setScanned(false);
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -30,23 +34,22 @@ function QRCodeScannerScreen() {
     getBarCodeScannerPermissions();
   }, []);
 
-  const isValidBarcode = (caseId: string) => true;
-
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     const caseId = result.data;
-    if (isValidBarcode(caseId)) {
-      const { id, title, summary, image } = await getCaseById(caseId);
-      const duplicate = await containsDuplicateCase(id);
-      if (duplicate) {
-        console.log('YOU ALREADY HAVE THIS CASE!');
-      } else {
-        router.push({
-          pathname: '/Cases/QRCodeScanner/AddCase',
-          params: { id, title, summary, image },
-        });
+    if (!scanned) {
+      setScanned(true);
+      const valid = await isValidCase(caseId);
+      if (!valid) {
+        // TODO: Display error toast message
+        return;
       }
-    } else {
-      setMessage('INVALID QR CODE!');
+      const data = await getCaseById(caseId);
+
+      const { id, title, image, summary } = data;
+      router.push({
+        pathname: '/Cases/QRCodeScanner/AddCase',
+        params: { id, title, image, summary },
+      });
     }
   };
 
@@ -61,7 +64,6 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text>Current Scanning: {message}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>

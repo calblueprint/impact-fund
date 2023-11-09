@@ -44,6 +44,14 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
+export async function isValidCase(caseId: CaseUid): Promise<boolean> {
+  const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+  if (!data) {
+    return false;
+  }
+  return data.length !== 0;
+}
+
 /**
  * Fetch an array of Case objects contained in an array of `CaseId`s. Fetches cases from `cases` table.
  *
@@ -93,7 +101,7 @@ export async function containsDuplicateCase(caseId: CaseUid) {
       .select()
       .eq('userId', userId)
       .eq('caseId', caseId);
-    return data?.length === 0;
+    return data?.length !== 0;
   } catch (error) {
     throw error;
   }
