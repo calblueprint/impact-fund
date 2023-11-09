@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Line } from 'react-native-svg';
 
 import styles from './styles';
 import Check from '../../../assets/check.svg';

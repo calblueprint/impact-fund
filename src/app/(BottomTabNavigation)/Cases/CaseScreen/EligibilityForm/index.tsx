@@ -1,11 +1,12 @@
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { router, useLocalSearchParams } from 'expo-router';
+
 import styles from './styles';
+import Arrow from '../../../../../../assets/arrow.svg';
 import { updateCaseStatus } from '../../../../../supabase/queries/cases';
 import { CaseUid, Eligibility } from '../../../../../types/types';
-import Arrow from '../../../../../../assets/arrow.svg';
 
 export default function EligibilityForm() {
   const { caseId } = useLocalSearchParams() as unknown as { caseId: CaseUid };

@@ -8,8 +8,8 @@ import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummarCa
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
-import { Case, Eligibility } from '../../../../types/types';
 import { getCaseStatus } from '../../../../supabase/queries/cases';
+import { Case, Eligibility } from '../../../../types/types';
 
 function CasesScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
