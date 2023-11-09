@@ -1,13 +1,15 @@
+import { router } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Line } from 'react-native-svg';
+
 import styles from './styles';
-import { Case, Eligibility } from '../../types/types';
-import { router } from 'expo-router';
-import Arrow from '../../../assets/next.svg';
 import Check from '../../../assets/check.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
+import Arrow from '../../../assets/next.svg';
 import Optout from '../../../assets/opt-out.svg';
+import { Case, Eligibility } from '../../types/types';
 
 interface EligibilityCardProps {
   caseData: Case;

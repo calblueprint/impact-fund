@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { normalize } from 'yargs';
+
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
