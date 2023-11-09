@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -8,12 +8,21 @@ import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummarCa
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
-import { Case } from '../../../../types/types';
+import { getCaseStatus } from '../../../../supabase/queries/cases';
+import { Case, Eligibility } from '../../../../types/types';
 
 function CasesScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
+  const [status, setStatus] = useState<Eligibility>();
 
-  console.log(caseData);
+  useEffect(() => {
+    const getStatus = async () => {
+      const caseStatus = await getCaseStatus(caseData.id);
+      setStatus(caseStatus);
+      console.log(caseStatus);
+    };
+    getStatus();
+  });
 
   return (
     <View style={styles.container}>
@@ -23,8 +32,14 @@ function CasesScreen() {
         </TouchableOpacity>
       </View>
       <CaseStatusBar />
+      {status === Eligibility.ELIGIBLE && (
+        <EligibilityCard caseData={caseData} status={status} />
+      )}
       <CaseSummaryCard />
-      <EligibilityCard />
+      {(status === Eligibility.INELIGIBLE ||
+        status === Eligibility.UNDETERMINED) && (
+        <EligibilityCard caseData={caseData} status={status} />
+      )}
       <FormsCard />
       <EducationalBar />
     </View>
