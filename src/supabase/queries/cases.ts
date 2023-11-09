@@ -87,27 +87,6 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
-// export async function getCaseById(caseIds: CaseUid[]): Promise<CasePartial[]> {
-//   try {
-//     // query cases contained in a list of caseIds
-//     const { data } = await supabase
-//       .from('cases')
-//       .select()
-//       .in('caseId', caseIds);
-
-//     // throw error if supabase data is empty
-//     if (!data) {
-//       throw new Error('no cases found');
-//     }
-//     // cast raw sql data as CaseCardProps data type
-//     return data.map(item => formatCase(item));
-//   } catch (error) {
-//     // eslint-disable-next-line no-console
-//     console.warn('(getCasesByIds)', error);
-//     throw error;
-//   }
-// }
-
 /**
  * Parse supabase case query and return Case object.
  *

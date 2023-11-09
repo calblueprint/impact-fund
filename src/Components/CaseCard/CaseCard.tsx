@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { getImageUrl } from '../../supabase/queries/cases';
+// import { getImageUrl } from '../../supabase/queries/cases';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
-  const [imageUri, setImageUri] = useState<string>();
+  // const [imageUri, setImageUri] = useState<string>();
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      const uri = await getImageUrl(caseData.id);
-      setImageUri(uri);
-    };
-    fetchImage();
-  }, []);
+  // useEffect(() => {
+  //   const fetchImage = async () => {
+  //     const uri = await getImageUrl(caseData.id);
+  //     setImageUri(uri);
+  //   };
+  //   fetchImage();
+  // }, []);
 
   return (
     <TouchableOpacity
