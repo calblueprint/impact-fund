@@ -20,8 +20,8 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    borderTopRightRadius: 9,
+    borderTopLeftRadius: 9,
   },
   blurbContainer: {
     height: 'auto',

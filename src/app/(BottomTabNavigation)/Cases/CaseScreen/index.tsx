@@ -25,7 +25,7 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentView}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
         <CaseStatusBar />
         {status === Eligibility.ELIGIBLE && (
           <EligibilityCard caseData={caseData} status={status} />
