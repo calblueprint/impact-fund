@@ -37,24 +37,11 @@ export async function getCaseIdsFromUserId(
   }
 }
 
-// export async function getCaseById(caseId: CaseUid): Promise<CasePartial> {
-//   try {
-//     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
-//     if (!data) {
-//       throw new Error('case not found');
-//     }
-//     return parseCase(data[0]);
-//   } catch (error) {
-//     console.warn('(getCaseById)', error);
-//     throw error;
-//   }
-// }
-
 /**
- * Fetch an array of Case objects contained in an array of `CaseId`s. Fetches cases from `cases` table.
+ * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
  * @param caseIds list of `CaseId`s
- * @returns array of `CaseCard` objects
+ * @returns array of `Case` objects
  */
 export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   try {
@@ -88,10 +75,10 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
 }
 
 /**
- * Parse supabase case query and return Case object.
+ * Parse supabase case query and return `CasePartial` object.
  *
- * @param item Case query result
- * @returns `Case` object
+ * @param item supabase Case query return data
+ * @returns `CasePartial` object
  */
 export function formatCase(item: any): CasePartial {
   const formattedCase: CasePartial = {

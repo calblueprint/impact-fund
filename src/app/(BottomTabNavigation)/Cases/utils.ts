@@ -4,15 +4,20 @@ import {
 } from '../../../supabase/queries/cases';
 import { Case, UserUid } from '../../../types/types';
 
-export async function fetchListViewCases(userUid: UserUid): Promise<Case[]> {
+/**
+ * Fetches all Cases associated with a specific `userUid` from supabase. Formats Case data and returns an array of `Case` objects.
+ *
+ * @param userUid uid of target user
+ * @returns array of formatted `Case` objects
+ */
+export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
   try {
     if (!userUid) {
       throw new Error(`Invalid user uid: ${userUid}`);
     }
+
     const caseIds = await getCaseIdsFromUserId(userUid);
     const cases = await getCasesByIds(caseIds);
-
-    console.log(cases);
 
     return cases;
   } catch (error) {
