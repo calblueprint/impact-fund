@@ -12,12 +12,7 @@ export default function FormsCard(caseData: Case) {
         router.push({
           pathname: `/Cases/Forms`,
           params: {
-            blurb: caseData.blurb,
-            summary: caseData.summary,
-            image: caseData.image,
-            caseSite: caseData.caseSite,
-            date: caseData.date,
-            lawFirm: caseData.lawFirm,
+            ...caseData,
           },
         })
       }

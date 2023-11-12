@@ -18,14 +18,14 @@ export interface Case {
   lawFirm: string;
 }
 
-export interface FormMetaData {
+export interface FormPartial {
   id: FormUid;
   title: string;
   filename: string;
   date: Date;
 }
 
-export interface Form extends FormMetaData {
+export interface Form extends FormPartial {
   formUrl: string;
 }
 

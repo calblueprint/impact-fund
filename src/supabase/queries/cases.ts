@@ -1,4 +1,4 @@
-import { Case, CaseUid, UserUid } from '../../types/types';
+import { Case, CaseUid, UserUid, FormPartial } from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -95,7 +95,13 @@ export function parseCase(item: any): Case {
   return formattedCase;
 }
 
-export async function getFormUrl(filename: string): Promise<string> {
+/**
+ * Fetch the supabase storage publicUrl associated with the given form filename.
+ *
+ * @param filename name of form file stored in supabase storage
+ * @returns publicUrl of the form
+ */
+export async function getPublicFormUrl(filename: string): Promise<string> {
   try {
     // fetch the form objects from supabase storage
     const { data } = await supabase.storage
@@ -109,16 +115,15 @@ export async function getFormUrl(filename: string): Promise<string> {
   }
 }
 
-type FormMetaData = {
-  id: CaseUid;
-  title: string;
-  filename: string;
-  date: Date;
-};
-
-export async function getFormObjects(
+/**
+ * Fetch the `FormMetaData` for forms associated with a given case.
+ *
+ * @param caseUid uid of target case.
+ * @returns list of `FormMetaData` objects.
+ */
+export async function getPartialForms(
   caseUid: CaseUid,
-): Promise<FormMetaData[]> {
+): Promise<FormPartial[]> {
   try {
     // fetch rows with the matching CaseUid
     const { data } = await supabase
@@ -130,18 +135,15 @@ export async function getFormObjects(
       throw new Error(`no forms found for the given case: ${caseUid}`);
     }
 
-    const forms: FormMetaData[] = [];
-
-    data.map(async item => {
-      const form: FormMetaData = {
+    return data.map(item => {
+      const form: FormPartial = {
         id: item.formId,
         title: item.title,
         filename: item.filename,
         date: item.date,
       };
-      forms.push(form);
+      return form;
     });
-    return forms;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getFormObjects)', error);

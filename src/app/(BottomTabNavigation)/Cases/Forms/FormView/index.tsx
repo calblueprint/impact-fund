@@ -14,7 +14,7 @@ export default function FormView() {
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-      <WebView source={{ uri: formData.pdfLink }} />
+      <WebView source={{ uri: formData.formUrl }} />
     </View>
   );
 }

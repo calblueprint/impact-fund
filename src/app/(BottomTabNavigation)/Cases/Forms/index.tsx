@@ -9,12 +9,10 @@ import { CaseUid, Form } from '../../../../types/types';
 export default function FormsScreen() {
   const id: CaseUid = 'a366a017-2834-4365-83f1-91605ba5c80a';
 
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
   const [forms, setForms] = useState<Form[]>([]);
 
   async function fetchFormsOnLoad() {
     fetchFormObjects(id).then(data => {
-      // setIsLoading(false);
       if (data.length > 0) {
         setForms(data);
       }

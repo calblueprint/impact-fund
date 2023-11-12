@@ -13,10 +13,7 @@ export default function FormListItem(formData: Form) {
         router.push({
           pathname: `Cases/Forms/FormView`,
           params: {
-            id: formData.pdfLink,
-            title: formData.title,
-            date: formData.date,
-            pdfLink: formData.pdfLink,
+            ...formData,
           },
         })
       }
