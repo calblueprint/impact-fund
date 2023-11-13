@@ -37,6 +37,55 @@ export async function getCaseIdsFromUserId(
   }
 }
 
+export async function getCaseById(caseId: CaseUid): Promise<CasePartial> {
+  try {
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    if (!data) {
+      throw new Error('case not found');
+    }
+    return formatCase(data[0]);
+  } catch (error) {
+    console.warn('(getCaseById)', error);
+    throw error;
+  }
+}
+
+export async function isValidCase(caseId: CaseUid): Promise<boolean> {
+  const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+  if (!data) {
+    return false;
+  }
+  return data.length !== 0;
+}
+
+export async function uploadCase(caseId: CaseUid | undefined) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const userId = user?.id;
+  const { error } = await supabase.from('status').insert({ caseId, userId });
+
+  console.log(error);
+  return { error };
+}
+
+export async function containsDuplicateCase(caseId: CaseUid) {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { data } = await supabase
+      .from('status')
+      .select()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    return data?.length !== 0;
+  } catch (error) {
+    throw error;
+  }
+}
+
 /**
  * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
