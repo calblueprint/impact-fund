@@ -23,7 +23,7 @@ export default StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     borderRadius: 3,
-    borderColor: '#000000',
+    borderColor: colors.black,
     borderWidth: 1.5,
     marginTop: 20,
     marginBottom: 10,
