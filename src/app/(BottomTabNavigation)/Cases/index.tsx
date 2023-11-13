@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { fetchListViewCases } from './utils';
+import { fetchAllCases } from './utils';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import supabase from '../../../supabase/createClient';
 import { Case, UserUid } from '../../../types/types';
@@ -16,14 +16,14 @@ function CasesScreen() {
   // fetch on load can be reused if user wants to reload
   // would require changing function argument to UserUid state
   async function fetchCasesOnLoad(id: UserUid) {
-    fetchListViewCases(id).then(data => {
+    fetchAllCases(id).then(data => {
       // data fetched and ready for render
-      setIsLoading(false);
       if (data.length > 0) {
         setCases(data);
       } else {
         setNoCasesExist(true);
       }
+      setIsLoading(false);
     });
   }
 
