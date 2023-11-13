@@ -1,10 +1,10 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
-import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummarCard';
+import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
@@ -25,22 +25,19 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-          <Text>Go Back</Text>
-        </TouchableOpacity>
-      </View>
-      <CaseStatusBar />
-      {status === Eligibility.ELIGIBLE && (
-        <EligibilityCard caseData={caseData} status={status} />
-      )}
-      <CaseSummaryCard />
-      {(status === Eligibility.INELIGIBLE ||
-        status === Eligibility.UNDETERMINED) && (
-        <EligibilityCard caseData={caseData} status={status} />
-      )}
-      <FormsCard />
-      <EducationalBar />
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <CaseStatusBar />
+        {status === Eligibility.ELIGIBLE && (
+          <EligibilityCard caseData={caseData} status={status} />
+        )}
+        {(status === Eligibility.INELIGIBLE ||
+          status === Eligibility.UNDETERMINED) && (
+          <EligibilityCard caseData={caseData} status={status} />
+        )}
+        <CaseSummaryCard {...caseData} />
+        <FormsCard />
+        <EducationalBar />
+      </ScrollView>
     </View>
   );
 }

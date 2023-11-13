@@ -4,9 +4,9 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import Arrow from '../../../../../../assets/arrow.svg';
-import { updateCaseStatus } from '../../../../../supabase/queries/cases';
-import { CaseUid, Eligibility } from '../../../../../types/types';
+import RightArrow from '../../../../../assets/right-arrow.svg';
+import { updateCaseStatus } from '../../../../supabase/queries/cases';
+import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
   const { caseId } = useLocalSearchParams() as unknown as { caseId: CaseUid };
@@ -47,7 +47,7 @@ export default function EligibilityForm() {
             onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
           >
             <Text>Yes, I am Eligible</Text>
-            <Arrow />
+            <RightArrow />
           </TouchableOpacity>
         </View>
         <View style={styles.buttonWrapperBottom}>

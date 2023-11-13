@@ -19,7 +19,7 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
     alignSelf: 'center',
     height: '90%',
-    width: '90%',
+    width: '100%',
     border: 'solid',
     borderColor: colors.darkGrey,
     borderWidth: 0.5,
