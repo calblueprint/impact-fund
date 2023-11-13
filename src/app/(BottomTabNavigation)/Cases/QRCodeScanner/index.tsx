@@ -40,11 +40,12 @@ function QRCodeScannerScreen() {
       setScanned(true);
       const valid = await isValidCase(caseId);
       if (!valid) {
+        console.log('soooo not legal');
         // TODO: Display error toast message
+        setScanned(false);
         return;
       }
       const data = await getCaseById(caseId);
-
       const { id, title, image, summary } = data;
       router.push({
         pathname: '/Cases/QRCodeScanner/AddCase',
