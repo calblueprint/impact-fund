@@ -45,6 +45,7 @@ export default StyleSheet.create({
     fontSize: 13,
     opacity: 0.35,
   },
+<<<<<<< HEAD
   instructionText: {
     color: '#000',
     fontSize: 24,
@@ -62,6 +63,9 @@ export default StyleSheet.create({
     marginRight: 18,
     marginLeft: 18,
   },
+=======
+
+>>>>>>> 94ffcc9 (changes after rebase)
   input: {
 <<<<<<< HEAD
     marginTop: 5,
