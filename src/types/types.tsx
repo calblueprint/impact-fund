@@ -30,9 +30,7 @@ export interface CaseSummaryProps {
 
 export interface User {
   id: UserUid;
-  firstName: string;
-  middleName: string | null;
-  lastName: string;
+  fullName: string;
   email: string;
   address: string;
 }
@@ -51,9 +49,7 @@ export enum Eligibility {
 }
 export const userInstance: User = {
   id: '',
-  firstName: '',
-  middleName: null,
-  lastName: '',
+  fullName: '',
   email: '',
   address: '',
 };

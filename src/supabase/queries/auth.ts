@@ -70,9 +70,7 @@ export const getCurrentUserInfo = async (): Promise<User> => {
     if (user) {
       const userInfo = {
         email: user.user_metadata.email,
-        firstName: user.user_metadata.firstName,
-        middleName: user.user_metadata.middleName,
-        lastName: user.user_metadata.lastName,
+        fullName: user.user_metadata.fullName,
         address: user.user_metadata.address,
         id: user.id,
       };
@@ -86,17 +84,11 @@ export const getCurrentUserInfo = async (): Promise<User> => {
   }
 };
 
-export const updateCurrUserName = async (
-  newFirstName: string,
-  newMiddleName: string | undefined | null,
-  newLastName: string,
-) => {
+export const updateCurrUserName = async (newFullName: string) => {
   try {
     await supabase.auth.updateUser({
       data: {
-        firstName: newFirstName,
-        middleName: newMiddleName,
-        lastName: newLastName,
+        fullName: newFullName,
       },
     });
   } catch (error) {

@@ -19,9 +19,7 @@ function DeleteAccountScreen() {
   }, []);
   return (
     <View>
-      <Text>
-        Are you sure you want to delete your account {currSession.firstName}?
-      </Text>
+      <Text>Are you sure you want to delete your account?</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {

@@ -11,43 +11,27 @@ import { User, userInstance } from '../../../../types/types';
 
 function EditNameScreen() {
   const [currSession, setCurrSession] = useState<User>(userInstance);
-  const [firstName, setFirstName] = useState<string>();
-  const [middleName, setMiddleName] = useState<string | null>();
-  const [lastName, setLastName] = useState<string>();
+  const [fullName, setFullName] = useState<string>();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
       setCurrSession(result);
-      setFirstName(result.firstName);
-      setMiddleName(result.middleName);
-      setLastName(result.lastName);
+      setFullName(result.fullName);
     });
   }, []);
   return (
     <View>
-      <Text>Edit Name {currSession.firstName}</Text>
+      <Text>Edit Name {currSession.fullName}</Text>
       <TextInput
         style={styles.input}
-        value={firstName}
-        onChangeText={setFirstName}
-        placeholder="First Name"
-      />
-      <TextInput
-        style={styles.input}
-        value={middleName ? middleName : ''}
-        onChangeText={setMiddleName}
-        placeholder="Middle Name"
-      />
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={setLastName}
-        placeholder="Last Name"
+        value={fullName}
+        onChangeText={setFullName}
+        placeholder="Full Name"
       />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          if (firstName && lastName) {
-            updateCurrUserName(firstName, middleName, lastName);
+          if (fullName) {
+            updateCurrUserName(fullName);
             router.push('/Profile/');
           } else {
             router.push('/Profile/');
