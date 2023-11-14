@@ -35,6 +35,18 @@ export default function CasesLayout() {
           headerTitle: props => <CasesHeader />,
         }}
       />
+      <Stack.Screen
+        name="Forms/index"
+        options={{
+          headerTitle: props => <CasesHeader />,
+        }}
+      />
+      <Stack.Screen
+        name="Forms/FormView/index"
+        options={{
+          headerTitle: props => <CasesHeader />,
+        }}
+      />
     </Stack>
   );
 }
