@@ -1,4 +1,11 @@
-import { Case, CaseUid, UserUid, FormPartial } from '../../types/types';
+import {
+  Case,
+  CasePartial,
+  CaseUid,
+  Eligibility,
+  UserUid,
+  FormPartial,
+} from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -31,24 +38,11 @@ export async function getCaseIdsFromUserId(
   }
 }
 
-export async function getCaseById(caseId: CaseUid): Promise<Case> {
-  try {
-    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
-    if (!data) {
-      throw new Error('case not found');
-    }
-    return parseCase(data[0]);
-  } catch (error) {
-    console.warn('(getCaseById)', error);
-    throw error;
-  }
-}
-
 /**
- * Fetch an array of Case objects contained in an array of `CaseId`s. Fetches cases from `cases` table.
+ * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
  * @param caseIds list of `CaseId`s
- * @returns array of `CaseCard` objects
+ * @returns array of `Case` objects
  */
 export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   try {
@@ -62,8 +56,18 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
     if (!data) {
       throw new Error('no cases found');
     }
-    // cast raw sql data as CaseCardProps data type
-    return data.map(item => parseCase(item));
+
+    return await Promise.all(
+      data.map(async item => {
+        const partialCase = formatCase(item);
+        const imageUrl = await getImageUrl(partialCase.id);
+        const caseData: Case = {
+          ...partialCase,
+          imageUrl,
+        };
+        return caseData;
+      }),
+    );
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getCasesByIds)', error);
@@ -72,19 +76,18 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
 }
 
 /**
- * Parse supabase case query and return Case object.
+ * Parse supabase case query and return `CasePartial` object.
  *
- * @param item Case query result
- * @returns `Case` object
+ * @param item supabase Case query return data
+ * @returns `CasePartial` object
  */
-export function parseCase(item: any): Case {
-  const formattedCase: Case = {
+export function formatCase(item: any): CasePartial {
+  const formattedCase: CasePartial = {
     id: item.caseId,
     approved: item.approved,
     title: item.title,
     blurb: item.blurb,
     summary: item.summary,
-    image: item.image,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,
@@ -147,6 +150,75 @@ export async function getPartialForms(
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getFormObjects)', error);
+    throw error;
+  }
+}
+
+/**
+ * Update a specific User/Case status
+ *
+ * @param caseId specified caseId
+ * @param status status to be updated in the specific User/Case row
+ * @returns nothing
+ */
+export async function updateCaseStatus(
+  caseId: CaseUid,
+  status: Eligibility,
+): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase
+      .from('status')
+      .update({ eligibility: status })
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(updateCaseStatus)', error);
+    throw error;
+  }
+}
+
+export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { data } = await supabase
+      .from('status')
+      .select()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    if (!data) {
+      throw new Error('Status not found');
+    }
+    return data[0].eligibility;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getCaseStatus)', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch image from Supabase storage and return its public URL.
+ *
+ * @param imagePath image path
+ * @returns Image URL string
+ */
+export async function getImageUrl(imagePath: string): Promise<string> {
+  try {
+    const { data } = supabase.storage
+      .from('caseImages')
+      .getPublicUrl(imagePath);
+    return data.publicUrl;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getImageUrl)', error);
     throw error;
   }
 }
