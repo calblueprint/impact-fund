@@ -114,7 +114,7 @@ export default function SignUpScreen() {
 
       <Text style={styles.instructionText}>Create your account.</Text>
 
-      <Text style={styles.displayText}>
+      <Text style={styles.displayTextStreet}>
         {displayStreet ? 'Street address' : ' '}{' '}
       </Text>
       <TextInput
@@ -129,7 +129,7 @@ export default function SignUpScreen() {
         clearButtonMode="while-editing"
       />
 
-      <Text style={styles.displayText}>{displayCity ? 'City' : ' '} </Text>
+      <Text style={styles.displayTextCity}>{displayCity ? 'City' : ' '} </Text>
       <TextInput
         style={[styles.input, isFocusedCity && styles.inputFocused]}
         value={city}
@@ -142,10 +142,18 @@ export default function SignUpScreen() {
         clearButtonMode="while-editing"
       />
 
-      <Text style={styles.displayText}>{displayState ? 'State' : ' '} </Text>
+      <View style={styles.inputWrap}>
+        <Text style={styles.displayTextState}>
+          {displayState ? 'State' : ' '}{' '}
+        </Text>
+        <Text style={styles.displayTextZip}>
+          {displayZip ? 'Zipcode' : ' '}{' '}
+        </Text>
+      </View>
+
       <View style={styles.inputWrap}>
         <TextInput
-          style={[styles.input, isFocusedState && styles.inputLeftFocused]}
+          style={[styles.inputLeft, isFocusedState && styles.inputLeftFocused]}
           value={state}
           onChangeText={setState}
           onEndEditing={removeState}
@@ -155,10 +163,8 @@ export default function SignUpScreen() {
           autoCapitalize="words"
           clearButtonMode="while-editing"
         />
-
-        <Text style={styles.displayText}>{displayZip ? 'Zipcode' : ' '} </Text>
         <TextInput
-          style={[styles.input, isFocusedZip && styles.inputRightFocused]}
+          style={[styles.inputRight, isFocusedZip && styles.inputRightFocused]}
           maxLength={5}
           value={zipcode}
           onChangeText={setZipcode}

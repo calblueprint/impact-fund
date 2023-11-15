@@ -65,8 +65,10 @@ export default function SignUpScreen() {
   };
 
   function removeName() {
-    if (password.trim() === '') {
+    if (name.trim() === '') {
       setDisplayName(false);
+    } else {
+      setDisplayName(true);
     }
   }
 
@@ -83,7 +85,7 @@ export default function SignUpScreen() {
   };
 
   function removeEmail() {
-    if (password.trim() === '') {
+    if (email.trim() === '') {
       setDisplayEmail(false);
     }
   }

@@ -62,7 +62,6 @@ export default StyleSheet.create({
   nextButton: {
     backgroundColor: colors.white,
     alignItems: 'center',
-    marginBottom: 20,
     borderRadius: 3,
     borderColor: colors.darkGrey,
     borderWidth: 1,
@@ -75,8 +74,8 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     width: '81%',
-    marginTop: 20,
+    marginTop: 10,
     marginRight: 25,
-    marginBottom: 20,
+    marginBottom: 25,
   },
 });
