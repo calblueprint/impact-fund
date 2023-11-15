@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { getCaseById, isValidCase } from '../../../../supabase/queries/cases';
+import {
+  containsDuplicateCase,
+  getCaseById,
+  isValidCase,
+} from '../../../../supabase/queries/cases';
 
 enum permissions {
   UNDETERMINED,
@@ -15,6 +19,7 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [scanned, setScanned] = useState<boolean>(false);
+  const [toast, setToast] = useState<string>();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -42,9 +47,15 @@ function QRCodeScannerScreen() {
       setScanned(true);
       const valid = await isValidCase(caseId);
       if (!valid) {
-        console.log('Not a valid QR CODE!');
         // TODO: Display error toast message
-        setScanned(false);
+        setToast('Not a valid QRCODE!');
+        setScanned(false); // setTimeout here
+        return;
+      }
+      const duplicate = await containsDuplicateCase(caseId);
+      if (duplicate) {
+        setToast('DUPLICATES NOT ALLOWED!');
+        setScanned(false); // we should do setTimeout
         return;
       }
       const data = await getCaseById(caseId);
@@ -67,6 +78,7 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
+      <Text style={styles.errorMessage}>{toast}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>

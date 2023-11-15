@@ -22,17 +22,12 @@ function AddCase() {
   console.log(loading);
 
   useEffect(() => {
-    const validateCaseUniqueness = async () => {
-      const duplicate = await containsDuplicateCase(id);
-      if (duplicate) {
-        console.log('DUPLICATES NOT ALLOWED!');
-        router.back();
-      }
+    const waitForImage = async () => {
       const bucketImage = await getImageUrl(id);
       setImage(bucketImage);
       setLoading(false);
     };
-    validateCaseUniqueness();
+    waitForImage();
   }, []);
 
   const addToCases = async () => {
