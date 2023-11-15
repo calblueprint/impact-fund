@@ -58,18 +58,20 @@ export async function isValidCase(caseId: CaseUid): Promise<boolean> {
   return data.length !== 0;
 }
 
-export async function uploadCase(caseId: CaseUid | undefined) {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const userId = user?.id;
-  const { error } = await supabase.from('status').insert({ caseId, userId });
-
-  console.log(error);
-  return { error };
+export async function uploadCase(caseId: CaseUid): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase.from('status').insert({ caseId, userId });
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
 }
 
-export async function containsDuplicateCase(caseId: CaseUid) {
+export async function containsDuplicateCase(caseId: CaseUid): Promise<boolean> {
   try {
     const {
       data: { user },
@@ -82,6 +84,7 @@ export async function containsDuplicateCase(caseId: CaseUid) {
       .eq('caseId', caseId);
     return data?.length !== 0;
   } catch (error) {
+    console.warn(error);
     throw error;
   }
 }
