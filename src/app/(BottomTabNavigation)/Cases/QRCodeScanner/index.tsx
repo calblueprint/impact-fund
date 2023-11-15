@@ -49,20 +49,20 @@ function QRCodeScannerScreen() {
       if (!valid) {
         // TODO: Display error toast message
         setToast('Not a valid QRCODE!');
-        setScanned(false); // setTimeout here
+        setScanned(false); // TODO: setTimeout here
         return;
       }
       const duplicate = await containsDuplicateCase(caseId);
       if (duplicate) {
         setToast('DUPLICATES NOT ALLOWED!');
-        setScanned(false); // we should do setTimeout
+        setScanned(false); // TODO: setTimeout here as well
         return;
       }
       const data = await getCaseById(caseId);
-      const { id, title, summary } = data;
+      const { id, title, date, lawFirm, summary } = data;
       router.push({
         pathname: '/Cases/QRCodeScanner/AddCase',
-        params: { id, title, summary },
+        params: { id, title, date, lawFirm, summary },
       });
     }
   };
