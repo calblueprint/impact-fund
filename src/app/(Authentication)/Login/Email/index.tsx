@@ -81,7 +81,6 @@ export default function LoginScreen() {
           <Text style={[styles.nextText]}>Next</Text>
         </TouchableOpacity>
       </View>
-      i{' '}
     </View>
   );
 }
