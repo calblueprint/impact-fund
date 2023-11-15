@@ -1,50 +1,47 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { emailExists } from '../../../../supabase/queries/auth';
+import { passwordExists, signInUser } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [isEmail, setIsEmail] = useState(false);
+  const [password, setPassword] = useState('');
   const [displayError, setDisplayError] = useState(false);
-  const [displayEmail, setDisplayEmail] = useState(false);
-  const [placeholder, setPlaceholder] = useState('Email');
+  const { email } = useLocalSearchParams() as unknown as { email: string };
+  const [displayPassword, setDisplayPassword] = useState(false);
+  const [placeholder, setPlaceholder] = useState('Password');
   const [isFocused, setIsFocused] = useState(false);
 
   const onClick = () => {
     setPlaceholder('');
     setIsFocused(true);
-    setDisplayEmail(true);
+    setDisplayPassword(true);
   };
 
   const offClick = () => {
-    setPlaceholder('Email address');
+    setPlaceholder('Password');
     setIsFocused(false);
   };
 
-  function removeEmail() {
-    if (email.trim() === '') {
-      setDisplayEmail(false);
-    }
-    if (email.trim() !== '') {
-      setIsEmail(true);
-    } else {
-      setIsEmail(false);
-    }
-    setIsEmail(!isEmail);
+  function inputPassword(password: string) {
+    setPassword(password);
   }
 
-  async function emailFind() {
-    const isEmail = await emailExists(email);
-    if (!isEmail) {
+  function removePassword() {
+    if (password.trim() === '') {
+      setDisplayPassword(false);
+    }
+  }
+
+  async function signIn() {
+    const isPassword = await passwordExists(email, password);
+    if (!isPassword) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      router.push({ pathname: 'Login/Password', params: { email } });
-      setEmail('');
-      setDisplayEmail(false);
+      signInUser(email, password);
+      setPassword('');
     }
   }
 
@@ -53,35 +50,34 @@ export default function LoginScreen() {
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
-      <Text style={styles.instructionText}>
-        Please enter your email address.
-      </Text>
-      <Text style={styles.emailText}>
-        {displayEmail ? 'Email address' : ' '}{' '}
+      <Text style={styles.instructionText}>Please enter your password.</Text>
+
+      <Text style={styles.passwordText}>
+        {displayPassword ? 'Password' : ' '}{' '}
       </Text>
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
-        value={email}
-        onChangeText={setEmail}
-        onEndEditing={removeEmail}
+        value={password}
+        onChangeText={inputPassword}
+        onEndEditing={removePassword}
         onFocus={onClick}
         onBlur={offClick}
         placeholder={placeholder}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        clearButtonMode="while-editing"
+        secureTextEntry
+        clearButtonMode="never"
       />
+
       <Text style={styles.errorMessage}>
         {displayError
-          ? 'The email you entered is either incorrect or not registered with the Impact Fund.'
-          : ' '}
+          ? 'Oh no! The password you entered is incorrect, please try again.'
+          : ' '}{' '}
       </Text>
+
       <View>
-        <TouchableOpacity style={[styles.nextButton]} onPress={emailFind}>
-          <Text style={[styles.nextText]}>Next</Text>
+        <TouchableOpacity style={[styles.nextButton]} onPress={() => signIn()}>
+          <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>
-      i{' '}
     </View>
   );
 }
