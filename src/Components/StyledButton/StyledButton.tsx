@@ -4,21 +4,39 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 
-function StyledButton({ text, file }: { text: string; file: string }) {
+function StyledButton({
+  text,
+  file,
+  color,
+}: {
+  text: string;
+  file: string;
+  color: string;
+}) {
   if (file === '') {
     return (
-      <View style={[styles.buttonContainer]}>
+      <View
+        style={[color === 'white' ? styles.whiteButton : styles.blackButton]}
+      >
         <TouchableOpacity>
-          <Text style={[styles.buttonText]}>{text}</Text>
+          <Text
+            style={[color === 'white' ? styles.blackText : styles.whiteText]}
+          >
+            {text}
+          </Text>
         </TouchableOpacity>
       </View>
     );
   }
   return (
-    <View style={[styles.buttonContainer]}>
+    <View style={[color === 'white' ? styles.whiteButton : styles.blackButton]}>
       <Link href={file} asChild>
         <TouchableOpacity>
-          <Text style={[styles.buttonText]}>{text}</Text>
+          <Text
+            style={[[color === 'white' ? styles.blackText : styles.whiteText]]}
+          >
+            {text}
+          </Text>
         </TouchableOpacity>
       </Link>
     </View>

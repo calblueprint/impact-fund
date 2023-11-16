@@ -2,6 +2,21 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from '../../styles/colors';
 
+const baseButton = {
+  backgroundColor: colors.white,
+  width: 310,
+  height: 55,
+  borderRadius: 3,
+  borderColor: colors.black,
+  borderWidth: 0.75,
+  marginBottom: 10,
+  padding: 17,
+};
+
+const buttonText = {
+  fontSize: 16,
+};
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -9,23 +24,27 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
-  buttonText: {
-    fontSize: 19,
+  buttonText,
+  whiteText: {
+    ...buttonText,
+    color: colors.white,
+    fontWeight: '400',
+    alignSelf: 'flex-start',
+  },
+  blackText: {
+    ...buttonText,
     color: colors.black,
-    alignSelf: 'center',
-    fontWeight: '600',
-    textTransform: 'uppercase',
+    fontWeight: '400',
+    alignSelf: 'flex-start',
   },
 
-  buttonContainer: {
-    backgroundColor: colors.midGrey,
-    width: 325,
-    height: 80,
-    justifyContent: 'center',
-    borderRadius: 3,
-    borderColor: colors.black,
-    borderWidth: 1.5,
-    marginTop: 20,
-    marginBottom: 10,
+  baseButton,
+  whiteButton: {
+    ...baseButton,
+    backgroundColor: colors.white,
+  },
+  blackButton: {
+    ...baseButton,
+    backgroundColor: colors.black,
   },
 });
