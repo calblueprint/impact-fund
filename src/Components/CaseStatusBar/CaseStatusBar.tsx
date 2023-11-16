@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import { colors } from '../../styles/colors';
@@ -9,6 +10,7 @@ interface CaseStatusBarProps {
 }
 
 export default function CaseStatusBar({ status }: CaseStatusBarProps) {
+  // stephanie this thing is so mf ugly where should i hide it
   const getStatusColor = (status: string) => {
     if (
       status === 'In Progress' ||
@@ -53,7 +55,7 @@ export default function CaseStatusBar({ status }: CaseStatusBarProps) {
   };
   const statusColor = getStatusColor(status);
   return (
-    <View style={styles.caseStatusContainer}>
+    <TouchableOpacity style={styles.caseStatusContainer}>
       <View style={styles.caseStatusContainerSmall}>
         <View>
           <Text style={styles.caseStatusText}>Case Status:</Text>
@@ -64,6 +66,6 @@ export default function CaseStatusBar({ status }: CaseStatusBarProps) {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
