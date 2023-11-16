@@ -36,7 +36,7 @@ function CasesScreen() {
         fetchCasesOnLoad(data.data.user.id);
       }
     });
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
