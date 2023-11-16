@@ -4,10 +4,12 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   eligible: {
-    height: '20%',
+    // height: '20%',
+    height: 120,
   },
   ineligible: {
-    height: '40%',
+    // height: '40%',
+    height: 240,
   },
   container: {
     flex: 0,

@@ -8,8 +8,9 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
   scrollView: {
+    flex: 1,
     alignItems: 'center',
-    minHeight: '100%',
+    minHeight: 900,
     width: '92%',
     rowGap: 20,
   },
