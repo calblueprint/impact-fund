@@ -7,23 +7,20 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: colors.white,
-    justifyContent: 'flex-start',
-  },
-  textContainer: {
-    width: 325,
-    marginLeft: 30,
-    marginTop: 140,
-    marginBottom: 30,
   },
 
   welcomeText: {
+    marginTop: 400,
+    marginRight: 20,
+    marginLeft: 40,
     color: colors.black,
-    fontSize: 50,
-    fontWeight: '200',
+    fontSize: 39.5,
+    fontWeight: '900',
     letterSpacing: 0.5,
   },
 
   buttonContainer: {
     alignItems: 'center',
+    marginTop: 50,
   },
 });
