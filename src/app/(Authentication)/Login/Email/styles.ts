@@ -33,20 +33,8 @@ export default StyleSheet.create({
     fontSize: 13,
     opacity: 0.35,
   },
-  input: {
-    marginTop: 5,
-    height: 40,
-    borderBottomWidth: 0.75,
-    width: 315,
-    borderColor: colors.darkGrey,
-  },
-  inputFocused: {
-    marginTop: 5,
-    height: 40,
-    borderBottomWidth: 2,
-    borderRadius: 2,
-    width: 315,
-    borderColor: colors.darkRed,
+  inputBox: {
+    marginTop: 97,
   },
   nextText: {
     marginRight: 240,

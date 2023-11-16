@@ -1,38 +1,16 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { passwordExists, signInUser } from '../../../../supabase/queries/auth';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { passwordExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [displayError, setDisplayError] = useState(false);
   const { email } = useLocalSearchParams() as unknown as { email: string };
   const [displayPassword, setDisplayPassword] = useState(false);
-  const [placeholder, setPlaceholder] = useState('Password');
-  const [isFocused, setIsFocused] = useState(false);
-
-  const onClick = () => {
-    setPlaceholder('');
-    setIsFocused(true);
-    setDisplayPassword(true);
-  };
-
-  const offClick = () => {
-    setPlaceholder('Password');
-    setIsFocused(false);
-  };
-
-  function inputPassword(password: string) {
-    setPassword(password);
-  }
-
-  function removePassword() {
-    if (password.trim() === '') {
-      setDisplayPassword(false);
-    }
-  }
 
   async function signIn() {
     const isPassword = await passwordExists(email, password);
@@ -51,20 +29,18 @@ export default function LoginScreen() {
       </TouchableOpacity>
       <Text style={styles.instructionText}>Please enter your password.</Text>
 
-      <Text style={styles.passwordText}>
-        {displayPassword ? 'Password' : ' '}{' '}
-      </Text>
-      <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
-        value={password}
-        onChangeText={inputPassword}
-        onEndEditing={removePassword}
-        onFocus={onClick}
-        onBlur={offClick}
-        placeholder={placeholder}
-        secureTextEntry
-        clearButtonMode="never"
-      />
+      <View style={styles.inputBox}>
+        <AuthInput
+          input={password}
+          setInput={setPassword}
+          defaultValue="Password"
+          isPassword
+          displayInput={displayPassword}
+          setDisplayInput={setDisplayPassword}
+          keyboard="default"
+          autoCap={false}
+        />
+      </View>
 
       <Text style={styles.errorMessage}>
         {displayError

@@ -1,39 +1,15 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import InputField from '../../../../Components/InputField/InputField';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
-  const [isEmail, setIsEmail] = useState(false);
   const [displayError, setDisplayError] = useState(false);
   const [displayEmail, setDisplayEmail] = useState(false);
-  const [placeholder, setPlaceholder] = useState('Email');
-  const [isFocused, setIsFocused] = useState(false);
-
-  const onClick = () => {
-    setPlaceholder('');
-    setIsFocused(true);
-    setDisplayEmail(true);
-  };
-
-  const offClick = () => {
-    setPlaceholder('Email address');
-    setIsFocused(false);
-  };
-
-  function removeEmail() {
-    if (email.trim() === '') {
-      setDisplayEmail(false);
-    }
-    if (email.trim() !== '') {
-      setIsEmail(true);
-    }
-    setIsEmail(!isEmail);
-  }
 
   async function emailFind() {
     const isEmail = await emailExists(email);
@@ -56,21 +32,19 @@ export default function LoginScreen() {
         Please enter your email address.
       </Text>
 
-      <Text style={styles.emailText}>
-        {displayEmail ? 'Email address' : ' '}{' '}
-      </Text>
-      <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
-        value={email}
-        onChangeText={setEmail}
-        onEndEditing={removeEmail}
-        onFocus={onClick}
-        onBlur={offClick}
-        placeholder={placeholder}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        clearButtonMode="while-editing"
-      />
+      <View style={styles.inputBox}>
+        <AuthInput
+          input={email}
+          setInput={setEmail}
+          defaultValue="Email address"
+          isPassword={false}
+          displayInput={displayEmail}
+          setDisplayInput={setDisplayEmail}
+          keyboard="email-address"
+          autoCap={false}
+        />
+      </View>
+
       <Text style={styles.errorMessage}>
         {displayError
           ? 'The email you entered is either incorrect or not registered with the Impact Fund.'

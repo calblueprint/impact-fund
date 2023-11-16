@@ -33,21 +33,6 @@ export default StyleSheet.create({
     fontSize: 13,
     opacity: 0.35,
   },
-  input: {
-    marginTop: 5,
-    height: 40,
-    borderBottomWidth: 0.75,
-    width: 310,
-    borderColor: colors.darkGrey,
-  },
-  inputFocused: {
-    marginTop: 5,
-    height: 40,
-    borderBottomWidth: 2,
-    width: 310,
-    borderColor: colors.darkRed,
-    borderRadius: 2,
-  },
   nextText: {
     marginRight: 230,
     fontSize: 14,
@@ -85,5 +70,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,
+  },
+  inputBox: {
+    marginTop: 97,
   },
 });
