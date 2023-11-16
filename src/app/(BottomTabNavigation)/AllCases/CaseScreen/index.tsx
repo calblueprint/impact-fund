@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
+// eslint-disable-next-line import/namespace
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
