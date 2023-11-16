@@ -40,7 +40,6 @@ export default function LoginScreen() {
       setDisplayError(true);
     } else {
       setDisplayError(false);
-      signInUser(email, password);
       setPassword('');
     }
   }
@@ -74,7 +73,7 @@ export default function LoginScreen() {
       </Text>
 
       <View>
-        <TouchableOpacity style={[styles.nextButton]} onPress={() => signIn()}>
+        <TouchableOpacity style={styles.nextButton} onPress={() => signIn()}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>

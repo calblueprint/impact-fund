@@ -9,26 +9,18 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
 
-  everythingContainer: {
-    justifyContent: 'flex-start',
-    marginTop: '35%',
-  },
-
-  textContainer: {
-    width: '90%',
-    height: '50%',
-    marginLeft: '9%',
-  },
-
   welcomeText: {
+    marginTop: 400,
+    marginRight: 20,
+    marginLeft: 40,
     color: colors.black,
-    fontSize: 50,
-    fontWeight: '200',
+    fontSize: 39.5,
+    fontWeight: '900',
     letterSpacing: 0.5,
   },
 
   buttonContainer: {
     alignItems: 'center',
-    marginBottom: '20%',
+    marginTop: 50,
   },
 });

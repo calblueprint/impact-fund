@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import InputField from '../../../../Components/InputField/InputField';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
@@ -30,8 +31,6 @@ export default function LoginScreen() {
     }
     if (email.trim() !== '') {
       setIsEmail(true);
-    } else {
-      setIsEmail(false);
     }
     setIsEmail(!isEmail);
   }
@@ -56,6 +55,7 @@ export default function LoginScreen() {
       <Text style={styles.instructionText}>
         Please enter your email address.
       </Text>
+
       <Text style={styles.emailText}>
         {displayEmail ? 'Email address' : ' '}{' '}
       </Text>
@@ -77,8 +77,8 @@ export default function LoginScreen() {
           : ' '}
       </Text>
       <View>
-        <TouchableOpacity style={[styles.nextButton]} onPress={emailFind}>
-          <Text style={[styles.nextText]}>Next</Text>
+        <TouchableOpacity style={styles.nextButton} onPress={emailFind}>
+          <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>
     </View>
