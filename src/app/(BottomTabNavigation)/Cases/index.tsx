@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -15,28 +15,29 @@ function CasesScreen() {
 
   // fetch on load can be reused if user wants to reload
   // would require changing function argument to UserUid state
-  async function fetchCasesOnLoad(id: UserUid) {
-    fetchAllCases(id).then(data => {
-      // data fetched and ready for render
-      if (data.length > 0) {
-        setCases(data);
-      } else {
-        setNoCasesExist(true);
-      }
-      setIsLoading(false);
-    });
-  }
+
+  const fetchCasesOnLoad = useCallback(async (id: UserUid) => {
+    const data = await fetchAllCases(id);
+    if (data.length > 0) {
+      setCases(data);
+    } else {
+      setNoCasesExist(true);
+    }
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
-    // TODO: fetches userUid on initial page render -- consider making this a state variable
-    supabase.auth.getUser().then(data => {
-      // if condition ensures that the user exists and is logged in
-      // TODO: double check logic to ensure this a null user cannot occur
+    console.log('yo');
+    async function getCases() {
+      const data = await supabase.auth.getUser();
       if (data.data.user?.id) {
-        fetchCasesOnLoad(data.data.user.id);
+        await fetchCasesOnLoad(data.data.user.id);
       }
-    });
-  }, []);
+    }
+    getCases();
+    // TODO: fetches userUid on initial page render -- consider making this a state variable
+    // TODO: double check logic to ensure this a null user cannot occur
+  }, [fetchCasesOnLoad]);
 
   return (
     <View style={styles.container}>
