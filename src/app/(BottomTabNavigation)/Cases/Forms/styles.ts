@@ -17,7 +17,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingHorizontal: '7%',
-    borderTopWidth: 1,
+    borderTopWidth: 0.5,
     borderColor: colors.darkGrey,
   },
   headerContainer: {
@@ -38,5 +38,15 @@ export default StyleSheet.create({
   headerText: {
     fontSize: 32,
     fontWeight: '800',
+  },
+  formTitle: {
+    fontSize: 16,
+    fontWeight: '300',
+    lineHeight: 21,
+  },
+  dateText: {
+    fontSize: 12,
+    fontWeight: '100',
+    lineHeight: 21,
   },
 });

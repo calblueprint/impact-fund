@@ -21,8 +21,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
 
-    borderBottomWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
+    borderBottomWidth: 0.5,
+    borderColor: colors.midGrey,
   },
   titleText: {
     fontSize: 16,
