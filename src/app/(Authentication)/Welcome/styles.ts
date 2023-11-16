@@ -7,13 +7,6 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: colors.white,
-    justifyContent: 'flex-start',
-  },
-  textContainer: {
-    width: 325,
-    marginLeft: 30,
-    marginTop: 140,
-    marginBottom: 30,
   },
 
   welcomeText: {
@@ -28,5 +21,6 @@ export default StyleSheet.create({
 
   buttonContainer: {
     alignItems: 'center',
+    marginTop: 50,
   },
 });
