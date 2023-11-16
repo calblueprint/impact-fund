@@ -1,38 +1,18 @@
-import { router, useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 
 import styles from './styles';
-import { getImageUrl, uploadCase } from '../../../../../supabase/queries/cases';
-import { CasePartial } from '../../../../../types/types';
+import { uploadCase } from '../../../../../supabase/queries/cases';
+import { Case } from '../../../../../types/types';
 import { formatDate } from '../../utils';
 
 function AddCase() {
-  const { id, title, date, lawFirm, summary } =
-    useLocalSearchParams() as unknown as CasePartial;
-  const [loading, setLoading] = useState<boolean>(true);
-  const [image, setImage] = useState<string>();
-
-  useEffect(() => {
-    const waitForImage = async () => {
-      const bucketImage = await getImageUrl(id);
-      setImage(bucketImage);
-      setLoading(false);
-    };
-    waitForImage();
-  });
-
+  const { id, title, imageUrl, date, lawFirm, summary } =
+    useLocalSearchParams() as unknown as Case;
   const addToCases = async () => {
     uploadCase(id);
     router.push('/Cases');
   };
-  if (loading) {
-    return (
-      <View style={styles.loading}>
-        <Text>LOADING... </Text>
-      </View>
-    );
-  }
   return (
     <View style={{ height: '100%' }}>
       <ScrollView
@@ -40,8 +20,9 @@ function AddCase() {
         contentContainerStyle={{
           justifyContent: 'flex-start',
         }}
+        showsVerticalScrollIndicator={false}
       >
-        <Image style={styles.image} source={{ uri: image }} />
+        <Image style={styles.image} source={{ uri: imageUrl }} />
         <Text style={styles.title}>{title}</Text>
         <View style={styles.dateAndFirm}>
           <Text style={styles.dateAndFirmText}>

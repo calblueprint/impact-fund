@@ -37,13 +37,13 @@ export async function getCaseIdsFromUserId(
   }
 }
 
-export async function getCaseById(caseId: CaseUid): Promise<CasePartial> {
+export async function getCaseById(caseId: CaseUid): Promise<Case> {
   try {
     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
     if (!data) {
       throw new Error('case not found');
     }
-    return formatCase(data[0]);
+    return formatCaseProperly(data[0]);
   } catch (error) {
     console.warn('(getCaseById)', error);
     throw error;
@@ -126,6 +126,15 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+export async function formatCaseProperly(item: any): Promise<Case> {
+  const partialCase = formatCase(item);
+  const imageUrl = await getImageUrl(partialCase.id);
+  const caseData: Case = {
+    ...partialCase,
+    imageUrl,
+  };
+  return caseData;
+}
 /**
  * Parse supabase case query and return `CasePartial` object.
  *

@@ -9,6 +9,7 @@ import {
   getCaseById,
   isValidCase,
 } from '../../../../supabase/queries/cases';
+import { Case } from '../../../../types/types';
 
 enum permissions {
   UNDETERMINED,
@@ -58,11 +59,11 @@ function QRCodeScannerScreen() {
         setScanned(false); // TODO: setTimeout here as well
         return;
       }
-      const data = await getCaseById(caseId);
-      const { id, title, date, lawFirm, summary } = data;
+      const caseData: Case = await getCaseById(caseId);
+      const { id, title, imageUrl, date, lawFirm, summary } = caseData;
       router.push({
         pathname: '/Cases/QRCodeScanner/AddCase',
-        params: { id, title, date, lawFirm, summary },
+        params: { id, title, imageUrl, date, lawFirm, summary },
       });
     }
   };
