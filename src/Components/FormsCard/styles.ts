@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../styles/colors';
+
 export default StyleSheet.create({
   container: {
     height: 40,
@@ -8,7 +10,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
+    borderColor: colors.midGrey,
     backgroundColor: '#fff',
     flexDirection: 'column',
   },

@@ -4,12 +4,11 @@ import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import { fetchFormObjects } from './utils';
+import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
 import { Form, Case } from '../../../../types/types';
 
 export default function FormsScreen() {
-  // const id: CaseUid = 'a366a017-2834-4365-83f1-91605ba5c80a';
-
   const caseData = useLocalSearchParams() as unknown as Case;
 
   const [forms, setForms] = useState<Form[]>([]);
@@ -28,13 +27,21 @@ export default function FormsScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Documents</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>Documents</Text>
+        </View>
+        <View style={styles.formsContainer}>
+          <FlatList
+            data={forms}
+            renderItem={({ item }) => <FormListItem {...item} />}
+          />
+        </View>
       </View>
-      <View style={styles.formsContainer}>
-        <FlatList
-          data={forms}
-          renderItem={({ item }) => <FormListItem {...item} />}
+      <View style={styles.linkContainer}>
+        <ExternalSiteLink
+          text="View all case documents"
+          url={caseData.caseSite}
         />
       </View>
     </View>

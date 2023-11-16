@@ -7,7 +7,7 @@ export default StyleSheet.create({
     width: '100%',
     aspectRatio: 6,
     paddingHorizontal: 20,
-    marginBottom: 30,
+    // marginBottom: 30,
 
     borderWidth: 1,
     borderRadius: 5,
