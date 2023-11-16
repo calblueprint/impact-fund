@@ -32,7 +32,7 @@ function CaseScreen() {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{caseData.title}</Text>
         </View>
-        <CaseStatusBar />
+        <CaseStatusBar status={caseData.caseStatus} />
         {status === Eligibility.ELIGIBLE && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
