@@ -5,7 +5,7 @@ export default function AppLayout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
-        name="Cases"
+        name="AllCases"
         options={{
           tabBarLabel: 'Cases',
           title: 'Cases',

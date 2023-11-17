@@ -1,18 +1,29 @@
 import { router, useLocalSearchParams } from 'expo-router';
+import { useContext } from 'react';
 import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 
 import styles from './styles';
-import { uploadCase } from '../../../../../supabase/queries/cases';
-import { Case } from '../../../../../types/types';
+import { CaseContext } from '../../../../../context/CaseContext';
+import { getCaseById, uploadCase } from '../../../../../supabase/queries/cases';
 import { formatDate } from '../../utils';
 
 function AddCase() {
+  const { allCases, updateCases } = useContext(CaseContext);
   const { id, title, imageUrl, date, lawFirm, summary } =
-    useLocalSearchParams() as unknown as Case;
+    useLocalSearchParams() as unknown as {
+      id: string;
+      title: string;
+      imageUrl: string;
+      date: Date;
+      lawFirm: string;
+      summary: string;
+    };
 
   const addToCases = async () => {
     await uploadCase(id);
-    router.push('/Cases');
+    const newCase = await getCaseById(id);
+    updateCases([...allCases, newCase]);
+    router.push('/AllCases');
   };
 
   return (
