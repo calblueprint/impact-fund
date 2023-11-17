@@ -29,6 +29,7 @@ export function CaseContextProvider({
         setCases(allCases);
         setIsLoading(false);
       }
+      setIsLoading(false);
     };
     fetchCases();
     // TODO: Might want to put something in dependency array when implementing refresh
