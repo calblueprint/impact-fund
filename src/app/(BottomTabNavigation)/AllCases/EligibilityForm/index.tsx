@@ -5,10 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import RightArrow from '../../../../../assets/right-arrow.svg';
-import {
-  getCaseById,
-  updateCaseStatus,
-} from '../../../../supabase/queries/cases';
+import { updateCaseStatus } from '../../../../supabase/queries/cases';
 import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
@@ -16,9 +13,7 @@ export default function EligibilityForm() {
 
   const updateEligibility = async (status: Eligibility) => {
     await updateCaseStatus(caseId, status);
-    getCaseById(caseId).then(res => {
-      router.push({ pathname: '/AllCases/CaseScreen', params: { ...res } });
-    });
+    router.push('/AllCases/CaseScreen');
   };
   return (
     <View style={styles.container}>
