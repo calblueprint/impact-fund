@@ -55,11 +55,9 @@ export default function LoginScreen() {
           ? 'The email you entered is either incorrect or not registered with the Impact Fund.'
           : ' '}
       </Text>
-      <View>
-        <TouchableOpacity style={styles.nextButton} onPress={emailFind}>
-          <Text style={styles.nextText}>Next</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.nextButton} onPress={emailFind}>
+        <Text style={styles.nextText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 }

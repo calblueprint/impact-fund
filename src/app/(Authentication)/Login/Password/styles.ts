@@ -5,10 +5,10 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    width: '100%',
-    height: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    height: '100%',
+    width: '100%',
   },
   backText: {
     color: colors.midGrey,
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
-    width: '81%',
+    width: 310,
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,

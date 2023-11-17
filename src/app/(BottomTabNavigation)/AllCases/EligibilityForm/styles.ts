@@ -25,6 +25,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     padding: 40,
+    gap: 10,
   },
   buttonWrapperTop: {
     flex: 0.5,
@@ -36,7 +37,7 @@ export default StyleSheet.create({
   },
   button: {
     width: '100%',
-    height: '70%',
+    height: 40,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
