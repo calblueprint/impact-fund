@@ -10,7 +10,6 @@ export interface CaseState {
   allCases: Case[];
   updateCases: React.Dispatch<React.SetStateAction<Case[]>>;
   loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function CaseContextProvider({
@@ -40,9 +39,8 @@ export function CaseContextProvider({
       allCases: cases,
       updateCases: setCases,
       loading: isLoading,
-      setLoading: setIsLoading,
     }),
-    [cases, setCases],
+    [cases, setCases, isLoading],
   );
 
   return (
