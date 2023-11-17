@@ -27,14 +27,13 @@ export default StyleSheet.create({
     paddingRight: 30,
   },
   titleContainer: {
-    width: '100%',
     flexDirection: 'row',
-    alignItems: 'flex-start',
   },
   title: {
+    flex: 1,
     color: colors.black,
     fontSize: 32,
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
   },
 });
