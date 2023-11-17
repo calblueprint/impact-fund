@@ -32,7 +32,10 @@ export interface User {
   id: UserUid;
   fullName: string;
   email: string;
-  address: string;
+  streetName: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 export type Status = {
@@ -51,5 +54,8 @@ export const userInstance: User = {
   id: '',
   fullName: '',
   email: '',
-  address: '',
+  streetName: '',
+  city: '',
+  state: '',
+  zip: '',
 };

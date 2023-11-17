@@ -71,7 +71,10 @@ export const getCurrentUserInfo = async (): Promise<User> => {
       const userInfo = {
         email: user.user_metadata.email,
         fullName: user.user_metadata.fullName,
-        address: user.user_metadata.address,
+        streetName: user.user_metadata.streetName,
+        city: user.user_metadata.city,
+        state: user.user_metadata.state,
+        zip: user.user_metadata.zip,
         id: user.id,
       };
       return userInfo;
@@ -97,10 +100,20 @@ export const updateCurrUserName = async (newFullName: string) => {
   }
 };
 
-export const updateCurrUserAddress = async (newAddress: string) => {
+export const updateCurrUserAddress = async (
+  newStreetName: string,
+  newCity: string,
+  newState: string,
+  newZip: string,
+) => {
   try {
     supabase.auth.updateUser({
-      data: { address: newAddress },
+      data: {
+        streetName: newStreetName,
+        city: newCity,
+        state: newState,
+        zip: newZip,
+      },
     });
   } catch (error) {
     console.error('(updateCurrUserAddress)', error);

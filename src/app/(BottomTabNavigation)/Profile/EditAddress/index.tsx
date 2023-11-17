@@ -7,31 +7,52 @@ import {
   getCurrentUserInfo,
   updateCurrUserAddress,
 } from '../../../../supabase/queries/auth';
-import { User, userInstance } from '../../../../types/types';
 
 function EditNameScreen() {
-  const [currSession, setCurrSession] = useState<User>(userInstance);
-  const [address, setAddress] = useState<string>();
+  const [streetName, setStreetName] = useState<string>();
+  const [usState, setUsState] = useState<string>();
+  const [city, setCity] = useState<string>();
+  const [zip, setZip] = useState<string>();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      setCurrSession(result);
-      setAddress(result.address);
+      setStreetName(result.streetName);
+      setUsState(result.state);
+      setCity(result.city);
+      setZip(result.zip);
     });
   }, []);
   return (
     <View>
-      <Text>Edit Address {currSession.address}</Text>
+      <Text>Edit Address</Text>
       <TextInput
         style={styles.input}
-        value={address}
-        onChangeText={setAddress}
-        placeholder="Input Address Here"
+        value={streetName}
+        onChangeText={setStreetName}
+        placeholder="Input Street Name"
+      />
+      <TextInput
+        style={styles.input}
+        value={city}
+        onChangeText={setCity}
+        placeholder="Input City Here"
+      />
+      <TextInput
+        style={styles.input}
+        value={usState}
+        onChangeText={setUsState}
+        placeholder="Input State Here"
+      />
+      <TextInput
+        style={styles.input}
+        value={zip}
+        onChangeText={setZip}
+        placeholder="Input Zip Code Here"
       />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          if (address) {
-            updateCurrUserAddress(address);
+          if (streetName && city && usState && zip) {
+            updateCurrUserAddress(streetName, city, usState, zip);
             router.push('/Profile/');
           } else {
             router.push('/Profile/');
