@@ -8,7 +8,7 @@ import { CaseContext } from '../../../context/CaseContext';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  const noCasesExist = allCases.length === 0;
+  const noCasesExist = !loading && allCases.length === 0;
 
   return (
     <View style={styles.container}>
