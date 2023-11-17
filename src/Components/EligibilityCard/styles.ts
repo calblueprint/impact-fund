@@ -16,7 +16,7 @@ export default StyleSheet.create({
     alignContent: 'center',
   },
   button: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     alignSelf: 'center',
     height: '90%',
     width: '100%',
@@ -25,7 +25,6 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 5,
     background: colors.white,
-    margin: 5,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
