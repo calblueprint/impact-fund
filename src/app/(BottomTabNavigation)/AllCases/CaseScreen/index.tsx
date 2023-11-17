@@ -30,13 +30,7 @@ function CasesScreen() {
           <Text style={styles.title}>{caseData.title}</Text>
         </View>
         <CaseStatusBar />
-        {status === Eligibility.ELIGIBLE && (
-          <EligibilityCard caseData={caseData} status={status} />
-        )}
-        {(status === Eligibility.INELIGIBLE ||
-          status === Eligibility.UNDETERMINED) && (
-          <EligibilityCard caseData={caseData} status={status} />
-        )}
+        {status && <EligibilityCard caseData={caseData} status={status} />}
         <CaseSummaryCard {...caseData} />
         <FormsCard />
         <EducationalBar />
