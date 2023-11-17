@@ -24,25 +24,13 @@ export default function EligibilityForm() {
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <View style={styles.insideContainer}>
-          <View>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text>Go Back</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Text>The eligibility requirements are as follows:</Text>
-          </View>
+          <Text>The eligibility requirements are as follows:</Text>
           <View>
             <Text>Sexy</Text>
             <Text>Tall</Text>
             <Text>Handsome</Text>
           </View>
-          <View>
-            <Text>Do you meet the following requirements?</Text>
-          </View>
+          <Text>Do you meet the following requirements?</Text>
         </View>
       </View>
       <View style={styles.buttonsContainer}>

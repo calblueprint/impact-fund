@@ -51,11 +51,9 @@ export default function LoginScreen() {
           : ' '}{' '}
       </Text>
 
-      <View>
-        <TouchableOpacity style={styles.nextButton} onPress={() => signIn()}>
-          <Text style={styles.nextText}>Next</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.nextButton} onPress={() => signIn()}>
+        <Text style={styles.nextText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 }
