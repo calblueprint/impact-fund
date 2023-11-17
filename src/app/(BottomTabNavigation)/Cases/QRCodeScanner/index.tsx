@@ -1,10 +1,15 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import { signOutUser } from '../../../../supabase/queries/auth';
+import {
+  containsDuplicateCase,
+  getCaseById,
+  isValidCase,
+} from '../../../../supabase/queries/cases';
+import { Case } from '../../../../types/types';
 
 enum permissions {
   UNDETERMINED,
@@ -15,7 +20,17 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [scanned, setScanned] = useState<boolean>(false);
-  const [data, setData] = useState('NOTHING');
+  const [toast, setToast] = useState<string>();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.addListener('blur', async () => {
+      setScanned(false);
+    });
+    navigation.addListener('focus', async () => {
+      setScanned(false);
+    });
+  }, [navigation]);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -28,9 +43,28 @@ function QRCodeScannerScreen() {
   }, []);
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
+    const caseId = result.data;
     if (!scanned) {
       setScanned(true);
-      setData(result.data);
+      const valid = await isValidCase(caseId);
+      if (!valid) {
+        // TODO: Display error toast message
+        setToast('Not a valid QRCODE!');
+        setScanned(false); // TODO: setTimeout here
+        return;
+      }
+      const duplicate = await containsDuplicateCase(caseId);
+      if (duplicate) {
+        setToast('DUPLICATES NOT ALLOWED!');
+        setScanned(false); // TODO: setTimeout here as well
+        return;
+      }
+      const caseData: Case = await getCaseById(caseId);
+      const { id, title, imageUrl, date, lawFirm, summary } = caseData;
+      router.push({
+        pathname: '/Cases/QRCodeScanner/AddCase',
+        params: { id, title, imageUrl, date, lawFirm, summary },
+      });
     }
   };
 
@@ -45,12 +79,9 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text>Current Scanning: {data}</Text>
+      <Text style={styles.errorMessage}>{toast}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => signOutUser()} style={styles.button}>
-        <Text>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
