@@ -14,8 +14,8 @@ function WelcomeScreen() {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <StyledButton text="LOG IN" file="/Login" />
-          <StyledButton text="CREATE ACCOUNT" file="/SignUp/Profile" />
+          <StyledButton text="LOG IN" file="/Login/Email" />
+          <StyledButton text="CREATE ACCOUNT" file="/SignUp" />
         </View>
       </View>
     </View>
