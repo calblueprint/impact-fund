@@ -3,6 +3,13 @@ import { useEffect } from 'react';
 
 import supabase from '../supabase/createClient';
 
+const resetAndPushToRouter = (path: string) => {
+  while (router.canGoBack()) {
+    router.back();
+  }
+  router.replace(path);
+};
+
 function StartScreen() {
   useEffect(() => {
     // supabase.auth.getSession().then(({ data: { session } }) => {
@@ -14,9 +21,9 @@ function StartScreen() {
     // });
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        router.replace('/AllCases');
+        resetAndPushToRouter('/AllCases');
       } else {
-        router.replace('Welcome');
+        resetAndPushToRouter('/Welcome');
       }
     });
     // return () => authListener.subscription.unsubscribe();
