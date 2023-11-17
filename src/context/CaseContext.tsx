@@ -9,6 +9,8 @@ export const CaseContext = createContext<CaseState>({} as CaseState);
 export interface CaseState {
   allCases: Case[];
   updateCases: React.Dispatch<React.SetStateAction<Case[]>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function CaseContextProvider({
@@ -17,6 +19,7 @@ export function CaseContextProvider({
   children: React.ReactNode;
 }) {
   const [cases, setCases] = React.useState<Case[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
     const fetchCases = async () => {
@@ -28,6 +31,7 @@ export function CaseContextProvider({
       }
     };
     fetchCases();
+    setIsLoading(false);
     // TODO: Might want to put something in dependency array when implementing refresh
   }, []);
 
@@ -35,6 +39,8 @@ export function CaseContextProvider({
     () => ({
       allCases: cases,
       updateCases: setCases,
+      loading: isLoading,
+      setLoading: setIsLoading,
     }),
     [cases, setCases],
   );
