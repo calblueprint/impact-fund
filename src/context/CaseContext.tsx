@@ -27,10 +27,10 @@ export function CaseContextProvider({
         const userId = user.data.user.id;
         const allCases = await fetchAllCases(userId);
         setCases(allCases);
+        setIsLoading(false);
       }
     };
     fetchCases();
-    setIsLoading(false);
     // TODO: Might want to put something in dependency array when implementing refresh
   }, []);
 
