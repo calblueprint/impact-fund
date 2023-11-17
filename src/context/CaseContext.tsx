@@ -24,7 +24,6 @@ export function CaseContextProvider({
       if (user.data.user?.id) {
         const userId = user.data.user.id;
         const allCases = await fetchAllCases(userId);
-        console.log({ allCases });
         setCases(allCases);
       }
     };
