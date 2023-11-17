@@ -10,10 +10,10 @@ import FormListItem from '../FormListItem/FormListItem';
 const exampleForm: Form = {
   id: '1',
   title: 'Long Form Notice',
-  date: new Date('10-10-2023'),
+  date: new Date(),
   filename: 'example.pdf',
   formUrl:
-    'chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://kvfpmjezholwvgdmabhr.supabase.co/storage/v1/object/public/caseFiles/a366a017-2834-4365-83f1-91605ba5c80a/altria-long-form-notice.pdf?t=2023-11-16T06%3A32%3A19.610Z',
+    'https://kvfpmjezholwvgdmabhr.supabase.co/storage/v1/object/public/caseFiles/a366a017-2834-4365-83f1-91605ba5c80a/altria-long-form-notice.pdf?t=2023-11-16T06%3A32%3A19.610Z',
 };
 
 export default function FormsCard(caseData: Case) {
