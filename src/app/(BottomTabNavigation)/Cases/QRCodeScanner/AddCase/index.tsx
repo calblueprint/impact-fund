@@ -9,8 +9,9 @@ import { formatDate } from '../../utils';
 function AddCase() {
   const { id, title, imageUrl, date, lawFirm, summary } =
     useLocalSearchParams() as unknown as Case;
+
   const addToCases = async () => {
-    uploadCase(id);
+    await uploadCase(id);
     router.push('/Cases');
   };
   return (
