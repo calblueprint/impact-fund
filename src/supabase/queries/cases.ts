@@ -37,6 +37,63 @@ export async function getCaseIdsFromUserId(
   }
 }
 
+export async function getCaseById(caseId: CaseUid): Promise<Case> {
+  try {
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    if (!data) {
+      throw new Error('case not found');
+    }
+    return formatCaseProperly(data[0]);
+  } catch (error) {
+    console.warn('(getCaseById)', error);
+    throw error;
+  }
+}
+
+export async function isValidCase(caseId: CaseUid): Promise<boolean> {
+  try {
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    if (!data) {
+      return false;
+    }
+    return data.length !== 0;
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+}
+
+export async function uploadCase(caseId: CaseUid): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase.from('status').insert({ caseId, userId });
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+}
+
+export async function containsDuplicateCase(caseId: CaseUid): Promise<boolean> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    const { data } = await supabase
+      .from('status')
+      .select()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    return data?.length !== 0;
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+}
+
 /**
  * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
@@ -74,6 +131,15 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+export async function formatCaseProperly(item: any): Promise<Case> {
+  const partialCase = formatCase(item);
+  const imageUrl = await getImageUrl(partialCase.id);
+  const caseData: Case = {
+    ...partialCase,
+    imageUrl,
+  };
+  return caseData;
+}
 /**
  * Parse supabase case query and return `CasePartial` object.
  *

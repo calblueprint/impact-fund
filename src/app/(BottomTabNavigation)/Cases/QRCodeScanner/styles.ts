@@ -23,4 +23,7 @@ export default StyleSheet.create({
     backgroundColor: '#339FFF',
     padding: 10,
   },
+  errorMessage: {
+    color: colors.midRed,
+  },
 });
