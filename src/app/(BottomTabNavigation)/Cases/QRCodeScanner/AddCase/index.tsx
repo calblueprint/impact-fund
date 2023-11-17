@@ -14,6 +14,7 @@ function AddCase() {
     await uploadCase(id);
     router.push('/Cases');
   };
+
   return (
     <View style={{ height: '100%' }}>
       <ScrollView
