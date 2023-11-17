@@ -51,11 +51,16 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
 }
 
 export async function isValidCase(caseId: CaseUid): Promise<boolean> {
-  const { data } = await supabase.from('cases').select().eq('caseId', caseId);
-  if (!data) {
-    return false;
+  try {
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    if (!data) {
+      return false;
+    }
+    return data.length !== 0;
+  } catch (error) {
+    console.warn(error);
+    throw error;
   }
-  return data.length !== 0;
 }
 
 export async function uploadCase(caseId: CaseUid): Promise<void> {

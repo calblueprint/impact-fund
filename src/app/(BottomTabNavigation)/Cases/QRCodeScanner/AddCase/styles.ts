@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { colors } from '../../../../../styles/colors';
 
 export default StyleSheet.create({
@@ -50,11 +51,5 @@ export default StyleSheet.create({
     height: 75,
     width: '100%',
     borderRadius: 20,
-  },
-
-  loading: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
