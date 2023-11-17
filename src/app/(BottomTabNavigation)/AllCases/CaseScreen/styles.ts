@@ -14,6 +14,7 @@ export default StyleSheet.create({
   scrollView: {
     flex: 1,
     width: '92%',
+    rowGap: 15,
     marginTop: 30,
   },
   headerContainer: {
