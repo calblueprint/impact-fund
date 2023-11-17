@@ -14,7 +14,9 @@ function StartScreen() {
     // });
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        router.replace('/Cases');
+        if (_event !== 'USER_UPDATED') {
+          router.replace('/Cases');
+        }
       } else {
         router.replace('Welcome');
       }

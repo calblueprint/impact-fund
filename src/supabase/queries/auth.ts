@@ -3,12 +3,13 @@ import supabaseAdmin from '../createAdminClient';
 import supabase from '../createClient';
 
 export const signUpUser = async (
-  firstName: string,
-  middleName: string | null,
-  lastName: string,
+  fullName: string,
   email: string,
-  address: string,
   password: string,
+  streetName: string,
+  city: string,
+  state: string,
+  zip: string,
 ) => {
   try {
     await supabase.auth.signUp({
@@ -16,10 +17,11 @@ export const signUpUser = async (
       password,
       options: {
         data: {
-          firstName,
-          middleName,
-          lastName,
-          address,
+          fullName,
+          streetName,
+          city,
+          state,
+          zip,
         },
       },
     });
