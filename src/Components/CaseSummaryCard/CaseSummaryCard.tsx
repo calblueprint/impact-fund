@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import ThreeDots from '../../../assets/three-dots.svg';
-import { formatDate } from '../../app/(BottomTabNavigation)/Cases/utils';
+import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Case } from '../../types/types';
 
 export default function CaseSummaryCard(caseData: Case) {
@@ -12,7 +12,7 @@ export default function CaseSummaryCard(caseData: Case) {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: `/Cases/CaseSummaryScreen`,
+          pathname: `/AllCases/CaseSummaryScreen`,
           params: {
             blurb: caseData.blurb,
             summary: caseData.summary,

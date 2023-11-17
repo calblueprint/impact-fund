@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 
 import styles from './styles';
-import { formatDate } from '../../app/(BottomTabNavigation)/Cases/utils';
+import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummary() {
