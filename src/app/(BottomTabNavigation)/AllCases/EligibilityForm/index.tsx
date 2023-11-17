@@ -26,9 +26,9 @@ export default function EligibilityForm() {
         <View style={styles.insideContainer}>
           <Text>The eligibility requirements are as follows:</Text>
           <View>
-            <Text>Sexy</Text>
-            <Text>Tall</Text>
-            <Text>Handsome</Text>
+            <Text>Requirement 1</Text>
+            <Text>Requirement 2</Text>
+            <Text>Requirement 3</Text>
           </View>
           <Text>Do you meet the following requirements?</Text>
         </View>
