@@ -10,38 +10,12 @@ function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   const noCasesExist = allCases.length === 0;
 
-  // return (
-  //   <View style={styles.container}>
-  //     <View style={styles.headerContainer}>
-  //       <TouchableOpacity
-  //         onPress={() =>
-  //           router.push({
-  //             pathname: '/AllCases/QRCodeScanner',
-  //           })
-  //         }
-  //       >
-  //         <View style={styles.circle}>
-  //           <Text>Camera</Text>
-  //         </View>
-  //       </TouchableOpacity>
-  //     </View>
-  //     <View style={styles.casesContainer}>
-  //       {noCasesExist ? (
-  //         <Text>Scan your first case using the QR code above!</Text>
-  //       ) : (
-  //         <FlatList
-  //           data={allCases}
-  //           renderItem={({ item }) => <CaseCard {...item} />}
-  //           keyExtractor={item => item.id}
-  //         />
-  //       )}
-  //     </View>
-  //   </View>
-  // );
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.push('/Cases/QRCodeScanner')}>
+        <TouchableOpacity
+          onPress={() => router.push('/AllCases/QRCodeScanner')}
+        >
           <View style={styles.circle}>
             <Text>Camera</Text>
           </View>
