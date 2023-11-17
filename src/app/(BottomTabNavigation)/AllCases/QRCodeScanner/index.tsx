@@ -62,8 +62,15 @@ function QRCodeScannerScreen() {
       const caseData: Case = await getCaseById(caseId);
       const { id, title, imageUrl, date, lawFirm, summary } = caseData;
       router.push({
-        pathname: '/Cases/QRCodeScanner/AddCase',
-        params: { id, title, imageUrl, date, lawFirm, summary },
+        pathname: '/AllCases/QRCodeScanner/AddCase',
+        params: {
+          id,
+          title,
+          imageUrl,
+          date,
+          lawFirm,
+          summary,
+        },
       });
     }
   };
