@@ -15,7 +15,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '92%',
-    rowGap: 10,
+    rowGap: 15,
     marginTop: 30,
   },
   headerContainer: {

@@ -7,17 +7,13 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: colors.white,
-  },
-
-  everythingContainer: {
     justifyContent: 'flex-start',
-    marginTop: '35%',
   },
-
   textContainer: {
-    width: '90%',
-    height: '50%',
-    marginLeft: '9%',
+    width: 325,
+    marginLeft: 30,
+    marginTop: 140,
+    marginBottom: 30,
   },
 
   welcomeText: {
@@ -29,6 +25,5 @@ export default StyleSheet.create({
 
   buttonContainer: {
     alignItems: 'center',
-    marginBottom: '20%',
   },
 });

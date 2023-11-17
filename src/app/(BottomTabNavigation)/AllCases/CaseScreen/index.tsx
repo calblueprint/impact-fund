@@ -33,11 +33,11 @@ function CasesScreen() {
         {status === Eligibility.ELIGIBLE && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
+        <CaseSummaryCard {...caseData} />
         {(status === Eligibility.INELIGIBLE ||
           status === Eligibility.UNDETERMINED) && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
-        <CaseSummaryCard {...caseData} />
         <FormsCard />
         <EducationalBar />
       </ScrollView>
