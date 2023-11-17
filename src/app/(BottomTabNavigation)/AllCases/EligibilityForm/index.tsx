@@ -13,7 +13,7 @@ export default function EligibilityForm() {
 
   const updateEligibility = async (status: Eligibility) => {
     await updateCaseStatus(caseId, status);
-    router.push('/Cases/CaseScreen');
+    router.push('/AllCases/CaseScreen');
   };
   return (
     <View style={styles.container}>
