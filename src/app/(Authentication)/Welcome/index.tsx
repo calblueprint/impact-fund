@@ -10,11 +10,7 @@ function WelcomeScreen() {
       <Text style={styles.welcomeText}>Welcome to the Impact Fund!</Text>
       <View style={styles.buttonContainer}>
         <StyledButton text="Create an account" file="/SignUp" color="white" />
-        <StyledButton
-          text="Log in with email"
-          file="/Login/Email"
-          color="black"
-        />
+        <StyledButton text="Log in with email" file="/Login" color="black" />
       </View>
     </View>
   );
