@@ -7,9 +7,10 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [displayError, setDisplayError] = useState(false);
-  const [displayEmail, setDisplayEmail] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [displayError, setDisplayError] = useState<boolean>(false);
+  const [displayEmail, setDisplayEmail] = useState<boolean>(false);
+  const [placeholder, setPlaceholder] = useState<string>('Email address');
 
   async function emailFind() {
     const isEmail = await emailExists(email);
@@ -18,6 +19,8 @@ export default function LoginScreen() {
     } else {
       setDisplayError(false);
       router.push({ pathname: 'Login/Password', params: { email } });
+      setPlaceholder('Email address');
+
       setEmail('');
       setDisplayEmail(false);
     }
@@ -41,7 +44,9 @@ export default function LoginScreen() {
           displayInput={displayEmail}
           setDisplayInput={setDisplayEmail}
           keyboard="email-address"
-          autoCap={false}
+          autoCapitalization={false}
+          placeholder={placeholder}
+          setPlaceholder={setPlaceholder}
         />
       </View>
 

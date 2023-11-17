@@ -22,6 +22,5 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     width: 310,
     borderColor: colors.darkRed,
-    borderRadius: 2,
   },
 });

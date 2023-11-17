@@ -7,10 +7,11 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { passwordExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
-  const [password, setPassword] = useState('');
-  const [displayError, setDisplayError] = useState(false);
+  const [password, setPassword] = useState<string>('');
+  const [displayError, setDisplayError] = useState<boolean>(false);
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const [displayPassword, setDisplayPassword] = useState(false);
+  const [displayPassword, setDisplayPassword] = useState<boolean>(false);
+  const [placeholder, setPlaceholder] = useState<string>('Password');
 
   async function signIn() {
     const isPassword = await passwordExists(email, password);
@@ -38,7 +39,9 @@ export default function LoginScreen() {
           displayInput={displayPassword}
           setDisplayInput={setDisplayPassword}
           keyboard="default"
-          autoCap={false}
+          autoCapitalization={false}
+          placeholder={placeholder}
+          setPlaceholder={setPlaceholder}
         />
       </View>
 

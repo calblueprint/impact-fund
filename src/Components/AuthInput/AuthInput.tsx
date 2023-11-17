@@ -11,7 +11,9 @@ interface AuthInputProps {
   displayInput: boolean;
   setDisplayInput: React.Dispatch<React.SetStateAction<boolean>>;
   keyboard: KeyboardTypeOptions;
-  autoCap: boolean;
+  autoCapitalization: boolean;
+  placeholder: string;
+  setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function AuthInput({
@@ -22,9 +24,10 @@ export default function AuthInput({
   displayInput,
   setDisplayInput,
   keyboard,
-  autoCap,
+  autoCapitalization,
+  placeholder,
+  setPlaceholder,
 }: AuthInputProps) {
-  const [placeholder, setPlaceholder] = useState<string>(defaultValue);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const onClick = () => {
@@ -64,7 +67,7 @@ export default function AuthInput({
         placeholder={placeholder}
         secureTextEntry={isPassword}
         keyboardType={keyboard}
-        autoCapitalize={autoCap ? 'words' : 'none'}
+        autoCapitalize={autoCapitalization ? 'words' : 'none'}
         clearButtonMode={isPassword ? 'never' : 'while-editing'}
       />
     </View>
