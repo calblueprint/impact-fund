@@ -15,7 +15,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '92%',
-    rowGap: 10,
+    rowGap: 15,
     marginTop: 30,
   },
   headerContainer: {
@@ -27,14 +27,13 @@ export default StyleSheet.create({
     paddingRight: 30,
   },
   titleContainer: {
-    width: '100%',
     flexDirection: 'row',
-    alignItems: 'flex-start',
   },
   title: {
+    flex: 1,
     color: colors.black,
     fontSize: 32,
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
   },
 });

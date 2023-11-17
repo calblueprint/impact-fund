@@ -26,7 +26,7 @@ export default StyleSheet.create({
   circle: {
     width: 70,
     height: 70,
-    borderRadius: 100 / 2,
+    borderRadius: 50,
     backgroundColor: colors.midGrey,
     alignItems: 'center',
     justifyContent: 'center',
