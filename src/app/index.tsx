@@ -21,7 +21,9 @@ function StartScreen() {
     // });
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        resetAndPushToRouter('/AllCases');
+        if (_event !== 'USER_UPDATED') {
+          resetAndPushToRouter('/AllCases');
+        }
       } else {
         resetAndPushToRouter('/Welcome');
       }
