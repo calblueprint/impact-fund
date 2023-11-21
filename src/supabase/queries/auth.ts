@@ -94,7 +94,7 @@ export const getCurrentUserInfo = async (): Promise<User> => {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
-      const userInfo = {
+      const userInfo: User = {
         email: user.user_metadata.email,
         fullName: user.user_metadata.fullName,
         streetName: user.user_metadata.streetName,

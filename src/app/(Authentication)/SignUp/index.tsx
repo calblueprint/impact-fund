@@ -7,14 +7,14 @@ import styles from './styles';
 import { signUpUser } from '../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [streetName, setStreetName] = useState('');
-  const [usState, setUsState] = useState('');
-  const [city, setCity] = useState('');
-  const [zip, setZip] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [streetName, setStreetName] = useState<string>('');
+  const [usState, setUsState] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [zip, setZip] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   return (
     <View style={styles.container}>
