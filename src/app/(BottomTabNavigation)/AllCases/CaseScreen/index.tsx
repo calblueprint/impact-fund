@@ -25,7 +25,10 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{caseData.title}</Text>
         </View>
@@ -38,7 +41,6 @@ function CasesScreen() {
           status === Eligibility.UNDETERMINED) && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
-        <CaseSummaryCard {...caseData} />
         <FormsCard {...caseData} />
         <EducationalBar />
       </ScrollView>
