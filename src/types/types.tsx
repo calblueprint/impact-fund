@@ -30,11 +30,12 @@ export interface CaseSummaryProps {
 
 export interface User {
   id: UserUid;
-  firstName: string;
-  middleName: string | null;
-  lastName: string;
+  fullName: string;
   email: string;
-  addresss: string;
+  streetName: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 export type Status = {
@@ -49,3 +50,12 @@ export enum Eligibility {
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
 }
+export const userInstance: User = {
+  id: '',
+  fullName: '',
+  email: '',
+  streetName: '',
+  city: '',
+  state: '',
+  zip: '',
+};

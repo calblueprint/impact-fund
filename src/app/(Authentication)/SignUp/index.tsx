@@ -7,35 +7,22 @@ import styles from './styles';
 import { signUpUser } from '../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
-  const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [streetName, setStreetName] = useState<string>('');
+  const [usState, setUsState] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [zip, setZip] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        value={firstName}
-        onChangeText={setFirstName}
-        placeholder="First name"
-        autoCapitalize="words"
-      />
-      <TextInput
-        style={styles.input}
-        value={middleName}
-        onChangeText={setMiddleName}
-        placeholder="Middle name"
-        autoCapitalize="words"
-      />
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={setLastName}
-        placeholder="Last name"
+        value={fullName}
+        onChangeText={setFullName}
+        placeholder="Full Legal name"
         autoCapitalize="words"
       />
       <TextInput
@@ -48,9 +35,30 @@ export default function SignUpScreen() {
       />
       <TextInput
         style={styles.input}
-        value={address}
-        onChangeText={setAddress}
-        placeholder="Mailing address"
+        value={streetName}
+        onChangeText={setStreetName}
+        placeholder="Street Name"
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        value={city}
+        onChangeText={setCity}
+        placeholder="City"
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        value={usState}
+        onChangeText={setUsState}
+        placeholder="State"
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        value={zip}
+        onChangeText={setZip}
+        placeholder="Zip Code"
         autoCapitalize="words"
       />
       <TextInput
@@ -70,7 +78,7 @@ export default function SignUpScreen() {
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          signUpUser(firstName, middleName, lastName, email, address, password)
+          signUpUser(fullName, email, password, streetName, city, usState, zip)
         }
       >
         <Text>Sign Up</Text>
