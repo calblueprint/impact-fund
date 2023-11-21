@@ -19,6 +19,13 @@ function StartScreen() {
     //     router.replace('/Welcome');
     //   }
     // });
+    // supabase.auth.getSession().then(({ data: { session } }) => {
+    //   if (session) {
+    //     router.replace('/Cases');
+    //   } else {
+    //     router.replace('/Welcome');
+    //   }
+    // });
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         resetAndPushToRouter('/AllCases');
@@ -26,6 +33,7 @@ function StartScreen() {
         resetAndPushToRouter('/Welcome');
       }
     });
+    // return () => authListener.subscription.unsubscribe();
     // return () => authListener.subscription.unsubscribe();
   }, []);
 }

@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from '../../../styles/colors';
 
+import { colors } from '../../../styles/colors';
+
 export default StyleSheet.create({
   container: {
     width: '100%',
@@ -17,6 +19,7 @@ export default StyleSheet.create({
   },
 
   welcomeText: {
+    color: colors.black,
     color: colors.black,
     fontSize: 50,
     fontWeight: '200',
