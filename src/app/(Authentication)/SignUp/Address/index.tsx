@@ -4,6 +4,7 @@ import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { signUpUser } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
@@ -19,11 +20,9 @@ export default function SignUpScreen() {
 
   const [displayStreet, setDisplayStreet] = useState(false);
   const [placeholderStreet, setPlaceholderStreet] = useState('Street address');
-  const [isFocusedStreet, setIsFocusedStreet] = useState(false);
 
   const [displayCity, setDisplayCity] = useState(false);
   const [placeholderCity, setPlaceholderCity] = useState('City');
-  const [isFocusedCity, setIsFocusedCity] = useState(false);
 
   const [displayState, setDisplayState] = useState(false);
   const [placeholderState, setPlaceholderState] = useState('State');
@@ -34,42 +33,6 @@ export default function SignUpScreen() {
   const [isFocusedZip, setIsFocusedZip] = useState(false);
 
   // ** Display fields **
-  //Street Address
-  const onClickStreet = () => {
-    setPlaceholderStreet('');
-    setIsFocusedStreet(true);
-    setDisplayStreet(true);
-  };
-
-  const offClickStreet = () => {
-    setPlaceholderStreet('Street address');
-    setIsFocusedStreet(false);
-  };
-
-  function removeStreet() {
-    if (streetAddress.trim() === '') {
-      setDisplayStreet(false);
-    }
-  }
-
-  //City
-  const onClickCity = () => {
-    setPlaceholderCity('');
-    setIsFocusedCity(true);
-    setDisplayCity(true);
-  };
-
-  const offClickCity = () => {
-    setPlaceholderCity('City');
-    setIsFocusedCity(false);
-  };
-
-  function removeCity() {
-    if (city.trim() === '') {
-      setDisplayCity(false);
-    }
-  }
-
   //State
   const onClickState = () => {
     setPlaceholderState('');
@@ -114,71 +77,87 @@ export default function SignUpScreen() {
 
       <Text style={styles.instructionText}>Create your account.</Text>
 
-      <Text style={styles.displayTextStreet}>
-        {displayStreet ? 'Street address' : ' '}{' '}
-      </Text>
-      <TextInput
-        style={[styles.input, isFocusedStreet && styles.inputFocused]}
-        value={streetAddress}
-        onChangeText={setStreetAddress}
-        onEndEditing={removeStreet}
-        onFocus={onClickStreet}
-        onBlur={offClickStreet}
-        placeholder={placeholderStreet}
-        autoCapitalize="words"
-        clearButtonMode="while-editing"
-      />
+      <View style={styles.inputBox}>
+        <AuthInput
+          input={streetAddress}
+          setInput={setStreetAddress}
+          defaultValue="Street address"
+          isPassword={false}
+          displayInput={displayStreet}
+          setDisplayInput={setDisplayStreet}
+          keyboard="default"
+          autoCapitalization
+          placeholder={placeholderStreet}
+          setPlaceholder={setPlaceholderStreet}
+        />
+      </View>
 
-      <Text style={styles.displayTextCity}>{displayCity ? 'City' : ' '} </Text>
-      <TextInput
-        style={[styles.input, isFocusedCity && styles.inputFocused]}
-        value={city}
-        onChangeText={setCity}
-        onEndEditing={removeCity}
-        onFocus={onClickCity}
-        onBlur={offClickCity}
-        placeholder={placeholderCity}
-        autoCapitalize="words"
-        clearButtonMode="while-editing"
-      />
-
-      <View style={styles.inputWrap}>
-        <Text style={styles.displayTextState}>
-          {displayState ? 'State' : ' '}{' '}
-        </Text>
-        <Text style={styles.displayTextZip}>
-          {displayZip ? 'Zipcode' : ' '}{' '}
-        </Text>
+      <View style={styles.inputBox}>
+        <AuthInput
+          input={city}
+          setInput={setCity}
+          defaultValue="City"
+          isPassword={false}
+          displayInput={displayCity}
+          setDisplayInput={setDisplayCity}
+          keyboard="default"
+          autoCapitalization
+          placeholder={placeholderCity}
+          setPlaceholder={setPlaceholderCity}
+        />
       </View>
 
       <View style={styles.inputWrap}>
-        <TextInput
-          style={[styles.inputLeft, isFocusedState && styles.inputLeftFocused]}
-          value={state}
-          onChangeText={setState}
-          onEndEditing={removeState}
-          onFocus={onClickState}
-          onBlur={offClickState}
-          placeholder={placeholderState}
-          autoCapitalize="words"
-          clearButtonMode="while-editing"
-        />
-        <TextInput
-          style={[styles.inputRight, isFocusedZip && styles.inputRightFocused]}
-          maxLength={5}
-          value={zipcode}
-          onChangeText={setZipcode}
-          onEndEditing={removeZip}
-          onFocus={onClickZip}
-          onBlur={offClickZip}
-          placeholder={placeholderZip}
-          keyboardType="numeric"
-          clearButtonMode="while-editing"
-        />
+        <View style={styles.smallInputBox}>
+          <Text style={styles.displayTextSmall}>
+            {displayState ? 'State' : ' '}
+          </Text>
+          <TextInput
+            style={[
+              styles.inputSmall,
+              isFocusedState && styles.inputSmallFocused,
+            ]}
+            value={state}
+            onChangeText={setState}
+            onEndEditing={removeState}
+            onFocus={onClickState}
+            onBlur={offClickState}
+            placeholder={placeholderState}
+            autoCapitalize="words"
+            clearButtonMode="while-editing"
+          />
+        </View>
+
+        <Text style={styles.space}> </Text>
+
+        <View style={styles.smallInputBox}>
+          <Text style={styles.displayTextSmall}>
+            {displayZip ? 'Zip' : ' '}
+          </Text>
+          <TextInput
+            style={[
+              styles.inputSmall,
+              isFocusedZip && styles.inputSmallFocused,
+            ]}
+            maxLength={5}
+            value={zipcode}
+            onChangeText={setZipcode}
+            onEndEditing={removeZip}
+            onFocus={onClickZip}
+            onBlur={offClickZip}
+            placeholder={placeholderZip}
+            keyboardType="default"
+            clearButtonMode="while-editing"
+          />
+        </View>
       </View>
+
       <TouchableOpacity
         style={styles.nextButton}
-        onPress={() => signUpUser(name, email, address, password)}
+        /* the signUpUser function requires first, middle, and last name
+        but the figma only wants a full name, so this doesn't work rn */
+
+        // onPress={() => signUpUser(name, email, address, password)}
       >
         <Text style={styles.nextText}>Sign Up</Text>
       </TouchableOpacity>

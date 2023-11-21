@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../styles/colors';
+import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -38,21 +38,6 @@ export default StyleSheet.create({
     marginRight: 70,
     marginBottom: 20,
   },
-  input: {
-    height: 40,
-    borderBottomWidth: 0.75,
-    width: 310,
-    borderColor: colors.darkGrey,
-    marginBottom: 15,
-  },
-  inputFocused: {
-    marginTop: 5,
-    height: 40,
-    borderBottomWidth: 2,
-    width: 310,
-    borderColor: colors.darkRed,
-    borderRadius: 2,
-  },
   nextText: {
     marginRight: 230,
     fontSize: 14,
@@ -74,8 +59,13 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     width: '81%',
-    marginTop: 10,
+    marginTop: 24,
     marginRight: 25,
     marginBottom: 25,
+  },
+  inputBox: {
+    marginTop: 11,
+    width: '100%',
+    alignItems: 'center',
   },
 });
