@@ -24,12 +24,12 @@ export default function EligibilityCard({
     status === Eligibility.UNDETERMINED
   ) {
     return (
-      <View style={[styles.container, styles.eligible]}>
+      <View style={[styles.container, styles.ineligible]}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
             router.push({
-              pathname: '/Cases/EligibilityForm',
+              pathname: '/AllCases/EligibilityForm',
               params: { caseId: caseData.id },
             });
           }}
@@ -51,7 +51,7 @@ export default function EligibilityCard({
     );
   } else if (status === Eligibility.ELIGIBLE) {
     return (
-      <View style={[styles.container, styles.ineligible]}>
+      <View style={[styles.container, styles.eligible]}>
         <View style={styles.inner}>
           <TouchableOpacity style={styles.button}>
             <View style={styles.topText}>

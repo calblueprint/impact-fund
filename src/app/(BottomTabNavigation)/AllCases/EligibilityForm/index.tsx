@@ -5,7 +5,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import RightArrow from '../../../../../assets/right-arrow.svg';
-import { updateCaseStatus } from '../../../../supabase/queries/cases';
+import {
+  getCaseById,
+  updateCaseStatus,
+} from '../../../../supabase/queries/cases';
 import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
@@ -13,31 +16,21 @@ export default function EligibilityForm() {
 
   const updateEligibility = async (status: Eligibility) => {
     await updateCaseStatus(caseId, status);
-    router.push('/Cases/CaseScreen');
+    getCaseById(caseId).then(res => {
+      router.push({ pathname: '/AllCases/CaseScreen', params: { ...res } });
+    });
   };
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <View style={styles.insideContainer}>
+          <Text>The eligibility requirements are as follows:</Text>
           <View>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.backButton}
-            >
-              <Text>Go Back</Text>
-            </TouchableOpacity>
+            <Text>Requirement 1</Text>
+            <Text>Requirement 2</Text>
+            <Text>Requirement 3</Text>
           </View>
-          <View>
-            <Text>The eligibility requirements are as follows:</Text>
-          </View>
-          <View>
-            <Text>Sexy</Text>
-            <Text>Tall</Text>
-            <Text>Handsome</Text>
-          </View>
-          <View>
-            <Text>Do you meet the following requirements?</Text>
-          </View>
+          <Text>Do you meet the following requirements?</Text>
         </View>
       </View>
       <View style={styles.buttonsContainer}>

@@ -5,6 +5,10 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent: 'flex-start',
+    flex: 1,
+    display: 'flex',
+    width: '100%', // essentially the safeAreaView container
     backgroundColor: colors.white,
   },
   scrollView: {
@@ -12,7 +16,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     minHeight: 900,
     width: '92%',
-    rowGap: 20,
+    rowGap: 15,
+    marginTop: 30,
   },
   headerContainer: {
     flex: 0.2,
@@ -21,5 +26,15 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%',
     paddingRight: 30,
+  },
+  titleContainer: {
+    flexDirection: 'row',
+  },
+  title: {
+    flex: 1,
+    color: colors.black,
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

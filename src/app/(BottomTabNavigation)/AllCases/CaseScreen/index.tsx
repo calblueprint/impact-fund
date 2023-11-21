@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
@@ -25,14 +25,15 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{caseData.title}</Text>
+        </View>
         <CaseStatusBar />
         {status === Eligibility.ELIGIBLE && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
+        <CaseSummaryCard {...caseData} />
         {(status === Eligibility.INELIGIBLE ||
           status === Eligibility.UNDETERMINED) && (
           <EligibilityCard caseData={caseData} status={status} />

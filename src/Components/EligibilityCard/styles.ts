@@ -4,30 +4,28 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   eligible: {
-    // height: '20%',
-    height: 120,
+    height: 270,
   },
   ineligible: {
-    // height: '40%',
-    height: 240,
+    height: 135,
   },
   container: {
-    flex: 0,
+    display: 'flex',
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
+    gap: 15,
   },
   button: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     alignSelf: 'center',
-    height: '90%',
+    height: 125,
     width: '100%',
     border: 'solid',
     borderColor: colors.darkGrey,
     borderWidth: 0.5,
     borderRadius: 5,
     background: colors.white,
-    margin: 5,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
@@ -46,6 +44,6 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
   inner: {
-    height: '50%',
+    height: 120,
   },
 });
