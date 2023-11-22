@@ -19,6 +19,13 @@ async function getPublicFormUrl(filename: string): Promise<string> {
   }
 }
 
+/**
+ * Fetch the `Form` object associated with the target filename.
+ *
+ * @param caseUid form buckets for a given case labeled with their caseUid
+ * @param filename name of file stored within the target case bucket in supabase storage
+ * @returns formatted `Form` object
+ */
 export async function fetchFormByFilename(
   caseUid: CaseUid,
   filename: string,
@@ -41,6 +48,12 @@ export async function fetchFormByFilename(
   }
 }
 
+/**
+ * Fetch all `Form` objects associated with the target caseUid.
+ *
+ * @param caseUid target caseUid
+ * @returns list of formatted `Form` objects
+ */
 export async function fetchAllForms(caseUid: CaseUid): Promise<Form[]> {
   try {
     // fetch rows with the matching CaseUid
@@ -54,8 +67,8 @@ export async function fetchAllForms(caseUid: CaseUid): Promise<Form[]> {
     }
     // return a list of properly formatted `Form`s
     return await Promise.all(
-      data.map(async rawFormData => {
-        return await formatForm(caseUid, rawFormData);
+      data.map(async queryItem => {
+        return await formatForm(caseUid, queryItem);
       }),
     );
   } catch (error) {
@@ -64,15 +77,25 @@ export async function fetchAllForms(caseUid: CaseUid): Promise<Form[]> {
   }
 }
 
-export async function formatForm(caseUid: CaseUid, item: any): Promise<Form> {
+/**
+ * Return a properly formatted `Form` object from the supabase query data.
+ *
+ * @param caseUid target caseUid
+ * @param queryItem raw form data returned from supabase query
+ * @returns formatted `Form` object
+ */
+export async function formatForm(
+  caseUid: CaseUid,
+  queryItem: any,
+): Promise<Form> {
   try {
     // organize form MetaData without publicUrl
     const partialForm: FormPartial = {
-      formUid: item.formUid,
-      caseUid: item.caseUid,
-      title: item.title,
-      filename: item.filename,
-      date: item.date,
+      formUid: queryItem.formUid,
+      caseUid: queryItem.caseUid,
+      title: queryItem.title,
+      filename: queryItem.filename,
+      date: queryItem.date,
     };
     // fetch form publicUrl and attach it to the form object
     const storageQuery = `${caseUid}/${partialForm.filename}`;
