@@ -11,7 +11,7 @@ import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import { getCaseStatus } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
-function CasesScreen() {
+function CaseScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
   const [status, setStatus] = useState<Eligibility>();
 
@@ -48,4 +48,4 @@ function CasesScreen() {
   );
 }
 
-export default CasesScreen;
+export default CaseScreen;

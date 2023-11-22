@@ -15,6 +15,8 @@ export interface CasePartial {
   caseStatus: string;
   date: Date;
   lawFirm: string;
+  formCount: number;
+  featuredFormName: string;
 }
 
 export interface Case extends CasePartial {

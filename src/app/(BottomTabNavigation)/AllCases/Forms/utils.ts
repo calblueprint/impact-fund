@@ -1,8 +1,16 @@
 import {
   getPartialForms,
   getPublicFormUrl,
+  fetchFormByName,
 } from '../../../../supabase/queries/cases';
 import { CaseUid, Form } from '../../../../types/types';
+
+export async function fetchFeaturedForm(
+  caseUid: CaseUid,
+  filename: string,
+): Promise<Form> {
+  return await fetchFormByName(caseUid, filename);
+}
 
 /**
  * Fetch an array of `Form` objects associated with a given `caseUid`.

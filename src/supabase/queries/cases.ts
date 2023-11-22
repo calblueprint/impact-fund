@@ -5,6 +5,7 @@ import {
   Eligibility,
   UserUid,
   FormPartial,
+  Form,
 } from '../../types/types';
 import supabase from '../createClient';
 
@@ -44,7 +45,7 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
     if (!data) {
       throw new Error('case not found');
     }
-    return formatCaseProperly(data[0]);
+    return formatCase(data[0]);
   } catch (error) {
     console.warn('(getCaseById)', error);
     throw error;
@@ -116,13 +117,7 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
 
     return await Promise.all(
       data.map(async item => {
-        const partialCase = formatCase(item);
-        const imageUrl = await getImageUrl(partialCase.id);
-        const caseData: Case = {
-          ...partialCase,
-          imageUrl,
-        };
-        return caseData;
+        return formatCase(item);
       }),
     );
   } catch (error) {
@@ -132,8 +127,8 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
-export async function formatCaseProperly(item: any): Promise<Case> {
-  const partialCase = formatCase(item);
+export async function formatCase(item: any): Promise<Case> {
+  const partialCase = formatPartialCaseFromQuery(item);
   const imageUrl = await getImageUrl(partialCase.id);
   const caseData: Case = {
     ...partialCase,
@@ -147,8 +142,8 @@ export async function formatCaseProperly(item: any): Promise<Case> {
  * @param item supabase Case query return data
  * @returns `CasePartial` object
  */
-export function formatCase(item: any): CasePartial {
-  const formattedCase: CasePartial = {
+export function formatPartialCaseFromQuery(item: any): CasePartial {
+  const formattedPartial: CasePartial = {
     id: item.caseId,
     approved: item.approved,
     title: item.title,
@@ -160,8 +155,10 @@ export function formatCase(item: any): CasePartial {
     caseStatus: item.status,
     date: item.date,
     lawFirm: item.lawFirm,
+    formCount: item.formCount,
+    featuredFormName: item.featuredFormName,
   };
-  return formattedCase;
+  return formattedPartial;
 }
 
 /**
@@ -184,11 +181,69 @@ export async function getPublicFormUrl(filename: string): Promise<string> {
   }
 }
 
+export async function fetchFormByName(
+  caseUid: CaseUid,
+  filename: string,
+): Promise<Form> {
+  try {
+    // fetch rows with the matching CaseUid
+    const { data } = await supabase
+      .from('caseForms')
+      .select()
+      .eq('caseId', caseUid)
+      .eq('filename', filename);
+
+    if (!data) {
+      throw new Error(`no forms found for the given case: ${caseUid}`);
+    }
+
+    return await formatForm(caseUid, data[0]);
+    // return data.map(item => {
+    //   const form: FormPartial = {
+    //     id: item.formId,
+    //     title: item.title,
+    //     filename: item.filename,
+    //     date: item.date,
+    //   };
+    //   return form;
+    // });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getFormObjects)', error);
+    throw error;
+  }
+}
+
+export async function formatForm(caseUid: CaseUid, item: any): Promise<Form> {
+  const partialForm = formatPartialFormFromQuery(item);
+  const formUrl = await getPublicFormUrl(`${caseUid}/${partialForm.filename}`);
+  const formData: Form = {
+    ...partialForm,
+    formUrl,
+  };
+  return formData;
+}
 /**
- * Fetch the `FormMetaData` for forms associated with a given case.
+ * Parse supabase case query and return `CasePartial` object.
+ *
+ * @param item supabase Case query return data
+ * @returns `CasePartial` object
+ */
+export function formatPartialFormFromQuery(item: any): FormPartial {
+  const formattedPartial: FormPartial = {
+    id: item.caseId,
+    title: item.title,
+    filename: item.string,
+    date: item.date,
+  };
+  return formattedPartial;
+}
+
+/**
+ * Fetch the `FormPartial` for forms associated with a given case.
  *
  * @param caseUid uid of target case.
- * @returns list of `FormMetaData` objects.
+ * @returns list of `FormPartial` objects.
  */
 export async function getPartialForms(
   caseUid: CaseUid,
