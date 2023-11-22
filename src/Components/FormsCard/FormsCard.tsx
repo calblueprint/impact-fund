@@ -11,17 +11,20 @@ import FormListItem from '../FormListItem/FormListItem';
 export default function FormsCard(caseData: Case) {
   const [featuredForm, setFeaturedForm] = useState<Form>();
 
+  const getForm = async () => {
+    const formData = await getFeaturedForm(
+      caseData.id,
+      caseData.featuredFormName,
+    );
+    if (formData) {
+      setFeaturedForm(formData);
+    }
+  };
+
   useEffect(() => {
-    const getForm = async () => {
-      const formData = await getFeaturedForm(
-        caseData.id,
-        caseData.featuredFormName,
-      );
-      if (formData) {
-        setFeaturedForm(formData);
-      }
-    };
-    getForm();
+    if (caseData.formCount > 0) {
+      getForm();
+    }
   });
 
   return (
@@ -29,6 +32,7 @@ export default function FormsCard(caseData: Case) {
       <View style={styles.topContainer}>
         <Text style={styles.titleText}>Documents</Text>
         <TouchableOpacity
+          disabled={Number(caseData.formCount) === 0}
           onPress={() =>
             router.push({
               pathname: `/AllCases/Forms`,
@@ -44,11 +48,9 @@ export default function FormsCard(caseData: Case) {
           </View>
         </TouchableOpacity>
       </View>
-      {featuredForm === undefined ? null : (
-        <View style={styles.bottomContainer}>
-          <FormListItem {...featuredForm} />
-        </View>
-      )}
+      <View style={styles.bottomContainer}>
+        {featuredForm === undefined ? null : <FormListItem {...featuredForm} />}
+      </View>
     </View>
   );
 }
