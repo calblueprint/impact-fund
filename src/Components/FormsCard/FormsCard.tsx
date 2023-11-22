@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
-import { fetchFeaturedForm } from '../../app/(BottomTabNavigation)/AllCases/Forms/utils';
+import { getFeaturedForm } from '../../app/(BottomTabNavigation)/AllCases/Forms/utils';
 import { Case, Form } from '../../types/types';
 import FormListItem from '../FormListItem/FormListItem';
 
@@ -13,7 +13,7 @@ export default function FormsCard(caseData: Case) {
 
   useEffect(() => {
     const getForm = async () => {
-      const formData = await fetchFeaturedForm(
+      const formData = await getFeaturedForm(
         caseData.id,
         caseData.featuredFormName,
       );

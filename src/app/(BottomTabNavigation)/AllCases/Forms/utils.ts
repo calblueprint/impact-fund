@@ -1,36 +1,29 @@
 import {
-  getPartialForms,
-  getPublicFormUrl,
-  fetchFormByName,
-} from '../../../../supabase/queries/cases';
+  fetchFormByFilename,
+  fetchAllForms,
+} from '../../../../supabase/queries/forms';
 import { CaseUid, Form } from '../../../../types/types';
 
-export async function fetchFeaturedForm(
+// TODO: implement error handling for the following funcitons.
+
+/**
+ * Gets the featured `Form` associated with a given case.
+ * @param caseUid filenames aren't unique globally: this helps us reduce the scope of our search.
+ * @param filename filename of the featured form
+ * @returns `Form` obeject
+ */
+export async function getFeaturedForm(
   caseUid: CaseUid,
   filename: string,
 ): Promise<Form> {
-  return await fetchFormByName(caseUid, filename);
+  return await fetchFormByFilename(caseUid, filename);
 }
 
 /**
- * Fetch an array of `Form` objects associated with a given `caseUid`.
- *
- * @param caseUid uid for the target Case
- * @returns array of `Form` objects
+ * Gets all `Form` objects associated with a given case.
+ * @param caseUid uid of the target case
+ * @returns list of formatted form objects
  */
-export async function fetchFormObjects(caseUid: CaseUid): Promise<Form[]> {
-  const partialFormsList = await getPartialForms(caseUid);
-
-  return await Promise.all(
-    partialFormsList.map(async partialForm => {
-      const formUrl = await getPublicFormUrl(
-        `${caseUid}/${partialForm.filename}`,
-      );
-      const form: Form = {
-        ...partialForm,
-        formUrl,
-      };
-      return form;
-    }),
-  );
+export async function getAllForms(caseUid: CaseUid): Promise<Form[]> {
+  return await fetchAllForms(caseUid);
 }

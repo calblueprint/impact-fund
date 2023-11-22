@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
-import { fetchFormObjects } from './utils';
+import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
 import { Form, Case } from '../../../../types/types';
@@ -13,8 +13,8 @@ export default function FormsScreen() {
 
   const [forms, setForms] = useState<Form[]>([]);
 
-  async function fetchFormsOnLoad() {
-    fetchFormObjects(caseData.id).then(data => {
+  async function getFormsOnLoad() {
+    getAllForms(caseData.id).then(data => {
       if (data.length > 0) {
         setForms(data);
       }
@@ -22,7 +22,7 @@ export default function FormsScreen() {
   }
 
   useEffect(() => {
-    fetchFormsOnLoad();
+    getFormsOnLoad();
   }, []);
 
   return (
