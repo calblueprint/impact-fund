@@ -19,7 +19,7 @@ async function getPublicFormUrl(filename: string): Promise<string> {
   }
 }
 
-export async function fetchFormByName(
+export async function fetchFormByFilename(
   caseUid: CaseUid,
   filename: string,
 ): Promise<Form> {
@@ -27,7 +27,7 @@ export async function fetchFormByName(
     const { data } = await supabase
       .from('caseForms')
       .select()
-      .eq('caseId', caseUid)
+      .eq('caseUid', caseUid)
       .eq('filename', filename);
 
     if (!data) {
@@ -36,18 +36,18 @@ export async function fetchFormByName(
 
     return await formatForm(caseUid, data[0]);
   } catch (error) {
-    console.warn('(fetchFormByName)', error);
+    console.warn('(fetchFormByFilename)', error);
     throw error;
   }
 }
 
-export async function getAllForms(caseUid: CaseUid): Promise<Form[]> {
+export async function fetchAllForms(caseUid: CaseUid): Promise<Form[]> {
   try {
     // fetch rows with the matching CaseUid
     const { data } = await supabase
       .from('caseForms')
       .select()
-      .eq('caseId', caseUid);
+      .eq('caseUid', caseUid);
 
     if (!data) {
       throw new Error(`no forms found for the given case: ${caseUid}`);
@@ -59,7 +59,7 @@ export async function getAllForms(caseUid: CaseUid): Promise<Form[]> {
       }),
     );
   } catch (error) {
-    console.warn('(getPartialForms)', error);
+    console.warn('(fetchAllForms)', error);
     throw error;
   }
 }
@@ -68,15 +68,15 @@ export async function formatForm(caseUid: CaseUid, item: any): Promise<Form> {
   try {
     // organize form MetaData without publicUrl
     const partialForm: FormPartial = {
-      id: item.caseId,
+      formUid: item.formUid,
+      caseUid: item.caseUid,
       title: item.title,
-      filename: item.string,
+      filename: item.filename,
       date: item.date,
     };
     // fetch form publicUrl and attach it to the form object
-    const formUrl = await getPublicFormUrl(
-      `${caseUid}/${partialForm.filename}`,
-    );
+    const storageQuery = `${caseUid}/${partialForm.filename}`;
+    const formUrl = await getPublicFormUrl(storageQuery);
     const completeForm: Form = {
       ...partialForm,
       formUrl,

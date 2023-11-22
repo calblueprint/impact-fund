@@ -34,6 +34,7 @@ export default function FormsScreen() {
         <View style={styles.formsContainer}>
           <FlatList
             data={forms}
+            keyExtractor={item => item.formUid}
             renderItem={({ item }) => <FormListItem {...item} />}
           />
         </View>

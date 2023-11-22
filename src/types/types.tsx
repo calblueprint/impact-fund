@@ -33,7 +33,8 @@ export interface CaseSummaryProps {
 }
 
 export interface FormPartial {
-  id: FormUid;
+  formUid: FormUid;
+  caseUid: CaseUid;
   title: string;
   filename: string;
   date: Date;
