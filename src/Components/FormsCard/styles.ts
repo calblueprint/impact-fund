@@ -4,26 +4,23 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    width: 349,
+    width: 360, // styling width according to percentages does so relative to view width
     flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: colors.midGrey,
+    rowGap: 12,
+    paddingVertical: 23,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: colors.darkGrey,
   },
   topContainer: {
-    height: 26,
     width: '88%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 23,
-    marginBottom: 6,
   },
   bottomContainer: {
     width: '88%',
-    marginBottom: 23,
   },
   formRouteButton: {
     flexDirection: 'row',

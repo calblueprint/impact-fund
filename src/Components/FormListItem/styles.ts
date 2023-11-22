@@ -5,7 +5,7 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    aspectRatio: 5.5,
+    aspectRatio: 8,
 
     justifyContent: 'center',
     alignItems: 'center',
@@ -20,9 +20,6 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     height: '100%',
-
-    // borderBottomWidth: 0.5,
-    // borderColor: colors.midGrey,
   },
   titleText: {
     fontSize: 16,

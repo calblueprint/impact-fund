@@ -48,9 +48,11 @@ export default function FormsCard(caseData: Case) {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.bottomContainer}>
-        {featuredForm === undefined ? null : <FormListItem {...featuredForm} />}
-      </View>
+      {featuredForm === undefined ? null : (
+        <View style={styles.bottomContainer}>
+          <FormListItem {...featuredForm} />
+        </View>
+      )}
     </View>
   );
 }

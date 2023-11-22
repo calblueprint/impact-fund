@@ -31,9 +31,15 @@ export default StyleSheet.create({
   formsContainer: {
     height: '80%',
     width: '100%',
+    marginTop: 10,
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'center',
+  },
+  lineStyle: {
+    borderTopWidth: 1,
+    borderTopColor: colors.midGrey,
+    marginVertical: 12,
   },
   headerText: {
     fontSize: 32,
