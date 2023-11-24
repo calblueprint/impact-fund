@@ -25,7 +25,7 @@ export default function FormsCard(caseData: Case) {
     if (caseData.formCount > 0) {
       getForm();
     }
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
