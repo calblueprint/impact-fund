@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+
+import ExternalSiteLink from '../ExternalSiteLink/ExternalSiteLink';
 
 export default function EducationalBar() {
   return (
-    <View>
-      <Text>EducationalBar</Text>
-    </View>
+    <ExternalSiteLink
+      text="Learn More About Class Actions"
+      url="https://www.impactfund.org/"
+    />
   );
 }
