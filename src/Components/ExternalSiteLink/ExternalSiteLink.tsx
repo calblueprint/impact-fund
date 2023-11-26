@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Linking } from 'react-native';
 
 import styles from './styles';
 import InformationIcon from '../../../assets/information-icon.svg';
-import RightCarrot from '../../../assets/right-carrot.svg';
+import RightCaret from '../../../assets/right-caret.svg';
 
 type ExternalLinkProps = {
   text: string;
@@ -32,7 +32,7 @@ export default function ExternalSiteLink({ text, url }: ExternalLinkProps) {
         </View>
         <Text style={styles.messageText}>{text}</Text>
         <View style={styles.iconContainer}>
-          <RightCarrot />
+          <RightCaret />
         </View>
       </View>
     </TouchableOpacity>

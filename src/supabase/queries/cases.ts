@@ -4,6 +4,8 @@ import {
   CaseUid,
   Eligibility,
   UserUid,
+  FormPartial,
+  Form,
 } from '../../types/types';
 import supabase from '../createClient';
 
@@ -43,7 +45,7 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
     if (!data) {
       throw new Error('case not found');
     }
-    return formatCaseProperly(data[0]);
+    return formatCase(data[0]);
   } catch (error) {
     console.warn('(getCaseById)', error);
     throw error;
@@ -115,13 +117,7 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
 
     return await Promise.all(
       data.map(async item => {
-        const partialCase = formatCase(item);
-        const imageUrl = await getImageUrl(partialCase.id);
-        const caseData: Case = {
-          ...partialCase,
-          imageUrl,
-        };
-        return caseData;
+        return formatCase(item);
       }),
     );
   } catch (error) {
@@ -131,8 +127,8 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
-export async function formatCaseProperly(item: any): Promise<Case> {
-  const partialCase = formatCase(item);
+export async function formatCase(item: any): Promise<Case> {
+  const partialCase = formatPartialCaseFromQuery(item);
   const imageUrl = await getImageUrl(partialCase.id);
   const caseData: Case = {
     ...partialCase,
@@ -146,8 +142,8 @@ export async function formatCaseProperly(item: any): Promise<Case> {
  * @param item supabase Case query return data
  * @returns `CasePartial` object
  */
-export function formatCase(item: any): CasePartial {
-  const formattedCase: CasePartial = {
+export function formatPartialCaseFromQuery(item: any): CasePartial {
+  const formattedPartial: CasePartial = {
     id: item.caseId,
     approved: item.approved,
     title: item.title,
@@ -159,12 +155,15 @@ export function formatCase(item: any): CasePartial {
     caseStatus: item.status,
     date: item.date,
     lawFirm: item.lawFirm,
+    formCount: item.formCount,
+    featuredFormName: item.featuredFormName,
   };
-  return formattedCase;
+  return formattedPartial;
 }
 
 /**
  * Update a specific User/Case status
+ *
  * @param caseId specified caseId
  * @param status status to be updated in the specific User/Case row
  * @returns nothing

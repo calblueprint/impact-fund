@@ -1,5 +1,7 @@
-export type CaseUid = string;
-export type UserUid = string;
+export type Uid = string;
+export type CaseUid = Uid;
+export type FormUid = Uid;
+export type UserUid = Uid;
 
 export interface CasePartial {
   id: CaseUid;
@@ -13,6 +15,8 @@ export interface CasePartial {
   caseStatus: string;
   date: Date;
   lawFirm: string;
+  formCount: number;
+  featuredFormName: string;
 }
 
 export interface Case extends CasePartial {
@@ -26,6 +30,18 @@ export interface CaseSummaryProps {
   caseSite: string;
   date: Date;
   lawFirm: string;
+}
+
+export interface FormPartial {
+  formUid: FormUid;
+  caseUid: CaseUid;
+  title: string;
+  filename: string;
+  date: Date;
+}
+
+export interface Form extends FormPartial {
+  formUrl: string;
 }
 
 export interface User {

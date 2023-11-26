@@ -11,7 +11,7 @@ import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import { getCaseStatus } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
-function CasesScreen() {
+function CaseScreen() {
   const caseData = useLocalSearchParams() as unknown as Case;
   const [status, setStatus] = useState<Eligibility>();
 
@@ -25,7 +25,10 @@ function CasesScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{caseData.title}</Text>
         </View>
@@ -38,11 +41,11 @@ function CasesScreen() {
           status === Eligibility.UNDETERMINED) && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
-        <FormsCard />
+        <FormsCard {...caseData} />
         <EducationalBar />
       </ScrollView>
     </View>
   );
 }
 
-export default CasesScreen;
+export default CaseScreen;
