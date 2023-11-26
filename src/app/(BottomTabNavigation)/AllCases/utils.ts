@@ -1,3 +1,5 @@
+import { Linking } from 'react-native';
+
 import { colors } from '../../../styles/colors';
 import {
   getCaseIdsFromUserId,
@@ -78,5 +80,18 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.midGrey },
     };
+  }
+}
+
+/**
+ * Routes user to the given url. Returns a Promise object:
+ * - If the user confirms the open dialog or the url automatically opens, the promise is resolved.
+ * - If the user cancels the open dialog or there are no registered applications for the url, the promise is rejected
+ */
+export async function openUrl(url: string) {
+  const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
+  if (supported) {
+    console.log(`routing user to: ${url}`);
+    await Linking.openURL(url); // It will open the URL on browser.
   }
 }
