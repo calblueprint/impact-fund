@@ -1,12 +1,23 @@
 import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import ExternalSiteLink from '../ExternalSiteLink/ExternalSiteLink';
+import styles from './styles';
+import RedInformationIcon from '../../../assets/red-information-icon.svg';
+import RightCarrot from '../../../assets/right-carrot.svg';
+import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 
 export default function EducationalBar() {
   return (
-    <ExternalSiteLink
-      text="Learn More About Class Actions"
-      url="https://www.impactfund.org/"
-    />
+    <TouchableOpacity onPress={() => openUrl('https://www.impactfund.org/')}>
+      <View style={styles.container}>
+        <View style={styles.iconContainer}>
+          <RedInformationIcon />
+        </View>
+        <Text style={styles.messageText}>Learn More About Class Actions</Text>
+        <View style={styles.iconContainer}>
+          <RightCarrot />
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 }

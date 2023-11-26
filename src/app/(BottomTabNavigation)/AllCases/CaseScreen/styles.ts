@@ -19,6 +19,7 @@ export default StyleSheet.create({
     rowGap: 15,
     marginTop: 30,
     minHeight: 900,
+    // flexGrow: 1,
   },
   headerContainer: {
     flex: 0.2,

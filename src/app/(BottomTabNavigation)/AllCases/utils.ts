@@ -1,3 +1,5 @@
+import { Linking } from 'react-native';
+
 import {
   getCaseIdsFromUserId,
   getCasesByIds,
@@ -35,4 +37,17 @@ export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
 export function formatDate(dateObject: Date) {
   const date = new Date(dateObject).toDateString().split(' ');
   return `${date[1]} ${date[2]}, ${date[3]}`;
+}
+
+/**
+ * Routes user to the given url. Returns a Promise object:
+ * - If the user confirms the open dialog or the url automatically opens, the promise is resolved.
+ * - If the user cancels the open dialog or there are no registered applications for the url, the promise is rejected
+ */
+export async function openUrl(url: string) {
+  const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
+  if (supported) {
+    console.log(`routing user to: ${url}`);
+    await Linking.openURL(url); // It will open the URL on browser.
+  }
 }
