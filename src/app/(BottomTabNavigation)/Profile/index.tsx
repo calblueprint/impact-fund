@@ -79,7 +79,7 @@ function ProfileScreen() {
               <Pencil style={styles.edit} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.userText}>{currSession.address}</Text>
+          <Text style={styles.userText}>{currSession.streetName}</Text>
         </View>
       </View>
 
