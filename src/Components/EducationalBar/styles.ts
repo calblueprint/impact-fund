@@ -7,12 +7,9 @@ export default StyleSheet.create({
     width: '100%',
     height: 55,
     paddingHorizontal: 20,
-    marginBottom: 30,
-
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.midGrey,
-
+    borderColor: colors.darkGrey,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
