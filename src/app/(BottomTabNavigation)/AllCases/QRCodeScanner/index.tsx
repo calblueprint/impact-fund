@@ -5,11 +5,9 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import {
-  containsDuplicateCase,
   getAllCaseIds,
   getCaseById,
   getCaseIdsFromUserId,
-  isValidCase,
 } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
 
