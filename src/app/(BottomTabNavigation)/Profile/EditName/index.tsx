@@ -1,44 +1,66 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import Submit from '../../../../../assets/submit.svg';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import {
   getCurrentUserInfo,
   updateCurrUserName,
 } from '../../../../supabase/queries/auth';
-import { User, userInstance } from '../../../../types/types';
 
 function EditNameScreen() {
-  const [currSession, setCurrSession] = useState<User>(userInstance);
-  const [fullName, setFullName] = useState<string>();
+  const [fullName, setFullName] = useState<string>('');
+  const [displayFullName, setDisplayFullName] = useState<boolean>(true);
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      setCurrSession(result);
       setFullName(result.fullName);
     });
   }, []);
   return (
-    <View>
-      <Text>Edit Name {currSession.fullName}</Text>
-      <TextInput
-        style={styles.input}
-        value={fullName}
-        onChangeText={setFullName}
-        placeholder="Full Name"
-      />
+    <View style={styles.container}>
       <TouchableOpacity
-        style={styles.button}
+        style={styles.backButton}
+        onPress={() => router.push('/Profile/')}
+      >
+        <Text style={styles.backText}>Back</Text>
+      </TouchableOpacity>
+      <Text style={styles.instructionText}>Edit account details</Text>
+
+      <View style={styles.inputBox}>
+        <AuthInput
+          input={fullName}
+          setInput={setFullName}
+          defaultValue="Full Name"
+          isPassword={false}
+          displayInput={displayFullName}
+          setDisplayInput={setDisplayFullName}
+          keyboard="default"
+          autoCapitalization
+          placeholder={fullName}
+          setPlaceholder={setFullName}
+        />
+      </View>
+      <TouchableOpacity
+        style={
+          fullName
+            ? styles.submitButton
+            : [styles.submitButton, styles.submitButtonDisabled]
+        }
         onPress={() => {
           if (fullName) {
             updateCurrUserName(fullName);
             router.push('/Profile/');
           } else {
-            router.push('/Profile/');
+            //ask josh about what should appear in invalid name event
           }
         }}
       >
-        <Text>Update Name</Text>
+        <Text style={styles.submitText}>
+          Submit
+          <Submit style={styles.submitIcon} />
+        </Text>
       </TouchableOpacity>
     </View>
   );

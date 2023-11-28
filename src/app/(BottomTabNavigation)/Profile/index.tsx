@@ -29,19 +29,28 @@ function ProfileScreen() {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <CasesHeader />
+        <View style={styles.headerLine} />
       </View>
       <Text style={styles.title}>Settings</Text>
       <View style={styles.actionsContainer}>
-        <View style={styles.actionElement}>
+        <View>
+          <View style={styles.actionElementTop}>
+            <View style={styles.iconTitle}>
+              <Envelope style={styles.icon} />
+              <Text style={styles.textElements}>Email address</Text>
+            </View>
+          </View>
+
+          <Text style={styles.userText}>{currSession.email}</Text>
+        </View>
+        <View style={styles.line} />
+        <View>
           <View style={styles.actionElementTop}>
             <View style={styles.iconTitle}>
               <Person style={styles.icon} />
               <Text style={styles.textElements}>Full name</Text>
             </View>
-            <TouchableOpacity
-              style={styles.actionElement}
-              onPress={() => router.push('/Profile/EditName')}
-            >
+            <TouchableOpacity onPress={() => router.push('/Profile/EditName')}>
               <Pencil style={styles.edit} />
             </TouchableOpacity>
           </View>
@@ -49,23 +58,7 @@ function ProfileScreen() {
           <Text style={styles.userText}>{currSession.fullName}</Text>
         </View>
         <View style={styles.line} />
-        <View style={styles.actionElement}>
-          <View style={styles.actionElementTop}>
-            <View style={styles.iconTitle}>
-              <Envelope style={styles.icon} />
-              <Text style={styles.textElements}>Email address</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.actionElement}
-              onPress={() => router.push('/Profile/EditAddress')}
-            >
-              <Pencil style={styles.edit} />
-            </TouchableOpacity>
-          </View>
 
-          <Text style={styles.userText}>sarah@email.com</Text>
-        </View>
-        <View style={styles.line} />
         <View>
           <View style={styles.actionElementTop}>
             <View style={styles.iconTitle}>
@@ -73,18 +66,25 @@ function ProfileScreen() {
               <Text style={styles.textElements}>Street address</Text>
             </View>
             <TouchableOpacity
-              style={styles.actionElement}
               onPress={() => router.push('/Profile/EditAddress')}
             >
               <Pencil style={styles.edit} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.userText}>{currSession.streetName}</Text>
+          <Text style={styles.userText}>
+            {currSession.streetName +
+              ', ' +
+              currSession.city +
+              ', ' +
+              currSession.state +
+              ', ' +
+              currSession.zip}
+          </Text>
         </View>
       </View>
 
       <View style={styles.actionsContainer}>
-        <View style={styles.actionElement}>
+        <View>
           <View style={[styles.actionElementTop, styles.resetIcon]}>
             <View style={styles.iconTitle}>
               <Reset style={styles.icon} />
@@ -100,11 +100,13 @@ function ProfileScreen() {
           </View>
         </View>
         <View style={styles.line} />
-        <View style={styles.actionElement}>
+        <View>
           <View style={styles.actionElementTop}>
             <View style={styles.iconTitle}>
               <RedTrash style={styles.icon} />
-              <Text style={styles.textElements}>Delete account</Text>
+              <Text style={[styles.textElements, styles.bottomPush]}>
+                Delete account
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => {
