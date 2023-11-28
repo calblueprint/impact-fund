@@ -3,60 +3,16 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import { colors } from '../../styles/colors';
-
+import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
 interface CaseStatusBarProps {
   status: string;
 }
 
 export default function CaseStatusBar({ status }: CaseStatusBarProps) {
-  // stephanie this thing is so mf ugly where should i hide it
-  const getStatusColor = (status: string) => {
-    if (
-      status === 'In Progress' ||
-      status === 'New Case' ||
-      status === 'Settled' ||
-      status === 'Appeal' ||
-      status === 'Payment Processing' ||
-      status === 'Payment Distributed'
-    ) {
-      return {
-        background: {
-          backgroundColor: colors.lightGreen,
-          borderColor: colors.darkGreen,
-        },
-        text: { color: colors.darkGreen },
-      };
-    } else if (status === 'Pending') {
-      return {
-        background: {
-          backgroundColor: colors.lightYellow,
-          borderColor: colors.darkYellow,
-        },
-        text: { color: colors.darkYellow },
-      };
-    } else if (status === 'Action Required') {
-      return {
-        background: {
-          backgroundColor: colors.lightRed,
-          borderColor: colors.darkRed,
-        },
-        text: { color: colors.darkRed },
-      };
-    } else {
-      return {
-        background: {
-          backgroundColor: colors.lightGrey,
-          borderColor: colors.darkGrey,
-        },
-        text: { color: colors.darkGrey },
-      };
-    }
-  };
   const statusColor = getStatusColor(status);
   return (
-    <TouchableOpacity style={styles.caseStatusContainer}>
-      <View style={styles.caseStatusContainerSmall}>
+    <View style={styles.caseStatusContainer}>
+      <TouchableOpacity style={styles.caseStatusContainerSmall}>
         <View>
           <Text style={styles.caseStatusText}>Case Status:</Text>
         </View>
@@ -65,7 +21,7 @@ export default function CaseStatusBar({ status }: CaseStatusBarProps) {
             {status}
           </Text>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
