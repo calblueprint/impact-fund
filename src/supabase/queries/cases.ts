@@ -20,6 +20,12 @@ export async function getCaseIdsFromUserId(
 ): Promise<CaseUid[]> {
   try {
     // fetch caseIds that match the specified userId
+    if (userId === 'NO_ID') {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      userId = user?.id as UserUid;
+    }
     const { data } = await supabase
       .from('status')
       .select('caseId')
@@ -39,6 +45,21 @@ export async function getCaseIdsFromUserId(
   }
 }
 
+// Similar to top function but gets ALL CaseIds
+export async function getAllCaseIds(): Promise<CaseUid[]> {
+  try {
+    const { data } = await supabase.from('cases').select();
+    if (!data) {
+      throw new Error('There was an error fetching caseIds');
+    }
+    return data.map(item => item.caseId as CaseUid);
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+}
+
+// Fetch a single case using its ID
 export async function getCaseById(caseId: CaseUid): Promise<Case> {
   try {
     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
@@ -52,19 +73,6 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
-export async function isValidCase(caseId: CaseUid): Promise<boolean> {
-  try {
-    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
-    if (!data) {
-      return false;
-    }
-    return data.length !== 0;
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
 export async function uploadCase(caseId: CaseUid): Promise<void> {
   try {
     const {
@@ -72,24 +80,6 @@ export async function uploadCase(caseId: CaseUid): Promise<void> {
     } = await supabase.auth.getUser();
     const userId = user?.id;
     await supabase.from('status').insert({ caseId, userId });
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
-export async function containsDuplicateCase(caseId: CaseUid): Promise<boolean> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    const { data } = await supabase
-      .from('status')
-      .select()
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-    return data?.length !== 0;
   } catch (error) {
     console.warn(error);
     throw error;
