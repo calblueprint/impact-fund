@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   caseStatusContainer: {
-    marginTop: 20,
     aspectRatio: 7.4,
     width: '100%',
   },
