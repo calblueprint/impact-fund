@@ -71,9 +71,10 @@ function ProfileScreen() {
               <Pencil style={styles.edit} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.userTextMargin}>{currSession.streetName}</Text>
           <Text style={styles.userText}>
-            {currSession.city +
+            {currSession.streetName +
+              '\n' +
+              currSession.city +
               ', ' +
               currSession.state +
               ' ' +
