@@ -4,7 +4,7 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    width: 360, // styling width according to percentages does so relative to view width
+    width: '100%', // styling width according to percentages does so relative to view width
     flexDirection: 'column',
     alignItems: 'center',
     rowGap: 12,

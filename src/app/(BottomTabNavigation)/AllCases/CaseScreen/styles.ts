@@ -13,10 +13,10 @@ export default StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    alignItems: 'center',
-    minHeight: 900,
+    // alignItems: 'center',
+    // minHeight: 900,
     width: '92%',
-    rowGap: 15,
+    // width: 360,
     marginTop: 30,
   },
   headerContainer: {
