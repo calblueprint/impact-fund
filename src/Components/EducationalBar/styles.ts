@@ -5,15 +5,11 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    // aspectRatio: 6,
     height: 55,
     paddingHorizontal: 20,
-    // marginBottom: 30,
-
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.black,
-
+    borderColor: colors.darkGrey,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
