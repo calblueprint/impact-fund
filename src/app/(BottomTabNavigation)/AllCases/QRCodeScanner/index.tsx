@@ -5,11 +5,11 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import {
-  containsDuplicateCase,
+  getAllCaseIds,
   getCaseById,
-  isValidCase,
+  getCaseIdsFromUserId,
 } from '../../../../supabase/queries/cases';
-import { Case } from '../../../../types/types';
+import { Case, CaseUid } from '../../../../types/types';
 
 enum permissions {
   UNDETERMINED,
@@ -20,8 +20,20 @@ enum permissions {
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [scanned, setScanned] = useState<boolean>(false);
+  const [validIds, setValidIds] = useState<CaseUid[]>([]);
+  const [userIds, setUserIds] = useState<CaseUid[]>([]);
   const [toast, setToast] = useState<string>();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const getAllCasesAndValidCases = async () => {
+      const allCases = await getAllCaseIds();
+      setValidIds(allCases);
+      const userCases = await getCaseIdsFromUserId('NO_ID');
+      setUserIds(userCases);
+    };
+    getAllCasesAndValidCases();
+  }, []);
 
   useEffect(() => {
     navigation.addListener('blur', async () => {
@@ -44,21 +56,12 @@ function QRCodeScannerScreen() {
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     const caseId = result.data;
-    if (!scanned) {
-      setScanned(true);
-      const valid = await isValidCase(caseId);
-      if (!valid) {
-        // TODO: Display error toast message
-        setToast('Not a valid QRCODE!');
-        setScanned(false); // TODO: setTimeout here
-        return;
-      }
-      const duplicate = await containsDuplicateCase(caseId);
-      if (duplicate) {
-        setToast('DUPLICATES NOT ALLOWED!');
-        setScanned(false); // TODO: setTimeout here as well
-        return;
-      }
+    if (!validIds.includes(caseId)) {
+      // TODO: Display error toast message
+      setToast('Not a valid QRCODE!');
+    } else if (userIds.includes(caseId)) {
+      setToast('DUPLICATES NOT ALLOWED!');
+    } else if (!scanned) {
       const caseData: Case = await getCaseById(caseId);
       const { id, title, imageUrl, date, lawFirm, summary } = caseData;
       router.push({
@@ -72,6 +75,8 @@ function QRCodeScannerScreen() {
           summary,
         },
       });
+      setScanned(true);
+      setToast('');
     }
   };
 
