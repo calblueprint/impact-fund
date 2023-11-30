@@ -12,9 +12,6 @@ export default StyleSheet.create({
     borderRadius: 5,
     borderColor: colors.darkGrey,
     flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
-    // justifyContent: 'center',
   },
   button: {
     width: '100%',
