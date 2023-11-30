@@ -30,7 +30,7 @@ export default StyleSheet.create({
     width: '50%',
     flex: 0.9,
     border: 'solid',
-    borderWidth: 0.5,
+    borderWidth: 0.3,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',

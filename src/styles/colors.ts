@@ -11,5 +11,6 @@ export const colors = {
   darkGrey: '#767676',
   white: '#FFFFFF',
   lightYellow: '#FFFEE2',
-  darkYellow: '#936E10',
+  midYellow: '#936E10',
+  darkYellow: '#937610',
 };
