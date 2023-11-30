@@ -13,6 +13,7 @@ import {
 function EditNameScreen() {
   const [fullName, setFullName] = useState<string>('');
   const [displayFullName, setDisplayFullName] = useState<boolean>(true);
+  const [namePlaceholder, setNamePlaceholder] = useState<string>('Full Name');
   useEffect(() => {
     getCurrentUserInfo().then(result => {
       setFullName(result.fullName);
@@ -38,8 +39,8 @@ function EditNameScreen() {
           setDisplayInput={setDisplayFullName}
           keyboard="default"
           autoCapitalization
-          placeholder={fullName}
-          setPlaceholder={setFullName}
+          placeholder={namePlaceholder}
+          setPlaceholder={setNamePlaceholder}
         />
       </View>
       <TouchableOpacity

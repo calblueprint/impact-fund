@@ -16,7 +16,10 @@ function EditNameScreen() {
   const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [zip, setZip] = useState<string>('');
-  const [displayName, setName] = useState<boolean>(true);
+  const [displayStreetName, setDisplayStreetName] = useState<boolean>(true);
+  const [displayState, setDisplayState] = useState<boolean>(true);
+  const [displayCity, setDisplayCity] = useState<boolean>(true);
+  const [displayZip, setDisplayZip] = useState<boolean>(true);
   const [streetPlaceholder, setStreetPlaceholder] =
     useState<string>('Street Name');
   const [statePlaceholder, setStatePlaceholder] = useState<string>('State');
@@ -47,8 +50,8 @@ function EditNameScreen() {
           setInput={setStreetName}
           defaultValue="Street Name"
           isPassword={false}
-          displayInput={displayName}
-          setDisplayInput={setName}
+          displayInput={displayStreetName}
+          setDisplayInput={setDisplayStreetName}
           keyboard="default"
           autoCapitalization
           placeholder={streetPlaceholder}
@@ -61,8 +64,8 @@ function EditNameScreen() {
           setInput={setCity}
           defaultValue="City"
           isPassword={false}
-          displayInput={displayName}
-          setDisplayInput={setName}
+          displayInput={displayCity}
+          setDisplayInput={setDisplayCity}
           keyboard="default"
           autoCapitalization
           placeholder={cityPlaceholder}
@@ -76,8 +79,8 @@ function EditNameScreen() {
             setInput={setUsState}
             defaultValue="State"
             isPassword={false}
-            displayInput={displayName}
-            setDisplayInput={setName}
+            displayInput={displayState}
+            setDisplayInput={setDisplayState}
             keyboard="default"
             autoCapitalization
             placeholder={statePlaceholder}
@@ -90,8 +93,8 @@ function EditNameScreen() {
             setInput={setZip}
             defaultValue="Zip code"
             isPassword={false}
-            displayInput={displayName}
-            setDisplayInput={setName}
+            displayInput={displayZip}
+            setDisplayInput={setDisplayZip}
             keyboard="default"
             autoCapitalization
             placeholder={zipPlaceholder}
