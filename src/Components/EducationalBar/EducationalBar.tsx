@@ -13,7 +13,6 @@ export default function EducationalBar() {
         onPress={() => openUrl('https://www.impactfund.org/')}
         style={styles.button}
       >
-        {/* <View style={styles.container}> */}
         <View style={styles.iconContainer}>
           <RedInformationIcon />
         </View>
@@ -21,7 +20,6 @@ export default function EducationalBar() {
         <View style={styles.iconContainer}>
           <RightCarrot />
         </View>
-        {/* </View> */}
       </TouchableOpacity>
     </View>
   );
