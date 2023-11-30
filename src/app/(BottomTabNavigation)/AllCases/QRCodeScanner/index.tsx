@@ -59,25 +59,24 @@ function QRCodeScannerScreen() {
     if (!validIds.includes(caseId)) {
       // TODO: Display error toast message
       setToast('Not a valid QRCODE!');
-      return;
-    }
-    if (userIds.includes(caseId)) {
+    } else if (userIds.includes(caseId)) {
       setToast('DUPLICATES NOT ALLOWED!');
-      return;
+    } else if (!scanned) {
+      const caseData: Case = await getCaseById(caseId);
+      const { id, title, imageUrl, date, lawFirm, summary } = caseData;
+      router.push({
+        pathname: '/AllCases/QRCodeScanner/AddCase',
+        params: {
+          id,
+          title,
+          imageUrl,
+          date,
+          lawFirm,
+          summary,
+        },
+      });
+      setScanned(true);
     }
-    const caseData: Case = await getCaseById(caseId);
-    const { id, title, imageUrl, date, lawFirm, summary } = caseData;
-    router.push({
-      pathname: '/AllCases/QRCodeScanner/AddCase',
-      params: {
-        id,
-        title,
-        imageUrl,
-        date,
-        lawFirm,
-        summary,
-      },
-    });
   };
 
   if (hasPermission === permissions.DENIED) {
