@@ -33,6 +33,12 @@ export default StyleSheet.create({
     marginBottom: 10,
     color: colors.darkGrey,
   },
+  userTextMargin: {
+    marginLeft: 34,
+    marginRight: 20,
+    marginTop: 5,
+    color: colors.darkGrey,
+  },
   line: {
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
