@@ -76,7 +76,7 @@ function ProfileScreen() {
             {currSession.city +
               ', ' +
               currSession.state +
-              ', ' +
+              ' ' +
               currSession.zip}
           </Text>
         </View>
