@@ -76,6 +76,7 @@ function QRCodeScannerScreen() {
         },
       });
       setScanned(true);
+      setToast('');
     }
   };
 
