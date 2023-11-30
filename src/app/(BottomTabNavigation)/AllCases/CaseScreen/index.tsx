@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
+// eslint-disable-next-line import/namespace
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
@@ -32,7 +33,7 @@ function CaseScreen() {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{caseData.title}</Text>
         </View>
-        <CaseStatusBar />
+        <CaseStatusBar status={caseData.caseStatus} />
         {status === Eligibility.ELIGIBLE && (
           <EligibilityCard caseData={caseData} status={status} />
         )}
