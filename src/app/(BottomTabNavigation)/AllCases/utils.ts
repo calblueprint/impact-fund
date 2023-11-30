@@ -58,7 +58,7 @@ export function getStatusColor(status: string) {
     return {
       background: {
         backgroundColor: colors.lightYellow,
-        borderColor: colors.darkYellow,
+        borderColor: colors.midYellow,
       },
       text: { color: colors.darkYellow },
     };
@@ -66,7 +66,7 @@ export function getStatusColor(status: string) {
     return {
       background: {
         backgroundColor: colors.lightRed,
-        borderColor: colors.darkRed,
+        borderColor: colors.midRed,
       },
       text: { color: colors.darkRed },
     };
