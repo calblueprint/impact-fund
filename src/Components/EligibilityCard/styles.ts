@@ -14,7 +14,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
-    gap: 15,
+    rowGap: 15,
   },
   button: {
     paddingHorizontal: 20,

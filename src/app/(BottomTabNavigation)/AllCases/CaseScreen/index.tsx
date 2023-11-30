@@ -27,7 +27,12 @@ function CaseScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
-        contentContainerStyle={styles.scrollView}
+        style={styles.scrollView}
+        contentContainerStyle={{
+          alignItems: 'center',
+          minHeight: 900,
+          rowGap: 15,
+        }}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.titleContainer}>

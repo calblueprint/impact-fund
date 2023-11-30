@@ -8,8 +8,11 @@ import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 
 export default function EducationalBar() {
   return (
-    <TouchableOpacity onPress={() => openUrl('https://www.impactfund.org/')}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => openUrl('https://www.impactfund.org/')}
+        style={styles.button}
+      >
         <View style={styles.iconContainer}>
           <RedInformationIcon />
         </View>
@@ -17,7 +20,7 @@ export default function EducationalBar() {
         <View style={styles.iconContainer}>
           <RightCarrot />
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
