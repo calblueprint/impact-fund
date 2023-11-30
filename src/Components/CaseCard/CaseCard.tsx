@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, Link } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
@@ -11,10 +11,7 @@ function CaseCard(caseData: Case) {
       style={styles.caseCard}
       onPress={() =>
         router.push({
-          pathname: `/AllCases/CaseScreen`,
-          params: {
-            ...caseData,
-          },
+          pathname: `/AllCases/CaseScreen/${caseData.id}`,
         })
       }
     >
