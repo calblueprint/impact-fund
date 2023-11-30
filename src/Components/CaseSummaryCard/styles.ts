@@ -4,15 +4,17 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    width: 360,
+    width: '100%',
     flexDirection: 'column',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     borderColor: colors.midGrey,
+    borderStyle: 'solid',
     backgroundColor: colors.white,
     shadowColor: colors.black,
-    shadowOffset: { width: 0.5, height: 1.25 },
-    shadowOpacity: 0.5,
+    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOpacity: 1.25,
+    shadowRadius: 0.05,
     elevation: 1,
   },
   imageContainer: {
@@ -20,8 +22,8 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderTopRightRadius: 9,
-    borderTopLeftRadius: 9,
+    borderTopRightRadius: 4,
+    borderTopLeftRadius: 4,
   },
   blurbContainer: {
     height: 'auto',
