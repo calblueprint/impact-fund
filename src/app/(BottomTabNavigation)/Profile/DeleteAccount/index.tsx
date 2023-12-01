@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+import styles from './styles';
 import {
   deleteCurrentUser,
   getCurrentUserInfo,
   signOutUser,
 } from '../../../../supabase/queries/auth';
 import { userInstance, User } from '../../../../types/types';
-import styles from '../styles';
 
 function DeleteAccountScreen() {
   const [currSession, setCurrSession] = useState<User>(userInstance);

@@ -5,16 +5,19 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    // aspectRatio: 6,
+    display: 'flex',
     height: 55,
     paddingHorizontal: 20,
-    // marginBottom: 30,
-
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.black,
-
+    borderColor: colors.darkGrey,
     flexDirection: 'row',
+  },
+  button: {
+    width: '100%',
+    flexDirection: 'row',
+
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
   },

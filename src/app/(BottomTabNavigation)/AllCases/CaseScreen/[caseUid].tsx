@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
+// eslint-disable-next-line import/namespace
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
-import { getCaseById, getCaseStatus } from '../../../../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../../../../types/types';
+import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
+import { Case, Eligibility } from '../../../../types/types';
 
 function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
-  console.log(caseUid);
   const [status, setStatus] = useState<Eligibility>();
   const [caseData, setCaseData] = useState<Case>();
 
@@ -40,13 +40,18 @@ function CaseScreen() {
         <Text>Loading...</Text>
       ) : (
         <ScrollView
-          contentContainerStyle={styles.scrollView}
+          style={styles.scrollView}
+          contentContainerStyle={{
+            alignItems: 'center',
+            minHeight: 900,
+            rowGap: 15,
+          }}
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
-          <CaseStatusBar />
+          <CaseStatusBar status={caseData.caseStatus} />
           {status === Eligibility.ELIGIBLE && (
             <EligibilityCard caseData={caseData} status={status} />
           )}
