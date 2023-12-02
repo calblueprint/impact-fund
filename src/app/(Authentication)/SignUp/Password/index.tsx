@@ -10,41 +10,46 @@ export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
   const { email } = useLocalSearchParams() as unknown as { email: string };
 
-  const [password, setPassword] = useState('');
-  const [displayErrorPassword, setDisplayErrorPassword] = useState(false);
-  const [displayPassword, setDisplayPassword] = useState(false);
-  const [placeholderPassword, setPlaceholderPassword] = useState('Password');
+  const [password, setPassword] = useState<string>('');
+  const [displayErrorPassword, setDisplayErrorPassword] =
+    useState<boolean>(false);
+  const [displayPassword, setDisplayPassword] = useState<boolean>(false);
+  const [placeholderPassword, setPlaceholderPassword] =
+    useState<string>('Password');
 
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [displayErrorPasswordMatch, setDisplayErrorPasswordMatch] =
-    useState(false);
-  const [displayConfirmPassword, setDisplayConfirmPassword] = useState(false);
+    useState<boolean>(false);
+  const [displayConfirmPassword, setDisplayConfirmPassword] =
+    useState<boolean>(false);
   const [placeholderConfirmPassword, setPlaceholderConfirmPassword] =
-    useState('Confirm password');
+    useState<string>('Confirm password');
+
+  const validateConfirmPassword = () => {
+    if (confirmPassword.trim() === password.trim()) {
+      setDisplayErrorPasswordMatch(false);
+      return true;
+    } else {
+      setDisplayErrorPasswordMatch(true);
+      return false;
+    }
+  };
 
   const validatePassword = () => {
-    // Implement your password requirements here
     const lengthRegex = /^.{6,}$/;
     return lengthRegex.test(password);
   };
 
-  const validateConfirmPassword = () => {
-    if (confirmPassword.trim === password.trim) {
-      setDisplayErrorPasswordMatch(false);
-    } else {
-      setDisplayErrorPasswordMatch(true);
-    }
-  };
-
   const handleSubmit = () => {
+    if (!displayErrorPassword && validatePassword()) {
+      if (validateConfirmPassword())
+        router.push({
+          pathname: 'SignUp/Address',
+          params: { name, email, password },
+        });
+    }
     if (!validatePassword()) {
       setDisplayErrorPassword(true);
-    } else {
-      setDisplayErrorPassword(false);
-      router.push({
-        pathname: 'SignUp/Address',
-        params: { name, email, password },
-      });
     }
   };
 
@@ -68,6 +73,8 @@ export default function SignUpScreen() {
           autoCapitalization={false}
           placeholder={placeholderPassword}
           setPlaceholder={setPlaceholderPassword}
+          errorHandling
+          setDisplayError={setDisplayErrorPassword}
         />
       </View>
 
@@ -83,6 +90,8 @@ export default function SignUpScreen() {
           autoCapitalization={false}
           placeholder={placeholderConfirmPassword}
           setPlaceholder={setPlaceholderConfirmPassword}
+          errorHandling={false}
+          setDisplayError={setDisplayErrorPasswordMatch}
         />
       </View>
 
@@ -91,14 +100,7 @@ export default function SignUpScreen() {
           {' '}
           {displayErrorPassword
             ? 'Your password needs at least six characters!'
-            : ' '}{' '}
-        </Text>
-      </View>
-
-      <View>
-        <Text style={styles.errorMessage}>
-          {' '}
-          {displayErrorPasswordMatch
+            : displayErrorPasswordMatch
             ? 'Your passwords should match each other.'
             : ' '}{' '}
         </Text>

@@ -8,36 +8,38 @@ import styles from './styles';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 
 export default function SignUpScreen() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [displayErrorPassword, setDisplayErrorPassword] = useState(false);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [displayError, setDisplayError] = useState<boolean>(false);
 
-  const [displayName, setDisplayName] = useState(false);
-  const [placeholderName, setPlaceholderName] = useState('Full name');
+  const [displayName, setDisplayName] = useState<boolean>(false);
+  const [placeholderName, setPlaceholderName] = useState<string>('Full name');
 
-  const [displayEmail, setDisplayEmail] = useState(false);
-  const [placeholderEmail, setPlaceholderEmail] = useState('Email address');
+  const [displayEmail, setDisplayEmail] = useState<boolean>(false);
+  const [placeholderEmail, setPlaceholderEmail] =
+    useState<string>('Email address');
 
   const validateEmail = () => {
     try {
       const emailSchema = z.string().email();
       emailSchema.parse(email);
+      setDisplayError(false);
       return true;
     } catch (error) {
       console.log(error);
+      setDisplayError(true);
       return false;
     }
   };
 
   const handleSubmit = () => {
-    if (!validateEmail()) {
-      setDisplayErrorPassword(true);
-    } else {
-      setDisplayErrorPassword(false);
-      router.push({
-        pathname: 'SignUp/Password',
-        params: { name, email },
-      });
+    if (!displayError) {
+      if (validateEmail()) {
+        router.push({
+          pathname: 'SignUp/Password',
+          params: { name, email },
+        });
+      }
     }
   };
 
@@ -61,6 +63,8 @@ export default function SignUpScreen() {
           autoCapitalization
           placeholder={placeholderName}
           setPlaceholder={setPlaceholderName}
+          errorHandling={false}
+          setDisplayError={setDisplayError}
         />
       </View>
 
@@ -76,13 +80,15 @@ export default function SignUpScreen() {
           autoCapitalization={false}
           placeholder={placeholderEmail}
           setPlaceholder={setPlaceholderEmail}
+          errorHandling
+          setDisplayError={setDisplayError}
         />
       </View>
 
       <View>
         <Text style={styles.errorMessage}>
           {' '}
-          {displayErrorPassword ? 'Sorry! Invalid email address.' : ' '}{' '}
+          {displayError ? 'Sorry! Invalid email address.' : ' '}{' '}
         </Text>
       </View>
 

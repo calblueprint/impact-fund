@@ -1,10 +1,11 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import MiniAuthInput from '../../../../Components/MiniAuthInput/MiniAuthInput';
 import { signUpUser } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
@@ -13,61 +14,25 @@ export default function SignUpScreen() {
   const { password } = useLocalSearchParams() as unknown as {
     password: string;
   };
-  const [streetAddress, setStreetAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zipcode, setZipcode] = useState('');
+  const [streetAddress, setStreetAddress] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [state, setState] = useState<string>('');
+  const [zipcode, setZipcode] = useState<string>('');
 
-  const [displayStreet, setDisplayStreet] = useState(false);
-  const [placeholderStreet, setPlaceholderStreet] = useState('Street address');
+  const [displayStreet, setDisplayStreet] = useState<boolean>(false);
+  const [placeholderStreet, setPlaceholderStreet] =
+    useState<string>('Street address');
 
-  const [displayCity, setDisplayCity] = useState(false);
-  const [placeholderCity, setPlaceholderCity] = useState('City');
+  const [displayCity, setDisplayCity] = useState<boolean>(false);
+  const [placeholderCity, setPlaceholderCity] = useState<string>('City');
 
-  const [displayState, setDisplayState] = useState(false);
-  const [placeholderState, setPlaceholderState] = useState('State');
-  const [isFocusedState, setIsFocusedState] = useState(false);
+  const [displayState, setDisplayState] = useState<boolean>(false);
+  const [placeholderState, setPlaceholderState] = useState<string>('State');
 
-  const [displayZip, setDisplayZip] = useState(false);
-  const [placeholderZip, setPlaceholderZip] = useState('Zip code');
-  const [isFocusedZip, setIsFocusedZip] = useState(false);
+  const [displayZip, setDisplayZip] = useState<boolean>(false);
+  const [placeholderZip, setPlaceholderZip] = useState<string>('Zip code');
 
-  // ** Display fields **
-  //State
-  const onClickState = () => {
-    setPlaceholderState('');
-    setIsFocusedState(true);
-    setDisplayState(true);
-  };
-
-  const offClickState = () => {
-    setPlaceholderState('State');
-    setIsFocusedState(false);
-  };
-
-  function removeState() {
-    if (state.trim() === '') {
-      setDisplayState(false);
-    }
-  }
-
-  //Zip
-  const onClickZip = () => {
-    setPlaceholderZip('');
-    setIsFocusedZip(true);
-    setDisplayZip(true);
-  };
-
-  const offClickZip = () => {
-    setPlaceholderZip('Zipcode');
-    setIsFocusedZip(false);
-  };
-
-  function removeZip() {
-    if (zipcode.trim() === '') {
-      setDisplayZip(false);
-    }
-  }
+  const [, setDummyError] = useState<boolean>(false);
 
   return (
     <View style={styles.container}>
@@ -89,6 +54,8 @@ export default function SignUpScreen() {
           autoCapitalization
           placeholder={placeholderStreet}
           setPlaceholder={setPlaceholderStreet}
+          errorHandling={false}
+          setDisplayError={setDummyError}
         />
       </View>
 
@@ -104,59 +71,47 @@ export default function SignUpScreen() {
           autoCapitalization
           placeholder={placeholderCity}
           setPlaceholder={setPlaceholderCity}
+          errorHandling={false}
+          setDisplayError={setDummyError}
         />
       </View>
 
       <View style={styles.inputWrap}>
         <View style={styles.smallInputBox}>
-          <Text style={styles.displayTextSmall}>
-            {displayState ? 'State' : ' '}
-          </Text>
-          <TextInput
-            style={[
-              styles.inputSmall,
-              isFocusedState && styles.inputSmallFocused,
-            ]}
-            value={state}
-            onChangeText={setState}
-            onEndEditing={removeState}
-            onFocus={onClickState}
-            onBlur={offClickState}
+          <MiniAuthInput
+            input={state}
+            setInput={setState}
+            defaultValue="State"
+            isPassword={false}
+            displayInput={displayState}
+            setDisplayInput={setDisplayState}
+            keyboard="default"
+            autoCapitalization
             placeholder={placeholderState}
-            autoCapitalize="words"
-            clearButtonMode="while-editing"
+            setPlaceholder={setPlaceholderState}
           />
         </View>
 
         <Text style={styles.space}> </Text>
 
         <View style={styles.smallInputBox}>
-          <Text style={styles.displayTextSmall}>
-            {displayZip ? 'Zip' : ' '}
-          </Text>
-          <TextInput
-            style={[
-              styles.inputSmall,
-              isFocusedZip && styles.inputSmallFocused,
-            ]}
-            maxLength={5}
-            value={zipcode}
-            onChangeText={setZipcode}
-            onEndEditing={removeZip}
-            onFocus={onClickZip}
-            onBlur={offClickZip}
+          <MiniAuthInput
+            input={zipcode}
+            setInput={setZipcode}
+            defaultValue="Zipcode"
+            isPassword={false}
+            displayInput={displayZip}
+            setDisplayInput={setDisplayZip}
+            keyboard="default"
+            autoCapitalization
             placeholder={placeholderZip}
-            keyboardType="default"
-            clearButtonMode="while-editing"
+            setPlaceholder={setPlaceholderZip}
           />
         </View>
       </View>
 
       <TouchableOpacity
         style={styles.nextButton}
-        /* the signUpUser function requires first, middle, and last name
-        but the figma only wants a full name, so this doesn't work rn */
-
         onPress={() =>
           signUpUser(name, email, password, streetAddress, city, state, zipcode)
         }
