@@ -62,18 +62,8 @@ function QRCodeScannerScreen() {
     } else if (userIds.includes(caseId)) {
       setToast('DUPLICATES NOT ALLOWED!');
     } else if (!scanned) {
-      const caseData: Case = await getCaseById(caseId);
-      const { id, title, imageUrl, date, lawFirm, summary } = caseData;
       router.push({
-        pathname: '/AllCases/QRCodeScanner/AddCase',
-        params: {
-          id,
-          title,
-          imageUrl,
-          date,
-          lawFirm,
-          summary,
-        },
+        pathname: `/AllCases/QRCodeScanner/AddCase/${caseId}`,
       });
       setScanned(true);
       setToast('');
