@@ -9,8 +9,12 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
 
+  imageContainer: {
+    marginTop: 90,
+    marginLeft: 40,
+  },
   welcomeText: {
-    marginTop: 400,
+    marginTop: 310,
     marginRight: 20,
     marginLeft: 40,
     color: colors.black,

@@ -3,6 +3,8 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import RightArrowWhite from '../../../assets/right-arrow-white.svg';
+import RightArrow from '../../../assets/right-arrow.svg';
 
 function StyledButton({
   text,
@@ -18,12 +20,15 @@ function StyledButton({
       <View
         style={[color === 'white' ? styles.whiteButton : styles.blackButton]}
       >
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
           <Text
             style={[color === 'white' ? styles.blackText : styles.whiteText]}
           >
             {text}
           </Text>
+          <View style={styles.arrow}>
+            <RightArrow />
+          </View>
         </TouchableOpacity>
       </View>
     );
@@ -31,12 +36,17 @@ function StyledButton({
   return (
     <View style={[color === 'white' ? styles.whiteButton : styles.blackButton]}>
       <Link href={file} asChild>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
           <Text
             style={[[color === 'white' ? styles.blackText : styles.whiteText]]}
           >
             {text}
           </Text>
+          <View
+            style={[[color === 'white' ? styles.arrow : styles.arrowWhite]]}
+          >
+            {color === 'white' ? <RightArrow /> : <RightArrowWhite />}
+          </View>
         </TouchableOpacity>
       </Link>
     </View>

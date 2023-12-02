@@ -10,20 +10,25 @@ const baseButton = {
   borderColor: colors.black,
   borderWidth: 0.75,
   marginBottom: 10,
-  padding: 17,
+  padding: 16,
 };
 
 const buttonText = {
-  fontSize: 16,
+  fontSize: 17,
 };
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  buttonContainer: {
+    flexDirection: 'row',
   },
-
+  arrow: {
+    marginLeft: 120,
+    marginTop: 5,
+  },
+  arrowWhite: {
+    marginLeft: 132,
+    marginTop: 5,
+  },
   buttonText,
   whiteText: {
     ...buttonText,
