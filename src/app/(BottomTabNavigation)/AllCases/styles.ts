@@ -12,12 +12,10 @@ export default StyleSheet.create({
   },
   headerContainer: {
     flex: 0.3,
-    // flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: '90%',
     paddingLeft: 10,
-    // paddingRight: 30,
   },
   casesContainer: {
     flex: 0.7,
