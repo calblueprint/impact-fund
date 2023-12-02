@@ -44,7 +44,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="Forms/index"
+          name="Forms/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
