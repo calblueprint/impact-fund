@@ -1,17 +1,22 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import Toast from 'react-native-toast-message';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import Toast, {
+  BaseToast,
+  ErrorToast,
+  ToastConfig,
+} from 'react-native-toast-message';
 
 import styles from './styles';
+import ErrorIcon from '../../../../../assets/warning.svg';
+import { colors } from '../../../../styles/colors';
 import {
   getAllCaseIds,
   getCaseById,
   getCaseIdsFromUserId,
 } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
-
 enum permissions {
   UNDETERMINED,
   DENIED,
@@ -24,6 +29,26 @@ function QRCodeScannerScreen() {
   const [validIds, setValidIds] = useState<CaseUid[]>([]);
   const [userIds, setUserIds] = useState<CaseUid[]>([]);
   const navigation = useNavigation();
+
+  const toastConfig: ToastConfig = {
+    success: (props: any) => <BaseToast />,
+
+    error: (props: any) => (
+      <ErrorToast
+        {...props}
+        text1Style={{
+          fontSize: 17,
+        }}
+        renderLeadingIcon={ErrorIcon}
+        style={{
+          borderLeftColor: colors.darkRed,
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 20,
+        }}
+      />
+    ),
+  };
 
   useEffect(() => {
     const getAllCasesAndValidCases = async () => {
@@ -60,13 +85,13 @@ function QRCodeScannerScreen() {
       Toast.show({
         type: 'error',
         text1: 'Not a valid QRCODE!',
-        visibilityTime: 2000,
+        visibilityTime: 1000,
       });
     } else if (userIds.includes(caseId)) {
       Toast.show({
         type: 'error',
         text1: 'Duplicate cases not allowed!',
-        visibilityTime: 2000,
+        visibilityTime: 1000,
       });
     } else if (!scanned) {
       const caseData: Case = await getCaseById(caseId);
@@ -97,10 +122,12 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-        <Text>Go Back</Text>
-      </TouchableOpacity>
-      <Toast position="bottom" bottomOffset={20} />
+      {scanned && (
+        <View>
+          <TouchableOpacity />
+        </View>
+      )}
+      <Toast position="bottom" bottomOffset={20} config={toastConfig} />
     </View>
   );
 }
