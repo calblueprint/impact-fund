@@ -24,7 +24,7 @@
       },
       "bundleIdentifier": "org.calblueprint.impactfund",
       //   icon: './assets/images/appstore.png',
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
