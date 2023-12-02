@@ -2,6 +2,7 @@ import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import styles from './styles';
 import {
@@ -22,7 +23,6 @@ function QRCodeScannerScreen() {
   const [scanned, setScanned] = useState<boolean>(false);
   const [validIds, setValidIds] = useState<CaseUid[]>([]);
   const [userIds, setUserIds] = useState<CaseUid[]>([]);
-  const [toast, setToast] = useState<string>();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -57,10 +57,17 @@ function QRCodeScannerScreen() {
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     const caseId = result.data;
     if (!validIds.includes(caseId)) {
-      // TODO: Display error toast message
-      setToast('Not a valid QRCODE!');
+      Toast.show({
+        type: 'error',
+        text1: 'Not a valid QRCODE!',
+        visibilityTime: 2000,
+      });
     } else if (userIds.includes(caseId)) {
-      setToast('DUPLICATES NOT ALLOWED!');
+      Toast.show({
+        type: 'error',
+        text1: 'Duplicate cases not allowed!',
+        visibilityTime: 2000,
+      });
     } else if (!scanned) {
       const caseData: Case = await getCaseById(caseId);
       const { id, title, imageUrl, date, lawFirm, summary } = caseData;
@@ -76,7 +83,6 @@ function QRCodeScannerScreen() {
         },
       });
       setScanned(true);
-      setToast('');
     }
   };
 
@@ -91,10 +97,10 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      <Text style={styles.errorMessage}>{toast}</Text>
       <TouchableOpacity onPress={() => router.back()} style={styles.button}>
         <Text>Go Back</Text>
       </TouchableOpacity>
+      <Toast position="bottom" bottomOffset={20} />
     </View>
   );
 }
