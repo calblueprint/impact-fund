@@ -10,7 +10,6 @@ import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  console.log(caseUid);
 
   const updateEligibility = async (status: Eligibility) => {
     if (caseUid !== undefined) {

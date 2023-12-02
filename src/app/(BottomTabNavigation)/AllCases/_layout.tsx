@@ -38,7 +38,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="CaseSummaryScreen/index"
+          name="CaseSummaryScreen/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
