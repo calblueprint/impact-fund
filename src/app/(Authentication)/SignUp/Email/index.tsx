@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { z } from 'zod';
 
 import styles from './styles';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
@@ -9,7 +10,6 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 export default function SignUpScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [displayErrorPassword, setDisplayErrorPassword] = useState(false);
 
   const [displayName, setDisplayName] = useState(false);
@@ -18,23 +18,25 @@ export default function SignUpScreen() {
   const [displayEmail, setDisplayEmail] = useState(false);
   const [placeholderEmail, setPlaceholderEmail] = useState('Email address');
 
-  const [displayPassword, setDisplayPassword] = useState(false);
-  const [placeholderPassword, setPlaceholderPassword] = useState('Password');
-
-  const validatePassword = () => {
-    // Implement your password requirements here
-    const lengthRegex = /^.{6,}$/;
-    return lengthRegex.test(password);
+  const validateEmail = () => {
+    try {
+      const emailSchema = z.string().email();
+      emailSchema.parse(email);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 
   const handleSubmit = () => {
-    if (!validatePassword()) {
+    if (!validateEmail()) {
       setDisplayErrorPassword(true);
     } else {
       setDisplayErrorPassword(false);
       router.push({
-        pathname: 'SignUp/Address',
-        params: { name, email, password },
+        pathname: 'SignUp/Password',
+        params: { name, email },
       });
     }
   };
@@ -77,32 +79,15 @@ export default function SignUpScreen() {
         />
       </View>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          setInput={setPassword}
-          defaultValue="Password"
-          isPassword
-          displayInput={displayPassword}
-          setDisplayInput={setDisplayPassword}
-          keyboard="default"
-          autoCapitalization={false}
-          placeholder={placeholderPassword}
-          setPlaceholder={setPlaceholderPassword}
-        />
-      </View>
-
       <View>
         <Text style={styles.errorMessage}>
           {' '}
-          {displayErrorPassword
-            ? 'Your password needs at least six characters!'
-            : ' '}{' '}
+          {displayErrorPassword ? 'Sorry! Invalid email address.' : ' '}{' '}
         </Text>
       </View>
 
       <TouchableOpacity style={[styles.nextButton]} onPress={handleSubmit}>
-        <Text style={styles.nextText}>Next</Text>
+        <Text style={styles.nextText}>Continue</Text>
       </TouchableOpacity>
     </View>
   );
