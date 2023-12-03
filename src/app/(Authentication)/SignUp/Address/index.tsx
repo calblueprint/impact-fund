@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import Check from '../../../../../assets/check-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import MiniAuthInput from '../../../../Components/MiniAuthInput/MiniAuthInput';
 import { signUpUser } from '../../../../supabase/queries/auth';
@@ -40,7 +41,7 @@ export default function SignUpScreen() {
         <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
 
-      <Text style={styles.instructionText}>Create your account.</Text>
+      <Text style={styles.instructionText}>Last, enter your address.</Text>
 
       <View style={styles.inputBox}>
         <AuthInput
@@ -109,6 +110,7 @@ export default function SignUpScreen() {
           />
         </View>
       </View>
+      <Text style={styles.space2}> </Text>
 
       <TouchableOpacity
         style={styles.nextButton}
@@ -117,6 +119,9 @@ export default function SignUpScreen() {
         }
       >
         <Text style={styles.nextText}>Sign Up</Text>
+        <View style={styles.check}>
+          <Check />
+        </View>
       </TouchableOpacity>
     </View>
   );

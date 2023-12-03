@@ -25,7 +25,7 @@ export default StyleSheet.create({
     color: colors.black,
     fontSize: 24,
     fontWeight: '800',
-    marginRight: 70,
+    marginRight: 25,
     marginBottom: 20,
   },
   inputBox: {
@@ -39,7 +39,6 @@ export default StyleSheet.create({
   },
   smallInputBox: {
     marginTop: 11,
-    alignItems: 'flex-start',
   },
   displayTextSmall: {
     fontSize: 13,
@@ -58,25 +57,29 @@ export default StyleSheet.create({
     borderColor: colors.darkRed,
   },
   space: {
-    margin: 5,
+    margin: 11,
+  },
+
+  space2: {
+    marginBottom: 50,
   },
   nextText: {
     color: colors.white,
-    fontSize: 17,
+    fontSize: 16,
     opacity: 1,
     fontWeight: '600',
-    marginLeft: 25,
+    marginLeft: 85,
+    marginRight: 20,
   },
   nextButton: {
     backgroundColor: colors.black,
     marginBottom: 20,
-    marginRight: 165,
     borderRadius: 3,
     borderColor: colors.black,
-    width: 150,
+    width: 310,
     height: 50,
     padding: 15,
-    marginTop: 60,
+    flexDirection: 'row',
   },
   errorMessage: {
     color: colors.darkRed,
@@ -86,5 +89,8 @@ export default StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
     marginBottom: 20,
+  },
+  check: {
+    marginTop: 3,
   },
 });
