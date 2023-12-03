@@ -38,7 +38,4 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
   },
-  inner: {
-    // height: 120,
-  },
 });
