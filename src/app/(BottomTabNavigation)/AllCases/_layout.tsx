@@ -26,25 +26,25 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="QRCodeScanner/AddCase/index"
+          name="QRCodeScanner/AddCase/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
         />
         <Stack.Screen
-          name="CaseScreen/index"
+          name="CaseScreen/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
         />
         <Stack.Screen
-          name="CaseSummaryScreen/index"
+          name="CaseSummaryScreen/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
         />
         <Stack.Screen
-          name="Forms/index"
+          name="Forms/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
