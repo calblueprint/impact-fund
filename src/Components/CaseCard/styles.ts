@@ -4,10 +4,9 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   caseCard: {
-    flexDirection: 'column',
+    height: 167,
     width: 'auto',
-    marginBottom: 20,
-    marginHorizontal: 10,
+    flexDirection: 'column',
     paddingHorizontal: 20,
 
     backgroundColor: colors.white,
@@ -28,10 +27,10 @@ export default StyleSheet.create({
   },
   infoContainer: {
     flexDirection: 'column',
-    width: '60%',
+    width: '65%',
   },
   imageContainer: {
-    width: '35%',
+    width: '30%',
     aspectRatio: 1,
     borderRadius: 10,
   },
