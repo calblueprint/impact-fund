@@ -9,6 +9,7 @@ import Toast, {
 } from 'react-native-toast-message';
 
 import styles from './styles';
+import Arrow from '../../../../../assets/black-right-arrow.svg';
 import ErrorIcon from '../../../../../assets/warning.svg';
 import { colors } from '../../../../styles/colors';
 import {
@@ -28,6 +29,7 @@ function QRCodeScannerScreen() {
   const [scanned, setScanned] = useState<boolean>(false);
   const [validIds, setValidIds] = useState<CaseUid[]>([]);
   const [userIds, setUserIds] = useState<CaseUid[]>([]);
+  const [userCase, setUserCase] = useState<Case>();
   const navigation = useNavigation();
 
   const toastConfig: ToastConfig = {
@@ -63,9 +65,11 @@ function QRCodeScannerScreen() {
   useEffect(() => {
     navigation.addListener('blur', async () => {
       setScanned(false);
+      setUserCase(undefined);
     });
     navigation.addListener('focus', async () => {
       setScanned(false);
+      setUserCase(undefined);
     });
   }, [navigation]);
 
@@ -94,11 +98,27 @@ function QRCodeScannerScreen() {
         visibilityTime: 1000,
       });
     } else if (!scanned) {
-      router.push({
-        pathname: `/AllCases/QRCodeScanner/AddCase/${caseId}`,
-      });
+      const caseData: Case = await getCaseById(caseId);
+      setUserCase(caseData);
       setScanned(true);
     }
+  };
+
+  const routeToAddCase = () => {
+    if (!userCase) {
+      return;
+    }
+    router.push({
+      pathname: '/AllCases/QRCodeScanner/AddCase',
+      params: {
+        id: userCase.id,
+        title: userCase.title,
+        imageUrl: userCase.imageUrl,
+        date: userCase.date,
+        lawFirm: userCase.lawFirm,
+        summary: userCase.summary,
+      },
+    });
   };
 
   if (hasPermission === permissions.DENIED) {
@@ -107,16 +127,22 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Add a new case</Text>
+      <Text style={styles.topText}>Point your Camera at the QR code.</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-      {scanned && (
-        <View>
-          <TouchableOpacity />
-        </View>
+
+      {userCase && (
+        <TouchableOpacity
+          style={styles.viewCaseButton}
+          onPress={() => routeToAddCase()}
+        >
+          <Text style={styles.caseButtonText}>View Case</Text>
+          <Arrow />
+        </TouchableOpacity>
       )}
+
       <Toast position="bottom" bottomOffset={20} config={toastConfig} />
     </View>
   );

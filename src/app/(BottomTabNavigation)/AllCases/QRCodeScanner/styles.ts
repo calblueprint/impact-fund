@@ -9,20 +9,40 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  topText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontStyle: 'normal',
+    fontWeight: '600',
+  },
 
   scanner: {
     height: 300,
     width: 300,
     border: 'solid',
-    borderWidth: 3,
+    borderWidth: 2,
+    borderRadius: 5,
+    marginVertical: 20,
+  },
+  viewCaseButton: {
+    border: 'solid',
+    flexDirection: 'row',
+    borderColor: colors.black,
+    borderWidth: 1,
+    height: 45,
+    width: 300,
+    borderRadius: 5,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  caseButtonText: {
+    color: colors.black,
+    fontSize: 18,
+    fontStyle: 'normal',
+    fontWeight: '600',
   },
 
-  button: {
-    margin: 10,
-    alignItems: 'center',
-    backgroundColor: '#339FFF',
-    padding: 10,
-  },
   errorMessage: {
     color: colors.midRed,
   },
