@@ -31,9 +31,6 @@ function CaseCard(caseData: Case) {
               {caseData.caseStatus}
             </Text>
           </View>
-          {/* <View style={styles.statusContainer}>
-          <Text style={styles.statusText}>{caseData.caseStatus}</Text>
-        </View> */}
         </View>
         <Image
           style={styles.imageContainer}

@@ -6,22 +6,20 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
     width: '100%',
     backgroundColor: colors.white,
   },
   headerContainer: {
-    flex: 0.2,
-    flexDirection: 'row',
-    alignItems: 'center',
+    height: 80,
+    width: '84%',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    width: '100%',
-    paddingRight: 30,
   },
   casesContainer: {
-    flex: 0.8,
+    width: '84%',
     flexDirection: 'column',
-    width: '90%',
+    marginVertical: 17,
   },
   circle: {
     width: 70,
@@ -30,5 +28,12 @@ export default StyleSheet.create({
     backgroundColor: colors.midGrey,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titleText: {
+    fontSize: 32,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 33,
+    color: colors.black,
   },
 });
