@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
@@ -9,10 +9,11 @@ import {
   getCaseById,
   updateCaseStatus,
 } from '../../../../supabase/queries/cases';
-import { CaseUid, Eligibility } from '../../../../types/types';
+import { Case, CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
-  const { caseId } = useLocalSearchParams() as unknown as { caseId: CaseUid };
+  const caseId = useLocalSearchParams() as unknown as CaseUid;
+  console.log(caseId);
 
   const updateEligibility = async (status: Eligibility) => {
     await updateCaseStatus(caseId, status);
@@ -22,7 +23,18 @@ export default function EligibilityForm() {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
+      <View style={styles.inner}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: 'http://helloworld.com',
+          }}
+        />
+      </View>
+    </View>
+  );
+}
+/* <View style={styles.textContainer}>
         <View style={styles.insideContainer}>
           <Text>The eligibility requirements are as follows:</Text>
           <View>
@@ -53,6 +65,5 @@ export default function EligibilityForm() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
-  );
-}
+    </View> 
+      )*/

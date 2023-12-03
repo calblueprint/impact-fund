@@ -8,6 +8,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inner: {
+    width: '90%',
+  },
+  image: {
+    width: '100%',
+    height: 200,
+  },
+
   insideContainer: {
     justifyContent: 'space-evenly',
     height: '90%',
