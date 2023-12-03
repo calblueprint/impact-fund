@@ -9,6 +9,10 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     justifyContent: 'flex-start',
   },
+  imageContainer: {
+    marginTop: 60,
+    marginLeft: 30,
+  },
   textContainer: {
     width: 325,
     marginLeft: 30,
