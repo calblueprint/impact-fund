@@ -24,7 +24,7 @@ export default function EligibilityCard({
     status === Eligibility.UNDETERMINED
   ) {
     return (
-      <View style={[styles.container, styles.ineligible]}>
+      <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
@@ -51,39 +51,34 @@ export default function EligibilityCard({
     );
   } else if (status === Eligibility.ELIGIBLE) {
     return (
-      <View style={[styles.container, styles.eligible]}>
-        <View style={styles.inner}>
-          <TouchableOpacity style={styles.button}>
-            <View style={styles.topText}>
-              <Fileclaim />
-              <View style={styles.center}>
-                <Text style={styles.text}>File a Claim</Text>
-              </View>
-              <Arrow />
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.topText}>
+            <Fileclaim />
+            <View style={styles.center}>
+              <Text style={styles.text}>File a Claim</Text>
             </View>
+            <Arrow />
+          </View>
 
-            <Text>
-              Eligible class members who wish to receive payment can submit a
-              claim electronically.
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.inner}>
-          <TouchableOpacity style={styles.button}>
-            <View style={styles.topText}>
-              <Optout />
-              <View style={styles.center}>
-                <Text style={styles.text}>Opt Out</Text>
-              </View>
-              <Arrow />
+          <Text>
+            Eligible class members who wish to receive payment can submit a
+            claim electronically.
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.topText}>
+            <Optout />
+            <View style={styles.center}>
+              <Text style={styles.text}>Opt Out</Text>
             </View>
+            <Arrow />
+          </View>
 
-            <Text>
-              Submit a claim if you wish to receive a payment from the
-              settlement.
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <Text>
+            Submit a claim if you wish to receive a payment from the settlement.
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   } else {

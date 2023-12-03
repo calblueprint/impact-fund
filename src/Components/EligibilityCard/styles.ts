@@ -3,18 +3,13 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
-  eligible: {
-    height: 270,
-  },
-  ineligible: {
-    height: 135,
-  },
   container: {
     display: 'flex',
     width: '100%',
+    height: 'auto',
     justifyContent: 'center',
     alignContent: 'center',
-    rowGap: 15,
+    rowGap: 20,
   },
   button: {
     paddingHorizontal: 20,
@@ -44,6 +39,6 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
   inner: {
-    height: 120,
+    // height: 120,
   },
 });

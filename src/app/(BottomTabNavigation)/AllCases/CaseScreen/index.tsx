@@ -31,7 +31,7 @@ function CaseScreen() {
         contentContainerStyle={{
           alignItems: 'center',
           minHeight: 900,
-          rowGap: 15,
+          rowGap: 20,
         }}
         showsVerticalScrollIndicator={false}
       >
