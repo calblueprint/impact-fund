@@ -9,14 +9,7 @@ import Toast, {
 } from 'react-native-toast-message';
 
 import styles from './styles';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Arrow from '../../../../../assets/black-right-arrow.svg';
-=======
->>>>>>> 93b751e (did a nice toast)
-=======
-import Arrow from '../../../../../assets/black-right-arrow.svg';
->>>>>>> 788539e (lowkey kinda goated tbh lol)
 import ErrorIcon from '../../../../../assets/warning.svg';
 import { colors } from '../../../../styles/colors';
 import {
@@ -139,10 +132,6 @@ function QRCodeScannerScreen() {
         onBarCodeScanned={handleBarCodeScanned}
         style={[styles.scanner]}
       />
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 788539e (lowkey kinda goated tbh lol)
 
       {userCase && (
         <TouchableOpacity
@@ -152,20 +141,8 @@ function QRCodeScannerScreen() {
           <Text style={styles.caseButtonText}>View Case</Text>
           <Arrow />
         </TouchableOpacity>
-<<<<<<< HEAD
       )}
 
-=======
-      {scanned && (
-        <View>
-          <TouchableOpacity />
-        </View>
-      )}
->>>>>>> 93b751e (did a nice toast)
-=======
-      )}
-
->>>>>>> 788539e (lowkey kinda goated tbh lol)
       <Toast position="bottom" bottomOffset={20} config={toastConfig} />
     </View>
   );
