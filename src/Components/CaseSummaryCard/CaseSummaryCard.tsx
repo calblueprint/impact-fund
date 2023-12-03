@@ -10,19 +10,11 @@ import { Case } from '../../types/types';
 export default function CaseSummaryCard(caseData: Case) {
   return (
     <TouchableOpacity
-      onPress={() =>
+      onPress={() => {
         router.push({
-          pathname: `/AllCases/CaseSummaryScreen`,
-          params: {
-            blurb: caseData.blurb,
-            summary: caseData.summary,
-            imageUrl: caseData.imageUrl,
-            caseSite: caseData.caseSite,
-            date: caseData.date,
-            lawFirm: caseData.lawFirm,
-          },
-        })
-      }
+          pathname: `/AllCases/CaseSummaryScreen/${caseData.id}`,
+        });
+      }}
     >
       <View style={styles.container}>
         <Image
