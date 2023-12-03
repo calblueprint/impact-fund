@@ -12,22 +12,16 @@ import {
 import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
-  const { caseId, setStatus } = useLocalSearchParams() as unknown as {
+  const { caseId } = useLocalSearchParams() as unknown as {
     caseId: CaseUid;
-    setStatus: (status: Eligibility) => void;
-    // caseStatus: Eligibility;
   };
-  // const params = useLocalSearchParams() as unknown as {
-  //   caseId: CaseUid;
-  //   caseStatus: Eligibility;
-  // };
 
   const updateEligibility = async (status: Eligibility) => {
     await updateCaseStatus(caseId, status);
     getCaseById(caseId).then(res => {
-      router.push({ pathname: '/AllCases/CaseScreen', params: { ...res } });
+      router.back();
+      router.replace({ pathname: '/AllCases/CaseScreen', params: { ...res } });
     });
-    setStatus(status);
   };
   return (
     <View style={styles.container}>

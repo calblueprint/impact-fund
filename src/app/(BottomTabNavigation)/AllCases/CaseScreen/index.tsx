@@ -22,11 +22,7 @@ function CaseScreen() {
       setStatus(caseStatus);
     };
     getStatus();
-  }, [status]);
-
-  const updateStatus = (updatedStatus: Eligibility) => {
-    setStatus(updatedStatus);
-  };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -44,20 +40,12 @@ function CaseScreen() {
         </View>
         <CaseStatusBar status={caseData.caseStatus} />
         {status === Eligibility.ELIGIBLE && (
-          <EligibilityCard
-            caseData={caseData}
-            status={status}
-            updateStatus={updateStatus}
-          />
+          <EligibilityCard caseData={caseData} status={status} />
         )}
         <CaseSummaryCard {...caseData} />
         {(status === Eligibility.INELIGIBLE ||
           status === Eligibility.UNDETERMINED) && (
-          <EligibilityCard
-            caseData={caseData}
-            status={status}
-            updateStatus={updateStatus}
-          />
+          <EligibilityCard caseData={caseData} status={status} />
         )}
         <FormsCard {...caseData} />
         <EducationalBar />

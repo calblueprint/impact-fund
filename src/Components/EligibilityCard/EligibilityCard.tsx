@@ -13,14 +13,11 @@ import { Case, Eligibility } from '../../types/types';
 interface EligibilityCardProps {
   caseData: Case;
   status: Eligibility;
-  updateStatus: (updatedStatus: Eligibility) => void;
-  // setStatus: React.Dispatch<React.SetStateAction<Eligibility | undefined>>;
 }
 
 export default function EligibilityCard({
   caseData,
   status,
-  updateStatus,
 }: EligibilityCardProps) {
   if (
     status === Eligibility.INELIGIBLE ||
@@ -35,9 +32,7 @@ export default function EligibilityCard({
               pathname: '/AllCases/EligibilityForm',
               params: {
                 caseId: caseData.id,
-                setStatus: (status: Eligibility) => updateStatus(status),
               },
-              // how to push down updateStatus
             });
           }}
         >
