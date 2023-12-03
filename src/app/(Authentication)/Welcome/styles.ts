@@ -31,5 +31,6 @@ export default StyleSheet.create({
 
   buttonContainer: {
     alignItems: 'center',
+    marginTop: 60,
   },
 });
