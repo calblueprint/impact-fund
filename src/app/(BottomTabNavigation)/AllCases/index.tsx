@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { CaseContext } from '../../../context/CaseContext';
 
@@ -13,11 +14,15 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
+        <View style={{ marginTop: 58, marginBottom: 15 }}>
+          <Text style={styles.caseText}>My Cases</Text>
+        </View>
         <TouchableOpacity
           onPress={() => router.push('/AllCases/QRCodeScanner')}
         >
-          <View style={styles.circle}>
-            <Text>Camera</Text>
+          <View style={styles.camera}>
+            <Camera />
+            <Text style={styles.cameraText}>Add Case with QR code</Text>
           </View>
         </TouchableOpacity>
       </View>
