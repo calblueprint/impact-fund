@@ -6,7 +6,7 @@ export default StyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'column',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
     borderStyle: 'solid',
     borderColor: colors.midGrey,
