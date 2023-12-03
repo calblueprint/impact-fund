@@ -10,6 +10,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  header: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginTop: 90,
+    marginRight: 100,
+    marginBottom: 40,
+  },
+  image: {
+    marginTop: 2,
+  },
   backText: {
     color: colors.midGrey,
     fontSize: 16,
@@ -17,9 +27,7 @@ export default StyleSheet.create({
     marginLeft: 7,
   },
   backButton: {
-    marginTop: 100,
-    marginBottom: 40,
-    marginRight: 280,
+    marginRight: 82,
   },
   instructionText: {
     color: colors.black,
