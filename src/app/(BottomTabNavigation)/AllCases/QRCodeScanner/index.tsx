@@ -109,7 +109,7 @@ function QRCodeScannerScreen() {
       return;
     }
     router.push({
-      pathname: '/AllCases/QRCodeScanner/AddCase',
+      pathname: `/AllCases/QRCodeScanner/AddCase/${userCase.id}`,
       params: {
         id: userCase.id,
         title: userCase.title,
