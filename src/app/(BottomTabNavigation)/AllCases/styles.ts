@@ -11,14 +11,14 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
   headerContainer: {
-    flex: 0.3,
+    flex: 0.4,
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: '90%',
     paddingLeft: 10,
   },
   casesContainer: {
-    flex: 0.7,
+    flex: 0.6,
     flexDirection: 'column',
     width: '90%',
   },
@@ -36,7 +36,7 @@ export default StyleSheet.create({
   camera: {
     flexDirection: 'row',
     width: 353,
-    height: 57,
+    height: 150,
     borderColor: colors.midGrey,
     borderWidth: 1,
     borderStyle: 'solid',
@@ -44,5 +44,11 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    shadowColor: colors.midGrey,
+    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOpacity: 1,
+    shadowRadius: 0.75,
+    elevation: 1,
+    backgroundColor: colors.white,
   },
 });
