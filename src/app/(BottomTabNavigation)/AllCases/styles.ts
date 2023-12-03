@@ -31,7 +31,6 @@ export default StyleSheet.create({
   cameraText: {
     textAlign: 'center',
     fontSize: 18,
-    fontstyle: 'normal',
     fontWeight: '300',
   },
   camera: {
