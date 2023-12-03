@@ -43,7 +43,7 @@ export default function FormsCard(caseData: Case) {
           }
         >
           <View style={styles.formRouteButton}>
-            <Text>View all ({caseData.formCount})</Text>
+            <Text style={styles.bodyText}>View all ({caseData.formCount})</Text>
             <RightCaret />
           </View>
         </TouchableOpacity>
