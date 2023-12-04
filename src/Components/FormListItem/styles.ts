@@ -22,13 +22,17 @@ export default StyleSheet.create({
     height: '100%',
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 15,
+    fontStyle: 'normal',
+    fontWeight: '300',
     lineHeight: 21,
     color: colors.black,
   },
   dateText: {
     fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '200',
     lineHeight: 21,
-    color: colors.darkGrey,
+    color: colors.black,
   },
 });

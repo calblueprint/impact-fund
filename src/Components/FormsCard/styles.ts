@@ -4,7 +4,7 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    width: '100%', // styling width according to percentages does so relative to view width
+    width: '100%',
     flexDirection: 'column',
     alignItems: 'center',
     rowGap: 12,
@@ -14,10 +14,12 @@ export default StyleSheet.create({
     borderColor: colors.darkGrey,
   },
   topContainer: {
+    height: 26 + 6,
     width: '88%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.midGrey,
   },
   bottomContainer: {
     width: '88%',
@@ -26,11 +28,19 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: 100,
+    width: 90,
   },
   titleText: {
     fontSize: 20,
+    fontStyle: 'normal',
     fontWeight: '700',
+    lineHeight: 21,
+    color: colors.black,
+  },
+  bodyText: {
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '300',
     color: colors.black,
   },
 });

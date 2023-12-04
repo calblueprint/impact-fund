@@ -29,7 +29,8 @@ export default function CaseSummaryScreen() {
         <Text>Loading...</Text>
       ) : (
         <ScrollView
-          style={styles.scrollContainer}
+          style={styles.outerScroll}
+          contentContainerStyle={styles.innerScroll}
           showsVerticalScrollIndicator={false}
         >
           <Image
@@ -41,8 +42,12 @@ export default function CaseSummaryScreen() {
           <View style={styles.blurbContainer}>
             <Text style={styles.blurbText}>{caseData.blurb}</Text>
             <View style={styles.inLineSubInfo}>
-              <Text style={styles.subText}>
-                {formatDate(caseData.date)} • {caseData.lawFirm}
+              <Text style={[styles.subText, styles.lawFirmText]}>
+                {caseData.lawFirm}
+              </Text>
+              <Text style={[styles.subText, styles.dateText]}>
+                {' '}
+                • {formatDate(caseData.date)}
               </Text>
             </View>
           </View>

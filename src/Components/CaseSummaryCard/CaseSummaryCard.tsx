@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import ThreeDots from '../../../assets/three-dots.svg';
+import RightCaret from '../../../assets/right-caret.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Case } from '../../types/types';
 
@@ -23,18 +23,21 @@ export default function CaseSummaryCard(caseData: Case) {
             uri: caseData.imageUrl,
           }}
         />
-        <View style={styles.blurbContainer}>
+        <View style={styles.infoContainer}>
+          <View style={styles.inLineInfo}>
+            <Text style={[styles.subText, styles.lawFirmText]}>
+              {caseData.lawFirm}
+            </Text>
+            <Text style={[styles.subText, styles.dateText]}>
+              {' '}
+              • {formatDate(caseData.date)}
+            </Text>
+          </View>
           <Text style={styles.blurbText}>{caseData.blurb}</Text>
         </View>
         <View style={styles.bottomContainer}>
-          <View style={styles.inLineInfo}>
-            <Text style={styles.subText}>
-              {formatDate(caseData.date)} • {caseData.lawFirm}
-            </Text>
-            <View style={styles.threeDots}>
-              <ThreeDots />
-            </View>
-          </View>
+          <Text style={styles.bottomText}>Read full case summary</Text>
+          <RightCaret />
         </View>
       </View>
     </TouchableOpacity>

@@ -7,9 +7,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
   },
-  scrollContainer: {
+  outerScroll: {
     minHeight: '100%',
     width: '84%',
+  },
+  innerScroll: {
+    paddingBottom: 20,
   },
   imageContainer: {
     width: '100%',
@@ -26,9 +29,9 @@ export default StyleSheet.create({
   },
   inLineSubInfo: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     height: 20,
     marginTop: 15,
+    marginBottom: 6,
   },
   blurbText: {
     color: colors.black,
@@ -36,8 +39,17 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
   subText: {
-    color: colors.darkGrey,
     fontSize: 12,
+    fontStyle: 'normal',
+    lineHeight: 21,
+  },
+  lawFirmText: {
+    color: colors.darkRed,
+    fontWeight: '700',
+  },
+  dateText: {
+    color: colors.darkGrey,
+    fontWeight: '300',
   },
   summaryText: {
     color: colors.black,
