@@ -13,13 +13,14 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity
+        <Text style={styles.titleText}>All Cases</Text>
+        {/* <TouchableOpacity
           onPress={() => router.push('/AllCases/QRCodeScanner')}
         >
           <View style={styles.circle}>
             <Text>Camera</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.casesContainer}>
         {loading ? (
@@ -30,9 +31,11 @@ function CasesScreen() {
               <Text>Scan your first case using the QR code above!</Text>
             ) : (
               <FlatList
+                contentContainerStyle={styles.innerScroll}
                 data={allCases}
                 renderItem={({ item }) => <CaseCard {...item} />}
                 keyExtractor={item => item.id}
+                showsVerticalScrollIndicator={false}
               />
             )}
           </>
