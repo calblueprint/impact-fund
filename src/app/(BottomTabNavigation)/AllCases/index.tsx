@@ -36,11 +36,6 @@ function CasesScreen() {
                 renderItem={({ item }) => <CaseCard {...item} />}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                getItemLayout={(_, index) => ({
-                  length: 167 + 20,
-                  offset: (167 + 20) * index,
-                  index,
-                })}
               />
             )}
           </>
