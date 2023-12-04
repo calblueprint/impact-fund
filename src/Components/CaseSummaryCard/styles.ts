@@ -56,7 +56,7 @@ export default StyleSheet.create({
     color: colors.black,
   },
   subText: {
-    fontSize: 12,
+    fontSize: 10,
     fontStyle: 'normal',
     lineHeight: 21,
   },
