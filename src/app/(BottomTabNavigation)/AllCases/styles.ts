@@ -19,8 +19,11 @@ export default StyleSheet.create({
   casesContainer: {
     width: '84%',
     flexDirection: 'column',
-    paddingBottom: 79,
     marginVertical: 17,
+  },
+  innerScroll: {
+    rowGap: 20,
+    paddingBottom: 90,
   },
   circle: {
     width: 70,

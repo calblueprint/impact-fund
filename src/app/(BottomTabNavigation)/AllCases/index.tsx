@@ -31,7 +31,7 @@ function CasesScreen() {
               <Text>Scan your first case using the QR code above!</Text>
             ) : (
               <FlatList
-                contentContainerStyle={{ rowGap: 20 }}
+                contentContainerStyle={styles.innerScroll}
                 data={allCases}
                 renderItem={({ item }) => <CaseCard {...item} />}
                 keyExtractor={item => item.id}
