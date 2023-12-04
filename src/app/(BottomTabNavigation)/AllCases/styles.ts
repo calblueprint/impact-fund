@@ -19,6 +19,7 @@ export default StyleSheet.create({
   casesContainer: {
     width: '84%',
     flexDirection: 'column',
+    paddingBottom: 79,
     marginVertical: 17,
   },
   circle: {
