@@ -42,12 +42,10 @@ export default function CaseSummaryCard(caseData: Case) {
             </Text>
           </View>
           <Text style={styles.blurbText}>{caseData.blurb}</Text>
-          <View style={styles.bottomContainer}>
-            <Text style={styles.bottomText}>Read full case summary</Text>
-            {/* <View style={styles.rightCaret}>
-              <RightCaret />
-            </View> */}
-          </View>
+        </View>
+        <View style={styles.bottomContainer}>
+          <Text style={styles.bottomText}>Read full case summary</Text>
+          <RightCaret />
         </View>
       </View>
     </TouchableOpacity>

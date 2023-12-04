@@ -26,22 +26,11 @@ export default StyleSheet.create({
     borderTopLeftRadius: 4,
   },
   infoContainer: {
-    height: 'auto',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingHorizontal: 20,
     overflow: 'hidden',
-  },
-  bottomContainer: {
-    height: 47,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 20,
-    borderTopWidth: 0.5,
-    borderColor: colors.midGrey,
   },
   inLineInfo: {
     width: '100%',
@@ -54,6 +43,16 @@ export default StyleSheet.create({
     fontWeight: '700',
     lineHeight: 21,
     color: colors.black,
+  },
+  bottomContainer: {
+    height: 47,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginTop: 20,
+    borderTopWidth: 0.5,
+    borderColor: colors.midGrey,
   },
   subText: {
     fontSize: 10,
@@ -75,7 +74,7 @@ export default StyleSheet.create({
     lineHeight: 21,
   },
   rightCaret: {
-    justifyContent: 'center',
-    opacity: 0.5,
+    // alignItems: 'center',
+    borderWidth: 1,
   },
 });
