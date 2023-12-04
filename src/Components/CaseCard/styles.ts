@@ -4,8 +4,7 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   caseCard: {
-    height: 167,
-    width: 'auto',
+    width: '100%',
     flexDirection: 'column',
     paddingHorizontal: 20,
 
@@ -26,18 +25,23 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   infoContainer: {
-    flexDirection: 'column',
+    height: 90,
     width: '65%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  titleContainer: {
+    height: 59,
   },
   imageContainer: {
-    width: '30%',
-    aspectRatio: 1,
-    borderRadius: 10,
+    height: 90,
+    width: '35%',
+    maxWidth: 90,
+    borderRadius: 3,
   },
   statusContainer: {
     height: 27,
     width: 129,
-    marginTop: 12,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -64,6 +68,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     lineHeight: 20,
+    overflow: 'hidden',
   },
   statusText: {
     fontSize: 14,
