@@ -29,8 +29,7 @@ export default function EligibilityCard({
           style={styles.buttonContainer}
           onPress={() => {
             router.push({
-              pathname: '/AllCases/EligibilityForm',
-              params: { caseId: caseData.id },
+              pathname: `/AllCases/EligibilityForm/${caseData.id}`,
             });
           }}
         >

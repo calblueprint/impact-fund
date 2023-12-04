@@ -35,10 +35,7 @@ export default function FormsCard(caseData: Case) {
           disabled={Number(caseData.formCount) === 0}
           onPress={() =>
             router.push({
-              pathname: `/AllCases/Forms`,
-              params: {
-                ...caseData,
-              },
+              pathname: `/AllCases/Forms/${caseData.id}?caseSite=${caseData.caseSite}`,
             })
           }
         >
