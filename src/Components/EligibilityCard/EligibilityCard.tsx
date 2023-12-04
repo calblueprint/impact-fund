@@ -4,10 +4,10 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import Check from '../../../assets/check.svg';
+import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
-import Optout from '../../../assets/opt-out.svg';
+import OptOut from '../../../assets/opt-out.svg';
 import { Case, Eligibility } from '../../types/types';
 
 interface EligibilityCardProps {
@@ -26,7 +26,7 @@ export default function EligibilityCard({
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.buttonContainer}
           onPress={() => {
             router.push({
               pathname: '/AllCases/EligibilityForm',
@@ -34,50 +34,63 @@ export default function EligibilityCard({
             });
           }}
         >
-          <View style={styles.topText}>
-            <Check />
-            <View style={styles.center}>
-              <Text style={styles.text}>Check Eligibility</Text>
-            </View>
+          <View style={styles.leftContainer}>
+            <CheckEligibility />
+          </View>
+          <View style={styles.middleContainer}>
+            <Text style={styles.headerText}>Check eligibility</Text>
+            <Text style={styles.bodyText}>
+              Check your eligibility for this case if you would like to file a
+              claim or opt out.
+            </Text>
+          </View>
+          <View style={styles.rightContainer}>
             <Arrow />
           </View>
-
-          <Text>
-            Check your eligibility for this class action if you would like to
-            file a claim or opt out.
-          </Text>
         </TouchableOpacity>
       </View>
     );
   } else if (status === Eligibility.ELIGIBLE) {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
-          <View style={styles.topText}>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <View style={styles.leftContainer}>
             <Fileclaim />
-            <View style={styles.center}>
-              <Text style={styles.text}>File a Claim</Text>
-            </View>
+          </View>
+          <View style={styles.middleContainer}>
+            <Text style={styles.headerText}>File a case claim</Text>
+            <Text style={styles.bodyText}>
+              Eligible class members can submit a claim electronically to
+              receive a settlement.
+            </Text>
+          </View>
+          <View style={styles.rightContainer}>
             <Arrow />
           </View>
-
-          <Text>
-            Eligible class members who wish to receive payment can submit a
-            claim electronically.
-          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <View style={styles.topText}>
-            <Optout />
-            <View style={styles.center}>
-              <Text style={styles.text}>Opt Out</Text>
-            </View>
+
+        <View style={styles.separatorComponent}>
+          <View style={styles.horizontalLine} />
+          <View style={styles.textContainer}>
+            <Text style={styles.separatorText}>OR</Text>
+          </View>
+          <View style={styles.horizontalLine} />
+        </View>
+
+        <TouchableOpacity style={styles.buttonContainer}>
+          <View style={styles.leftContainer}>
+            <OptOut />
+          </View>
+          <View style={styles.middleContainer}>
+            <Text style={styles.headerText}>Opt out of case</Text>
+            <Text style={styles.bodyText}>
+              Opt out of this case to do something you can still file private
+              claim yada yada
+            </Text>
+          </View>
+          <View style={styles.rightContainer}>
             <Arrow />
           </View>
-
-          <Text>
-            Submit a claim if you wish to receive a payment from the settlement.
-          </Text>
         </TouchableOpacity>
       </View>
     );

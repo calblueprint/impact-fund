@@ -4,38 +4,77 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    display: 'flex',
     width: '100%',
     height: 'auto',
     justifyContent: 'center',
     alignContent: 'center',
-    rowGap: 20,
   },
-  button: {
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    height: 125,
+  buttonContainer: {
     width: '100%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+    padding: 20,
+    backgroundColor: colors.white,
+
     border: 'solid',
-    borderColor: colors.darkGrey,
     borderWidth: 0.5,
     borderRadius: 5,
-    background: colors.white,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    borderColor: colors.midGrey,
+
+    shadowColor: colors.black,
+    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOpacity: 1.25,
+    shadowRadius: 0.05,
+    elevation: 1,
   },
-  topText: {
-    flexDirection: 'row',
+  leftContainer: {
+    flex: 0.15,
+  },
+  middleContainer: {
+    flex: 0.8,
+    flexDirection: 'column',
     justifyContent: 'space-between',
+    rowGap: 12,
+  },
+  rightContainer: {
+    flex: 0.05,
+    alignItems: 'flex-end',
+  },
+  separatorComponent: {
+    height: 33,
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  center: {
-    flex: 0.9,
+  textContainer: {
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  text: {
-    color: colors.black,
+  horizontalLine: {
+    flex: 1,
+    height: 0.5,
+    backgroundColor: colors.black,
+  },
+  headerText: {
     fontSize: 20,
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: '600',
+    lineHeight: 21,
+    color: colors.black,
+  },
+  bodyText: {
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 16,
+    color: colors.darkGrey,
+  },
+  separatorText: {
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 16,
+    color: colors.black,
   },
 });
