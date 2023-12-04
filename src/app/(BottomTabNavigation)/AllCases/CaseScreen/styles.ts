@@ -11,9 +11,14 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: colors.white,
   },
-  scrollView: {
+  outerScroll: {
     flex: 1,
     width: '92%',
+  },
+  innerScroll: {
+    alignItems: 'center',
+    rowGap: 20,
+    paddingBottom: 20,
   },
   headerContainer: {
     flex: 0.2,
