@@ -11,10 +11,10 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderColor: colors.midGrey,
     backgroundColor: colors.white,
-    shadowColor: colors.midGrey,
+    shadowColor: colors.black,
     shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1,
-    shadowRadius: 0.75,
+    shadowOpacity: 1.25,
+    shadowRadius: 0.05,
     elevation: 1,
   },
   imageContainer: {
