@@ -34,13 +34,11 @@ export default function SignUpScreen() {
   };
 
   const handleSubmit = () => {
-    if (!displayError) {
-      if (validateEmail()) {
-        router.push({
-          pathname: 'SignUp/Password',
-          params: { name, email },
-        });
-      }
+    if (validateEmail()) {
+      router.push({
+        pathname: 'SignUp/Password',
+        params: { name, email },
+      });
     }
   };
 
