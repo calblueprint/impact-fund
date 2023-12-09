@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
+import { z } from 'zod';
 
 import styles from './styles';
 
@@ -14,6 +15,8 @@ interface AuthInputProps {
   autoCapitalization: boolean;
   placeholder: string;
   setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
+  errorHandling: boolean;
+  setDisplayError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AuthInput({
@@ -27,6 +30,8 @@ export default function AuthInput({
   autoCapitalization,
   placeholder,
   setPlaceholder,
+  errorHandling,
+  setDisplayError,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -51,7 +56,36 @@ export default function AuthInput({
       setDisplayInput(true);
       setPlaceholder(defaultValue);
     }
+    if (isPassword && errorHandling) {
+      if (!validatePassword()) {
+        setDisplayError(true);
+      } else {
+        setDisplayError(false);
+      }
+    } else if (errorHandling) {
+      if (!validateEmail()) {
+        setDisplayError(true);
+      } else {
+        setDisplayError(false);
+      }
+    }
   }
+
+  const validatePassword = () => {
+    const lengthRegex = /^.{6,}$/;
+    return lengthRegex.test(input);
+  };
+
+  const validateEmail = () => {
+    try {
+      const emailSchema = z.string().email();
+      emailSchema.parse(input);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
 
   return (
     <View>
