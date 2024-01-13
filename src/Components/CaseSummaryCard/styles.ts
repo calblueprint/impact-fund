@@ -74,7 +74,6 @@ export default StyleSheet.create({
     lineHeight: 21,
   },
   rightCaret: {
-    // alignItems: 'center',
     borderWidth: 1,
   },
 });

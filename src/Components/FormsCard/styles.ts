@@ -14,7 +14,7 @@ export default StyleSheet.create({
     borderColor: colors.darkGrey,
   },
   topContainer: {
-    height: 26 + 6,
+    height: 32,
     width: '88%',
     flexDirection: 'row',
     justifyContent: 'space-between',
