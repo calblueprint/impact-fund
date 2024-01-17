@@ -12,7 +12,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
   outerScroll: {
-    flex: 1,
+    height: '84%',
     width: '92%',
   },
   innerScroll: {
@@ -31,6 +31,15 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 12,
     marginTop: 20,
+  },
+  linkContainer: {
+    height: '16%',
+    width: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: '7%',
+    borderTopWidth: 0.5,
+    borderColor: colors.darkGrey,
+    zIndex: 2,
   },
   title: {
     flex: 1,
