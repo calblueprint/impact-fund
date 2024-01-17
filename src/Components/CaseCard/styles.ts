@@ -25,17 +25,19 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   infoContainer: {
-    width: '65%',
+    width: '62%',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     paddingVertical: 5,
+    // borderWidth: 1,
   },
   titleContainer: {
     marginBottom: 10,
   },
   imageContainer: {
-    height: 93,
+    // height: 93,
     aspectRatio: 1.1,
-    maxWidth: 90,
+    width: '35%',
     borderRadius: 3,
   },
   statusContainer: {
