@@ -6,13 +6,11 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: colors.white,
+    flex: 1,
   },
   outerScroll: {
-    minHeight: '100%',
+    minHeight: '84%',
     width: '84%',
-  },
-  innerScroll: {
-    paddingBottom: 20,
   },
   imageContainer: {
     width: '100%',
@@ -26,6 +24,15 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 28,
     borderColor: colors.midGrey,
+  },
+  linkContainer: {
+    height: '16%',
+    width: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: '7%',
+    borderTopWidth: 0.5,
+    borderColor: colors.darkGrey,
+    zIndex: 2,
   },
   inLineSubInfo: {
     flexDirection: 'row',

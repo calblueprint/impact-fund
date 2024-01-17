@@ -4,10 +4,9 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flex: 1,
-    display: 'flex',
     width: '100%',
     backgroundColor: colors.white,
   },
@@ -31,15 +30,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 12,
     marginTop: 20,
-  },
-  linkContainer: {
-    height: '16%',
-    width: '100%',
-    justifyContent: 'center',
-    paddingHorizontal: '7%',
-    borderTopWidth: 0.5,
-    borderColor: colors.darkGrey,
-    zIndex: 2,
   },
   title: {
     flex: 1,

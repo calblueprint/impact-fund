@@ -39,30 +39,26 @@ function CaseScreen() {
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <>
-          <ScrollView
-            style={styles.outerScroll}
-            contentContainerStyle={styles.innerScroll}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>{caseData.title}</Text>
-            </View>
-            <CaseStatusBar status={caseData.caseStatus} />
-            {status === Eligibility.ELIGIBLE && (
-              <EligibilityCard caseData={caseData} status={status} />
-            )}
-            <CaseSummaryCard {...caseData} />
-            {(status === Eligibility.INELIGIBLE ||
-              status === Eligibility.UNDETERMINED) && (
-              <EligibilityCard caseData={caseData} status={status} />
-            )}
-            <FormsCard {...caseData} />
-          </ScrollView>
-          <View style={styles.linkContainer}>
-            <EducationalBar />
+        <ScrollView
+          style={styles.outerScroll}
+          contentContainerStyle={styles.innerScroll}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{caseData.title}</Text>
           </View>
-        </>
+          <CaseStatusBar status={caseData.caseStatus} />
+          {status === Eligibility.ELIGIBLE && (
+            <EligibilityCard caseData={caseData} status={status} />
+          )}
+          <CaseSummaryCard {...caseData} />
+          {(status === Eligibility.INELIGIBLE ||
+            status === Eligibility.UNDETERMINED) && (
+            <EligibilityCard caseData={caseData} status={status} />
+          )}
+          <FormsCard {...caseData} />
+          <EducationalBar />
+        </ScrollView>
       )}
     </View>
   );
