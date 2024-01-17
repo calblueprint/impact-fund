@@ -29,9 +29,11 @@ export default StyleSheet.create({
     width: '65%',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    paddingVertical: 5,
+    borderWidth: 1,
   },
   titleContainer: {
-    height: 59,
+    // height: 59,
   },
   imageContainer: {
     height: 90,

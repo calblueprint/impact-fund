@@ -13,14 +13,7 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.titleText}>All Cases</Text>
-        {/* <TouchableOpacity
-          onPress={() => router.push('/AllCases/QRCodeScanner')}
-        >
-          <View style={styles.circle}>
-            <Text>Camera</Text>
-          </View>
-        </TouchableOpacity> */}
+        <Text style={styles.titleText}>My Cases</Text>
       </View>
       <View style={styles.casesContainer}>
         {loading ? (
