@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router/tabs';
 import React from 'react';
+// import { TouchableOpacity } from 'react-native';
 
 export default function AppLayout() {
   return (
@@ -12,17 +13,18 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="Profile"
-        options={{
-          tabBarLabel: 'Profile',
-          title: 'Profile',
-        }}
-      />
-      <Tabs.Screen
         name="Updates"
         options={{
           tabBarLabel: 'Updates',
           title: 'Updates',
+          // tabBarButton: props => <TouchableOpacity {...props} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        options={{
+          tabBarLabel: 'Profile',
+          title: 'Profile',
         }}
       />
     </Tabs>
