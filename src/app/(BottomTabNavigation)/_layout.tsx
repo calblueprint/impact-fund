@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router/tabs';
 import React from 'react';
-// import { TouchableOpacity } from 'react-native';
+
+import BottomTabButton from '../../Components/BottomTabButton/BottomTabButton';
 
 export default function AppLayout() {
   return (
@@ -17,7 +18,7 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Updates',
           title: 'Updates',
-          // tabBarButton: props => <TouchableOpacity {...props} />,
+          tabBarButton: props => <BottomTabButton {...props} />,
         }}
       />
       <Tabs.Screen
