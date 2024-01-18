@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import ThreeDots from '../../../assets/three-dots.svg';
@@ -35,9 +36,9 @@ function CaseCard(caseData: Case) {
         </View>
         <Image
           style={styles.imageContainer}
-          source={{
-            uri: caseData.imageUrl,
-          }}
+          source={caseData.imageUrl}
+          contentFit="cover"
+          transition={300}
         />
       </View>
       <View style={styles.bottomContainer}>

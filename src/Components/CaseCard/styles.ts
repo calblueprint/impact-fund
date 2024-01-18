@@ -34,6 +34,7 @@ export default StyleSheet.create({
     aspectRatio: 1.1,
     width: '35%',
     borderRadius: 3,
+    backgroundColor: colors.lightGrey,
   },
   statusContainer: {
     height: 27,
