@@ -23,11 +23,10 @@ function CaseCard(caseData: Case) {
     >
       <View style={styles.mainContentContainer}>
         <View style={styles.infoContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText} numberOfLines={2}>
-              {caseData.title}
-            </Text>
-          </View>
+          <Text style={styles.titleText} numberOfLines={2}>
+            {caseData.title}
+          </Text>
+
           <View style={[styles.statusContainer, statusColor.background]}>
             <Text style={[styles.statusText, statusColor.text]}>
               {caseData.caseStatus}

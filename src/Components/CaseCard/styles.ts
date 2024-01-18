@@ -28,14 +28,9 @@ export default StyleSheet.create({
     width: '62%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingVertical: 5,
-    // borderWidth: 1,
-  },
-  titleContainer: {
-    marginBottom: 10,
+    paddingVertical: 7,
   },
   imageContainer: {
-    // height: 93,
     aspectRatio: 1.1,
     width: '35%',
     borderRadius: 3,
