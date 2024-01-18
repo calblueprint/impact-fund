@@ -43,8 +43,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.midGrey,
 
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOffset: { width: 0.05, height: 1.5 },
     shadowOpacity: 1.25,
     shadowRadius: 0.05,
     elevation: 1,
