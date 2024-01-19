@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-// import { colors } from '../../styles/colors';
+import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    height: 20,
-    width: 20,
+    height: 56,
+    width: 66,
     borderWidth: 1,
   },
 });
