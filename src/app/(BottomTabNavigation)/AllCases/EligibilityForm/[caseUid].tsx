@@ -1,4 +1,4 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { Link, router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,16 +12,15 @@ import {
 import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
-  const { caseId } = useLocalSearchParams() as unknown as {
-    caseId: CaseUid;
-  };
+  const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
 
   const updateEligibility = async (status: Eligibility) => {
-    await updateCaseStatus(caseId, status);
-    getCaseById(caseId).then(res => {
-      router.back();
-      router.replace({ pathname: '/AllCases/CaseScreen', params: { ...res } });
-    });
+    if (caseUid !== undefined) {
+      await updateCaseStatus(caseUid, status);
+      router.replace({
+        pathname: `/AllCases/CaseScreen/${caseUid}`,
+      });
+    }
   };
   return (
     <View style={styles.container}>
@@ -38,13 +37,15 @@ export default function EligibilityForm() {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonWrapperTop}>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonTop]}
-            onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
-          >
-            <Text>Yes, I am Eligible</Text>
-            <RightArrow />
-          </TouchableOpacity>
+          <Link href={`/AllCases/CaseScreen/${caseUid}`} asChild replace>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonTop]}
+              onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
+            >
+              <Text>Yes, I am Eligible</Text>
+              <RightArrow />
+            </TouchableOpacity>
+          </Link>
         </View>
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
