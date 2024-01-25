@@ -11,6 +11,15 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Cases',
           title: 'Cases',
+          tabBarButton: props => <BottomTabButton {...props} />,
+          // tabBarActiveBackgroundColor: '#000000',
+          // tabBarItemStyle: {
+          //   height: 56,
+          //   backgroundColor: '#00ff00',
+          //   margin: 5,
+          //   borderRadius: 10,
+          //   borderWidth: 1,
+          // },
         }}
       />
       <Tabs.Screen
@@ -18,7 +27,6 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Updates',
           title: 'Updates',
-          tabBarButton: props => <BottomTabButton {...props} />,
         }}
       />
       <Tabs.Screen

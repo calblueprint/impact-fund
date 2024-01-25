@@ -8,7 +8,7 @@ export default function BottomTabButton({ ...props }) {
   return (
     <TouchableOpacity style={styles.container} {...props}>
       <RedHomeIcon />
-      <Text>Button</Text>
+      <Text style={styles.buttonText}>Cases</Text>
     </TouchableOpacity>
   );
 }
