@@ -9,29 +9,19 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: colors.white,
   },
-  headerContainer: {
-    height: 80,
-    width: '84%',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-  },
   casesContainer: {
-    width: '84%',
+    width: '85%',
     flexDirection: 'column',
-    marginVertical: 17,
   },
   innerScroll: {
     rowGap: 20,
-    paddingBottom: 90,
+    paddingTop: 50,
+    paddingBottom: 20,
   },
-  circle: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    backgroundColor: colors.midGrey,
-    alignItems: 'center',
-    justifyContent: 'center',
+  headerContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
   },
   titleText: {
     fontSize: 32,
