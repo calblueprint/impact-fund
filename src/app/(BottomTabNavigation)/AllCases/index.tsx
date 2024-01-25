@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { FlatList, SectionList, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';

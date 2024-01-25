@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
@@ -35,9 +36,9 @@ export default function CaseSummaryScreen() {
           >
             <Image
               style={styles.imageContainer}
-              source={{
-                uri: caseData.imageUrl,
-              }}
+              source={caseData.imageUrl}
+              contentFit="cover"
+              transition={300}
             />
             <View style={styles.blurbContainer}>
               <Text style={styles.blurbText}>{caseData.blurb}</Text>
