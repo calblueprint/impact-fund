@@ -36,7 +36,7 @@ export default StyleSheet.create({
   camera: {
     flexDirection: 'row',
     width: 353,
-    height: 150,
+    height: 57,
     borderColor: colors.midGrey,
     borderWidth: 1,
     borderStyle: 'solid',
