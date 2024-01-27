@@ -42,8 +42,4 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '600',
   },
-
-  errorMessage: {
-    color: colors.midRed,
-  },
 });

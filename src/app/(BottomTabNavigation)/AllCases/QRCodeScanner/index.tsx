@@ -1,7 +1,7 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Toast, {
   BaseToast,
   ErrorToast,
@@ -11,7 +11,6 @@ import Toast, {
 import styles from './styles';
 import Arrow from '../../../../../assets/black-right-arrow.svg';
 import ErrorIcon from '../../../../../assets/warning.svg';
-import { colors } from '../../../../styles/colors';
 import {
   getAllCaseIds,
   getCaseById,
@@ -39,14 +38,14 @@ function QRCodeScannerScreen() {
       <ErrorToast
         {...props}
         text1Style={{
-          fontSize: 17,
+          fontSize: 14,
+          fontWeight: '400',
         }}
         renderLeadingIcon={ErrorIcon}
         style={{
-          borderLeftColor: colors.darkRed,
           justifyContent: 'center',
           alignItems: 'center',
-          paddingHorizontal: 20,
+          paddingLeft: 20,
         }}
       />
     ),
@@ -58,6 +57,7 @@ function QRCodeScannerScreen() {
       setValidIds(allCases);
       const userCases = await getCaseIdsFromUserId('NO_ID');
       setUserIds(userCases);
+      console.log(validIds, userIds);
     };
     getAllCasesAndValidCases();
   }, []);
@@ -88,13 +88,13 @@ function QRCodeScannerScreen() {
     if (!validIds.includes(caseId)) {
       Toast.show({
         type: 'error',
-        text1: 'Not a valid QRCODE!',
+        text1: 'Sorry! This QR code is invalid.',
         visibilityTime: 1000,
       });
     } else if (userIds.includes(caseId)) {
       Toast.show({
         type: 'error',
-        text1: 'Duplicate cases not allowed!',
+        text1: "You've already scanned this QR code.",
         visibilityTime: 1000,
       });
     } else if (!scanned) {
