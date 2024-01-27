@@ -6,29 +6,28 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
     width: '100%',
     backgroundColor: colors.white,
   },
-  headerContainer: {
-    flex: 0.2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '100%',
-    paddingRight: 30,
-  },
   casesContainer: {
-    flex: 0.8,
+    width: '85%',
     flexDirection: 'column',
-    width: '90%',
   },
-  circle: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    backgroundColor: colors.midGrey,
-    alignItems: 'center',
-    justifyContent: 'center',
+  innerScroll: {
+    rowGap: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
+  },
+  headerContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+  },
+  titleText: {
+    fontSize: 32,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 33,
+    color: colors.black,
   },
 });
