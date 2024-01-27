@@ -53,6 +53,7 @@ export function getStatusColor(status: string) {
       background: {
         backgroundColor: colors.lightGreen,
         borderColor: colors.darkGreen,
+        shadowColor: colors.darkGreen,
       },
       text: { color: colors.darkGreen },
     };
@@ -61,6 +62,7 @@ export function getStatusColor(status: string) {
       background: {
         backgroundColor: colors.lightYellow,
         borderColor: colors.midYellow,
+        shadowColor: colors.midYellow,
       },
       text: { color: colors.darkYellow },
     };
@@ -69,6 +71,7 @@ export function getStatusColor(status: string) {
       background: {
         backgroundColor: colors.lightRed,
         borderColor: colors.midRed,
+        shadowColor: colors.midRed,
       },
       text: { color: colors.darkRed },
     };
@@ -77,6 +80,7 @@ export function getStatusColor(status: string) {
       background: {
         backgroundColor: colors.lightGrey,
         borderColor: colors.midGrey,
+        shadowColor: colors.midGrey,
       },
       text: { color: colors.midGrey },
     };

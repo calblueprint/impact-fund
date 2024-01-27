@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
@@ -19,9 +20,9 @@ export default function CaseSummaryCard(caseData: Case) {
       <View style={styles.container}>
         <Image
           style={styles.imageContainer}
-          source={{
-            uri: caseData.imageUrl,
-          }}
+          source={caseData.imageUrl}
+          contentFit="cover"
+          transition={300}
         />
         <View style={styles.infoContainer}>
           <View style={styles.inLineInfo}>
