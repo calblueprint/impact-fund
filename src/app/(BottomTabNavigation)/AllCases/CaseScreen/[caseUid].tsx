@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
@@ -16,6 +16,7 @@ function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
   const [status, setStatus] = useState<Eligibility>();
   const [caseData, setCaseData] = useState<Case>();
+  const navigation = useNavigation();
 
   const getCase = async (uid: string) => {
     const caseData = await getCaseById(uid);
@@ -30,9 +31,16 @@ function CaseScreen() {
   useEffect(() => {
     if (caseUid !== undefined) {
       getCase(caseUid);
-      getStatus(caseUid);
     }
   }, []);
+
+  useEffect(() => {
+    navigation.addListener('focus', async () => {
+      if (caseUid !== undefined) {
+        getStatus(caseUid);
+      }
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

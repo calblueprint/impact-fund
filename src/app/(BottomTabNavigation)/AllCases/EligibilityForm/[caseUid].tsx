@@ -5,10 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import RightArrow from '../../../../../assets/right-arrow.svg';
-import {
-  getCaseById,
-  updateCaseStatus,
-} from '../../../../supabase/queries/cases';
+import { updateCaseStatus } from '../../../../supabase/queries/cases';
 import { CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
@@ -17,9 +14,7 @@ export default function EligibilityForm() {
   const updateEligibility = async (status: Eligibility) => {
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, status);
-      router.replace({
-        pathname: `/AllCases/CaseScreen/${caseUid}`,
-      });
+      router.back();
     }
   };
   return (
@@ -37,15 +32,13 @@ export default function EligibilityForm() {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonWrapperTop}>
-          <Link href={`/AllCases/CaseScreen/${caseUid}`} asChild replace>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonTop]}
-              onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
-            >
-              <Text>Yes, I am Eligible</Text>
-              <RightArrow />
-            </TouchableOpacity>
-          </Link>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonTop]}
+            onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
+          >
+            <Text>Yes, I am Eligible</Text>
+            <RightArrow />
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
