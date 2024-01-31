@@ -16,16 +16,19 @@ function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
   const [status, setStatus] = useState<Eligibility>();
   const [caseData, setCaseData] = useState<Case>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigation = useNavigation();
 
   const getCase = async (uid: string) => {
     const caseData = await getCaseById(uid);
     setCaseData(caseData);
+    setIsLoading(false);
   };
 
   const getStatus = async (uid: string) => {
     const caseStatus = await getCaseStatus(uid);
     setStatus(caseStatus);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -36,6 +39,7 @@ function CaseScreen() {
 
   useEffect(() => {
     navigation.addListener('focus', async () => {
+      setIsLoading(true);
       if (caseUid !== undefined) {
         getStatus(caseUid);
       }
@@ -44,7 +48,7 @@ function CaseScreen() {
 
   return (
     <View style={styles.container}>
-      {caseData === undefined ? (
+      {isLoading || caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
         <ScrollView
