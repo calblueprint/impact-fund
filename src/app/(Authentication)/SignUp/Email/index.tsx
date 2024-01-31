@@ -15,10 +15,12 @@ export default function SignUpScreen() {
 
   const [displayName, setDisplayName] = useState<boolean>(false);
   const [placeholderName, setPlaceholderName] = useState<string>('Full name');
+  const [nameFilled, setNameFilled] = useState<boolean>(false);
 
   const [displayEmail, setDisplayEmail] = useState<boolean>(false);
   const [placeholderEmail, setPlaceholderEmail] =
     useState<string>('Email address');
+  const [emailFilled, setEmailFilled] = useState<boolean>(false);
 
   const validateEmail = () => {
     try {
@@ -34,12 +36,19 @@ export default function SignUpScreen() {
   };
 
   const handleSubmit = () => {
-    if (validateEmail()) {
+    if (filled() && validateEmail()) {
       router.push({
         pathname: 'SignUp/Password',
         params: { name, email },
       });
     }
+  };
+
+  const filled = () => {
+    if (emailFilled && nameFilled) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -59,7 +68,6 @@ export default function SignUpScreen() {
         </View>
       </View>
       <Text style={styles.instructionText}>Create your account.</Text>
-
       <View style={styles.inputBox}>
         <AuthInput
           input={name}
@@ -74,9 +82,9 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderName}
           errorHandling={false}
           setDisplayError={setDisplayError}
+          setFilled={setNameFilled}
         />
       </View>
-
       <View style={styles.inputBox}>
         <AuthInput
           input={email}
@@ -91,17 +99,21 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderEmail}
           errorHandling
           setDisplayError={setDisplayError}
+          setFilled={setEmailFilled}
         />
       </View>
-
       <View>
         <Text style={styles.errorMessage}>
           {' '}
           {displayError ? 'Sorry! Invalid email address.' : ' '}{' '}
         </Text>
       </View>
-
-      <TouchableOpacity style={[styles.nextButton]} onPress={handleSubmit}>
+      <TouchableOpacity
+        style={
+          filled() && !displayError ? styles.nextButton : styles.nextButtonGray
+        }
+        onPress={handleSubmit}
+      >
         <Text style={styles.nextText}>Continue</Text>
         <View>
           <Arrow />

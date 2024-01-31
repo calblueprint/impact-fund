@@ -23,17 +23,34 @@ export default function SignUpScreen() {
   const [displayStreet, setDisplayStreet] = useState<boolean>(false);
   const [placeholderStreet, setPlaceholderStreet] =
     useState<string>('Street address');
+  const [streetFilled, setStreetFilled] = useState<boolean>(false);
 
   const [displayCity, setDisplayCity] = useState<boolean>(false);
   const [placeholderCity, setPlaceholderCity] = useState<string>('City');
+  const [cityFilled, setCityFilled] = useState<boolean>(false);
 
   const [displayState, setDisplayState] = useState<boolean>(false);
   const [placeholderState, setPlaceholderState] = useState<string>('State');
+  const [stateFilled, setStateFilled] = useState<boolean>(false);
 
   const [displayZip, setDisplayZip] = useState<boolean>(false);
   const [placeholderZip, setPlaceholderZip] = useState<string>('Zip code');
+  const [zipFilled, setZipFilled] = useState<boolean>(false);
 
   const [, setDummyError] = useState<boolean>(false);
+
+  const filled = () => {
+    if (streetFilled && cityFilled && stateFilled && zipFilled) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleSubmit = () => {
+    if (filled()) {
+      signUpUser(name, email, password, streetAddress, city, state, zipcode);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -69,6 +86,7 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderStreet}
           errorHandling={false}
           setDisplayError={setDummyError}
+          setFilled={setStreetFilled}
         />
       </View>
 
@@ -86,6 +104,7 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderCity}
           errorHandling={false}
           setDisplayError={setDummyError}
+          setFilled={setCityFilled}
         />
       </View>
 
@@ -102,6 +121,7 @@ export default function SignUpScreen() {
             autoCapitalization
             placeholder={placeholderState}
             setPlaceholder={setPlaceholderState}
+            setFilled={setStateFilled}
           />
         </View>
 
@@ -119,16 +139,15 @@ export default function SignUpScreen() {
             autoCapitalization
             placeholder={placeholderZip}
             setPlaceholder={setPlaceholderZip}
+            setFilled={setZipFilled}
           />
         </View>
       </View>
       <Text style={styles.space2}> </Text>
 
       <TouchableOpacity
-        style={styles.nextButton}
-        onPress={() =>
-          signUpUser(name, email, password, streetAddress, city, state, zipcode)
-        }
+        style={filled() ? styles.nextButton : styles.nextButtonGray}
+        onPress={() => handleSubmit()}
       >
         <Text style={styles.nextText}>Sign Up</Text>
         <View style={styles.check}>

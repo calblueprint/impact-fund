@@ -17,6 +17,7 @@ export default function SignUpScreen() {
   const [displayPassword, setDisplayPassword] = useState<boolean>(false);
   const [placeholderPassword, setPlaceholderPassword] =
     useState<string>('Password');
+  const [passwordFilled, setPasswordFilled] = useState<boolean>(false);
 
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [displayErrorPasswordMatch, setDisplayErrorPasswordMatch] =
@@ -25,6 +26,8 @@ export default function SignUpScreen() {
     useState<boolean>(false);
   const [placeholderConfirmPassword, setPlaceholderConfirmPassword] =
     useState<string>('Confirm password');
+  const [confirmPasswordFilled, setConfirmPasswordFilled] =
+    useState<boolean>(false);
 
   const validateConfirmPassword = () => {
     if (confirmPassword.trim() === password.trim()) {
@@ -38,20 +41,25 @@ export default function SignUpScreen() {
 
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
+    setDisplayErrorPassword(!lengthRegex.test(password));
     return lengthRegex.test(password);
   };
 
   const handleSubmit = () => {
-    if (!displayErrorPassword && validatePassword()) {
+    if (validateConfirmPassword() && validatePassword() && filled()) {
       if (validateConfirmPassword())
         router.push({
           pathname: 'SignUp/Address',
           params: { name, email, password },
         });
     }
-    if (!validatePassword()) {
-      setDisplayErrorPassword(true);
+  };
+
+  const filled = () => {
+    if (passwordFilled && confirmPasswordFilled) {
+      return true;
     }
+    return false;
   };
 
   return (
@@ -87,6 +95,7 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderPassword}
           errorHandling
           setDisplayError={setDisplayErrorPassword}
+          setFilled={setPasswordFilled}
         />
       </View>
 
@@ -104,6 +113,7 @@ export default function SignUpScreen() {
           setPlaceholder={setPlaceholderConfirmPassword}
           errorHandling={false}
           setDisplayError={setDisplayErrorPasswordMatch}
+          setFilled={setConfirmPasswordFilled}
         />
       </View>
 
@@ -118,7 +128,14 @@ export default function SignUpScreen() {
         </Text>
       </View>
 
-      <TouchableOpacity style={[styles.nextButton]} onPress={handleSubmit}>
+      <TouchableOpacity
+        style={
+          filled() && !displayErrorPassword && !displayErrorPasswordMatch
+            ? styles.nextButton
+            : styles.nextButtonGray
+        }
+        onPress={handleSubmit}
+      >
         <Text style={styles.nextText}>Continue</Text>
         <View>
           <Arrow />

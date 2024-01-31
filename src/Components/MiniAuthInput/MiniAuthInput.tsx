@@ -14,6 +14,7 @@ interface MiniAuthInputProps {
   autoCapitalization: boolean;
   placeholder: string;
   setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
+  setFilled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function MiniAuthInput({
@@ -27,6 +28,7 @@ export default function MiniAuthInput({
   autoCapitalization,
   placeholder,
   setPlaceholder,
+  setFilled,
 }: MiniAuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -40,8 +42,10 @@ export default function MiniAuthInput({
     if (input.trim() === '') {
       setPlaceholder(defaultValue);
       setDisplayInput(false);
+      setFilled(false);
     } else {
       setPlaceholder('');
+      setFilled(true);
     }
     setIsFocused(false);
   };
@@ -50,7 +54,9 @@ export default function MiniAuthInput({
     if (input.trim() === '') {
       setDisplayInput(true);
       setPlaceholder(defaultValue);
+      setFilled(false);
     }
+    setFilled(true);
   }
 
   return (

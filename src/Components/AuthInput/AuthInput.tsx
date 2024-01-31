@@ -17,6 +17,7 @@ interface AuthInputProps {
   setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
   errorHandling: boolean;
   setDisplayError: React.Dispatch<React.SetStateAction<boolean>>;
+  setFilled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AuthInput({
@@ -32,6 +33,7 @@ export default function AuthInput({
   setPlaceholder,
   errorHandling,
   setDisplayError,
+  setFilled,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -45,8 +47,10 @@ export default function AuthInput({
     if (input.trim() === '') {
       setPlaceholder(defaultValue);
       setDisplayInput(false);
+      setFilled(false);
     } else {
       setPlaceholder('');
+      setFilled(true);
     }
     setIsFocused(false);
   };
@@ -55,7 +59,9 @@ export default function AuthInput({
     if (input.trim() === '') {
       setDisplayInput(true);
       setPlaceholder(defaultValue);
+      setFilled(false);
     }
+    setFilled(true);
     if (isPassword && errorHandling) {
       if (!validatePassword()) {
         setDisplayError(true);

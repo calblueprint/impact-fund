@@ -89,6 +89,16 @@ export default StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
   },
+  nextButtonGray: {
+    backgroundColor: colors.midGrey,
+    marginBottom: 20,
+    borderRadius: 3,
+    borderColor: colors.midGrey,
+    width: 310,
+    height: 50,
+    padding: 15,
+    flexDirection: 'row',
+  },
   errorMessage: {
     color: colors.darkRed,
     fontSize: 14,
