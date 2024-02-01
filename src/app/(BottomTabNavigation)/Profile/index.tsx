@@ -101,19 +101,20 @@ function ProfileScreen() {
         </View>
         <View style={styles.line} />
         <View>
-          <View style={styles.actionElementTop}>
-            <View style={styles.iconTitle}>
-              <RedTrash style={styles.icon} />
-              <Text style={[styles.textElements, styles.bottomPush]}>
-                Delete account
-              </Text>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/Profile/DeleteAccount');
+            }}
+          >
+            <View style={styles.actionElementTop}>
+              <View style={styles.iconTitle}>
+                <RedTrash style={styles.icon} />
+                <Text style={[styles.textElements, styles.bottomPush]}>
+                  Delete account
+                </Text>
+              </View>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                router.push('/Profile/DeleteAccount');
-              }}
-            />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity
