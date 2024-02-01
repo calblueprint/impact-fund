@@ -62,6 +62,7 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
+    marginTop: 320,
   },
   nextButtonGray: {
     backgroundColor: colors.midGrey,
@@ -73,6 +74,19 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
+    marginTop: 30,
+  },
+  nextButtonDown: {
+    backgroundColor: colors.midGrey,
+    alignItems: 'center',
+    borderRadius: 3,
+    borderColor: colors.midGrey,
+    borderWidth: 1,
+    width: 310,
+    height: 50,
+    padding: 15,
+    flexDirection: 'row',
+    marginTop: 320,
   },
   errorMessage: {
     color: colors.darkRed,

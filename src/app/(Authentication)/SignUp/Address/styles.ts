@@ -69,7 +69,7 @@ export default StyleSheet.create({
   },
 
   space2: {
-    marginBottom: 50,
+    marginBottom: 15,
   },
   nextText: {
     color: colors.white,
@@ -88,6 +88,7 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
+    marginTop: 300,
   },
   nextButtonGray: {
     backgroundColor: colors.midGrey,
@@ -98,6 +99,17 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
+  },
+  nextButtonDown: {
+    backgroundColor: colors.midGrey,
+    marginBottom: 20,
+    borderRadius: 3,
+    borderColor: colors.midGrey,
+    width: 310,
+    height: 50,
+    padding: 15,
+    flexDirection: 'row',
+    marginTop: 300,
   },
   errorMessage: {
     color: colors.darkRed,

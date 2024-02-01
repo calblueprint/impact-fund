@@ -29,6 +29,8 @@ export default function SignUpScreen() {
   const [confirmPasswordFilled, setConfirmPasswordFilled] =
     useState<boolean>(false);
 
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const validateConfirmPassword = () => {
     if (confirmPassword.trim() === password.trim()) {
       setDisplayErrorPasswordMatch(false);
@@ -96,6 +98,8 @@ export default function SignUpScreen() {
           errorHandling
           setDisplayError={setDisplayErrorPassword}
           setFilled={setPasswordFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
 
@@ -114,6 +118,8 @@ export default function SignUpScreen() {
           errorHandling={false}
           setDisplayError={setDisplayErrorPasswordMatch}
           setFilled={setConfirmPasswordFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
 
@@ -130,8 +136,13 @@ export default function SignUpScreen() {
 
       <TouchableOpacity
         style={
-          filled() && !displayErrorPassword && !displayErrorPasswordMatch
+          !isFocused &&
+          filled() &&
+          !displayErrorPassword &&
+          !displayErrorPasswordMatch
             ? styles.nextButton
+            : !isFocused
+            ? styles.nextButtonDown
             : styles.nextButtonGray
         }
         onPress={handleSubmit}

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 import { z } from 'zod';
 
@@ -18,6 +17,8 @@ interface AuthInputProps {
   errorHandling: boolean;
   setDisplayError: React.Dispatch<React.SetStateAction<boolean>>;
   setFilled: React.Dispatch<React.SetStateAction<boolean>>;
+  isFocused: boolean;
+  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AuthInput({
@@ -34,9 +35,9 @@ export default function AuthInput({
   errorHandling,
   setDisplayError,
   setFilled,
+  isFocused,
+  setIsFocused,
 }: AuthInputProps) {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
   const onClick = () => {
     setPlaceholder('');
     setIsFocused(true);

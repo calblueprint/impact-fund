@@ -15,6 +15,8 @@ interface MiniAuthInputProps {
   placeholder: string;
   setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
   setFilled: React.Dispatch<React.SetStateAction<boolean>>;
+  isFocused: boolean;
+  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function MiniAuthInput({
@@ -29,9 +31,9 @@ export default function MiniAuthInput({
   placeholder,
   setPlaceholder,
   setFilled,
+  isFocused,
+  setIsFocused,
 }: MiniAuthInputProps) {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
   const onClick = () => {
     setPlaceholder('');
     setIsFocused(true);

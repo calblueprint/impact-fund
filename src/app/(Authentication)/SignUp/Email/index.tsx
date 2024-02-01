@@ -22,6 +22,8 @@ export default function SignUpScreen() {
     useState<string>('Email address');
   const [emailFilled, setEmailFilled] = useState<boolean>(false);
 
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const validateEmail = () => {
     try {
       const emailSchema = z.string().email();
@@ -83,6 +85,8 @@ export default function SignUpScreen() {
           errorHandling={false}
           setDisplayError={setDisplayError}
           setFilled={setNameFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
       <View style={styles.inputBox}>
@@ -100,6 +104,8 @@ export default function SignUpScreen() {
           errorHandling
           setDisplayError={setDisplayError}
           setFilled={setEmailFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
       <View>
@@ -110,7 +116,11 @@ export default function SignUpScreen() {
       </View>
       <TouchableOpacity
         style={
-          filled() && !displayError ? styles.nextButton : styles.nextButtonGray
+          !isFocused && filled() && !displayError
+            ? styles.nextButton
+            : !isFocused
+            ? styles.nextButtonDown
+            : styles.nextButtonGray
         }
         onPress={handleSubmit}
       >

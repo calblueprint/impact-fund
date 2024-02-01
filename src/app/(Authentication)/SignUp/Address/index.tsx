@@ -39,6 +39,8 @@ export default function SignUpScreen() {
 
   const [, setDummyError] = useState<boolean>(false);
 
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const filled = () => {
     if (streetFilled && cityFilled && stateFilled && zipFilled) {
       return true;
@@ -87,6 +89,8 @@ export default function SignUpScreen() {
           errorHandling={false}
           setDisplayError={setDummyError}
           setFilled={setStreetFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
 
@@ -105,6 +109,8 @@ export default function SignUpScreen() {
           errorHandling={false}
           setDisplayError={setDummyError}
           setFilled={setCityFilled}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
         />
       </View>
 
@@ -122,6 +128,8 @@ export default function SignUpScreen() {
             placeholder={placeholderState}
             setPlaceholder={setPlaceholderState}
             setFilled={setStateFilled}
+            isFocused={isFocused}
+            setIsFocused={setIsFocused}
           />
         </View>
 
@@ -140,13 +148,21 @@ export default function SignUpScreen() {
             placeholder={placeholderZip}
             setPlaceholder={setPlaceholderZip}
             setFilled={setZipFilled}
+            isFocused={isFocused}
+            setIsFocused={setIsFocused}
           />
         </View>
       </View>
       <Text style={styles.space2}> </Text>
 
       <TouchableOpacity
-        style={filled() ? styles.nextButton : styles.nextButtonGray}
+        style={
+          filled() && !isFocused
+            ? styles.nextButton
+            : !isFocused
+            ? styles.nextButtonDown
+            : styles.nextButtonGray
+        }
         onPress={() => handleSubmit()}
       >
         <Text style={styles.nextText}>Sign Up</Text>
