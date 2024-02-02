@@ -12,6 +12,7 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
+import { useSession } from '../../../context/AuthContext';
 import {
   getCurrentUserInfo,
   signOutUser,
@@ -20,10 +21,13 @@ import { User, userInstance } from '../../../types/types';
 
 function ProfileScreen() {
   const [currSession, setCurrSession] = useState<User>(userInstance);
+  const { session } = useSession();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
       setCurrSession(result);
     });
+    console.log('result from currAuth function', currSession);
+    console.log('result from auth context', session);
   }, []);
   return (
     <View style={styles.container}>

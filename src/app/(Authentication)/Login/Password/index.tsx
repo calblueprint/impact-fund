@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { passwordExists } from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
 export default function LoginScreen() {
   const [password, setPassword] = useState<string>('');
@@ -12,10 +12,12 @@ export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
   const [displayPassword, setDisplayPassword] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>('Password');
+  const sessionHandler = useSession();
 
   async function signIn() {
-    const isPassword = await passwordExists(email, password);
-    if (!isPassword) {
+    const { error } = await sessionHandler.signInWithEmail(email, password);
+
+    if (error) {
       setDisplayError(true);
     } else {
       setDisplayError(false);
