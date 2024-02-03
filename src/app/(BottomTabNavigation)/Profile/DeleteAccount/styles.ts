@@ -6,15 +6,19 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingHorizontal: 25,
+    width: '100%',
+    alignItems: 'center',
+  },
+  screenContainer: {
+    width: '85%',
+    height: '100%',
+    justifyContent: 'space-between',
   },
   headerContainer: {
-    alignSelf: 'flex-start',
     marginTop: 63, // copied this value from profile screen
   },
   textContainer: {
     rowGap: 20,
-    marginTop: 100,
   },
   topText: {
     fontSize: 38,
@@ -30,16 +34,24 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginTop: 365, // im guessing here how do i move the buttons to the bottom of the screen w out just adding a bunch of marginTop for this container
+    justifyContent: 'space-between',
+    height: '5%',
+  },
+  buttonView: {
+    width: '48%',
+  },
+  buttonContent: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '60%',
   },
   cancelButton: {
     flex: 1,
-    flexDirection: 'row',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: colors.black,
-    paddingVertical: 10,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   cancelText: {
@@ -51,10 +63,8 @@ export default StyleSheet.create({
   confirmButton: {
     flex: 1,
     backgroundColor: colors.black,
-    flexDirection: 'row',
     borderRadius: 5,
     paddingVertical: 10,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   confirmText: {
@@ -62,8 +72,5 @@ export default StyleSheet.create({
     fontSize: 17,
     fontStyle: 'normal',
     fontWeight: '500',
-  },
-  gap: {
-    width: 10,
   },
 });
