@@ -4,14 +4,16 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: colors.white,
     width: '100%',
+    height: '100%',
     alignItems: 'center',
   },
   screenContainer: {
     width: '85%',
-    height: '100%',
+    height: '95%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
     justifyContent: 'space-between',
   },
   headerContainer: {
@@ -19,6 +21,7 @@ export default StyleSheet.create({
   },
   textContainer: {
     rowGap: 20,
+    height: '60%', // this is a bit of a guess
   },
   topText: {
     fontSize: 38,
@@ -64,7 +67,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
     borderRadius: 5,
-    paddingVertical: 10,
     alignItems: 'center',
   },
   confirmText: {

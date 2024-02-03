@@ -33,6 +33,7 @@ function DeleteAccountScreen() {
         <View style={styles.headerContainer}>
           <CasesHeader />
         </View>
+
         <View style={styles.textContainer}>
           <Text style={styles.topText}>Delete account?</Text>
           <Text style={styles.blurb}>
