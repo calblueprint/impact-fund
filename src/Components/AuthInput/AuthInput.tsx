@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 import { z } from 'zod';
 
@@ -5,104 +6,51 @@ import styles from './styles';
 
 interface AuthInputProps {
   input: string;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  defaultValue: string;
+  onChangeInput: (input: string) => void;
+  labelText: string;
+  placeholderText: string;
   isPassword: boolean;
-  displayInput: boolean;
-  setDisplayInput: React.Dispatch<React.SetStateAction<boolean>>;
   keyboard: KeyboardTypeOptions;
   autoCapitalization: boolean;
-  placeholder: string;
-  setPlaceholder: React.Dispatch<React.SetStateAction<string>>;
-  errorHandling: boolean;
-  setDisplayError: React.Dispatch<React.SetStateAction<boolean>>;
-  setFilled: React.Dispatch<React.SetStateAction<boolean>>;
-  isFocused: boolean;
-  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AuthInput({
   input,
-  setInput,
-  defaultValue,
+  onChangeInput,
+  labelText,
+  placeholderText,
   isPassword,
-  displayInput,
-  setDisplayInput,
   keyboard,
   autoCapitalization,
-  placeholder,
-  setPlaceholder,
-  errorHandling,
-  setDisplayError,
-  setFilled,
-  isFocused,
-  setIsFocused,
 }: AuthInputProps) {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [placeholder, setPlaceholder] = useState<string>(placeholderText);
+  const [isLabelDisplayed, setIsLabelDisplayed] = useState<boolean>(false);
+
   const onClick = () => {
-    setPlaceholder('');
     setIsFocused(true);
-    setDisplayInput(true);
+    setPlaceholder('');
+    setIsLabelDisplayed(true);
   };
 
   const offClick = () => {
+    setIsFocused(false);
     if (input.trim() === '') {
-      setPlaceholder(defaultValue);
-      setDisplayInput(false);
-      setFilled(false);
+      setPlaceholder(placeholderText);
+      setIsLabelDisplayed(false);
     } else {
       setPlaceholder('');
-      setFilled(true);
-    }
-    setIsFocused(false);
-  };
-
-  function removeInput() {
-    if (input.trim() === '') {
-      setDisplayInput(true);
-      setPlaceholder(defaultValue);
-      setFilled(false);
-    }
-    setFilled(true);
-    if (isPassword && errorHandling) {
-      if (!validatePassword()) {
-        setDisplayError(true);
-      } else {
-        setDisplayError(false);
-      }
-    } else if (errorHandling) {
-      if (!validateEmail()) {
-        setDisplayError(true);
-      } else {
-        setDisplayError(false);
-      }
-    }
-  }
-
-  const validatePassword = () => {
-    const lengthRegex = /^.{6,}$/;
-    return lengthRegex.test(input);
-  };
-
-  const validateEmail = () => {
-    try {
-      const emailSchema = z.string().email();
-      emailSchema.parse(input);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
     }
   };
 
   return (
     <View>
-      <Text style={styles.inputText}>{displayInput ? defaultValue : ' '} </Text>
+      <Text style={styles.inputText}>{isLabelDisplayed ? labelText : ' '}</Text>
 
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
         value={input}
-        onChangeText={setInput}
-        onEndEditing={removeInput}
+        onChangeText={onChangeInput}
         onFocus={onClick}
         onBlur={offClick}
         placeholder={placeholder}

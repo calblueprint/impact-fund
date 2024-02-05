@@ -11,46 +11,45 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [displayError, setDisplayError] = useState<boolean>(false);
 
-  const [displayName, setDisplayName] = useState<boolean>(false);
-  const [placeholderName, setPlaceholderName] = useState<string>('Full name');
-  const [nameFilled, setNameFilled] = useState<boolean>(false);
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const [displayEmail, setDisplayEmail] = useState<boolean>(false);
-  const [placeholderEmail, setPlaceholderEmail] =
-    useState<string>('Email address');
-  const [emailFilled, setEmailFilled] = useState<boolean>(false);
+  const onChangeName = (text: string) => {
+    setErrorExists(false);
+    setName(text);
+  };
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const onChangeEmail = (text: string) => {
+    setErrorExists(false);
+    setEmail(text);
+  };
 
-  const validateEmail = () => {
+  const validateName = (): boolean => {
+    return name.length !== 0;
+  };
+
+  const validateEmail = (): boolean => {
     try {
       const emailSchema = z.string().email();
       emailSchema.parse(email);
-      setDisplayError(false);
+      setErrorExists(false);
       return true;
     } catch (error) {
       console.log(error);
-      setDisplayError(true);
+      setErrorExists(true);
+      setErrorMessage('Sorry! Invalid email address.');
       return false;
     }
   };
 
   const handleSubmit = () => {
-    if (filled() && validateEmail()) {
+    if (validateName() && validateEmail()) {
       router.push({
         pathname: 'SignUp/Password',
         params: { name, email },
       });
     }
-  };
-
-  const filled = () => {
-    if (emailFilled && nameFilled) {
-      return true;
-    }
-    return false;
   };
 
   return (
@@ -73,54 +72,36 @@ export default function SignUpScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={name}
-          setInput={setName}
-          defaultValue="Full name"
+          onChangeInput={onChangeName}
+          labelText="Full Name"
+          placeholderText="Full Name"
           isPassword={false}
-          displayInput={displayName}
-          setDisplayInput={setDisplayName}
           keyboard="default"
           autoCapitalization
-          placeholder={placeholderName}
-          setPlaceholder={setPlaceholderName}
-          errorHandling={false}
-          setDisplayError={setDisplayError}
-          setFilled={setNameFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
       <View style={styles.inputBox}>
         <AuthInput
           input={email}
-          setInput={setEmail}
-          defaultValue="Email address"
+          onChangeInput={onChangeEmail}
+          labelText="Email address"
+          placeholderText="Email address"
           isPassword={false}
-          displayInput={displayEmail}
-          setDisplayInput={setDisplayEmail}
           keyboard="default"
           autoCapitalization={false}
-          placeholder={placeholderEmail}
-          setPlaceholder={setPlaceholderEmail}
-          errorHandling
-          setDisplayError={setDisplayError}
-          setFilled={setEmailFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
       <View>
         <Text style={styles.errorMessage}>
-          {' '}
-          {displayError ? 'Sorry! Invalid email address.' : ' '}{' '}
+          {errorExists ? errorMessage : ' '}
         </Text>
       </View>
       <TouchableOpacity
+        disabled={name.length === 0 || email.length === 0 || errorExists}
         style={
-          !isFocused && filled() && !displayError
-            ? styles.nextButton
-            : !isFocused
-            ? styles.nextButtonDown
-            : styles.nextButtonGray
+          name.length === 0 || email.length === 0 || errorExists
+            ? styles.nextButtonGray
+            : styles.nextButton
         }
         onPress={handleSubmit}
       >

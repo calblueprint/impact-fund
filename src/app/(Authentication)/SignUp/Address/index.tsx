@@ -74,7 +74,7 @@ export default function SignUpScreen() {
 
       <Text style={styles.instructionText}>Last, enter your address.</Text>
 
-      <View style={styles.inputBox}>
+      {/* <View style={styles.inputBox}>
         <AuthInput
           input={streetAddress}
           setInput={setStreetAddress}
@@ -152,7 +152,7 @@ export default function SignUpScreen() {
             setIsFocused={setIsFocused}
           />
         </View>
-      </View>
+      </View> */}
       <Text style={styles.space2}> </Text>
 
       <TouchableOpacity
