@@ -8,6 +8,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
   },
   topText: {
     textAlign: 'center',
@@ -33,8 +34,10 @@ export default StyleSheet.create({
     width: 300,
     borderRadius: 5,
     paddingHorizontal: 20,
+    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'space-between',
+    bottom: 20,
   },
   caseButtonText: {
     color: colors.black,
