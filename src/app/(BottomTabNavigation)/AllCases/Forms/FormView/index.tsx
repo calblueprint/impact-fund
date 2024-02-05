@@ -1,17 +1,20 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import styles from './styles';
-import { Form } from '../../../../../types/types';
 
 export default function FormView() {
-  const formData = useLocalSearchParams() as unknown as Form;
+  const { formUrl } = useLocalSearchParams<{ formUrl: string }>();
 
   return (
     <View style={styles.container}>
-      <WebView source={{ uri: formData.formUrl }} />
+      {formUrl === undefined ? (
+        <Text>Failed to Load Form Data</Text>
+      ) : (
+        <WebView source={{ uri: formUrl }} />
+      )}
     </View>
   );
 }

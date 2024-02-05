@@ -6,15 +6,18 @@ import styles from './styles';
 import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
-import { Form, Case } from '../../../../types/types';
+import { Form, CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
-  const caseData = useLocalSearchParams() as unknown as Case;
+  const { caseUid, caseSite } = useLocalSearchParams<{
+    caseUid: CaseUid;
+    caseSite?: string;
+  }>();
 
   const [forms, setForms] = useState<Form[]>([]);
 
-  async function getFormsOnLoad() {
-    getAllForms(caseData.id).then(data => {
+  async function getFormsOnLoad(uid: CaseUid) {
+    getAllForms(uid).then(data => {
       if (data.length > 0) {
         setForms(data);
       }
@@ -22,7 +25,9 @@ export default function FormsScreen() {
   }
 
   useEffect(() => {
-    getFormsOnLoad();
+    if (caseUid !== undefined) {
+      getFormsOnLoad(caseUid);
+    }
   }, []);
 
   return (
@@ -40,12 +45,11 @@ export default function FormsScreen() {
           />
         </View>
       </View>
-      <View style={styles.linkContainer}>
-        <ExternalSiteLink
-          text="View all case documents"
-          url={caseData.caseSite}
-        />
-      </View>
+      {caseSite === undefined ? null : (
+        <View style={styles.linkContainer}>
+          <ExternalSiteLink text="View all case documents" url={caseSite} />
+        </View>
+      )}
     </View>
   );
 }
