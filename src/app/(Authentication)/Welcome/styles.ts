@@ -18,6 +18,10 @@ export default StyleSheet.create({
   imageContainer: {
     width: '100%',
   },
+  image: {
+    width: 130,
+    height: 16,
+  },
   textContainer: {
     width: '100%',
     marginTop: 310,

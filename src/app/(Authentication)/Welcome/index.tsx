@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
 import StyledButton from '../../../Components/StyledButton/StyledButton';
@@ -8,12 +9,10 @@ function WelcomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require('../../../../assets/inline-logo.jpeg')}
-            style={{ width: 130, height: 16.25 }}
-          />
-        </View>
+        <Image
+          style={styles.image}
+          source={require('../../../../assets/inline-logo.jpeg')}
+        />
 
         <View style={styles.textContainer}>
           <Text style={styles.welcomeText}>Welcome to the Impact Fund!</Text>
