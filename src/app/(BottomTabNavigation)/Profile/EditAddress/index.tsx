@@ -11,28 +11,52 @@ import {
 } from '../../../../supabase/queries/auth';
 
 function EditNameScreen() {
-  const [streetName, setStreetName] = useState<string>('');
-  const [usState, setUsState] = useState<string>('');
+  const [streetAddress, setStreetAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [zip, setZip] = useState<string>('');
-  const [displayStreetName, setDisplayStreetName] = useState<boolean>(true);
-  const [displayState, setDisplayState] = useState<boolean>(true);
-  const [displayCity, setDisplayCity] = useState<boolean>(true);
-  const [displayZip, setDisplayZip] = useState<boolean>(true);
-  const [streetPlaceholder, setStreetPlaceholder] =
-    useState<string>('Street Name');
-  const [statePlaceholder, setStatePlaceholder] = useState<string>('State');
-  const [cityPlaceholder, setCityPlaceholder] = useState<string>('City');
-  const [zipPlaceholder, setZipPlaceholder] = useState<string>('Zip code');
+  const [state, setState] = useState<string>('');
+  const [zipcode, setZipcode] = useState<string>('');
+
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const onChangeStreetAddress = (text: string) => {
+    setErrorExists(false);
+    setStreetAddress(text);
+  };
+
+  const onChangeCity = (text: string) => {
+    setErrorExists(false);
+    setCity(text);
+  };
+
+  const onChangeState = (text: string) => {
+    setErrorExists(false);
+    setState(text);
+  };
+
+  const onChangeZipcode = (text: string) => {
+    setErrorExists(false);
+    setZipcode(text);
+  };
+
+  const handleSubmit = () => {
+    if (streetAddress && city && state && zipcode) {
+      updateCurrUserAddress(streetAddress, city, state, zipcode);
+      router.push('/Profile/');
+    } else {
+      //ask josh about case of invalid address
+    }
+  };
 
   useEffect(() => {
     getCurrentUserInfo().then(result => {
-      setStreetName(result.streetName);
-      setUsState(result.state);
+      setStreetAddress(result.streetName);
       setCity(result.city);
-      setZip(result.zip);
+      setState(result.state);
+      setZipcode(result.zip);
     });
   }, []);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -45,77 +69,61 @@ function EditNameScreen() {
 
       <View style={styles.inputBox}>
         <AuthInput
-          input={streetName}
-          setAuth={setStreetName}
-          defaultValue="Street Name"
+          input={streetAddress}
+          onChangeInput={onChangeStreetAddress}
+          labelText="Street address"
+          placeholderText="Street address"
           isPassword={false}
-          displayInput={displayStreetName}
-          setDisplayInput={setDisplayStreetName}
           keyboard="default"
           autoCapitalization
-          placeholder={streetPlaceholder}
-          setPlaceholder={setStreetPlaceholder}
         />
       </View>
       <View style={styles.inputBox}>
         <AuthInput
           input={city}
-          setInput={setCity}
-          defaultValue="City"
+          onChangeInput={onChangeCity}
+          labelText="City"
+          placeholderText="City"
           isPassword={false}
-          displayInput={displayCity}
-          setDisplayInput={setDisplayCity}
           keyboard="default"
           autoCapitalization
-          placeholder={cityPlaceholder}
-          setPlaceholder={setCityPlaceholder}
         />
       </View>
       <View style={styles.stateLine}>
         <View>
-          <MiniAuthInput
-            input={usState}
-            setInput={setUsState}
-            defaultValue="State"
+          <AuthInput
+            input={state}
+            onChangeInput={onChangeState}
+            labelText="State"
+            placeholderText="State"
             isPassword={false}
-            displayInput={displayState}
-            setDisplayInput={setDisplayState}
             keyboard="default"
             autoCapitalization
-            placeholder={statePlaceholder}
-            setPlaceholder={setStatePlaceholder}
+            isHalfWidth
           />
         </View>
         <View>
-          <MiniAuthInput
-            input={zip}
-            setInput={setZip}
-            defaultValue="Zip code"
+          <AuthInput
+            input={zipcode}
+            onChangeInput={onChangeZipcode}
+            labelText="Zipcode"
+            placeholderText="Zipcode"
             isPassword={false}
-            displayInput={displayZip}
-            setDisplayInput={setDisplayZip}
             keyboard="default"
             autoCapitalization
-            placeholder={zipPlaceholder}
-            setPlaceholder={setZipPlaceholder}
+            isHalfWidth
           />
         </View>
       </View>
 
       <TouchableOpacity
+        disabled={!streetAddress || !city || !state || !zipcode}
         style={
-          streetName && city && usState && zip
+          streetAddress && city && state && zipcode
             ? styles.submitButton
             : [styles.submitButton, styles.submitButtonDisabled]
         }
-        onPress={() => {
-          if (streetName && city && usState && zip) {
-            updateCurrUserAddress(streetName, city, usState, zip);
-            router.push('/Profile/');
-          } else {
-            //ask josh about case of invalid address
-          }
-        }}
+        onPress={handleSubmit}
       >
         <Text style={styles.submitText}>
           Submit
