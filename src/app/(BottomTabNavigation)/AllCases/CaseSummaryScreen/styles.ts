@@ -6,9 +6,10 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: colors.white,
+    flex: 1,
   },
-  scrollContainer: {
-    minHeight: '100%',
+  outerScroll: {
+    minHeight: '84%',
     width: '84%',
   },
   imageContainer: {
@@ -24,11 +25,20 @@ export default StyleSheet.create({
     marginBottom: 28,
     borderColor: colors.midGrey,
   },
+  linkContainer: {
+    height: '16%',
+    width: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: '7%',
+    borderTopWidth: 0.5,
+    borderColor: colors.darkGrey,
+    zIndex: 2,
+  },
   inLineSubInfo: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     height: 20,
     marginTop: 15,
+    marginBottom: 6,
   },
   blurbText: {
     color: colors.black,
@@ -36,8 +46,17 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
   subText: {
-    color: colors.darkGrey,
     fontSize: 12,
+    fontStyle: 'normal',
+    lineHeight: 21,
+  },
+  lawFirmText: {
+    color: colors.darkRed,
+    fontWeight: '700',
+  },
+  dateText: {
+    color: colors.darkGrey,
+    fontWeight: '300',
   },
   summaryText: {
     color: colors.black,

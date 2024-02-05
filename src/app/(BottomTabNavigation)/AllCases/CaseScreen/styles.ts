@@ -4,17 +4,20 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flex: 1,
-    display: 'flex',
-    width: '100%', // essentially the safeAreaView container
+    width: '100%',
     backgroundColor: colors.white,
   },
-  scrollView: {
-    flex: 1,
+  outerScroll: {
+    height: '84%',
     width: '92%',
-    marginTop: 30,
+  },
+  innerScroll: {
+    alignItems: 'center',
+    rowGap: 20,
+    paddingBottom: 20,
   },
   headerContainer: {
     flex: 0.2,
@@ -22,10 +25,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     width: '100%',
-    paddingRight: 30,
   },
   titleContainer: {
     flexDirection: 'row',
+    paddingVertical: 12,
+    marginTop: 20,
   },
   title: {
     flex: 1,

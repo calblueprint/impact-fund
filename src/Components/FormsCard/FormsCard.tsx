@@ -35,15 +35,12 @@ export default function FormsCard(caseData: Case) {
           disabled={Number(caseData.formCount) === 0}
           onPress={() =>
             router.push({
-              pathname: `/AllCases/Forms`,
-              params: {
-                ...caseData,
-              },
+              pathname: `/AllCases/Forms/${caseData.id}?caseSite=${caseData.caseSite}`,
             })
           }
         >
           <View style={styles.formRouteButton}>
-            <Text>View all ({caseData.formCount})</Text>
+            <Text style={styles.bodyText}>View all ({caseData.formCount})</Text>
             <RightCaret />
           </View>
         </TouchableOpacity>

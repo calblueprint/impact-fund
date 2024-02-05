@@ -14,7 +14,7 @@ export default function FormListItem(formData: Form) {
         router.push({
           pathname: `/AllCases/Forms/FormView`,
           params: {
-            ...formData,
+            formUrl: formData.formUrl,
           },
         })
       }
