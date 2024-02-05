@@ -97,9 +97,9 @@ export default function SignUpScreen() {
         </Text>
       </View>
       <TouchableOpacity
-        disabled={name.length === 0 || email.length === 0 || errorExists}
+        disabled={name.trim() === '' || email.trim() === '' || errorExists}
         style={
-          name.length === 0 || email.length === 0 || errorExists
+          name.trim() === '' || email.trim() === '' || errorExists
             ? styles.nextButtonGray
             : styles.nextButton
         }

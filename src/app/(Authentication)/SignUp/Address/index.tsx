@@ -20,36 +20,36 @@ export default function SignUpScreen() {
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
 
-  const [displayStreet, setDisplayStreet] = useState<boolean>(false);
-  const [placeholderStreet, setPlaceholderStreet] =
-    useState<string>('Street address');
-  const [streetFilled, setStreetFilled] = useState<boolean>(false);
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const [displayCity, setDisplayCity] = useState<boolean>(false);
-  const [placeholderCity, setPlaceholderCity] = useState<string>('City');
-  const [cityFilled, setCityFilled] = useState<boolean>(false);
+  const onChangeStreetAddress = (text: string) => {
+    setErrorExists(false);
+    setStreetAddress(text);
+  };
 
-  const [displayState, setDisplayState] = useState<boolean>(false);
-  const [placeholderState, setPlaceholderState] = useState<string>('State');
-  const [stateFilled, setStateFilled] = useState<boolean>(false);
+  const onChangeCity = (text: string) => {
+    setErrorExists(false);
+    setCity(text);
+  };
 
-  const [displayZip, setDisplayZip] = useState<boolean>(false);
-  const [placeholderZip, setPlaceholderZip] = useState<string>('Zip code');
-  const [zipFilled, setZipFilled] = useState<boolean>(false);
+  const onChangeState = (text: string) => {
+    setErrorExists(false);
+    setState(text);
+  };
 
-  const [, setDummyError] = useState<boolean>(false);
+  const onChangeZipcode = (text: string) => {
+    setErrorExists(false);
+    setZipcode(text);
+  };
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
-  const filled = () => {
-    if (streetFilled && cityFilled && stateFilled && zipFilled) {
-      return true;
-    }
-    return false;
+  const validateAddressInputs = () => {
+    // Insert any address input validation logic
+    return true;
   };
 
   const handleSubmit = () => {
-    if (filled()) {
+    if (validateAddressInputs()) {
       signUpUser(name, email, password, streetAddress, city, state, zipcode);
     }
   };
@@ -74,94 +74,73 @@ export default function SignUpScreen() {
 
       <Text style={styles.instructionText}>Last, enter your address.</Text>
 
-      {/* <View style={styles.inputBox}>
+      <View style={styles.inputBox}>
         <AuthInput
           input={streetAddress}
-          setInput={setStreetAddress}
-          defaultValue="Street address"
+          onChangeInput={onChangeStreetAddress}
+          labelText="Street address"
+          placeholderText="Street address"
           isPassword={false}
-          displayInput={displayStreet}
-          setDisplayInput={setDisplayStreet}
           keyboard="default"
           autoCapitalization
-          placeholder={placeholderStreet}
-          setPlaceholder={setPlaceholderStreet}
-          errorHandling={false}
-          setDisplayError={setDummyError}
-          setFilled={setStreetFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
 
       <View style={styles.inputBox}>
         <AuthInput
           input={city}
-          setInput={setCity}
-          defaultValue="City"
+          onChangeInput={onChangeCity}
+          labelText="City"
+          placeholderText="City"
           isPassword={false}
-          displayInput={displayCity}
-          setDisplayInput={setDisplayCity}
           keyboard="default"
           autoCapitalization
-          placeholder={placeholderCity}
-          setPlaceholder={setPlaceholderCity}
-          errorHandling={false}
-          setDisplayError={setDummyError}
-          setFilled={setCityFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
 
       <View style={styles.inputWrap}>
         <View style={styles.smallInputBox}>
-          <MiniAuthInput
+          <AuthInput
             input={state}
-            setInput={setState}
-            defaultValue="State"
+            onChangeInput={onChangeState}
+            labelText="State"
+            placeholderText="State"
             isPassword={false}
-            displayInput={displayState}
-            setDisplayInput={setDisplayState}
             keyboard="default"
             autoCapitalization
-            placeholder={placeholderState}
-            setPlaceholder={setPlaceholderState}
-            setFilled={setStateFilled}
-            isFocused={isFocused}
-            setIsFocused={setIsFocused}
           />
         </View>
 
         <Text style={styles.space}> </Text>
 
         <View style={styles.smallInputBox}>
-          <MiniAuthInput
+          <AuthInput
             input={zipcode}
-            setInput={setZipcode}
-            defaultValue="Zipcode"
+            onChangeInput={onChangeZipcode}
+            labelText="Zipcode"
+            placeholderText="Zipcode"
             isPassword={false}
-            displayInput={displayZip}
-            setDisplayInput={setDisplayZip}
             keyboard="default"
             autoCapitalization
-            placeholder={placeholderZip}
-            setPlaceholder={setPlaceholderZip}
-            setFilled={setZipFilled}
-            isFocused={isFocused}
-            setIsFocused={setIsFocused}
           />
         </View>
-      </View> */}
+      </View>
       <Text style={styles.space2}> </Text>
 
       <TouchableOpacity
+        disabled={
+          streetAddress.trim() === '' ||
+          city.trim() === '' ||
+          state.trim() === '' ||
+          zipcode.trim() === ''
+        }
         style={
-          filled() && !isFocused
-            ? styles.nextButton
-            : !isFocused
-            ? styles.nextButtonDown
-            : styles.nextButtonGray
+          streetAddress.trim() === '' ||
+          city.trim() === '' ||
+          state.trim() === '' ||
+          zipcode.trim() === ''
+            ? styles.nextButtonGray
+            : styles.nextButton
         }
         onPress={() => handleSubmit()}
       >

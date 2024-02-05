@@ -88,7 +88,7 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
-    marginTop: 300,
+    // marginTop: 300,
   },
   nextButtonGray: {
     backgroundColor: colors.midGrey,

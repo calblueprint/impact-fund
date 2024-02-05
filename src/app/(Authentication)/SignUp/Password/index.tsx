@@ -12,56 +12,47 @@ export default function SignUpScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
 
   const [password, setPassword] = useState<string>('');
-  const [displayErrorPassword, setDisplayErrorPassword] =
-    useState<boolean>(false);
-  const [displayPassword, setDisplayPassword] = useState<boolean>(false);
-  const [placeholderPassword, setPlaceholderPassword] =
-    useState<string>('Password');
-  const [passwordFilled, setPasswordFilled] = useState<boolean>(false);
-
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [displayErrorPasswordMatch, setDisplayErrorPasswordMatch] =
-    useState<boolean>(false);
-  const [displayConfirmPassword, setDisplayConfirmPassword] =
-    useState<boolean>(false);
-  const [placeholderConfirmPassword, setPlaceholderConfirmPassword] =
-    useState<string>('Confirm password');
-  const [confirmPasswordFilled, setConfirmPasswordFilled] =
-    useState<boolean>(false);
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const validateConfirmPassword = () => {
-    if (confirmPassword.trim() === password.trim()) {
-      setDisplayErrorPasswordMatch(false);
-      return true;
-    } else {
-      setDisplayErrorPasswordMatch(true);
-      return false;
-    }
+  const onChangePassword = (text: string) => {
+    setErrorExists(false);
+    setPassword(text);
+  };
+
+  const onChangeConfirmPassword = (text: string) => {
+    setErrorExists(false);
+    setConfirmPassword(text);
   };
 
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
-    setDisplayErrorPassword(!lengthRegex.test(password));
-    return lengthRegex.test(password);
+    if (!lengthRegex.test(password)) {
+      setErrorExists(true);
+      setErrorMessage('Your password needs at least six characters!');
+      return false;
+    }
+    return true;
+  };
+
+  const validateConfirmPassword = () => {
+    if (confirmPassword.trim() !== password.trim()) {
+      setErrorExists(true);
+      setErrorMessage('Your passwords should match each other.');
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = () => {
-    if (validateConfirmPassword() && validatePassword() && filled()) {
-      if (validateConfirmPassword())
-        router.push({
-          pathname: 'SignUp/Address',
-          params: { name, email, password },
-        });
+    if (validatePassword() && validateConfirmPassword()) {
+      router.push({
+        pathname: 'SignUp/Address',
+        params: { name, email, password },
+      });
     }
-  };
-
-  const filled = () => {
-    if (passwordFilled && confirmPasswordFilled) {
-      return true;
-    }
-    return false;
   };
 
   return (
@@ -86,64 +77,41 @@ export default function SignUpScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={password}
-          setInput={setPassword}
-          defaultValue="Password"
+          onChangeInput={onChangePassword}
+          labelText="Password"
+          placeholderText="Password"
           isPassword
-          displayInput={displayPassword}
-          setDisplayInput={setDisplayPassword}
           keyboard="default"
           autoCapitalization={false}
-          placeholder={placeholderPassword}
-          setPlaceholder={setPlaceholderPassword}
-          errorHandling
-          setDisplayError={setDisplayErrorPassword}
-          setFilled={setPasswordFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
 
       <View style={styles.inputBox}>
         <AuthInput
           input={confirmPassword}
-          setInput={setConfirmPassword}
-          defaultValue="Confirm password"
+          onChangeInput={onChangeConfirmPassword}
+          labelText="Confirm password"
+          placeholderText="Confirm password"
           isPassword
-          displayInput={displayConfirmPassword}
-          setDisplayInput={setDisplayConfirmPassword}
           keyboard="default"
           autoCapitalization={false}
-          placeholder={placeholderConfirmPassword}
-          setPlaceholder={setPlaceholderConfirmPassword}
-          errorHandling={false}
-          setDisplayError={setDisplayErrorPasswordMatch}
-          setFilled={setConfirmPasswordFilled}
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
         />
       </View>
 
       <View>
         <Text style={styles.errorMessage}>
-          {' '}
-          {displayErrorPassword
-            ? 'Your password needs at least six characters!'
-            : displayErrorPasswordMatch
-            ? 'Your passwords should match each other.'
-            : ' '}{' '}
+          {errorExists ? errorMessage : ' '}
         </Text>
       </View>
 
       <TouchableOpacity
+        disabled={
+          password.trim() === '' || confirmPassword.trim() === '' || errorExists
+        }
         style={
-          !isFocused &&
-          filled() &&
-          !displayErrorPassword &&
-          !displayErrorPasswordMatch
-            ? styles.nextButton
-            : !isFocused
-            ? styles.nextButtonDown
-            : styles.nextButtonGray
+          password.trim() === '' || confirmPassword.trim() === '' || errorExists
+            ? styles.nextButtonGray
+            : styles.nextButton
         }
         onPress={handleSubmit}
       >
