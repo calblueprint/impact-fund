@@ -6,10 +6,10 @@ export default StyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'column',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.midGrey,
     borderStyle: 'solid',
+    borderColor: colors.midGrey,
     backgroundColor: colors.white,
     shadowColor: colors.black,
     shadowOffset: { width: 0.05, height: 0.75 },
@@ -25,39 +25,55 @@ export default StyleSheet.create({
     borderTopRightRadius: 4,
     borderTopLeftRadius: 4,
   },
-  blurbContainer: {
-    height: 'auto',
+  infoContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 30,
     overflow: 'hidden',
   },
-  bottomContainer: {
-    height: 41,
-    borderTopWidth: 1,
-    borderColor: colors.midGrey,
-    justifyContent: 'center',
-  },
   inLineInfo: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    width: '100%',
+    paddingVertical: 15,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   blurbText: {
     fontSize: 20,
+    fontStyle: 'normal',
     fontWeight: '700',
+    lineHeight: 21,
     color: colors.black,
   },
-  subText: {
-    fontSize: 12,
-    color: colors.darkGrey,
+  bottomContainer: {
+    height: 47,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginTop: 20,
+    borderTopWidth: 0.5,
+    borderColor: colors.midGrey,
   },
-  threeDots: {
-    justifyContent: 'center',
-    opacity: 0.5,
+  subText: {
+    fontSize: 10,
+    fontStyle: 'normal',
+    lineHeight: 21,
+  },
+  lawFirmText: {
+    color: colors.darkRed,
+    fontWeight: '700',
+  },
+  dateText: {
+    color: colors.darkGrey,
+    fontWeight: '300',
+  },
+  bottomText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 21,
+  },
+  rightCaret: {
+    borderWidth: 1,
   },
 });

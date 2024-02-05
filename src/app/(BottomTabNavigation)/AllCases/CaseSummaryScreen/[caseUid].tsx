@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
@@ -28,30 +29,38 @@ export default function CaseSummaryScreen() {
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <ScrollView
-          style={styles.scrollContainer}
-          showsVerticalScrollIndicator={false}
-        >
-          <Image
-            style={styles.imageContainer}
-            source={{
-              uri: caseData.imageUrl,
-            }}
-          />
-          <View style={styles.blurbContainer}>
-            <Text style={styles.blurbText}>{caseData.blurb}</Text>
-            <View style={styles.inLineSubInfo}>
-              <Text style={styles.subText}>
-                {formatDate(caseData.date)} • {caseData.lawFirm}
-              </Text>
+        <>
+          <ScrollView
+            style={styles.outerScroll}
+            showsVerticalScrollIndicator={false}
+          >
+            <Image
+              style={styles.imageContainer}
+              source={caseData.imageUrl}
+              contentFit="cover"
+              transition={300}
+            />
+            <View style={styles.blurbContainer}>
+              <Text style={styles.blurbText}>{caseData.blurb}</Text>
+              <View style={styles.inLineSubInfo}>
+                <Text style={[styles.subText, styles.lawFirmText]}>
+                  {caseData.lawFirm}
+                </Text>
+                <Text style={[styles.subText, styles.dateText]}>
+                  {' '}
+                  • {formatDate(caseData.date)}
+                </Text>
+              </View>
             </View>
+            <Text style={styles.summaryText}>{caseData.summary}</Text>
+          </ScrollView>
+          <View style={styles.linkContainer}>
+            <ExternalSiteLink
+              text="Learn more on case website"
+              url={caseData.caseSite}
+            />
           </View>
-          <Text style={styles.summaryText}>{caseData.summary}</Text>
-          <ExternalSiteLink
-            text="Learn more on case website"
-            url={caseData.caseSite}
-          />
-        </ScrollView>
+        </>
       )}
     </View>
   );
