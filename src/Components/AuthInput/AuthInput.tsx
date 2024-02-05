@@ -1,5 +1,11 @@
-import { useState } from 'react';
-import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
+import { useState, CSSProperties } from 'react';
+import {
+  KeyboardTypeOptions,
+  Text,
+  TextInput,
+  View,
+  ViewBase,
+} from 'react-native';
 import { z } from 'zod';
 
 import styles from './styles';
@@ -12,6 +18,7 @@ interface AuthInputProps {
   isPassword: boolean;
   keyboard: KeyboardTypeOptions;
   autoCapitalization: boolean;
+  isHalfWidth?: boolean;
 }
 
 export default function AuthInput({
@@ -22,6 +29,7 @@ export default function AuthInput({
   isPassword,
   keyboard,
   autoCapitalization,
+  isHalfWidth,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(placeholderText);
@@ -45,10 +53,14 @@ export default function AuthInput({
 
   return (
     <View>
-      <Text style={styles.inputText}>{isLabelDisplayed ? labelText : ' '}</Text>
+      <Text style={styles.labelText}>{isLabelDisplayed ? labelText : ' '}</Text>
 
       <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
+        style={[
+          styles.inputBox,
+          isHalfWidth && styles.halfWidth,
+          isFocused && styles.inputFocused,
+        ]}
         value={input}
         onChangeText={onChangeInput}
         onFocus={onClick}

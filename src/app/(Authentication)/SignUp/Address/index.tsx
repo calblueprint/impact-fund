@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import Check from '../../../../../assets/check-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import MiniAuthInput from '../../../../Components/MiniAuthInput/MiniAuthInput';
 import { signUpUser } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
@@ -108,6 +107,7 @@ export default function SignUpScreen() {
             isPassword={false}
             keyboard="default"
             autoCapitalization
+            isHalfWidth
           />
         </View>
 
@@ -122,6 +122,7 @@ export default function SignUpScreen() {
             isPassword={false}
             keyboard="default"
             autoCapitalization
+            isHalfWidth
           />
         </View>
       </View>
