@@ -1,7 +1,9 @@
+import { router } from 'expo-router';
 import React, { useContext } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { CaseContext } from '../../../context/CaseContext';
 
@@ -22,9 +24,22 @@ function CasesScreen() {
               <FlatList
                 contentContainerStyle={styles.innerScroll}
                 ListHeaderComponent={() => (
-                  <View style={styles.headerContainer}>
-                    <Text style={styles.titleText}>My Cases</Text>
-                  </View>
+                  <>
+                    <View style={styles.headerContainer}>
+                      <Text style={styles.titleText}>My Cases</Text>
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => router.push('/AllCases/QRCodeScanner')}
+                      style={styles.cameraContainer}
+                    >
+                      <View style={styles.buttonInfoContainer}>
+                        <Camera />
+                        <Text style={styles.cameraText}>
+                          Add Case with QR code
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </>
                 )}
                 data={allCases}
                 renderItem={({ item }) => <CaseCard {...item} />}
