@@ -8,21 +8,23 @@ import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');
-  const [displayError, setDisplayError] = useState<boolean>(false);
-  const [displayEmail, setDisplayEmail] = useState<boolean>(false);
-  const [placeholder, setPlaceholder] = useState<string>('Email address');
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const onChangeEmail = (text: string) => {
+    setErrorExists(false);
+    setEmail(text);
+  };
 
   async function emailFind() {
     const isEmail = await emailExists(email);
     if (!isEmail) {
-      setDisplayError(true);
+      setErrorExists(true);
+      setErrorMessage(
+        'The email you entered is either incorrect or not registered with the Impact Fund.',
+      );
     } else {
-      setDisplayError(false);
       router.push({ pathname: 'Login/Password', params: { email } });
-      setPlaceholder('Email address');
-
-      setEmail('');
-      setDisplayEmail(false);
     }
   }
 
@@ -38,22 +40,17 @@ export default function LoginScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={email}
-          setInput={setEmail}
-          defaultValue="Email address"
+          onChangeInput={onChangeEmail}
+          labelText="Email address"
+          placeholderText="Email address"
           isPassword={false}
-          displayInput={displayEmail}
-          setDisplayInput={setDisplayEmail}
           keyboard="email-address"
           autoCapitalization={false}
-          placeholder={placeholder}
-          setPlaceholder={setPlaceholder}
         />
       </View>
 
       <Text style={styles.errorMessage}>
-        {displayError
-          ? 'The email you entered is either incorrect or not registered with the Impact Fund.'
-          : ' '}
+        {errorExists ? errorMessage : ' '}
       </Text>
       <TouchableOpacity style={styles.nextButton} onPress={emailFind}>
         <Text style={styles.nextText}>Next</Text>

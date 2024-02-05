@@ -5,7 +5,6 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Submit from '../../../../../assets/submit.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import MiniAuthInput from '../../../../Components/MiniAuthInput/MiniAuthInput';
 import {
   getCurrentUserInfo,
   updateCurrUserAddress,
@@ -47,7 +46,7 @@ function EditNameScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={streetName}
-          setInput={setStreetName}
+          setAuth={setStreetName}
           defaultValue="Street Name"
           isPassword={false}
           displayInput={displayStreetName}
