@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -7,14 +8,23 @@ import StyledButton from '../../../Components/StyledButton/StyledButton';
 function WelcomeScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.welcomeText}>
-          Welcome to Impact Fund! Log in or create an account to get started.
-        </Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <StyledButton text="LOG IN" file="/Login/Email" />
-        <StyledButton text="CREATE ACCOUNT" file="/SignUp" />
+      <View style={styles.contentContainer}>
+        <Image
+          style={styles.image}
+          source={require('../../../../assets/inline-logo.jpeg')}
+        />
+
+        <View style={styles.textContainer}>
+          <Text style={styles.welcomeText}>Welcome to the Impact Fund!</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <StyledButton text="Create an account" file="/SignUp" color="white" />
+          <StyledButton
+            text="Log in with email"
+            file="/Login/Email"
+            color="black"
+          />
+        </View>
       </View>
     </View>
   );
