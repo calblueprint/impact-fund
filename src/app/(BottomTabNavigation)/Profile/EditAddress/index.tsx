@@ -6,12 +6,10 @@ import styles from './styles';
 import Submit from '../../../../../assets/submit.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import MiniAuthInput from '../../../../Components/MiniAuthInput/MiniAuthInput';
-import {
-  getCurrentUserInfo,
-  updateCurrUserAddress,
-} from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
 function EditNameScreen() {
+  const { updateUser, session } = useSession();
   const [streetName, setStreetName] = useState<string>('');
   const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
@@ -27,12 +25,10 @@ function EditNameScreen() {
   const [zipPlaceholder, setZipPlaceholder] = useState<string>('Zip code');
 
   useEffect(() => {
-    getCurrentUserInfo().then(result => {
-      setStreetName(result.streetName);
-      setUsState(result.state);
-      setCity(result.city);
-      setZip(result.zip);
-    });
+    setStreetName(session?.user?.user_metadata.streetName);
+    setUsState(session?.user?.user_metadata.state);
+    setCity(session?.user?.user_metadata.city);
+    setZip(session?.user?.user_metadata.zip);
   }, []);
   return (
     <View style={styles.container}>
@@ -111,7 +107,14 @@ function EditNameScreen() {
         }
         onPress={() => {
           if (streetName && city && usState && zip) {
-            updateCurrUserAddress(streetName, city, usState, zip);
+            updateUser({
+              data: {
+                streetName,
+                city,
+                state: usState,
+                zip,
+              },
+            });
             router.push('/Profile/');
           } else {
             //ask josh about case of invalid address

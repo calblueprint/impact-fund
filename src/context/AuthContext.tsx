@@ -14,6 +14,7 @@ import React, {
   useState,
 } from 'react';
 
+import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
 
 export interface AuthState {
@@ -40,6 +41,7 @@ export interface AuthState {
   >;
   updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
   signOut: () => Promise<void>;
+  deleteCurrentUser: (userId: string) => Promise<void>;
 }
 
 const AuthContext = createContext({} as AuthState);
@@ -133,6 +135,10 @@ export function AuthContextProvider({
   const updateUser = async (attributes: UserAttributes) =>
     await supabase.auth.updateUser(attributes);
 
+  const deleteCurrentUser = async (userId: string) => {
+    await supabaseAdmin.auth.admin.deleteUser(userId);
+  };
+
   const authContextValue = useMemo(
     () => ({
       user,
@@ -146,6 +152,7 @@ export function AuthContextProvider({
       updateUser,
       resetPassword,
       resendVerification,
+      deleteCurrentUser,
     }),
     [session, user, isLoading],
   );
@@ -156,141 +163,3 @@ export function AuthContextProvider({
     </AuthContext.Provider>
   );
 }
-
-// import React, {
-//   createContext,
-//   useContext,
-//   useState,
-//   useEffect,
-//   useReducer,
-//   useMemo,
-// } from 'react';
-
-// import supabase from '../supabase/createClient';
-// import { getCurrentUserInfo } from '../supabase/queries/auth';
-// import { User } from '../types/types';
-
-// export type AuthDispatch = React.Dispatch<AuthContextAction>;
-
-// const AuthContext = createContext<AuthState>({} as AuthState);
-
-// export interface AuthState {
-//   isLoading: boolean;
-//   user: User | null;
-//   dispatch: AuthDispatch;
-// }
-// export type AuthContextAction =
-//   | { type: 'RESTORE_USER'; user: User | null }
-//   | { type: 'SIGN_IN'; user: User | null }
-//   | { type: 'SIGN_OUT' };
-
-// export const useAuthReducer = () => {
-//   useReducer(
-//     (prevState: AuthState, action: AuthContextAction) => {
-//       switch (action.type) {
-//         case 'RESTORE_USER':
-//           return {
-//             ...prevState,
-//             isLoading: false,
-//             user: action.user,
-//           };
-//         case 'SIGN_IN':
-//           return {
-//             ...prevState,
-//             isLoading: false,
-//             user: action.user,
-//           };
-//         case 'SIGN_OUT':
-//           return {
-//             ...prevState,
-//             isLoading: false,
-//             userObject: null,
-//           };
-//         default:
-//           return prevState;
-//       }
-//     },
-//     {
-//       isLoading: true,
-//       user: null,
-//       dispatch: () => null,
-//     },
-//   );
-// };
-
-// export function AuthContextProvider({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   const authState = useAuthReducer();
-//   const dispatch = useAuthReducer();
-
-//   // Subscribe to auth state changes and restore the user if they're already signed in
-//   useEffect(() => {
-//     const unsubscribe = 1;
-//     return unsubscribe;
-//   }, [dispatch]);
-
-//   const authContextValue = useMemo(
-//     () => ({
-//       ...authState,
-//       dispatch,
-//     }),
-//     [authState, dispatch],
-//   );
-
-//   return (
-//     <AuthContext.Provider value={authContextValue}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
-// // const AuthProvider = ({ children }) => {
-// //   const [user, setUser] = useState<User | null>(null);
-
-// //   useEffect(() => {
-// //     // Check if the user is already authenticated
-// //     setCurrentSession();
-// //   }, []);
-
-// //   const setCurrentSession = async () => {
-// //     const { data } = await supabase.auth.getSession();
-// //     if (data) {
-// //       const currUser: User = await getCurrentUserInfo();
-// //       setUser(currUser);
-// //     } else {
-// //       setUser(null);
-// //     }
-// //   };
-
-// //   const signIn = async (email: string, password: string) => {
-// //     const { user, error } = await supabase.auth.signIn(email, password);
-// //     if (error) {
-// //       console.error('Error signing in:', error.message);
-// //     } else {
-// //       setUser(user);
-// //     }
-// //   };
-
-// //   const signOut = async () => {
-// //     await supabase.auth.signOut();
-// //     setUser(null);
-// //   };
-
-// //   return (
-// //     <AuthContext.Provider value={{ user, signIn, signOut }}>
-// //       {children}
-// //     </AuthContext.Provider>
-// //   );
-// // };
-
-// // const useAuth = () => {
-// //   const context = useContext(AuthContext);
-// //   if (!context) {
-// //     throw new Error('useAuth must be used within an AuthProvider');
-// //   }
-// //   return context;
-// // };
-
-// // export { AuthProvider, useAuth };

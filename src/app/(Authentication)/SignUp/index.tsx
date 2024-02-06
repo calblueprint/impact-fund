@@ -4,7 +4,7 @@ import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import { signUpUser } from '../../../supabase/queries/auth';
+import { useSession } from '../../../context/AuthContext';
 
 export default function SignUpScreen() {
   const [fullName, setFullName] = useState<string>('');
@@ -15,6 +15,7 @@ export default function SignUpScreen() {
   const [zip, setZip] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const { signUp } = useSession();
 
   return (
     <View style={styles.container}>
@@ -78,7 +79,13 @@ export default function SignUpScreen() {
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          signUpUser(fullName, email, password, streetName, city, usState, zip)
+          signUp(email, password, {
+            fullName,
+            streetName,
+            city,
+            state: usState,
+            zip,
+          })
         }
       >
         <Text>Sign Up</Text>

@@ -15,8 +15,6 @@ export default function LoginScreen() {
   async function emailFind() {
     const isEmail = await emailExists(email);
     if (!isEmail) {
-      setDisplayError(true);
-    } else {
       setDisplayError(false);
       router.push({ pathname: 'Login/Password', params: { email } });
       setPlaceholder('Email address');
