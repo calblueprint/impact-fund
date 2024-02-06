@@ -12,6 +12,7 @@ import { userInstance, User } from '../../../../types/types';
 
 function DeleteAccountScreen() {
   const [currSession, setCurrSession] = useState<User>(userInstance);
+
   const { signOut, deleteCurrentUser } = useSession();
   useEffect(() => {
     getCurrentUserInfo().then(result => {
@@ -21,7 +22,7 @@ function DeleteAccountScreen() {
 
   const deleteAccount = () => {
     deleteCurrentUser(currSession.id);
-    signOutUser();
+    signOut();
   };
 
   return (

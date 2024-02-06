@@ -19,7 +19,6 @@ export default function LoginScreen() {
     setErrorExists(false);
     setPassword(text);
   };
-  const sessionHandler = useSession();
 
   async function signIn() {
     const isPassword = await sessionHandler.signInWithEmail(email, password);
