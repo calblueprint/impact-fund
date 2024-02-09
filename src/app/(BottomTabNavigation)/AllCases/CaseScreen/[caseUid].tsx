@@ -28,7 +28,6 @@ function CaseScreen() {
   const getStatus = async (uid: string) => {
     const caseStatus = await getCaseStatus(uid);
     setStatus(caseStatus);
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -39,7 +38,6 @@ function CaseScreen() {
 
   useEffect(() => {
     navigation.addListener('focus', async () => {
-      setIsLoading(true);
       if (caseUid !== undefined) {
         getStatus(caseUid);
       }
