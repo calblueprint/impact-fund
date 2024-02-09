@@ -34,4 +34,15 @@ export default StyleSheet.create({
   addCaseButton: {
     backgroundColor: colors.midnightBlack,
   },
+  buttonText: {
+    fontSize: 17,
+    fontStyle: 'normal',
+    fontWeight: '500',
+  },
+  whiteText: {
+    color: colors.white,
+  },
+  blackText: {
+    color: colors.midnightBlack,
+  },
 });

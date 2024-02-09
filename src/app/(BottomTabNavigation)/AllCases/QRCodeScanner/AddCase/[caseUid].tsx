@@ -43,13 +43,15 @@ export default function AddCase() {
               onPress={() => router.back()}
               style={[styles.buttonBase, styles.cancelButton]}
             >
-              <Text>Cancel</Text>
+              <Text style={[styles.buttonText, styles.blackText]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => addToCases(caseData)}
               style={[styles.buttonBase, styles.addCaseButton]}
             >
-              <Text>Add Case</Text>
+              <Text style={[styles.buttonText, styles.whiteText]}>
+                Add Case
+              </Text>
             </TouchableOpacity>
           </View>
         </>
