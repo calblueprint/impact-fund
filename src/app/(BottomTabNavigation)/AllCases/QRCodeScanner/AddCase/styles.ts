@@ -12,15 +12,17 @@ export default StyleSheet.create({
     height: '16%',
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+    columnGap: 20,
+
     paddingHorizontal: '7%',
     borderTopWidth: 0.5,
     borderColor: colors.darkGrey,
     zIndex: 2,
   },
   buttonBase: {
-    width: 149,
+    flex: 1,
     height: 47,
     flexDirection: 'row',
     alignItems: 'center',
@@ -29,6 +31,7 @@ export default StyleSheet.create({
 
     borderWidth: 0.5,
     borderRadius: 5,
+    borderColor: colors.midnightBlack,
   },
   cancelButton: {
     backgroundColor: colors.white,

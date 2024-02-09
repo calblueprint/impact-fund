@@ -30,6 +30,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingHorizontal: '7%',
+
     borderTopWidth: 0.5,
     borderColor: colors.darkGrey,
     zIndex: 2,
