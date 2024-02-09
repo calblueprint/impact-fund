@@ -1,4 +1,4 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { Link, router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,9 +14,7 @@ export default function EligibilityForm() {
   const updateEligibility = async (status: Eligibility) => {
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, status);
-      router.replace({
-        pathname: `/AllCases/CaseScreen/${caseUid}`,
-      });
+      router.back();
     }
   };
   return (
