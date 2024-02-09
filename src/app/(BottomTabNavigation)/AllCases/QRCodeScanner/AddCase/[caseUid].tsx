@@ -39,16 +39,16 @@ export default function AddCase() {
           <CaseSummaryContent />
           <View style={styles.linkContainer}>
             <TouchableOpacity
-              onPress={() => addToCases(caseData)}
-              style={styles.button}
+              onPress={() => router.back()}
+              style={styles.buttonBase}
             >
-              <Text>ADD TO CASES</Text>
+              <Text>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.button}
+              onPress={() => addToCases(caseData)}
+              style={styles.buttonBase}
             >
-              <Text>CANCEL</Text>
+              <Text>Add Case</Text>
             </TouchableOpacity>
           </View>
         </>
