@@ -1,14 +1,14 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useContext, useEffect, useState } from 'react';
-import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import CaseSummaryContent from '../../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { getCaseById, uploadCase } from '../../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../../types/types';
-import { formatDate } from '../../utils';
 
-function AddCase() {
+export default function AddCase() {
   const { allCases, updateCases } = useContext(CaseContext);
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
@@ -31,38 +31,28 @@ function AddCase() {
   }, []);
 
   return (
-    <View style={{ height: '100%' }}>
+    <View style={styles.container}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={{
-            justifyContent: 'flex-start',
-          }}
-          showsVerticalScrollIndicator={false}
-        >
-          <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
-          <Text style={styles.title}>{caseData.title}</Text>
-          <View style={styles.dateAndFirm}>
-            <Text style={styles.dateAndFirmText}>
-              {formatDate(caseData.date)} • {caseData.lawFirm}
-            </Text>
+        <>
+          <CaseSummaryContent />
+          <View style={styles.linkContainer}>
+            <TouchableOpacity
+              onPress={() => addToCases(caseData)}
+              style={styles.button}
+            >
+              <Text>ADD TO CASES</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={styles.button}
+            >
+              <Text>CANCEL</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={styles.blurb}>{caseData.summary}</Text>
-          <TouchableOpacity
-            onPress={() => addToCases(caseData)}
-            style={styles.button}
-          >
-            <Text>ADD TO CASES</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.back()} style={styles.button}>
-            <Text>CANCEL</Text>
-          </TouchableOpacity>
-        </ScrollView>
+        </>
       )}
     </View>
   );
 }
-
-export default AddCase;

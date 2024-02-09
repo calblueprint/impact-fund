@@ -4,8 +4,9 @@ import { colors } from '../../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
     flex: 1,
-    marginHorizontal: 30,
   },
 
   image: {
@@ -51,5 +52,15 @@ export default StyleSheet.create({
     height: 75,
     width: '100%',
     borderRadius: 20,
+  },
+
+  linkContainer: {
+    height: '16%',
+    width: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: '7%',
+    borderTopWidth: 0.5,
+    borderColor: colors.darkGrey,
+    zIndex: 2,
   },
 });
