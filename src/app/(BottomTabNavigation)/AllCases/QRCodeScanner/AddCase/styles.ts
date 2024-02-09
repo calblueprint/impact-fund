@@ -28,4 +28,10 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 5,
   },
+  cancelButton: {
+    backgroundColor: colors.white,
+  },
+  addCaseButton: {
+    backgroundColor: colors.midnightBlack,
+  },
 });

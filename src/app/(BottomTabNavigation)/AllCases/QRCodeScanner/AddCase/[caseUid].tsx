@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import CaseSummaryContent from '../../../../../Components/CaseSummaryContent/CaseSummaryContent';
+import StyledButton from '../../../../../Components/StyledButton/StyledButton';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { getCaseById, uploadCase } from '../../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../../types/types';
@@ -40,13 +41,13 @@ export default function AddCase() {
           <View style={styles.linkContainer}>
             <TouchableOpacity
               onPress={() => router.back()}
-              style={styles.buttonBase}
+              style={[styles.buttonBase, styles.cancelButton]}
             >
               <Text>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => addToCases(caseData)}
-              style={styles.buttonBase}
+              style={[styles.buttonBase, styles.addCaseButton]}
             >
               <Text>Add Case</Text>
             </TouchableOpacity>
