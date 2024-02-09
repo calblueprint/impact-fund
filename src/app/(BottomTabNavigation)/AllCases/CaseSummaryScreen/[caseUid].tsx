@@ -1,7 +1,6 @@
-import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from './styles';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
@@ -31,7 +30,7 @@ export default function CaseSummaryScreen() {
         <Text>Loading...</Text>
       ) : (
         <>
-          <CaseSummaryContent />
+          <CaseSummaryContent {...caseData} />
           <View style={styles.linkContainer}>
             <ExternalSiteLink
               text="Learn more on case website"

@@ -38,7 +38,7 @@ export default function AddCase() {
         <Text>Loading...</Text>
       ) : (
         <>
-          <CaseSummaryContent />
+          <CaseSummaryContent {...caseData} />
           <View style={styles.linkContainer}>
             <TouchableOpacity
               onPress={() => router.back()}
