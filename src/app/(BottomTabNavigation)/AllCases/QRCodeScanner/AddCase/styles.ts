@@ -22,8 +22,10 @@ export default StyleSheet.create({
   buttonBase: {
     width: 149,
     height: 47,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    columnGap: 10,
 
     borderWidth: 0.5,
     borderRadius: 5,

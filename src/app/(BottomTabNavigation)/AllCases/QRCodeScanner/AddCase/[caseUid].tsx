@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import AddCaseIcon from '../../../../../../assets/add-case-icon.svg';
+import CancelIcon from '../../../../../../assets/cancel-x-icon.svg';
 import CaseSummaryContent from '../../../../../Components/CaseSummaryContent/CaseSummaryContent';
-import StyledButton from '../../../../../Components/StyledButton/StyledButton';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { getCaseById, uploadCase } from '../../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../../types/types';
@@ -43,12 +44,14 @@ export default function AddCase() {
               onPress={() => router.back()}
               style={[styles.buttonBase, styles.cancelButton]}
             >
+              <CancelIcon />
               <Text style={[styles.buttonText, styles.blackText]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => addToCases(caseData)}
               style={[styles.buttonBase, styles.addCaseButton]}
             >
+              <AddCaseIcon />
               <Text style={[styles.buttonText, styles.whiteText]}>
                 Add Case
               </Text>
