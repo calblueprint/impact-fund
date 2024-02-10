@@ -4,14 +4,7 @@ import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
-
-type SummaryContentProps = {
-  imageUrl: string;
-  blurb: string;
-  lawFirm: string;
-  date: Date;
-  summary: string;
-};
+import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummaryContent({
   imageUrl,
@@ -19,7 +12,7 @@ export default function CaseSummaryContent({
   lawFirm,
   date,
   summary,
-}: SummaryContentProps) {
+}: CaseSummaryProps) {
   return (
     <View style={styles.container}>
       <ScrollView
