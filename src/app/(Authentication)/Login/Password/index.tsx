@@ -3,24 +3,32 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 
 export default function LoginScreen() {
-  const [password, setPassword] = useState<string>('');
-  const [displayError, setDisplayError] = useState<boolean>(false);
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const [displayPassword, setDisplayPassword] = useState<boolean>(false);
-  const [placeholder, setPlaceholder] = useState<string>('Password');
   const sessionHandler = useSession();
+  const [password, setPassword] = useState<string>('');
+
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const onChangePassword = (text: string) => {
+    setErrorExists(false);
+    setPassword(text);
+  };
 
   async function signIn() {
-    const { error } = await sessionHandler.signInWithEmail(email, password);
-
-    if (error) {
-      setDisplayError(true);
+    const isPassword = await sessionHandler.signInWithEmail(email, password);
+    if (!isPassword) {
+      setErrorExists(true);
+      setErrorMessage(
+        'Oh no! The password you entered is incorrect, please try again.',
+      );
     } else {
-      setDisplayError(false);
+      setErrorExists(false);
       setPassword('');
     }
   }
@@ -35,27 +43,36 @@ export default function LoginScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={password}
-          setInput={setPassword}
-          defaultValue="Password"
+          onChangeInput={onChangePassword}
+          labelText="Password"
+          placeholderText="Password"
           isPassword
-          displayInput={displayPassword}
-          setDisplayInput={setDisplayPassword}
           keyboard="default"
           autoCapitalization={false}
-          placeholder={placeholder}
-          setPlaceholder={setPlaceholder}
         />
       </View>
 
-      <Text style={styles.errorMessage}>
-        {displayError
-          ? 'Oh no! The password you entered is incorrect, please try again.'
-          : ' '}{' '}
-      </Text>
+      <View style={styles.errorMessageBox}>
+        <Text style={styles.errorMessageText}>
+          {errorExists ? errorMessage : ' '}
+        </Text>
+      </View>
 
-      <TouchableOpacity style={styles.nextButton} onPress={() => signIn()}>
-        <Text style={styles.nextText}>Next</Text>
-      </TouchableOpacity>
+      <View style={styles.nextLine}>
+        <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+        <TouchableOpacity
+          disabled={password === '' || errorExists}
+          style={
+            password === '' || errorExists
+              ? [styles.nextButtonBase, styles.nextButtonDisabled]
+              : [styles.nextButtonBase, styles.nextButtonActive]
+          }
+          onPress={() => signIn()}
+        >
+          <Text style={styles.nextText}>Next</Text>
+          <Arrow />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

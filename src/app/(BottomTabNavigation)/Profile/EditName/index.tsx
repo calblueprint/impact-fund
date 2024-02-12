@@ -10,11 +10,11 @@ import { useSession } from '../../../../context/AuthContext';
 function EditNameScreen() {
   const { updateUser, session } = useSession();
   const [fullName, setFullName] = useState<string>('');
-  const [displayFullName, setDisplayFullName] = useState<boolean>(true);
-  const [namePlaceholder, setNamePlaceholder] = useState<string>('Full Name');
+
   useEffect(() => {
     setFullName(session?.user?.user_metadata.fullName);
   }, []);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -28,15 +28,12 @@ function EditNameScreen() {
       <View style={styles.inputBox}>
         <AuthInput
           input={fullName}
-          setInput={setFullName}
-          defaultValue="Full Name"
+          onChangeInput={setFullName}
+          labelText="Full Name"
+          placeholderText="Full Name"
           isPassword={false}
-          displayInput={displayFullName}
-          setDisplayInput={setDisplayFullName}
           keyboard="default"
           autoCapitalization
-          placeholder={namePlaceholder}
-          setPlaceholder={setNamePlaceholder}
         />
       </View>
       <TouchableOpacity

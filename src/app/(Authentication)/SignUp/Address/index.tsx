@@ -1,73 +1,71 @@
-import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import Submit from '../../../../../assets/submit.svg';
+import Check from '../../../../../assets/check-circle.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
+import { signUpUser } from '../../../../supabase/queries/auth';
 
-function EditNameScreen() {
-  const { updateUser, session } = useSession();
+export default function SignUpScreen() {
+  const { name } = useLocalSearchParams() as unknown as { name: string };
+  const { email } = useLocalSearchParams() as unknown as { email: string };
+  const { password } = useLocalSearchParams() as unknown as {
+    password: string;
+  };
   const [streetAddress, setStreetAddress] = useState<string>('');
-  const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
+  const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
 
-  const [errorExists, setErrorExists] = useState<boolean>(false);
-
   const onChangeStreetAddress = (text: string) => {
-    setErrorExists(false);
     setStreetAddress(text);
   };
 
   const onChangeCity = (text: string) => {
-    setErrorExists(false);
     setCity(text);
   };
 
   const onChangeState = (text: string) => {
-    setErrorExists(false);
-    setUsState(text);
+    setState(text);
   };
 
   const onChangeZipcode = (text: string) => {
-    setErrorExists(false);
     setZipcode(text);
   };
 
+  const validateAddressInputs = () => {
+    if (
+      streetAddress.trim() !== '' ||
+      city.trim() !== '' ||
+      state.trim() !== '' ||
+      zipcode.trim() !== ''
+    )
+      return true;
+  };
+
   const handleSubmit = () => {
-    if (streetAddress && city && usState && zipcode && !errorExists) {
-      updateUser({
-        data: {
-          streetAddress,
-          city,
-          state: usState,
-          zipcode,
-        },
-      });
-      router.push('/Profile/');
-    } else {
-      //ask josh about case of invalid address
+    if (validateAddressInputs()) {
+      signUpUser(name, email, password, streetAddress, city, state, zipcode);
+      setStreetAddress('');
+      setCity('');
+      setState('');
+      setZipcode('');
     }
   };
 
-  useEffect(() => {
-    setStreetAddress(session?.user?.user_metadata.streetName);
-    setUsState(session?.user?.user_metadata.state);
-    setCity(session?.user?.user_metadata.city);
-    setZipcode(session?.user?.user_metadata.zip);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.push('/Profile/')}
-      >
-        <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity>
-      <Text style={styles.instructionText}>Edit account details</Text>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <Text style={styles.backText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.instructionText}>Last, enter your address.</Text>
 
       <View style={styles.inputBox}>
         <AuthInput
@@ -80,6 +78,7 @@ function EditNameScreen() {
           autoCapitalization
         />
       </View>
+
       <View style={styles.inputBox}>
         <AuthInput
           input={city}
@@ -91,10 +90,11 @@ function EditNameScreen() {
           autoCapitalization
         />
       </View>
+
       <View style={styles.stateLine}>
         <View>
           <AuthInput
-            input={usState}
+            input={state}
             onChangeInput={onChangeState}
             labelText="State"
             placeholderText="State"
@@ -104,6 +104,7 @@ function EditNameScreen() {
             isHalfWidth
           />
         </View>
+
         <View>
           <AuthInput
             input={zipcode}
@@ -117,22 +118,30 @@ function EditNameScreen() {
           />
         </View>
       </View>
+      <Text style={styles.space}> </Text>
 
       <TouchableOpacity
-        disabled={!streetAddress || !city || !usState || !zipcode}
-        style={
-          streetAddress && city && usState && zipcode
-            ? styles.submitButton
-            : [styles.submitButton, styles.submitButtonDisabled]
+        disabled={
+          streetAddress.trim() === '' ||
+          city.trim() === '' ||
+          state.trim() === '' ||
+          zipcode.trim() === ''
         }
-        onPress={handleSubmit}
+        style={
+          streetAddress.trim() === '' ||
+          city.trim() === '' ||
+          state.trim() === '' ||
+          zipcode.trim() === ''
+            ? styles.nextButtonGray
+            : styles.nextButton
+        }
+        onPress={() => handleSubmit()}
       >
-        <Text style={styles.submitText}>
-          Submit
-          <Submit style={styles.submitIcon} />
-        </Text>
+        <Text style={styles.nextText}>Sign Up</Text>
+        <View style={styles.check}>
+          <Check />
+        </View>
       </TouchableOpacity>
     </View>
   );
 }
-export default EditNameScreen;
