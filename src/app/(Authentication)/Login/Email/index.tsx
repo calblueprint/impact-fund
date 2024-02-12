@@ -51,19 +51,19 @@ export default function LoginScreen() {
       </View>
 
       <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessage}>
+        <Text style={styles.errorMessageText}>
           {errorExists ? errorMessage : ' '}
         </Text>
       </View>
 
       <View style={styles.nextLine}>
-        <Text style={styles.passwordText}>Forgot password?</Text>
+        <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         <TouchableOpacity
           disabled={email.trim() === '' || errorExists}
           style={
             email.trim() === '' || errorExists
-              ? styles.nextButtonGrey
-              : styles.nextButton
+              ? [styles.nextButtonBase, styles.nextButtonDisabled]
+              : [styles.nextButtonBase, styles.nextButtonActive]
           }
           onPress={emailFind}
         >
