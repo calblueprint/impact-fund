@@ -72,7 +72,6 @@ export default StyleSheet.create({
     width: 310,
     marginTop: 70,
   },
-  arrow: {},
   forgotPasswordText: {
     fontWeight: '400',
     fontSize: 14,

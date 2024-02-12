@@ -77,8 +77,4 @@ export default StyleSheet.create({
     width: 310,
     marginTop: 70,
   },
-  arrow: {
-    marginLeft: 70,
-    marginTop: -14,
-  },
 });
