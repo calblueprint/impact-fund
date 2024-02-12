@@ -17,6 +17,7 @@ import {
   getCaseIdsFromUserId,
 } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
+
 enum permissions {
   UNDETERMINED,
   DENIED,
