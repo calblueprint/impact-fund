@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
@@ -49,12 +50,29 @@ export default function LoginScreen() {
         />
       </View>
 
-      <Text style={styles.errorMessage}>
-        {errorExists ? errorMessage : ' '}
-      </Text>
-      <TouchableOpacity style={styles.nextButton} onPress={emailFind}>
-        <Text style={styles.nextText}>Next</Text>
-      </TouchableOpacity>
+      <View style={styles.errorMessageBox}>
+        <Text style={styles.errorMessage}>
+          {errorExists ? errorMessage : ' '}
+        </Text>
+      </View>
+
+      <View style={styles.nextLine}>
+        <Text style={styles.passwordText}>Forgot password?</Text>
+        <TouchableOpacity
+          disabled={email.trim() === '' || errorExists}
+          style={
+            email.trim() === '' || errorExists
+              ? styles.nextButtonGrey
+              : styles.nextButton
+          }
+          onPress={emailFind}
+        >
+          <Text style={styles.nextText}>Next</Text>
+          <View>
+            <Arrow style={styles.arrow} />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

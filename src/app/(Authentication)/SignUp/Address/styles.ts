@@ -17,9 +17,6 @@ export default StyleSheet.create({
     marginRight: 100,
     marginBottom: 40,
   },
-  image: {
-    marginTop: 2,
-  },
   backText: {
     color: colors.midGrey,
     fontSize: 16,
@@ -27,7 +24,7 @@ export default StyleSheet.create({
     marginLeft: 7,
   },
   backButton: {
-    marginRight: 82,
+    marginRight: 182,
   },
   instructionText: {
     color: colors.black,
@@ -45,30 +42,16 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  smallInputBox: {
+  stateLine: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    justifyContent: 'space-between',
+    width: 310,
+    marginLeft: 40,
+    marginRight: 100,
     marginTop: 11,
   },
-  displayTextSmall: {
-    fontSize: 13,
-    opacity: 0.35,
-  },
-  inputSmall: {
-    height: 40,
-    borderBottomWidth: 0.75,
-    width: 147,
-    borderColor: colors.darkGrey,
-  },
-  inputSmallFocused: {
-    height: 40,
-    borderBottomWidth: 2,
-    width: 147,
-    borderColor: colors.darkRed,
-  },
   space: {
-    margin: 11,
-  },
-
-  space2: {
     marginBottom: 15,
   },
   nextText: {
@@ -88,7 +71,6 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
-    // marginTop: 300,
   },
   nextButtonGray: {
     backgroundColor: colors.midGrey,
@@ -100,17 +82,6 @@ export default StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
   },
-  nextButtonDown: {
-    backgroundColor: colors.midGrey,
-    marginBottom: 20,
-    borderRadius: 3,
-    borderColor: colors.midGrey,
-    width: 310,
-    height: 50,
-    padding: 15,
-    flexDirection: 'row',
-    marginTop: 300,
-  },
   errorMessage: {
     color: colors.darkRed,
     fontSize: 14,
@@ -121,6 +92,6 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   check: {
-    marginTop: 3,
+    marginTop: 1.5,
   },
 });

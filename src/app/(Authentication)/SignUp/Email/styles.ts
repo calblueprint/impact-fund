@@ -23,10 +23,7 @@ export default StyleSheet.create({
   },
   backButton: {
     marginBottom: 40,
-    marginRight: 79,
-  },
-  image: {
-    marginTop: 2,
+    marginRight: 180,
   },
   displayText: {
     marginRight: 253,
@@ -62,7 +59,6 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
-    // marginTop: 320,
   },
   nextButtonGray: {
     backgroundColor: colors.midGrey,
@@ -74,28 +70,15 @@ export default StyleSheet.create({
     height: 50,
     padding: 15,
     flexDirection: 'row',
-    marginTop: 30,
-  },
-  nextButtonDown: {
-    backgroundColor: colors.midGrey,
-    alignItems: 'center',
-    borderRadius: 3,
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    width: 310,
-    height: 50,
-    padding: 15,
-    flexDirection: 'row',
-    marginTop: 320,
   },
   errorMessage: {
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
     width: '81%',
-    marginTop: 24,
+    marginTop: 10,
     marginRight: 130,
-    marginBottom: 25,
+    marginBottom: 65,
   },
   inputBox: {
     marginTop: 11,

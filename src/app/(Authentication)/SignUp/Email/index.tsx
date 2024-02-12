@@ -1,7 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { z } from 'zod';
 
 import styles from './styles';
@@ -61,12 +60,6 @@ export default function SignUpScreen() {
         >
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
-        <View style={styles.image}>
-          <Image
-            source={require('../../../../../assets/inline-logo.jpeg')}
-            style={{ width: 100, height: 12.5 }}
-          />
-        </View>
       </View>
       <Text style={styles.instructionText}>Create your account.</Text>
       <View style={styles.inputBox}>

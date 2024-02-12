@@ -1,10 +1,9 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import Check from '../../../../../assets/check-white.svg';
+import Check from '../../../../../assets/check-circle.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { signUpUser } from '../../../../supabase/queries/auth';
 
@@ -19,37 +18,39 @@ export default function SignUpScreen() {
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
 
-  const [errorExists, setErrorExists] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-
   const onChangeStreetAddress = (text: string) => {
-    setErrorExists(false);
     setStreetAddress(text);
   };
 
   const onChangeCity = (text: string) => {
-    setErrorExists(false);
     setCity(text);
   };
 
   const onChangeState = (text: string) => {
-    setErrorExists(false);
     setState(text);
   };
 
   const onChangeZipcode = (text: string) => {
-    setErrorExists(false);
     setZipcode(text);
   };
 
   const validateAddressInputs = () => {
-    // Insert any address input validation logic
-    return true;
+    if (
+      streetAddress.trim() !== '' ||
+      city.trim() !== '' ||
+      state.trim() !== '' ||
+      zipcode.trim() !== ''
+    )
+      return true;
   };
 
   const handleSubmit = () => {
     if (validateAddressInputs()) {
       signUpUser(name, email, password, streetAddress, city, state, zipcode);
+      setStreetAddress('');
+      setCity('');
+      setState('');
+      setZipcode('');
     }
   };
 
@@ -62,13 +63,6 @@ export default function SignUpScreen() {
         >
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
-
-        <View style={styles.image}>
-          <Image
-            source={require('../../../../../assets/inline-logo.jpeg')}
-            style={{ width: 100, height: 12.5 }}
-          />
-        </View>
       </View>
 
       <Text style={styles.instructionText}>Last, enter your address.</Text>
@@ -97,8 +91,8 @@ export default function SignUpScreen() {
         />
       </View>
 
-      <View style={styles.inputWrap}>
-        <View style={styles.smallInputBox}>
+      <View style={styles.stateLine}>
+        <View>
           <AuthInput
             input={state}
             onChangeInput={onChangeState}
@@ -111,9 +105,7 @@ export default function SignUpScreen() {
           />
         </View>
 
-        <Text style={styles.space}> </Text>
-
-        <View style={styles.smallInputBox}>
+        <View>
           <AuthInput
             input={zipcode}
             onChangeInput={onChangeZipcode}
@@ -126,7 +118,7 @@ export default function SignUpScreen() {
           />
         </View>
       </View>
-      <Text style={styles.space2}> </Text>
+      <Text style={styles.space}> </Text>
 
       <TouchableOpacity
         disabled={

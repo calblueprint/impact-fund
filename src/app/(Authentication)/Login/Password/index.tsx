@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { passwordExists } from '../../../../supabase/queries/auth';
 
@@ -50,13 +51,27 @@ export default function LoginScreen() {
         />
       </View>
 
-      <Text style={styles.errorMessage}>
-        {errorExists ? errorMessage : ' '}
-      </Text>
+      <View style={styles.errorMessageBox}>
+        <Text style={styles.errorMessage}>
+          {errorExists ? errorMessage : ' '}
+        </Text>
+      </View>
 
-      <TouchableOpacity style={styles.nextButton} onPress={() => signIn()}>
-        <Text style={styles.nextText}>Next</Text>
-      </TouchableOpacity>
+      <View style={styles.nextLine}>
+        <Text style={styles.passwordText}>Forgot password?</Text>
+        <TouchableOpacity
+          disabled={password === '' || errorExists}
+          style={
+            password === '' || errorExists
+              ? styles.nextButtonGrey
+              : styles.nextButton
+          }
+          onPress={() => signIn()}
+        >
+          <Text style={styles.nextText}>Next</Text>
+          <Arrow style={styles.arrow} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
