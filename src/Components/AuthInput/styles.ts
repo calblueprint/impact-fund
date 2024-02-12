@@ -3,24 +3,22 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    alignItems: 'flex-start',
-  },
-  inputText: {
+  labelText: {
     marginLeft: 0,
     fontSize: 13,
     opacity: 0.35,
   },
-  input: {
+  inputBox: {
     height: 40,
-    borderBottomWidth: 0.75,
     width: 310,
+    borderBottomWidth: 0.75,
     borderColor: colors.darkGrey,
   },
+  halfWidth: {
+    width: 140,
+  },
   inputFocused: {
-    height: 40,
     borderBottomWidth: 2,
-    width: 310,
     borderColor: colors.darkRed,
   },
 });
