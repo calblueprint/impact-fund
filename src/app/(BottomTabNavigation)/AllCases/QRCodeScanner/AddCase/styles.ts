@@ -4,52 +4,50 @@ import { colors } from '../../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
     flex: 1,
-    marginHorizontal: 30,
   },
-
-  image: {
-    // should use pixels. percentage will change depending on size of scrollview
-    height: 200,
+  linkContainer: {
+    height: '16%',
     width: '100%',
-    marginVertical: 10,
-    borderRadius: 5,
-  },
-
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-
-  dateAndFirm: {
-    height: 30,
+    flexDirection: 'row',
     justifyContent: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: colors.darkGrey,
-    marginBottom: 25,
-    marginTop: 10,
-  },
+    alignItems: 'center',
+    columnGap: 20,
 
-  dateAndFirmText: {
-    color: colors.darkGrey,
-    fontSize: 12,
+    paddingHorizontal: '7%',
+    borderTopWidth: 0.5,
+    borderColor: colors.darkGrey,
+    zIndex: 2,
   },
-
-  blurb: {
-    fontSize: 16,
-    marginBottom: 50,
-  },
-
-  button: {
-    border: 'solid',
-    borderWidth: 2,
-    marginTop: 10,
-    marginBottom: 10,
+  buttonBase: {
+    flex: 1,
+    height: 47,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.midGrey,
-    height: 75,
-    width: '100%',
-    borderRadius: 20,
+    columnGap: 10,
+
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: colors.midnightBlack,
+  },
+  cancelButton: {
+    backgroundColor: colors.white,
+  },
+  addCaseButton: {
+    backgroundColor: colors.midnightBlack,
+  },
+  buttonText: {
+    fontSize: 17,
+    fontStyle: 'normal',
+    fontWeight: '500',
+  },
+  whiteText: {
+    color: colors.white,
+  },
+  blackText: {
+    color: colors.midnightBlack,
   },
 });
