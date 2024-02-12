@@ -69,7 +69,7 @@ export default function LoginScreen() {
         >
           <Text style={styles.nextText}>Next</Text>
           <View>
-            <Arrow style={styles.arrow} />
+            <Arrow />
           </View>
         </TouchableOpacity>
       </View>

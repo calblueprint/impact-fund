@@ -30,17 +30,19 @@ export default StyleSheet.create({
   },
   nextText: {
     color: colors.white,
-    marginRight: 50,
     fontSize: 16,
     opacity: 1,
     fontWeight: '600',
   },
   nextButtonBase: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 5,
     width: 120,
     height: 50,
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   nextButtonDisabled: {
     backgroundColor: colors.midGrey,
@@ -70,10 +72,7 @@ export default StyleSheet.create({
     width: 310,
     marginTop: 70,
   },
-  arrow: {
-    marginLeft: 70,
-    marginTop: -14,
-  },
+  arrow: {},
   forgotPasswordText: {
     fontWeight: '400',
     fontSize: 14,

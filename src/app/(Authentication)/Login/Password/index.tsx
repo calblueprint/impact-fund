@@ -69,7 +69,7 @@ export default function LoginScreen() {
           onPress={() => signIn()}
         >
           <Text style={styles.nextText}>Next</Text>
-          <Arrow style={styles.arrow} />
+          <Arrow />
         </TouchableOpacity>
       </View>
     </View>

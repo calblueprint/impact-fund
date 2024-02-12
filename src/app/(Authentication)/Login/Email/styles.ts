@@ -43,11 +43,14 @@ export default StyleSheet.create({
     color: colors.darkGrey,
   },
   nextButtonBase: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 5,
     width: 120,
     height: 50,
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   nextButtonDisabled: {
     backgroundColor: colors.midGrey,
