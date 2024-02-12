@@ -12,7 +12,7 @@ export const signUpUser = async (
   zip: string,
 ) => {
   try {
-    await supabase.auth.signUp({
+    const { data: user } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -25,6 +25,14 @@ export const signUpUser = async (
         },
       },
     });
+    // add user information to the public table
+    if (user.user) {
+      await supabase.from('users').insert({
+        userId: user.user.id,
+        email,
+        fullName,
+      });
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('(signUpUser)', error);
@@ -133,7 +141,7 @@ export const updateCurrUserAddress = async (
   newZip: string,
 ) => {
   try {
-    supabase.auth.updateUser({
+    await supabase.auth.updateUser({
       data: {
         streetName: newStreetName,
         city: newCity,
