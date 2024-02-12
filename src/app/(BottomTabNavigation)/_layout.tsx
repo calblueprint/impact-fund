@@ -1,7 +1,10 @@
 import { Tabs } from 'expo-router/tabs';
 import React from 'react';
 
-// import BottomTabButton from '../../Components/BottomTabButton/BottomTabButton';
+import RedHomeIcon from '../../../assets/bottom-tab-home.svg';
+import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
+import RedBellIcon from '../../../assets/bottom-tab-updates-bell.svg';
+import { colors } from '../../styles/colors';
 
 export default function AppLayout() {
   return (
@@ -9,7 +12,7 @@ export default function AppLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: 84,
+          height: 90,
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
@@ -21,15 +24,15 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Cases',
           title: 'Cases',
-          // tabBarButton: props => <BottomTabButton {...props} />,
-          tabBarItemStyle: {
-            height: 56,
-            maxWidth: 66,
-            backgroundColor: '#00ff00',
-            marginRight: 60,
-            borderRadius: 10,
-            borderWidth: 1,
+          tabBarIcon: () => <RedHomeIcon />,
+          tabBarLabelStyle: {
+            fontSize: 9,
+            fontStyle: 'normal',
+            fontWeight: '600',
+            lineHeight: 21,
+            color: colors.midRed,
           },
+          tabBarActiveTintColor: colors.black,
         }}
       />
       <Tabs.Screen
@@ -37,13 +40,13 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Updates',
           title: 'Updates',
-          tabBarItemStyle: {
-            height: 56,
-            maxWidth: 66,
-            backgroundColor: '#00ff00',
-            // margin: 5,
-            borderRadius: 10,
-            borderWidth: 1,
+          tabBarIcon: () => <RedBellIcon />,
+          tabBarLabelStyle: {
+            fontSize: 9,
+            fontStyle: 'normal',
+            fontWeight: '600',
+            lineHeight: 21,
+            color: colors.midRed,
           },
         }}
       />
@@ -52,13 +55,13 @@ export default function AppLayout() {
         options={{
           tabBarLabel: 'Profile',
           title: 'Profile',
-          tabBarItemStyle: {
-            height: 56,
-            maxWidth: 66,
-            backgroundColor: '#00ff00',
-            marginLeft: 60,
-            borderRadius: 10,
-            borderWidth: 1,
+          tabBarIcon: () => <RedGearIcon />,
+          tabBarLabelStyle: {
+            fontSize: 9,
+            fontStyle: 'normal',
+            fontWeight: '600',
+            lineHeight: 21,
+            color: colors.midRed,
           },
         }}
       />
