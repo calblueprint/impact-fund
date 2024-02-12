@@ -37,7 +37,7 @@ export default StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'space-between',
-    bottom: 20,
+    bottom: 30,
   },
   caseButtonText: {
     color: colors.black,

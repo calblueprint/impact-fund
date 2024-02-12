@@ -51,14 +51,22 @@ function QRCodeScannerScreen() {
     ),
   };
 
+  const getAllCasesAndValidCases = async () => {
+    const allCases = await getAllCaseIds();
+    setValidIds(allCases);
+    const userCases = await getCaseIdsFromUserId('NO_ID');
+    setUserIds(userCases);
+  };
+
+  const getBarCodeScannerPermissions = async () => {
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    setHasPermission(
+      status === 'granted' ? permissions.GRANTED : permissions.DENIED,
+    );
+  };
+
   useEffect(() => {
-    const getAllCasesAndValidCases = async () => {
-      const allCases = await getAllCaseIds();
-      setValidIds(allCases);
-      const userCases = await getCaseIdsFromUserId('NO_ID');
-      setUserIds(userCases);
-      console.log(validIds, userIds);
-    };
+    getBarCodeScannerPermissions();
     getAllCasesAndValidCases();
   }, []);
 
@@ -73,29 +81,19 @@ function QRCodeScannerScreen() {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(
-        status === 'granted' ? permissions.GRANTED : permissions.DENIED,
-      );
-    };
-    getBarCodeScannerPermissions();
-  }, []);
-
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     const caseId = result.data;
     if (!validIds.includes(caseId)) {
       Toast.show({
         type: 'error',
         text1: 'Sorry! This QR code is invalid.',
-        visibilityTime: 1000,
+        visibilityTime: 1500,
       });
     } else if (userIds.includes(caseId)) {
       Toast.show({
         type: 'error',
         text1: "You've already scanned this QR code.",
-        visibilityTime: 1000,
+        visibilityTime: 1500,
       });
     } else if (!scanned) {
       const caseData: Case = await getCaseById(caseId);
