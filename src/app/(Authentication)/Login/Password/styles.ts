@@ -5,6 +5,7 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.white,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: '100%',
@@ -18,7 +19,7 @@ export default StyleSheet.create({
   },
   backButton: {
     marginTop: 100,
-    marginBottom: 40,
+    marginBottom: 30,
     marginRight: 280,
   },
   instructionText: {
@@ -27,51 +28,53 @@ export default StyleSheet.create({
     fontWeight: '800',
     marginRight: 97,
   },
-  passwordText: {
-    marginTop: 90,
-    marginRight: 253,
-    fontSize: 13,
-    opacity: 0.35,
-  },
   nextText: {
-    marginRight: 230,
-    fontSize: 14,
+    color: colors.white,
+    fontSize: 16,
     opacity: 1,
-    fontWeight: '400',
+    fontWeight: '600',
   },
-  nextButtonGrey: {
-    backgroundColor: colors.white,
+  nextButtonBase: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    borderRadius: 3,
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    width: 120,
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  nextButtonDisabled: {
+    backgroundColor: colors.midGrey,
     borderColor: colors.midGrey,
-    borderWidth: 1,
-    width: 310,
-    height: 50,
-    padding: 15,
-    opacity: 0.3,
   },
-  nextButton: {
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    marginBottom: 20,
-    borderRadius: 3,
+  nextButtonActive: {
+    backgroundColor: colors.black,
     borderColor: colors.black,
-    borderWidth: 1,
-    width: 310,
-    height: 50,
-    padding: 15,
   },
-  errorMessage: {
+  errorMessageBox: {
+    marginTop: 13,
+    height: 50,
+    width: 310,
+  },
+  errorMessageText: {
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
-    width: 310,
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
   },
   inputBox: {
-    marginTop: 97,
+    marginTop: 40,
+  },
+  nextLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 310,
+    marginTop: 70,
+  },
+  forgotPasswordText: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: colors.darkGrey,
   },
 });
