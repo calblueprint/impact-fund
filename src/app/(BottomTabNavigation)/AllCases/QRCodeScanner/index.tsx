@@ -17,6 +17,7 @@ import {
   getCaseIdsFromUserId,
 } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
+
 enum permissions {
   UNDETERMINED,
   DENIED,
@@ -108,14 +109,6 @@ function QRCodeScannerScreen() {
     }
     router.push({
       pathname: `/AllCases/QRCodeScanner/AddCase/${userCase.id}`,
-      params: {
-        id: userCase.id,
-        title: userCase.title,
-        imageUrl: userCase.imageUrl,
-        date: userCase.date,
-        lawFirm: userCase.lawFirm,
-        summary: userCase.summary,
-      },
     });
   };
 
