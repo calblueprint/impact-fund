@@ -24,12 +24,12 @@ export interface Case extends CasePartial {
 }
 
 export interface CaseSummaryProps {
-  blurb: string;
-  summary: string;
+  id: CaseUid;
   imageUrl: string;
-  caseSite: string;
-  date: Date;
+  blurb: string;
   lawFirm: string;
+  summary: string;
+  date: Date;
 }
 
 export interface FormPartial {
