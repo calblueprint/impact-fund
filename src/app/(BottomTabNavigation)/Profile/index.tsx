@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
@@ -20,11 +20,16 @@ import { User, userInstance } from '../../../types/types';
 
 function ProfileScreen() {
   const [currSession, setCurrSession] = useState<User>(userInstance);
+  const navigation = useNavigation();
+
   useEffect(() => {
-    getCurrentUserInfo().then(result => {
-      setCurrSession(result);
+    navigation.addListener('focus', async () => {
+      getCurrentUserInfo().then(result => {
+        setCurrSession(result);
+      });
     });
-  }, []);
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
