@@ -59,6 +59,7 @@ export default StyleSheet.create({
   errorMessageBox: {
     marginTop: 10,
     height: 50,
+    borderWidth: 1,
   },
   errorMessage: {
     color: colors.darkRed,
