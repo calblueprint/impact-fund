@@ -7,7 +7,6 @@ import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSu
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case } from '../../../../types/types';
-// import { formatDate } from '../utils';
 
 export default function CaseSummaryScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();

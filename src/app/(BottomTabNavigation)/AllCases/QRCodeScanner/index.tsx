@@ -108,14 +108,6 @@ function QRCodeScannerScreen() {
     }
     router.push({
       pathname: `/AllCases/QRCodeScanner/AddCase/${userCase.id}`,
-      params: {
-        id: userCase.id,
-        title: userCase.title,
-        imageUrl: userCase.imageUrl,
-        date: userCase.date,
-        lawFirm: userCase.lawFirm,
-        summary: userCase.summary,
-      },
     });
   };
 
