@@ -19,7 +19,7 @@ function EditNameScreen() {
   const [displayCity, setDisplayCity] = useState<boolean>(true);
   const [displayZip, setDisplayZip] = useState<boolean>(true);
   const [streetPlaceholder, setStreetPlaceholder] =
-    useState<string>('Street Name');
+    useState<string>('Street NAdfasdf');
   const [statePlaceholder, setStatePlaceholder] = useState<string>('State');
   const [cityPlaceholder, setCityPlaceholder] = useState<string>('City');
   const [zipPlaceholder, setZipPlaceholder] = useState<string>('Zip code');
