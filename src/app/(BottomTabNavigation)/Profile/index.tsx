@@ -1,5 +1,5 @@
-import { router } from 'expo-router';
-import React from 'react';
+import { router, useNavigation } from 'expo-router';
+import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -16,6 +16,11 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const { signOut, session } = useSession();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.addListener('focus', async () => {});
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -94,20 +99,19 @@ function ProfileScreen() {
         </View>
         <View style={styles.line} />
         <View>
-          <TouchableOpacity
-            onPress={() => {
-              router.push('/Profile/DeleteAccount');
-            }}
-          >
-            <View style={styles.actionElementTop}>
-              <View style={styles.iconTitle}>
-                <RedTrash style={styles.icon} />
-                <Text style={[styles.textElements, styles.bottomPush]}>
-                  Delete account
-                </Text>
-              </View>
+          <View style={styles.actionElementTop}>
+            <View style={styles.iconTitle}>
+              <RedTrash style={styles.icon} />
+              <Text style={[styles.textElements, styles.bottomPush]}>
+                Delete account
+              </Text>
             </View>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                router.push('/Profile/DeleteAccount');
+              }}
+            />
+          </View>
         </View>
       </View>
       <TouchableOpacity onPress={() => signOut()} style={styles.signOutButton}>
