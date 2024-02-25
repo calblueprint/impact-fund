@@ -5,18 +5,14 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Submit from '../../../../../assets/submit.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  getCurrentUserInfo,
-  updateCurrUserName,
-} from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
 function EditNameScreen() {
+  const { updateUser, session } = useSession();
   const [fullName, setFullName] = useState<string>('');
 
   useEffect(() => {
-    getCurrentUserInfo().then(result => {
-      setFullName(result.fullName);
-    });
+    setFullName(session?.user?.user_metadata.fullName);
   }, []);
 
   return (
@@ -48,7 +44,11 @@ function EditNameScreen() {
         }
         onPress={() => {
           if (fullName) {
-            updateCurrUserName(fullName);
+            updateUser({
+              data: {
+                fullName,
+              },
+            });
             router.push('/Profile/');
           } else {
             //ask josh about what should appear in invalid name event

@@ -5,19 +5,16 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Submit from '../../../../../assets/submit.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  getCurrentUserInfo,
-  updateCurrUserAddress,
-} from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
 function EditNameScreen() {
+  const { updateUser, session } = useSession();
   const [streetAddress, setStreetAddress] = useState<string>('');
+  const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onChangeStreetAddress = (text: string) => {
     setErrorExists(false);
@@ -31,7 +28,7 @@ function EditNameScreen() {
 
   const onChangeState = (text: string) => {
     setErrorExists(false);
-    setState(text);
+    setUsState(text);
   };
 
   const onChangeZipcode = (text: string) => {
@@ -40,8 +37,15 @@ function EditNameScreen() {
   };
 
   const handleSubmit = () => {
-    if (streetAddress && city && state && zipcode) {
-      updateCurrUserAddress(streetAddress, city, state, zipcode);
+    if (streetAddress && city && usState && zipcode && !errorExists) {
+      updateUser({
+        data: {
+          streetName: streetAddress,
+          city,
+          state: usState,
+          zipcode,
+        },
+      });
       router.push('/Profile/');
     } else {
       //ask josh about case of invalid address
@@ -49,12 +53,10 @@ function EditNameScreen() {
   };
 
   useEffect(() => {
-    getCurrentUserInfo().then(result => {
-      setStreetAddress(result.streetName);
-      setCity(result.city);
-      setState(result.state);
-      setZipcode(result.zip);
-    });
+    setStreetAddress(session?.user?.user_metadata.streetName);
+    setUsState(session?.user?.user_metadata.state);
+    setCity(session?.user?.user_metadata.city);
+    setZipcode(session?.user?.user_metadata.zip);
   }, []);
 
   return (
@@ -92,7 +94,7 @@ function EditNameScreen() {
       <View style={styles.stateLine}>
         <View>
           <AuthInput
-            input={state}
+            input={usState}
             onChangeInput={onChangeState}
             labelText="State"
             placeholderText="State"
@@ -117,9 +119,9 @@ function EditNameScreen() {
       </View>
 
       <TouchableOpacity
-        disabled={!streetAddress || !city || !state || !zipcode}
+        disabled={!streetAddress || !city || !usState || !zipcode}
         style={
-          streetAddress && city && state && zipcode
+          streetAddress && city && usState && zipcode
             ? styles.submitButton
             : [styles.submitButton, styles.submitButtonDisabled]
         }

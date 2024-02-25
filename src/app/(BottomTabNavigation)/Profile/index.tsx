@@ -1,5 +1,5 @@
 import { router, useNavigation } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -12,22 +12,14 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
-import {
-  getCurrentUserInfo,
-  signOutUser,
-} from '../../../supabase/queries/auth';
-import { User, userInstance } from '../../../types/types';
+import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
-  const [currSession, setCurrSession] = useState<User>(userInstance);
+  const { signOut, session } = useSession();
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.addListener('focus', async () => {
-      getCurrentUserInfo().then(result => {
-        setCurrSession(result);
-      });
-    });
+    navigation.addListener('focus', async () => {});
   }, [navigation]);
 
   return (
@@ -46,7 +38,7 @@ function ProfileScreen() {
             </View>
           </View>
 
-          <Text style={styles.userText}>{currSession.email}</Text>
+          <Text style={styles.userText}>{session?.user?.email}</Text>
         </View>
         <View style={styles.line} />
         <View>
@@ -60,7 +52,9 @@ function ProfileScreen() {
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.userText}>{currSession.fullName}</Text>
+          <Text style={styles.userText}>
+            {session?.user?.user_metadata.fullName}
+          </Text>
         </View>
         <View style={styles.line} />
 
@@ -77,13 +71,13 @@ function ProfileScreen() {
             </TouchableOpacity>
           </View>
           <Text style={styles.userText}>
-            {currSession.streetName +
+            {session?.user?.user_metadata.streetName +
               '\n' +
-              currSession.city +
+              session?.user?.user_metadata.city +
               ', ' +
-              currSession.state +
+              session?.user?.user_metadata.state +
               ' ' +
-              currSession.zip}
+              session?.user?.user_metadata.zip}
           </Text>
         </View>
       </View>
@@ -122,10 +116,7 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={() => signOutUser()}
-        style={styles.signOutButton}
-      >
+      <TouchableOpacity onPress={() => signOut()} style={styles.signOutButton}>
         <SignOut />
         <Text style={styles.signOutText}>Log out</Text>
       </TouchableOpacity>
