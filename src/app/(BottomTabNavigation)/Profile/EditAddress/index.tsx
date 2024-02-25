@@ -40,7 +40,7 @@ function EditNameScreen() {
     if (streetAddress && city && usState && zipcode && !errorExists) {
       updateUser({
         data: {
-          streetAddress,
+          streetName: streetAddress,
           city,
           state: usState,
           zipcode,
