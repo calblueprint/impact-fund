@@ -1,14 +1,28 @@
+import { Session } from '@supabase/supabase-js';
 import { router } from 'expo-router';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
+import Push from '../../../Components/Push';
 import { CaseContext } from '../../../context/CaseContext';
+import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
+  // const [session, setSession] = useState<Session | null>(null);
+
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
+
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -32,6 +46,7 @@ function CasesScreen() {
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
                   </View>
                 </TouchableOpacity>
+                {/* <Push session={session} /> */}
               </>
             )}
             data={allCases}
