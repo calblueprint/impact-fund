@@ -105,9 +105,10 @@ export default StyleSheet.create({
   },
   signOutButton: {
     alignSelf: 'flex-start',
-    width: 125,
+    width: 320,
     height: 45,
-    marginLeft: 27,
+    marginLeft: 29,
+    marginRight: 27,
     borderRadius: 5,
     backgroundColor: colors.black,
     padding: 3,
