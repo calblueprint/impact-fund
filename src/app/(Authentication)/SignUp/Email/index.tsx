@@ -6,6 +6,7 @@ import { z } from 'zod';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
@@ -42,10 +43,17 @@ export default function SignUpScreen() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateName() && validateEmail()) {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+      });
+      if (error) {
+        console.log(error);
+        return;
+      }
       router.push({
-        pathname: 'SignUp/Password',
+        pathname: 'OTPFlow',
         params: { name, email },
       });
     }

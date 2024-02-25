@@ -2,7 +2,7 @@ import { User } from '../../types/types';
 import supabaseAdmin from '../createAdminClient';
 import supabase from '../createClient';
 
-export const signUpUser = async (
+export const fullySignUpUser = async (
   fullName: string,
   email: string,
   password: string,
@@ -12,17 +12,15 @@ export const signUpUser = async (
   zip: string,
 ) => {
   try {
-    const { data: user } = await supabase.auth.signUp({
+    const { data: user } = await supabase.auth.updateUser({
       email,
       password,
-      options: {
-        data: {
-          fullName,
-          streetName,
-          city,
-          state,
-          zip,
-        },
+      data: {
+        fullName,
+        streetName,
+        city,
+        state,
+        zip,
       },
     });
     // add user information to the public table

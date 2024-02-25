@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { signUpUser } from '../../../../supabase/queries/auth';
+import { fullySignUpUser } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -46,7 +46,15 @@ export default function SignUpScreen() {
 
   const handleSubmit = () => {
     if (validateAddressInputs()) {
-      signUpUser(name, email, password, streetAddress, city, state, zipcode);
+      fullySignUpUser(
+        name,
+        email,
+        password,
+        streetAddress,
+        city,
+        state,
+        zipcode,
+      );
       setStreetAddress('');
       setCity('');
       setState('');
