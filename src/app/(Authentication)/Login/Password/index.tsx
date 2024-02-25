@@ -19,6 +19,7 @@ export default function LoginScreen() {
     setErrorExists(false);
     setPassword(text);
   };
+  const sessionHandler = useSession();
 
   async function signIn() {
     const isPassword = await sessionHandler.signInWithEmail(email, password);
@@ -27,9 +28,6 @@ export default function LoginScreen() {
       setErrorMessage(
         'Oh no! The password you entered is incorrect, please try again.',
       );
-    } else {
-      setErrorExists(false);
-      setPassword('');
     }
   }
 
