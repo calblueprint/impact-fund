@@ -5,8 +5,8 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    color: colors.white,
+    margin: 20,
   },
   insideContainer: {
     justifyContent: 'space-evenly',
@@ -16,33 +16,24 @@ export default StyleSheet.create({
   textContainer: {
     flex: 0.7,
     width: '100%',
-    justifyContent: 'flex-end',
-    paddingHorizontal: 50,
-    paddingTop: 50,
+    justifyContent: 'center',
+    paddingHorizontal: 40,
   },
   buttonsContainer: {
-    flex: 0.3,
-    width: '100%',
-    justifyContent: 'center',
-    padding: 40,
-    gap: 10,
-  },
-  buttonWrapperTop: {
-    flex: 0.5,
-    justifyContent: 'flex-end',
-  },
-  buttonWrapperBottom: {
-    flex: 0.5,
-    justifyContent: 'flex-start',
+    width: '83%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginHorizontal: 20,
   },
   button: {
-    width: '100%',
-    height: 40,
+    width: 149,
+    height: 47,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
+    marginTop: 10,
   },
   buttonBottom: {
     backgroundColor: colors.black,
@@ -54,13 +45,21 @@ export default StyleSheet.create({
   buttonBottomText: {
     color: colors.white,
   },
-  backButton: {
-    margin: 10,
-    alignItems: 'center',
-    backgroundColor: colors.midGrey,
-    padding: 10,
-    borderColor: colors.black,
-    borderWidth: 0.5,
-    borderRadius: 5,
+  reqs: {
+    marginVertical: 10,
+  },
+  info: {
+    marginBottom: 10,
+  },
+  image: {
+    height: 150,
+    width: 300,
+    marginLeft: 25,
+  },
+  title: {
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginVertical: 10,
+    marginLeft: 55,
   },
 });
