@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { View, Button, Platform } from 'react-native';
 
 import supabase from '../supabase/createClient';
 
@@ -15,13 +15,23 @@ Notifications.setNotificationHandler({
   }),
 });
 
+async function getDummyUpdate() {
+  const { data } = await supabase
+    .from('updates')
+    .select()
+    .eq('updateId', '54c9244d-a336-4200-b236-fc7cf6e26a44');
+  if (data) {
+    return data[0].updateInfo;
+  }
+}
+
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
-    title: 'Original Title',
-    body: 'And here is the body!',
+    title: 'A Dummy Update',
+    body: await getDummyUpdate(),
     data: { someData: 'goes here' },
   };
 
@@ -61,10 +71,9 @@ async function registerForPushNotificationsAsync() {
       return '';
     }
     token = await Notifications.getExpoPushTokenAsync({
-      // projectId: Constants?.expoConfig?.extra?.eas.projectId, // TODO: fix
+      // projectId: Constants?.expoConfig?.extra?.eas.projectId, // TODO: figure out why this isnt working
       projectId: 'd1a810ad-7132-4890-888f-0142c444b21d',
     });
-    console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -108,18 +117,7 @@ export default function Push({ session }: { session: Session }) {
   }, []);
 
   return (
-    <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}
-    >
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Title: {notification?.request.content.title} </Text>
-        <Text>Body: {notification?.request.content.body}</Text>
-        <Text>
-          Data:{' '}
-          {notification && JSON.stringify(notification.request.content.data)}
-        </Text>
-      </View>
+    <View>
       <Button
         title="Press to Send Notification"
         onPress={async () => {
