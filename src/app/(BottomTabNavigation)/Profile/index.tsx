@@ -11,6 +11,7 @@ import Person from '../../../../assets/person.svg';
 import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
+import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import {
   getCurrentUserInfo,
@@ -62,11 +63,9 @@ function ProfileScreen() {
                 <Pencil style={styles.edit} />
               </TouchableOpacity>
             </View>
-
             <Text style={styles.userText}>{currSession.fullName}</Text>
           </View>
           <View style={styles.line} />
-
           <View>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
@@ -103,7 +102,7 @@ function ProfileScreen() {
                   router.push('/Profile/DeleteAccount');
                 }}
               >
-                <GreyRightCarrot />
+                <GreyRightCarrot style={styles.edit} />
               </TouchableOpacity>
             </View>
           </View>
@@ -129,8 +128,13 @@ function ProfileScreen() {
           onPress={() => signOutUser()}
           style={styles.signOutButton}
         >
-          <SignOut />
-          <Text style={styles.signOutText}>Log out</Text>
+          <View style={styles.signOutContentContainer}>
+            <View style={styles.signOutIcon}>
+              <SignOut style={styles.edit} />
+            </View>
+            <Text style={styles.signOutText}>Log out</Text>
+          </View>
+          <WhiteRightCarrot style={styles.edit} />
         </TouchableOpacity>
       </View>
     </View>

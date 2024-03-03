@@ -10,7 +10,7 @@ export default StyleSheet.create({
     // justifyContent: 'flex-start',
   },
   edit: {
-    marginRight: 5,
+    marginRight: 20,
     marginTop: 3,
   },
   iconTitle: {
@@ -28,14 +28,14 @@ export default StyleSheet.create({
   },
   userText: {
     marginLeft: 34,
-    marginRight: 20,
+    // marginRight: 20,
     marginTop: 5,
     marginBottom: 10,
     color: colors.darkGrey,
   },
   userTextMargin: {
     marginLeft: 34,
-    marginRight: 20,
+    // marginRight: 20,
     marginTop: 5,
     color: colors.darkGrey,
   },
@@ -43,12 +43,11 @@ export default StyleSheet.create({
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 0.5,
-    width: '92%',
     marginLeft: 32,
-    marginRight: 0,
+    // marginRight: 0,
   },
   actionsContainer: {
-    paddingRight: 10,
+    // paddingRight: 10,
     paddingBottom: 3,
     paddingLeft: 10,
     width: '100%',
@@ -72,7 +71,6 @@ export default StyleSheet.create({
     lineHeight: 33,
     color: colors.black,
     alignSelf: 'flex-start',
-    // marginLeft: 29,
     marginTop: 39,
     marginBottom: 15,
   },
@@ -94,14 +92,10 @@ export default StyleSheet.create({
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 0.5,
-    // marginLeft: 2,
     marginTop: 8,
-    // width: 317,
   },
   headerContainer: {
-    // alignSelf: 'flex-start',
     marginTop: 63,
-    // marginLeft: 27,
     width: '100%',
   },
   signOutButton: {
@@ -110,9 +104,9 @@ export default StyleSheet.create({
     height: 45,
     borderRadius: 5,
     backgroundColor: colors.black,
-    padding: 3,
+    paddingLeft: 3,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   signOutText: {
@@ -123,5 +117,14 @@ export default StyleSheet.create({
   contentContainer: {
     width: '84%',
     alignItems: 'center',
+  },
+  signOutIcon: {
+    marginLeft: 20,
+    // marginRight: 5,
+    flexDirection: 'row',
+  },
+  signOutContentContainer: {
+    flexDirection: 'row',
+    // alignItems: 'flex-start',
   },
 });
