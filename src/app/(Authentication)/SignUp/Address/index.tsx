@@ -59,6 +59,7 @@ export default function SignUpScreen() {
       setCity('');
       setState('');
       setZipcode('');
+      router.push('/');
     }
   };
 

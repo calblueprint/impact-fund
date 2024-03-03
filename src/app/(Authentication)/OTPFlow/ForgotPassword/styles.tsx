@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../styles/colors';
+import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -17,5 +17,11 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 30,
     marginTop: 30,
+  },
+  resendButton: {
+    marginTop: 30,
+  },
+  resendText: {
+    textDecorationLine: 'underline',
   },
 });
