@@ -130,9 +130,9 @@ function ProfileScreen() {
         >
           <View style={styles.signOutContentContainer}>
             <View style={styles.signOutIcon}>
-              <SignOut style={styles.edit} />
+              <SignOut style={styles.icon} />
+              <Text style={styles.signOutText}>Log out</Text>
             </View>
-            <Text style={styles.signOutText}>Log out</Text>
           </View>
           <WhiteRightCarrot style={styles.edit} />
         </TouchableOpacity>

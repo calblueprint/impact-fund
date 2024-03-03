@@ -42,7 +42,8 @@ export default StyleSheet.create({
   line: {
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0,
+    // width: '100%',
     marginLeft: 32,
     // marginRight: 0,
   },
@@ -113,6 +114,7 @@ export default StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
     fontSize: 15,
+    marginLeft: 10,
   },
   contentContainer: {
     width: '84%',
@@ -120,7 +122,6 @@ export default StyleSheet.create({
   },
   signOutIcon: {
     marginLeft: 20,
-    // marginRight: 5,
     flexDirection: 'row',
   },
   signOutContentContainer: {
