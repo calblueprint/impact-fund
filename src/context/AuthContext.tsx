@@ -17,6 +17,13 @@ import React, {
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
 
+/**
+ * To use AuthContext, import useSession() in whichever file you prefer.
+ * You can call any file/variable that exists in the AuthState below.
+ * Write all supabase queries regarding authenthication in this file, and write
+ * its name and type in the AuthState interface.
+ */
+
 export interface AuthState {
   session: Session | null;
   user: User | null;

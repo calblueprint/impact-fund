@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -7,21 +7,13 @@ import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../../context/AuthContext';
-import { getCurrentUserInfo } from '../../../../supabase/queries/auth';
-import { userInstance, User } from '../../../../types/types';
-
 function DeleteAccountScreen() {
-  const [currSession, setCurrSession] = useState<User>(userInstance);
-
-  const { signOut, deleteCurrentUser } = useSession();
-  useEffect(() => {
-    getCurrentUserInfo().then(result => {
-      setCurrSession(result);
-    });
-  }, []);
+  const { signOut, deleteCurrentUser, session } = useSession();
 
   const deleteAccount = () => {
-    deleteCurrentUser(currSession.id);
+    if (session?.user.id) {
+      deleteCurrentUser(session.user.id);
+    }
     signOut();
   };
 
