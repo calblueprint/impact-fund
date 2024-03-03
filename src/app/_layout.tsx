@@ -7,6 +7,7 @@ export default function StackLayout() {
   return (
     <AuthContextProvider>
       <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(Authentication)" options={{}} />
         <Stack.Screen name="(BottomTabNavigation)" options={{}} />
       </Stack>
     </AuthContextProvider>
