@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import Check from '../../../assets/checkbox.svg';
-import Rectangle from '../../../assets/rectangle.svg';
+import Check from '../../../../../assets/checkbox.svg';
+import Rectangle from '../../../../../assets/rectangle.svg';
 
 const Checkbox = () => {
   const [isChecked, setIsChecked] = useState(false);

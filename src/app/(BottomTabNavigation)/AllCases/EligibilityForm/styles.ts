@@ -5,25 +5,17 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    color: colors.white,
-    margin: 20,
+    backgroundColor: colors.white,
   },
-  insideContainer: {
-    justifyContent: 'space-evenly',
-    height: '90%',
-    width: '100%',
-  },
-  textContainer: {
-    flex: 0.7,
-    width: '100%',
-    justifyContent: 'center',
-    paddingHorizontal: 40,
+  centerContainer: {
+    width: '84%',
+    //backgroundColor: 'green',
   },
   buttonsContainer: {
-    width: '83%',
+    width: '85%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginHorizontal: 20,
+    //backgroundColor: 'blue',
   },
   button: {
     width: 149,
@@ -32,11 +24,27 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    marginTop: 10,
+    paddingHorizontal: 30,
   },
   buttonBottom: {
+    width: 149,
+    height: 47,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30,
     backgroundColor: colors.black,
+  },
+  buttonBottomGray: {
+    width: 149,
+    height: 47,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    backgroundColor: colors.midGrey,
   },
   buttonTop: {
     borderColor: colors.black,
@@ -45,21 +53,25 @@ export default StyleSheet.create({
   buttonBottomText: {
     color: colors.white,
   },
-  reqs: {
-    marginVertical: 10,
-  },
   info: {
-    marginBottom: 10,
+    marginVertical: 20,
+  },
+  infoRow: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginVertical: 20,
   },
   image: {
-    height: 150,
-    width: 300,
-    marginLeft: 25,
+    height: 225,
+    width: 350,
   },
   title: {
+    marginTop: 15,
     fontSize: 35,
     fontWeight: 'bold',
-    marginVertical: 10,
-    marginLeft: 55,
+  },
+  list: {
+    flexDirection: 'row',
+    marginVertical: 15,
   },
 });
