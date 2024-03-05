@@ -5,6 +5,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -45,10 +46,18 @@ export default function SignUpScreen() {
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validatePassword() && validateConfirmPassword()) {
+      const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+      });
+      if (error) {
+        console.log(error);
+        return;
+      }
+      console.log(data);
       router.push({
-        pathname: 'SignUp/Address',
+        pathname: 'OTPFlow/OTPVerify',
         params: { name, email, password },
       });
       setPassword('');
@@ -111,6 +120,9 @@ export default function SignUpScreen() {
         <View>
           <Arrow />
         </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPVerify')}>
+        <Text>GO TO VERIFY SCREEN</Text>
       </TouchableOpacity>
     </View>
   );

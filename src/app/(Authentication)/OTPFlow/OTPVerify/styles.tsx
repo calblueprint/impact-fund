@@ -7,8 +7,16 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    padding: 30,
+  },
+  otpInput: {
+    marginVertical: 100,
+  },
+  bottomStuff: {
+    marginVertical: 100,
+    width: '100%',
   },
   verifyButton: {
     borderColor: colors.black,
@@ -23,5 +31,13 @@ export default StyleSheet.create({
   },
   resendText: {
     textDecorationLine: 'underline',
+  },
+
+  instructionText: {
+    color: colors.black,
+    fontSize: 24,
+    fontWeight: '800',
+    marginRight: 35,
+    marginBottom: 20,
   },
 });

@@ -153,19 +153,6 @@ export const updateCurrUserAddress = async (
   }
 };
 
-export const verifyOtp = async (email: string, token: string) => {
-  try {
-    await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email',
-    });
-  } catch (error) {
-    console.error('Verifying one time password failed!');
-    throw error;
-  }
-};
-
 export const resendOtp = async (email: string) => {
   try {
     await supabase.auth.resend({

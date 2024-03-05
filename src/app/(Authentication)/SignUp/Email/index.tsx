@@ -45,24 +45,8 @@ export default function SignUpScreen() {
 
   const handleSubmit = async () => {
     if (validateName() && validateEmail()) {
-      setErrorMessage('hello');
-      const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          shouldCreateUser: false,
-        },
-      });
-      if (error) {
-        //setErrorMessage(error.message);
-        console.log(error);
-        return;
-      }
-      if (data?.user) {
-        setErrorMessage('USER ALREADY EXISTS!');
-        return;
-      }
       router.push({
-        pathname: 'OTPFlow/OTPVerify',
+        pathname: 'SignUp/Password',
         params: { name, email },
       });
     }
@@ -101,16 +85,6 @@ export default function SignUpScreen() {
           autoCapitalization={false}
         />
       </View>
-      {/* <TouchableOpacity
-        onPress={() =>
-          router.push({
-            pathname: 'OTPFlow/OTPVerify',
-            params: { name, email },
-          })
-        }
-      >
-        <Text>HELLO</Text>
-      </TouchableOpacity> */}
       <View>
         <Text style={styles.errorMessage}>
           {errorExists ? errorMessage : ' '}
