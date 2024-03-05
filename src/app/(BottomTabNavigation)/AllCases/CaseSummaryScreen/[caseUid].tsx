@@ -1,13 +1,12 @@
-import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from './styles';
+import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case } from '../../../../types/types';
-import { formatDate } from '../utils';
 
 export default function CaseSummaryScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
@@ -30,30 +29,7 @@ export default function CaseSummaryScreen() {
         <Text>Loading...</Text>
       ) : (
         <>
-          <ScrollView
-            style={styles.outerScroll}
-            showsVerticalScrollIndicator={false}
-          >
-            <Image
-              style={styles.imageContainer}
-              source={caseData.imageUrl}
-              contentFit="cover"
-              transition={300}
-            />
-            <View style={styles.blurbContainer}>
-              <Text style={styles.blurbText}>{caseData.blurb}</Text>
-              <View style={styles.inLineSubInfo}>
-                <Text style={[styles.subText, styles.lawFirmText]}>
-                  {caseData.lawFirm}
-                </Text>
-                <Text style={[styles.subText, styles.dateText]}>
-                  {' '}
-                  • {formatDate(caseData.date)}
-                </Text>
-              </View>
-            </View>
-            <Text style={styles.summaryText}>{caseData.summary}</Text>
-          </ScrollView>
+          <CaseSummaryContent {...caseData} />
           <View style={styles.linkContainer}>
             <ExternalSiteLink
               text="Learn more on case website"

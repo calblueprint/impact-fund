@@ -2,30 +2,54 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from '../../styles/colors';
 
+const baseButton = {
+  backgroundColor: colors.white,
+  width: 310,
+  height: 55,
+  borderRadius: 3,
+  borderColor: colors.black,
+  borderWidth: 0.75,
+  marginBottom: 10,
+  padding: 16,
+};
+
+const buttonText = {
+  fontSize: 17,
+};
+
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonText: {
-    fontSize: 19,
-    color: colors.black,
-    alignSelf: 'center',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-
   buttonContainer: {
-    backgroundColor: colors.midGrey,
-    width: 325,
-    height: 80,
-    justifyContent: 'center',
-    borderRadius: 3,
-    borderColor: colors.black,
-    borderWidth: 1.5,
-    marginTop: 20,
-    marginBottom: 10,
+    flexDirection: 'row',
+  },
+  arrow: {
+    marginLeft: 120,
+    marginTop: 5,
+  },
+  arrowWhite: {
+    marginLeft: 132,
+    marginTop: 5,
+  },
+  buttonText,
+  whiteText: {
+    ...buttonText,
+    color: colors.white,
+    fontWeight: '400',
+    alignSelf: 'flex-start',
+  },
+  blackText: {
+    ...buttonText,
+    color: colors.black,
+    fontWeight: '400',
+    alignSelf: 'flex-start',
+  },
+
+  baseButton,
+  whiteButton: {
+    ...baseButton,
+    backgroundColor: colors.white,
+  },
+  blackButton: {
+    ...baseButton,
+    backgroundColor: colors.black,
   },
 });

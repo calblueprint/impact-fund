@@ -5,6 +5,7 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.white,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: '100%',
@@ -29,8 +30,6 @@ export default StyleSheet.create({
   },
   inputBox: {
     marginTop: 40,
-    width: '100%',
-    alignItems: 'center',
   },
   nextText: {
     marginRight: 17,
@@ -38,52 +37,44 @@ export default StyleSheet.create({
     fontWeight: '600',
     color: colors.white,
   },
-  passwordText: {
+  forgotPasswordText: {
     fontWeight: '400',
-    marginLeft: 7,
     fontSize: 14,
     color: colors.darkGrey,
-    marginTop: 16,
   },
-  nextButtonGrey: {
+  nextButtonBase: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    width: 120,
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  nextButtonDisabled: {
     backgroundColor: colors.midGrey,
-    borderRadius: 3,
-    borderWidth: 1,
     borderColor: colors.midGrey,
-    width: 125,
-    height: 50,
-    padding: 15,
   },
-  nextButton: {
+  nextButtonActive: {
     backgroundColor: colors.black,
-    borderRadius: 3,
-    borderWidth: 1,
     borderColor: colors.black,
-    width: 125,
-    height: 50,
-    padding: 15,
   },
   errorMessageBox: {
-    marginTop: 10,
+    marginTop: 13,
     height: 50,
+    width: 310,
   },
-  errorMessage: {
+  errorMessageText: {
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
-    width: 310,
-    alignItems: 'center',
   },
   nextLine: {
     flexDirection: 'row',
-    alignSelf: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     width: 310,
-    marginLeft: 30,
-    marginTop: 100,
-  },
-  arrow: {
-    marginLeft: 70,
-    marginTop: -14,
+    marginTop: 70,
   },
 });

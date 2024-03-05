@@ -1,4 +1,3 @@
-//import CheckBox from '@react-native-community/checkbox';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
@@ -142,9 +141,7 @@ export default function EligibilityForm() {
   const updateEligibility = async (status: Eligibility) => {
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, status);
-      router.replace({
-        pathname: `/AllCases/CaseScreen/${caseUid}`,
-      });
+      router.back();
     }
   };
 
