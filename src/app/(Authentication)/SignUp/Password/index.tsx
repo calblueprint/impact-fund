@@ -121,9 +121,6 @@ export default function SignUpScreen() {
           <Arrow />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPVerify')}>
-        <Text>GO TO VERIFY SCREEN</Text>
-      </TouchableOpacity>
     </View>
   );
 }
