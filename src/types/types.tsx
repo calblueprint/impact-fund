@@ -61,11 +61,17 @@ export type Status = {
   excluded: boolean;
 };
 
+export type EligibilityRequirement = {
+  id: CaseUid;
+  reqs: string;
+};
+
 export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
 }
+
 export const userInstance: User = {
   id: '',
   fullName: '',

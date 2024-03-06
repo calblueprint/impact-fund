@@ -2,94 +2,43 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
 
+import Checkbox from './checkbox';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
-import Ch from '../../../../../assets/checkbox.svg';
+//import Ch from '../../../../../assets/checkbox.svg';
 import Error from '../../../../../assets/exclamation.svg';
 import LineBig from '../../../../../assets/line-big.svg';
 import LineSmall from '../../../../../assets/line-small.svg';
-import Rectangle from '../../../../../assets/rectangle.svg';
+//import Rectangle from '../../../../../assets/rectangle.svg';
 import Ex from '../../../../../assets/x.svg';
 import {
   updateCaseStatus,
   getCaseById,
 } from '../../../../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../../../../types/types';
-
-type ItemData = {
-  id: string;
-  text: string;
-};
+import { getReqsById } from '../../../../supabase/queries/elig';
+import {
+  Case,
+  CaseUid,
+  Eligibility,
+  EligibilityRequirement,
+} from '../../../../types/types';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
-  const [numChecks, setNumChecks] = useState(0);
-
-  const DATA: ItemData[] = [
-    {
-      id: '001',
-      text: 'This is a requirement 1 that you should meet to file a claim',
-    },
-    {
-      id: '002',
-      text: 'This is a requirement 2 that you should meet to file a claim',
-    },
-    {
-      id: '003',
-      text: 'This is a requirement 3 that you should meet to file a claim',
-    },
-    {
-      id: '004',
-      text: 'This is a requirement 4 that you should meet to file a claim',
-    },
-    {
-      id: '005',
-      text: 'This is a requirement 5 that you should meet to file a claim',
-    },
-    {
-      id: '006',
-      text: 'This is a requirement 6 that you should meet to file a claim',
-    },
-  ];
-
-  const Checkbox = () => {
-    const [isChecked, setIsChecked] = useState(false);
-
-    const toggleCheckbox = () => {
-      setIsChecked(!isChecked);
-      if (isChecked) {
-        setNumChecks(numChecks + 1);
-      } else if (isChecked === false && numChecks > 0) {
-        setNumChecks(numChecks - 1);
-      }
-    };
-
-    return (
-      <TouchableOpacity onPress={toggleCheckbox}>
-        {isChecked ? <Ch /> : <Rectangle />}
-      </TouchableOpacity>
-    );
-  };
-
-  const Item = ({ item }: { item: ItemData }) => (
-    <View style={styles.centerContainer}>
-      <View style={styles.list}>
-        <Checkbox />
-        <Text style={{ marginLeft: 10 }}>{item.text}</Text>
-      </View>
-      <LineSmall style={{ justifyContent: 'flex-end' }} />
-    </View>
-  );
+  const [eligReqs, setEligReqs] = useState<EligibilityRequirement | null>(null);
 
   const caseHeader = () => (
     <View style={styles.centerContainer}>
-      {caseData && (
+      {!caseData ? (
+        <Text style={{ fontSize: 75 }}>Loading!!!</Text>
+      ) : (
         <>
           <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
           <Text style={styles.title}>{caseData.title}</Text>
         </>
       )}
+
       <View style={styles.infoRow}>
         <Error style={{ marginHorizontal: 10 }} />
         <Text>
@@ -97,6 +46,16 @@ export default function EligibilityForm() {
         </Text>
       </View>
       <LineBig />
+    </View>
+  );
+
+  const Item = () => (
+    <View style={styles.centerContainer}>
+      <View style={styles.list}>
+        <Checkbox />
+        <Text>{reqs}</Text>
+      </View>
+      <LineSmall style={{ justifyContent: 'flex-end' }} />
     </View>
   );
 
@@ -112,11 +71,11 @@ export default function EligibilityForm() {
           <Text>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={numChecks !== DATA.length}
+          //disabled={numChecks !== DATA.length}
           style={
-            numChecks === DATA.length
-              ? styles.buttonBottom
-              : styles.buttonBottomGray
+            styles.buttonBottomGray
+            // numChecks === DATA.length
+            //   ? styles.buttonBottom:
           }
           onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
         >
@@ -127,6 +86,12 @@ export default function EligibilityForm() {
     </View>
   );
 
+  async function fetchEligReqs() {
+    if (caseUid) {
+      const reqs = await getReqsById(caseUid);
+      setEligReqs(reqs);
+    }
+  }
   async function fetchCaseData() {
     if (caseUid) {
       const caseData = await getCaseById(caseUid);
@@ -136,6 +101,10 @@ export default function EligibilityForm() {
 
   useEffect(() => {
     fetchCaseData();
+  }, []);
+
+  useEffect(() => {
+    fetchEligReqs();
   }, []);
 
   const updateEligibility = async (status: Eligibility) => {
@@ -148,11 +117,12 @@ export default function EligibilityForm() {
   return (
     <View style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.flatty}
         ListHeaderComponent={caseHeader}
         ListFooterComponent={caseFooter}
-        data={DATA}
+        data={eligReqs ? [eligReqs] : []}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <Item item={item} />}
+        renderItem={({ item }) => <Text>{item.reqs}</Text>}
       />
     </View>
   );

@@ -6,13 +6,14 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    alignItems: 'center',
+    justifyItems: 'center',
   },
   centerContainer: {
-    width: '84%',
+    width: '100%',
     //backgroundColor: 'green',
   },
   buttonsContainer: {
-    width: '85%',
     justifyContent: 'space-between',
     flexDirection: 'row',
     //backgroundColor: 'blue',
@@ -62,8 +63,7 @@ export default StyleSheet.create({
     marginVertical: 20,
   },
   image: {
-    height: 225,
-    width: 350,
+    aspectRatio: 6,
   },
   title: {
     marginTop: 15,
@@ -73,5 +73,12 @@ export default StyleSheet.create({
   list: {
     flexDirection: 'row',
     marginVertical: 15,
+  },
+  flatty: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '84%',
+    rowGap: 10,
+    marginBottom: 40,
   },
 });
