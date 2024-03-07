@@ -1,28 +1,73 @@
 import { Session } from '@supabase/supabase-js';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, Platform } from 'react-native';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import Push from '../../../Components/Push';
 import { CaseContext } from '../../../context/CaseContext';
 import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  // const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
 
-  // useEffect(() => {
-  //   supabase.auth.getSession().then(({ data: { session } }) => {
-  //     setSession(session);
-  //   });
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  async function registerForPushNotificationsAsync() {
+    let token;
+
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return '';
+      }
+      token = await Notifications.getExpoPushTokenAsync({
+        // projectId: Constants?.expoConfig?.extra?.eas.projectId, // TODO: figure out why this isnt working
+        projectId: 'd1a810ad-7132-4890-888f-0142c444b21d',
+      });
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+
+    return token?.data ?? '';
+  }
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(async (token: string) => {
+      const { error } = await supabase
+        .from('users')
+        .upsert({ userId: session?.user.id, expo_push_token: token }); // push token is used to set up edge function
+      console.log(error);
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -46,7 +91,6 @@ function CasesScreen() {
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
                   </View>
                 </TouchableOpacity>
-                {/* <Push session={session} /> */}
               </>
             )}
             data={allCases}
