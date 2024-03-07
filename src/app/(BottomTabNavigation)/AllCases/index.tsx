@@ -10,18 +10,6 @@ import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  useEffect(() => {
-    const doSilly = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      console.log(user);
-      if (user && !user.user_metadata.address) {
-        router.push('../(Authentication)/SignUp/Address');
-      }
-    };
-    doSilly();
-  }, []);
 
   return (
     <View style={styles.container}>
