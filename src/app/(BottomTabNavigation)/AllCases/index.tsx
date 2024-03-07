@@ -82,6 +82,7 @@ function CasesScreen() {
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
                   </View>
                 </TouchableOpacity>
+                {/* <Push session={session} /> */}
               </>
             )}
             data={allCases}
