@@ -1,4 +1,3 @@
-import { Session } from '@supabase/supabase-js';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
@@ -8,23 +7,15 @@ import { FlatList, Text, View, TouchableOpacity, Platform } from 'react-native';
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
+import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  const [session, setSession] = useState<Session | null>(null);
+  const { updateUser, session } = useSession();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
+  // where should we put this function?
   async function registerForPushNotificationsAsync() {
     let token;
 
@@ -64,8 +55,8 @@ function CasesScreen() {
     registerForPushNotificationsAsync().then(async (token: string) => {
       const { error } = await supabase
         .from('users')
-        .upsert({ userId: session?.user.id, expo_push_token: token }); // push token is used to set up edge function
-      console.log(error);
+        .upsert({ userId: session?.user.id, expo_push_token: token });
+      // should we also store this token in the auth table?
     });
   }, []);
 
