@@ -17,15 +17,20 @@ export default function OTPFlow() {
     password: string;
   };
   const [token, setToken] = useState('');
+  const [errorMessage, setErrorMessage] = useState(' ');
+  const [errExists, setErrExists] = useState(false);
 
   const verify = async (email: string, token: string) => {
-    const { data, error } = await supabase.auth.verifyOtp({
+    const { error } = await supabase.auth.verifyOtp({
       email,
       token,
       type: 'email',
     });
     if (error) {
-      console.log(error);
+      //setErrExists(true);
+      setErrorMessage(
+        'Sorry! The verification code was incorrect. Try again, or make sure you used a valid email.',
+      );
       return;
     }
     router.push({
@@ -54,30 +59,23 @@ export default function OTPFlow() {
           keyboardType="number-pad"
           autoFocus={false}
         />
-        {/* <AuthInput
-          input={token}
-          onChangeInput={setToken}
-          labelText=""
-          placeholderText="Enter passcode Here"
-          isPassword={false}
-          keyboard="numeric"
-          autoCapitalization={false}
-        /> */}
+        <View style={styles.resendContainer}>
+          <Text>Didn't receive a code? Go back to confirm your email or </Text>
+          <TouchableOpacity onPress={() => resendOtp(email)}>
+            <Text style={styles.resendText}>tap here to resend code.</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.bottomStuff}>
-        <TouchableOpacity
-          style={styles.resendButton}
-          onPress={() => resendOtp(email)}
-        >
-          <Text style={styles.resendText}>
-            Oh no! I didn't receive an email.
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        </View>
         <TouchableOpacity
           style={styles.verifyButton}
           onPress={() => verify(email, token)}
         >
           <Text>Verify</Text>
+          <Text>-</Text>
         </TouchableOpacity>
       </View>
     </View>

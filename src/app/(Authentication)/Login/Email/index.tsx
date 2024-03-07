@@ -57,7 +57,7 @@ export default function LoginScreen() {
       </View>
 
       <View style={styles.nextLine}>
-        <TouchableOpacity onPress={() => router.push('OTPFlow/ForgotPassword')}>
+        <TouchableOpacity>
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
 

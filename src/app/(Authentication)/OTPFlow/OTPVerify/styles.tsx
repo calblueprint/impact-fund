@@ -15,8 +15,11 @@ export default StyleSheet.create({
     marginVertical: 100,
   },
   bottomStuff: {
-    marginVertical: 100,
+    marginVertical: 70,
     width: '100%',
+  },
+  resendContainer: {
+    marginTop: 10,
   },
   verifyButton: {
     borderColor: colors.black,
@@ -24,10 +27,17 @@ export default StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 30,
-    marginTop: 30,
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  resendButton: {
-    marginTop: 30,
+  errorContainer: {
+    width: '100%',
+    height: 40,
+  },
+  errorMessage: {
+    color: colors.darkRed,
   },
   resendText: {
     textDecorationLine: 'underline',
