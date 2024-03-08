@@ -1,7 +1,7 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlatList, Text, View, TouchableOpacity, Platform } from 'react-native';
 
 import styles from './styles';
@@ -13,7 +13,7 @@ import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  const { updateUser, session } = useSession();
+  const { session } = useSession();
 
   // where should we put this function?
   async function registerForPushNotificationsAsync() {
@@ -53,10 +53,10 @@ function CasesScreen() {
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(async (token: string) => {
+      // should we put this in a queries file?
       const { error } = await supabase
         .from('users')
         .upsert({ userId: session?.user.id, expo_push_token: token });
-      // should we also store this token in the auth table?
     });
   }, []);
 
