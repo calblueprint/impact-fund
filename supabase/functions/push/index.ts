@@ -2,8 +2,6 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
-console.log('Hello from Functions!');
-
 Deno.serve(async req => {
   const { update, expoPushToken } = await req.json();
 
