@@ -102,7 +102,7 @@ function ProfileScreen() {
         <View>
           <TouchableOpacity
             onPress={() => {
-              router.push('/Profile/DeleteAccount');
+              router.push('/Profile/LogOut');
             }}
           >
             <View style={styles.actionElementTop}>
@@ -116,7 +116,12 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity onPress={() => signOut()} style={styles.signOutButton}>
+      <TouchableOpacity
+        onPress={() => {
+          router.push('/Profile/DeleteAccount');
+        }}
+        style={styles.signOutButton}
+      >
         <SignOut />
         <Text style={styles.signOutText}>Log out</Text>
       </TouchableOpacity>
