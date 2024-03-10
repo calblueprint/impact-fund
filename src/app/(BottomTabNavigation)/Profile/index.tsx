@@ -112,14 +112,14 @@ function ProfileScreen() {
               onPress={() => {
                 router.push('/Profile/DeleteAccount');
               }}
+              style={styles.bottomPush}
             >
               <View style={styles.actionElementTop}>
                 <View style={styles.iconTitle}>
                   <RedTrash style={styles.icon} />
-                  <Text style={[styles.textElements, styles.bottomPush]}>
-                    Delete account
-                  </Text>
+                  <Text style={styles.redTextElements}>Delete account</Text>
                 </View>
+                <GreyRightCarrot style={styles.edit} />
               </View>
             </TouchableOpacity>
           </View>
