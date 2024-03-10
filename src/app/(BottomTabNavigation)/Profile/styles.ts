@@ -23,14 +23,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 17,
+    marginTop: 15,
     marginLeft: 10,
   },
   userText: {
     marginLeft: 34,
-    // marginRight: 20,
     marginTop: 5,
-    marginBottom: 10,
+    marginBottom: 15,
     color: colors.darkGrey,
   },
   userTextMargin: {
@@ -42,8 +41,8 @@ export default StyleSheet.create({
   line: {
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0,
-    // width: '100%',
+    borderBottomWidth: 1,
+    // width: '%',
     marginLeft: 32,
     // marginRight: 0,
   },
