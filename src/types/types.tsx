@@ -61,10 +61,10 @@ export type Status = {
   excluded: boolean;
 };
 
-export type EligibilityRequirement = {
+export interface EligibilityRequirement {
   id: CaseUid;
   reqs: string;
-};
+}
 
 export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',

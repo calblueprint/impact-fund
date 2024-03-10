@@ -15,21 +15,16 @@ import {
   updateCaseStatus,
   getCaseById,
 } from '../../../../supabase/queries/cases';
-import { getReqsById } from '../../../../supabase/queries/elig';
-import {
-  Case,
-  CaseUid,
-  Eligibility,
-  EligibilityRequirement,
-} from '../../../../types/types';
+import { getReqsById } from '../../../../supabase/queries/eligibility';
+import { Case, CaseUid, Eligibility } from '../../../../types/types';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
-  const [eligReqs, setEligReqs] = useState<EligibilityRequirement | null>(null);
+  const [eligReqs, setEligReqs] = useState<string[]>();
 
   const caseHeader = () => (
-    <View style={styles.centerContainer}>
+    <View>
       {!caseData ? (
         <Text style={{ fontSize: 75 }}>Loading!!!</Text>
       ) : (
@@ -49,11 +44,11 @@ export default function EligibilityForm() {
     </View>
   );
 
-  const Item = () => (
-    <View style={styles.centerContainer}>
+  const Item = (item: any) => (
+    <View>
       <View style={styles.list}>
         <Checkbox />
-        <Text>{reqs}</Text>
+        <Text>{item.requirements}</Text>
       </View>
       <LineSmall style={{ justifyContent: 'flex-end' }} />
     </View>
@@ -89,9 +84,12 @@ export default function EligibilityForm() {
   async function fetchEligReqs() {
     if (caseUid) {
       const reqs = await getReqsById(caseUid);
+      console.log(reqs);
       setEligReqs(reqs);
+      console.log(eligReqs);
     }
   }
+
   async function fetchCaseData() {
     if (caseUid) {
       const caseData = await getCaseById(caseUid);
@@ -101,9 +99,6 @@ export default function EligibilityForm() {
 
   useEffect(() => {
     fetchCaseData();
-  }, []);
-
-  useEffect(() => {
     fetchEligReqs();
   }, []);
 
@@ -120,9 +115,9 @@ export default function EligibilityForm() {
         contentContainerStyle={styles.flatty}
         ListHeaderComponent={caseHeader}
         ListFooterComponent={caseFooter}
-        data={eligReqs ? [eligReqs] : []}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => <Text>{item.reqs}</Text>}
+        data={eligReqs ? eligReqs : []}
+        renderItem={({ item }) => Item({ item })}
+        //keyExtractor={index => index.toString()}
       />
     </View>
   );

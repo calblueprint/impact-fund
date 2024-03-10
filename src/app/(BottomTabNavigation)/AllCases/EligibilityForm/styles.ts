@@ -9,10 +9,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyItems: 'center',
   },
-  centerContainer: {
-    width: '100%',
-    //backgroundColor: 'green',
-  },
   buttonsContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -63,7 +59,7 @@ export default StyleSheet.create({
     marginVertical: 20,
   },
   image: {
-    aspectRatio: 6,
+    aspectRatio: 5,
   },
   title: {
     marginTop: 15,
@@ -77,8 +73,8 @@ export default StyleSheet.create({
   flatty: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '84%',
+    width: '70%',
     rowGap: 10,
-    marginBottom: 40,
+    //backgroundColor: 'green',
   },
 });
