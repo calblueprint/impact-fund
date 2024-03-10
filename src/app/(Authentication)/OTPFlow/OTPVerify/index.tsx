@@ -42,34 +42,34 @@ export default function OTPFlow() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <View style={styles.otpInput}>
+        <View style={styles.instructionContainer}>
+          <Text style={styles.headerText}>Enter verification code.</Text>
           <Text style={styles.instructionText}>
-            Enter the password sent to {email}
+            We've just emailed it to you at {email}
           </Text>
-          <OTPTextInput
-            // ref={otpInput}
-            inputCount={6}
-            tintColor={colors.darkGrey}
-            defaultValue={token}
-            inputCellLength={1}
-            handleTextChange={setToken}
-            containerStyle={styles.otpContainerStyle}
-            textInputStyle={styles.otpTextInputStyle}
-            // isValid={!showErrorMessage}
-
-            keyboardType="number-pad"
-            // returnKeyType="done"
-            autoFocus={false}
-          />
-          <View style={styles.resendContainer}>
-            <Text>
-              Didn't receive a code? Go back to confirm your email or{' '}
-            </Text>
-            <TouchableOpacity onPress={() => resendOtp(email)}>
-              <Text style={styles.resendText}>tap here to resend code.</Text>
-            </TouchableOpacity>
-          </View>
         </View>
+        <OTPTextInput
+          inputCount={6}
+          tintColor={colors.darkGrey}
+          defaultValue={token}
+          inputCellLength={1}
+          handleTextChange={setToken}
+          containerStyle={styles.otpContainer}
+          textInputStyle={styles.otpTextInput}
+          // isValid={!showErrorMessage}
+
+          keyboardType="number-pad"
+          // returnKeyType="done"
+          autoFocus={false}
+        />
+        <Text style={styles.instructionText}>
+          Didn't receive a code? Go back to confirm your email or{' '}
+          <TouchableOpacity onPress={() => resendOtp(email)}>
+            <Text style={[styles.instructionText, styles.underlineText]}>
+              press here to resend code.
+            </Text>
+          </TouchableOpacity>
+        </Text>
         <View style={styles.bottomStuff}>
           <View style={styles.errorContainer}>
             <Text style={styles.errorMessage}>{errorMessage}</Text>

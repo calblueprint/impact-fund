@@ -8,40 +8,32 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // width: '100%',
-    // height: '100%',
-    // alignItems: 'flex-start',
-    // justifyContent: 'flex-start',
-    // padding: 30,
   },
   contentContainer: {
     borderWidth: 1,
     width: '84%',
+    flexDirection: 'column',
     alignItems: 'center',
+    rowGap: 20,
   },
-  otpContainerStyle: {
+  instructionContainer: {
+    rowGap: 10,
+  },
+  otpContainer: {
     backgroundColor: colors.lightGrey,
     paddingVertical: 20,
     paddingHorizontal: 10,
     borderRadius: 5,
   },
-  otpTextInputStyle: {
-    // borderWidth: 1,
-    // borderRadius: 2,
+  otpTextInput: {
     width: 40,
     height: 40,
-  },
-  otpInput: {
-    // marginVertical: 100,
-    borderWidth: 1,
   },
   bottomStuff: {
     // marginVertical: 70,
     width: '100%',
   },
-  resendContainer: {
-    marginTop: 10,
-  },
+  resendContainer: {},
   verifyButton: {
     borderColor: colors.black,
     borderWidth: 1,
@@ -60,15 +52,21 @@ export default StyleSheet.create({
   errorMessage: {
     color: colors.darkRed,
   },
-  resendText: {
-    textDecorationLine: 'underline',
-  },
-
   instructionText: {
+    color: colors.darkGrey,
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 18,
+  },
+  headerText: {
     color: colors.black,
-    fontSize: 24,
-    fontWeight: '800',
-    marginRight: 35,
-    marginBottom: 20,
+    fontSize: 26,
+    fontWeight: '700',
+    fontStyle: 'normal',
+    lineHeight: 28,
+  },
+  underlineText: {
+    textDecorationLine: 'underline',
   },
 });
