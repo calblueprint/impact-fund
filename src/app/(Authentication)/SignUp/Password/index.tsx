@@ -19,11 +19,13 @@ export default function SignUpScreen() {
 
   const onChangePassword = (text: string) => {
     setDisableButton(false);
+    setErrorMessage('');
     setPassword(text);
   };
 
   const onChangeConfirmPassword = (text: string) => {
     setDisableButton(false);
+    setErrorMessage('');
     setConfirmPassword(text);
   };
 
