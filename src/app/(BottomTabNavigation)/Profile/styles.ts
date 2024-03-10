@@ -7,7 +7,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     alignItems: 'center',
-    // justifyContent: 'flex-start',
   },
   edit: {
     marginRight: 20,
@@ -34,7 +33,6 @@ export default StyleSheet.create({
   },
   userTextMargin: {
     marginLeft: 34,
-    // marginRight: 20,
     marginTop: 5,
     color: colors.darkGrey,
   },
@@ -42,20 +40,15 @@ export default StyleSheet.create({
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 1,
-    // width: '%',
     marginLeft: 32,
-    // marginRight: 0,
   },
   actionsContainer: {
-    // paddingRight: 10,
     paddingBottom: 3,
     paddingLeft: 10,
     width: '100%',
-    // marginLeft: 29,
-    // marginRight: 27,
     border: 'solid',
-    borderColor: colors.darkGrey,
-    borderWidth: 0.5,
+    borderColor: colors.midGrey,
+    borderWidth: 1,
     borderRadius: 5,
     background: colors.white,
     marginBottom: 22,
@@ -125,6 +118,5 @@ export default StyleSheet.create({
   },
   signOutContentContainer: {
     flexDirection: 'row',
-    // alignItems: 'flex-start',
   },
 });
