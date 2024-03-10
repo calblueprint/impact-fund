@@ -1,11 +1,11 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { fullySignUpUser } from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -17,6 +17,7 @@ export default function SignUpScreen() {
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
+  const { fullySignUpUser } = useSession();
 
   const onChangeStreetAddress = (text: string) => {
     setStreetAddress(text);

@@ -6,9 +6,8 @@ import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
-import supabase from '../../../../supabase/createClient';
-import { resendOtp } from '../../../../supabase/queries/auth';
 
 export default function OTPFlow() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -19,6 +18,7 @@ export default function OTPFlow() {
   const [token, setToken] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errorExists, setErrorExists] = useState(true);
+  const { verifyOtp, resendOtp } = useSession();
 
   const onChangeToken = (text: string) => {
     setErrorExists(false);
@@ -27,11 +27,7 @@ export default function OTPFlow() {
   };
 
   const verify = async (email: string, token: string) => {
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email',
-    });
+    const { error } = await verifyOtp(email, token);
     if (error) {
       setErrorExists(true);
       setErrorMessage(
