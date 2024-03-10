@@ -5,7 +5,7 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150,
+    paddingTop: 90,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -77,5 +77,18 @@ export default StyleSheet.create({
   },
   errorText: {
     color: colors.darkRed,
+  },
+
+  header: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    width: '84%',
+    marginBottom: 60,
+  },
+  backText: {
+    color: colors.midGrey,
+    fontSize: 16,
+    fontWeight: '400',
+    marginLeft: 7,
   },
 });
