@@ -14,23 +14,23 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onChangePassword = (text: string) => {
-    setErrorExists(false);
+    setDisableButton(false);
     setPassword(text);
   };
 
   const onChangeConfirmPassword = (text: string) => {
-    setErrorExists(false);
+    setDisableButton(false);
     setConfirmPassword(text);
   };
 
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
     if (!lengthRegex.test(password)) {
-      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage('Your password needs at least six characters!');
       return false;
     }
@@ -39,7 +39,7 @@ export default function SignUpScreen() {
 
   const validateConfirmPassword = () => {
     if (confirmPassword !== password) {
-      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage('Your passwords should match each other.');
       return false;
     }
@@ -47,15 +47,15 @@ export default function SignUpScreen() {
   };
 
   const handleSubmit = async () => {
+    setDisableButton(true);
     if (validatePassword() && validateConfirmPassword()) {
-      const { data, error } = await supabase.auth.signInWithOtp({
+      const { error } = await supabase.auth.signInWithOtp({
         email,
       });
       if (error) {
-        console.log(error);
+        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
         return;
       }
-      console.log(data);
       router.push({
         pathname: 'OTPFlow/OTPVerify',
         params: { name, email, password },
@@ -103,14 +103,14 @@ export default function SignUpScreen() {
 
       <View>
         <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
+          {disableButton ? errorMessage : ' '}
         </Text>
       </View>
 
       <TouchableOpacity
-        disabled={password === '' || confirmPassword === '' || errorExists}
+        disabled={password === '' || confirmPassword === '' || disableButton}
         style={
-          password === '' || confirmPassword === '' || errorExists
+          password === '' || confirmPassword === '' || disableButton
             ? styles.nextButtonGray
             : styles.nextButton
         }
