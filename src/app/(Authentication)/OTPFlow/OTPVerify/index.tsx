@@ -21,11 +21,7 @@ export default function OTPFlow() {
   const [errorExists, setErrorExists] = useState(true);
 
   const onChangeToken = (text: string) => {
-    if (text.length === 6) {
-      setErrorExists(false);
-    } else {
-      setErrorExists(true);
-    }
+    setErrorExists(false);
     setErrorMessage('');
     setToken(text);
   };
@@ -87,9 +83,9 @@ export default function OTPFlow() {
         </View>
 
         <TouchableOpacity
-          disabled={email.trim() === '' || errorExists}
+          disabled={token.length !== 6 || errorExists}
           style={
-            email.trim() === '' || errorExists
+            token.length !== 6 || errorExists
               ? [styles.nextButtonBase, styles.nextButtonDisabled]
               : [styles.nextButtonBase, styles.nextButtonActive]
           }
