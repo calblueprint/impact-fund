@@ -4,50 +4,78 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
+    paddingTop: 150,
     backgroundColor: colors.white,
-    width: '100%',
-    height: '100%',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 30,
   },
-  otpInput: {
-    marginVertical: 100,
+  contentContainer: {
+    width: '84%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    rowGap: 20,
   },
-  bottomStuff: {
-    marginVertical: 70,
-    width: '100%',
+  instructionContainer: {
+    rowGap: 10,
   },
-  resendContainer: {
-    marginTop: 10,
-  },
-  verifyButton: {
-    borderColor: colors.black,
-    borderWidth: 1,
+  otpContainer: {
+    backgroundColor: colors.lightGrey,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    marginTop: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  },
+  otpInputBoxes: {
+    width: 40,
+    height: 40,
   },
   errorContainer: {
     width: '100%',
-    height: 40,
+    height: 60,
+    justifyContent: 'flex-end',
   },
-  errorMessage: {
-    color: colors.darkRed,
+  nextButtonBase: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    width: '100%',
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  resendText: {
+  nextButtonDisabled: {
+    backgroundColor: colors.midGrey,
+    borderColor: colors.midGrey,
+  },
+  nextButtonActive: {
+    backgroundColor: colors.black,
+    borderColor: colors.black,
+  },
+  instructionText: {
+    color: colors.darkGrey,
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 18,
+  },
+  headerText: {
+    color: colors.black,
+    fontSize: 26,
+    fontWeight: '700',
+    fontStyle: 'normal',
+    lineHeight: 28,
+  },
+  buttonText: {
+    color: colors.white,
+    marginRight: 17,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  underlineText: {
     textDecorationLine: 'underline',
   },
-
-  instructionText: {
-    color: colors.black,
-    fontSize: 24,
-    fontWeight: '800',
-    marginRight: 35,
-    marginBottom: 20,
+  errorText: {
+    color: colors.darkRed,
   },
 });

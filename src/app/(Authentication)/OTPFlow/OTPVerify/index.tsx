@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
-import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { colors } from '../../../../styles/colors';
 import supabase from '../../../../supabase/createClient';
 import { resendOtp } from '../../../../supabase/queries/auth';
@@ -17,8 +17,14 @@ export default function OTPFlow() {
     password: string;
   };
   const [token, setToken] = useState('');
-  const [errorMessage, setErrorMessage] = useState(' ');
-  const [errExists, setErrExists] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errorExists, setErrorExists] = useState(true);
+
+  const onChangeToken = (text: string) => {
+    setErrorExists(false);
+    setErrorMessage('');
+    setToken(text);
+  };
 
   const verify = async (email: string, token: string) => {
     const { error } = await supabase.auth.verifyOtp({
@@ -27,7 +33,7 @@ export default function OTPFlow() {
       type: 'email',
     });
     if (error) {
-      //setErrExists(true);
+      setErrorExists(true);
       setErrorMessage(
         'Sorry! The verification code was incorrect. Try again, or make sure you used a valid email.',
       );
@@ -41,41 +47,54 @@ export default function OTPFlow() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.otpInput}>
-        <Text style={styles.instructionText}>
-          Enter the password sent to {email}
-        </Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.instructionContainer}>
+          <Text style={styles.headerText}>Enter verification code.</Text>
+          <Text style={styles.instructionText}>
+            We've just emailed it to you at {email}
+          </Text>
+        </View>
+
         <OTPTextInput
-          // ref={otpInput}
           inputCount={6}
           tintColor={colors.darkGrey}
           defaultValue={token}
           inputCellLength={1}
-          handleTextChange={setToken}
-          // containerStyle={styles.otpContainerStyle}
-          // textInputStyle={styles.otpTextInputStyle}
-          // isValid={!showErrorMessage}
-
+          handleTextChange={onChangeToken}
+          containerStyle={styles.otpContainer}
+          textInputStyle={styles.otpInputBoxes}
           keyboardType="number-pad"
           autoFocus={false}
         />
-        <View style={styles.resendContainer}>
-          <Text>Didn't receive a code? Go back to confirm your email or </Text>
+
+        <Text style={styles.instructionText}>
+          Didn't receive a code? Go back to confirm your email or{' '}
           <TouchableOpacity onPress={() => resendOtp(email)}>
-            <Text style={styles.resendText}>tap here to resend code.</Text>
+            <Text style={[styles.instructionText, styles.underlineText]}>
+              press here to resend code.
+            </Text>
           </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.bottomStuff}>
+        </Text>
+
         <View style={styles.errorContainer}>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
+          <Text style={[styles.instructionText, styles.errorText]}>
+            {errorMessage}
+          </Text>
         </View>
+
         <TouchableOpacity
-          style={styles.verifyButton}
+          disabled={token.length !== 6 || errorExists}
+          style={
+            token.length !== 6 || errorExists
+              ? [styles.nextButtonBase, styles.nextButtonDisabled]
+              : [styles.nextButtonBase, styles.nextButtonActive]
+          }
           onPress={() => verify(email, token)}
         >
-          <Text>Verify</Text>
-          <Text>-</Text>
+          <Text style={styles.buttonText}>Verify</Text>
+          <View>
+            <Arrow />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
