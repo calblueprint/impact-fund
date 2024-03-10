@@ -41,42 +41,47 @@ export default function OTPFlow() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.otpInput}>
-        <Text style={styles.instructionText}>
-          Enter the password sent to {email}
-        </Text>
-        <OTPTextInput
-          // ref={otpInput}
-          inputCount={6}
-          tintColor={colors.darkGrey}
-          defaultValue={token}
-          inputCellLength={1}
-          handleTextChange={setToken}
-          // containerStyle={styles.otpContainerStyle}
-          // textInputStyle={styles.otpTextInputStyle}
-          // isValid={!showErrorMessage}
+      <View style={styles.contentContainer}>
+        <View style={styles.otpInput}>
+          <Text style={styles.instructionText}>
+            Enter the password sent to {email}
+          </Text>
+          <OTPTextInput
+            // ref={otpInput}
+            inputCount={6}
+            tintColor={colors.darkGrey}
+            defaultValue={token}
+            inputCellLength={1}
+            handleTextChange={setToken}
+            containerStyle={styles.otpContainerStyle}
+            textInputStyle={styles.otpTextInputStyle}
+            // isValid={!showErrorMessage}
 
-          keyboardType="number-pad"
-          autoFocus={false}
-        />
-        <View style={styles.resendContainer}>
-          <Text>Didn't receive a code? Go back to confirm your email or </Text>
-          <TouchableOpacity onPress={() => resendOtp(email)}>
-            <Text style={styles.resendText}>tap here to resend code.</Text>
+            keyboardType="number-pad"
+            // returnKeyType="done"
+            autoFocus={false}
+          />
+          <View style={styles.resendContainer}>
+            <Text>
+              Didn't receive a code? Go back to confirm your email or{' '}
+            </Text>
+            <TouchableOpacity onPress={() => resendOtp(email)}>
+              <Text style={styles.resendText}>tap here to resend code.</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.bottomStuff}>
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.verifyButton}
+            onPress={() => verify(email, token)}
+          >
+            <Text>Verify</Text>
+            <Text>-</Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.bottomStuff}>
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.verifyButton}
-          onPress={() => verify(email, token)}
-        >
-          <Text>Verify</Text>
-          <Text>-</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

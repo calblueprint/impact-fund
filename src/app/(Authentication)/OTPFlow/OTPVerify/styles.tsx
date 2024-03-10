@@ -5,17 +5,38 @@ import { colors } from '../../../../styles/colors';
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    width: '100%',
-    height: '100%',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: 30,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // width: '100%',
+    // height: '100%',
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
+    // padding: 30,
+  },
+  contentContainer: {
+    borderWidth: 1,
+    width: '84%',
+    alignItems: 'center',
+  },
+  otpContainerStyle: {
+    backgroundColor: colors.lightGrey,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  otpTextInputStyle: {
+    // borderWidth: 1,
+    // borderRadius: 2,
+    width: 40,
+    height: 40,
   },
   otpInput: {
-    marginVertical: 100,
+    // marginVertical: 100,
+    borderWidth: 1,
   },
   bottomStuff: {
-    marginVertical: 70,
+    // marginVertical: 70,
     width: '100%',
   },
   resendContainer: {

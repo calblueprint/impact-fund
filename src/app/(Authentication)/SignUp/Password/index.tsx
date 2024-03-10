@@ -48,14 +48,14 @@ export default function SignUpScreen() {
 
   const handleSubmit = async () => {
     if (validatePassword() && validateConfirmPassword()) {
-      const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-      });
-      if (error) {
-        console.log(error);
-        return;
-      }
-      console.log(data);
+      // const { data, error } = await supabase.auth.signInWithOtp({
+      //   email,
+      // });
+      // if (error) {
+      //   console.log(error);
+      //   return;
+      // }
+      // console.log(data);
       router.push({
         pathname: 'OTPFlow/OTPVerify',
         params: { name, email, password },
