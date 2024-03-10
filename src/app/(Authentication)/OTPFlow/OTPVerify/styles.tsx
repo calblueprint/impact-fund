@@ -4,13 +4,13 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
     flex: 1,
+    paddingTop: 150,
+    backgroundColor: colors.white,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   contentContainer: {
-    borderWidth: 1,
     width: '84%',
     flexDirection: 'column',
     alignItems: 'center',
@@ -25,32 +25,32 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
   },
-  otpTextInput: {
+  otpInputBoxes: {
     width: 40,
     height: 40,
   },
-  bottomStuff: {
-    // marginVertical: 70,
-    width: '100%',
-  },
-  resendContainer: {},
-  verifyButton: {
-    borderColor: colors.black,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    marginTop: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   errorContainer: {
     width: '100%',
-    height: 40,
+    height: 60,
+    justifyContent: 'flex-end',
   },
-  errorMessage: {
-    color: colors.darkRed,
+  nextButtonBase: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    width: '100%',
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  nextButtonDisabled: {
+    backgroundColor: colors.midGrey,
+    borderColor: colors.midGrey,
+  },
+  nextButtonActive: {
+    backgroundColor: colors.black,
+    borderColor: colors.black,
   },
   instructionText: {
     color: colors.darkGrey,
@@ -66,7 +66,16 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 28,
   },
+  buttonText: {
+    color: colors.white,
+    marginRight: 17,
+    fontSize: 16,
+    fontWeight: '600',
+  },
   underlineText: {
     textDecorationLine: 'underline',
+  },
+  errorText: {
+    color: colors.darkRed,
   },
 });
