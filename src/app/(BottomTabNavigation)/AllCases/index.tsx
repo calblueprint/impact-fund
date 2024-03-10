@@ -10,6 +10,7 @@ import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import supabase from '../../../supabase/createClient';
+import 'react-native-url-polyfill/auto';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
@@ -41,8 +42,7 @@ function CasesScreen() {
         return '';
       }
       token = await Notifications.getExpoPushTokenAsync({
-        // projectId: Constants?.expoConfig?.extra?.eas.projectId, // TODO: figure out why this isnt working
-        projectId: 'd1a810ad-7132-4890-888f-0142c444b21d',
+        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
       });
     } else {
       alert('Must use physical device for Push Notifications');
