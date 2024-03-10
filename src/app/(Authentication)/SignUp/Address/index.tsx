@@ -65,6 +65,7 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header} />
       <Text style={styles.instructionText}>Last, enter your address.</Text>
 
       <View style={styles.inputBox}>
