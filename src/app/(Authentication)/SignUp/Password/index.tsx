@@ -5,6 +5,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -13,23 +14,25 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onChangePassword = (text: string) => {
-    setErrorExists(false);
+    setDisableButton(false);
+    setErrorMessage('');
     setPassword(text);
   };
 
   const onChangeConfirmPassword = (text: string) => {
-    setErrorExists(false);
+    setDisableButton(false);
+    setErrorMessage('');
     setConfirmPassword(text);
   };
 
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
     if (!lengthRegex.test(password)) {
-      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage('Your password needs at least six characters!');
       return false;
     }
@@ -38,17 +41,25 @@ export default function SignUpScreen() {
 
   const validateConfirmPassword = () => {
     if (confirmPassword !== password) {
-      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage('Your passwords should match each other.');
       return false;
     }
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setDisableButton(true);
     if (validatePassword() && validateConfirmPassword()) {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+      });
+      if (error) {
+        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
+        return;
+      }
       router.push({
-        pathname: 'SignUp/Address',
+        pathname: 'OTPFlow/OTPVerify',
         params: { name, email, password },
       });
       setPassword('');
@@ -94,14 +105,14 @@ export default function SignUpScreen() {
 
       <View>
         <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
+          {disableButton ? errorMessage : ' '}
         </Text>
       </View>
 
       <TouchableOpacity
-        disabled={password === '' || confirmPassword === '' || errorExists}
+        disabled={password === '' || confirmPassword === '' || disableButton}
         style={
-          password === '' || confirmPassword === '' || errorExists
+          password === '' || confirmPassword === '' || disableButton
             ? styles.nextButtonGray
             : styles.nextButton
         }
