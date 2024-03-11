@@ -1,11 +1,12 @@
 import { router } from 'expo-router';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { CaseContext } from '../../../context/CaseContext';
+import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
