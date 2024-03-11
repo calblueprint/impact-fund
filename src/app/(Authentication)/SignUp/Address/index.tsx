@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
@@ -60,6 +60,7 @@ export default function SignUpScreen() {
       setCity('');
       setState('');
       setZipcode('');
+      router.push('/');
     }
   };
 
