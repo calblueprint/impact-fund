@@ -19,8 +19,6 @@ function ProfileScreen() {
   const navigation = useNavigation();
   const { session, signOut } = useSession();
 
-  console.log(session?.user?.email);
-
   useEffect(() => {
     navigation.addListener('focus', async () => {});
   }, [navigation]);
@@ -37,7 +35,7 @@ function ProfileScreen() {
           <View>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
-                <Envelope style={styles.icon} />
+                <Envelope />
                 <Text style={styles.textElements}>Email address</Text>
               </View>
             </View>
@@ -48,13 +46,13 @@ function ProfileScreen() {
           <View>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
-                <Person style={styles.icon} />
+                <Person />
                 <Text style={styles.textElements}>Full name</Text>
               </View>
               <TouchableOpacity
                 onPress={() => router.push('/Profile/EditName')}
               >
-                <Pencil style={styles.edit} />
+                <Pencil />
               </TouchableOpacity>
             </View>
             <Text style={styles.userText}>
@@ -65,13 +63,13 @@ function ProfileScreen() {
           <View>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
-                <Location style={styles.icon} />
+                <Location />
                 <Text style={styles.textElements}>Street address</Text>
               </View>
               <TouchableOpacity
                 onPress={() => router.push('/Profile/EditAddress')}
               >
-                <Pencil style={styles.edit} />
+                <Pencil />
               </TouchableOpacity>
             </View>
             <Text style={styles.userText}>
@@ -90,7 +88,7 @@ function ProfileScreen() {
           <View>
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
-                <Reset style={styles.icon} />
+                <Reset />
                 <Text style={styles.textElements}>Reset password</Text>
               </View>
               <TouchableOpacity
@@ -98,7 +96,7 @@ function ProfileScreen() {
                   router.push('/Profile/DeleteAccount');
                 }}
               >
-                <GreyRightCarrot style={styles.edit} />
+                <GreyRightCarrot />
               </TouchableOpacity>
             </View>
           </View>
@@ -112,10 +110,10 @@ function ProfileScreen() {
             >
               <View style={styles.actionElementTop}>
                 <View style={styles.iconTitle}>
-                  <RedTrash style={styles.icon} />
+                  <RedTrash />
                   <Text style={styles.redTextElements}>Delete account</Text>
                 </View>
-                <GreyRightCarrot style={styles.edit} />
+                <GreyRightCarrot />
               </View>
             </TouchableOpacity>
           </View>
@@ -124,13 +122,11 @@ function ProfileScreen() {
           onPress={() => signOut()}
           style={styles.signOutButton}
         >
-          <View style={styles.signOutContentContainer}>
-            <View style={styles.signOutIcon}>
-              <SignOut style={styles.icon} />
-              <Text style={styles.signOutText}>Log out</Text>
-            </View>
+          <View style={styles.signOutInstructions}>
+            <SignOut />
+            <Text style={styles.signOutText}>Log out</Text>
           </View>
-          <WhiteRightCarrot style={styles.edit} />
+          <WhiteRightCarrot />
         </TouchableOpacity>
       </View>
     </View>

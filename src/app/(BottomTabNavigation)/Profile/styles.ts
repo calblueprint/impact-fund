@@ -8,15 +8,9 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
-  edit: {
-    marginRight: 20,
-    marginTop: 3,
-  },
   iconTitle: {
     flexDirection: 'row',
-  },
-  icon: {
-    marginTop: 3,
+    alignItems: 'center',
   },
   actionElementTop: {
     flexDirection: 'row',
@@ -24,9 +18,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
     marginLeft: 10,
+    marginRight: 20,
   },
   userText: {
-    marginLeft: 34,
+    marginLeft: 35,
     marginTop: 5,
     marginBottom: 15,
     color: colors.darkGrey,
@@ -103,29 +98,28 @@ export default StyleSheet.create({
     width: '100%',
   },
   signOutButton: {
-    alignSelf: 'flex-start',
-    width: '100%',
-    height: 45,
-    borderRadius: 5,
-    backgroundColor: colors.black,
-    paddingLeft: 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
+    height: 45,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    backgroundColor: colors.black,
   },
   signOutText: {
     color: colors.white,
     fontWeight: '700',
     fontSize: 15,
-    marginLeft: 10,
   },
   contentContainer: {
     width: '84%',
     alignItems: 'center',
   },
-  signOutIcon: {
-    marginLeft: 20,
+  signOutInstructions: {
     flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 15,
   },
   signOutContentContainer: {
     flexDirection: 'row',
