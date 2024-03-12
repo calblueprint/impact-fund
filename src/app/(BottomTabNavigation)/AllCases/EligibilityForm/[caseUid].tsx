@@ -8,6 +8,7 @@ import Check from '../../../../../assets/check-circle.svg';
 //import Ch from '../../../../../assets/checkbox.svg';
 import Error from '../../../../../assets/exclamation.svg';
 import LineBig from '../../../../../assets/line-big.svg';
+import LineHuge from '../../../../../assets/line-huge.svg';
 import LineSmall from '../../../../../assets/line-small.svg';
 //import Rectangle from '../../../../../assets/rectangle.svg';
 import Ex from '../../../../../assets/x.svg';
@@ -16,15 +17,21 @@ import {
   getCaseById,
 } from '../../../../supabase/queries/cases';
 import { getReqsById } from '../../../../supabase/queries/eligibility';
-import { Case, CaseUid, Eligibility } from '../../../../types/types';
+import {
+  Case,
+  CaseUid,
+  Eligibility,
+  EligibilityRequirement,
+} from '../../../../types/types';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
-  const [eligReqs, setEligReqs] = useState<string[]>();
+  const [eligReqs, setEligReqs] = useState<EligibilityRequirement[]>([]);
+  const [numChecked, setNumChecked] = useState(0);
 
   const caseHeader = () => (
-    <View>
+    <View style={styles.headerContainer}>
       {!caseData ? (
         <Text style={{ fontSize: 75 }}>Loading!!!</Text>
       ) : (
@@ -35,27 +42,33 @@ export default function EligibilityForm() {
       )}
 
       <View style={styles.infoRow}>
-        <Error style={{ marginHorizontal: 10 }} />
-        <Text>
+        <Error style={{ marginRight: 20, marginLeft: 10 }} />
+        <Text style={styles.texts}>
           You must meet every requirement to be eligible for this class-action.
         </Text>
       </View>
-      <LineBig />
+      <LineBig style={{ marginHorizontal: 15 }} />
     </View>
   );
 
-  const Item = (item: any) => (
+  const Item = (item: EligibilityRequirement) => (
     <View>
       <View style={styles.list}>
-        <Checkbox />
-        <Text>{item.requirements}</Text>
+        <Checkbox setNum={setNumChecked} />
+        <Text style={styles.reqs}>{item.requirements}</Text>
       </View>
-      <LineSmall style={{ justifyContent: 'flex-end' }} />
+      <LineSmall
+        style={{
+          /*alignItems: 'flex-end'*/ //this doesn't work at all for some reason
+          marginLeft: 70,
+        }}
+      />
     </View>
   );
 
   const caseFooter = () => (
-    <View>
+    <View style={styles.footerContainer}>
+      <LineHuge />
       <Text style={styles.info}>Do you meet the following requirements?</Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
@@ -66,11 +79,11 @@ export default function EligibilityForm() {
           <Text>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          //disabled={numChecks !== DATA.length}
+          disabled={numChecked !== eligReqs.length}
           style={
-            styles.buttonBottomGray
-            // numChecks === DATA.length
-            //   ? styles.buttonBottom:
+            numChecked === eligReqs.length
+              ? styles.buttonBottom
+              : styles.buttonBottomGray
           }
           onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
         >
@@ -81,12 +94,22 @@ export default function EligibilityForm() {
     </View>
   );
 
+  // const countChecked = () => {
+  //   let checkedCount = 0;
+  //   eligReqs.forEach(requirement => {
+  //     if (requirement.checked) {
+  //       checkedCount++;
+  //     }
+  //   });
+  //   console.log(checkedCount);
+  //   console.log(eligReqs);
+  //   return checkedCount;
+  // };
+
   async function fetchEligReqs() {
     if (caseUid) {
       const reqs = await getReqsById(caseUid);
-      console.log(reqs);
       setEligReqs(reqs);
-      console.log(eligReqs);
     }
   }
 
@@ -115,9 +138,9 @@ export default function EligibilityForm() {
         contentContainerStyle={styles.flatty}
         ListHeaderComponent={caseHeader}
         ListFooterComponent={caseFooter}
-        data={eligReqs ? eligReqs : []}
-        renderItem={({ item }) => Item({ item })}
-        //keyExtractor={index => index.toString()}
+        data={eligReqs}
+        renderItem={({ item }) => <Item {...item} />}
+        keyExtractor={item => item.eligUid}
       />
     </View>
   );

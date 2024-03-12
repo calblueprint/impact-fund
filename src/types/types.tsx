@@ -2,6 +2,7 @@ export type Uid = string;
 export type CaseUid = Uid;
 export type FormUid = Uid;
 export type UserUid = Uid;
+export type EligUid = Uid;
 
 export interface CasePartial {
   id: CaseUid;
@@ -62,8 +63,10 @@ export type Status = {
 };
 
 export interface EligibilityRequirement {
-  id: CaseUid;
-  reqs: string;
+  eligUid: EligUid;
+  caseId: CaseUid;
+  requirements: string;
+  //checked: boolean;
 }
 
 export enum Eligibility {
