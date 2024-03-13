@@ -2,7 +2,13 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
+/**
+ * Sets up a Deno edge function endpoint:
+ * 1. Recieves a notification request from the database trigger.
+ * 2. Parses the request and makes an HTTP post request to the Expo notifications handler.
+ */
 Deno.serve(async req => {
+  // fetch the notifcation request from the supabase edge function
   const { update, expoPushToken } = await req.json();
 
   const res = await fetch('https://exp.host/--/api/v2/push/send', {
