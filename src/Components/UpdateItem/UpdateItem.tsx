@@ -1,13 +1,23 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import { Update } from '../../types/types';
+import { getCaseById } from '../../supabase/queries/cases';
+import { CaseUid, Update } from '../../types/types';
 
 export default function UpdateItem(updateData: Update) {
-  console.log(updateData);
+  const [lawFirm, setLawFirm] = useState<string>();
+
+  async function getLawFirm(uid: CaseUid) {
+    getCaseById(uid).then(data => setLawFirm(data.lawFirm));
+  }
+
+  useEffect(() => {
+    getLawFirm(updateData.caseUid);
+  }, []);
+
   return (
     <TouchableOpacity
       onPress={() =>
@@ -20,10 +30,10 @@ export default function UpdateItem(updateData: Update) {
       }
     >
       <View style={styles.container}>
-        <View style={styles.imageContainer} />
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>{updateData.title}</Text>
           <Text style={styles.dateText}>{formatDate(updateData.date)}</Text>
+          <Text>{lawFirm}</Text>
           <Text>{updateData.blurb}</Text>
         </View>
       </View>

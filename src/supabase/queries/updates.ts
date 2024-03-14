@@ -40,7 +40,7 @@ export async function fetchAllUpdates(caseUid: CaseUid): Promise<Update[]> {
 export async function formatUpdate(item: any): Promise<Update> {
   const updateData: Update = {
     updateUid: item.updateId,
-    caseUid: item.caseUidm,
+    caseUid: item.caseUUID,
     title: item.title,
     blurb: item.blurb,
     category: item.category,

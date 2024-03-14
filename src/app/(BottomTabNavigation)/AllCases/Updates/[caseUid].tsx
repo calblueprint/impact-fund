@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
+import styles from './styles';
 import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';
 import { Update, CaseUid } from '../../../../types/types';
@@ -27,16 +28,19 @@ export default function UpdatesScreen() {
   }, []);
 
   return (
-    <View>
-      <View>
-        <Text>Case Updates</Text>
-      </View>
-      <View>
-        <FlatList
-          data={updates}
-          keyExtractor={item => item.updateUid}
-          renderItem={({ item }) => <UpdateItem {...item} />}
-        />
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Case Updates</Text>
+        </View>
+        <View style={styles.updatesContainer}>
+          <FlatList
+            data={updates}
+            keyExtractor={item => item.updateUid}
+            ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
+            renderItem={({ item }) => <UpdateItem {...item} />}
+          />
+        </View>
       </View>
     </View>
   );

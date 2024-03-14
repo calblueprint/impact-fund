@@ -12,19 +12,15 @@ export default function UpdateView() {
   const [update, setUpdate] = useState<Update>(updateInstance); // is there a better way to set this bc if no default value then errors w "update may be undefined"
 
   async function getUpdate(uid: UpdateUid) {
-    console.log('getting update');
     const update = await getUpdateById(uid);
     setUpdate(update);
   }
 
   useEffect(() => {
-    console.log(updateUid);
     if (updateUid !== undefined) {
       getUpdate(updateUid);
     }
   }, []);
-
-  console.log(update);
 
   return (
     <View>
