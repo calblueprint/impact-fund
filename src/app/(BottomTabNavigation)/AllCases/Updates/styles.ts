@@ -4,14 +4,17 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
     alignItems: 'center',
   },
   contentContainer: {
-    width: '84%',
+    width: '82%',
+    height: '84%',
   },
   titleContainer: {
     alignItems: 'flex-start',
+    paddingTop: 10,
   },
   title: {
     color: colors.black,
@@ -27,5 +30,6 @@ export default StyleSheet.create({
   updatesContainer: {
     height: '100%',
     width: '100%',
+    paddingTop: 12,
   },
 });

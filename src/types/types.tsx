@@ -87,13 +87,3 @@ export interface Update {
   date: Date;
   summary: string;
 }
-
-export const updateInstance: Update = {
-  updateUid: '',
-  caseUid: '',
-  title: '',
-  blurb: '',
-  category: '',
-  date: new Date(),
-  summary: '',
-};

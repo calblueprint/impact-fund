@@ -39,6 +39,7 @@ export default function UpdatesScreen() {
             keyExtractor={item => item.updateUid}
             ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
             renderItem={({ item }) => <UpdateItem {...item} />}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </View>

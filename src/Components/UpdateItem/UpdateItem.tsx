@@ -25,6 +25,7 @@ export default function UpdateItem(updateData: Update) {
           pathname: `/AllCases/Updates/UpdateView`,
           params: {
             updateUid: updateData.updateUid,
+            lawFirm,
           },
         })
       }
@@ -32,9 +33,9 @@ export default function UpdateItem(updateData: Update) {
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>{updateData.title}</Text>
-          <Text style={styles.dateText}>{formatDate(updateData.date)}</Text>
-          <Text>{lawFirm}</Text>
-          <Text>{updateData.blurb}</Text>
+          <Text style={styles.bottomText}>
+            {formatDate(updateData.date)} • {lawFirm}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

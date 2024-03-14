@@ -1,16 +1,19 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
+import styles from './styles';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
-import { Update, UpdateUid, updateInstance } from '../../../../../types/types';
+import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
 
 export default function UpdateView() {
-  const { updateUid } = useLocalSearchParams<{ updateUid: UpdateUid }>();
+  const { updateUid, lawFirm } = useLocalSearchParams<{
+    updateUid: UpdateUid;
+    lawFirm: string;
+  }>();
 
-  const [update, setUpdate] = useState<Update>(updateInstance); // is there a better way to set this bc if no default value then errors w "update may be undefined"
-
+  const [update, setUpdate] = useState<Update>();
   async function getUpdate(uid: UpdateUid) {
     const update = await getUpdateById(uid);
     setUpdate(update);
@@ -23,11 +26,20 @@ export default function UpdateView() {
   }, []);
 
   return (
-    <View>
-      <Text>{update.title}</Text>
-      <Text>{formatDate(update.date)}</Text>
-      <Text>{update.blurb}</Text>
-      <Text>{update.summary}</Text>
+    <View style={styles.container}>
+      {update && (
+        <>
+          <ScrollView style={styles.scrollContainer}>
+            <Text style={styles.title}>{update.title}</Text>
+            <View style={styles.inLineSubInfo}>
+              <Text>{lawFirm}</Text>
+              <Text> • {formatDate(update.date)}</Text>
+            </View>
+            {/* <Text>{update.blurb}</Text> */}
+            <Text>{update.summary}</Text>
+          </ScrollView>
+        </>
+      )}
     </View>
   );
 }

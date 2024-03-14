@@ -12,17 +12,17 @@ export default StyleSheet.create({
     height: '100%',
   },
   titleText: {
-    fontSize: 15,
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 16,
+    color: colors.midnightBlack,
+  },
+  bottomText: {
+    color: colors.darkGrey,
+    fontSize: 10,
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 21,
-    color: colors.black,
-  },
-  dateText: {
-    fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: '200',
-    lineHeight: 21,
-    color: colors.black,
   },
 });
