@@ -1,8 +1,10 @@
+import CheckBox from 'expo-checkbox';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
 
-import Checkbox from './checkbox';
+import Requirement from './Requirement';
+// import CustomCheckbox from './checkbox';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 //import Ch from '../../../../../assets/checkbox.svg';
@@ -33,36 +35,21 @@ export default function EligibilityForm() {
   const caseHeader = () => (
     <View style={styles.headerContainer}>
       {!caseData ? (
-        <Text style={{ fontSize: 75 }}>Loading!!!</Text>
+        <Text>Loading!!!</Text>
       ) : (
         <>
           <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
-          <Text style={styles.title}>{caseData.title}</Text>
+          <Text style={styles.titleText}>{caseData.title}</Text>
+          <View style={styles.infoRow}>
+            <Error />
+            <Text style={styles.bodyText}>
+              You must meet every requirement to be eligible for this
+              class-action.
+            </Text>
+          </View>
+          {/* <LineBig style={{ marginHorizontal: 15 }} /> */}
         </>
       )}
-
-      <View style={styles.infoRow}>
-        <Error style={{ marginRight: 20, marginLeft: 10 }} />
-        <Text style={styles.texts}>
-          You must meet every requirement to be eligible for this class-action.
-        </Text>
-      </View>
-      <LineBig style={{ marginHorizontal: 15 }} />
-    </View>
-  );
-
-  const Item = (item: EligibilityRequirement) => (
-    <View>
-      <View style={styles.list}>
-        <Checkbox setNum={setNumChecked} />
-        <Text style={styles.reqs}>{item.requirements}</Text>
-      </View>
-      <LineSmall
-        style={{
-          /*alignItems: 'flex-end'*/ //this doesn't work at all for some reason
-          marginLeft: 70,
-        }}
-      />
     </View>
   );
 
@@ -139,7 +126,7 @@ export default function EligibilityForm() {
         ListHeaderComponent={caseHeader}
         ListFooterComponent={caseFooter}
         data={eligReqs}
-        renderItem={({ item }) => <Item {...item} />}
+        renderItem={({ item }) => <Requirement {...item} />}
         keyExtractor={item => item.eligUid}
       />
     </View>
