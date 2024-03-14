@@ -1,31 +1,35 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { emailExists } from '../../../../supabase/queries/auth';
+import { useSession } from '../../../../context/AuthContext';
 
-export default function LoginScreen() {
-  const [email, setEmail] = useState<string>('');
+export default function OTPEmailInput() {
+  const { email } = useLocalSearchParams() as unknown as { email: string };
+  const sessionHandler = useSession();
+  const [password, setPassword] = useState<string>('');
+
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const onChangeEmail = (text: string) => {
+  const onChangePassword = (text: string) => {
     setErrorExists(false);
-    setEmail(text);
+    setPassword(text);
   };
 
-  async function emailFind() {
-    const isEmail = await emailExists(email);
-    if (!isEmail) {
+  async function getOTP() {
+    const isPassword = await sessionHandler.signInWithEmail(email, password);
+    if (!isPassword) {
       setErrorExists(true);
       setErrorMessage(
-        'The email you entered is either incorrect or not registered with the Impact Fund.',
+        'Oh no! The password you entered is incorrect, please try again.',
       );
     } else {
-      router.push({ pathname: 'Login/Password', params: { email } });
+      setErrorExists(false);
+      setPassword('');
     }
   }
 
@@ -35,17 +39,17 @@ export default function LoginScreen() {
         <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
       <Text style={styles.instructionText}>
-        Please enter your email address.
+        Please enter the email you used to create your account.
       </Text>
 
       <View style={styles.inputBox}>
         <AuthInput
-          input={email}
-          onChangeInput={onChangeEmail}
-          labelText="Email address"
-          placeholderText="Email address"
-          isPassword={false}
-          keyboard="email-address"
+          input={password}
+          onChangeInput={onChangePassword}
+          labelText="Password"
+          placeholderText="Password"
+          isPassword
+          keyboard="default"
           autoCapitalization={false}
         />
       </View>
@@ -57,23 +61,17 @@ export default function LoginScreen() {
       </View>
 
       <View style={styles.nextLine}>
-        <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity
-          disabled={email.trim() === '' || errorExists}
+          disabled={password === '' || errorExists}
           style={
-            email.trim() === '' || errorExists
+            password === '' || errorExists
               ? [styles.nextButtonBase, styles.nextButtonDisabled]
               : [styles.nextButtonBase, styles.nextButtonActive]
           }
-          onPress={emailFind}
+          onPress={getOTP}
         >
-          <Text style={styles.nextText}>Next</Text>
-          <View>
-            <Arrow />
-          </View>
+          <Text style={styles.nextText}>Continue</Text>
+          <Arrow />
         </TouchableOpacity>
       </View>
     </View>
