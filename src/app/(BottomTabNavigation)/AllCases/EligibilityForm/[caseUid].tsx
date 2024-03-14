@@ -121,14 +121,16 @@ export default function EligibilityForm() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.flatty}
-        ListHeaderComponent={caseHeader}
-        ListFooterComponent={caseFooter}
-        data={eligReqs}
-        renderItem={({ item }) => <Requirement {...item} />}
-        keyExtractor={item => item.eligUid}
-      />
+      <View style={styles.contentContainer}>
+        <FlatList
+          contentContainerStyle={styles.flatty}
+          ListHeaderComponent={caseHeader}
+          ListFooterComponent={caseFooter}
+          data={eligReqs}
+          renderItem={({ item }) => <Requirement {...item} />}
+          keyExtractor={item => item.eligUid}
+        />
+      </View>
     </View>
   );
 }

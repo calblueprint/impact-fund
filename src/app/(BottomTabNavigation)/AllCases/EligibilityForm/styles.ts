@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { color } from 'react-native-elements/dist/helpers';
 
 import { colors } from '../../../../styles/colors';
 
@@ -7,9 +6,20 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  contentContainer: {
+    width: '84%',
+  },
+  flatty: {
+    // marginHorizontal: 20,
+    alignContent: 'center',
+    justifyContent: 'center',
+    // width: '84%',
+    rowGap: 10,
+    //backgroundColor: 'green',
+    borderWidth: 1,
   },
   headerContainer: {
     flexDirection: 'column',
@@ -44,7 +54,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
     backgroundColor: colors.black,
-    marginLeft: 8,
+    // marginLeft: 8,
   },
   buttonBottomGray: {
     width: 149,
@@ -55,10 +65,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
     backgroundColor: colors.midGrey,
-    marginLeft: 8,
+    // marginLeft: 8,
   },
   buttonTop: {
-    marginRight: 8,
+    // marginRight: 8,
     borderColor: colors.black,
     borderWidth: 0.5,
   },
@@ -90,20 +100,11 @@ export default StyleSheet.create({
   list: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal: 30,
+    // marginHorizontal: 30,
     alignItems: 'flex-start',
   },
-  flatty: {
-    marginHorizontal: 20,
-    alignContent: 'center',
-    justifyContent: 'center',
-    width: '84%',
-    rowGap: 10,
-    //backgroundColor: 'green',
-    borderWidth: 1,
-  },
   reqs: {
-    marginLeft: 30,
+    // marginLeft: 30,
   },
   bodyText: {
     fontSize: 16,
