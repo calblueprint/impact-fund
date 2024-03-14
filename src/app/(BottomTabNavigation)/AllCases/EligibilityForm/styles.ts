@@ -17,14 +17,20 @@ export default StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     // width: '84%',
-    rowGap: 10,
+    // rowGap: 10,
     //backgroundColor: 'green',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   headerContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
     rowGap: 20,
+  },
+  requirementContainer: {
+    flexDirection: 'row',
+    paddingVertical: 20,
+    columnGap: 20,
+    // borderWidth: 1,
   },
   buttonsContainer: {
     justifyContent: 'space-between',
@@ -82,9 +88,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     columnGap: 20,
-    // marginVertical: 10,
-    // marginHorizontal: 20,
-    //width: '80%',
     borderBottomWidth: 1,
     paddingVertical: 10,
   },
@@ -103,13 +106,14 @@ export default StyleSheet.create({
     // marginHorizontal: 30,
     alignItems: 'flex-start',
   },
-  reqs: {
-    // marginLeft: 30,
-  },
   bodyText: {
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '300',
     color: colors.black,
+  },
+  lineStyle: {
+    borderTopWidth: 1,
+    borderTopColor: colors.midGrey,
   },
 });

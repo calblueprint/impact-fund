@@ -33,11 +33,11 @@ export default function EligibilityForm() {
   const [numChecked, setNumChecked] = useState(0);
 
   const caseHeader = () => (
-    <View style={styles.headerContainer}>
+    <>
       {!caseData ? (
         <Text>Loading!!!</Text>
       ) : (
-        <>
+        <View style={styles.headerContainer}>
           <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
           <Text style={styles.titleText}>{caseData.title}</Text>
           <View style={styles.infoRow}>
@@ -48,9 +48,9 @@ export default function EligibilityForm() {
             </Text>
           </View>
           {/* <LineBig style={{ marginHorizontal: 15 }} /> */}
-        </>
+        </View>
       )}
-    </View>
+    </>
   );
 
   const caseFooter = () => (
@@ -126,6 +126,8 @@ export default function EligibilityForm() {
           contentContainerStyle={styles.flatty}
           ListHeaderComponent={caseHeader}
           ListFooterComponent={caseFooter}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
           data={eligReqs}
           renderItem={({ item }) => <Requirement {...item} />}
           keyExtractor={item => item.eligUid}
