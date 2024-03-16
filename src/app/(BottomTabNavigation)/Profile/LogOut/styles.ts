@@ -12,17 +12,11 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
   },
   screenContainer: {
-    width: '85%',
-    height: '100%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
     justifyContent: 'flex-end',
-  },
-  headerContainer: {
-    marginTop: 63, // copied this value from profile screen
-  },
-  textContainer: {
-    rowGap: 20,
-    height: '60%', // this is a bit of a guess
-    justifyContent: 'flex-end',
+    paddingTop: 32,
+    paddingBottom: 32,
+    paddingLeft: 29,
+    paddingRight: 29,
   },
   topText: {
     fontSize: 38,
@@ -33,7 +27,7 @@ export default StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '15.8%', // scaled by 95/3 from 5% (matched DeleteAccount)
+    height: 41,
   },
   buttonView: {
     width: '48%',
@@ -72,15 +66,14 @@ export default StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: '30%',
     borderBottom: 'solid',
     borderColor: colors.midGrey,
     borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  spaceBetween: {
-    width: '100%',
-    height: '15.8%',
+  contentContainer: {
+    justifyContent: 'space-between',
+    rowGap: 25,
   },
 });

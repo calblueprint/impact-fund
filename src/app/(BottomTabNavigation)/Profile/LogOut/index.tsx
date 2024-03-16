@@ -18,40 +18,37 @@ function LogOutConfirmation() {
             <CasesHeader />
           </View> */}
 
-          <View style={styles.textContainer}>
+          <View style={styles.contentContainer}>
             <Text style={styles.topText}>
               Are you sure you'd like to log out?
             </Text>
-          </View>
 
-          <View style={styles.spaceBetween} />
+            <View style={styles.buttonContainer}>
+              <View style={styles.buttonView}>
+                <TouchableOpacity
+                  onPress={() => router.push('/Profile')}
+                  style={styles.cancelButton}
+                >
+                  <View style={styles.buttonContent}>
+                    <X />
+                    <Text style={styles.cancelText}>Cancel</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
 
-          <View style={styles.buttonContainer}>
-            <View style={styles.buttonView}>
-              <TouchableOpacity
-                onPress={() => router.push('/Profile')}
-                style={styles.cancelButton}
-              >
-                <View style={styles.buttonContent}>
-                  <X />
-                  <Text style={styles.cancelText}>Cancel</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.buttonView}>
-              <TouchableOpacity
-                onPress={() => signOut()}
-                style={styles.confirmButton}
-              >
-                <View style={styles.buttonContent}>
-                  <SignOut />
-                  <Text style={styles.confirmText}>Confirm</Text>
-                </View>
-              </TouchableOpacity>
+              <View style={styles.buttonView}>
+                <TouchableOpacity
+                  onPress={() => signOut()}
+                  style={styles.confirmButton}
+                >
+                  <View style={styles.buttonContent}>
+                    <SignOut />
+                    <Text style={styles.confirmText}>Confirm</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View style={styles.spaceBetween} />
         </View>
       </View>
     </View>
