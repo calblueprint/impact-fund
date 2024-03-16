@@ -45,7 +45,7 @@ export interface AuthState {
     state: string,
     zip: string,
   ) => Promise<UserResponse>;
-
+  sendOtp: (email: string) => Promise<AuthResponse>;
   verifyOtp: (email: string, token: string) => Promise<AuthResponse>;
   resendOtp: (email: string) => Promise<AuthResponse>;
   updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
@@ -169,6 +169,15 @@ export function AuthContextProvider({
     setSession(null);
   };
 
+  const sendOtp = async (email: string) => {
+    try {
+      return await supabase.auth.signInWithOtp({ email });
+    } catch (e) {
+      console.warn('there was an error sending your one time passcode');
+      throw e;
+    }
+  };
+
   const verifyOtp = async (email: string, token: string) => {
     const value = await supabase.auth.verifyOtp({
       email,
@@ -212,6 +221,7 @@ export function AuthContextProvider({
       signInWithEmail,
       signOut,
       fullySignUpUser,
+      sendOtp,
       verifyOtp,
       updateUser,
       resetPassword,

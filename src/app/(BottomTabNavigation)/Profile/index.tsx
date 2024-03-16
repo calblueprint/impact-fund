@@ -17,11 +17,22 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const navigation = useNavigation();
-  const { session, signOut } = useSession();
+  const { session, signOut, sendOtp } = useSession();
 
   useEffect(() => {
     navigation.addListener('focus', async () => {});
   }, [navigation]);
+
+  const resetPasswordHaha = async () => {
+    const { error } = await sendOtp(session?.user?.email as string);
+    if (error) {
+      return;
+    }
+    router.push({
+      pathname: '/(Authentication)/OTPFlow/OTPVerify',
+      params: { email: session?.user?.email, changePassword: 'yes' },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -85,21 +96,15 @@ function ProfileScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <View>
+          <TouchableOpacity onPress={resetPasswordHaha}>
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
                 <Reset />
                 <Text style={styles.textElements}>Reset password</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  router.push('/Profile/DeleteAccount');
-                }}
-              >
-                <GreyRightCarrot />
-              </TouchableOpacity>
+              <GreyRightCarrot />
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.line} />
           <View>
             <TouchableOpacity
