@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import supabase from '../supabase/createClient';
 
@@ -22,6 +22,8 @@ function StartScreen() {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         if (_event !== 'USER_UPDATED') {
+          //if user password doesn't exist, send to /Password
+          //if user address doesn't exist, send to /Address
           resetAndPushToRouter('/AllCases');
         }
       } else {

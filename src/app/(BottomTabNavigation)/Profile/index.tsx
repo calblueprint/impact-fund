@@ -11,12 +11,13 @@ import Person from '../../../../assets/person.svg';
 import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
+import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
-  const { signOut, session } = useSession();
   const navigation = useNavigation();
+  const { session, signOut } = useSession();
 
   useEffect(() => {
     navigation.addListener('focus', async () => {});
@@ -24,107 +25,113 @@ function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <CasesHeader />
-        <View style={styles.headerLine} />
-      </View>
-      <Text style={styles.title}>Settings</Text>
-      <View style={styles.actionsContainer}>
-        <View>
-          <View style={styles.actionElementTop}>
-            <View style={styles.iconTitle}>
-              <Envelope style={styles.icon} />
-              <Text style={styles.textElements}>Email address</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.headerContainer}>
+          <CasesHeader />
+          <View style={styles.headerLine} />
+        </View>
+        <Text style={styles.title}>Settings</Text>
+        <View style={styles.actionsContainer}>
+          <View>
+            <View style={styles.actionElementTop}>
+              <View style={styles.iconTitle}>
+                <Envelope />
+                <Text style={styles.textElements}>Email address</Text>
+              </View>
+            </View>
+
+            <Text style={styles.userText}>{session?.user?.email}</Text>
+          </View>
+          <View style={styles.line} />
+          <View>
+            <View style={styles.actionElementTop}>
+              <View style={styles.iconTitle}>
+                <Person />
+                <Text style={styles.textElements}>Full name</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => router.push('/Profile/EditName')}
+              >
+                <Pencil />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.userText}>
+              {session?.user?.user_metadata.fullName}
+            </Text>
+          </View>
+          <View style={styles.line} />
+          <View>
+            <View style={styles.actionElementTop}>
+              <View style={styles.iconTitle}>
+                <Location />
+                <Text style={styles.textElements}>Street address</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => router.push('/Profile/EditAddress')}
+              >
+                <Pencil />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.userText}>
+              {session?.user?.user_metadata.streetName +
+                '\n' +
+                session?.user?.user_metadata.city +
+                ', ' +
+                session?.user?.user_metadata.state +
+                ' ' +
+                session?.user?.user_metadata.zip}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.actionsContainer}>
+          <View>
+            <View style={[styles.actionElementTop, styles.resetIcon]}>
+              <View style={styles.iconTitle}>
+                <Reset />
+                <Text style={styles.textElements}>Reset password</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  router.push('/Profile/DeleteAccount');
+                }}
+              >
+                <GreyRightCarrot />
+              </TouchableOpacity>
             </View>
           </View>
-
-          <Text style={styles.userText}>{session?.user?.email}</Text>
-        </View>
-        <View style={styles.line} />
-        <View>
-          <View style={styles.actionElementTop}>
-            <View style={styles.iconTitle}>
-              <Person style={styles.icon} />
-              <Text style={styles.textElements}>Full name</Text>
-            </View>
-            <TouchableOpacity onPress={() => router.push('/Profile/EditName')}>
-              <Pencil style={styles.edit} />
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.userText}>
-            {session?.user?.user_metadata.fullName}
-          </Text>
-        </View>
-        <View style={styles.line} />
-
-        <View>
-          <View style={styles.actionElementTop}>
-            <View style={styles.iconTitle}>
-              <Location style={styles.icon} />
-              <Text style={styles.textElements}>Street address</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => router.push('/Profile/EditAddress')}
-            >
-              <Pencil style={styles.edit} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.userText}>
-            {session?.user?.user_metadata.streetName +
-              '\n' +
-              session?.user?.user_metadata.city +
-              ', ' +
-              session?.user?.user_metadata.state +
-              ' ' +
-              session?.user?.user_metadata.zip}
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.actionsContainer}>
-        <View>
-          <View style={[styles.actionElementTop, styles.resetIcon]}>
-            <View style={styles.iconTitle}>
-              <Reset style={styles.icon} />
-              <Text style={styles.textElements}>Reset password</Text>
-            </View>
+          <View style={styles.line} />
+          <View>
             <TouchableOpacity
               onPress={() => {
                 router.push('/Profile/DeleteAccount');
               }}
+              style={styles.bottomPush}
             >
-              <GreyRightCarrot />
+              <View style={styles.actionElementTop}>
+                <View style={styles.iconTitle}>
+                  <RedTrash />
+                  <Text style={styles.redTextElements}>Delete account</Text>
+                </View>
+                <GreyRightCarrot />
+              </View>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.line} />
-        <View>
-          <TouchableOpacity
-            onPress={() => {
-              router.push('/Profile/LogOut');
-            }}
-          >
-            <View style={styles.actionElementTop}>
-              <View style={styles.iconTitle}>
-                <RedTrash style={styles.icon} />
-                <Text style={[styles.textElements, styles.bottomPush]}>
-                  Delete account
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          // onPress={() => signOut()}
+          onPress={() => {
+            router.push('/Profile/LogOut');
+          }}
+          style={styles.signOutButton}
+        >
+          <View style={styles.signOutInstructions}>
+            <SignOut />
+            <Text style={styles.signOutText}>Log out</Text>
+          </View>
+          <WhiteRightCarrot />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          router.push('/Profile/DeleteAccount');
-        }}
-        style={styles.signOutButton}
-      >
-        <SignOut />
-        <Text style={styles.signOutText}>Log out</Text>
-      </TouchableOpacity>
     </View>
   );
 }

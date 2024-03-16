@@ -57,7 +57,10 @@ export default function LoginScreen() {
       </View>
 
       <View style={styles.nextLine}>
-        <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+        <TouchableOpacity>
+          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           disabled={email.trim() === '' || errorExists}
           style={
