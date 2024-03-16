@@ -6,7 +6,6 @@ import { z } from 'zod';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import supabase from '../../../../supabase/createClient';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
