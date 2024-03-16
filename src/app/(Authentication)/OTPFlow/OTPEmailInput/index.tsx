@@ -5,11 +5,12 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import supabase from '../../../../supabase/createClient';
+import { useSession } from '../../../../context/AuthContext';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');
+  const { sendOtp } = useSession();
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -21,16 +22,14 @@ export default function OTPEmailInput() {
   };
 
   async function getOTP() {
-    const isEmail = await emailExists(email);
     setErrorExists(true);
+    const isEmail = await emailExists(email);
     if (!isEmail) {
       setErrorMessage(
         'The email you entered is either incorrect or not registered with the Impact Fund.',
       );
     } else {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-      });
+      const { error } = await sendOtp(email);
       if (error) {
         setErrorMessage('Sorry, you can only send a code every 60 seconds!');
         return;

@@ -172,9 +172,9 @@ export function AuthContextProvider({
   const sendOtp = async (email: string) => {
     try {
       return await supabase.auth.signInWithOtp({ email });
-    } catch (e) {
+    } catch (error) {
       console.warn('there was an error sending your one time passcode');
-      throw e;
+      throw error;
     }
   };
 

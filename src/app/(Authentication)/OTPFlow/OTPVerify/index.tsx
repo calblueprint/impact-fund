@@ -29,7 +29,7 @@ export default function OTPFlow() {
     setToken(text);
   };
 
-  const verify = async (token: string) => {
+  const verifyToken = async (token: string) => {
     const { error } = await verifyOtp(email, token);
     if (error) {
       setErrorExists(true);
@@ -97,7 +97,7 @@ export default function OTPFlow() {
               ? [styles.nextButtonBase, styles.nextButtonDisabled]
               : [styles.nextButtonBase, styles.nextButtonActive]
           }
-          onPress={() => verify(token)}
+          onPress={() => verifyToken(token)}
         >
           <Text style={styles.buttonText}>Verify</Text>
           <View>

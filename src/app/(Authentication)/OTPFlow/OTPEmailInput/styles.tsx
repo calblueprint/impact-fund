@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    marginTop: 110,
+    marginTop: 100,
     width: '80%',
   },
   backText: {
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     fontWeight: '400',
   },
   inputBox: {
-    marginTop: 40,
+    marginTop: 20,
   },
   nextLine: {
     flexDirection: 'row',

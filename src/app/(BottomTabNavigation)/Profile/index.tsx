@@ -23,15 +23,20 @@ function ProfileScreen() {
     navigation.addListener('focus', async () => {});
   }, [navigation]);
 
-  const resetPasswordHaha = async () => {
+  const resetPassword = async () => {
     const { error } = await sendOtp(session?.user?.email as string);
     if (error) {
+      console.log(error.message);
       return;
     }
     router.push({
       pathname: '/(Authentication)/OTPFlow/OTPVerify',
       params: { email: session?.user?.email, changePassword: 'yes' },
     });
+    // router.push({
+    //   pathname: '/Profile/ResetConfirm',
+    //   params: { email: session?.user?.email },
+    // });
   };
 
   return (
@@ -96,7 +101,7 @@ function ProfileScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <TouchableOpacity onPress={resetPasswordHaha}>
+          <TouchableOpacity onPress={resetPassword}>
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
                 <Reset />
