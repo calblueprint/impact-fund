@@ -10,6 +10,9 @@ import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
 
 export default function OTPFlow() {
+  const { changePassword } = useLocalSearchParams() as unknown as {
+    changePassword: string;
+  };
   const { name } = useLocalSearchParams() as unknown as { name: string };
   const { email } = useLocalSearchParams() as unknown as { email: string };
   const { password } = useLocalSearchParams() as unknown as {
@@ -26,7 +29,7 @@ export default function OTPFlow() {
     setToken(text);
   };
 
-  const verify = async (email: string, token: string) => {
+  const verifyToken = async (token: string) => {
     const { error } = await verifyOtp(email, token);
     if (error) {
       setErrorExists(true);
@@ -35,22 +38,18 @@ export default function OTPFlow() {
       );
       return;
     }
-    router.push({
-      pathname: 'SignUp/Address',
-      params: { email, password, name },
-    });
+    if (changePassword === 'yes') {
+      router.push('OTPFlow/OTPNewPassword');
+    } else {
+      router.push({
+        pathname: 'SignUp/Address',
+        params: { email, password, name },
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View> */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.backText}>Back</Text>
@@ -98,7 +97,7 @@ export default function OTPFlow() {
               ? [styles.nextButtonBase, styles.nextButtonDisabled]
               : [styles.nextButtonBase, styles.nextButtonActive]
           }
-          onPress={() => verify(email, token)}
+          onPress={() => verifyToken(token)}
         >
           <Text style={styles.buttonText}>Verify</Text>
           <View>
