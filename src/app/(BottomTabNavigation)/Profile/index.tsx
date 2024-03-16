@@ -17,27 +17,11 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const navigation = useNavigation();
-  const { session, signOut, sendOtp } = useSession();
+  const { session, signOut } = useSession();
 
   useEffect(() => {
     navigation.addListener('focus', async () => {});
   }, [navigation]);
-
-  const resetPassword = async () => {
-    const { error } = await sendOtp(session?.user?.email as string);
-    if (error) {
-      console.log(error.message);
-      return;
-    }
-    router.push({
-      pathname: '/(Authentication)/OTPFlow/OTPVerify',
-      params: { email: session?.user?.email, changePassword: 'yes' },
-    });
-    // router.push({
-    //   pathname: '/Profile/ResetConfirm',
-    //   params: { email: session?.user?.email },
-    // });
-  };
 
   return (
     <View style={styles.container}>
@@ -101,7 +85,14 @@ function ProfileScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <TouchableOpacity onPress={resetPassword}>
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: '/Profile/ResetConfirm',
+                params: { email: session?.user?.email },
+              })
+            }
+          >
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
                 <Reset />

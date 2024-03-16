@@ -25,4 +25,31 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: '800',
   },
+  nextButtonBase: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    width: '100%',
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  nextButtonDisabled: {
+    backgroundColor: colors.midGrey,
+    borderColor: colors.midGrey,
+  },
+  nextButtonActive: {
+    backgroundColor: colors.black,
+    borderColor: colors.black,
+  },
+  nextText: {
+    color: colors.white,
+    fontSize: 16,
+    opacity: 1,
+    fontWeight: '600',
+  },
+  nextButton: {
+    marginTop: 100,
+  },
 });
