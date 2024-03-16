@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useReducer } from 'react';
+import React, { createContext, useEffect, useMemo } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
