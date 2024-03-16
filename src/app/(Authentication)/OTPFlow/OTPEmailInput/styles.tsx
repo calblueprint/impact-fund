@@ -8,8 +8,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: '100%',
-    width: '100%',
+    flex: 1,
+  },
+  innerContainer: {
+    marginTop: 110,
+    width: '80%',
   },
   backText: {
     color: colors.midGrey,
@@ -18,15 +21,12 @@ export default StyleSheet.create({
     marginLeft: 7,
   },
   backButton: {
-    marginTop: 100,
     marginBottom: 30,
-    marginRight: 280,
   },
   instructionText: {
     color: colors.black,
     fontSize: 24,
     fontWeight: '800',
-    marginRight: 97,
   },
   nextText: {
     color: colors.white,
