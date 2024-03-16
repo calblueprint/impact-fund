@@ -30,12 +30,13 @@ export default function UpdateView() {
       {update && (
         <>
           <ScrollView style={styles.scrollContainer}>
-            <Text style={styles.title}>{update.title}</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{update.title}</Text>
+            </View>
             <View style={styles.inLineSubInfo}>
               <Text>{lawFirm}</Text>
               <Text> • {formatDate(update.date)}</Text>
             </View>
-            {/* <Text>{update.blurb}</Text> */}
             <Text>{update.summary}</Text>
           </ScrollView>
         </>

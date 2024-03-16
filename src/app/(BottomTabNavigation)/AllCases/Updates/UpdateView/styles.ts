@@ -10,17 +10,21 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   scrollContainer: {
-    width: '82%',
+    width: '84%',
     height: '84%',
+  },
+  titleContainer: {
+    marginTop: 30,
+    marginBottom: 10,
   },
   title: {
     color: colors.midnightBlack,
     fontSize: 30,
     fontStyle: 'normal',
     fontWeight: '800',
-    lineHeight: 18,
   },
   inLineSubInfo: {
     flexDirection: 'row',
+    marginBottom: 10,
   },
 });
