@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import WhiteTrash from '../../../../../assets/white-trash.svg';
+import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
 // import CasesHeader from '../../../../Components/CasesHeader/CasesHeader'; address in future PR
 import { useSession } from '../../../../context/AuthContext';
@@ -45,7 +45,7 @@ function LogOutConfirmation() {
                 style={styles.confirmButton}
               >
                 <View style={styles.buttonContent}>
-                  <WhiteTrash />
+                  <SignOut />
                   <Text style={styles.confirmText}>Confirm</Text>
                 </View>
               </TouchableOpacity>
