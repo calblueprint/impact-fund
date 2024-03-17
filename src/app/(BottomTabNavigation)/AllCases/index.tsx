@@ -1,16 +1,16 @@
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { CaseContext } from '../../../context/CaseContext';
-import supabase from '../../../supabase/createClient';
 
 function CasesScreen() {
-  const { allCases, loading } = useContext(CaseContext);
-
+  //const { allCases } = useContext(CaseContext);
+  const { activeCases, loading } = useContext(CaseContext);
+  const { inactiveCases } = useContext(CaseContext);
   return (
     <View style={styles.container}>
       <View style={styles.casesContainer}>
@@ -33,15 +33,36 @@ function CasesScreen() {
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
                   </View>
                 </TouchableOpacity>
+                <View>
+                  <Text style={{ fontSize: 20, marginTop: 20 }}>
+                    Inactive Cases
+                  </Text>
+                </View>
               </>
             )}
-            data={allCases}
+            data={inactiveCases}
             renderItem={({ item }) => <CaseCard {...item} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
               <Text>Scan your first case using the QR code above!</Text>
             }
+          />
+        )}
+        {loading ? (
+          <Text> </Text>
+        ) : (
+          <FlatList
+            contentContainerStyle={styles.innerScroll}
+            ListHeaderComponent={() => (
+              <>
+                <Text style={{ fontSize: 20, marginTop: 0 }}>Active Cases</Text>
+              </>
+            )}
+            data={activeCases}
+            renderItem={({ item }) => <CaseCard {...item} />}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
           />
         )}
       </View>

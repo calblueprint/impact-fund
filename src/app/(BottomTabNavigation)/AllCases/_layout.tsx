@@ -55,6 +55,18 @@ export default function CasesLayout() {
             headerTitle: props => <CasesHeader />,
           }}
         />
+        <Stack.Screen
+          name="EligibilityForm/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="EligibilityForm/ConfirmEligibility/index"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
       </Stack>
     </CaseContextProvider>
   );

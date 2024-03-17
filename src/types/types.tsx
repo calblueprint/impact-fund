@@ -59,6 +59,7 @@ export type Status = {
   userId: UserUid;
   eligible: Eligibility;
   excluded: boolean;
+  active: boolean;
 };
 
 export enum Eligibility {
@@ -66,6 +67,7 @@ export enum Eligibility {
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
 }
+
 export const userInstance: User = {
   id: '',
   fullName: '',

@@ -45,6 +45,44 @@ export async function getCaseIdsFromUserId(
   }
 }
 
+/**
+ * Fetch an array of `CaseId`s associated with a specific user and active status. Fetches ids from `status` table.
+ *
+ * @param userId user Uuid
+ * @returns array of `CaseId`s
+ */
+export async function getCaseIdsFromUserActivity(
+  userId: UserUid,
+  activity: boolean,
+): Promise<CaseUid[]> {
+  try {
+    // fetch caseIds that match the specified userId
+    if (userId === 'NO_ID') {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      userId = user?.id as UserUid;
+    }
+    const { data } = await supabase
+      .from('status')
+      .select('caseId')
+      .eq('userId', userId)
+      .eq('active', activity);
+
+    // throw error if supabase data is empty
+    if (!data) {
+      throw new Error(`no caseIds found for the given user: ${userId}`);
+    }
+
+    // cast raw sql data as an array of CaseIds
+    return data.map(item => item.caseId as CaseUid);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(getCaseIdsFromUserId)', error);
+    throw error;
+  }
+}
+
 // Similar to top function but gets ALL CaseIds
 export async function getAllCaseIds(): Promise<CaseUid[]> {
   try {
@@ -80,6 +118,7 @@ export async function uploadCase(caseId: CaseUid): Promise<void> {
     } = await supabase.auth.getUser();
     const userId = user?.id;
     await supabase.from('status').insert({ caseId, userId });
+    updateCaseActivity(caseId, true);
   } catch (error) {
     console.warn(error);
     throw error;
@@ -216,6 +255,35 @@ export async function getImageUrl(imagePath: string): Promise<string> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getImageUrl)', error);
+    throw error;
+  }
+}
+
+/**
+ * Update a specific User/Case status
+ *
+ * @param caseId specified caseId
+ * @param activity active status to be updated in the specific User/Case row
+ * @returns nothing
+ */
+export async function updateCaseActivity(
+  caseId: CaseUid,
+  activity: boolean,
+): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase
+      .from('status')
+      .update({ active: activity })
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+    console.log(user?.id);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('(updateCaseStatus)', error);
     throw error;
   }
 }

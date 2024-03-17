@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useMemo, useReducer } from 'react';
 
-import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
+import {
+  fetchAllCases,
+  fetchCasesOnActivity,
+} from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
 import { Case } from '../types/types';
 
@@ -10,6 +13,8 @@ export interface CaseState {
   allCases: Case[];
   updateCases: React.Dispatch<React.SetStateAction<Case[]>>;
   loading: boolean;
+  activeCases: Case[];
+  inactiveCases: Case[];
 }
 
 export function CaseContextProvider({
@@ -18,6 +23,9 @@ export function CaseContextProvider({
   children: React.ReactNode;
 }) {
   const [cases, setCases] = React.useState<Case[]>([]);
+  const [active, setActive] = React.useState<Case[]>([]);
+  const [inactive, setInactive] = React.useState<Case[]>([]);
+
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
@@ -26,7 +34,11 @@ export function CaseContextProvider({
       if (user.data.user?.id) {
         const userId = user.data.user.id;
         const allCases = await fetchAllCases(userId);
+        const actives = await fetchCasesOnActivity(userId, true);
+        const inactives = await fetchCasesOnActivity(userId, false);
         setCases(allCases);
+        setActive(actives);
+        setInactive(inactives);
       }
       setIsLoading(false);
     };
@@ -39,6 +51,8 @@ export function CaseContextProvider({
       allCases: cases,
       updateCases: setCases,
       loading: isLoading,
+      activeCases: active,
+      inactiveCases: inactive,
     }),
     [cases, setCases, isLoading],
   );
