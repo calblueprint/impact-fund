@@ -16,6 +16,10 @@ import 'react-native-url-polyfill/auto';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
+  const { session } = useSession();
+
+  // const prefix = Linking.make
+
   // const url = Linking.useURL();
   // const addCaseUrl = Linking.createURL('addCase/', {
   //   queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
@@ -23,22 +27,21 @@ function CasesScreen() {
   const [parsedUrl, setUrl] = useState<Linking.ParsedURL | null>(null);
   // console.log('addCaseURl', addCaseUrl);
   // console.log({ url });
-  const { session } = useSession();
 
-  function urlRedirect(url: string | null) {
+  function urlRedirect(url: Linking.ParsedURL) {
     if (!url) return;
     // parse and redirect to new url
-    const { path, queryParams } = Linking.parse(url);
+    const { path, queryParams } = url;
     console.log(
       `Linked to app with path: ${path} and data: ${JSON.stringify(
         queryParams,
       )}`,
     );
-    if (queryParams?.caseUID) {
-      router.push({
-        pathname: `/AllCases/QRCodeScanner/AddCase/${queryParams?.caseUID}`,
-      });
-    }
+    // if (queryParams?.caseUID) {
+    //   router.push({
+    //     pathname: `/AllCases/QRCodeScanner/AddCase/${queryParams?.caseUID}`,
+    //   });
+    // }
   }
 
   function handleDeepLink(event: any) {
@@ -54,13 +57,14 @@ function CasesScreen() {
   }
 
   useEffect(() => {
-    // urlRedirect(
-    //   'exp://10.0.0.36:8081/--/QRCodeScanner/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc,
-    // );
-
     Linking.addEventListener('url', handleDeepLink);
     if (!parsedUrl) {
       getInitialUrl();
+    }
+
+    if (parsedUrl) {
+      console.log('urlRedirect triggered');
+      urlRedirect(parsedUrl);
     }
 
     if (session?.user) {
