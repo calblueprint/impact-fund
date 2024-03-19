@@ -1,5 +1,6 @@
+import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -15,9 +16,36 @@ import 'react-native-url-polyfill/auto';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
+  const url = Linking.useURL();
+  const addCaseUrl = Linking.createURL('addCase/', {
+    queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
+  });
+  // console.log('addCaseURl', addCaseUrl);
+  // console.log({ url });
   const { session } = useSession();
 
+  function urlRedirect(url: string | null) {
+    if (!url) return;
+    // parse and redirect to new url
+    const { path, queryParams } = Linking.parse(url);
+    console.log(
+      `Linked to app with path: ${path} and data: ${JSON.stringify(
+        queryParams,
+      )}`,
+    );
+    if (queryParams?.caseUID) {
+      router.push({
+        pathname: `/AllCases/QRCodeScanner/AddCase/${queryParams?.caseUID}`,
+      });
+    }
+  }
+
   useEffect(() => {
+    // Linking.getInitialURL().then(urlRedirect);
+    urlRedirect(
+      'exp://10.0.0.36:8081/--/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
+    );
+
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
         updatePushToken(session.user.id, token);

@@ -1,3 +1,4 @@
+import * as Linking from 'expo-linking';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -17,6 +18,8 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const navigation = useNavigation();
+  const url = Linking.useURL();
+  console.log({ url });
   const { session, signOut } = useSession();
 
   useEffect(() => {
