@@ -16,10 +16,11 @@ import 'react-native-url-polyfill/auto';
 
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
-  const url = Linking.useURL();
+  // const url = Linking.useURL();
   const addCaseUrl = Linking.createURL('addCase/', {
     queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
   });
+  const [parsedUrl, setUrl] = useState<Linking.ParsedURL | null>(null);
   // console.log('addCaseURl', addCaseUrl);
   // console.log({ url });
   const { session } = useSession();
@@ -40,21 +41,37 @@ function CasesScreen() {
     }
   }
 
+  function handleDeepLink(event: any) {
+    const parsedUrl = Linking.parse(event.url);
+    setUrl(parsedUrl);
+  }
+
   useEffect(() => {
-    urlRedirect(
-      'exp://10.0.0.36:8081/--/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
-    );
+    // urlRedirect(
+    //   'exp://10.0.0.36:8081/--/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
+    // );
+
+    Linking.addEventListener('url', handleDeepLink);
 
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
         updatePushToken(session.user.id, token);
       });
     }
+
+    // return () => {
+    //   Linking.removeEventListener('url');
+    // };
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.casesContainer}>
+        <Text>
+          {parsedUrl
+            ? JSON.stringify(parsedUrl)
+            : 'app not opened with a deep link'}
+        </Text>
         {loading ? (
           <Text>Loading...</Text>
         ) : (
