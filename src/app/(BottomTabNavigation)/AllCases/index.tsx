@@ -1,5 +1,5 @@
 import * as Linking from 'expo-linking';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
@@ -17,9 +17,9 @@ import 'react-native-url-polyfill/auto';
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   // const url = Linking.useURL();
-  const addCaseUrl = Linking.createURL('addCase/', {
-    queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
-  });
+  // const addCaseUrl = Linking.createURL('addCase/', {
+  //   queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
+  // });
   const [parsedUrl, setUrl] = useState<Linking.ParsedURL | null>(null);
   // console.log('addCaseURl', addCaseUrl);
   // console.log({ url });
@@ -46,12 +46,22 @@ function CasesScreen() {
     setUrl(parsedUrl);
   }
 
+  async function getInitialUrl() {
+    const initialUrl = await Linking.getInitialURL();
+    if (initialUrl) {
+      setUrl(Linking.parse(initialUrl));
+    }
+  }
+
   useEffect(() => {
     // urlRedirect(
-    //   'exp://10.0.0.36:8081/--/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
+    //   'exp://10.0.0.36:8081/--/QRCodeScanner/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc,
     // );
 
     Linking.addEventListener('url', handleDeepLink);
+    if (!parsedUrl) {
+      getInitialUrl();
+    }
 
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
