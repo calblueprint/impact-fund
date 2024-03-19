@@ -41,7 +41,6 @@ function CasesScreen() {
   }
 
   useEffect(() => {
-    // Linking.getInitialURL().then(urlRedirect);
     urlRedirect(
       'exp://10.0.0.36:8081/--/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
     );
