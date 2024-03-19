@@ -108,7 +108,7 @@ function QRCodeScannerScreen() {
       return;
     }
     router.push({
-      pathname: `/AllCases/QRCodeScanner/AddCase/${userCase.id}`,
+      pathname: `/AllCases/AddCase/${userCase.id}`,
     });
   };
 

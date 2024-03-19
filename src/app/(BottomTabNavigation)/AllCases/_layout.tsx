@@ -26,7 +26,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="QRCodeScanner/AddCase/[caseUid]"
+          name="AddCase/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
