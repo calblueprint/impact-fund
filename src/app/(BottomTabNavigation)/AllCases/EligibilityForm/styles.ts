@@ -10,12 +10,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   contentContainer: {
-    width: '84%',
+    width: '100%',
   },
-  flatty: {
+  flatListContainer: {
     // marginHorizontal: 20,
     alignContent: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     // width: '84%',
     // rowGap: 10,
     //backgroundColor: 'green',
@@ -24,9 +25,11 @@ export default StyleSheet.create({
   headerContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '84%',
     rowGap: 20,
   },
   requirementContainer: {
+    width: '84%',
     flexDirection: 'row',
     paddingTop: 20,
     columnGap: 20,
@@ -43,9 +46,11 @@ export default StyleSheet.create({
     //backgroundColor: 'blue',
   },
   footerContainer: {
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 15,
+    flexDirection: 'column',
+    rowGap: 16,
+    borderTopWidth: 1,
+    padding: 25,
   },
   button: {
     width: 149,
@@ -87,7 +92,7 @@ export default StyleSheet.create({
     color: colors.white,
   },
   info: {
-    marginVertical: 20,
+    // marginVertical: 20,
   },
   infoRow: {
     flexDirection: 'row',

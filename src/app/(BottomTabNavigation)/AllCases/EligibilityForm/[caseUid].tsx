@@ -28,7 +28,7 @@ export default function EligibilityForm() {
   >([]);
   const [checkCount, setCheckCount] = useState(0);
 
-  const caseHeader = () => (
+  const CaseHeader = () => (
     <>
       {!caseData ? (
         <Text>Loading!!!</Text>
@@ -48,10 +48,11 @@ export default function EligibilityForm() {
     </>
   );
 
-  const caseFooter = () => (
+  const CaseFooter = () => (
     <View style={styles.footerContainer}>
-      <LineHuge />
-      <Text style={styles.info}>Do you meet the following requirements?</Text>
+      <Text style={styles.bodyText}>
+        Do you meet the following requirements?
+      </Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={[styles.button, styles.buttonTop]}
@@ -106,9 +107,9 @@ export default function EligibilityForm() {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <FlatList
-          contentContainerStyle={styles.flatty}
-          ListHeaderComponent={caseHeader}
-          ListFooterComponent={caseFooter}
+          contentContainerStyle={styles.flatListContainer}
+          ListHeaderComponent={CaseHeader}
+          ListFooterComponent={CaseFooter}
           showsVerticalScrollIndicator={false}
           data={eligibilityRequirements}
           renderItem={({ item }) => (
