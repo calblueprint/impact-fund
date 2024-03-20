@@ -13,14 +13,9 @@ export default StyleSheet.create({
     width: '100%',
   },
   flatListContainer: {
-    // marginHorizontal: 20,
     alignContent: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    // width: '84%',
-    // rowGap: 10,
-    //backgroundColor: 'green',
-    // borderWidth: 1,
   },
   headerContainer: {
     flexDirection: 'column',
@@ -43,7 +38,7 @@ export default StyleSheet.create({
   buttonsContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    //backgroundColor: 'blue',
+    columnGap: 20,
   },
   footerContainer: {
     justifyContent: 'space-between',
@@ -52,47 +47,24 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     padding: 25,
   },
-  button: {
-    width: 149,
+  buttonBase: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
     height: 47,
     borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 30,
+    columnGap: 10,
   },
-  buttonBottom: {
-    width: 149,
-    height: 47,
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 30,
+  eligibleButton: {
     backgroundColor: colors.black,
-    // marginLeft: 8,
   },
-  buttonBottomGray: {
-    width: 149,
-    height: 47,
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 30,
+  inactiveEligibleButton: {
     backgroundColor: colors.midGrey,
-    // marginLeft: 8,
   },
-  buttonTop: {
-    // marginRight: 8,
+  ineligbleButton: {
     borderColor: colors.black,
     borderWidth: 0.5,
-  },
-  buttonBottomText: {
-    color: colors.white,
-  },
-  info: {
-    // marginVertical: 20,
   },
   infoRow: {
     flexDirection: 'row',
@@ -110,25 +82,18 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  list: {
-    flexDirection: 'row',
-    marginVertical: 10,
-    // marginHorizontal: 30,
-    alignItems: 'flex-start',
-  },
   bodyText: {
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '300',
   },
-  activeColor: {
+  eligibleButtonText: {
+    color: colors.white,
+  },
+  activeText: {
     color: colors.black,
   },
-  inactiveColor: {
+  inactiveText: {
     color: colors.midGrey,
-  },
-  lineStyle: {
-    borderTopWidth: 1,
-    borderTopColor: colors.midGrey,
   },
 });

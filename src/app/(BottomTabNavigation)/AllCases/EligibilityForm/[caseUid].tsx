@@ -55,23 +55,25 @@ export default function EligibilityForm() {
       </Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
-          style={[styles.button, styles.buttonTop]}
+          style={[styles.buttonBase, styles.ineligbleButton]}
           onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
         >
           <Ex />
-          <Text>No, I don't</Text>
+          <Text style={styles.bodyText}>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={checkCount !== eligibilityRequirements.length}
           style={
             checkCount === eligibilityRequirements.length
-              ? styles.buttonBottom
-              : styles.buttonBottomGray
+              ? [styles.buttonBase, styles.eligibleButton]
+              : [styles.buttonBase, styles.inactiveEligibleButton]
           }
           onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
         >
           <Check />
-          <Text style={styles.buttonBottomText}>Yes, I do</Text>
+          <Text style={[styles.bodyText, styles.eligibleButtonText]}>
+            Yes, I do
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

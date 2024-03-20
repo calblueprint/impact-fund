@@ -34,8 +34,8 @@ export default function Requirement({
         <Text
           style={
             isChecked
-              ? [styles.bodyText, styles.inactiveColor]
-              : [styles.bodyText, styles.activeColor]
+              ? [styles.bodyText, styles.inactiveText]
+              : [styles.bodyText, styles.activeText]
           }
         >
           {requirement}
