@@ -1,18 +1,12 @@
-import CheckBox from 'expo-checkbox';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import Requirement from './Requirement';
-// import CustomCheckbox from './checkbox';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
-//import Ch from '../../../../../assets/checkbox.svg';
 import Error from '../../../../../assets/exclamation.svg';
-// import LineBig from '../../../../../assets/line-big.svg';
 import LineHuge from '../../../../../assets/line-huge.svg';
-// import LineSmall from '../../../../../assets/line-small.svg';
-//import Rectangle from '../../../../../assets/rectangle.svg';
 import Ex from '../../../../../assets/x.svg';
 import {
   updateCaseStatus,
@@ -29,7 +23,9 @@ import {
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
-  const [eligReqs, setEligReqs] = useState<EligibilityRequirement[]>([]);
+  const [eligibilityRequirements, setEligibilityRequirements] = useState<
+    EligibilityRequirement[]
+  >([]);
   const [checkCount, setCheckCount] = useState(0);
 
   const caseHeader = () => (
@@ -47,7 +43,6 @@ export default function EligibilityForm() {
               class-action.
             </Text>
           </View>
-          {/* <LineBig style={{ marginHorizontal: 15 }} /> */}
         </View>
       )}
     </>
@@ -66,9 +61,9 @@ export default function EligibilityForm() {
           <Text>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={checkCount !== eligReqs.length}
+          disabled={checkCount !== eligibilityRequirements.length}
           style={
-            checkCount === eligReqs.length
+            checkCount === eligibilityRequirements.length
               ? styles.buttonBottom
               : styles.buttonBottomGray
           }
@@ -81,10 +76,10 @@ export default function EligibilityForm() {
     </View>
   );
 
-  async function fetchEligReqs() {
+  async function fetchEligibilityRequirments() {
     if (caseUid) {
-      const reqs = await getReqsById(caseUid);
-      setEligReqs(reqs);
+      const requirements = await getReqsById(caseUid);
+      setEligibilityRequirements(requirements);
     }
   }
 
@@ -97,7 +92,7 @@ export default function EligibilityForm() {
 
   useEffect(() => {
     fetchCaseData();
-    fetchEligReqs();
+    fetchEligibilityRequirments();
   }, []);
 
   const updateEligibility = async (status: Eligibility) => {
@@ -115,7 +110,7 @@ export default function EligibilityForm() {
           ListHeaderComponent={caseHeader}
           ListFooterComponent={caseFooter}
           showsVerticalScrollIndicator={false}
-          data={eligReqs}
+          data={eligibilityRequirements}
           renderItem={({ item }) => (
             <Requirement
               requirement={item.requirement}

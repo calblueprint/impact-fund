@@ -30,10 +30,9 @@ export async function formatEligibility(
   try {
     // organize form MetaData without publicUrl
     const eligs: EligibilityRequirement = {
-      eligUid: queryItem.eligibility_id,
+      eligibilityUid: queryItem.eligibility_id,
       caseId: CaseUid,
-      requirements: queryItem.requirement,
-      //checked: false,
+      requirement: queryItem.requirement,
     };
     return eligs;
   } catch (error) {
