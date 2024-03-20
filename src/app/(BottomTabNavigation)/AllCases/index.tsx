@@ -1,8 +1,7 @@
 import * as Linking from 'expo-linking';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
-import { parse } from 'yargs';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
@@ -15,6 +14,11 @@ import {
 } from '../../../supabase/pushNotifications';
 import 'react-native-url-polyfill/auto';
 
+enum linkingEvents {
+  ADD_CASE = 'addCase',
+  NOTIFICATION = 'notification',
+}
+
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
@@ -23,17 +27,20 @@ function CasesScreen() {
 
   function urlRedirect(url: Linking.ParsedURL) {
     if (!url) return;
-    // parse and redirect to new url
+    // parse query params and determine routing
     const { queryParams } = url;
     console.log(
-      `Linked into the app according to the following query parameters: ${JSON.stringify(
+      `Linking into the app using the following query parameters: ${JSON.stringify(
         queryParams,
       )}`,
     );
-    if (queryParams) {
-      router.push({
-        pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
-      });
+    // determine routing from the event variable
+    if (queryParams?.event) {
+      const event = queryParams.event.toString();
+      if (event === linkingEvents.ADD_CASE)
+        router.push({
+          pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
+        });
     }
   }
 
