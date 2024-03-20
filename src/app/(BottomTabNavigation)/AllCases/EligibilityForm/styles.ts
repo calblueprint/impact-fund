@@ -28,9 +28,15 @@ export default StyleSheet.create({
   },
   requirementContainer: {
     flexDirection: 'row',
-    paddingVertical: 20,
+    paddingTop: 20,
     columnGap: 20,
     // borderWidth: 1,
+  },
+  innerRequirementBox: {
+    flex: 1,
+    paddingBottom: 20,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.midGrey,
   },
   buttonsContainer: {
     justifyContent: 'space-between',
@@ -111,6 +117,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '300',
     color: colors.black,
+    // marginLeft: 20,
   },
   lineStyle: {
     borderTopWidth: 1,

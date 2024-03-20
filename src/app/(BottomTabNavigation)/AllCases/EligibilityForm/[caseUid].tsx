@@ -9,9 +9,9 @@ import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 //import Ch from '../../../../../assets/checkbox.svg';
 import Error from '../../../../../assets/exclamation.svg';
-import LineBig from '../../../../../assets/line-big.svg';
+// import LineBig from '../../../../../assets/line-big.svg';
 import LineHuge from '../../../../../assets/line-huge.svg';
-import LineSmall from '../../../../../assets/line-small.svg';
+// import LineSmall from '../../../../../assets/line-small.svg';
 //import Rectangle from '../../../../../assets/rectangle.svg';
 import Ex from '../../../../../assets/x.svg';
 import {
@@ -127,7 +127,7 @@ export default function EligibilityForm() {
           ListHeaderComponent={caseHeader}
           ListFooterComponent={caseFooter}
           showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
+          // ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
           data={eligReqs}
           renderItem={({ item }) => <Requirement {...item} />}
           keyExtractor={item => item.eligUid}

@@ -15,16 +15,10 @@ export default function Requirement(item: EligibilityRequirement) {
 
   return (
     <View style={styles.requirementContainer}>
-      {/* <View style={styles.list}> */}
       <CheckBox value={isChecked} onValueChange={onCheck} />
-      <Text style={styles.bodyText}>{item.requirements}</Text>
-      {/* </View> */}
-      {/* <LineSmall
-        style={{
-          // alignItems: 'flex-end' //this doesn't work at all for some reason
-          marginLeft: 70,
-        }}
-      /> */}
+      <View style={styles.innerRequirementBox}>
+        <Text style={styles.bodyText}>{item.requirements}</Text>
+      </View>
     </View>
   );
 }
