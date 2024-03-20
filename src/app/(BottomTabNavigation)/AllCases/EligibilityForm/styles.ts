@@ -69,6 +69,7 @@ export default StyleSheet.create({
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     columnGap: 20,
     borderBottomWidth: 1,
     paddingVertical: 10,

@@ -38,10 +38,12 @@ export default function EligibilityForm() {
           <Text style={styles.titleText}>{caseData.title}</Text>
           <View style={styles.infoRow}>
             <Error />
-            <Text style={styles.bodyText}>
-              You must meet every requirement to be eligible for this
-              class-action.
-            </Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.bodyText}>
+                You must meet every requirement to be eligible for this
+                class-action.
+              </Text>
+            </View>
           </View>
         </View>
       )}
