@@ -1,12 +1,5 @@
-import { useState, CSSProperties } from 'react';
-import {
-  KeyboardTypeOptions,
-  Text,
-  TextInput,
-  View,
-  ViewBase,
-} from 'react-native';
-import { z } from 'zod';
+import { useState } from 'react';
+import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
 

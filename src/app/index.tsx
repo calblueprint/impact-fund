@@ -22,6 +22,8 @@ function StartScreen() {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         if (_event !== 'USER_UPDATED') {
+          //if user password doesn't exist, send to /Password
+          //if user address doesn't exist, send to /Address
           resetAndPushToRouter('/AllCases');
         }
       } else {

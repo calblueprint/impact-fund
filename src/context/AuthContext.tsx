@@ -28,6 +28,7 @@ export interface AuthState {
   session: Session | null;
   user: User | null;
   isLoading: boolean;
+
   signIn: (newSession: Session | null) => void;
   signUp: (
     email: string,
@@ -35,7 +36,19 @@ export interface AuthState {
     options: object,
   ) => Promise<AuthResponse>;
   signInWithEmail: (email: string, password: string) => Promise<AuthResponse>;
-  resendVerification: (email: string) => Promise<AuthResponse>;
+  fullySignUpUser: (
+    fullName: string,
+    email: string,
+    password: string,
+    streetName: string,
+    city: string,
+    state: string,
+    zip: string,
+  ) => Promise<UserResponse>;
+
+  verifyOtp: (email: string, token: string) => Promise<AuthResponse>;
+  resendOtp: (email: string) => Promise<AuthResponse>;
+  updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
   resetPassword: (email: string) => Promise<
     | {
         data: object;
@@ -46,7 +59,7 @@ export interface AuthState {
         error: AuthError;
       }
   >;
-  updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
+
   signOut: () => Promise<void>;
   deleteCurrentUser: (userId: string) => Promise<void>;
 }
@@ -113,6 +126,43 @@ export function AuthContextProvider({
     return value;
   };
 
+  const fullySignUpUser = async (
+    fullName: string,
+    email: string,
+    password: string,
+    streetName: string,
+    city: string,
+    state: string,
+    zip: string,
+  ) => {
+    try {
+      const value = await updateUser({
+        email,
+        password,
+        data: {
+          fullName,
+          streetName,
+          city,
+          state,
+          zip,
+        },
+      });
+      // add user information to the public table
+      if (value.data.user) {
+        await supabase.from('users').insert({
+          userId: value.data.user.id,
+          email,
+          fullName,
+        });
+      }
+      return value;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(signUpUser)', error);
+      throw error;
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -130,11 +180,17 @@ export function AuthContextProvider({
     return value;
   };
 
-  const resendVerification = async (email: string) =>
-    await supabase.auth.resend({
-      type: 'signup',
-      email,
-    });
+  const resendOtp = async (email: string) => {
+    try {
+      return await supabase.auth.resend({
+        type: 'signup',
+        email,
+      });
+    } catch (error) {
+      console.warn('there was an error resending your one time passcode');
+      throw error;
+    }
+  };
 
   const resetPassword = async (email: string) =>
     await supabase.auth.resetPasswordForEmail(email);
@@ -155,10 +211,11 @@ export function AuthContextProvider({
       signIn,
       signInWithEmail,
       signOut,
+      fullySignUpUser,
       verifyOtp,
       updateUser,
       resetPassword,
-      resendVerification,
+      resendOtp,
       deleteCurrentUser,
     }),
     [session, user, isLoading],

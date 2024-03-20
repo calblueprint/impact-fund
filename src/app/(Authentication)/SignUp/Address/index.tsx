@@ -1,4 +1,4 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
@@ -17,7 +17,7 @@ export default function SignUpScreen() {
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
-  const { signUp } = useSession();
+  const { fullySignUpUser } = useSession();
 
   const onChangeStreetAddress = (text: string) => {
     setStreetAddress(text);
@@ -47,31 +47,26 @@ export default function SignUpScreen() {
 
   const handleSubmit = () => {
     if (validateAddressInputs()) {
-      signUp(email, password, {
-        fullName: name,
-        streetName: streetAddress,
+      fullySignUpUser(
+        name,
+        email,
+        password,
+        streetAddress,
         city,
         state,
-        zip: zipcode,
-      });
+        zipcode,
+      );
       setStreetAddress('');
       setCity('');
       setState('');
       setZipcode('');
+      router.push('/');
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
-
+      <View style={styles.header} />
       <Text style={styles.instructionText}>Last, enter your address.</Text>
 
       <View style={styles.inputBox}>

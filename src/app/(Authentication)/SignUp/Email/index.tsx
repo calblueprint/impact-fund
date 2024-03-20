@@ -6,6 +6,7 @@ import { z } from 'zod';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
@@ -42,12 +43,16 @@ export default function SignUpScreen() {
     }
   };
 
-  const handleSubmit = () => {
-    if (validateName() && validateEmail()) {
+  const handleSubmit = async () => {
+    const emailDoesExist = await emailExists(email);
+    if (validateName() && validateEmail() && !emailDoesExist) {
       router.push({
         pathname: 'SignUp/Password',
         params: { name, email },
       });
+    } else {
+      setErrorExists(true);
+      setErrorMessage('Email already exists!');
     }
   };
 
