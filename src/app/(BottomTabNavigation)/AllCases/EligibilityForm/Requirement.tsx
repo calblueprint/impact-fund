@@ -1,17 +1,31 @@
 import CheckBox from 'expo-checkbox';
-import React, { useState } from 'react';
+import React, { MutableRefObject, ReactNode, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import LineSmall from '../../../../../assets/line-small.svg';
 import { colors } from '../../../../styles/colors';
 import { EligibilityRequirement } from '../../../../types/types';
 
-export default function Requirement(item: EligibilityRequirement) {
+interface requirementProps {
+  requirement: string;
+  checkCount: number;
+  setCheckCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function Requirement({
+  requirement,
+  checkCount,
+  setCheckCount,
+}: requirementProps): ReactNode {
   const [isChecked, setIsChecked] = useState(false);
 
   const onCheck = () => {
     setIsChecked(!isChecked);
+    if (isChecked) {
+      setCheckCount(checkCount - 1);
+    } else {
+      setCheckCount(checkCount + 1);
+    }
   };
 
   return (
@@ -25,7 +39,7 @@ export default function Requirement(item: EligibilityRequirement) {
               : [styles.bodyText, styles.activeColor]
           }
         >
-          {item.requirements}
+          {requirement}
         </Text>
       </View>
     </TouchableOpacity>

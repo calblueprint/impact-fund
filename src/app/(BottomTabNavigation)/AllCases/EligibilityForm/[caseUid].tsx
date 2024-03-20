@@ -1,6 +1,6 @@
 import CheckBox from 'expo-checkbox';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import Requirement from './Requirement';
@@ -30,7 +30,7 @@ export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
   const [eligReqs, setEligReqs] = useState<EligibilityRequirement[]>([]);
-  const [numChecked, setNumChecked] = useState(0);
+  const [checkCount, setCheckCount] = useState(0);
 
   const caseHeader = () => (
     <>
@@ -66,9 +66,9 @@ export default function EligibilityForm() {
           <Text>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={numChecked !== eligReqs.length}
+          disabled={checkCount !== eligReqs.length}
           style={
-            numChecked === eligReqs.length
+            checkCount === eligReqs.length
               ? styles.buttonBottom
               : styles.buttonBottomGray
           }
@@ -127,9 +127,14 @@ export default function EligibilityForm() {
           ListHeaderComponent={caseHeader}
           ListFooterComponent={caseFooter}
           showsVerticalScrollIndicator={false}
-          // ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
           data={eligReqs}
-          renderItem={({ item }) => <Requirement {...item} />}
+          renderItem={({ item }) => (
+            <Requirement
+              requirement={item.requirements}
+              checkCount={checkCount}
+              setCheckCount={setCheckCount}
+            />
+          )}
           keyExtractor={item => item.eligUid}
         />
       </View>
