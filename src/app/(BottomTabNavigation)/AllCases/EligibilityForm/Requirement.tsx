@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import LineSmall from '../../../../../assets/line-small.svg';
+import { colors } from '../../../../styles/colors';
 import { EligibilityRequirement } from '../../../../types/types';
 
 export default function Requirement(item: EligibilityRequirement) {
@@ -14,11 +15,19 @@ export default function Requirement(item: EligibilityRequirement) {
   };
 
   return (
-    <View style={styles.requirementContainer}>
-      <CheckBox value={isChecked} onValueChange={onCheck} />
+    <TouchableOpacity style={styles.requirementContainer} onPress={onCheck}>
+      <CheckBox value={isChecked} color={colors.darkGrey} />
       <View style={styles.innerRequirementBox}>
-        <Text style={styles.bodyText}>{item.requirements}</Text>
+        <Text
+          style={
+            isChecked
+              ? [styles.bodyText, styles.inactiveColor]
+              : [styles.bodyText, styles.activeColor]
+          }
+        >
+          {item.requirements}
+        </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

@@ -30,7 +30,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 20,
     columnGap: 20,
-    // borderWidth: 1,
   },
   innerRequirementBox: {
     flex: 1,
@@ -116,8 +115,12 @@ export default StyleSheet.create({
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '300',
+  },
+  activeColor: {
     color: colors.black,
-    // marginLeft: 20,
+  },
+  inactiveColor: {
+    color: colors.midGrey,
   },
   lineStyle: {
     borderTopWidth: 1,
