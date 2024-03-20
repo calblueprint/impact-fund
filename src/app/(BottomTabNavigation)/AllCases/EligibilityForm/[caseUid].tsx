@@ -109,23 +109,22 @@ export default function EligibilityForm() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <FlatList
-          contentContainerStyle={styles.flatListContainer}
-          ListHeaderComponent={CaseHeader}
-          ListFooterComponent={CaseFooter}
-          showsVerticalScrollIndicator={false}
-          data={eligibilityRequirements}
-          renderItem={({ item }) => (
-            <Requirement
-              requirement={item.requirement}
-              checkCount={checkCount}
-              setCheckCount={setCheckCount}
-            />
-          )}
-          keyExtractor={item => item.eligibilityUid}
-        />
-      </View>
+      <FlatList
+        style={styles.contentContainer}
+        contentContainerStyle={styles.flatListContainer}
+        ListHeaderComponent={CaseHeader}
+        ListFooterComponent={CaseFooter}
+        showsVerticalScrollIndicator={false}
+        data={eligibilityRequirements}
+        renderItem={({ item }) => (
+          <Requirement
+            requirement={item.requirement}
+            checkCount={checkCount}
+            setCheckCount={setCheckCount}
+          />
+        )}
+        keyExtractor={item => item.eligibilityUid}
+      />
     </View>
   );
 }

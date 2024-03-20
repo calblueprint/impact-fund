@@ -13,21 +13,23 @@ export default StyleSheet.create({
     width: '100%',
   },
   flatListContainer: {
+    paddingTop: 20,
+    width: '100%',
+    flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
-    flexDirection: 'column',
   },
   headerContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '84%',
+    paddingHorizontal: '6%',
     rowGap: 20,
   },
   requirementContainer: {
-    width: '84%',
     flexDirection: 'row',
     paddingTop: 20,
     columnGap: 20,
+    paddingHorizontal: '6%',
   },
   innerRequirementBox: {
     flex: 1,
@@ -72,7 +74,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     columnGap: 20,
     borderBottomWidth: 1,
-    paddingVertical: 10,
+    paddingBottom: 10,
   },
   image: {
     aspectRatio: 1.75,
