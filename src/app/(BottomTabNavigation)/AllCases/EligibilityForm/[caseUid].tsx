@@ -81,18 +81,6 @@ export default function EligibilityForm() {
     </View>
   );
 
-  // const countChecked = () => {
-  //   let checkedCount = 0;
-  //   eligReqs.forEach(requirement => {
-  //     if (requirement.checked) {
-  //       checkedCount++;
-  //     }
-  //   });
-  //   console.log(checkedCount);
-  //   console.log(eligReqs);
-  //   return checkedCount;
-  // };
-
   async function fetchEligReqs() {
     if (caseUid) {
       const reqs = await getReqsById(caseUid);
@@ -130,12 +118,12 @@ export default function EligibilityForm() {
           data={eligReqs}
           renderItem={({ item }) => (
             <Requirement
-              requirement={item.requirements}
+              requirement={item.requirement}
               checkCount={checkCount}
               setCheckCount={setCheckCount}
             />
           )}
-          keyExtractor={item => item.eligUid}
+          keyExtractor={item => item.eligibilityUid}
         />
       </View>
     </View>

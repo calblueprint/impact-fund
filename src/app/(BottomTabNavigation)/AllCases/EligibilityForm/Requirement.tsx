@@ -1,10 +1,9 @@
 import CheckBox from 'expo-checkbox';
-import React, { MutableRefObject, ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import { colors } from '../../../../styles/colors';
-import { EligibilityRequirement } from '../../../../types/types';
 
 interface requirementProps {
   requirement: string;

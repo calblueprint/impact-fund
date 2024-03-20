@@ -63,10 +63,9 @@ export type Status = {
 };
 
 export interface EligibilityRequirement {
-  eligUid: EligUid;
+  eligibilityUid: EligUid;
   caseId: CaseUid;
-  requirements: string;
-  //checked: boolean;
+  requirement: string;
 }
 
 export enum Eligibility {
