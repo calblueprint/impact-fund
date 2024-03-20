@@ -2,6 +2,7 @@ import * as Linking from 'expo-linking';
 import { Link, router } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { parse } from 'yargs';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
@@ -18,64 +19,53 @@ function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
 
-  // const prefix = Linking.make
-
-  // const url = Linking.useURL();
-  // const addCaseUrl = Linking.createURL('addCase/', {
-  //   queryParams: { caseUID: '09a59710-706c-11ee-b5ff-87a607d233fc' },
-  // });
   const [parsedUrl, setUrl] = useState<Linking.ParsedURL | null>(null);
-  // console.log('addCaseURl', addCaseUrl);
-  // console.log({ url });
 
   function urlRedirect(url: Linking.ParsedURL) {
     if (!url) return;
     // parse and redirect to new url
-    const { path, queryParams } = url;
+    const { queryParams } = url;
     console.log(
-      `Linked to app with path: ${path} and data: ${JSON.stringify(
+      `Linked into the app according to the following query parameters: ${JSON.stringify(
         queryParams,
       )}`,
     );
-    // if (queryParams?.caseUID) {
-    //   router.push({
-    //     pathname: `/AllCases/QRCodeScanner/AddCase/${queryParams?.caseUID}`,
-    //   });
-    // }
+    if (queryParams) {
+      router.push({
+        pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
+      });
+    }
   }
 
   function handleDeepLink(event: any) {
     const parsedUrl = Linking.parse(event.url);
     setUrl(parsedUrl);
-  }
-
-  async function getInitialUrl() {
-    const initialUrl = await Linking.getInitialURL();
-    if (initialUrl) {
-      setUrl(Linking.parse(initialUrl));
+    if (parsedUrl) {
+      urlRedirect(parsedUrl);
     }
   }
+
+  // async function getInitialUrl() {
+  //   const initialUrl = await Linking.getInitialURL();
+  //   if (initialUrl) {
+  //     setUrl(Linking.parse(initialUrl));
+  //   }
+  // }
 
   useEffect(() => {
     Linking.addEventListener('url', handleDeepLink);
-    if (!parsedUrl) {
-      getInitialUrl();
-    }
-
-    if (parsedUrl) {
-      console.log('urlRedirect triggered');
-      urlRedirect(parsedUrl);
-    }
+    // if (!parsedUrl) {
+    //   getInitialUrl().then(() => {
+    //     console.log('urlRedirect triggered');
+    //     urlRedirect(parsedUrl);
+    //   });
+    // }
 
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
         updatePushToken(session.user.id, token);
       });
     }
-
-    // return () => {
-    //   Linking.removeEventListener('url');
-    // };
   }, []);
 
   return (
