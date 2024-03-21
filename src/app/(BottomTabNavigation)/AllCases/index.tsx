@@ -35,12 +35,12 @@ function CasesScreen() {
                 </TouchableOpacity>
                 <View>
                   <Text style={{ fontSize: 20, marginTop: 20 }}>
-                    Inactive Cases
+                    Active Cases
                   </Text>
                 </View>
               </>
             )}
-            data={inactiveCases}
+            data={activeCases}
             renderItem={({ item }) => <CaseCard {...item} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
@@ -56,10 +56,12 @@ function CasesScreen() {
             contentContainerStyle={styles.innerScroll}
             ListHeaderComponent={() => (
               <>
-                <Text style={{ fontSize: 20, marginTop: 0 }}>Active Cases</Text>
+                <Text style={{ fontSize: 20, marginTop: 0 }}>
+                  Inactive Cases
+                </Text>
               </>
             )}
-            data={activeCases}
+            data={inactiveCases}
             renderItem={({ item }) => <CaseCard {...item} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
