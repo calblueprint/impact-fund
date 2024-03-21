@@ -18,8 +18,7 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const navigation = useNavigation();
-  const url = Linking.useURL();
-  console.log({ url });
+
   const { session, signOut } = useSession();
 
   useEffect(() => {

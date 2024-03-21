@@ -29,11 +29,6 @@ function CasesScreen() {
     if (!parsedUrl) return;
     // parse query params and determine routing
     const { queryParams } = parsedUrl;
-    console.log(
-      `Linking into the app using the following query parameters: ${JSON.stringify(
-        queryParams,
-      )}`,
-    );
     // determine routing from the event variable
     if (queryParams?.event) {
       const event = queryParams.event.toString();
@@ -81,9 +76,6 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.casesContainer}>
-        <Text>
-          {url ? JSON.stringify(url) : 'app not opened with a deep link'}
-        </Text>
         {loading ? (
           <Text>Loading...</Text>
         ) : (
