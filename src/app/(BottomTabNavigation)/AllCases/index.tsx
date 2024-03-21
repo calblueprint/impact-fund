@@ -1,5 +1,6 @@
+import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -13,11 +14,63 @@ import {
 } from '../../../supabase/pushNotifications';
 import 'react-native-url-polyfill/auto';
 
+enum linkingEvents {
+  ADD_CASE = 'addCase',
+  NOTIFICATION = 'notification',
+}
+
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
 
+  const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
+
+  function urlRedirect(parsedUrl: Linking.ParsedURL) {
+    if (!parsedUrl) return;
+    // parse query params and determine routing
+    const { queryParams } = parsedUrl;
+    console.log(
+      `Linking into the app using the following query parameters: ${JSON.stringify(
+        queryParams,
+      )}`,
+    );
+    // determine routing from the event variable
+    if (queryParams?.event) {
+      const event = queryParams.event.toString();
+      // TODO: determine a way to validate required parameters
+      // TODO: prevent users from routing to a case they're already involved in
+      if (event === linkingEvents.ADD_CASE)
+        router.push({
+          pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
+        });
+    }
+  }
+
+  function handleDeepLink(event: any) {
+    const parsedUrl = Linking.parse(event.url);
+    if (parsedUrl) {
+      setUrl(parsedUrl);
+      urlRedirect(parsedUrl);
+    }
+  }
+
+  async function getInitialUrl() {
+    const initialUrl = await Linking.getInitialURL();
+    if (initialUrl) {
+      const parsed = Linking.parse(initialUrl);
+      setUrl(parsed);
+      urlRedirect(parsed);
+    }
+  }
+
   useEffect(() => {
+    // will detect any incoming link requests, assuming the app is already open
+    Linking.addEventListener('url', handleDeepLink);
+    if (!url) {
+      // if the link opened the app, must route to the initial incoming route
+      getInitialUrl();
+    }
+
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
         updatePushToken(session.user.id, token);
@@ -28,6 +81,9 @@ function CasesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.casesContainer}>
+        <Text>
+          {url ? JSON.stringify(url) : 'app not opened with a deep link'}
+        </Text>
         {loading ? (
           <Text>Loading...</Text>
         ) : (
