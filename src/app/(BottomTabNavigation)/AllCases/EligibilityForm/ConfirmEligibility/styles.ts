@@ -12,7 +12,7 @@ export default StyleSheet.create({
   centerContainer: {
     alignItems: 'flex-start',
     width: '85%',
-    height: '74%',
+    height: '85%',
     //backgroundColor: colors.darkGreen,
   },
   titleText: {
@@ -22,7 +22,9 @@ export default StyleSheet.create({
   },
   infoContainer: {
     flexDirection: 'row',
+    gap: 16,
     marginBottom: 20,
+    //backgroundColor: colors.darkGreen,
   },
   infoText: {
     fontSize: 16,
@@ -33,42 +35,39 @@ export default StyleSheet.create({
   buttonContainer: {
     justifyContent: 'flex-end',
     alignItems: 'center',
+    flexDirection: 'row',
+    marginHorizontal: 26,
   },
   button: {
     backgroundColor: colors.white,
     borderRadius: 3,
     borderColor: colors.black,
     borderWidth: 1,
-    width: 317,
-    height: 45,
-    padding: 14,
+    width: 150,
+    height: 51,
+    padding: 16,
     flexDirection: 'row',
     marginVertical: 7,
+    marginHorizontal: 10,
   },
   buttonBlack: {
     backgroundColor: colors.black,
     borderRadius: 3,
     borderColor: colors.black,
     borderWidth: 1,
-    width: 317,
-    height: 45,
-    padding: 14,
+    width: 150,
+    height: 51,
+    padding: 16,
     flexDirection: 'row',
     marginVertical: 7,
+    marginHorizontal: 10,
   },
   buttonText: {
     fontSize: 15,
-    //marginHorizontal: 108,
     color: colors.white,
-    marginTop: -1,
   },
   buttonTextBlack: {
     fontSize: 15,
     //marginHorizontal: 105,
-    marginTop: -2,
-  },
-  center: {
-    flexDirection: 'row',
-    marginHorizontal: 95,
   },
 });

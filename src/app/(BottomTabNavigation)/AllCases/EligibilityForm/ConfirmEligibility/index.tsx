@@ -1,4 +1,4 @@
-import { Link, router, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -39,14 +39,14 @@ export default function ConfirmEligibility() {
           Do you want to mark your status as ineligible?
         </Text>
         <View style={styles.infoContainer}>
-          <Alarm style={{ marginRight: 17, marginTop: 5 }} />
+          <Alarm style={{ marginTop: 5 }} />
 
           <Text style={styles.infoText}>
             Once you indicate ineligibility, this case will become inactive.{' '}
           </Text>
         </View>
         <View style={styles.infoContainer}>
-          <LittlePerson style={{ marginRight: 17, marginTop: 12 }} />
+          <LittlePerson style={{ marginTop: 5 }} />
 
           <Text style={styles.infoText}>
             You can still view and share case details, but won’t be able to
@@ -55,25 +55,22 @@ export default function ConfirmEligibility() {
         </View>
       </View>
 
+      <Line style={{ marginBottom: 15 }} />
+
       <View style={styles.buttonContainer}>
-        <Line style={{ marginBottom: 15 }} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => updateActivity(true)}
         >
-          <View style={styles.center}>
-            <Ex style={{ marginRight: 10 }} />
-            <Text style={styles.buttonTextBlack}>No, I don't</Text>
-          </View>
+          <Ex style={{ marginRight: 10, marginLeft: 6 }} />
+          <Text style={styles.buttonTextBlack}>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonBlack}
           onPress={() => updateActivity(false)}
         >
-          <View style={styles.center}>
-            <Check style={{ marginRight: 10 }} />
-            <Text style={styles.buttonText}>Yes, I do</Text>
-          </View>
+          <Check style={{ marginRight: 10, marginLeft: 8 }} />
+          <Text style={styles.buttonText}>Yes, I do</Text>
         </TouchableOpacity>
       </View>
     </View>
