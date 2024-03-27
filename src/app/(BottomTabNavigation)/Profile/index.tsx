@@ -121,7 +121,10 @@ function ProfileScreen() {
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => signOut()}
+          // onPress={() => signOut()}
+          onPress={() => {
+            router.push('/Profile/LogOut');
+          }}
           style={styles.signOutButton}
         >
           <View style={styles.signOutInstructions}>
