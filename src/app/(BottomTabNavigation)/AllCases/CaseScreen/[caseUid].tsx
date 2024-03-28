@@ -1,6 +1,6 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 // eslint-disable-next-line import/namespace
@@ -58,6 +58,14 @@ function CaseScreen() {
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
           <CaseStatusBar status={caseData.caseStatus} />
+          <TouchableOpacity
+            onPress={() => {
+              router.push({ pathname: `AllCases/Updates/${caseUid}` });
+            }}
+          >
+            <Text>View Updates</Text>
+          </TouchableOpacity>
+
           {status === Eligibility.ELIGIBLE && (
             <EligibilityCard caseData={caseData} status={status} />
           )}

@@ -55,6 +55,18 @@ export default function CasesLayout() {
             headerTitle: props => <CasesHeader />,
           }}
         />
+        <Stack.Screen
+          name="Updates/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="Updates/UpdateView/[updateUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
       </Stack>
     </CaseContextProvider>
   );
