@@ -86,4 +86,5 @@ export interface Update {
   category: string;
   date: Date;
   summary: string;
+  lawFirm: string;
 }

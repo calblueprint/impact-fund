@@ -29,7 +29,10 @@ export default function UpdateView() {
     <View style={styles.container}>
       {update && (
         <>
-          <ScrollView style={styles.scrollContainer}>
+          <ScrollView
+            style={styles.scrollContainer}
+            showsVerticalScrollIndicator={false}
+          >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{update.title}</Text>
             </View>

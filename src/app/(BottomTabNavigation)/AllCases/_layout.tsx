@@ -62,7 +62,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="Updates/UpdateView/index"
+          name="Updates/UpdateView/[updateUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}

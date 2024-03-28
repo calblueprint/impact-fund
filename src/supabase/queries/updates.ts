@@ -37,7 +37,7 @@ export async function fetchAllUpdates(caseUid: CaseUid): Promise<Update[]> {
  * @param queryItem raw form data returned from supabase query
  * @returns formatted `Update` object
  */
-export async function formatUpdate(item: any): Promise<Update> {
+export function formatUpdate(item: any): Update {
   const updateData: Update = {
     updateUid: item.updateId,
     caseUid: item.caseUUID,
@@ -46,6 +46,7 @@ export async function formatUpdate(item: any): Promise<Update> {
     category: item.category,
     date: item.date,
     summary: item.summary,
+    lawFirm: item.lawFirm,
   };
   return updateData;
 }
