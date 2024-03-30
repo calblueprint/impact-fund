@@ -2,6 +2,7 @@ export type Uid = string;
 export type CaseUid = Uid;
 export type FormUid = Uid;
 export type UserUid = Uid;
+export type UpdateUid = Uid;
 
 export interface CasePartial {
   id: CaseUid;
@@ -77,3 +78,14 @@ export const userInstance: User = {
   state: '',
   zip: '',
 };
+
+export interface Update {
+  updateUid: UpdateUid;
+  caseUid: CaseUid;
+  title: string;
+  blurb: string;
+  category: string;
+  date: Date;
+  summary: string;
+  lawFirm: string;
+}

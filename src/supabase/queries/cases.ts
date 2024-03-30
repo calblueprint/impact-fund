@@ -4,8 +4,6 @@ import {
   CaseUid,
   Eligibility,
   UserUid,
-  FormPartial,
-  Form,
 } from '../../types/types';
 import supabase from '../createClient';
 

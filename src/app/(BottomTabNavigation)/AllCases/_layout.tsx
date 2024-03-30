@@ -26,7 +26,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="QRCodeScanner/AddCase/[caseUid]"
+          name="AddCase/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
@@ -56,13 +56,13 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="EligibilityForm/[caseUid]"
+          name="Updates/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
         />
         <Stack.Screen
-          name="EligibilityForm/ConfirmEligibility/index"
+          name="Updates/UpdateView/[updateUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}

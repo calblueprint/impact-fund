@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useReducer } from 'react';
+import React, { createContext, useEffect, useMemo } from 'react';
 
 import {
   fetchAllCases,
