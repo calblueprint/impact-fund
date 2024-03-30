@@ -1,10 +1,9 @@
 import * as Linking from 'expo-linking';
-import { router, useLocalSearchParams, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import { getStatusColor } from './utils';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
@@ -13,7 +12,6 @@ import {
   registerForPushNotifications,
   updatePushToken,
 } from '../../../supabase/pushNotifications';
-import { CaseUid } from '../../../types/types';
 
 import 'react-native-url-polyfill/auto';
 
@@ -24,10 +22,7 @@ enum linkingEvents {
 
 function CasesScreen() {
   //const { allCases } = useContext(CaseContext);
-  const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const navigation = useNavigation();
-  const { activeCases, loading } = useContext(CaseContext);
-  const { inactiveCases } = useContext(CaseContext);
+  const { activeCases, inactiveCases, loading } = useContext(CaseContext);
   const { session } = useSession();
 
   const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
@@ -80,13 +75,13 @@ function CasesScreen() {
     }
   }, []);
 
-  useEffect(() => {
-    navigation.addListener('focus', async () => {
-      if (caseUid !== undefined) {
-        getStatusColor(caseUid);
-      }
-    });
-  }, [navigation]);
+  // useEffect(() => {
+  //   navigation.addListener('focus', async () => {
+  //     if (caseUid !== undefined) {
+  //       getStatusColor(caseUid);
+  //     }
+  //   });
+  // }, [navigation]);
 
   return (
     <View style={styles.container}>
