@@ -21,7 +21,7 @@ enum linkingEvents {
 }
 
 function CasesScreen() {
-  //const { allCases } = useContext(CaseContext);
+  const { allCases } = useContext(CaseContext);
   const { activeCases, inactiveCases, loading } = useContext(CaseContext);
   const { session } = useSession();
 
@@ -106,13 +106,11 @@ function CasesScreen() {
                   </View>
                 </TouchableOpacity>
                 <View>
-                  <Text style={{ fontSize: 20, marginTop: 20 }}>
-                    Active Cases
-                  </Text>
+                  <Text style={{ fontSize: 20, marginTop: 20 }}>All Cases</Text>
                 </View>
               </>
             )}
-            data={activeCases}
+            data={allCases}
             renderItem={({ item }) => <CaseCard {...item} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
@@ -121,7 +119,7 @@ function CasesScreen() {
             }
           />
         )}
-        {loading ? (
+        {/* {loading ? (
           <Text> </Text>
         ) : (
           <FlatList
@@ -138,7 +136,7 @@ function CasesScreen() {
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
           />
-        )}
+        )} */}
       </View>
     </View>
   );

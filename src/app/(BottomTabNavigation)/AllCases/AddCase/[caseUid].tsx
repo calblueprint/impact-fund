@@ -11,13 +11,13 @@ import { getCaseById, uploadCase } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
-  const { allCases, updateCases } = useContext(CaseContext);
+  const { allCases, updateCases, addCase } = useContext(CaseContext);
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
 
   const addToCases = async (newCase: Case) => {
     await uploadCase(newCase.id);
-    updateCases([...allCases, newCase]);
+    addCase(newCase);
     router.push('/AllCases');
   };
 

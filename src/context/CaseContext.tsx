@@ -15,6 +15,7 @@ export interface CaseState {
   loading: boolean;
   activeCases: Case[];
   inactiveCases: Case[];
+  addCase: (newCase: Case) => void;
 }
 
 export function CaseContextProvider({
@@ -46,6 +47,10 @@ export function CaseContextProvider({
     // TODO: Might want to put something in dependency array when implementing refresh
   }, []);
 
+  function addCase(newCase: Case) {
+    setCases([...cases, newCase]);
+  }
+
   const caseContextValue = useMemo(
     () => ({
       allCases: cases,
@@ -53,6 +58,7 @@ export function CaseContextProvider({
       loading: isLoading,
       activeCases: active,
       inactiveCases: inactive,
+      addCase,
     }),
     [cases, setCases, isLoading],
   );
