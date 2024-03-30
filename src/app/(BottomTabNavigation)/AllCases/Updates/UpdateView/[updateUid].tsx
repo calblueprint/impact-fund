@@ -8,12 +8,11 @@ import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
 
 export default function UpdateView() {
-  const { updateUid, lawFirm } = useLocalSearchParams<{
+  const { updateUid } = useLocalSearchParams<{
     updateUid: UpdateUid;
-    lawFirm: string;
   }>();
-
   const [update, setUpdate] = useState<Update>();
+
   async function getUpdate(uid: UpdateUid) {
     const update = await getUpdateById(uid);
     setUpdate(update);
@@ -30,14 +29,13 @@ export default function UpdateView() {
       {update && (
         <>
           <ScrollView
-            style={styles.scrollContainer}
+            style={styles.outerScroll}
+            contentContainerStyle={styles.innerScroll}
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>{update.title}</Text>
-            </View>
+            <Text style={styles.title}>{update.title}</Text>
             <View style={styles.inLineSubInfo}>
-              <Text>{lawFirm}</Text>
+              <Text>{update.lawFirm}</Text>
               <Text> • {formatDate(update.date)}</Text>
             </View>
             <Text>{update.summary}</Text>

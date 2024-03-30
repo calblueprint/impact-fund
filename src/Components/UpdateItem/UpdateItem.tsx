@@ -12,9 +12,6 @@ export default function UpdateItem(updateData: Update) {
       onPress={() =>
         router.push({
           pathname: `/AllCases/Updates/UpdateView/${updateData.updateUid}`,
-          params: {
-            lawFirm: updateData.lawFirm,
-          },
         })
       }
     >

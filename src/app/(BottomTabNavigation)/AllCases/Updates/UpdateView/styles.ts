@@ -9,13 +9,13 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
-  scrollContainer: {
+  outerScroll: {
     width: '84%',
     height: '84%',
   },
-  titleContainer: {
-    marginTop: 30,
-    marginBottom: 10,
+  innerScroll: {
+    paddingVertical: 20,
+    rowGap: 20,
   },
   title: {
     color: colors.midnightBlack,
@@ -25,6 +25,5 @@ export default StyleSheet.create({
   },
   inLineSubInfo: {
     flexDirection: 'row',
-    marginBottom: 10,
   },
 });
