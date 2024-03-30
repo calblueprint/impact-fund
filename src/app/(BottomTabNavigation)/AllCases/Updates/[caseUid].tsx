@@ -11,18 +11,12 @@ import { Update, CaseUid } from '../../../../types/types';
 export default function UpdatesScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const [updates, setUpdates] = useState<Update[]>([]);
 
   async function getUpdatesOnLoad(uid: CaseUid) {
-    // should prob consider a case w no updates?
     fetchAllUpdates(uid).then(data => {
       setUpdates(data);
       setIsLoading(false);
-      // if (data.length > 0) {
-      //   setUpdates(data);
-      //   setIsLoading(false);
-      // }
     });
   }
 
@@ -38,18 +32,14 @@ export default function UpdatesScreen() {
         <Text>Loading...</Text>
       ) : (
         <View style={styles.contentContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Case Updates</Text>
-          </View>
-          <View style={styles.updatesContainer}>
-            <FlatList
-              data={updates}
-              keyExtractor={item => item.updateUid}
-              ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
-              renderItem={({ item }) => <UpdateItem {...item} />}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
+          <FlatList
+            data={updates}
+            keyExtractor={item => item.updateUid}
+            contentContainerStyle={styles.innerScroll}
+            ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
+            renderItem={({ item }) => <UpdateItem {...item} />}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       )}
     </View>

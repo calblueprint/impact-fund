@@ -9,12 +9,14 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   contentContainer: {
-    width: '82%',
-    height: '84%',
+    width: '84%',
+  },
+  innerScroll: {
+    paddingVertical: 20,
   },
   titleContainer: {
     alignItems: 'flex-start',
-    paddingTop: 10,
+    borderWidth: 1,
   },
   title: {
     color: colors.black,
@@ -26,10 +28,5 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
     marginVertical: 12,
-  },
-  updatesContainer: {
-    height: '100%',
-    width: '100%',
-    paddingTop: 12,
   },
 });
