@@ -38,7 +38,7 @@ export default function ResetConfirm() {
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
 
-        <Text style={styles.titlText}>Reset Password</Text>
+        <Text style={styles.titleText}>Reset Password</Text>
 
         <View style={styles.instructionContainer}>
           <View style={styles.instructionRow}>

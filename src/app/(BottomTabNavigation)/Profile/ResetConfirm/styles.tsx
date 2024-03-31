@@ -39,7 +39,7 @@ export default StyleSheet.create({
     fontWeight: '300',
     color: colors.black,
   },
-  titlText: {
+  titleText: {
     fontSize: 36,
     fontStyle: 'normal',
     fontWeight: '800',
