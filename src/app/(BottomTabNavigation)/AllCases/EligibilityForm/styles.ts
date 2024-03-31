@@ -24,6 +24,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: '6%',
     rowGap: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.midGrey,
   },
   requirementContainer: {
     flexDirection: 'row',
@@ -34,8 +36,11 @@ export default StyleSheet.create({
   innerRequirementBox: {
     flex: 1,
     paddingBottom: 20,
-    borderBottomWidth: 0.5,
-    borderBottomColor: colors.midGrey,
+  },
+  separatorLine: {
+    borderTopWidth: 1,
+    borderTopColor: colors.midGrey,
+    marginHorizontal: '6%',
   },
   buttonsContainer: {
     justifyContent: 'space-between',
@@ -73,7 +78,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     columnGap: 20,
-    borderBottomWidth: 1,
     paddingBottom: 10,
   },
   image: {

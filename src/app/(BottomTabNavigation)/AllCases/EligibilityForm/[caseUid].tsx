@@ -6,7 +6,6 @@ import Requirement from './Requirement';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 import Error from '../../../../../assets/exclamation.svg';
-import LineHuge from '../../../../../assets/line-huge.svg';
 import Ex from '../../../../../assets/x.svg';
 import {
   updateCaseStatus,
@@ -124,6 +123,7 @@ export default function EligibilityForm() {
           />
         )}
         keyExtractor={item => item.eligibilityUid}
+        ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
       />
     </View>
   );
