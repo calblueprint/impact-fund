@@ -87,21 +87,22 @@ function ProfileScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <View>
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: '/Profile/ResetConfirm',
+                params: { email: session?.user?.email },
+              })
+            }
+          >
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
                 <Reset />
                 <Text style={styles.textElements}>Reset password</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  router.push('/Profile/DeleteAccount');
-                }}
-              >
-                <GreyRightCarrot />
-              </TouchableOpacity>
+              <GreyRightCarrot />
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.line} />
           <View>
             <TouchableOpacity
