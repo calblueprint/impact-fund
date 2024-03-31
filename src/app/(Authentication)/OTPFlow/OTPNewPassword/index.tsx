@@ -55,7 +55,7 @@ export default function SignUpScreen() {
     if (validatePassword() && validateConfirmPassword()) {
       const { error } = await updateUser({ password });
       if (error) {
-        setErrorMessage('Sorry, there was an error updating your password!');
+        setErrorMessage(error.message);
         return;
       }
       router.push({

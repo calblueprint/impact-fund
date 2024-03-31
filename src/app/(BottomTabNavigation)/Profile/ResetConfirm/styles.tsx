@@ -8,8 +8,8 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
-  mainContainer: {
-    width: '80%',
+  contentContainer: {
+    width: '84%',
     marginTop: 110,
   },
   backText: {
@@ -20,10 +20,30 @@ export default StyleSheet.create({
   backContainer: {
     marginBottom: 40,
   },
+  instructionContainer: {
+    marginTop: 34,
+    width: '100%',
+    flexDirection: 'column',
+    rowGap: 20,
+  },
+  instructionRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: 30,
+  },
   instructionText: {
+    flex: 1,
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
     color: colors.black,
-    fontSize: 24,
+  },
+  titlText: {
+    fontSize: 36,
+    fontStyle: 'normal',
     fontWeight: '800',
+    color: colors.black,
   },
   nextButtonBase: {
     flexDirection: 'row',
