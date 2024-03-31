@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
@@ -65,7 +66,12 @@ export default function EligibilityForm() {
           ListHeaderComponent={
             <View style={styles.headerContainer}>
               <Text style={styles.titleText}>{caseData.title}</Text>
-              <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
+              <Image
+                style={styles.imageContainer}
+                source={{ uri: caseData.imageUrl }}
+                contentFit="cover"
+                transition={300}
+              />
               <View style={styles.infoRow}>
                 <Error />
                 <View style={{ flex: 1 }}>

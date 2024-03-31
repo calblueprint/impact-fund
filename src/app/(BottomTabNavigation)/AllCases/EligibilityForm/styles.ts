@@ -71,7 +71,7 @@ export default StyleSheet.create({
     columnGap: 20,
     paddingBottom: 20,
   },
-  image: {
+  imageContainer: {
     aspectRatio: 1.75,
     borderRadius: 5,
   },
