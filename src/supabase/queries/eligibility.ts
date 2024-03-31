@@ -1,20 +1,26 @@
 import { CaseUid, EligibilityRequirement } from '../../types/types';
 import supabase from '../createClient';
 
-// Fetch eligibility requirements using a caseID
-export async function getReqsById(
-  caseId: CaseUid,
+/**
+ * Fetch eligibility requirements matching a specific `caseUid`.
+ *
+ * @param caseUid target case to fetch requirements for.
+ * @return array of `EligibilityRequirement` objects.
+ * */
+export async function getRequirementsByCaseUid(
+  caseUid: CaseUid,
 ): Promise<EligibilityRequirement[]> {
   try {
-    const { data } = await supabase.from('eligibility').select();
-
+    const { data } = await supabase
+      .from('eligibility')
+      .select()
+      .eq('case_id', caseUid);
     if (!data) {
       throw new Error('requirements not found');
     }
-    //return await formatForm(caseUid,  eligibility.map(item => item.requirement));
     return await Promise.all(
       data.map(async queryItem => {
-        return await formatEligibility(caseId, queryItem);
+        return formatEligibility(caseUid, queryItem);
       }),
     );
   } catch (error) {
@@ -23,18 +29,21 @@ export async function getReqsById(
   }
 }
 
-export async function formatEligibility(
-  CaseUid: CaseUid,
+/**
+ * Place query data into an `EligibilityRequirement` object.
+ */
+export function formatEligibility(
+  caseUid: CaseUid,
   queryItem: any,
-): Promise<EligibilityRequirement> {
+): EligibilityRequirement {
   try {
     // organize form MetaData without publicUrl
-    const eligs: EligibilityRequirement = {
+    const requirement: EligibilityRequirement = {
       eligibilityUid: queryItem.eligibility_id,
-      caseId: CaseUid,
+      caseUid,
       requirement: queryItem.requirement,
     };
-    return eligs;
+    return requirement;
   } catch (error) {
     throw error;
   }

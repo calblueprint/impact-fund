@@ -64,7 +64,7 @@ export type Status = {
 
 export interface EligibilityRequirement {
   eligibilityUid: EligUid;
-  caseId: CaseUid;
+  caseUid: CaseUid;
   requirement: string;
 }
 

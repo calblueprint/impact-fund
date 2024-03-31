@@ -11,7 +11,7 @@ import {
   updateCaseStatus,
   getCaseById,
 } from '../../../../supabase/queries/cases';
-import { getReqsById } from '../../../../supabase/queries/eligibility';
+import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibility';
 import {
   Case,
   CaseUid,
@@ -29,7 +29,7 @@ export default function EligibilityForm() {
 
   async function fetchEligibilityRequirments() {
     if (caseUid) {
-      const requirements = await getReqsById(caseUid);
+      const requirements = await getRequirementsByCaseUid(caseUid);
       setEligibilityRequirements(requirements);
     }
   }
