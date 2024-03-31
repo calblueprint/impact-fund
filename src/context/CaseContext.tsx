@@ -5,7 +5,7 @@ import {
   fetchCasesOnActivity,
 } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
-import { Case } from '../types/types';
+import { Case, CaseUid } from '../types/types';
 
 export const CaseContext = createContext<CaseState>({} as CaseState);
 
@@ -16,6 +16,7 @@ export interface CaseState {
   activeCases: Case[];
   inactiveCases: Case[];
   addCase: (newCase: Case) => void;
+  removeCase: (targetCase: CaseUid) => void;
 }
 
 export function CaseContextProvider({
@@ -51,6 +52,20 @@ export function CaseContextProvider({
     setCases([...cases, newCase]);
   }
 
+  function removeCase(caseUid: CaseUid) {
+    let targetIndex = -1;
+    for (let i = 0; i < cases.length; i++) {
+      if (cases[i].id === caseUid) {
+        targetIndex = i;
+      }
+    }
+    console.log(cases, targetIndex);
+    if (targetIndex > -1) {
+      cases.splice(targetIndex, 1);
+    }
+    console.log(cases);
+  }
+
   const caseContextValue = useMemo(
     () => ({
       allCases: cases,
@@ -59,6 +74,7 @@ export function CaseContextProvider({
       activeCases: active,
       inactiveCases: inactive,
       addCase,
+      removeCase,
     }),
     [cases, setCases, isLoading],
   );

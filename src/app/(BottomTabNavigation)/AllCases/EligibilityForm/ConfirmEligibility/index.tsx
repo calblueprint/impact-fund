@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -8,6 +8,7 @@ import Check from '../../../../../../assets/check-circle.svg';
 import Line from '../../../../../../assets/line-vector.svg';
 import Alarm from '../../../../../../assets/noIdea.svg';
 import LittlePerson from '../../../../../../assets/noIdea2.svg';
+import { CaseContext } from '../../../../../context/CaseContext';
 import {
   updateCaseActivity,
   updateCaseStatus,
@@ -16,6 +17,7 @@ import { CaseUid, Eligibility } from '../../../../../types/types';
 
 export default function ConfirmEligibility() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
+  const { removeCase } = useContext(CaseContext);
 
   const updateActivity = async (active: boolean) => {
     console.log('case', caseUid);
@@ -24,6 +26,7 @@ export default function ConfirmEligibility() {
       if (!active) {
         await updateCaseStatus(caseUid, Eligibility.INELIGIBLE);
         await updateCaseActivity(caseUid, active);
+        removeCase(caseUid);
         router.push({
           pathname: '/AllCases',
         });
