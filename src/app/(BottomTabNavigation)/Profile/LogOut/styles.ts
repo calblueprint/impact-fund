@@ -4,26 +4,17 @@ import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: colors.white,
-    width: '100%',
-    height: '100%',
     justifyContent: 'flex-end',
   },
   screenContainer: {
-    paddingTop: 32,
-    paddingBottom: 32,
-    paddingLeft: 29,
-    paddingRight: 29,
-    width: '100%',
-    borderBottom: 'solid',
+    paddingVertical: 32,
+    paddingHorizontal: 29,
     borderColor: colors.midGrey,
     borderWidth: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentContainer: {
     justifyContent: 'space-between',
     rowGap: 25,
   },
