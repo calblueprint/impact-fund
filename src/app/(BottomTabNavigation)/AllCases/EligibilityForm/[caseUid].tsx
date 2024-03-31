@@ -27,59 +27,6 @@ export default function EligibilityForm() {
   >([]);
   const [checkCount, setCheckCount] = useState(0);
 
-  const CaseHeader = () => (
-    <>
-      {!caseData ? (
-        <Text>Loading!!!</Text>
-      ) : (
-        <View style={styles.headerContainer}>
-          <Text style={styles.titleText}>{caseData.title}</Text>
-          <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
-          <View style={styles.infoRow}>
-            <Error />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.bodyText}>
-                You must meet every requirement to be eligible for this
-                class-action.
-              </Text>
-            </View>
-          </View>
-        </View>
-      )}
-    </>
-  );
-
-  const CaseFooter = () => (
-    <View style={styles.footerContainer}>
-      <Text style={styles.bodyText}>
-        Do you meet the following requirements?
-      </Text>
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          style={[styles.buttonBase, styles.ineligbleButton]}
-          onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
-        >
-          <Ex />
-          <Text style={styles.bodyText}>No, I don't</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={checkCount !== eligibilityRequirements.length}
-          style={
-            checkCount === eligibilityRequirements.length
-              ? [styles.buttonBase, styles.eligibleButton]
-              : [styles.buttonBase, styles.inactiveEligibleButton]
-          }
-          onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
-        >
-          <Check />
-          <Text style={[styles.bodyText, styles.eligibleButtonText]}>
-            Yes, I do
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   async function fetchEligibilityRequirments() {
     if (caseUid) {
       const requirements = await getReqsById(caseUid);
@@ -94,37 +41,84 @@ export default function EligibilityForm() {
     }
   }
 
+  async function updateEligibility(status: Eligibility) {
+    if (caseUid !== undefined) {
+      await updateCaseStatus(caseUid, status);
+      router.back();
+    }
+  }
+
   useEffect(() => {
     fetchCaseData();
     fetchEligibilityRequirments();
   }, []);
 
-  const updateEligibility = async (status: Eligibility) => {
-    if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, status);
-      router.back();
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <FlatList
-        style={styles.contentContainer}
-        contentContainerStyle={styles.flatListContainer}
-        ListHeaderComponent={CaseHeader}
-        ListFooterComponent={CaseFooter}
-        showsVerticalScrollIndicator={false}
-        data={eligibilityRequirements}
-        renderItem={({ item }) => (
-          <Requirement
-            requirement={item.requirement}
-            checkCount={checkCount}
-            setCheckCount={setCheckCount}
-          />
-        )}
-        keyExtractor={item => item.eligibilityUid}
-        ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
-      />
+      {caseData === undefined ? (
+        <Text>Loading...</Text>
+      ) : (
+        <FlatList
+          style={styles.contentContainer}
+          contentContainerStyle={styles.flatListContainer}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={
+            <View style={styles.headerContainer}>
+              <Text style={styles.titleText}>{caseData.title}</Text>
+              <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
+              <View style={styles.infoRow}>
+                <Error />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.bodyText}>
+                    You must meet every requirement to be eligible for this
+                    class-action.
+                  </Text>
+                </View>
+              </View>
+            </View>
+          }
+          data={eligibilityRequirements}
+          keyExtractor={item => item.eligibilityUid}
+          renderItem={({ item }) => (
+            <Requirement
+              requirement={item.requirement}
+              checkCount={checkCount}
+              setCheckCount={setCheckCount}
+            />
+          )}
+          ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
+          ListFooterComponent={
+            <View style={styles.footerContainer}>
+              <Text style={styles.bodyText}>
+                Do you meet the following requirements?
+              </Text>
+              <View style={styles.buttonsContainer}>
+                <TouchableOpacity
+                  style={[styles.buttonBase, styles.ineligbleButton]}
+                  onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
+                >
+                  <Ex />
+                  <Text style={styles.bodyText}>No, I don't</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  disabled={checkCount !== eligibilityRequirements.length}
+                  style={
+                    checkCount === eligibilityRequirements.length
+                      ? [styles.buttonBase, styles.eligibleButton]
+                      : [styles.buttonBase, styles.inactiveEligibleButton]
+                  }
+                  onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
+                >
+                  <Check />
+                  <Text style={[styles.bodyText, styles.eligibleButtonText]}>
+                    Yes, I do
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          }
+        />
+      )}
     </View>
   );
 }
