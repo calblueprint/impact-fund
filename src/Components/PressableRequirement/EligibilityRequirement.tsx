@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import { colors } from '../../../../styles/colors';
+import { colors } from '../../styles/colors';
 
 interface requirementProps {
   requirement: string;
@@ -11,7 +11,7 @@ interface requirementProps {
   setCheckCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Requirement({
+export default function PressableRequirement({
   requirement,
   checkCount,
   setCheckCount,

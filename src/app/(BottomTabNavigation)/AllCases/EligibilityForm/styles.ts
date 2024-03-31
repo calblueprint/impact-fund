@@ -27,16 +27,6 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: colors.midGrey,
   },
-  requirementContainer: {
-    flexDirection: 'row',
-    paddingTop: 20,
-    columnGap: 20,
-    paddingHorizontal: '6%',
-  },
-  innerRequirementBox: {
-    flex: 1,
-    paddingBottom: 20,
-  },
   separatorLine: {
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
@@ -98,11 +88,5 @@ export default StyleSheet.create({
   },
   eligibleButtonText: {
     color: colors.white,
-  },
-  activeText: {
-    color: colors.black,
-  },
-  inactiveText: {
-    color: colors.midGrey,
   },
 });

@@ -2,11 +2,11 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TouchableOpacity, FlatList } from 'react-native';
 
-import Requirement from './Requirement';
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 import Error from '../../../../../assets/exclamation.svg';
 import Ex from '../../../../../assets/x.svg';
+import PressableRequirement from '../../../../Components/PressableRequirement/EligibilityRequirement';
 import {
   updateCaseStatus,
   getCaseById,
@@ -80,7 +80,7 @@ export default function EligibilityForm() {
           data={eligibilityRequirements}
           keyExtractor={item => item.eligibilityUid}
           renderItem={({ item }) => (
-            <Requirement
+            <PressableRequirement
               requirement={item.requirement}
               checkCount={checkCount}
               setCheckCount={setCheckCount}
