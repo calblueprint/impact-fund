@@ -37,10 +37,6 @@ export default function ResetConfirm() {
         >
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
-        {/* <Text style={styles.instructionText}>
-          Are you sure you want to reset the password associated with the email{' '}
-          {email}?
-        </Text> */}
 
         <Text style={styles.titlText}>Reset Password</Text>
 
@@ -56,15 +52,14 @@ export default function ResetConfirm() {
           <View style={styles.instructionRow}>
             <Refresh />
             <Text style={styles.instructionText}>
-              We will send a six-digit verification code to the email that is
-              registered with your account.
+              Enter the code in the following screen to create your new
+              password.
             </Text>
           </View>
         </View>
 
         <View style={styles.nextButton}>
           <TouchableOpacity
-            //disabled={email === '' || errorExists}
             style={
               email === '' || errorExists
                 ? [styles.nextButtonBase, styles.nextButtonDisabled]
