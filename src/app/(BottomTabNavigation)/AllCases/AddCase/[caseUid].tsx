@@ -3,12 +3,12 @@ import { useContext, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
-import AddCaseIcon from '../../../../../../assets/add-case-icon.svg';
-import CancelIcon from '../../../../../../assets/cancel-x-icon.svg';
-import CaseSummaryContent from '../../../../../Components/CaseSummaryContent/CaseSummaryContent';
-import { CaseContext } from '../../../../../context/CaseContext';
-import { getCaseById, uploadCase } from '../../../../../supabase/queries/cases';
-import { CaseUid, Case } from '../../../../../types/types';
+import AddCaseIcon from '../../../../../assets/add-case-icon.svg';
+import CancelIcon from '../../../../../assets/cancel-x-icon.svg';
+import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
+import { CaseContext } from '../../../../context/CaseContext';
+import { getCaseById, uploadCase } from '../../../../supabase/queries/cases';
+import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
   const { allCases, updateCases } = useContext(CaseContext);
