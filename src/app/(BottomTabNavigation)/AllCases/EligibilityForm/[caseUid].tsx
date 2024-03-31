@@ -7,7 +7,7 @@ import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
 import Error from '../../../../../assets/exclamation.svg';
 import Ex from '../../../../../assets/x.svg';
-import PressableRequirement from '../../../../Components/PressableRequirement/EligibilityRequirement';
+import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import {
   updateCaseStatus,
   getCaseById,
@@ -121,6 +121,13 @@ export default function EligibilityForm() {
                   </Text>
                 </TouchableOpacity>
               </View>
+            </View>
+          }
+          ListEmptyComponent={
+            <View style={styles.listEmptyContainer}>
+              <Text style={styles.bodyText}>
+                There are no requirements for this case.
+              </Text>
             </View>
           }
         />

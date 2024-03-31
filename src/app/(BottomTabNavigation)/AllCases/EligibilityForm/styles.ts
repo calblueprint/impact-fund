@@ -89,4 +89,9 @@ export default StyleSheet.create({
   eligibleButtonText: {
     color: colors.white,
   },
+  listEmptyContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
 });
