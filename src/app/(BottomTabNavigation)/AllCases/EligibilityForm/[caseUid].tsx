@@ -33,8 +33,8 @@ export default function EligibilityForm() {
         <Text>Loading!!!</Text>
       ) : (
         <View style={styles.headerContainer}>
-          <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
           <Text style={styles.titleText}>{caseData.title}</Text>
+          <Image style={styles.image} source={{ uri: caseData.imageUrl }} />
           <View style={styles.infoRow}>
             <Error />
             <View style={{ flex: 1 }}>

@@ -51,8 +51,9 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'column',
     rowGap: 16,
-    borderTopWidth: 1,
     padding: 25,
+    borderTopWidth: 2,
+    borderTopColor: colors.midGrey,
   },
   buttonBase: {
     flexDirection: 'row',
@@ -78,7 +79,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     columnGap: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
   image: {
     aspectRatio: 1.75,
@@ -91,6 +92,7 @@ export default StyleSheet.create({
   },
   bodyText: {
     fontSize: 16,
+    lineHeight: 16,
     fontStyle: 'normal',
     fontWeight: '300',
   },
