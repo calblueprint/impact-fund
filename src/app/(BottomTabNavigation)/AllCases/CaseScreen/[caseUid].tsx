@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import { router, useLocalSearchParams, useNavigation } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
-=======
 import * as Linking from 'expo-linking';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
->>>>>>> 38811db (broken deep link for sharing)
+import { View, ScrollView, Text, TouchableOpacity, Share } from 'react-native';
 
 import styles from './styles';
 import Icon from '../../../../../assets/shareicon.svg';
@@ -20,6 +13,7 @@ import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityC
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
+import Deep from '../../AllCases';
 
 function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
@@ -27,26 +21,33 @@ function CaseScreen() {
   const [caseData, setCaseData] = useState<Case>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigation = useNavigation();
-  const url = Linking.useURL();
-  const urle = Linking.getInitialURL();
 
   const getCase = async (uid: string) => {
     const caseData = await getCaseById(uid);
     setCaseData(caseData);
     setIsLoading(false);
   };
-  const shareLink = async () => {
-    if (caseData) {
+
+  const onShare = async () => {
+    const addCaseUrl = Linking.createURL('addCase/', {
+      queryParams: { caseUid },
+    });
+    console.log(addCaseUrl);
+    //Linking.openURL(addCaseUrl);
+
+    const test = await Linking.getInitialURL();
+    if (test) {
       try {
-        console.log(url);
-        await Sharing.shareAsync(
-          'exp://192.168.4.84:8082/--/AllCases/addCase/?caseUID=09a59710-706c-11ee-b5ff-87a607d233fc',
-        );
+        await Share.share({
+          message: 'ADD CASE',
+          url: `${addCaseUrl}/`,
+        });
       } catch (error) {
-        console.error('Failed sharing:', error);
+        console.log(error);
       }
     }
   };
+
   const getStatus = async (uid: string) => {
     const caseStatus = await getCaseStatus(uid);
     setStatus(caseStatus);
@@ -76,22 +77,14 @@ function CaseScreen() {
           contentContainerStyle={styles.innerScroll}
           showsVerticalScrollIndicator={false}
         >
-          <TouchableOpacity style={styles.shareContainer} onPress={shareLink}>
+          <TouchableOpacity style={styles.shareContainer} onPress={onShare}>
             <Text style={styles.share}>Share</Text>
-            <Icon style={{ marginBottom: 2 }} />
+            <Icon style={{ marginBottom: 0 }} />
           </TouchableOpacity>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
           <CaseStatusBar status={caseData.caseStatus} />
-          <TouchableOpacity
-            onPress={() => {
-              router.push({ pathname: `AllCases/Updates/${caseUid}` });
-            }}
-          >
-            <Text>View Updates</Text>
-          </TouchableOpacity>
-
           {status === Eligibility.ELIGIBLE && (
             <EligibilityCard caseData={caseData} status={status} />
           )}

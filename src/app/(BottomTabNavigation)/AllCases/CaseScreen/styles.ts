@@ -38,13 +38,14 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   shareContainer: {
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     flexDirection: 'row',
     marginTop: 10,
+    marginLeft: 280,
     //backgroundColor: colors.darkGrey,
   },
   share: {
-    textAlign: 'right',
+    alignText: 'right',
     color: colors.midRed,
     fontSize: 16,
     marginHorizontal: 3,
