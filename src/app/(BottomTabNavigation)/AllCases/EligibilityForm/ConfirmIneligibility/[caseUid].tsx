@@ -5,7 +5,6 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Ex from '../../../../../../assets/cancel-x-icon.svg';
 import Check from '../../../../../../assets/check-circle.svg';
-import Line from '../../../../../../assets/line-vector.svg';
 import Alarm from '../../../../../../assets/noIdea.svg';
 import LittlePerson from '../../../../../../assets/noIdea2.svg';
 import { CaseContext } from '../../../../../context/CaseContext';
@@ -47,20 +46,25 @@ export default function ConfirmEligibility() {
         </View>
       </View>
 
-      <Line style={{ marginBottom: 15 }} />
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-          <Ex style={{ marginRight: 10, marginLeft: 6 }} />
-          <Text style={styles.buttonTextBlack}>No, I don't</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonBlack}
-          onPress={() => deleteCase()}
-        >
-          <Check style={{ marginRight: 10, marginLeft: 8 }} />
-          <Text style={styles.buttonText}>Yes, I do</Text>
-        </TouchableOpacity>
+      <View style={styles.footerContainer}>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            style={[styles.buttonBase, styles.ineligbleButton]}
+            onPress={() => router.back()}
+          >
+            <Ex />
+            <Text style={styles.buttonText}>No, I don't</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.buttonBase, styles.eligibleButton]}
+            onPress={() => deleteCase()}
+          >
+            <Check />
+            <Text style={[styles.buttonText, styles.eligibleButtonText]}>
+              Yes, I do
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
