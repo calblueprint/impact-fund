@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useMemo } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
-import { uploadCase, leaveCase } from '../supabase/queries/cases';
+import { addCase, removeCase } from '../supabase/queries/cases';
 import { Case, CaseUid } from '../types/types';
 
 export const CaseContext = createContext<CaseState>({} as CaseState);
@@ -10,8 +10,8 @@ export const CaseContext = createContext<CaseState>({} as CaseState);
 export interface CaseState {
   allCases: Case[];
   loading: boolean;
-  addCase: (newCase: Case) => Promise<void>;
-  removeCase: (targetCase: CaseUid) => Promise<void>;
+  joinCase: (newCase: Case) => Promise<void>;
+  leaveCase: (targetCase: CaseUid) => Promise<void>;
 }
 
 export function CaseContextProvider({
@@ -36,26 +36,46 @@ export function CaseContextProvider({
     // TODO: Might want to put something in dependency array when implementing refresh
   }, []);
 
-  async function addCase(newCase: Case) {
+  /**
+   * Add this case to a user's list of cases, both locally and on supabase.
+   * @param newCase case being joined.
+   */
+  async function joinCase(newCase: Case) {
     try {
-      await uploadCase(newCase.id);
-      setCases([...cases, newCase]);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userUid = user?.id;
+      if (userUid) {
+        await addCase(newCase.id, userUid);
+        setCases([...cases, newCase]);
+      }
     } catch (error) {
       console.warn(error);
     }
   }
 
-  async function removeCase(caseUid: CaseUid) {
+  /**
+   * Remove this case from a user's list of cases, both locally and on supabase.
+   * @param caseUid case being removed.
+   */
+  async function leaveCase(caseUid: CaseUid) {
     try {
-      await leaveCase(caseUid);
-      let targetIndex = -1;
-      for (let i = 0; i < cases.length; i++) {
-        if (cases[i].id === caseUid) {
-          targetIndex = i;
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userUid = user?.id;
+      if (userUid) {
+        await removeCase(caseUid, userUid);
+        let targetIndex = -1;
+        for (let i = 0; i < cases.length; i++) {
+          if (cases[i].id === caseUid) {
+            targetIndex = i;
+          }
         }
-      }
-      if (targetIndex > -1) {
-        cases.splice(targetIndex, 1);
+        if (targetIndex > -1) {
+          cases.splice(targetIndex, 1);
+        }
       }
     } catch (error) {
       console.warn(error);
@@ -66,8 +86,8 @@ export function CaseContextProvider({
     () => ({
       allCases: cases,
       loading: isLoading,
-      addCase,
-      removeCase,
+      joinCase,
+      leaveCase,
     }),
     [cases, setCases, isLoading],
   );

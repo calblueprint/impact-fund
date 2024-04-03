@@ -71,12 +71,13 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
-export async function uploadCase(caseId: CaseUid): Promise<void> {
+/**
+ * Create a case-user association on supabase.
+ * @param caseId case being added.
+ * @param userId user joining that case.
+ */
+export async function addCase(caseId: CaseUid, userId: UserUid): Promise<void> {
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
     await supabase.from('status').insert({ caseId, userId });
   } catch (error) {
     console.warn(error);
@@ -84,12 +85,16 @@ export async function uploadCase(caseId: CaseUid): Promise<void> {
   }
 }
 
-export async function leaveCase(caseId: CaseUid): Promise<void> {
+/**
+ * Remove a case-user association from supabase.
+ * @param caseId case to be removed.
+ * @param userId user leaving the case.
+ */
+export async function removeCase(
+  caseId: CaseUid,
+  userId: UserUid,
+): Promise<void> {
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
     await supabase
       .from('status')
       .delete()
