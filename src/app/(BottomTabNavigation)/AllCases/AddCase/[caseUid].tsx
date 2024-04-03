@@ -7,17 +7,16 @@ import AddCaseIcon from '../../../../../assets/add-case-icon.svg';
 import CancelIcon from '../../../../../assets/cancel-x-icon.svg';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../context/CaseContext';
-import { getCaseById, uploadCase } from '../../../../supabase/queries/cases';
+import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
-  const { allCases, updateCases, addCase } = useContext(CaseContext);
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
+  const { addCase } = useContext(CaseContext);
   const [caseData, setCaseData] = useState<Case>();
 
   const addToCases = async (newCase: Case) => {
-    await uploadCase(newCase.id);
-    addCase(newCase);
+    await addCase(newCase);
     router.push('/AllCases');
   };
 

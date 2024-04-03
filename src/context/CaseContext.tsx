@@ -2,16 +2,16 @@ import React, { createContext, useEffect, useMemo } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
+import { uploadCase, leaveCase } from '../supabase/queries/cases';
 import { Case, CaseUid } from '../types/types';
 
 export const CaseContext = createContext<CaseState>({} as CaseState);
 
 export interface CaseState {
   allCases: Case[];
-  updateCases: React.Dispatch<React.SetStateAction<Case[]>>;
   loading: boolean;
-  addCase: (newCase: Case) => void;
-  removeCase: (targetCase: CaseUid) => void;
+  addCase: (newCase: Case) => Promise<void>;
+  removeCase: (targetCase: CaseUid) => Promise<void>;
 }
 
 export function CaseContextProvider({
@@ -36,26 +36,35 @@ export function CaseContextProvider({
     // TODO: Might want to put something in dependency array when implementing refresh
   }, []);
 
-  function addCase(newCase: Case) {
-    setCases([...cases, newCase]);
+  async function addCase(newCase: Case) {
+    try {
+      await uploadCase(newCase.id);
+      setCases([...cases, newCase]);
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
-  function removeCase(caseUid: CaseUid) {
-    let targetIndex = -1;
-    for (let i = 0; i < cases.length; i++) {
-      if (cases[i].id === caseUid) {
-        targetIndex = i;
+  async function removeCase(caseUid: CaseUid) {
+    try {
+      await leaveCase(caseUid);
+      let targetIndex = -1;
+      for (let i = 0; i < cases.length; i++) {
+        if (cases[i].id === caseUid) {
+          targetIndex = i;
+        }
       }
-    }
-    if (targetIndex > -1) {
-      cases.splice(targetIndex, 1);
+      if (targetIndex > -1) {
+        cases.splice(targetIndex, 1);
+      }
+    } catch (error) {
+      console.warn(error);
     }
   }
 
   const caseContextValue = useMemo(
     () => ({
       allCases: cases,
-      updateCases: setCases,
       loading: isLoading,
       addCase,
       removeCase,

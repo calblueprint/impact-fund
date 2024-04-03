@@ -17,7 +17,7 @@ export default function ConfirmEligibility() {
 
   async function deleteCase() {
     if (caseUid !== undefined) {
-      removeCase(caseUid);
+      await removeCase(caseUid);
       router.push({
         pathname: '/AllCases',
       });

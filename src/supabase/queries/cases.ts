@@ -84,6 +84,23 @@ export async function uploadCase(caseId: CaseUid): Promise<void> {
   }
 }
 
+export async function leaveCase(caseId: CaseUid): Promise<void> {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
+    await supabase
+      .from('status')
+      .delete()
+      .eq('userId', userId)
+      .eq('caseId', caseId);
+  } catch (error) {
+    console.warn(error);
+    throw error;
+  }
+}
+
 /**
  * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
