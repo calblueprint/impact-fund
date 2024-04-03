@@ -50,6 +50,12 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
+          name="EligibilityForm/ConfirmIneligibility/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
           name="Forms/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
