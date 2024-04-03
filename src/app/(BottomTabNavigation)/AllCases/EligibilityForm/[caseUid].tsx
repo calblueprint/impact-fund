@@ -11,20 +11,17 @@ import { CaseUid, Eligibility } from '../../../../types/types';
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
 
-  const updateEligibility = async (status: Eligibility) => {
+  async function confirmEligibility() {
     if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, status);
-      if (status === Eligibility.INELIGIBLE) {
-        router.push({
-          pathname: 'AllCases/EligibilityForm/ConfirmEligibility',
-          params: { caseUid },
-        });
-      } else {
-        await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
-        router.back();
-      }
+      await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
+      router.back();
     }
-  };
+  }
+
+  function confirmIneligibility() {
+    router.push(`AllCases/EligibilityForm/ConfirmIneligibility/${caseUid}`);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -42,7 +39,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperTop}>
           <TouchableOpacity
             style={[styles.button, styles.buttonTop]}
-            onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
+            onPress={() => confirmEligibility()}
           >
             <Text>Yes, I am Eligible</Text>
             <RightArrow />
@@ -51,7 +48,7 @@ export default function EligibilityForm() {
         <View style={styles.buttonWrapperBottom}>
           <TouchableOpacity
             style={[styles.button, styles.buttonBottom]}
-            onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
+            onPress={() => confirmIneligibility()}
           >
             <Text style={styles.buttonBottomText}>No, I'm not Eligible</Text>
             <Text style={styles.buttonBottomText}>X</Text>

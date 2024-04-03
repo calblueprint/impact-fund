@@ -1,9 +1,6 @@
 import React, { createContext, useEffect, useMemo } from 'react';
 
-import {
-  fetchAllCases,
-  fetchCasesOnActivity,
-} from '../app/(BottomTabNavigation)/AllCases/utils';
+import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
 import { Case, CaseUid } from '../types/types';
 
@@ -50,11 +47,9 @@ export function CaseContextProvider({
         targetIndex = i;
       }
     }
-    console.log(cases, targetIndex);
     if (targetIndex > -1) {
       cases.splice(targetIndex, 1);
     }
-    console.log(cases);
   }
 
   const caseContextValue = useMemo(

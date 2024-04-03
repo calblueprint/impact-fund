@@ -9,32 +9,21 @@ import Line from '../../../../../../assets/line-vector.svg';
 import Alarm from '../../../../../../assets/noIdea.svg';
 import LittlePerson from '../../../../../../assets/noIdea2.svg';
 import { CaseContext } from '../../../../../context/CaseContext';
-import {
-  updateCaseActivity,
-  updateCaseStatus,
-} from '../../../../../supabase/queries/cases';
-import { CaseUid, Eligibility } from '../../../../../types/types';
+import { CaseUid } from '../../../../../types/types';
 
 export default function ConfirmEligibility() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const { removeCase } = useContext(CaseContext);
 
-  const updateActivity = async (active: boolean) => {
-    console.log('case', caseUid);
-    console.log('active', active);
+  async function deleteCase() {
     if (caseUid !== undefined) {
-      if (!active) {
-        await updateCaseStatus(caseUid, Eligibility.INELIGIBLE);
-        await updateCaseActivity(caseUid, active);
-        removeCase(caseUid);
-        router.push({
-          pathname: '/AllCases',
-        });
-      } else {
-        router.back();
-      }
+      removeCase(caseUid);
+      router.push({
+        pathname: '/AllCases',
+      });
     }
-  };
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.centerContainer}>
@@ -61,16 +50,13 @@ export default function ConfirmEligibility() {
       <Line style={{ marginBottom: 15 }} />
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => updateActivity(true)}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => router.back()}>
           <Ex style={{ marginRight: 10, marginLeft: 6 }} />
           <Text style={styles.buttonTextBlack}>No, I don't</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonBlack}
-          onPress={() => updateActivity(false)}
+          onPress={() => deleteCase()}
         >
           <Check style={{ marginRight: 10, marginLeft: 8 }} />
           <Text style={styles.buttonText}>Yes, I do</Text>

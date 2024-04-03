@@ -78,7 +78,6 @@ export async function uploadCase(caseId: CaseUid): Promise<void> {
     } = await supabase.auth.getUser();
     const userId = user?.id;
     await supabase.from('status').insert({ caseId, userId });
-    updateCaseActivity(caseId, true);
   } catch (error) {
     console.warn(error);
     throw error;
@@ -215,35 +214,6 @@ export async function getImageUrl(imagePath: string): Promise<string> {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn('(getImageUrl)', error);
-    throw error;
-  }
-}
-
-/**
- * Update a specific User/Case status
- *
- * @param caseId specified caseId
- * @param activity active status to be updated in the specific User/Case row
- * @returns nothing
- */
-export async function updateCaseActivity(
-  caseId: CaseUid,
-  activity: boolean,
-): Promise<void> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    await supabase
-      .from('status')
-      .update({ active: activity })
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-    console.log(user?.id);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(updateCaseStatus)', error);
     throw error;
   }
 }

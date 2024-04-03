@@ -22,7 +22,7 @@ enum linkingEvents {
 
 function CasesScreen() {
   const { allCases } = useContext(CaseContext);
-  const { activeCases, inactiveCases, loading } = useContext(CaseContext);
+  const { loading } = useContext(CaseContext);
   const { session } = useSession();
 
   const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
