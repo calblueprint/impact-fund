@@ -3,7 +3,6 @@ import { Linking } from 'react-native';
 import { colors } from '../../../styles/colors';
 import {
   getCaseIdsFromUserId,
-  getCaseIdsFromUserActivity,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
 import { Case, UserUid } from '../../../types/types';
@@ -21,33 +20,6 @@ export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
     }
 
     const caseIds = await getCaseIdsFromUserId(userUid);
-    const cases = await getCasesByIds(caseIds);
-
-    return cases;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(fetchListViewCases)', error);
-    throw error;
-  }
-}
-
-/**
- * Fetches all Cases associated with a specific `userUid` and 'active' status from supabase. Formats Case data and returns an array of `Case` objects.
- *
- * @param userUid uid of target user
- * @param active boolean of target case
- * @returns array of formatted `Case` objects
- */
-export async function fetchCasesOnActivity(
-  userUid: UserUid,
-  activity: boolean,
-): Promise<Case[]> {
-  try {
-    if (!userUid) {
-      throw new Error(`Invalid user uid: ${userUid}`);
-    }
-
-    const caseIds = await getCaseIdsFromUserActivity(userUid, activity);
     const cases = await getCasesByIds(caseIds);
 
     return cases;

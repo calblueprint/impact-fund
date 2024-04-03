@@ -43,44 +43,6 @@ export async function getCaseIdsFromUserId(
   }
 }
 
-/**
- * Fetch an array of `CaseId`s associated with a specific user and active status. Fetches ids from `status` table.
- *
- * @param userId user Uuid
- * @returns array of `CaseId`s
- */
-export async function getCaseIdsFromUserActivity(
-  userId: UserUid,
-  activity: boolean,
-): Promise<CaseUid[]> {
-  try {
-    // fetch caseIds that match the specified userId
-    if (userId === 'NO_ID') {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      userId = user?.id as UserUid;
-    }
-    const { data } = await supabase
-      .from('status')
-      .select('caseId')
-      .eq('userId', userId)
-      .eq('active', activity);
-
-    // throw error if supabase data is empty
-    if (!data) {
-      throw new Error(`no caseIds found for the given user: ${userId}`);
-    }
-
-    // cast raw sql data as an array of CaseIds
-    return data.map(item => item.caseId as CaseUid);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(getCaseIdsFromUserId)', error);
-    throw error;
-  }
-}
-
 // Similar to top function but gets ALL CaseIds
 export async function getAllCaseIds(): Promise<CaseUid[]> {
   try {

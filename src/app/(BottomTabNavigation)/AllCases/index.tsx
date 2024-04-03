@@ -75,14 +75,6 @@ function CasesScreen() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   navigation.addListener('focus', async () => {
-  //     if (caseUid !== undefined) {
-  //       getStatusColor(caseUid);
-  //     }
-  //   });
-  // }, [navigation]);
-
   return (
     <View style={styles.container}>
       <View style={styles.casesContainer}>
@@ -105,9 +97,6 @@ function CasesScreen() {
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
                   </View>
                 </TouchableOpacity>
-                <View>
-                  <Text style={{ fontSize: 20, marginTop: 20 }}>All Cases</Text>
-                </View>
               </>
             )}
             data={allCases}
@@ -119,24 +108,6 @@ function CasesScreen() {
             }
           />
         )}
-        {/* {loading ? (
-          <Text> </Text>
-        ) : (
-          <FlatList
-            contentContainerStyle={styles.innerScroll}
-            ListHeaderComponent={() => (
-              <>
-                <Text style={{ fontSize: 20, marginTop: 0 }}>
-                  Inactive Cases
-                </Text>
-              </>
-            )}
-            data={inactiveCases}
-            renderItem={({ item }) => <CaseCard {...item} />}
-            keyExtractor={item => item.id}
-            showsVerticalScrollIndicator={false}
-          />
-        )} */}
       </View>
     </View>
   );
