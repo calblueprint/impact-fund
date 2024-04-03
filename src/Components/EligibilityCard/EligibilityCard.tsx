@@ -4,7 +4,6 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-// import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
@@ -16,6 +15,14 @@ interface EligibilityCardProps {
   caseData: Case;
   status: Eligibility;
 }
+
+const ensureURLFormat = (url: string | null | undefined) => {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return `https://${url}`;
+};
 
 export default function EligibilityCard({
   caseData,
@@ -52,11 +59,16 @@ export default function EligibilityCard({
       </View>
     );
   } else if (status === Eligibility.ELIGIBLE) {
+    const claimLink = caseData.claimLink
+      ? ensureURLFormat(caseData.claimLink)
+      : null;
+    const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
+
     return (
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => openUrl(caseData.claimLink)}
+          onPress={onPressHandler}
         >
           <View style={styles.leftContainer}>
             <Fileclaim />
