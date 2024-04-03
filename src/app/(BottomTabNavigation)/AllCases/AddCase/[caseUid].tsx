@@ -12,11 +12,11 @@ import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { addCase } = useContext(CaseContext);
+  const { joinCase } = useContext(CaseContext);
   const [caseData, setCaseData] = useState<Case>();
 
   const addToCases = async (newCase: Case) => {
-    await addCase(newCase);
+    await joinCase(newCase);
     router.push('/AllCases');
   };
 

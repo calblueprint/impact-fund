@@ -13,11 +13,11 @@ import { CaseUid } from '../../../../../types/types';
 
 export default function ConfirmEligibility() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { removeCase } = useContext(CaseContext);
+  const { leaveCase } = useContext(CaseContext);
 
   async function deleteCase() {
     if (caseUid !== undefined) {
-      await removeCase(caseUid);
+      await leaveCase(caseUid);
       router.push({
         pathname: '/AllCases',
       });
