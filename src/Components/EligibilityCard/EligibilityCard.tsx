@@ -4,10 +4,12 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
+// import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
 import OptOut from '../../../assets/opt-out.svg';
+import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Case, Eligibility } from '../../types/types';
 
 interface EligibilityCardProps {
@@ -52,7 +54,10 @@ export default function EligibilityCard({
   } else if (status === Eligibility.ELIGIBLE) {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => openUrl(caseData.claimLink)}
+        >
           <View style={styles.leftContainer}>
             <Fileclaim />
           </View>
