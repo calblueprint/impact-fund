@@ -1,3 +1,4 @@
+import * as Linking from 'expo-linking';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -17,6 +18,7 @@ import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
   const navigation = useNavigation();
+
   const { session, signOut } = useSession();
 
   useEffect(() => {
@@ -85,21 +87,22 @@ function ProfileScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <View>
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: '/Profile/ResetConfirm',
+                params: { email: session?.user?.email },
+              })
+            }
+          >
             <View style={[styles.actionElementTop, styles.resetIcon]}>
               <View style={styles.iconTitle}>
                 <Reset />
                 <Text style={styles.textElements}>Reset password</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  router.push('/Profile/DeleteAccount');
-                }}
-              >
-                <GreyRightCarrot />
-              </TouchableOpacity>
+              <GreyRightCarrot />
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.line} />
           <View>
             <TouchableOpacity
@@ -119,7 +122,10 @@ function ProfileScreen() {
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => signOut()}
+          // onPress={() => signOut()}
+          onPress={() => {
+            router.push('/Profile/LogOut');
+          }}
           style={styles.signOutButton}
         >
           <View style={styles.signOutInstructions}>

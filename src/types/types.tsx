@@ -2,6 +2,8 @@ export type Uid = string;
 export type CaseUid = Uid;
 export type FormUid = Uid;
 export type UserUid = Uid;
+export type EligibilityUid = Uid;
+export type UpdateUid = Uid;
 
 export interface CasePartial {
   id: CaseUid;
@@ -61,11 +63,18 @@ export type Status = {
   excluded: boolean;
 };
 
+export interface EligibilityRequirement {
+  eligibilityUid: EligibilityUid;
+  caseUid: CaseUid;
+  requirement: string;
+}
+
 export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
 }
+
 export const userInstance: User = {
   id: '',
   fullName: '',
@@ -75,3 +84,14 @@ export const userInstance: User = {
   state: '',
   zip: '',
 };
+
+export interface Update {
+  updateUid: UpdateUid;
+  caseUid: CaseUid;
+  title: string;
+  blurb: string;
+  category: string;
+  date: Date;
+  summary: string;
+  lawFirm: string;
+}

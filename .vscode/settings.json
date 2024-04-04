@@ -1,7 +1,10 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "deno.enable": true,
+  "deno.enablePaths": ["./supabase/functions/"],
+  "deno.unstable": true,
   "editor.codeActionsOnSave": {
-    "source.formatDocument": "explicit",
-    "source.fixAll.eslint": "explicit"
-  }
+    "source.fixAll.eslint": "explicit",
+    "source.formatDocument": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
