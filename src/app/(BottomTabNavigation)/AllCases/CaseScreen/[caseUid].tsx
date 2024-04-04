@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import * as Sharing from 'expo-sharing';
+//import * as Sharing from 'expo-sharing';
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, Share } from 'react-native';
 
@@ -13,7 +13,6 @@ import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityC
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
-import Deep from '../../AllCases';
 
 function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
@@ -29,22 +28,17 @@ function CaseScreen() {
   };
 
   const onShare = async () => {
-    const addCaseUrl = Linking.createURL('addCase/', {
+    const addCaseUrl = Linking.createURL('?event=addCase&', {
       queryParams: { caseUid },
     });
     console.log(addCaseUrl);
-    //Linking.openURL(addCaseUrl);
-
-    const test = await Linking.getInitialURL();
-    if (test) {
-      try {
-        await Share.share({
-          message: 'ADD CASE',
-          url: `${addCaseUrl}/`,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      await Share.share({
+        //message: 'ADD CASE',
+        url: `${addCaseUrl}/`,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -79,7 +73,7 @@ function CaseScreen() {
         >
           <TouchableOpacity style={styles.shareContainer} onPress={onShare}>
             <Text style={styles.share}>Share</Text>
-            <Icon style={{ marginBottom: 0 }} />
+            <Icon style={{ marginTop: 2 }} />
           </TouchableOpacity>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>

@@ -45,7 +45,7 @@ export default StyleSheet.create({
     //backgroundColor: colors.darkGrey,
   },
   share: {
-    alignText: 'right',
+    // alignText: 'right',
     color: colors.midRed,
     fontSize: 16,
     marginHorizontal: 3,
