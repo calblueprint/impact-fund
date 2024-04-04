@@ -93,7 +93,14 @@ export default function EligibilityCard({
           <View style={styles.horizontalLine} />
         </View>
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            router.push({
+              pathname: `/AllCases/OptOut/${caseData.id}`,
+            });
+          }}
+        >
           <View style={styles.leftContainer}>
             <OptOut />
           </View>
