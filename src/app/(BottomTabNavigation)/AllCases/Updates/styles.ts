@@ -14,8 +14,9 @@ export default StyleSheet.create({
   innerScroll: {
     paddingVertical: 20,
   },
-  titleContainer: {
-    alignItems: 'flex-start',
+  headerContainer: {
+    flexDirection: 'column',
+    rowGap: 12,
     borderWidth: 1,
   },
   title: {
@@ -28,5 +29,11 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
     marginVertical: 12,
+  },
+  titleText: {
+    fontSize: 32,
+    lineHeight: 33,
+    fontStyle: 'normal',
+    fontWeight: '700',
   },
 });
