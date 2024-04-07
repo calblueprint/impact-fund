@@ -61,6 +61,7 @@ export type Status = {
   userId: UserUid;
   eligible: Eligibility;
   excluded: boolean;
+  active: boolean;
 };
 
 export interface EligibilityRequirement {
