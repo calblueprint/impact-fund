@@ -4,12 +4,25 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
+    height: 126,
     width: '100%',
     flexDirection: 'row',
+    columnGap: 17,
   },
-  textContainer: {
+  contentContainer: {
     // this might be unnecessary idk
     height: '100%',
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  instructionContainer: {
+    paddingHorizontal: 13,
+    paddingVertical: 3,
+
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.midGrey,
   },
   titleText: {
     fontSize: 16,

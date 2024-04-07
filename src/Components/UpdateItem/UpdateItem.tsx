@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import NotificationBell from '../../../assets/notification-bell.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Update } from '../../types/types';
 
@@ -16,8 +17,12 @@ export default function UpdateItem(updateData: Update) {
       }
     >
       <View style={styles.container}>
-        <View style={styles.textContainer}>
+        <NotificationBell />
+        <View style={styles.contentContainer}>
           <Text style={styles.titleText}>{updateData.title}</Text>
+          <View style={styles.instructionContainer}>
+            <Text>VIEW UPDATES</Text>
+          </View>
           <Text style={styles.bottomText}>
             {formatDate(updateData.date)} • {updateData.lawFirm}
           </Text>

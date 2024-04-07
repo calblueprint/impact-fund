@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
+    backgroundColor: colors.white,
   },
   contentContainer: {
     width: '84%',
@@ -17,7 +18,7 @@ export default StyleSheet.create({
   headerContainer: {
     flexDirection: 'column',
     rowGap: 12,
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   title: {
     color: colors.black,
