@@ -1,6 +1,8 @@
 import { Stack } from 'expo-router';
 import React from 'react';
+import { Image, Text, View } from 'react-native';
 
+import BackArrow from '../../../../assets/left-caret.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { CaseContextProvider } from '../../../context/CaseContext';
 
@@ -10,7 +12,7 @@ export default function CasesLayout() {
       <Stack
         screenOptions={{
           headerShown: true,
-          headerBackTitleVisible: false,
+          headerBackTitleVisible: true,
         }}
       >
         <Stack.Screen
