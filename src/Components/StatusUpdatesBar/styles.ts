@@ -3,13 +3,15 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
-    height: 47,
+    // height: ,
     width: '100%',
     alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: colors.white,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
+    padding: 16,
+    rowGap: 10,
 
     borderWidth: 0.5,
     borderRadius: 5,
@@ -22,9 +24,24 @@ export default StyleSheet.create({
     shadowRadius: 0.05,
     elevation: 1,
   },
+  topContainer: {
+    width: '100%',
+    height: 31,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.midGrey,
+  },
+  updatesButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 16,
+  },
   statusContainer: {
     height: 29,
-    width: 177,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
 
@@ -33,16 +50,22 @@ export default StyleSheet.create({
     borderRadius: 5,
   },
   statusText: {
-    fontSize: 18,
-    fontStyle: 'normal',
-    fontWeight: '300',
+    fontSize: 20,
     lineHeight: 21,
+    fontStyle: 'normal',
+    fontWeight: '400',
     color: colors.midnightBlack,
   },
   statusTextColor: {
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: '500',
+    lineHeight: 21,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
     lineHeight: 21,
   },
 });

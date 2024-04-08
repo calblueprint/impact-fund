@@ -56,14 +56,6 @@ export interface User {
   zip: string;
 }
 
-// export type Status = {
-//   id: CaseUid;
-//   userId: UserUid;
-//   eligible: Eligibility;
-//   excluded: boolean;
-//   active: boolean;
-// };
-
 export interface EligibilityRequirement {
   eligibilityUid: EligibilityUid;
   caseUid: CaseUid;

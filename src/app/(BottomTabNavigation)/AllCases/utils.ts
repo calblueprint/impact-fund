@@ -40,7 +40,7 @@ export function formatDate(dateObject: Date) {
   return `${date[1]} ${date[2]}, ${date[3]}`;
 }
 
-export function getStatusColor(status: CaseStatusOptions) {
+export function getStatusColor(status: string) {
   if (
     status === 'In Progress' ||
     status === 'New Case' ||

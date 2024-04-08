@@ -4,11 +4,11 @@ import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 // eslint-disable-next-line import/namespace
-import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
+import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -57,14 +57,10 @@ function CaseScreen() {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
-          <CaseStatusBar status={caseData.caseStatus} />
-          <TouchableOpacity
-            onPress={() => {
-              router.push({ pathname: `AllCases/Updates/${caseUid}` });
-            }}
-          >
-            <Text>View Updates</Text>
-          </TouchableOpacity>
+          <StatusUpdatesBar
+            caseUid={caseData.id}
+            status={caseData.caseStatus}
+          />
 
           {status === Eligibility.ELIGIBLE && (
             <EligibilityCard caseData={caseData} status={status} />
