@@ -48,7 +48,14 @@ export default function OptOutScreen() {
           <TouchableOpacity style={styles.button} onPress={onPressHandler}>
             <Text style={styles.bodyText}>Take Me to Link to Opt Out</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              router.push({
+                pathname: `/AllCases/OptOut/ConfirmOptOut/${caseUid}`,
+              })
+            }
+          >
             <Text style={styles.bodyText}>I've Already Opted Out</Text>
           </TouchableOpacity>
         </>
