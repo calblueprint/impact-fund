@@ -5,7 +5,7 @@ import {
   getCaseIdsFromUserId,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
-import { Case, UserUid } from '../../../types/types';
+import { Case, UserUid, CaseStatusOptions } from '../../../types/types';
 
 /**
  * Fetches all Cases associated with a specific `userUid` from supabase. Formats Case data and returns an array of `Case` objects.
@@ -40,7 +40,7 @@ export function formatDate(dateObject: Date) {
   return `${date[1]} ${date[2]}, ${date[3]}`;
 }
 
-export function getStatusColor(status: string) {
+export function getStatusColor(status: CaseStatusOptions) {
   if (
     status === 'In Progress' ||
     status === 'New Case' ||
