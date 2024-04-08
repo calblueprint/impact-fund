@@ -1,6 +1,7 @@
 import * as Linking from 'expo-linking';
+import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -12,7 +13,16 @@ import {
   registerForPushNotifications,
   updatePushToken,
 } from '../../../supabase/pushNotifications';
+
 import 'react-native-url-polyfill/auto';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 enum linkingEvents {
   ADD_CASE = 'addCase',
@@ -22,6 +32,8 @@ enum linkingEvents {
 function CasesScreen() {
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
 
   const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
@@ -71,6 +83,22 @@ function CasesScreen() {
         updatePushToken(session.user.id, token);
       });
     }
+
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      notification => {
+        console.log('notification');
+      },
+    );
+
+    const responseListener =
+      Notifications.addNotificationResponseReceivedListener(response => {
+        console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
   }, []);
 
   return (
