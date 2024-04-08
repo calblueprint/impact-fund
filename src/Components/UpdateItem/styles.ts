@@ -4,38 +4,53 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    height: 126,
     width: '100%',
     flexDirection: 'row',
-    columnGap: 17,
+    columnGap: 16,
+    paddingTop: 24,
+    paddingBottom: 8,
   },
   contentContainer: {
-    // this might be unnecessary idk
-    height: '100%',
-    borderWidth: 1,
     flex: 1,
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  titleContainer: {
+    height: 41,
   },
   instructionContainer: {
-    paddingHorizontal: 13,
+    width: 130,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
     paddingVertical: 3,
 
     borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.midGrey,
+
+    marginTop: 20,
+    marginBottom: 11,
   },
   titleText: {
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '600',
-    lineHeight: 16,
+    lineHeight: 18,
     color: colors.midnightBlack,
+    overflow: 'hidden',
   },
   bottomText: {
-    color: colors.darkGrey,
     fontSize: 10,
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 21,
+    color: colors.darkGrey,
+  },
+  updateText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    color: colors.darkGrey,
   },
 });

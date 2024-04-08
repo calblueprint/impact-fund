@@ -18,23 +18,16 @@ export default StyleSheet.create({
   headerContainer: {
     flexDirection: 'column',
     rowGap: 12,
-    // borderWidth: 1,
-  },
-  title: {
-    color: colors.black,
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    paddingVertical: 16,
   },
   lineStyle: {
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
-    marginVertical: 12,
   },
   titleText: {
     fontSize: 32,
     lineHeight: 33,
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: '600',
   },
 });

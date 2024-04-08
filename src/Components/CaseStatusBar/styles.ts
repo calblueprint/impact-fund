@@ -13,8 +13,8 @@ export default StyleSheet.create({
 
     borderWidth: 0.5,
     borderRadius: 5,
-    borderColor: colors.midGrey,
     borderStyle: 'solid',
+    borderColor: colors.midGrey,
 
     shadowColor: colors.black,
     shadowOffset: { width: 0.05, height: 0.75 },

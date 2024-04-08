@@ -24,7 +24,6 @@ export default function UpdatesScreen() {
 
   async function getCaseData(uid: CaseUid) {
     const caseData = await getCaseById(uid);
-    console.log(caseData);
     setCaseData(caseData);
   }
 

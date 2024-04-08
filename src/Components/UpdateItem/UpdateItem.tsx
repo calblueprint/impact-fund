@@ -10,23 +10,26 @@ import { Update } from '../../types/types';
 export default function UpdateItem(updateData: Update) {
   return (
     <TouchableOpacity
+      style={styles.container}
       onPress={() =>
         router.push({
           pathname: `/AllCases/Updates/UpdateView/${updateData.updateUid}`,
         })
       }
     >
-      <View style={styles.container}>
-        <NotificationBell />
-        <View style={styles.contentContainer}>
-          <Text style={styles.titleText}>{updateData.title}</Text>
-          <View style={styles.instructionContainer}>
-            <Text>VIEW UPDATES</Text>
-          </View>
-          <Text style={styles.bottomText}>
-            {formatDate(updateData.date)} • {updateData.lawFirm}
+      <NotificationBell />
+      <View style={styles.contentContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText} numberOfLines={2}>
+            {updateData.title}
           </Text>
         </View>
+        <View style={styles.instructionContainer}>
+          <Text style={styles.updateText}>VIEW UPDATE</Text>
+        </View>
+        <Text style={styles.bottomText}>
+          {formatDate(updateData.date)} • {updateData.lawFirm}
+        </Text>
       </View>
     </TouchableOpacity>
   );
