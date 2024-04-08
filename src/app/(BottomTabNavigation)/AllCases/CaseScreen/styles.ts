@@ -39,6 +39,7 @@ export default StyleSheet.create({
   },
   shareContainer: {
     justifyContent: 'flex-end',
+    width: '22%',
     flexDirection: 'row',
     marginTop: 10,
     marginLeft: 280,
