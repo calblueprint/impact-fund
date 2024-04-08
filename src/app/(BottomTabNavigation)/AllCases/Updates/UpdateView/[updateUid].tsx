@@ -27,7 +27,9 @@ export default function UpdateView() {
 
   return (
     <View style={styles.container}>
-      {update && (
+      {update === undefined ? (
+        <Text>Loading...</Text>
+      ) : (
         <>
           <ScrollView
             style={styles.outerScroll}
