@@ -1,5 +1,5 @@
-import { router } from 'expo-router';
-import React from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
@@ -8,19 +8,30 @@ import CircleCheckWhite from '../../../../../../assets/circle-check-white.svg';
 import X from '../../../../../../assets/x.svg';
 import CasesHeader from '../../../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../../../context/AuthContext';
-import {
-  updateCaseStatus,
-  getCaseById,
-} from '../../../../../supabase/queries/cases';
-function DeleteAccountScreen() {
+import { CaseContext } from '../../../../../context/CaseContext';
+import { CaseUid } from '../../../../../types/types';
+
+function ConfirmOptOut() {
+  const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
+  const { leaveCase } = useContext(CaseContext);
+
   const { signOut, deleteCurrentUser, session } = useSession();
 
-  const deleteAccount = () => {
-    if (session?.user.id) {
-      deleteCurrentUser(session.user.id);
+  // const deleteAccount = () => {
+  //   if (session?.user.id) {
+  //     deleteCurrentUser(session.user.id);
+  //   }
+  //   signOut();
+  // };
+
+  async function deleteCase() {
+    if (caseUid !== undefined) {
+      await leaveCase(caseUid);
+      router.push({
+        pathname: '/AllCases',
+      });
     }
-    signOut();
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -51,13 +62,10 @@ function DeleteAccountScreen() {
           </View>
 
           <View style={styles.buttonView}>
-            <TouchableOpacity
-              onPress={deleteAccount}
-              style={styles.confirmButton}
-            >
+            <TouchableOpacity onPress={deleteCase} style={styles.confirmButton}>
               <View style={styles.buttonContent}>
                 <CircleCheckWhite />
-                <Text style={styles.confirmText}>Confirm</Text>
+                <Text style={styles.confirmText}>Continue</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -66,4 +74,4 @@ function DeleteAccountScreen() {
     </View>
   );
 }
-export default DeleteAccountScreen;
+export default ConfirmOptOut;
