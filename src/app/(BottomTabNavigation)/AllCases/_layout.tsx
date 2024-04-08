@@ -1,10 +1,31 @@
+import * as Notifications from 'expo-notifications';
 import { Stack } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { CaseContextProvider } from '../../../context/CaseContext';
 
 export default function CasesLayout() {
+  useEffect(() => {
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      notification => {
+        // setNotification(notification);
+        console.log(notification);
+      },
+    );
+
+    const responseListener =
+      Notifications.addNotificationResponseReceivedListener(response => {
+        console.log(response);
+      });
+
+    // triggerNotification();
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
   return (
     <CaseContextProvider>
       <Stack
