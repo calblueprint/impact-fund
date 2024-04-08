@@ -28,8 +28,7 @@ export default StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'row',
-    paddingVertical: 12,
-    marginTop: 20,
+    paddingBottom: 12,
   },
   title: {
     flex: 1,
@@ -37,5 +36,19 @@ export default StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  shareContainer: {
+    justifyContent: 'flex-end',
+    width: '22%',
+    flexDirection: 'row',
+    marginTop: 10,
+    marginLeft: 280,
+    //backgroundColor: colors.darkGrey,
+  },
+  share: {
+    // alignText: 'right',
+    color: colors.midRed,
+    fontSize: 16,
+    marginHorizontal: 3,
   },
 });
