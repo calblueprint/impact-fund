@@ -77,7 +77,7 @@ export default function OptOutScreen() {
               onPress={onPressHandler}
             >
               <Text style={[styles.buttonText, styles.blackText]}>
-                Take Me to Link to Opt Out
+                Take Me to Opt Out Link
               </Text>
               <BlackRightArrow />
             </TouchableOpacity>
