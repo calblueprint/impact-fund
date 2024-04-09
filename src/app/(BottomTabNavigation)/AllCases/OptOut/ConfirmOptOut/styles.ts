@@ -11,17 +11,18 @@ export default StyleSheet.create({
     height: '100%',
     alignItems: 'center',
   },
+  topContainer: {
+    marginTop: 40,
+  },
   screenContainer: {
     width: '85%',
     height: '95%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
     justifyContent: 'space-between',
   },
-  headerContainer: {
-    marginTop: 63, // copied this value from profile screen
-  },
-  textContainer: {
-    rowGap: 20,
-    height: '60%', // this is a bit of a guess
+  infoContainer: {
+    flexDirection: 'row',
+    gap: 16,
+    marginTop: 20,
   },
   topText: {
     fontSize: 38,

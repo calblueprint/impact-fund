@@ -79,6 +79,18 @@ export default function CasesLayout() {
             headerTitle: props => <CasesHeader />,
           }}
         />
+        <Stack.Screen
+          name="OptOut/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="OptOut/ConfirmOptOut/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
       </Stack>
     </CaseContextProvider>
   );
