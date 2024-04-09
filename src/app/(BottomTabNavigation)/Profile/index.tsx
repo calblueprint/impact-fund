@@ -1,4 +1,3 @@
-import * as Linking from 'expo-linking';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -19,7 +18,7 @@ import { useSession } from '../../../context/AuthContext';
 function ProfileScreen() {
   const navigation = useNavigation();
 
-  const { session, signOut } = useSession();
+  const { session } = useSession();
 
   useEffect(() => {
     navigation.addListener('focus', async () => {});

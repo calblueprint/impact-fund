@@ -38,9 +38,8 @@ function CasesScreen() {
     }),
   });
 
-  const [notification, setNotification] = useState<
-    Notifications.Notification | undefined
-  >();
+  const [notification, setNotification] =
+    useState<Notifications.Notification>();
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
@@ -53,6 +52,7 @@ function CasesScreen() {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
+        setNotification(notification);
         console.log(response);
       });
 
@@ -138,6 +138,7 @@ function CasesScreen() {
                   <View style={styles.buttonInfoContainer}>
                     <Camera />
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
+                    <Text>{notification?.request.content.body}</Text>
                   </View>
                 </TouchableOpacity>
               </>
