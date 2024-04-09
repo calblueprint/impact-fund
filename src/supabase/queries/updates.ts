@@ -80,8 +80,8 @@ export async function getUpdateById(updateId: UpdateUid): Promise<Update> {
  * @returns list of formatted `Update` objects sorted by date
  */
 export async function sortUpdatesByDate(updates: Update[]): Promise<Update[]> {
-  updates.sort(function (a, b): any {
-    return new Date(b.date).getDate() - new Date(a.date).getDate();
+  updates.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
   return updates;
 }
