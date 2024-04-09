@@ -38,7 +38,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '300',
-    color: colors.black,
+    color: colors.darkGrey,
   },
   buttonContainer: {
     flexDirection: 'row',

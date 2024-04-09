@@ -7,7 +7,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     alignItems: 'center',
-    justifyContent: 'center',
     rowGap: 10,
   },
   screenContainer: {
@@ -65,7 +64,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '300',
-    color: colors.black,
+    color: colors.darkGrey,
     flexWrap: 'wrap',
   },
   blackText: {
