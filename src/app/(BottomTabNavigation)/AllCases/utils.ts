@@ -5,7 +5,7 @@ import {
   getCaseIdsFromUserId,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
-import { Case, UserUid, CaseStatusOptions } from '../../../types/types';
+import { Case, UserUid } from '../../../types/types';
 
 /**
  * Fetches all Cases associated with a specific `userUid` from supabase. Formats Case data and returns an array of `Case` objects.
