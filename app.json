@@ -46,6 +46,14 @@
         }
       ]
     ],
-    "scheme": "impactfundapp"
+    "scheme": "impactfundapp",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d1a810ad-7132-4890-888f-0142c444b21d"
+      }
+    }
   }
 }
