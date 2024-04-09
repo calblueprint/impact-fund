@@ -10,24 +10,61 @@ export default StyleSheet.create({
     justifyContent: 'center',
     rowGap: 10,
   },
-  button: {
+  contentContainer: {
+    width: '84%',
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  topContainer: { marginTop: 40 },
+  infoContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    gap: 16,
+    marginTop: 20,
+  },
+  buttonsContainer: {
+    flexDirection: 'column',
+    rowGap: 12,
+    marginBottom: 40,
+  },
+  buttonBase: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: 50,
-    width: '80%',
+    width: '100%',
+    height: 47,
+    paddingHorizontal: 20,
     borderRadius: 5,
-    backgroundColor: 'grey',
+    borderWidth: 1,
+  },
+  buttonWhite: {
+    backgroundColor: colors.white,
+    borderColor: colors.black,
+  },
+  buttonBlack: {
+    backgroundColor: colors.black,
   },
   titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: '800',
   },
-  bodyText: {
+  buttonText: {
+    fontSize: 17,
+    fontStyle: 'normal',
+    fontWeight: '400',
+  },
+  infoText: {
     fontSize: 16,
-    lineHeight: 16,
-    color: 'white',
+    lineHeight: 20,
     fontWeight: '300',
+    fontStyle: 'normal',
+    color: colors.darkGrey,
+    flexWrap: 'wrap',
+  },
+  blackText: {
+    color: colors.black,
+  },
+  whiteText: {
+    color: colors.white,
   },
 });
