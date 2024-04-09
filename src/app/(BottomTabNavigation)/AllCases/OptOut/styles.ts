@@ -10,22 +10,24 @@ export default StyleSheet.create({
     justifyContent: 'center',
     rowGap: 10,
   },
-  contentContainer: {
-    width: '84%',
-    height: '100%',
-    flexDirection: 'column',
+  screenContainer: {
+    width: '85%',
+    height: '95%',
     justifyContent: 'space-between',
+    whiteSpace: 'pre-line',
   },
-  topContainer: { marginTop: 40 },
+  contentContainer: {
+    flexDirection: 'column',
+    rowGap: 34,
+    marginTop: 40,
+  },
   infoContainer: {
-    flexDirection: 'row',
-    gap: 16,
-    marginTop: 20,
+    flexDirection: 'column',
+    rowGap: 20,
   },
   buttonsContainer: {
     flexDirection: 'column',
     rowGap: 12,
-    marginBottom: 40,
   },
   buttonBase: {
     flexDirection: 'row',
@@ -45,8 +47,14 @@ export default StyleSheet.create({
     backgroundColor: colors.black,
   },
   titleText: {
-    fontSize: 35,
+    fontSize: 38,
     fontWeight: '800',
+  },
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flex: 1,
   },
   buttonText: {
     fontSize: 17,
@@ -55,10 +63,9 @@ export default StyleSheet.create({
   },
   infoText: {
     fontSize: 16,
-    lineHeight: 20,
-    fontWeight: '300',
     fontStyle: 'normal',
-    color: colors.darkGrey,
+    fontWeight: '300',
+    color: colors.black,
     flexWrap: 'wrap',
   },
   blackText: {
@@ -66,5 +73,12 @@ export default StyleSheet.create({
   },
   whiteText: {
     color: colors.white,
+  },
+  textIconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 24,
   },
 });

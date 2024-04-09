@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import Mail from '../../../../../assets/big-envelope.svg';
 import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
+import Reset from '../../../../../assets/reset-password-refresh.svg';
 import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
@@ -42,20 +44,30 @@ export default function OptOutScreen() {
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <View style={styles.contentContainer}>
-          <View style={styles.topContainer}>
-            <Text style={styles.titleText}>Opting Out Of A Case</Text>
+        <View style={styles.screenContainer}>
+          <View style={styles.contentContainer}>
+            <Text style={styles.titleText}>Opting out of a case</Text>
             <View style={styles.infoContainer}>
-              <Text style={styles.infoText}>
-                You must first Opt-Out on the official case website linked
-                below.{' '}
-              </Text>
+              <View style={styles.textIconContainer}>
+                <Mail style={styles.icon} />
+                <View style={styles.textContainer}>
+                  <Text style={styles.infoText}>
+                    You must first Opt-Out on the official case website linked
+                    below.{' '}
+                  </Text>
+                </View>
+              </View>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={styles.infoText}>
-                Once you opt-out online, please confirm that you've opted out on
-                the following screen.{' '}
-              </Text>
+              <View style={styles.textIconContainer}>
+                <Reset style={styles.icon} />
+                <View style={styles.textContainer}>
+                  <Text style={styles.infoText}>
+                    Once you opt-out online, please confirm that you've opted
+                    out on the following screen.{' '}
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
 
