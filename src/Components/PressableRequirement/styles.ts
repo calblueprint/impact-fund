@@ -29,9 +29,9 @@ export default StyleSheet.create({
     fontWeight: '300',
   },
   activeText: {
-    color: colors.black,
+    color: colors.darkGrey,
   },
   inactiveText: {
-    color: colors.midGrey,
+    color: colors.black,
   },
 });
