@@ -13,6 +13,7 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
+import ShowBottomNav from '../../../Components/ShowBottomNav/ShowBottomNav';
 import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
@@ -23,6 +24,7 @@ function ProfileScreen() {
   useEffect(() => {
     navigation.addListener('focus', async () => {});
   }, [navigation]);
+  ShowBottomNav();
 
   return (
     <View style={styles.container}>

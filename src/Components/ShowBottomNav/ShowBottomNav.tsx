@@ -1,10 +1,10 @@
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 
-export default function HideBottomNav() {
+export default function ShowBottomNav() {
   const navigation = useNavigation();
   useEffect(() => {
-    navigation.addListener('blur', async () => {
+    navigation.addListener('focus', async () => {
       navigation.getParent()?.setOptions({
         tabBarStyle: {
           height: 90,
@@ -14,7 +14,7 @@ export default function HideBottomNav() {
         },
       });
     });
-    navigation.addListener('focus', async () => {
+    navigation.addListener('blur', async () => {
       navigation.getParent()?.setOptions({
         tabBarStyle: { maxHeight: 0, overflow: 'hidden' },
       });

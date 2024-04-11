@@ -1,12 +1,12 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import HideBottomNav from '../../../Components/HideBottomNav/HideBottomNav';
+import ShowBottomNav from '../../../Components/ShowBottomNav/ShowBottomNav';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import {
@@ -58,7 +58,7 @@ function CasesScreen() {
     }
   }
 
-  //HideBottomNav();
+  ShowBottomNav();
 
   return (
     <View style={styles.container}>
