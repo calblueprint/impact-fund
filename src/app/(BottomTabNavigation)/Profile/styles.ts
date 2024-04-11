@@ -87,16 +87,6 @@ export default StyleSheet.create({
   resetIcon: {
     marginBottom: 15,
   },
-  headerLine: {
-    borderBottom: 'solid',
-    borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0.5,
-    marginTop: 8,
-  },
-  headerContainer: {
-    marginTop: 63,
-    width: '100%',
-  },
   signOutButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',

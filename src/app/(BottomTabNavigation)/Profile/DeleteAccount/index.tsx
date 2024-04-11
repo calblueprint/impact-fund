@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
-import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
+import { CasesHeader } from '../../../../Components/HeaderComponents/HeaderComponents';
 import { useSession } from '../../../../context/AuthContext';
 function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();

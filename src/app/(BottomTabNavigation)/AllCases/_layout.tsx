@@ -1,9 +1,12 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
 
-import BackArrow from '../../../../assets/left-caret.svg';
-import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
+import {
+  AllCasesHeader,
+  BackButton,
+  ShareIcon,
+  CasesHeader,
+} from '../../../Components/HeaderComponents/HeaderComponents';
 import { CaseContextProvider } from '../../../context/CaseContext';
 
 export default function CasesLayout() {
@@ -12,13 +15,14 @@ export default function CasesLayout() {
       <Stack
         screenOptions={{
           headerShown: true,
-          headerBackTitleVisible: true,
+          headerBackTitleVisible: false,
+          headerShadowVisible: false,
         }}
       >
         <Stack.Screen
           name="index"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerTitle: props => <AllCasesHeader />,
           }}
         />
         <Stack.Screen
@@ -37,6 +41,9 @@ export default function CasesLayout() {
           name="CaseScreen/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButton backText="Cases" />,
+            headerRight: () => <ShareIcon />,
+            headerBackTitle: 'Cases',
           }}
         />
         <Stack.Screen

@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router/tabs';
 import React from 'react';
 import { View, Text } from 'react-native';
 
+import styles from './styles';
 import GreyHomeIcon from '../../../assets/bottom-tab-home-inactive.svg';
 import RedHomeIcon from '../../../assets/bottom-tab-home.svg';
 import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg';
@@ -17,30 +18,18 @@ interface TabBarItemProps {
 
 const TabBarItem = ({ icon, label, focused }: TabBarItemProps) => (
   <View
-    style={{
-      backgroundColor: focused ? colors.lightRed : 'transparent',
-      borderRadius: 10,
-      height: 55,
-      width: 66,
-    }}
+    style={[
+      styles.mainContainer,
+      { backgroundColor: focused ? colors.lightRed : 'transparent' },
+    ]}
   >
-    <View
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 8,
-      }}
-    >
+    <View style={styles.iconContainer}>
       {icon}
       <Text
-        style={{
-          fontSize: 9,
-          fontStyle: 'normal',
-          fontWeight: '600',
-          lineHeight: 21,
-          color: focused ? colors.midRed : colors.midGrey,
-        }}
+        style={[
+          styles.tabBarText,
+          { color: focused ? colors.midRed : colors.midGrey },
+        ]}
       >
         {label}
       </Text>
