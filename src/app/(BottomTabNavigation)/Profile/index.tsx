@@ -45,34 +45,26 @@ function ProfileScreen() {
             <Text style={styles.userText}>{session?.user?.email}</Text>
           </View>
           <View style={styles.line} />
-          <View>
+          <TouchableOpacity onPress={() => router.push('/Profile/EditName')}>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
                 <Person />
                 <Text style={styles.textElements}>Full name</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => router.push('/Profile/EditName')}
-              >
-                <Pencil />
-              </TouchableOpacity>
+              <Pencil />
             </View>
             <Text style={styles.userText}>
               {session?.user?.user_metadata.fullName}
             </Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.line} />
-          <View>
+          <TouchableOpacity onPress={() => router.push('/Profile/EditAddress')}>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
                 <Location />
                 <Text style={styles.textElements}>Street address</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => router.push('/Profile/EditAddress')}
-              >
-                <Pencil />
-              </TouchableOpacity>
+              <Pencil />
             </View>
             <Text style={styles.userText}>
               {session?.user?.user_metadata.streetName +
@@ -83,7 +75,7 @@ function ProfileScreen() {
                 ' ' +
                 session?.user?.user_metadata.zip}
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.actionsContainer}>
