@@ -11,6 +11,7 @@ export default StyleSheet.create({
   },
   casesContainer: {
     width: '85%',
+    height: '100%',
     flexDirection: 'column',
   },
   innerScroll: {

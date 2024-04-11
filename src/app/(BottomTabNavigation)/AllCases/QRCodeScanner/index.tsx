@@ -121,7 +121,11 @@ function QRCodeScannerScreen() {
       <Text style={styles.topText}>Point your Camera at the QR code.</Text>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
-        style={[styles.scanner]}
+        style={
+          scanned
+            ? [styles.scanner, styles.scanned]
+            : [styles.scanner, styles.notScanned]
+        }
       />
 
       {userCase && (

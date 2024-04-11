@@ -21,9 +21,15 @@ export default StyleSheet.create({
     height: 300,
     width: 300,
     border: 'solid',
-    borderWidth: 2,
+    borderWidth: 3,
     borderRadius: 5,
     marginVertical: 20,
+  },
+  scanned: {
+    borderColor: colors.green,
+  },
+  notScanned: {
+    borderColor: colors.black,
   },
   viewCaseButton: {
     border: 'solid',
