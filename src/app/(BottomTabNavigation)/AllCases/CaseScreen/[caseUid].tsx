@@ -9,6 +9,7 @@ import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryC
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
+import HideBottomNav from '../../../../Components/HideBottomNav/HideBottomNav';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -43,6 +44,8 @@ function CaseScreen() {
       }
     });
   }, [navigation]);
+
+  HideBottomNav();
 
   return (
     <View style={styles.container}>

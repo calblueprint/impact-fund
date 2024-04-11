@@ -6,6 +6,7 @@ import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
+import HideBottomNav from '../../../Components/HideBottomNav/HideBottomNav';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import {
@@ -13,7 +14,6 @@ import {
   updatePushToken,
 } from '../../../supabase/pushNotifications';
 import 'react-native-url-polyfill/auto';
-
 enum linkingEvents {
   ADD_CASE = 'addCase',
   NOTIFICATION = 'notification',
@@ -58,20 +58,7 @@ function CasesScreen() {
     }
   }
 
-  useEffect(() => {
-    // will detect any incoming link requests, assuming the app is already open
-    Linking.addEventListener('url', handleDeepLink);
-    if (!url) {
-      // if the link opened the app, must route to the initial incoming route
-      getInitialUrl();
-    }
-
-    if (session?.user) {
-      registerForPushNotifications().then(async (token: string) => {
-        updatePushToken(session.user.id, token);
-      });
-    }
-  }, []);
+  //HideBottomNav();
 
   return (
     <View style={styles.container}>
