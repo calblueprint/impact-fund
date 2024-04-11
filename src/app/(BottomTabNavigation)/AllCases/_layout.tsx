@@ -44,6 +44,7 @@ export default function CasesLayout() {
             headerLeft: () => <BackButton backText="Cases" />,
             headerRight: () => <ShareIcon />,
             headerBackTitle: 'Cases',
+            navigationBarHidden: true,
           }}
         />
         <Stack.Screen
