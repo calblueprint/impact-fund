@@ -36,8 +36,23 @@ export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
  * @returns readable date string
  */
 export function formatDate(dateObject: Date) {
-  const date = new Date(dateObject).toDateString().split(' ');
-  return `${date[1]} ${date[2]}, ${date[3]}`;
+  const date = new Date(dateObject);
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const monthName = months[date.getUTCMonth()];
+  return `${monthName} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
 }
 
 export function getStatusColor(status: string) {
