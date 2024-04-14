@@ -95,7 +95,6 @@ export function getStatusColor(status: string) {
 export async function openUrl(url: string) {
   const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
   if (supported) {
-    console.log(`routing user to: ${url}`);
     await Linking.openURL(url); // It will open the URL on browser.
   }
 }

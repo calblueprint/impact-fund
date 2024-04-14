@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
+    backgroundColor: colors.white,
   },
   contentContainer: {
     width: '84%',
@@ -14,19 +15,19 @@ export default StyleSheet.create({
   innerScroll: {
     paddingVertical: 20,
   },
-  titleContainer: {
-    alignItems: 'flex-start',
-    borderWidth: 1,
-  },
-  title: {
-    color: colors.black,
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'left',
+  headerContainer: {
+    flexDirection: 'column',
+    rowGap: 12,
+    paddingVertical: 16,
   },
   lineStyle: {
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
-    marginVertical: 12,
+  },
+  titleText: {
+    fontSize: 32,
+    lineHeight: 33,
+    fontStyle: 'normal',
+    fontWeight: '600',
   },
 });

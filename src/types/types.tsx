@@ -9,8 +9,8 @@ export interface CasePartial {
   id: CaseUid;
   approved: boolean;
   title: string;
-  blurb: string;
-  summary: string;
+  briefSummary: string;
+  description: string;
   caseSite: string;
   claimLink: string;
   optOutLink: string;
@@ -28,9 +28,9 @@ export interface Case extends CasePartial {
 export interface CaseSummaryProps {
   id: CaseUid;
   imageUrl: string;
-  blurb: string;
+  briefSummary: string;
   lawFirm: string;
-  summary: string;
+  description: string;
   date: Date;
 }
 
@@ -55,13 +55,6 @@ export interface User {
   state: string;
   zip: string;
 }
-
-export type Status = {
-  id: CaseUid;
-  userId: UserUid;
-  eligible: Eligibility;
-  excluded: boolean;
-};
 
 export interface EligibilityRequirement {
   eligibilityUid: EligibilityUid;

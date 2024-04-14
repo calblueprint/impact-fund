@@ -13,6 +13,7 @@ import {
   registerForPushNotifications,
   updatePushToken,
 } from '../../../supabase/pushNotifications';
+
 import 'react-native-url-polyfill/auto';
 enum linkingEvents {
   ADD_CASE = 'addCase',
@@ -20,7 +21,8 @@ enum linkingEvents {
 }
 
 function CasesScreen() {
-  const { allCases, loading } = useContext(CaseContext);
+  const { allCases } = useContext(CaseContext);
+  const { loading } = useContext(CaseContext);
   const { session } = useSession();
 
   const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
