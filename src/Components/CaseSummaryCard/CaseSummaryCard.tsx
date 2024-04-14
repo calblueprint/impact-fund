@@ -11,7 +11,7 @@ import { CaseSummaryProps } from '../../types/types';
 export default function CaseSummaryCard({
   id,
   imageUrl,
-  blurb,
+  briefSummary,
   lawFirm,
   date,
 }: CaseSummaryProps) {
@@ -38,7 +38,7 @@ export default function CaseSummaryCard({
               • {formatDate(date)}
             </Text>
           </View>
-          <Text style={styles.blurbText}>{blurb}</Text>
+          <Text style={styles.blurbText}>{briefSummary}</Text>
         </View>
         <View style={styles.bottomContainer}>
           <Text style={styles.bottomText}>Read full case summary</Text>

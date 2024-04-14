@@ -1,17 +1,13 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
-  const { name } = useLocalSearchParams() as unknown as { name: string };
-  const { email } = useLocalSearchParams() as unknown as { email: string };
-
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const { updateUser } = useSession();
