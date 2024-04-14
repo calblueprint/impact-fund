@@ -5,65 +5,67 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { useSession } from '../../../../context/AuthContext';
 import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
   const { email } = useLocalSearchParams() as unknown as { email: string };
 
+  const { sendOtp } = useSession();
+
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const [disableButton, setDisableButton] = useState<boolean>(false);
+  const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onChangePassword = (text: string) => {
-    setDisableButton(false);
-    setErrorMessage('');
+    setErrorExists(false);
     setPassword(text);
   };
 
   const onChangeConfirmPassword = (text: string) => {
-    setDisableButton(false);
-    setErrorMessage('');
+    setErrorExists(false);
     setConfirmPassword(text);
   };
 
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
     if (!lengthRegex.test(password)) {
-      setDisableButton(true);
+      setErrorExists(true);
       setErrorMessage('Your password needs at least six characters!');
       return false;
     }
+    setErrorExists(false);
     return true;
   };
 
   const validateConfirmPassword = () => {
     if (confirmPassword !== password) {
-      setDisableButton(true);
+      setErrorExists(true);
       setErrorMessage('Your passwords should match each other.');
       return false;
     }
+    setErrorExists(false);
     return true;
   };
 
   const handleSubmit = async () => {
-    setDisableButton(true);
-    if (validatePassword() && validateConfirmPassword()) {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-      });
+    setErrorExists(true);
+    if (validateConfirmPassword() && validatePassword()) {
+      const { error } = await sendOtp(email);
       if (error) {
-        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
-        return;
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      } else {
+        router.push({
+          pathname: 'OTPFlow/OTPVerify',
+          params: { name, email, password },
+        });
+        setPassword('');
+        setConfirmPassword('');
       }
-      router.push({
-        pathname: 'OTPFlow/OTPVerify',
-        params: { name, email, password },
-      });
-      setPassword('');
-      setConfirmPassword('');
     }
   };
 
@@ -103,16 +105,16 @@ export default function SignUpScreen() {
         />
       </View>
 
-      <View>
+      <View style={styles.errorMessageContainer}>
         <Text style={styles.errorMessage}>
-          {disableButton ? errorMessage : ' '}
+          {errorExists ? errorMessage : ' '}
         </Text>
       </View>
 
       <TouchableOpacity
-        disabled={password === '' || confirmPassword === '' || disableButton}
+        disabled={password === '' || confirmPassword === '' || errorExists}
         style={
-          password === '' || confirmPassword === '' || disableButton
+          password === '' || confirmPassword === '' || errorExists
             ? styles.nextButtonGray
             : styles.nextButton
         }

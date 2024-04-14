@@ -71,14 +71,15 @@ export default StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
   },
+  errorMessageContainer: {
+    width: '75%',
+    marginTop: 10,
+    marginBottom: 65,
+  },
   errorMessage: {
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
-    width: '81%',
-    marginTop: 10,
-    marginRight: 130,
-    marginBottom: 65,
   },
   inputBox: {
     marginTop: 11,

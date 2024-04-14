@@ -25,10 +25,6 @@ export default function SignUpScreen() {
     setEmail(text);
   };
 
-  const validateName = (): boolean => {
-    return name.length !== 0;
-  };
-
   const validateEmail = (): boolean => {
     try {
       const emailSchema = z.string().email();
@@ -45,14 +41,16 @@ export default function SignUpScreen() {
 
   const handleSubmit = async () => {
     const emailDoesExist = await emailExists(email);
-    if (validateName() && validateEmail() && !emailDoesExist) {
-      router.push({
-        pathname: 'SignUp/Password',
-        params: { name, email },
-      });
-    } else {
-      setErrorExists(true);
-      setErrorMessage('Email already exists!');
+    if (validateEmail()) {
+      if (!emailDoesExist) {
+        router.push({
+          pathname: 'SignUp/Password',
+          params: { name, email },
+        });
+      } else {
+        setErrorExists(true);
+        setErrorMessage('Email already exists!');
+      }
     }
   };
 
@@ -89,7 +87,8 @@ export default function SignUpScreen() {
           autoCapitalization={false}
         />
       </View>
-      <View>
+
+      <View style={styles.errorMessageContainer}>
         <Text style={styles.errorMessage}>
           {errorExists ? errorMessage : ' '}
         </Text>
