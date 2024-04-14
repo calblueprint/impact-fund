@@ -8,10 +8,10 @@ import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummaryContent({
   imageUrl,
-  blurb,
+  briefSummary,
   lawFirm,
   date,
-  summary,
+  description,
 }: CaseSummaryProps) {
   return (
     <View style={styles.container}>
@@ -26,7 +26,7 @@ export default function CaseSummaryContent({
           transition={300}
         />
         <View style={styles.blurbContainer}>
-          <Text style={styles.blurbText}>{blurb}</Text>
+          <Text style={styles.blurbText}>{briefSummary}</Text>
           <View style={styles.inLineSubInfo}>
             <Text style={[styles.subText, styles.lawFirmText]}>{lawFirm}</Text>
             <Text style={[styles.subText, styles.dateText]}>
@@ -35,7 +35,7 @@ export default function CaseSummaryContent({
             </Text>
           </View>
         </View>
-        <Text style={styles.summaryText}>{summary}</Text>
+        <Text style={styles.summaryText}>{description}</Text>
       </ScrollView>
     </View>
   );

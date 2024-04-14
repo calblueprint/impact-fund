@@ -28,13 +28,6 @@ export default function EligibilityForm() {
   >([]);
   const [checkCount, setCheckCount] = useState(0);
 
-  async function fetchEligibilityRequirments() {
-    if (caseUid) {
-      const requirements = await getRequirementsByCaseUid(caseUid);
-      setEligibilityRequirements(requirements);
-    }
-  }
-
   async function fetchCaseData() {
     if (caseUid) {
       const caseData = await getCaseById(caseUid);
@@ -42,11 +35,22 @@ export default function EligibilityForm() {
     }
   }
 
-  async function updateEligibility(status: Eligibility) {
+  async function fetchEligibilityRequirments() {
+    if (caseUid) {
+      const requirements = await getRequirementsByCaseUid(caseUid);
+      setEligibilityRequirements(requirements);
+    }
+  }
+
+  async function confirmEligibility() {
     if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, status);
+      await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
       router.back();
     }
+  }
+
+  function confirmIneligibility() {
+    router.push(`AllCases/EligibilityForm/ConfirmIneligibility/${caseUid}`);
   }
 
   useEffect(() => {
@@ -101,7 +105,7 @@ export default function EligibilityForm() {
               <View style={styles.buttonsContainer}>
                 <TouchableOpacity
                   style={[styles.buttonBase, styles.ineligbleButton]}
-                  onPress={() => updateEligibility(Eligibility.INELIGIBLE)}
+                  onPress={() => confirmIneligibility()}
                 >
                   <Ex />
                   <Text style={styles.bodyText}>No, I don't</Text>
@@ -113,7 +117,7 @@ export default function EligibilityForm() {
                       ? [styles.buttonBase, styles.eligibleButton]
                       : [styles.buttonBase, styles.inactiveEligibleButton]
                   }
-                  onPress={() => updateEligibility(Eligibility.ELIGIBLE)}
+                  onPress={() => confirmEligibility()}
                 >
                   <Check />
                   <Text style={[styles.bodyText, styles.eligibleButtonText]}>

@@ -50,6 +50,12 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
+          name="EligibilityForm/ConfirmIneligibility/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
           name="Forms/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
@@ -69,6 +75,18 @@ export default function CasesLayout() {
         />
         <Stack.Screen
           name="Updates/UpdateView/[updateUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="OptOut/[caseUid]"
+          options={{
+            headerTitle: props => <CasesHeader />,
+          }}
+        />
+        <Stack.Screen
+          name="OptOut/ConfirmOptOut/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
           }}
