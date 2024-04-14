@@ -8,12 +8,21 @@ import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
 import OptOut from '../../../assets/opt-out.svg';
+import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Case, Eligibility } from '../../types/types';
 
 interface EligibilityCardProps {
   caseData: Case;
   status: Eligibility;
 }
+
+const ensureURLFormat = (url: string | null | undefined) => {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return `https://${url}`;
+};
 
 export default function EligibilityCard({
   caseData,
@@ -50,9 +59,17 @@ export default function EligibilityCard({
       </View>
     );
   } else if (status === Eligibility.ELIGIBLE) {
+    const claimLink = caseData.claimLink
+      ? ensureURLFormat(caseData.claimLink)
+      : null;
+    const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
+
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={onPressHandler}
+        >
           <View style={styles.leftContainer}>
             <Fileclaim />
           </View>
@@ -76,7 +93,14 @@ export default function EligibilityCard({
           <View style={styles.horizontalLine} />
         </View>
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            router.push({
+              pathname: `/AllCases/OptOut/${caseData.id}`,
+            });
+          }}
+        >
           <View style={styles.leftContainer}>
             <OptOut />
           </View>
