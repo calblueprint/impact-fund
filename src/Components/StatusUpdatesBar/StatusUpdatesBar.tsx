@@ -19,22 +19,26 @@ export default function StatusUpdatesBar({
   const statusColor = getStatusColor(status);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <Text style={styles.statusText}>Case Status:</Text>
-        <TouchableOpacity
-          style={styles.updatesButton}
-          onPress={() => {
-            router.push({ pathname: `AllCases/Updates/${caseUid}` });
-          }}
-        >
+    <TouchableOpacity
+      style={styles.updatesButton}
+      onPress={() => {
+        router.push({ pathname: `AllCases/Updates/${caseUid}` });
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.topContainer}>
+          <Text style={styles.statusText}>Case Status:</Text>
+
           <Text style={styles.buttonText}>View all updates</Text>
           <RightCaret />
-        </TouchableOpacity>
+        </View>
+
+        <View style={[styles.statusContainer, statusColor.background]}>
+          <Text style={[styles.statusTextColor, statusColor.text]}>
+            {status}
+          </Text>
+        </View>
       </View>
-      <View style={[styles.statusContainer, statusColor.background]}>
-        <Text style={[styles.statusTextColor, statusColor.text]}>{status}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
