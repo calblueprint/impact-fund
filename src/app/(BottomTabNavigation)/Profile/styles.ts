@@ -63,7 +63,7 @@ export default StyleSheet.create({
     lineHeight: 33,
     color: colors.black,
     alignSelf: 'flex-start',
-    marginTop: 39,
+    marginTop: '2%',
     marginBottom: 15,
   },
   userInfo: {

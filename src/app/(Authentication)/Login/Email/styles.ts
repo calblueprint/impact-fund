@@ -26,7 +26,7 @@ export default StyleSheet.create({
     color: colors.black,
     fontSize: 24,
     fontWeight: '800',
-    marginRight: 35,
+    marginRight: '2%',
   },
   inputBox: {
     marginTop: 40,

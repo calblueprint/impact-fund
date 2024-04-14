@@ -24,7 +24,7 @@ export default StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    marginTop: 310,
+    marginTop: 210,
   },
   welcomeText: {
     color: colors.black,
