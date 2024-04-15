@@ -4,11 +4,14 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   allCasesBorder: {
-    paddingRight: 230,
-    marginTop: 14,
+    width: '94%',
+    paddingTop: 14,
     paddingBottom: 14,
     borderBottomWidth: 1,
     borderBottomColor: colors.darkGrey,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   headerText: {
     color: colors.midRed,
@@ -24,8 +27,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  tenPixelsRightPadding: {
-    paddingRight: 10,
+    columnGap: 10,
   },
 });

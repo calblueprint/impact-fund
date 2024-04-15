@@ -43,7 +43,6 @@ export default function CasesLayout() {
             headerTitle: props => <CasesHeader />,
             headerLeft: () => <BackButton backText="Cases" />,
             headerRight: () => <ShareIcon />,
-            headerBackTitle: 'Cases',
             navigationBarHidden: true,
           }}
         />
