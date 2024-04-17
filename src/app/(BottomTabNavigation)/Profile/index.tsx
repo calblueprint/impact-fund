@@ -33,7 +33,7 @@ function ProfileScreen() {
         </View>
         <Text style={styles.title}>Settings</Text>
         <View style={styles.actionsContainer}>
-          <View>
+          <View style={styles.profileDetailsBox}>
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
                 <Envelope />
@@ -44,20 +44,28 @@ function ProfileScreen() {
             <Text style={styles.userText}>{session?.user?.email}</Text>
           </View>
           <View style={styles.line} />
-          <TouchableOpacity onPress={() => router.push('/Profile/EditName')}>
-            <View style={styles.actionElementTop}>
-              <View style={styles.iconTitle}>
-                <Person />
-                <Text style={styles.textElements}>Full name</Text>
+          <TouchableOpacity
+            style={styles.profileDetailsBox}
+            onPress={() => router.push('/Profile/EditName')}
+          >
+            <Person />
+            <View style={styles.textContainer}>
+              <View style={styles.actionElementTop}>
+                <View style={styles.iconTitle}>
+                  <Text style={styles.textElements}>Full name</Text>
+                </View>
+                <Pencil />
               </View>
-              <Pencil />
+              <Text style={styles.userText}>
+                {session?.user?.user_metadata.fullName}
+              </Text>
             </View>
-            <Text style={styles.userText}>
-              {session?.user?.user_metadata.fullName}
-            </Text>
           </TouchableOpacity>
           <View style={styles.line} />
-          <TouchableOpacity onPress={() => router.push('/Profile/EditAddress')}>
+          <TouchableOpacity
+            style={styles.profileDetailsBox}
+            onPress={() => router.push('/Profile/EditAddress')}
+          >
             <View style={styles.actionElementTop}>
               <View style={styles.iconTitle}>
                 <Location />
@@ -79,6 +87,7 @@ function ProfileScreen() {
 
         <View style={styles.actionsContainer}>
           <TouchableOpacity
+            style={styles.profileDetailsBox}
             onPress={() =>
               router.push({
                 pathname: '/Profile/ResetConfirm',
@@ -100,7 +109,8 @@ function ProfileScreen() {
               onPress={() => {
                 router.push('/Profile/DeleteAccount');
               }}
-              style={styles.bottomPush}
+              // style={styles.bottomPush}
+              style={styles.profileDetailsBox}
             >
               <View style={styles.actionElementTop}>
                 <View style={styles.iconTitle}>
