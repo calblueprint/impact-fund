@@ -1,6 +1,6 @@
-import { router, useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
 // eslint-disable-next-line import/namespace
