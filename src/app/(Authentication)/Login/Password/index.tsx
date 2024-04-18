@@ -22,7 +22,7 @@ export default function LoginScreen() {
 
   async function signIn() {
     const isPassword = await sessionHandler.signInWithEmail(email, password);
-    if (!isPassword) {
+    if (isPassword.error != null) {
       setErrorExists(true);
       setErrorMessage(
         'Oh no! The password you entered is incorrect, please try again.',
