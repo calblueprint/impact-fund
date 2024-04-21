@@ -25,21 +25,17 @@ export default function StatusUpdatesBar({
         router.push({ pathname: `AllCases/Updates/${caseUid}` });
       }}
     >
-      <View style={styles.container}>
-        <View style={styles.topContainer}>
-          <Text style={styles.statusText}>Case Status:</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.statusText}>Case Status:</Text>
 
-          <View style={styles.updatesContainer}>
-            <Text style={styles.buttonText}>View all updates</Text>
-            <RightCaret style={styles.icon} />
-          </View>
+        <View style={styles.updatesContainer}>
+          <Text style={styles.buttonText}>View all updates</Text>
+          <RightCaret style={styles.icon} />
         </View>
+      </View>
 
-        <View style={[styles.statusContainer, statusColor.background]}>
-          <Text style={[styles.statusTextColor, statusColor.text]}>
-            {status}
-          </Text>
-        </View>
+      <View style={[styles.statusContainer, statusColor.background]}>
+        <Text style={[styles.statusTextColor, statusColor.text]}>{status}</Text>
       </View>
     </TouchableOpacity>
   );

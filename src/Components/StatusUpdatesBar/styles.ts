@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from '../../styles/colors';
 export default StyleSheet.create({
-  container: {
+  updatesButton: {
     width: '100%',
     alignItems: 'center',
     flexDirection: 'column',
@@ -10,7 +10,6 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     padding: 16,
     rowGap: 10,
-
     borderWidth: 0.5,
     borderRadius: 5,
     borderStyle: 'solid',
@@ -22,7 +21,7 @@ export default StyleSheet.create({
     shadowRadius: 0.05,
     elevation: 1,
   },
-  topContainer: {
+  textContainer: {
     width: '100%',
     height: 31,
     flexDirection: 'row',
@@ -31,11 +30,6 @@ export default StyleSheet.create({
 
     borderBottomWidth: 0.5,
     borderBottomColor: colors.midGrey,
-  },
-  updatesButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 16,
   },
   statusContainer: {
     height: 29,
