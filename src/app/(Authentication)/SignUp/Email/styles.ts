@@ -13,14 +13,12 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   contentContainer: {
-    marginTop: 100,
+    marginTop: 30,
     width: '81%',
-    alignItems: 'center',
   },
   backButton: {
     marginTop: 80,
     marginBottom: 40,
-    marginRight: 180,
   },
   displayText: {
     marginRight: 253,
@@ -46,7 +44,6 @@ export default StyleSheet.create({
   },
   nextButton: {
     borderWidth: 1,
-    width: 310,
     height: 50,
     padding: 15,
     flexDirection: 'row',

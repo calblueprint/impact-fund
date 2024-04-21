@@ -11,6 +11,9 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  contentContainer: {
+    width: '81%',
+  },
   backText: {
     color: colors.midGrey,
     fontSize: 16,
@@ -37,7 +40,6 @@ export default StyleSheet.create({
   errorMessageBox: {
     marginTop: 13,
     height: 50,
-    width: 310,
   },
   errorMessageText: {
     color: colors.darkRed,
@@ -51,7 +53,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: 310,
     marginTop: 70,
   },
   forgotPasswordText: {

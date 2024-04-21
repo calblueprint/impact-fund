@@ -26,16 +26,15 @@ export default StyleSheet.create({
     marginBottom: 27,
   },
   inputBox: {
-    width: 315,
-    alignSelf: 'flex-start',
     marginBottom: 15,
+  },
+  smallInput: {
+    width: '48%',
   },
   stateLine: {
     flexDirection: 'row',
-    alignSelf: 'flex-start',
     justifyContent: 'space-between',
-    width: 310,
-    marginRight: 100,
+    width: '100%',
   },
   submitText: {
     fontSize: 17,
@@ -52,7 +51,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5,
     marginTop: 39,
-    width: 310,
     height: 50,
   },
 });

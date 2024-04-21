@@ -26,7 +26,6 @@ export default StyleSheet.create({
   inputBox: {
     marginTop: 11,
     width: '100%',
-    alignItems: 'center',
   },
   inputWrap: {
     flexDirection: 'row',
@@ -34,10 +33,9 @@ export default StyleSheet.create({
   },
   stateLine: {
     flexDirection: 'row',
-    alignSelf: 'flex-start',
     justifyContent: 'space-between',
-    width: 310,
     marginTop: 11,
+    width: '100%',
   },
   nextText: {
     color: colors.white,
@@ -48,7 +46,6 @@ export default StyleSheet.create({
   nextButton: {
     marginTop: 40,
     borderRadius: 3,
-    width: 310,
     height: 50,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -64,5 +61,8 @@ export default StyleSheet.create({
   check: {
     flexDirection: 'row',
     columnGap: 1,
+  },
+  smallInput: {
+    width: '48%',
   },
 });

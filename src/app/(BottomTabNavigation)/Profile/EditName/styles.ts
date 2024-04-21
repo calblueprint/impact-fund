@@ -45,7 +45,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     marginTop: 39,
-    width: 310,
     height: 50,
   },
 });

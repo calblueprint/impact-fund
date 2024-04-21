@@ -10,6 +10,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  contentContainer: {
+    width: '81%',
+  },
   header: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
@@ -44,14 +47,13 @@ export default StyleSheet.create({
   },
   nextText: {
     color: colors.white,
-    marginRight: 200,
+    marginLeft: 15,
     fontSize: 14,
     opacity: 1,
     fontWeight: '600',
   },
   nextButton: {
-    alignItems: 'center',
-    width: 310,
+    justifyContent: 'space-between',
     height: 50,
     padding: 15,
     flexDirection: 'row',
@@ -68,6 +70,5 @@ export default StyleSheet.create({
   inputBox: {
     marginTop: 11,
     width: '100%',
-    alignItems: 'center',
   },
 });

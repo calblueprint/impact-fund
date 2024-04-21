@@ -38,44 +38,51 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <BackButton />
-      </TouchableOpacity>
-      <Text style={styles.instructionText}>Please enter your password.</Text>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessageText}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
-
-      <View style={styles.nextLine}>
-        <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+      <View style={styles.contentContainer}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <BackButton />
         </TouchableOpacity>
+        <Text style={styles.instructionText}>Please enter your password.</Text>
 
-        <View style={styles.buttonContainer}>
-          <ButtonBlack
-            onPress={() => signIn()}
-            disabled={password === '' || errorExists}
+        <View style={styles.inputBox}>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
+
+        <View style={styles.errorMessageBox}>
+          <Text style={styles.errorMessageText}>
+            {errorExists ? errorMessage : ' '}
+          </Text>
+        </View>
+
+        <View style={styles.nextLine}>
+          <TouchableOpacity
+            onPress={() => router.push('/OTPFlow/OTPEmailInput')}
           >
-            <View style={styles.ButtonLine}>
-              <Text style={styles.nextText}>Next</Text>
-              <Arrow style={{ marginLeft: 18 }} />
-            </View>
-          </ButtonBlack>
+            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+          </TouchableOpacity>
+
+          <View style={styles.buttonContainer}>
+            <ButtonBlack
+              onPress={() => signIn()}
+              disabled={password === '' || errorExists}
+            >
+              <View style={styles.ButtonLine}>
+                <Text style={styles.nextText}>Next</Text>
+                <Arrow style={{ marginLeft: 18 }} />
+              </View>
+            </ButtonBlack>
+          </View>
         </View>
       </View>
     </View>

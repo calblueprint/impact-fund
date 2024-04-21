@@ -10,6 +10,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  contentContainer: {
+    width: '81%',
+  },
   header: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
@@ -47,17 +50,14 @@ export default StyleSheet.create({
     fontSize: 14,
     opacity: 1,
     fontWeight: '600',
+    marginLeft: 15,
   },
   nextButton: {
-    backgroundColor: colors.black,
-    alignItems: 'center',
     borderRadius: 3,
-    borderColor: colors.black,
     borderWidth: 1,
-    width: 310,
     height: 50,
-    padding: 15,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   errorMessage: {
     color: colors.darkRed,
@@ -66,11 +66,9 @@ export default StyleSheet.create({
     marginTop: 10,
     marginBottom: 65,
     justifyContent: 'flex-start',
-    width: 310,
   },
   inputBox: {
     marginTop: 11,
     width: '100%',
-    alignItems: 'center',
   },
 });

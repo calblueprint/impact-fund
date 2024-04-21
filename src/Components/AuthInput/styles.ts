@@ -10,12 +10,12 @@ export default StyleSheet.create({
   },
   inputBox: {
     height: 40,
-    width: 310,
+    width: '100%',
     borderBottomWidth: 0.75,
     borderColor: colors.darkGrey,
   },
   halfWidth: {
-    width: 140,
+    width: '100%',
   },
   inputFocused: {
     borderBottomWidth: 2,

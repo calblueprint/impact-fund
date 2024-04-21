@@ -99,7 +99,7 @@ export default function SignUpScreen() {
         </View>
 
         <View style={styles.stateLine}>
-          <View>
+          <View style={styles.smallInput}>
             <AuthInput
               input={state}
               onChangeInput={onChangeState}
@@ -112,7 +112,7 @@ export default function SignUpScreen() {
             />
           </View>
 
-          <View>
+          <View style={styles.smallInput}>
             <AuthInput
               input={zipcode}
               onChangeInput={onChangeZipcode}

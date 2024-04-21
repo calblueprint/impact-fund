@@ -95,7 +95,7 @@ function EditNameScreen() {
           />
         </View>
         <View style={styles.stateLine}>
-          <View>
+          <View style={styles.smallInput}>
             <AuthInput
               input={usState}
               onChangeInput={onChangeState}
@@ -107,7 +107,7 @@ function EditNameScreen() {
               isHalfWidth
             />
           </View>
-          <View>
+          <View style={styles.smallInput}>
             <AuthInput
               input={zipcode}
               onChangeInput={onChangeZipcode}

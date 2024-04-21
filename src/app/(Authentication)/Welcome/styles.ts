@@ -37,6 +37,7 @@ export default StyleSheet.create({
   orLine: {
     flexDirection: 'row',
     marginBottom: 7.5,
+    width: '89%',
   },
   orStyle: {
     fontWeight: '200',
@@ -57,7 +58,6 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   baseButton: {
-    width: 310,
     height: 55,
     borderRadius: 3,
     borderBottomWidth: 2.25,

@@ -71,54 +71,56 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
+      <View style={styles.contentContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
+            <BackButton />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.instructionText}>Next, make a password.</Text>
+
+        <View style={styles.inputBox}>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
+
+        <View style={styles.inputBox}>
+          <AuthInput
+            input={confirmPassword}
+            onChangeInput={onChangeConfirmPassword}
+            labelText="Confirm password"
+            placeholderText="Confirm password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
+
+        <View>
+          <Text style={styles.errorMessage}>
+            {disableButton ? errorMessage : ' '}
+          </Text>
+        </View>
+
+        <ButtonBlack
+          disabled={password === '' || confirmPassword === '' || disableButton}
+          style={styles.nextButton}
+          onPress={handleSubmit}
         >
-          <BackButton />
-        </TouchableOpacity>
+          <Text style={styles.nextText}>Continue</Text>
+          <Arrow style={{ marginRight: 15 }} />
+        </ButtonBlack>
       </View>
-      <Text style={styles.instructionText}>Next, make a password.</Text>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={confirmPassword}
-          onChangeInput={onChangeConfirmPassword}
-          labelText="Confirm password"
-          placeholderText="Confirm password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-
-      <View>
-        <Text style={styles.errorMessage}>
-          {disableButton ? errorMessage : ' '}
-        </Text>
-      </View>
-
-      <ButtonBlack
-        disabled={password === '' || confirmPassword === '' || disableButton}
-        style={styles.nextButton}
-        onPress={handleSubmit}
-      >
-        <Text style={styles.nextText}>Continue</Text>
-        <Arrow />
-      </ButtonBlack>
     </View>
   );
 }

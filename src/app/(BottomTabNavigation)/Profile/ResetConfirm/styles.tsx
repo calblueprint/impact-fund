@@ -39,7 +39,6 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '800',
     color: colors.black,
-    marginTop: 25,
   },
   nextButtonBase: {
     flexDirection: 'row',
@@ -59,6 +58,6 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   nextButton: {
-    marginTop: 100,
+    marginTop: 400,
   },
 });
