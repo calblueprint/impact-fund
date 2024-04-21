@@ -13,21 +13,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   contentContainer: {
-    marginTop: 30,
-    width: '81%',
+    width: '84%',
   },
   backButton: {
     marginTop: 80,
     marginBottom: 40,
-  },
-  displayText: {
-    marginRight: 253,
-    fontSize: 13,
-    opacity: 0.35,
-  },
-  displayTextEmail: {
-    fontSize: 13,
-    opacity: 0.35,
   },
   instructionText: {
     color: colors.black,
