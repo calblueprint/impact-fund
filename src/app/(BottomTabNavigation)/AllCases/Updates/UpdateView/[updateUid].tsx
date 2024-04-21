@@ -33,26 +33,28 @@ export default function UpdateView() {
         <>
           <ScrollView
             style={styles.outerScroll}
-            contentContainerStyle={styles.innerScroll}
+            // contentContainerStyle={styles.innerScroll}
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.titleContainer}>
-              <NotificationBell />
-              <View style={styles.headerText}>
-                <Text style={styles.categoryText}>{update.category}</Text>
-                <Text style={styles.titleText}>{update.title}</Text>
+            <View style={styles.innerScroll}>
+              <View style={styles.titleContainer}>
+                <NotificationBell />
+                <View style={styles.headerText}>
+                  <Text style={styles.categoryText}>{update.category}</Text>
+                  <Text style={styles.titleText}>{update.title}</Text>
+                </View>
               </View>
+              <View style={styles.inLineSubInfo}>
+                <Text style={[styles.subText, styles.lawFirmText]}>
+                  {update.lawFirm}
+                </Text>
+                <Text style={[styles.subText, styles.dateText]}>
+                  {' '}
+                  • {formatDate(update.date)}
+                </Text>
+              </View>
+              <Text style={styles.bodyText}>{update.summary}</Text>
             </View>
-            <View style={styles.inLineSubInfo}>
-              <Text style={[styles.subText, styles.lawFirmText]}>
-                {update.lawFirm}
-              </Text>
-              <Text style={[styles.subText, styles.dateText]}>
-                {' '}
-                • {formatDate(update.date)}
-              </Text>
-            </View>
-            <Text style={styles.bodyText}>{update.summary}</Text>
           </ScrollView>
         </>
       )}

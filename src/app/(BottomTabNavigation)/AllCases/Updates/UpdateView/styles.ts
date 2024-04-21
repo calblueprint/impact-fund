@@ -11,11 +11,11 @@ export default StyleSheet.create({
   },
   outerScroll: {
     width: '93%',
-    paddingVertical: 20,
   },
   innerScroll: {
     paddingVertical: 32,
     paddingHorizontal: 23,
+    marginVertical: 20,
     rowGap: 20,
     backgroundColor: colors.white,
 
