@@ -35,7 +35,7 @@ export interface AuthState {
     password: string,
     options: object,
   ) => Promise<AuthResponse>;
-  signInWithEmail: (email: string, password: string) => Promise<AuthResponse>;
+  signInWithEmail: (email: string, password: string) => Promise<AuthError>;
   fullySignUpUser: (
     fullName: string,
     email: string,
@@ -46,7 +46,7 @@ export interface AuthState {
     zip: string,
   ) => Promise<UserResponse>;
   sendOtp: (email: string) => Promise<AuthResponse>;
-  verifyOtp: (email: string, token: string) => Promise<AuthResponse>;
+  verifyOtp: (email: string, token: string) => Promise<AuthError>;
   resendOtp: (email: string) => Promise<AuthResponse>;
   updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
   resetPassword: (email: string) => Promise<
@@ -102,12 +102,20 @@ export function AuthContextProvider({
   };
 
   const signInWithEmail = async (email: string, password: string) => {
-    const value = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    }); // will trigger the use effect to update the session
-    setUser(value.data.user);
-    return value;
+    try {
+      const value = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      }); // will trigger the use effect to update the session
+      if (value.error) {
+        throw value.error;
+      }
+      setUser(value.data.user);
+      return null;
+    } catch (error) {
+      console.warn(error);
+      return error;
+    }
   };
 
   const signUp = async (email: string, password: string, metaData: object) => {
@@ -154,11 +162,14 @@ export function AuthContextProvider({
           fullName,
         });
       }
+      if (value.error) {
+        throw value.error;
+      }
       return value;
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('(signUpUser)', error);
-      throw error;
+      return error;
     }
   };
 
@@ -170,33 +181,46 @@ export function AuthContextProvider({
 
   const sendOtp = async (email: string) => {
     try {
-      return await supabase.auth.signInWithOtp({ email });
+      const value = await supabase.auth.signInWithOtp({ email });
+      if (value.error) {
+        throw value.error;
+      }
+      return value;
     } catch (error) {
       console.warn('there was an error sending your one time passcode');
-      throw error;
+      return error;
     }
   };
 
   const verifyOtp = async (email: string, token: string) => {
-    const value = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email',
-    });
-
-    // if (value.data.user) setUser(value.data.user);
-    return value;
+    try {
+      const value = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: 'email',
+      });
+      if (value.error) {
+        throw value.error;
+      }
+      return null;
+    } catch (error) {
+      console.warn('otp not working uh oh');
+      return error;
+    }
   };
 
   const resendOtp = async (email: string) => {
     try {
-      return await supabase.auth.resend({
+      const value = await supabase.auth.resend({
         type: 'signup',
         email,
       });
+      if (value.error) {
+        return value.error;
+      }
     } catch (error) {
       console.warn('there was an error resending your one time passcode');
-      throw error;
+      return error;
     }
   };
 

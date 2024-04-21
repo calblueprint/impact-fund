@@ -22,7 +22,7 @@ export default function LoginScreen() {
   };
 
   async function signIn() {
-    const { error } = await sessionHandler.signInWithEmail(email, password);
+    const error = await sessionHandler.signInWithEmail(email, password);
     console.log(error);
     if (error != null) {
       setErrorExists(true);
