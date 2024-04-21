@@ -63,7 +63,7 @@ export default StyleSheet.create({
     lineHeight: 33,
     color: colors.black,
     alignSelf: 'flex-start',
-    marginTop: '2%',
+    marginTop: '10%',
     marginBottom: 15,
   },
   userInfo: {
@@ -102,7 +102,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: 45,
+    height: 52,
     paddingHorizontal: 20,
     borderRadius: 5,
     backgroundColor: colors.black,
@@ -110,7 +110,7 @@ export default StyleSheet.create({
   signOutText: {
     color: colors.white,
     fontWeight: '700',
-    fontSize: 15,
+    fontSize: 16,
   },
   contentContainer: {
     width: '84%',

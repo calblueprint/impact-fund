@@ -10,30 +10,24 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  backText: {
-    color: colors.midGrey,
-    fontSize: 16,
-    fontWeight: '400',
-    marginLeft: 7,
+  contentContainer: {
+    width: '81%',
   },
   backButton: {
-    marginTop: 51,
-    marginBottom: 55,
+    marginTop: 70,
+    marginBottom: 35,
     alignSelf: 'flex-start',
-    marginLeft: 22,
   },
   instructionText: {
     color: colors.black,
     fontSize: 24,
     fontWeight: '800',
     alignSelf: 'flex-start',
-    marginLeft: 29,
     marginBottom: 27,
   },
   inputBox: {
     width: 315,
     alignSelf: 'flex-start',
-    marginLeft: 29,
     marginBottom: 15,
   },
   stateLine: {
@@ -41,17 +35,12 @@ export default StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'space-between',
     width: 310,
-    marginLeft: 29,
     marginRight: 100,
   },
   submitText: {
     fontSize: 17,
     color: colors.white,
     fontWeight: '600',
-    marginLeft: 29,
-  },
-  submitButtonDisabled: {
-    opacity: 0.35,
   },
   submitIcon: {
     marginLeft: 20,
@@ -60,11 +49,10 @@ export default StyleSheet.create({
     backgroundColor: colors.black,
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginLeft: 29,
+    justifyContent: 'center',
     borderRadius: 5,
     marginTop: 39,
-    width: 150,
+    width: 310,
     height: 50,
   },
 });

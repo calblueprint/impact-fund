@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
@@ -75,7 +76,7 @@ export default function SignUpScreen() {
           style={styles.backButton}
           onPress={() => router.back()}
         >
-          <Text style={styles.backText}>Back</Text>
+          <BackButton />
         </TouchableOpacity>
       </View>
       <Text style={styles.instructionText}>Next, make a password.</Text>

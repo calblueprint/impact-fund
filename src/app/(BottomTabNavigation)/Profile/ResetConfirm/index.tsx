@@ -4,9 +4,11 @@ import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Envelope from '../../../../../assets/reset-password-envelope.svg';
 import Refresh from '../../../../../assets/reset-password-refresh.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 
 export default function ResetConfirm() {
@@ -35,7 +37,7 @@ export default function ResetConfirm() {
           style={styles.backContainer}
           onPress={() => router.back()}
         >
-          <Text style={styles.backText}>Back</Text>
+          <BackButton />
         </TouchableOpacity>
 
         <Text style={styles.titleText}>Reset Password</Text>
@@ -59,17 +61,14 @@ export default function ResetConfirm() {
         </View>
 
         <View style={styles.nextButton}>
-          <TouchableOpacity
-            style={
-              email === '' || errorExists
-                ? [styles.nextButtonBase, styles.nextButtonDisabled]
-                : [styles.nextButtonBase, styles.nextButtonActive]
-            }
+          <ButtonBlack
+            disabled={email === '' || errorExists}
+            style={styles.nextButtonBase}
             onPress={resetPassword}
           >
             <Text style={styles.nextText}>Continue</Text>
-            <Arrow />
-          </TouchableOpacity>
+            <Arrow style={{ marginRight: 12 }} />
+          </ButtonBlack>
         </View>
       </View>
     </View>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
@@ -67,77 +68,78 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header} />
-      <Text style={styles.instructionText}>Last, enter your address.</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <BackButton />
+        </TouchableOpacity>
+        <Text style={styles.instructionText}>Last, enter your address.</Text>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={streetAddress}
-          onChangeInput={onChangeStreetAddress}
-          labelText="Street address"
-          placeholderText="Street address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={city}
-          onChangeInput={onChangeCity}
-          labelText="City"
-          placeholderText="City"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-
-      <View style={styles.stateLine}>
-        <View>
+        <View style={styles.inputBox}>
           <AuthInput
-            input={state}
-            onChangeInput={onChangeState}
-            labelText="State"
-            placeholderText="State"
+            input={streetAddress}
+            onChangeInput={onChangeStreetAddress}
+            labelText="Street address"
+            placeholderText="Street address"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
         </View>
 
-        <View>
+        <View style={styles.inputBox}>
           <AuthInput
-            input={zipcode}
-            onChangeInput={onChangeZipcode}
-            labelText="Zipcode"
-            placeholderText="Zipcode"
+            input={city}
+            onChangeInput={onChangeCity}
+            labelText="City"
+            placeholderText="City"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
         </View>
-      </View>
-      <Text style={styles.space}> </Text>
 
-      <ButtonBlack
-        disabled={
-          streetAddress.trim() === '' ||
-          city.trim() === '' ||
-          state.trim() === '' ||
-          zipcode.trim() === ''
-        }
-        style={styles.nextButton}
-        onPress={() => handleSubmit()}
-      >
-        <Text style={styles.nextText}>Sign Up</Text>
-        <View style={styles.check}>
+        <View style={styles.stateLine}>
+          <View>
+            <AuthInput
+              input={state}
+              onChangeInput={onChangeState}
+              labelText="State"
+              placeholderText="State"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+              isHalfWidth
+            />
+          </View>
+
+          <View>
+            <AuthInput
+              input={zipcode}
+              onChangeInput={onChangeZipcode}
+              labelText="Zipcode"
+              placeholderText="Zipcode"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+              isHalfWidth
+            />
+          </View>
+        </View>
+
+        <ButtonBlack
+          disabled={
+            streetAddress.trim() === '' ||
+            city.trim() === '' ||
+            state.trim() === '' ||
+            zipcode.trim() === ''
+          }
+          style={styles.nextButton}
+          onPress={() => handleSubmit()}
+        >
+          <Text style={styles.nextText}>Sign Up</Text>
           <Check />
-        </View>
-      </ButtonBlack>
+        </ButtonBlack>
+      </View>
     </View>
   );
 }

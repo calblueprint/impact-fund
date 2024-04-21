@@ -30,6 +30,7 @@ export default function LoginScreen() {
         'Oh no! The password you entered is incorrect, please try again.',
       );
     } else {
+      //erroring!!!
       setErrorExists(false);
       setPassword('');
     }

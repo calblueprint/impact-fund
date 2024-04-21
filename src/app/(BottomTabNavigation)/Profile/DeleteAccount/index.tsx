@@ -1,12 +1,17 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../../context/AuthContext';
+
 function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
 
@@ -28,13 +33,13 @@ function DeleteAccountScreen() {
           <Text style={styles.topText}>Delete account?</Text>
           <Text style={styles.blurb}>
             Deleting your account will also permanently delete any data
-            assoicated with it. This action cannot be undone.
+            associated with it. This action cannot be undone.
           </Text>
         </View>
 
         <View style={styles.buttonContainer}>
           <View style={styles.buttonView}>
-            <TouchableOpacity
+            <ButtonWhite
               onPress={() => router.back()}
               style={styles.cancelButton}
             >
@@ -42,19 +47,16 @@ function DeleteAccountScreen() {
                 <X />
                 <Text style={styles.cancelText}>Cancel</Text>
               </View>
-            </TouchableOpacity>
+            </ButtonWhite>
           </View>
 
           <View style={styles.buttonView}>
-            <TouchableOpacity
-              onPress={deleteAccount}
-              style={styles.confirmButton}
-            >
+            <ButtonBlack onPress={deleteAccount} style={styles.confirmButton}>
               <View style={styles.buttonContent}>
                 <WhiteTrash />
                 <Text style={styles.confirmText}>Confirm</Text>
               </View>
-            </TouchableOpacity>
+            </ButtonBlack>
           </View>
         </View>
       </View>

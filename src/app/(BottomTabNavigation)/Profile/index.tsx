@@ -1,4 +1,3 @@
-import * as Linking from 'expo-linking';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -13,6 +12,7 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../context/AuthContext';
 
@@ -121,19 +121,18 @@ function ProfileScreen() {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          // onPress={() => signOut()}
+        <ButtonBlack
           onPress={() => {
             router.push('/Profile/LogOut');
           }}
           style={styles.signOutButton}
         >
           <View style={styles.signOutInstructions}>
-            <SignOut />
+            <SignOut style={{ marginLeft: 15 }} />
             <Text style={styles.signOutText}>Log out</Text>
           </View>
-          <WhiteRightCarrot />
-        </TouchableOpacity>
+          <WhiteRightCarrot style={{ marginRight: 15 }} />
+        </ButtonBlack>
       </View>
     </View>
   );

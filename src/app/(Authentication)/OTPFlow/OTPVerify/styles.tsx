@@ -11,9 +11,8 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   contentContainer: {
-    width: '84%',
+    width: '81%',
     flexDirection: 'column',
-    alignItems: 'center',
     rowGap: 20,
   },
   instructionContainer: {
@@ -70,17 +69,12 @@ export default StyleSheet.create({
   },
   errorText: {
     color: colors.darkRed,
+    marginBottom: -9,
   },
   header: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     width: '84%',
     marginBottom: 60,
-  },
-  backText: {
-    color: colors.midGrey,
-    fontSize: 16,
-    fontWeight: '400',
-    marginLeft: 7,
   },
 });

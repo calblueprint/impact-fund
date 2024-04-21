@@ -9,13 +9,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   contentContainer: {
-    width: '84%',
-    marginTop: 110,
-  },
-  backText: {
-    color: colors.midGrey,
-    fontSize: 16,
-    fontWeight: '400',
+    width: '81%',
+    marginTop: 70,
   },
   backContainer: {
     marginBottom: 40,
@@ -44,6 +39,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '800',
     color: colors.black,
+    marginTop: 25,
   },
   nextButtonBase: {
     flexDirection: 'row',
@@ -55,19 +51,12 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  nextButtonDisabled: {
-    backgroundColor: colors.midGrey,
-    borderColor: colors.midGrey,
-  },
-  nextButtonActive: {
-    backgroundColor: colors.black,
-    borderColor: colors.black,
-  },
   nextText: {
     color: colors.white,
     fontSize: 16,
     opacity: 1,
     fontWeight: '600',
+    marginLeft: 10,
   },
   nextButton: {
     marginTop: 100,

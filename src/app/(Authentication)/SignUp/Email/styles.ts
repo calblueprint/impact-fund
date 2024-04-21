@@ -9,19 +9,16 @@ export default StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    flex: 1,
+    flexDirection: 'column',
   },
-  header: {
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    marginTop: 90,
-    marginRight: 93,
-  },
-  backText: {
-    color: colors.midGrey,
-    fontSize: 16,
-    fontWeight: '400',
+  contentContainer: {
+    marginTop: 100,
+    width: '81%',
+    alignItems: 'center',
   },
   backButton: {
+    marginTop: 80,
     marginBottom: 40,
     marginRight: 180,
   },
@@ -31,7 +28,6 @@ export default StyleSheet.create({
     opacity: 0.35,
   },
   displayTextEmail: {
-    marginRight: 225,
     fontSize: 13,
     opacity: 0.35,
   },
@@ -44,32 +40,27 @@ export default StyleSheet.create({
   },
   nextText: {
     color: colors.white,
-    marginRight: 200,
     fontSize: 14,
     opacity: 1,
     fontWeight: '600',
   },
   nextButton: {
-    alignItems: 'center',
-    borderRadius: 3,
     borderWidth: 1,
     width: 310,
     height: 50,
     padding: 15,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   errorMessage: {
     color: colors.darkRed,
     fontSize: 14,
     fontWeight: '400',
-    width: '81%',
     marginTop: 10,
-    marginRight: 130,
     marginBottom: 65,
   },
   inputBox: {
     marginTop: 11,
     width: '100%',
-    alignItems: 'center',
   },
 });

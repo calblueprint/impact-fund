@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   contentContainer: {
     height: '84%',
-    width: 315,
+    width: '81%',
   },
   image: {
     width: 130,
@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
   orStyle: {
     fontWeight: '200',
-    marginTop: -2,
+    marginTop: -8,
   },
   nextText: {
     color: colors.white,
@@ -62,9 +62,15 @@ export default StyleSheet.create({
     borderRadius: 3,
     borderBottomWidth: 2.25,
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 13,
+    marginTop: -2,
     padding: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  horizontalLine: {
+    flex: 1,
+    height: 0.5,
+    backgroundColor: colors.black,
   },
 });

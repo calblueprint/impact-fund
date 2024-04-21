@@ -11,6 +11,9 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  contentContainer: {
+    width: '81%',
+  },
   backButton: {
     marginTop: 100,
     marginBottom: 30,
@@ -40,10 +43,6 @@ export default StyleSheet.create({
     width: 120,
     justifyContent: 'space-between',
   },
-  // nextButtonActive: {
-  //   backgroundColor: colors.black,
-  //   borderColor: colors.black,
-  // },
   errorMessageBox: {
     marginTop: 13,
     height: 50,

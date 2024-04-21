@@ -12,8 +12,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   screenContainer: {
-    width: '85%',
-    height: '95%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
+    width: '81%',
+    height: '93%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
     justifyContent: 'space-between',
   },
   headerContainer: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '5%',
+    height: 48,
   },
   buttonView: {
     width: '48%',
@@ -74,5 +74,6 @@ export default StyleSheet.create({
     fontSize: 17,
     fontStyle: 'normal',
     fontWeight: '500',
+    marginLeft: 14,
   },
 });

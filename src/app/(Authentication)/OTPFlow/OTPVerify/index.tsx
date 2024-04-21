@@ -5,6 +5,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
@@ -51,7 +52,7 @@ export default function OTPFlow() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.backText}>Back</Text>
+          <BackButton />
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>

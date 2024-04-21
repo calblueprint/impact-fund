@@ -34,13 +34,13 @@ function WelcomeScreen() {
           </ButtonWhite>
 
           <View style={styles.orLine}>
-            <GreyLine style={{ margin: 5 }} />
-            <Text style={styles.orStyle}>OR</Text>
-            <GreyLine style={{ margin: 5 }} />
+            <View style={styles.horizontalLine} />
+            <Text style={styles.orStyle}> OR </Text>
+            <View style={styles.horizontalLine} />
           </View>
           <ButtonBlack
             style={styles.baseButton}
-            onPress={() => router.push('/SignUp/Email')}
+            onPress={() => router.push('/Login/Email')}
           >
             <Text style={styles.nextText}>Log in with email</Text>
             <RightArrowWhite style={{ marginRight: 10 }} />

@@ -63,5 +63,6 @@ export default StyleSheet.create({
     fontSize: 17,
     fontStyle: 'normal',
     fontWeight: '500',
+    marginLeft: 6,
   },
 });

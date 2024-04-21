@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 
@@ -61,77 +63,75 @@ function EditNameScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.push('/Profile/')}
-      >
-        <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity>
-      <Text style={styles.instructionText}>Edit account details</Text>
+      <View style={styles.contentContainer}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push('/Profile/')}
+        >
+          <BackButton />
+        </TouchableOpacity>
+        <Text style={styles.instructionText}>Edit account details</Text>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={streetAddress}
-          onChangeInput={onChangeStreetAddress}
-          labelText="Street address"
-          placeholderText="Street address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={city}
-          onChangeInput={onChangeCity}
-          labelText="City"
-          placeholderText="City"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.stateLine}>
-        <View>
+        <View style={styles.inputBox}>
           <AuthInput
-            input={usState}
-            onChangeInput={onChangeState}
-            labelText="State"
-            placeholderText="State"
+            input={streetAddress}
+            onChangeInput={onChangeStreetAddress}
+            labelText="Street address"
+            placeholderText="Street address"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
         </View>
-        <View>
+        <View style={styles.inputBox}>
           <AuthInput
-            input={zipcode}
-            onChangeInput={onChangeZipcode}
-            labelText="Zipcode"
-            placeholderText="Zipcode"
+            input={city}
+            onChangeInput={onChangeCity}
+            labelText="City"
+            placeholderText="City"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
         </View>
-      </View>
+        <View style={styles.stateLine}>
+          <View>
+            <AuthInput
+              input={usState}
+              onChangeInput={onChangeState}
+              labelText="State"
+              placeholderText="State"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+              isHalfWidth
+            />
+          </View>
+          <View>
+            <AuthInput
+              input={zipcode}
+              onChangeInput={onChangeZipcode}
+              labelText="Zipcode"
+              placeholderText="Zipcode"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+              isHalfWidth
+            />
+          </View>
+        </View>
 
-      <TouchableOpacity
-        disabled={!streetAddress || !city || !usState || !zipcode}
-        style={
-          streetAddress && city && usState && zipcode
-            ? styles.submitButton
-            : [styles.submitButton, styles.submitButtonDisabled]
-        }
-        onPress={handleSubmit}
-      >
-        <Text style={styles.submitText}>
-          Submit
-          <Submit style={styles.submitIcon} />
-        </Text>
-      </TouchableOpacity>
+        <ButtonBlack
+          disabled={!streetAddress || !city || !usState || !zipcode}
+          style={styles.submitButton}
+          onPress={handleSubmit}
+        >
+          <Text style={styles.submitText}>
+            Submit
+            <Submit style={styles.submitIcon} />
+          </Text>
+        </ButtonBlack>
+      </View>
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
@@ -36,13 +36,22 @@ export default function AuthInput({
 
   const offClick = () => {
     setIsFocused(false);
-    if (input.trim() === '' && !isPassword) {
+    if ((!input || input.trim() === '') && !isPassword) {
+      setPlaceholder(placeholderText);
+      setIsLabelDisplayed(false);
+    } else if (isPassword && !input) {
       setPlaceholder(placeholderText);
       setIsLabelDisplayed(false);
     } else {
       setPlaceholder('');
     }
   };
+
+  useEffect(() => {
+    if (!isPassword && input && input.trim() !== '') {
+      setIsLabelDisplayed(true);
+    }
+  }, [input]);
 
   return (
     <View>

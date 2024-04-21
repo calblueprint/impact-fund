@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 
 import { colors } from '../../styles/colors';
@@ -22,5 +20,5 @@ export const ButtonBlack = styled(ButtonBase)`
 export const ButtonWhite = styled(ButtonBase)`
   background: ${colors.white};
   border-color: ${colors.black};
-  border-width: 2px;
+  border-width: 1px;
 `;

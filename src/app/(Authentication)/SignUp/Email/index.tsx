@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { z } from 'zod';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
@@ -64,45 +65,45 @@ export default function SignUpScreen() {
           style={styles.backButton}
           onPress={() => router.back()}
         >
-          <Text style={styles.backText}>Back</Text>
+          <BackButton />
         </TouchableOpacity>
+        <Text style={styles.instructionText}>Create your account.</Text>
+        <View style={styles.inputBox}>
+          <AuthInput
+            input={name}
+            onChangeInput={onChangeName}
+            labelText="Full Name"
+            placeholderText="Full Name"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization
+          />
+        </View>
+        <View style={styles.inputBox}>
+          <AuthInput
+            input={email}
+            onChangeInput={onChangeEmail}
+            labelText="Email address"
+            placeholderText="Email address"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
+        <View>
+          <Text style={styles.errorMessage}>
+            {errorExists ? errorMessage : ' '}
+          </Text>
+        </View>
+        <ButtonBlack
+          disabled={name.trim() === '' || email.trim() === '' || errorExists}
+          onPress={handleSubmit}
+          style={styles.nextButton}
+        >
+          <Text style={styles.nextText}>Continue</Text>
+          <Arrow />
+        </ButtonBlack>
       </View>
-      <Text style={styles.instructionText}>Create your account.</Text>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={name}
-          onChangeInput={onChangeName}
-          labelText="Full Name"
-          placeholderText="Full Name"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={email}
-          onChangeInput={onChangeEmail}
-          labelText="Email address"
-          placeholderText="Email address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-      <View>
-        <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
-      <ButtonBlack
-        disabled={name.trim() === '' || email.trim() === '' || errorExists}
-        onPress={handleSubmit}
-        style={styles.nextButton}
-      >
-        <Text style={styles.nextText}>Continue</Text>
-        <Arrow />
-      </ButtonBlack>
     </View>
   );
 }
