@@ -33,7 +33,6 @@ export default function UpdateView() {
         <>
           <ScrollView
             style={styles.outerScroll}
-            // contentContainerStyle={styles.innerScroll}
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.innerScroll}>
