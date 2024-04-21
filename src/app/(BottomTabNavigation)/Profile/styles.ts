@@ -78,7 +78,7 @@ export default StyleSheet.create({
   },
   userText: {
     fontSize: 13,
-    fontWidth: '300',
+    fontWeight: '300',
     color: colors.darkGrey,
   },
   profileLabelText: {
