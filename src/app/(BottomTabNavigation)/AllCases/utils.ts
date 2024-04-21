@@ -36,7 +36,12 @@ export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
  * @returns readable date string
  */
 export function formatDate(dateObject: Date) {
-  const date = new Date(dateObject);
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const date = new Date(
+    dateObject.toLocaleString('en-US', {
+      timeZone: userTimeZone,
+    }),
+  );
   const months = [
     'Jan',
     'Feb',
@@ -51,8 +56,8 @@ export function formatDate(dateObject: Date) {
     'Nov',
     'Dec',
   ];
-  const monthName = months[date.getUTCMonth()];
-  return `${monthName} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
+  const monthName = months[date.getMonth()];
+  return `${monthName} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
 export function getStatusColor(status: string) {
