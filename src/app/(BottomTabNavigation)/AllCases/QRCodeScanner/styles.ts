@@ -25,8 +25,11 @@ export default StyleSheet.create({
     borderRadius: 5,
     marginVertical: 20,
   },
-  scanned: {
+  validScan: {
     borderColor: colors.green,
+  },
+  invalidScan: {
+    borderColor: colors.midRed,
   },
   notScanned: {
     borderColor: colors.black,

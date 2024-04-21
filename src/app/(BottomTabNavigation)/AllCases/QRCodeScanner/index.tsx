@@ -1,15 +1,17 @@
-import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Toast, {
-  BaseToast,
   ErrorToast,
+  SuccessToast,
   ToastConfig,
 } from 'react-native-toast-message';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/black-right-arrow.svg';
+import CheckIcon from '../../../../../assets/green-check.svg';
 import ErrorIcon from '../../../../../assets/warning.svg';
 import {
   getAllCaseIds,
@@ -26,14 +28,29 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [scanned, setScanned] = useState<boolean>(false);
   const [validIds, setValidIds] = useState<CaseUid[]>([]);
   const [userIds, setUserIds] = useState<CaseUid[]>([]);
   const [userCase, setUserCase] = useState<Case>();
+  const [borderStyle, setBorderStyle] = useState(styles.notScanned);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const navigation = useNavigation();
 
   const toastConfig: ToastConfig = {
-    success: (props: any) => <BaseToast />,
+    success: (props: any) => (
+      <SuccessToast
+        {...props}
+        text1Style={{
+          fontSize: 14,
+          fontWeight: '400',
+        }}
+        renderLeadingIcon={CheckIcon}
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingLeft: 20,
+        }}
+      />
+    ),
 
     error: (props: any) => (
       <ErrorToast
@@ -60,10 +77,32 @@ function QRCodeScannerScreen() {
   };
 
   const getBarCodeScannerPermissions = async () => {
-    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    const { status } = await Camera.requestCameraPermissionsAsync();
     setHasPermission(
       status === 'granted' ? permissions.GRANTED : permissions.DENIED,
     );
+  };
+
+  const setValidBarcodeStyle = () => {
+    if (!isActive) {
+      setBorderStyle(styles.validScan);
+      setIsActive(true);
+      setTimeout(() => {
+        setBorderStyle(styles.notScanned);
+        setIsActive(false);
+      }, 1500);
+    }
+  };
+
+  const setInvalidBarcodeStyle = async () => {
+    if (!isActive) {
+      setBorderStyle(styles.invalidScan);
+      setIsActive(true);
+      setTimeout(() => {
+        setBorderStyle(styles.notScanned);
+        setIsActive(false);
+      }, 1500);
+    }
   };
 
   useEffect(() => {
@@ -73,33 +112,42 @@ function QRCodeScannerScreen() {
 
   useEffect(() => {
     navigation.addListener('blur', async () => {
-      setScanned(false);
       setUserCase(undefined);
+      setBorderStyle(styles.notScanned);
     });
     navigation.addListener('focus', async () => {
-      setScanned(false);
       setUserCase(undefined);
+      setBorderStyle(styles.notScanned);
     });
   }, [navigation]);
 
-  const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
+  const handleBarCodeScanned = async (result: BarCodeScanningResult) => {
     const caseId = result.data;
     if (!validIds.includes(caseId)) {
+      setUserCase(undefined);
+      setInvalidBarcodeStyle();
       Toast.show({
         type: 'error',
         text1: 'Sorry! This QR code is invalid.',
         visibilityTime: 1500,
       });
     } else if (userIds.includes(caseId)) {
+      setUserCase(undefined);
+      setInvalidBarcodeStyle();
       Toast.show({
         type: 'error',
         text1: "You've already scanned this QR code.",
         visibilityTime: 1500,
       });
-    } else if (!scanned) {
+    } else {
       const caseData: Case = await getCaseById(caseId);
       setUserCase(caseData);
-      setScanned(true);
+      setValidBarcodeStyle();
+      Toast.show({
+        type: 'success',
+        text1: 'QR code successfully scanned',
+        visibilityTime: 1500,
+      });
     }
   };
 
@@ -118,14 +166,15 @@ function QRCodeScannerScreen() {
 
   return (
     <View style={styles.container}>
+      <Toast position="top" topOffset={20} config={toastConfig} />
       <Text style={styles.topText}>Point your Camera at the QR code.</Text>
-      <BarCodeScanner
+      <Camera
         onBarCodeScanned={handleBarCodeScanned}
-        style={
-          scanned
-            ? [styles.scanner, styles.scanned]
-            : [styles.scanner, styles.notScanned]
-        }
+        barCodeScannerSettings={{
+          barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
+          interval: 1000,
+        }}
+        style={[styles.scanner, borderStyle]}
       />
 
       {userCase && (
@@ -137,8 +186,6 @@ function QRCodeScannerScreen() {
           <Arrow />
         </TouchableOpacity>
       )}
-
-      <Toast position="bottom" bottomOffset={20} config={toastConfig} />
     </View>
   );
 }
