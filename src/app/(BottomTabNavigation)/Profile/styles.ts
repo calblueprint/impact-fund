@@ -8,6 +8,48 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
+  contentContainer: {
+    width: '84%',
+    alignItems: 'center',
+  },
+
+  headerContainer: {
+    marginTop: 63,
+    width: '100%',
+  },
+  headerLine: {
+    borderBottom: 'solid',
+    borderBottomColor: colors.midGrey,
+    borderBottomWidth: 0.5,
+    marginTop: 8,
+  },
+  titleText: {
+    fontSize: 32,
+    fontWeight: '800',
+    lineHeight: 33,
+    color: colors.black,
+    alignSelf: 'flex-start',
+    marginTop: 39,
+    marginBottom: 18,
+  },
+
+  actionsContainer: {
+    width: '100%',
+    border: 'solid',
+    borderColor: colors.midGrey,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: colors.white,
+    marginBottom: 22,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    shadowColor: colors.midGrey,
+    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOpacity: 1.25,
+    shadowRadius: 0.05,
+    elevation: 1,
+  },
+
   profileDetailsBox: {
     flexDirection: 'row',
     columnGap: 15,
@@ -25,51 +67,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexGrow: 1,
   },
-  userText: {
-    fontSize: 13,
-    fontWidth: '300',
-    color: colors.darkGrey,
-  },
-  userTextMargin: {
-    marginLeft: 34,
-    marginTop: 5,
-    color: colors.darkGrey,
-  },
   line: {
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 1,
     marginLeft: 50,
   },
-  actionsContainer: {
-    width: '100%',
-    border: 'solid',
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: colors.white,
-    marginBottom: 22,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
+  centerAlign: {
+    alignItems: 'center',
   },
-  bottomPush: {
-    paddingBottom: 15,
+  userText: {
+    fontSize: 13,
+    fontWidth: '300',
+    color: colors.darkGrey,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: '800',
-    lineHeight: 33,
-    color: colors.black,
-    alignSelf: 'flex-start',
-    marginTop: 39,
-    marginBottom: 15,
-  },
-  profileLabel: {
+  profileLabelText: {
     color: colors.black,
     fontSize: 16,
     fontWeight: '400',
@@ -77,16 +89,7 @@ export default StyleSheet.create({
   redText: {
     color: colors.darkRed,
   },
-  headerLine: {
-    borderBottom: 'solid',
-    borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0.5,
-    marginTop: 8,
-  },
-  headerContainer: {
-    marginTop: 63,
-    width: '100%',
-  },
+
   signOutButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -102,10 +105,6 @@ export default StyleSheet.create({
     fontWeight: '700',
     fontSize: 15,
   },
-  contentContainer: {
-    width: '84%',
-    alignItems: 'center',
-  },
   signOutInstructions: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -113,8 +112,5 @@ export default StyleSheet.create({
   },
   signOutContentContainer: {
     flexDirection: 'row',
-  },
-  centerAlign: {
-    alignItems: 'center',
   },
 });

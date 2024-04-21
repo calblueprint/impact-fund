@@ -31,12 +31,12 @@ function ProfileScreen() {
           <CasesHeader />
           <View style={styles.headerLine} />
         </View>
-        <Text style={styles.title}>Settings</Text>
+        <Text style={styles.titleText}>Settings</Text>
         <View style={styles.actionsContainer}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
             <View style={styles.textContainer}>
-              <Text style={styles.profileLabel}>Email address</Text>
+              <Text style={styles.profileLabelText}>Email address</Text>
               <Text style={styles.userText}>{session?.user?.email}</Text>
             </View>
           </View>
@@ -49,7 +49,7 @@ function ProfileScreen() {
             <Person />
             <View style={styles.textContainer}>
               <View style={styles.spreadInlineContainer}>
-                <Text style={styles.profileLabel}>Full name</Text>
+                <Text style={styles.profileLabelText}>Full name</Text>
                 <Pencil />
               </View>
               <Text style={styles.userText}>
@@ -66,7 +66,7 @@ function ProfileScreen() {
             <Location />
             <View style={styles.textContainer}>
               <View style={styles.spreadInlineContainer}>
-                <Text style={styles.profileLabel}>Street address</Text>
+                <Text style={styles.profileLabelText}>Street address</Text>
                 <Pencil />
               </View>
               <Text style={styles.userText}>
@@ -94,7 +94,7 @@ function ProfileScreen() {
           >
             <Reset />
             <View style={styles.spreadInlineContainer}>
-              <Text style={styles.profileLabel}>Reset password</Text>
+              <Text style={styles.profileLabelText}>Reset password</Text>
               <GreyRightCarrot />
             </View>
           </TouchableOpacity>
@@ -109,13 +109,14 @@ function ProfileScreen() {
           >
             <RedTrash />
             <View style={styles.spreadInlineContainer}>
-              <Text style={[styles.profileLabel, styles.redText]}>
+              <Text style={[styles.profileLabelText, styles.redText]}>
                 Delete account
               </Text>
               <GreyRightCarrot />
             </View>
           </TouchableOpacity>
         </View>
+
         <TouchableOpacity
           onPress={() => {
             router.push('/Profile/LogOut');
