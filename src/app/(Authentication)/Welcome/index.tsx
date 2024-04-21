@@ -4,7 +4,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
-import GreyLine from '../../../../assets/grey-line.svg';
 import RightArrowWhite from '../../../../assets/right-arrow-white.svg';
 import RightArrow from '../../../../assets/right-arrow.svg';
 import {
@@ -33,16 +32,16 @@ function WelcomeScreen() {
             <RightArrow style={{ marginRight: 10 }} />
           </ButtonWhite>
 
-          <View style={styles.orLine}>
+          <View style={styles.orContainer}>
             <View style={styles.horizontalLine} />
-            <Text style={styles.orStyle}> OR </Text>
+            <Text style={styles.orTextContainer}> OR </Text>
             <View style={styles.horizontalLine} />
           </View>
           <ButtonBlack
             style={styles.baseButton}
             onPress={() => router.push('/Login/Email')}
           >
-            <Text style={styles.nextText}>Log in with email</Text>
+            <Text style={styles.nextTextWhite}>Log in with email</Text>
             <RightArrowWhite style={{ marginRight: 10 }} />
           </ButtonBlack>
         </View>

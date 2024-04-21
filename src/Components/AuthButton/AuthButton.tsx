@@ -3,10 +3,10 @@ import styled from 'styled-components/native';
 import { colors } from '../../styles/colors';
 
 const ButtonBase = styled.TouchableOpacity`
-  justifycontent: space-between;
+  justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  flexdirection: 'row';
+  flex-direction: row;
   width: 100%;
   height: 45px;
   padding: 13px;

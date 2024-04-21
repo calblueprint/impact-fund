@@ -34,16 +34,24 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 55,
   },
-  orLine: {
+  orContainer: {
     flexDirection: 'row',
-    marginBottom: 7.5,
-    width: '89%',
+    alignItems: 'center',
+    width: '100%',
+    height: 35,
   },
-  orStyle: {
-    fontWeight: '200',
-    marginTop: -8,
+  orTextContainer: {
+    fontSize: 12,
+    lineHeight: 15,
+    fontWeight: '300',
+    fontStyle: 'normal',
   },
-  nextText: {
+  horizontalLine: {
+    flex: 1,
+    height: 0.5,
+    backgroundColor: colors.black,
+  },
+  nextTextWhite: {
     color: colors.white,
     fontSize: 17,
     opacity: 1,
@@ -59,18 +67,6 @@ export default StyleSheet.create({
   },
   baseButton: {
     height: 55,
-    borderRadius: 3,
     borderBottomWidth: 2.25,
-    borderWidth: 1,
-    marginBottom: 13,
-    marginTop: -2,
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  horizontalLine: {
-    flex: 1,
-    height: 0.5,
-    backgroundColor: colors.black,
   },
 });
