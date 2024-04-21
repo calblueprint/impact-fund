@@ -29,8 +29,10 @@ export default function StatusUpdatesBar({
         <View style={styles.topContainer}>
           <Text style={styles.statusText}>Case Status:</Text>
 
-          <Text style={styles.buttonText}>View all updates</Text>
-          <RightCaret />
+          <View style={styles.updatesContainer}>
+            <Text style={styles.buttonText}>View all updates</Text>
+            <RightCaret style={styles.icon} />
+          </View>
         </View>
 
         <View style={[styles.statusContainer, statusColor.background]}>

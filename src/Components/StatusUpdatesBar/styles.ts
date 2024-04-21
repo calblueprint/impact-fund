@@ -3,13 +3,11 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
-    // height: ,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: colors.white,
-    // paddingHorizontal: 20,
     padding: 16,
     rowGap: 10,
 
@@ -49,6 +47,11 @@ export default StyleSheet.create({
     borderWidth: 0.3,
     borderRadius: 5,
   },
+  updatesContainer: {
+    flexDirection: 'row',
+
+    columnGap: 10,
+  },
   statusText: {
     fontSize: 20,
     lineHeight: 21,
@@ -67,5 +70,8 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 21,
+  },
+  icon: {
+    marginTop: 5,
   },
 });
