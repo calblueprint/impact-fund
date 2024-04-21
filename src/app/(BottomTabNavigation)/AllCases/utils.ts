@@ -5,7 +5,14 @@ import {
   getCaseIdsFromUserId,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
-import { Case, UserUid } from '../../../types/types';
+import {
+  Case,
+  GreenStatusOptions,
+  YellowStatusOptions,
+  RedStatusOptions,
+  UserUid,
+  StatusOptions,
+} from '../../../types/types';
 
 /**
  * Fetches all Cases associated with a specific `userUid` from supabase. Formats Case data and returns an array of `Case` objects.
@@ -61,13 +68,14 @@ export function formatDate(dateObject: Date) {
 }
 
 export function getStatusColor(status: string) {
+  if (!StatusOptions.includes(status)) {
+    throw new Error(`Invalid status: ${status}`);
+  }
+
   if (
-    status === 'In Progress' ||
-    status === 'New Case' ||
-    status === 'Settled' ||
-    status === 'Appeal' ||
-    status === 'Payment Processing' ||
-    status === 'Payment Distributed'
+    Object.values(GreenStatusOptions).includes(
+      status as unknown as GreenStatusOptions,
+    )
   ) {
     return {
       background: {
@@ -77,7 +85,11 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkGreen },
     };
-  } else if (status === 'Pending') {
+  } else if (
+    Object.values(YellowStatusOptions).includes(
+      status as unknown as YellowStatusOptions,
+    )
+  ) {
     return {
       background: {
         backgroundColor: colors.lightYellow,
@@ -86,7 +98,11 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkYellow },
     };
-  } else if (status === 'Action Required') {
+  } else if (
+    Object.values(RedStatusOptions).includes(
+      status as unknown as RedStatusOptions,
+    )
+  ) {
     return {
       background: {
         backgroundColor: colors.lightRed,

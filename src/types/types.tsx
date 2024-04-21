@@ -88,3 +88,26 @@ export interface Update {
   summary: string;
   lawFirm: string;
 }
+
+export enum GreenStatusOptions {
+  'In Progress',
+  'New Case',
+  'Settled',
+  'Appeal',
+  'Payment Processing',
+  'Payment Distributed',
+}
+
+export enum YellowStatusOptions {
+  'Pending',
+}
+
+export enum RedStatusOptions {
+  'Action Required',
+}
+
+export const StatusOptions: string[] = [
+  ...(Object.values(GreenStatusOptions) as string[]),
+  ...(Object.values(YellowStatusOptions) as string[]),
+  ...(Object.values(RedStatusOptions) as string[]),
+];
