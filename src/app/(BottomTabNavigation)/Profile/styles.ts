@@ -8,37 +8,26 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
-  iconTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   profileDetailsBox: {
     flexDirection: 'row',
-    columnGap: 10,
+    columnGap: 15,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    borderWidth: 1,
   },
   textContainer: {
-    borderWidth: 1,
     flex: 1,
     flexDirection: 'column',
     rowGap: 5,
   },
-  actionElementTop: {
+  spreadInlineContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginTop: 15,
-    // marginLeft: 10,
-    // marginRight: 20,
-    borderWidth: 1,
+    flexGrow: 1,
   },
   userText: {
-    borderWidth: 1,
-    // marginLeft: 35,
-    // marginTop: 5,
-    // marginBottom: 15,
+    fontSize: 13,
+    fontWidth: '300',
     color: colors.darkGrey,
   },
   userTextMargin: {
@@ -50,10 +39,9 @@ export default StyleSheet.create({
     borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 1,
-    marginLeft: 32,
+    marginLeft: 50,
   },
   actionsContainer: {
-    // paddingLeft: 10,
     width: '100%',
     border: 'solid',
     borderColor: colors.midGrey,
@@ -81,26 +69,13 @@ export default StyleSheet.create({
     marginTop: 39,
     marginBottom: 15,
   },
-  userInfo: {
-    color: colors.darkGrey,
-    fontSize: 20,
-  },
-  textElements: {
+  profileLabel: {
     color: colors.black,
-    marginLeft: 10,
-    marginTop: 0,
     fontSize: 16,
     fontWeight: '400',
   },
-  redTextElements: {
+  redText: {
     color: colors.darkRed,
-    marginLeft: 10,
-    marginTop: 0,
-    fontSize: 16,
-    fontWeight: '400',
-  },
-  resetIcon: {
-    marginBottom: 15,
   },
   headerLine: {
     borderBottom: 'solid',
@@ -138,5 +113,8 @@ export default StyleSheet.create({
   },
   signOutContentContainer: {
     flexDirection: 'row',
+  },
+  centerAlign: {
+    alignItems: 'center',
   },
 });
