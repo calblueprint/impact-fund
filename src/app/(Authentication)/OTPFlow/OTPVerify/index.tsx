@@ -33,9 +33,7 @@ export default function OTPFlow() {
     const { error } = await verifyOtp(email, token);
     if (error) {
       setErrorExists(true);
-      setErrorMessage(
-        'Sorry! The verification code was incorrect. Try again, or make sure you used a valid email.',
-      );
+      setErrorMessage('Sorry! The verification code was incorrect.');
       return;
     }
     if (changePassword === 'yes') {
@@ -58,9 +56,7 @@ export default function OTPFlow() {
       <View style={styles.contentContainer}>
         <View style={styles.instructionContainer}>
           <Text style={styles.headerText}>Enter verification code.</Text>
-          <Text style={styles.instructionText}>
-            We've just emailed it to you at {email}
-          </Text>
+          <Text style={styles.instructionText}>We've sent it to {email}</Text>
         </View>
 
         <OTPTextInput

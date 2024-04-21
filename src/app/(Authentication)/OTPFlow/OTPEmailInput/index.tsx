@@ -31,7 +31,7 @@ export default function OTPEmailInput() {
     } else {
       const { error } = await sendOtp(email);
       if (error) {
-        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
+        setErrorMessage(error.message);
         return;
       }
       router.push({

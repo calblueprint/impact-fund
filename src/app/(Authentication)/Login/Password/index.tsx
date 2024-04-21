@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import AuthErrorMessage from '../../../../Components/AuthErrorMessage/AuthErrorMessage';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 
@@ -21,12 +22,17 @@ export default function LoginScreen() {
   };
 
   async function signIn() {
-    const isPassword = await sessionHandler.signInWithEmail(email, password);
-    if (isPassword.error != null) {
+    const { error } = await sessionHandler.signInWithEmail(email, password);
+    console.log(error);
+    if (error != null) {
       setErrorExists(true);
-      setErrorMessage(
-        'Oh no! The password you entered is incorrect, please try again.',
-      );
+      if (error.message === 'Invalid login credentials') {
+        setErrorMessage(
+          'Oh no! The password you entered is incorrect, please try again.',
+        );
+      } else {
+        setErrorMessage(error.message);
+      }
     } else {
       setErrorExists(false);
       setPassword('');
@@ -52,11 +58,7 @@ export default function LoginScreen() {
         />
       </View>
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessageText}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
+      <AuthErrorMessage message={errorExists ? errorMessage : ''} />
 
       <View style={styles.nextLine}>
         <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>

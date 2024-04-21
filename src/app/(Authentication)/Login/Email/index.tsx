@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import AuthErrorMessage from '../../../../Components/AuthErrorMessage/AuthErrorMessage';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
@@ -50,11 +51,7 @@ export default function LoginScreen() {
         />
       </View>
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessageText}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
+      <AuthErrorMessage message={errorExists ? errorMessage : ' '} />
 
       <View style={styles.nextLine}>
         <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>

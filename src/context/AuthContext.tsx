@@ -106,7 +106,6 @@ export function AuthContextProvider({
       email,
       password,
     }); // will trigger the use effect to update the session
-
     setUser(value.data.user);
     return value;
   };

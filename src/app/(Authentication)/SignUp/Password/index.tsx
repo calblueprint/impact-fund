@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import AuthErrorMessage from '../../../../Components/AuthErrorMessage/AuthErrorMessage';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import supabase from '../../../../supabase/createClient';
@@ -105,11 +106,7 @@ export default function SignUpScreen() {
         />
       </View>
 
-      <View style={styles.errorMessageContainer}>
-        <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
+      <AuthErrorMessage message={errorExists ? errorMessage : ' '} />
 
       <TouchableOpacity
         disabled={password === '' || confirmPassword === '' || errorExists}

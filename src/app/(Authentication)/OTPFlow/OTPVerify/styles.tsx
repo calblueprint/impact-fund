@@ -18,11 +18,13 @@ export default StyleSheet.create({
   },
   instructionContainer: {
     rowGap: 10,
+    width: '100%',
+    marginBottom: 30,
   },
   otpContainer: {
     backgroundColor: colors.lightGrey,
     paddingVertical: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 24,
     borderRadius: 5,
   },
   otpInputBoxes: {

@@ -52,16 +52,6 @@ export default StyleSheet.create({
     backgroundColor: colors.black,
     borderColor: colors.black,
   },
-  errorMessageBox: {
-    marginTop: 13,
-    height: 50,
-    width: 310,
-  },
-  errorMessageText: {
-    color: colors.darkRed,
-    fontSize: 14,
-    fontWeight: '400',
-  },
   inputBox: {
     marginTop: 40,
   },
