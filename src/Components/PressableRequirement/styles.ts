@@ -8,10 +8,11 @@ export default StyleSheet.create({
     paddingTop: 20,
     columnGap: 20,
     paddingHorizontal: '6%',
+    paddingVertical: 20,
   },
   innerRequirementBox: {
     flex: 1,
-    paddingBottom: 20,
+    justifyContent: 'center',
   },
   buttonBase: {
     flexDirection: 'row',
