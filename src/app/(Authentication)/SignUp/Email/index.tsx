@@ -5,6 +5,7 @@ import { z } from 'zod';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
@@ -94,20 +95,14 @@ export default function SignUpScreen() {
           {errorExists ? errorMessage : ' '}
         </Text>
       </View>
-      <TouchableOpacity
+      <ButtonBlack
         disabled={name.trim() === '' || email.trim() === '' || errorExists}
-        style={
-          name.trim() === '' || email.trim() === '' || errorExists
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
         onPress={handleSubmit}
+        style={styles.nextButton}
       >
         <Text style={styles.nextText}>Continue</Text>
-        <View>
-          <Arrow />
-        </View>
-      </TouchableOpacity>
+        <Arrow />
+      </ButtonBlack>
     </View>
   );
 }

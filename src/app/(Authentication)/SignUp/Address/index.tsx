@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 
@@ -122,28 +123,21 @@ export default function SignUpScreen() {
       </View>
       <Text style={styles.space}> </Text>
 
-      <TouchableOpacity
+      <ButtonBlack
         disabled={
           streetAddress.trim() === '' ||
           city.trim() === '' ||
           state.trim() === '' ||
           zipcode.trim() === ''
         }
-        style={
-          streetAddress.trim() === '' ||
-          city.trim() === '' ||
-          state.trim() === '' ||
-          zipcode.trim() === ''
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
+        style={styles.nextButton}
         onPress={() => handleSubmit()}
       >
         <Text style={styles.nextText}>Sign Up</Text>
         <View style={styles.check}>
           <Check />
         </View>
-      </TouchableOpacity>
+      </ButtonBlack>
     </View>
   );
 }

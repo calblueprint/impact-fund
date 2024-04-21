@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { emailExists } from '../../../../supabase/queries/auth';
@@ -76,18 +77,14 @@ export default function OTPEmailInput() {
         </View>
 
         <View style={styles.nextLine}>
-          <TouchableOpacity
+          <ButtonBlack
             disabled={email === '' || errorExists}
-            style={
-              email === '' || errorExists
-                ? [styles.nextButtonBase, styles.nextButtonDisabled]
-                : [styles.nextButtonBase, styles.nextButtonActive]
-            }
+            style={styles.nextButtonBase}
             onPress={getOTP}
           >
             <Text style={styles.nextText}>Continue</Text>
-            <Arrow />
-          </TouchableOpacity>
+            <Arrow style={{ marginRight: 10 }} />
+          </ButtonBlack>
         </View>
       </View>
     </View>

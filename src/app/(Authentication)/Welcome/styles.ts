@@ -13,18 +13,15 @@ export default StyleSheet.create({
   },
   contentContainer: {
     height: '84%',
-    width: '82%',
-  },
-  imageContainer: {
-    width: '100%',
+    width: 315,
   },
   image: {
     width: 130,
     height: 16,
   },
   textContainer: {
-    width: '100%',
-    marginTop: 210,
+    marginTop: 275,
+    justifyContent: 'center',
   },
   welcomeText: {
     color: colors.black,
@@ -35,6 +32,39 @@ export default StyleSheet.create({
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 60,
+    marginTop: 55,
+  },
+  orLine: {
+    flexDirection: 'row',
+    marginBottom: 7.5,
+  },
+  orStyle: {
+    fontWeight: '200',
+    marginTop: -2,
+  },
+  nextText: {
+    color: colors.white,
+    fontSize: 17,
+    opacity: 1,
+    fontWeight: '500',
+    marginLeft: 10,
+  },
+  nextTextBlack: {
+    color: colors.black,
+    fontSize: 17,
+    opacity: 1,
+    fontWeight: '500',
+    marginLeft: 10,
+  },
+  baseButton: {
+    width: 310,
+    height: 55,
+    borderRadius: 3,
+    borderBottomWidth: 2.25,
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

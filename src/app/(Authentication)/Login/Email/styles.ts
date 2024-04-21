@@ -11,22 +11,16 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  backText: {
-    fontWeight: '400',
-    marginLeft: 7,
-    color: colors.midGrey,
-    fontSize: 16,
-  },
   backButton: {
     marginTop: 100,
     marginBottom: 30,
-    marginRight: 280,
+    width: '80%',
   },
   instructionText: {
     color: colors.black,
     fontSize: 24,
     fontWeight: '800',
-    marginRight: '2%',
+    width: '80%',
   },
   inputBox: {
     marginTop: 40,
@@ -42,24 +36,14 @@ export default StyleSheet.create({
     fontSize: 14,
     color: colors.darkGrey,
   },
-  nextButtonBase: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: 5,
+  buttonContainer: {
     width: 120,
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
-  nextButtonDisabled: {
-    backgroundColor: colors.midGrey,
-    borderColor: colors.midGrey,
-  },
-  nextButtonActive: {
-    backgroundColor: colors.black,
-    borderColor: colors.black,
-  },
+  // nextButtonActive: {
+  //   backgroundColor: colors.black,
+  //   borderColor: colors.black,
+  // },
   errorMessageBox: {
     marginTop: 13,
     height: 50,
@@ -76,5 +60,10 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     width: 310,
     marginTop: 70,
+  },
+  ButtonLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

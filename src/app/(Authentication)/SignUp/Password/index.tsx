@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import supabase from '../../../../supabase/createClient';
 
@@ -109,20 +110,14 @@ export default function SignUpScreen() {
         </Text>
       </View>
 
-      <TouchableOpacity
+      <ButtonBlack
         disabled={password === '' || confirmPassword === '' || disableButton}
-        style={
-          password === '' || confirmPassword === '' || disableButton
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
+        style={styles.nextButton}
         onPress={handleSubmit}
       >
         <Text style={styles.nextText}>Continue</Text>
-        <View>
-          <Arrow />
-        </View>
-      </TouchableOpacity>
+        <Arrow />
+      </ButtonBlack>
     </View>
   );
 }

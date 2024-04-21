@@ -20,7 +20,7 @@ export default StyleSheet.create({
   backButton: {
     marginTop: 100,
     marginBottom: 30,
-    marginRight: 280,
+    width: '80%',
   },
   instructionText: {
     color: colors.black,
@@ -33,24 +33,6 @@ export default StyleSheet.create({
     fontSize: 16,
     opacity: 1,
     fontWeight: '600',
-  },
-  nextButtonBase: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: 5,
-    width: 120,
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  nextButtonDisabled: {
-    backgroundColor: colors.midGrey,
-    borderColor: colors.midGrey,
-  },
-  nextButtonActive: {
-    backgroundColor: colors.black,
-    borderColor: colors.black,
   },
   errorMessageBox: {
     marginTop: 13,
@@ -76,5 +58,14 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     color: colors.darkGrey,
+  },
+  ButtonLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  buttonContainer: {
+    width: 120,
+    justifyContent: 'space-between',
   },
 });

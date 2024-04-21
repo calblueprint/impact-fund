@@ -44,14 +44,6 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  nextButtonDisabled: {
-    backgroundColor: colors.midGrey,
-    borderColor: colors.midGrey,
-  },
-  nextButtonActive: {
-    backgroundColor: colors.black,
-    borderColor: colors.black,
-  },
   instructionText: {
     color: colors.darkGrey,
     fontSize: 14,
@@ -68,17 +60,17 @@ export default StyleSheet.create({
   },
   buttonText: {
     color: colors.white,
-    marginRight: 17,
+    marginLeft: 10,
     fontSize: 16,
     fontWeight: '600',
   },
   underlineText: {
     textDecorationLine: 'underline',
+    marginTop: 21,
   },
   errorText: {
     color: colors.darkRed,
   },
-
   header: {
     justifyContent: 'flex-start',
     flexDirection: 'row',

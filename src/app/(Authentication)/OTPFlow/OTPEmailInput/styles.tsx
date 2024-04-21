@@ -33,6 +33,7 @@ export default StyleSheet.create({
     fontSize: 16,
     opacity: 1,
     fontWeight: '600',
+    marginLeft: 10,
   },
   nextButtonBase: {
     flexDirection: 'row',

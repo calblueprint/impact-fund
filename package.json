@@ -50,6 +50,7 @@
     "react-native-vector-icons": "^10.0.0",
     "react-native-webview": "13.2.2",
     "scheduler": "^0.23.0",
+    "styled-components": "^6.1.8",
     "uri-scheme": "^1.2.0",
     "yargs": "^16.2.0",
     "yargs-parser": "^20.2.9",

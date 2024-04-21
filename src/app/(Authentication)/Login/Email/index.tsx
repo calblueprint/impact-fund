@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 
@@ -32,7 +34,7 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Text style={styles.backText}>Back</Text>
+        <BackButton />
       </TouchableOpacity>
       <Text style={styles.instructionText}>
         Please enter your email address.
@@ -61,20 +63,17 @@ export default function LoginScreen() {
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          disabled={email.trim() === '' || errorExists}
-          style={
-            email.trim() === '' || errorExists
-              ? [styles.nextButtonBase, styles.nextButtonDisabled]
-              : [styles.nextButtonBase, styles.nextButtonActive]
-          }
-          onPress={emailFind}
-        >
-          <Text style={styles.nextText}>Next</Text>
-          <View>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <ButtonBlack
+            onPress={emailFind}
+            disabled={email.trim() === '' || errorExists}
+          >
+            <View style={styles.ButtonLine}>
+              <Text style={styles.nextText}>Next</Text>
+              <Arrow />
+            </View>
+          </ButtonBlack>
+        </View>
       </View>
     </View>
   );
