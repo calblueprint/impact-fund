@@ -39,7 +39,9 @@ export default function UpdateView() {
               <View style={styles.titleContainer}>
                 <NotificationBell />
                 <View style={styles.headerText}>
-                  <Text style={styles.categoryText}>{update.category}</Text>
+                  <Text style={styles.categoryText}>
+                    {update.category.toUpperCase()}
+                  </Text>
                   <Text style={styles.titleText}>{update.title}</Text>
                 </View>
               </View>
