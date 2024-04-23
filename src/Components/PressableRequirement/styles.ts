@@ -6,7 +6,7 @@ export default StyleSheet.create({
   requirementContainer: {
     flexDirection: 'row',
     columnGap: 20,
-    paddingHorizontal: '6%',
+    paddingHorizontal: 25,
     paddingVertical: 20,
   },
   innerRequirementBox: {
