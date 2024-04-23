@@ -1,18 +1,26 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import supabase from '../../../../supabase/createClient';
+import {
+  ContentContainer,
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InputBoxContainer,
+  InstructionContainer,
+  SafeArea,
+  TitleText,
+} from '../../styles';
 
-export default function SignUpScreen() {
-  const { name } = useLocalSearchParams() as unknown as { name: string };
-  const { email } = useLocalSearchParams() as unknown as { email: string };
-
+export default function OTPNewPassword() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const { updateUser } = useSession();
@@ -68,19 +76,17 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => router.back()}
-          >
-            <Text style={styles.backText}>Back</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.instructionText}>Create a new password.</Text>
+    <SafeArea>
+      <ContentContainer>
+        <TouchableOpacity onPress={() => router.back()}>
+          <BackButton />
+        </TouchableOpacity>
 
-        <View style={styles.inputBox}>
+        <InstructionContainer>
+          <TitleText>Create a new password.</TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -90,9 +96,7 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
 
-        <View style={styles.inputBox}>
           <AuthInput
             input={confirmPassword}
             onChangeInput={onChangeConfirmPassword}
@@ -102,23 +106,22 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
+        </InputBoxContainer>
 
-        <View>
-          <Text style={styles.errorMessage}>
+        <ErrorMessageContainer>
+          <ErrorMessageText>
             {disableButton ? errorMessage : ' '}
-          </Text>
-        </View>
+          </ErrorMessageText>
+        </ErrorMessageContainer>
 
         <ButtonBlack
           disabled={password === '' || confirmPassword === '' || disableButton}
-          style={styles.nextButton}
           onPress={handleSubmit}
         >
-          <Text style={styles.nextText}>Continue</Text>
-          <Arrow style={{ marginRight: 15 }} />
+          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Arrow />
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }

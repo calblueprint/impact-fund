@@ -1,13 +1,25 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { emailExists } from '../../../../supabase/queries/auth';
+import {
+  ContentContainer,
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InputBoxContainer,
+  InstructionContainer,
+  SafeArea,
+  TitleText,
+} from '../../styles';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');
@@ -44,21 +56,19 @@ export default function OTPEmailInput() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
+    <SafeArea>
+      <ContentContainer>
+        <TouchableOpacity onPress={() => router.back()}>
+          <BackButton />
         </TouchableOpacity>
-        <View>
-          <Text style={styles.instructionText}>
-            Please enter the email you used to create your account.
-          </Text>
-        </View>
 
-        <View style={styles.inputBox}>
+        <InstructionContainer>
+          <TitleText>
+            Please enter the email you used to create your account.
+          </TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -68,25 +78,19 @@ export default function OTPEmailInput() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
+        </InputBoxContainer>
 
-        <View style={styles.errorMessageBox}>
-          <Text style={styles.errorMessageText}>
+        <ErrorMessageContainer>
+          <ErrorMessageText>
             {errorExists ? errorMessage : ' '}
-          </Text>
-        </View>
+          </ErrorMessageText>
+        </ErrorMessageContainer>
 
-        <View style={styles.nextLine}>
-          <ButtonBlack
-            disabled={email === '' || errorExists}
-            style={styles.nextButtonBase}
-            onPress={getOTP}
-          >
-            <Text style={styles.nextText}>Continue</Text>
-            <Arrow style={{ marginRight: 10 }} />
-          </ButtonBlack>
-        </View>
-      </View>
-    </View>
+        <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
+          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Arrow />
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }
