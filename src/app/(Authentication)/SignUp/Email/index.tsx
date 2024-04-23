@@ -6,10 +6,19 @@ import { z } from 'zod';
 import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
-import { InputBoxContainer, TitleText } from '../../styles';
+import {
+  ContentContainer,
+  InputBoxContainer,
+  InstructionContainer,
+  SafeArea,
+  TitleText,
+} from '../../styles';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
@@ -60,15 +69,15 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
+    <SafeArea>
+      <ContentContainer>
+        <TouchableOpacity onPress={() => router.back()}>
           <BackButton />
         </TouchableOpacity>
-        <TitleText>Create your account.</TitleText>
+
+        <InstructionContainer>
+          <TitleText>Create your account.</TitleText>
+        </InstructionContainer>
 
         <InputBoxContainer>
           <AuthInput
@@ -99,12 +108,11 @@ export default function SignUpScreen() {
         <ButtonBlack
           disabled={name.trim() === '' || email.trim() === '' || errorExists}
           onPress={handleSubmit}
-          style={styles.nextButton}
         >
-          <Text style={styles.nextText}>Continue</Text>
+          <ButtonTextWhite>Continue</ButtonTextWhite>
           <Arrow />
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }

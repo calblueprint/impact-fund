@@ -15,10 +15,6 @@ export default StyleSheet.create({
   contentContainer: {
     width: '84%',
   },
-  backButton: {
-    marginTop: 80,
-    marginBottom: 40,
-  },
   instructionText: {
     color: colors.black,
     fontSize: 24,
@@ -31,13 +27,6 @@ export default StyleSheet.create({
     fontSize: 14,
     opacity: 1,
     fontWeight: '600',
-  },
-  nextButton: {
-    borderWidth: 1,
-    height: 50,
-    padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   errorMessage: {
     color: colors.darkRed,
