@@ -31,6 +31,13 @@ export const InputBoxContainer = styled.View({
   marginTop: 34,
 });
 
+export const InlineInputContainer = styled.View({
+  width: '100%',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  columnGap: 20,
+});
+
 export const ErrorMessageContainer = styled.View({
   height: 70,
   paddingTop: 10,

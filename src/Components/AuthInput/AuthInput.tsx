@@ -22,7 +22,6 @@ export default function AuthInput({
   isPassword,
   keyboard,
   autoCapitalization,
-  isHalfWidth,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(placeholderText);
@@ -54,15 +53,11 @@ export default function AuthInput({
   }, [input]);
 
   return (
-    <View>
+    <View style={styles.outerContainer}>
       <Text style={styles.labelText}>{isLabelDisplayed ? labelText : ' '}</Text>
 
       <TextInput
-        style={[
-          styles.inputBox,
-          isHalfWidth && styles.halfWidth,
-          isFocused && styles.inputFocused,
-        ]}
+        style={[styles.inputBox, isFocused && styles.inputFocused]}
         value={input}
         onChangeText={onChangeInput}
         onFocus={onClick}

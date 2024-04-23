@@ -34,7 +34,6 @@ export default StyleSheet.create({
   stateLine: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 11,
     width: '100%',
   },
   nextText: {
@@ -63,6 +62,7 @@ export default StyleSheet.create({
     columnGap: 1,
   },
   smallInput: {
-    width: '48%',
+    // width: '48%',
+    flex: 1,
   },
 });

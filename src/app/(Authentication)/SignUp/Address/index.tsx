@@ -5,9 +5,20 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import {
+  ContentContainer,
+  InlineInputContainer,
+  InputBoxContainer,
+  InstructionContainer,
+  SafeArea,
+  TitleText,
+} from '../../styles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -67,14 +78,17 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <SafeArea>
+      <ContentContainer>
         <TouchableOpacity onPress={() => router.back()}>
           <BackButton />
         </TouchableOpacity>
-        <Text style={styles.instructionText}>Last, enter your address.</Text>
 
-        <View style={styles.inputBox}>
+        <InstructionContainer>
+          <TitleText>Last, enter your address.</TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -84,9 +98,7 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
 
-        <View style={styles.inputBox}>
           <AuthInput
             input={city}
             onChangeInput={onChangeCity}
@@ -96,10 +108,8 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
 
-        <View style={styles.stateLine}>
-          <View style={styles.smallInput}>
+          <InlineInputContainer>
             <AuthInput
               input={state}
               onChangeInput={onChangeState}
@@ -110,9 +120,7 @@ export default function SignUpScreen() {
               autoCapitalization
               isHalfWidth
             />
-          </View>
 
-          <View style={styles.smallInput}>
             <AuthInput
               input={zipcode}
               onChangeInput={onChangeZipcode}
@@ -123,8 +131,8 @@ export default function SignUpScreen() {
               autoCapitalization
               isHalfWidth
             />
-          </View>
-        </View>
+          </InlineInputContainer>
+        </InputBoxContainer>
 
         <ButtonBlack
           disabled={
@@ -136,10 +144,10 @@ export default function SignUpScreen() {
           style={styles.nextButton}
           onPress={() => handleSubmit()}
         >
-          <Text style={styles.nextText}>Sign Up</Text>
+          <ButtonTextWhite>Sign Up</ButtonTextWhite>
           <Check />
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }
