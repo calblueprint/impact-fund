@@ -9,6 +9,7 @@ import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
+import { InputBoxContainer, TitleText } from '../../styles';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
@@ -67,8 +68,9 @@ export default function SignUpScreen() {
         >
           <BackButton />
         </TouchableOpacity>
-        <Text style={styles.instructionText}>Create your account.</Text>
-        <View style={styles.inputBox}>
+        <TitleText>Create your account.</TitleText>
+
+        <InputBoxContainer>
           <AuthInput
             input={name}
             onChangeInput={onChangeName}
@@ -78,8 +80,6 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
-        <View style={styles.inputBox}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -89,7 +89,8 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
+        </InputBoxContainer>
+
         <View>
           <Text style={styles.errorMessage}>
             {errorExists ? errorMessage : ' '}

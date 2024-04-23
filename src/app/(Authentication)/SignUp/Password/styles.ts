@@ -11,14 +11,15 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   contentContainer: {
-    width: '81%',
+    width: '84%',
   },
   header: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
+    width: '100%',
     marginTop: 90,
-    marginRight: 98,
     marginBottom: 40,
+    borderWidth: 1,
   },
   backText: {
     color: colors.midGrey,

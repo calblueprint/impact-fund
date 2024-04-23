@@ -8,6 +8,7 @@ import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import supabase from '../../../../supabase/createClient';
+import { InputBoxContainer, TitleText } from '../../styles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -73,16 +74,14 @@ export default function SignUpScreen() {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => router.back()}
-          >
+          <TouchableOpacity onPress={() => router.back()}>
             <BackButton />
           </TouchableOpacity>
         </View>
-        <Text style={styles.instructionText}>Next, make a password.</Text>
 
-        <View style={styles.inputBox}>
+        <TitleText>Next, make a password.</TitleText>
+
+        <InputBoxContainer>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -92,9 +91,7 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
 
-        <View style={styles.inputBox}>
           <AuthInput
             input={confirmPassword}
             onChangeInput={onChangeConfirmPassword}
@@ -104,7 +101,7 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </View>
+        </InputBoxContainer>
 
         <View>
           <Text style={styles.errorMessage}>
