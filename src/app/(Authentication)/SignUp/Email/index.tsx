@@ -1,9 +1,8 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { z } from 'zod';
 
-import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {

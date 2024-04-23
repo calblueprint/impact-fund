@@ -1,8 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
@@ -124,7 +123,7 @@ export default function SignUpScreen() {
           disabled={password === '' || confirmPassword === '' || disableButton}
           onPress={handleSubmit}
         >
-          <ButtonTextBlack style={styles.nextText}>Continue</ButtonTextBlack>
+          <ButtonTextBlack>Continue</ButtonTextBlack>
           <Arrow style={{ marginRight: 15 }} />
         </ButtonBlack>
       </ContentContainer>

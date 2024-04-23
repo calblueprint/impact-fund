@@ -1,8 +1,7 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
-import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';
 import {
@@ -118,7 +117,6 @@ export default function SignUpScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
-              isHalfWidth
             />
 
             <AuthInput
@@ -129,7 +127,6 @@ export default function SignUpScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
-              isHalfWidth
             />
           </InlineInputContainer>
         </InputBoxContainer>
@@ -141,11 +138,12 @@ export default function SignUpScreen() {
             state.trim() === '' ||
             zipcode.trim() === ''
           }
-          style={styles.nextButton}
           onPress={() => handleSubmit()}
         >
-          <ButtonTextWhite>Sign Up</ButtonTextWhite>
-          <Check />
+          <View style={{ flexDirection: 'row', columnGap: 15 }}>
+            <ButtonTextWhite>Sign Up</ButtonTextWhite>
+            <Check />
+          </View>
         </ButtonBlack>
       </ContentContainer>
     </SafeArea>
