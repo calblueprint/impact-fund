@@ -11,11 +11,11 @@ export default StyleSheet.create({
   },
   outerScroll: {
     width: '93%',
-    paddingVertical: 20,
   },
   innerScroll: {
     paddingVertical: 32,
     paddingHorizontal: 23,
+    marginVertical: 20,
     rowGap: 20,
     backgroundColor: colors.white,
 
@@ -34,6 +34,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     columnGap: 13,
   },
+  headerText: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   inLineSubInfo: {
     flexDirection: 'row',
     height: 30,
@@ -47,7 +51,6 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontStyle: 'normal',
     color: colors.black,
-    flex: 1,
   },
   bodyText: {
     fontSize: 16,
@@ -68,5 +71,12 @@ export default StyleSheet.create({
   dateText: {
     color: colors.darkGrey,
     fontWeight: '300',
+  },
+  categoryText: {
+    fontSize: 12,
+    lineHeight: 18,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    color: colors.midGrey,
   },
 });
