@@ -5,7 +5,6 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   requirementContainer: {
     flexDirection: 'row',
-    paddingTop: 20,
     columnGap: 20,
     paddingHorizontal: '6%',
     paddingVertical: 20,

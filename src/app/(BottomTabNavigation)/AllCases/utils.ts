@@ -72,11 +72,7 @@ export function getStatusColor(status: string) {
     throw new Error(`Invalid status: ${status}`);
   }
 
-  if (
-    Object.values(GreenStatusOptions).includes(
-      status as unknown as GreenStatusOptions,
-    )
-  ) {
+  if (Object.values(GreenStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightGreen,
@@ -85,11 +81,7 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkGreen },
     };
-  } else if (
-    Object.values(YellowStatusOptions).includes(
-      status as unknown as YellowStatusOptions,
-    )
-  ) {
+  } else if (Object.values(YellowStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightYellow,
@@ -98,11 +90,7 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkYellow },
     };
-  } else if (
-    Object.values(RedStatusOptions).includes(
-      status as unknown as RedStatusOptions,
-    )
-  ) {
+  } else if (Object.values(RedStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightRed,
