@@ -14,6 +14,8 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { emailExists } from '../../../../supabase/queries/auth';
 import {
   ContentContainer,
+  ErrorMessageContainer,
+  ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
   SafeArea,
@@ -100,11 +102,12 @@ export default function SignUpScreen() {
           />
         </InputBoxContainer>
 
-        <View>
-          <Text style={styles.errorMessage}>
+        <ErrorMessageContainer>
+          <ErrorMessageText>
             {errorExists ? errorMessage : ' '}
-          </Text>
-        </View>
+          </ErrorMessageText>
+        </ErrorMessageContainer>
+
         <ButtonBlack
           disabled={name.trim() === '' || email.trim() === '' || errorExists}
           onPress={handleSubmit}

@@ -31,8 +31,19 @@ export const InputBoxContainer = styled.View({
   marginTop: 34,
 });
 
+export const ErrorMessageContainer = styled.View({
+  height: 70,
+  paddingTop: 10,
+});
+
 export const TitleText = styled.Text({
   color: colors.black,
   fontSize: 24,
   fontWeight: '800',
+});
+
+export const ErrorMessageText = styled.Text({
+  color: colors.darkRed,
+  fontSize: 14,
+  fontWeight: '400',
 });
