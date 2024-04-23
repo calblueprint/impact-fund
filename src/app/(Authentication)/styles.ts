@@ -42,6 +42,14 @@ export const TitleText = styled.Text({
   fontWeight: '800',
 });
 
+export const InstructionText = styled.Text({
+  color: colors.darkGrey,
+  fontSize: 14,
+  fontStyle: 'normal',
+  fontWeight: '300',
+  lineHeight: 18,
+});
+
 export const ErrorMessageText = styled.Text({
   color: colors.darkRed,
   fontSize: 14,

@@ -7,9 +7,22 @@ import OTPTextInput from 'react-native-otp-textinput';
 import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
+import {
+  ContentContainer,
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InputBoxContainer,
+  InstructionContainer,
+  InstructionText,
+  SafeArea,
+  TitleText,
+} from '../../styles';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
@@ -49,57 +62,55 @@ export default function OTPFlow() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <SafeArea>
+      <ContentContainer>
         <TouchableOpacity onPress={() => router.back()}>
           <BackButton />
         </TouchableOpacity>
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.headerText}>Enter verification code.</Text>
-          <Text style={styles.instructionText}>We've sent it to {email}</Text>
-        </View>
 
-        <OTPTextInput
-          inputCount={6}
-          tintColor={colors.darkGrey}
-          defaultValue={token}
-          inputCellLength={1}
-          handleTextChange={onChangeToken}
-          containerStyle={styles.otpContainer}
-          textInputStyle={styles.otpInputBoxes}
-          keyboardType="number-pad"
-          autoFocus={false}
-        />
+        <InstructionContainer>
+          <TitleText>Enter verification code.</TitleText>
+          <InstructionText>We've sent it to {email}</InstructionText>
+        </InstructionContainer>
 
-        <Text style={styles.instructionText}>
-          Didn't receive a code? Go back to confirm your email or
-          <TouchableOpacity onPress={() => resendOtp(email)}>
-            <Text style={[styles.instructionText, styles.underlineText]}>
-              {' '}
-              tap here to resend it.
-            </Text>
-          </TouchableOpacity>
-        </Text>
+        <InputBoxContainer>
+          <OTPTextInput
+            inputCount={6}
+            tintColor={colors.darkGrey}
+            defaultValue={token}
+            inputCellLength={1}
+            handleTextChange={onChangeToken}
+            containerStyle={styles.otpContainer}
+            textInputStyle={styles.otpInputBoxes}
+            keyboardType="number-pad"
+            autoFocus={false}
+          />
+          <InstructionText>
+            Didn't receive a code? Go back to confirm your email or
+            <TouchableOpacity onPress={() => resendOtp(email)}>
+              <InstructionText style={{ textDecorationLine: 'underline' }}>
+                {' '}
+                tap here to resend it.
+              </InstructionText>
+            </TouchableOpacity>
+          </InstructionText>
+        </InputBoxContainer>
 
-        <View style={styles.errorContainer}>
-          <Text style={[styles.instructionText, styles.errorText]}>
-            {errorMessage}
-          </Text>
-        </View>
+        <ErrorMessageContainer>
+          <ErrorMessageText>{errorMessage}</ErrorMessageText>
+        </ErrorMessageContainer>
 
         <ButtonBlack
           disabled={token.length !== 6 || errorExists}
           style={styles.nextButtonBase}
           onPress={() => verifyToken(token)}
         >
-          <Text style={styles.buttonText}>Continue</Text>
+          <ButtonTextWhite style={styles.buttonText}>Continue</ButtonTextWhite>
           <View>
             <Arrow style={{ marginRight: 10 }} />
           </View>
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }
