@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { router } from 'expo-router/src/imperative-api';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
@@ -102,10 +102,9 @@ export default function OTPFlow() {
 
         <ButtonBlack
           disabled={token.length !== 6 || errorExists}
-          style={styles.nextButtonBase}
           onPress={() => verifyToken(token)}
         >
-          <ButtonTextWhite style={styles.buttonText}>Continue</ButtonTextWhite>
+          <ButtonTextWhite>Continue</ButtonTextWhite>
           <View>
             <Arrow style={{ marginRight: 10 }} />
           </View>

@@ -35,6 +35,7 @@ export const InlineInputContainer = styled.View({
   width: '100%',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center',
   columnGap: 20,
 });
 
@@ -54,7 +55,6 @@ export const InstructionText = styled.Text({
   fontSize: 14,
   fontStyle: 'normal',
   fontWeight: '300',
-  lineHeight: 18,
 });
 
 export const ErrorMessageText = styled.Text({
