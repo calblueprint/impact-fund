@@ -9,8 +9,12 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   contentContainer: {
-    width: '81%',
-    marginTop: 70,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+    width: '84%',
+    paddingTop: 40,
+    paddingBottom: 60,
   },
   backContainer: {
     marginBottom: 40,
@@ -39,16 +43,7 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '800',
     color: colors.black,
-  },
-  nextButtonBase: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: 5,
-    width: '100%',
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    marginTop: 60,
   },
   nextText: {
     color: colors.white,

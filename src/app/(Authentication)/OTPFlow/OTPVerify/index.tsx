@@ -13,16 +13,15 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
-import { SafeArea } from '../../../../styles/global';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import {
-  ContentContainer,
   ErrorMessageContainer,
   ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../AuthFlowStyles';
+} from '../../styles';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {

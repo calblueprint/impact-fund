@@ -9,16 +9,15 @@ import {
   ButtonTextBlack,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { SafeArea } from '../../../../styles/global';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import supabase from '../../../../supabase/createClient';
 import {
-  ContentContainer,
   ErrorMessageContainer,
   ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
   TitleText,
-} from '../../AuthFlowStyles';
+} from '../../styles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };

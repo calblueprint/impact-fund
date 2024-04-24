@@ -12,6 +12,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   contentContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     height: '84%',
     width: '81%',
   },

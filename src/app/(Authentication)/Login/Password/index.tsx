@@ -10,9 +10,8 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import { SafeArea } from '../../../../styles/global';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import {
-  ContentContainer,
   ErrorMessageContainer,
   ErrorMessageText,
   InlineInputContainer,
@@ -20,7 +19,7 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../AuthFlowStyles';
+} from '../../styles';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };

@@ -12,3 +12,8 @@ export const SafeArea = styled(SafeAreaView)`
   align-items: center;
   flex: 1;
 `;
+
+export const ContentContainer = styled.View({
+  paddingTop: 40,
+  width: '84%',
+});

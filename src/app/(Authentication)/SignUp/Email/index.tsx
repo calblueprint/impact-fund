@@ -10,16 +10,15 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { SafeArea } from '../../../../styles/global';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
 import {
-  ContentContainer,
   ErrorMessageContainer,
   ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
   TitleText,
-} from '../../AuthFlowStyles';
+} from '../../styles';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');

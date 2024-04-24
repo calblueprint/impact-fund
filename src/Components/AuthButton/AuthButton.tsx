@@ -8,8 +8,7 @@ const ButtonBase = styled.TouchableOpacity`
   border-radius: 5px;
   flex-direction: row;
   width: 100%;
-  height: 45px;
-  padding: 15px;
+  padding: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;
 
