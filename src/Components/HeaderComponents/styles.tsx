@@ -4,7 +4,7 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   allCasesBorder: {
-    width: '94%',
+    width: '92%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',

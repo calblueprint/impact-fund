@@ -5,7 +5,6 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
-import { CasesHeader } from '../../../../Components/HeaderComponents/HeaderComponents';
 import { useSession } from '../../../../context/AuthContext';
 function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
@@ -20,10 +19,6 @@ function DeleteAccountScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.screenContainer}>
-        <View style={styles.headerContainer}>
-          <CasesHeader />
-        </View>
-
         <View style={styles.textContainer}>
           <Text style={styles.topText}>Delete account?</Text>
           <Text style={styles.blurb}>

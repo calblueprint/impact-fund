@@ -1,7 +1,6 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Image } from 'react-native';
 
 import styles from './styles';
-import ShareButton from '../../../assets/red-share-button.svg';
 
 export function HeaderImage() {
   return (
@@ -14,7 +13,7 @@ export function HeaderImage() {
 
 export function LeftAlignedHeader() {
   return (
-    <View style={styles.allCasesBorder}>
+    <View style={styles.fullHeaderContainer}>
       <HeaderImage />
     </View>
   );
@@ -22,7 +21,7 @@ export function LeftAlignedHeader() {
 
 export function LeftAlignedHeaderLine() {
   return (
-    <View style={[styles.allCasesBorder, styles.bottomLine]}>
+    <View style={[styles.fullHeaderContainer, styles.bottomLine]}>
       <HeaderImage />
     </View>
   );

@@ -1,7 +1,12 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import { LeftAlignedHeaderLine } from '../../../Components/HeaderComponents/HeaderComponents';
+import { BackButtonNoText } from '../../../Components/BackButtons/BackButtons';
+import {
+  EmptyHeader,
+  LeftAlignedHeader,
+  LeftAlignedHeaderLine,
+} from '../../../Components/HeaderComponents/HeaderComponents';
 
 export default function ProfileLayout() {
   return (
@@ -16,6 +21,27 @@ export default function ProfileLayout() {
         name="index"
         options={{
           headerTitle: props => <LeftAlignedHeaderLine />,
+        }}
+      />
+      <Stack.Screen
+        name="EditName/index"
+        options={{
+          headerLeft: () => <BackButtonNoText />,
+          headerTitle: () => <EmptyHeader />,
+        }}
+      />
+      <Stack.Screen
+        name="EditAddress/index"
+        options={{
+          headerLeft: () => <BackButtonNoText />,
+          headerTitle: () => <EmptyHeader />,
+        }}
+      />
+      <Stack.Screen
+        name="DeleteAccount/index"
+        options={{
+          headerTitle: () => <LeftAlignedHeader />,
+          headerBackVisible: false,
         }}
       />
     </Stack>
