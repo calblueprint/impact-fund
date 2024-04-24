@@ -5,13 +5,15 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   allCasesBorder: {
     width: '94%',
-    paddingTop: 14,
-    paddingBottom: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.darkGrey,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    paddingTop: 14,
+    paddingBottom: 14,
+  },
+  bottomLine: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.midGrey,
   },
   headerText: {
     color: colors.midRed,

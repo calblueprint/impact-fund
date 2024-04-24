@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import { AllCasesHeader } from '../../../Components/HeaderComponents/HeaderComponents';
+import { LeftAlignedHeaderLine } from '../../../Components/HeaderComponents/HeaderComponents';
 
 export default function ProfileLayout() {
   return (
@@ -15,7 +15,7 @@ export default function ProfileLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: props => <AllCasesHeader />,
+          headerTitle: props => <LeftAlignedHeaderLine />,
         }}
       />
     </Stack>
