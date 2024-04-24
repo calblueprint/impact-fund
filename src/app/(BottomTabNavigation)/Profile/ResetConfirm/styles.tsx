@@ -3,11 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-  },
   contentContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -15,9 +10,6 @@ export default StyleSheet.create({
     width: '84%',
     paddingTop: 40,
     paddingBottom: 60,
-  },
-  backContainer: {
-    marginBottom: 40,
   },
   instructionContainer: {
     marginTop: 34,

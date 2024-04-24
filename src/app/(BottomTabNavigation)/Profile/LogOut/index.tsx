@@ -25,16 +25,14 @@ function LogOutConfirmation() {
           <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
             <View style={styles.buttonContent}>
               <X />
-              <ButtonTextBlack style={styles.cancelText}>
-                Cancel
-              </ButtonTextBlack>
+              <ButtonTextBlack>Cancel</ButtonTextBlack>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
             <View style={styles.buttonContent}>
               <SignOut />
-              <Text style={styles.confirmText}>Confirm</Text>
+              <ButtonTextWhite>Confirm</ButtonTextWhite>
             </View>
           </ButtonBlack>
         </View>

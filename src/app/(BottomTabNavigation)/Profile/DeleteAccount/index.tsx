@@ -7,10 +7,13 @@ import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
+  ButtonTextBlack,
+  ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea } from '../../../../styles/global';
 
 function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
@@ -23,44 +26,39 @@ function DeleteAccountScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeArea>
       <View style={styles.screenContainer}>
-        <View style={styles.headerContainer}>
+        <View>
           <CasesHeader />
-        </View>
 
-        <View style={styles.textContainer}>
-          <Text style={styles.topText}>Delete account?</Text>
-          <Text style={styles.blurb}>
-            Deleting your account will also permanently delete any data
-            associated with it. This action cannot be undone.
-          </Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.topText}>Delete account?</Text>
+            <Text style={styles.blurb}>
+              Deleting your account will also permanently delete any data
+              associated with it. This action cannot be undone.
+            </Text>
+          </View>
         </View>
 
         <View style={styles.buttonContainer}>
-          <View style={styles.buttonView}>
-            <ButtonWhite
-              onPress={() => router.back()}
-              style={styles.cancelButton}
-            >
-              <View style={styles.buttonContent}>
-                <X />
-                <Text style={styles.cancelText}>Cancel</Text>
-              </View>
-            </ButtonWhite>
-          </View>
+          <ButtonWhite onPress={() => router.back()} style={styles.buttonView}>
+            <View style={styles.buttonContent}>
+              <X />
+              <ButtonTextBlack style={styles.cancelText}>
+                Cancel
+              </ButtonTextBlack>
+            </View>
+          </ButtonWhite>
 
-          <View style={styles.buttonView}>
-            <ButtonBlack onPress={deleteAccount} style={styles.confirmButton}>
-              <View style={styles.buttonContent}>
-                <WhiteTrash />
-                <Text style={styles.confirmText}>Confirm</Text>
-              </View>
-            </ButtonBlack>
-          </View>
+          <ButtonBlack onPress={deleteAccount} style={styles.buttonView}>
+            <View style={styles.buttonContent}>
+              <WhiteTrash />
+              <ButtonTextWhite>Confirm</ButtonTextWhite>
+            </View>
+          </ButtonBlack>
         </View>
       </View>
-    </View>
+    </SafeArea>
   );
 }
 export default DeleteAccountScreen;

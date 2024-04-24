@@ -9,7 +9,7 @@ const ButtonBase = styled.TouchableOpacity`
   border-radius: 5px;
   min-height: 41px;
   width: 100%;
-  padding-horizontal: 15px;
+  padding-horizontal: 20px;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;
 
@@ -25,7 +25,7 @@ export const ButtonWhite = styled(ButtonBase)`
 
 export const ButtonTextBase = styled.Text({
   color: colors.white,
-  fontSize: 14,
+  fontSize: 16,
   opacity: 1,
   fontWeight: '600',
 });
