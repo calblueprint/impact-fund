@@ -17,18 +17,7 @@ export default StyleSheet.create({
     paddingVertical: 32,
     paddingHorizontal: 23,
     rowGap: 20,
-    backgroundColor: colors.white,
-
-    borderWidth: 1,
     borderRadius: 15,
-    borderStyle: 'solid',
-    borderColor: colors.midGrey,
-
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   titleContainer: {
     flexDirection: 'row',
