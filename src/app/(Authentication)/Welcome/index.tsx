@@ -10,43 +10,46 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../Components/AuthButton/AuthButton';
+import { SafeArea } from '../../../styles/global';
 
 function WelcomeScreen() {
   return (
-    <View style={styles.container}>
+    <SafeArea>
       <View style={styles.contentContainer}>
         <Image
           style={styles.image}
           source={require('../../../../assets/inline-logo.jpeg')}
         />
 
-        <View style={styles.textContainer}>
+        <View>
           <Text style={styles.welcomeText}>Welcome to the Impact Fund.</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <ButtonWhite
-            style={styles.baseButton}
-            onPress={() => router.push('/SignUp/Email')}
-          >
-            <Text style={styles.nextTextBlack}>Create an account</Text>
-            <RightArrow style={{ marginRight: 10 }} />
-          </ButtonWhite>
 
-          <View style={styles.orContainer}>
-            <View style={styles.horizontalLine} />
-            <Text style={styles.orTextContainer}> OR </Text>
-            <View style={styles.horizontalLine} />
+          <View style={styles.buttonContainer}>
+            <ButtonWhite
+              style={styles.baseButton}
+              onPress={() => router.push('/SignUp/Email')}
+            >
+              <Text style={styles.nextTextBlack}>Create an account</Text>
+              <RightArrow />
+            </ButtonWhite>
+
+            <View style={styles.orContainer}>
+              <View style={styles.horizontalLine} />
+              <Text style={styles.orTextContainer}> OR </Text>
+              <View style={styles.horizontalLine} />
+            </View>
+
+            <ButtonBlack
+              style={styles.baseButton}
+              onPress={() => router.push('/Login/Email')}
+            >
+              <Text style={styles.nextTextWhite}>Log in with email</Text>
+              <RightArrowWhite />
+            </ButtonBlack>
           </View>
-          <ButtonBlack
-            style={styles.baseButton}
-            onPress={() => router.push('/Login/Email')}
-          >
-            <Text style={styles.nextTextWhite}>Log in with email</Text>
-            <RightArrowWhite style={{ marginRight: 10 }} />
-          </ButtonBlack>
         </View>
       </View>
-    </View>
+    </SafeArea>
   );
 }
 

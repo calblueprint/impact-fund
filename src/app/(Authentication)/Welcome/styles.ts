@@ -16,6 +16,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     height: '84%',
     width: '81%',
+    paddingVertical: 40,
   },
   image: {
     width: 130,
@@ -33,7 +34,6 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
-    alignItems: 'center',
     marginTop: 55,
   },
   orContainer: {
@@ -56,16 +56,12 @@ export default StyleSheet.create({
   nextTextWhite: {
     color: colors.white,
     fontSize: 17,
-    opacity: 1,
     fontWeight: '500',
-    marginLeft: 10,
   },
   nextTextBlack: {
     color: colors.black,
     fontSize: 17,
-    opacity: 1,
     fontWeight: '500',
-    marginLeft: 10,
   },
   baseButton: {
     height: 55,

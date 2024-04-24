@@ -12,7 +12,10 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
-import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../context/AuthContext';
 
@@ -118,18 +121,17 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
+        <ButtonBlack
           onPress={() => {
             router.push('/Profile/LogOut');
           }}
-          style={styles.signOutButton}
         >
           <View style={styles.signOutInstructions}>
-            <SignOut style={{ marginLeft: 15 }} />
-            <Text style={styles.signOutText}>Log out</Text>
+            <SignOut />
+            <ButtonTextWhite>Log out</ButtonTextWhite>
           </View>
-          <WhiteRightCarrot style={{ marginRight: 15 }} />
-        </TouchableOpacity>
+          <WhiteRightCarrot />
+        </ButtonBlack>
       </View>
     </View>
   );

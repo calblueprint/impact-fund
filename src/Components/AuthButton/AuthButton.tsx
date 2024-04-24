@@ -3,12 +3,12 @@ import styled from 'styled-components/native';
 import { colors } from '../../styles/colors';
 
 const ButtonBase = styled.TouchableOpacity`
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  flex-direction: row;
   width: 100%;
-  padding: 17px;
+  padding: 15px;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;
 

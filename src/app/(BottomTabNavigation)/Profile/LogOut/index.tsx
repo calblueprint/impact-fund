@@ -7,6 +7,8 @@ import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
+  ButtonTextBlack,
+  ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
@@ -24,10 +26,10 @@ function LogOutConfirmation() {
             onPress={() => router.push('/Profile')}
             style={styles.cancelButton}
           >
-            <View style={styles.buttonContent}>
-              <X style={{ marginTop: 1 }} />
-              <Text style={styles.cancelText}>Cancel</Text>
-            </View>
+            {/* <View style={styles.buttonContent}> */}
+            {/* <X /> */}
+            <ButtonTextBlack style={styles.cancelText}>Cancel</ButtonTextBlack>
+            {/* </View> */}
           </ButtonWhite>
 
           <ButtonBlack onPress={() => signOut()} style={styles.confirmButton}>

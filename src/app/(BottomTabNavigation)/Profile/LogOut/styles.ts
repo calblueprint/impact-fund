@@ -21,30 +21,17 @@ export default StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 41,
   },
   buttonContent: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
-    width: '60%',
+    columnGap: 15,
   },
   cancelButton: {
     width: '48%',
-    flex: 1,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: colors.black,
-    alignItems: 'center',
   },
   confirmButton: {
     width: '48%',
-    marginLeft: 13,
-    flex: 1,
-    backgroundColor: colors.black,
-    borderRadius: 5,
-    alignItems: 'center',
   },
   topText: {
     fontSize: 38,
@@ -63,6 +50,5 @@ export default StyleSheet.create({
     fontSize: 17,
     fontStyle: 'normal',
     fontWeight: '500',
-    marginLeft: 6,
   },
 });
