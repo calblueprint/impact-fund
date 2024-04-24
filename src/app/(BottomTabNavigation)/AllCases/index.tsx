@@ -16,14 +16,6 @@ import {
 
 import 'react-native-url-polyfill/auto';
 
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: false,
-//     shouldSetBadge: false,
-//   }),
-// });
-
 enum linkingEvents {
   ADD_CASE = 'addCase',
   NOTIFICATION = 'notification',
@@ -43,27 +35,27 @@ function CasesScreen() {
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
-  useEffect(() => {
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener(notification => {
-        setNotification(notification);
-        console.log(notification);
-      });
+  // useEffect(() => {
+  //   notificationListener.current =
+  //     Notifications.addNotificationReceivedListener(notification => {
+  //       setNotification(notification);
+  //       console.log(notification);
+  //     });
 
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener(response => {
-        setNotification(notification);
-        console.log(response);
-      });
+  //   responseListener.current =
+  //     Notifications.addNotificationResponseReceivedListener(response => {
+  //       setNotification(notification);
+  //       console.log(response);
+  //     });
 
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current!,
-      );
+  //   return () => {
+  //     Notifications.removeNotificationSubscription(
+  //       notificationListener.current!,
+  //     );
 
-      Notifications.removeNotificationSubscription(responseListener.current!);
-    };
-  }, []);
+  //     Notifications.removeNotificationSubscription(responseListener.current!);
+  //   };
+  // }, []);
 
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
@@ -116,6 +108,28 @@ function CasesScreen() {
         updatePushToken(session.user.id, token);
       });
     }
+
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener(notification => {
+        setNotification(notification);
+        console.log('recieved notification while in app');
+        console.log(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener(response => {
+        console.log('recieved notification');
+        setNotification(notification);
+        console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current!,
+      );
+
+      Notifications.removeNotificationSubscription(responseListener.current!);
+    };
   }, []);
 
   return (
