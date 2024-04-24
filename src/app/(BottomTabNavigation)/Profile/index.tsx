@@ -17,6 +17,7 @@ import {
   ButtonTextWhite,
 } from '../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
+import { GroupButtonContent } from '../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../context/AuthContext';
 
 function ProfileScreen() {
@@ -126,10 +127,10 @@ function ProfileScreen() {
             router.push('/Profile/LogOut');
           }}
         >
-          <View style={styles.signOutInstructions}>
+          <GroupButtonContent>
             <SignOut />
             <ButtonTextWhite>Log out</ButtonTextWhite>
-          </View>
+          </GroupButtonContent>
           <WhiteRightCarrot />
         </ButtonBlack>
       </View>
