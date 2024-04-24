@@ -1,10 +1,13 @@
 import { Tabs } from 'expo-router/tabs';
 import React from 'react';
 
+import GreyHomeIcon from '../../../assets/bottom-tab-home-inactive.svg';
 import RedHomeIcon from '../../../assets/bottom-tab-home.svg';
+import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg';
 import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
+import GreyBellIcon from '../../../assets/bottom-tab-updates-bell-inactive.svg';
 import RedBellIcon from '../../../assets/bottom-tab-updates-bell.svg';
-import { colors } from '../../styles/colors';
+import TabBarItem from '../../Components/TabBarItem/TabBarItem';
 
 export default function AppLayout() {
   return (
@@ -13,56 +16,44 @@ export default function AppLayout() {
         headerShown: false,
         tabBarStyle: {
           height: 90,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
         },
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
         name="AllCases"
         options={{
-          tabBarLabel: 'Cases',
-          title: 'Cases',
-          tabBarIcon: () => <RedHomeIcon />,
-          tabBarLabelStyle: {
-            fontSize: 9,
-            fontStyle: 'normal',
-            fontWeight: '600',
-            lineHeight: 21,
-            color: colors.midRed,
-          },
-          tabBarActiveTintColor: colors.black,
+          tabBarIcon: ({ focused }) => (
+            <TabBarItem
+              icon={focused ? <RedHomeIcon /> : <GreyHomeIcon />}
+              label="Cases"
+              focused={focused}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="Updates"
         options={{
-          tabBarLabel: 'Updates',
-          title: 'Updates',
-          tabBarIcon: () => <RedBellIcon />,
-          tabBarLabelStyle: {
-            fontSize: 9,
-            fontStyle: 'normal',
-            fontWeight: '600',
-            lineHeight: 21,
-            color: colors.midRed,
-          },
+          tabBarIcon: ({ focused }) => (
+            <TabBarItem
+              icon={focused ? <RedBellIcon /> : <GreyBellIcon />}
+              label="Updates"
+              focused={focused}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="Profile"
         options={{
-          tabBarLabel: 'Profile',
-          title: 'Profile',
-          tabBarIcon: () => <RedGearIcon />,
-          tabBarLabelStyle: {
-            fontSize: 9,
-            fontStyle: 'normal',
-            fontWeight: '600',
-            lineHeight: 21,
-            color: colors.midRed,
-          },
+          tabBarIcon: ({ focused }) => (
+            <TabBarItem
+              icon={focused ? <RedGearIcon /> : <GreyGearIcon />}
+              label="Profile"
+              focused={focused}
+            />
+          ),
         }}
       />
     </Tabs>

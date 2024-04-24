@@ -9,11 +9,6 @@ function WelcomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Image
-          style={styles.image}
-          source={require('../../../../assets/inline-logo.jpeg')}
-        />
-
         <View style={styles.textContainer}>
           <Text style={styles.welcomeText}>Welcome to the Impact Fund!</Text>
         </View>

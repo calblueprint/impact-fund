@@ -1,7 +1,15 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
+import {
+  BackButtonNoText,
+  BackButtonText,
+} from '../../../Components/BackButtons/BackButtons';
+import {
+  LeftAlignedHeaderLine,
+  HeaderImage,
+  EmptyHeader,
+} from '../../../Components/HeaderComponents/HeaderComponents';
 import { CaseContextProvider } from '../../../context/CaseContext';
 
 export default function CasesLayout() {
@@ -11,84 +19,97 @@ export default function CasesLayout() {
         screenOptions={{
           headerShown: true,
           headerBackTitleVisible: false,
+          headerShadowVisible: false,
         }}
       >
         <Stack.Screen
           name="index"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerTitle: () => <LeftAlignedHeaderLine />,
           }}
         />
         <Stack.Screen
           name="QRCodeScanner/index"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="AddCase/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="CaseScreen/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonText backText="Cases" />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="CaseSummaryScreen/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="EligibilityForm/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonText backText="Case" />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="EligibilityForm/ConfirmIneligibility/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="Forms/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="Forms/FormView/index"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <HeaderImage />,
           }}
         />
         <Stack.Screen
           name="Updates/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonText backText="Case" />,
+            headerTitle: () => <EmptyHeader />,
           }}
         />
         <Stack.Screen
           name="Updates/UpdateView/[updateUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonText backText="All Updates" />,
+            headerTitle: () => <EmptyHeader />,
           }}
         />
         <Stack.Screen
           name="OptOut/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <EmptyHeader />,
           }}
         />
         <Stack.Screen
           name="OptOut/ConfirmOptOut/[caseUid]"
           options={{
-            headerTitle: props => <CasesHeader />,
+            headerLeft: () => <BackButtonNoText />,
+            headerTitle: () => <EmptyHeader />,
           }}
         />
       </Stack>

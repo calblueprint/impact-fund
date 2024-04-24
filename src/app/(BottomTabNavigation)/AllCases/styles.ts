@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   innerScroll: {
     rowGap: 20,
-    paddingTop: 50,
+    paddingTop: 39,
     paddingBottom: 20,
   },
   headerContainer: {

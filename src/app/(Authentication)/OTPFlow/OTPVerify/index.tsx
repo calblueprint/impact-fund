@@ -50,11 +50,6 @@ export default function OTPFlow() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.contentContainer}>
         <View style={styles.instructionContainer}>
           <Text style={styles.headerText}>Enter verification code.</Text>

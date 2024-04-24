@@ -12,17 +12,6 @@ export default StyleSheet.create({
     width: '84%',
     alignItems: 'center',
   },
-
-  headerContainer: {
-    marginTop: 63,
-    width: '100%',
-  },
-  headerLine: {
-    borderBottom: 'solid',
-    borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0.5,
-    marginTop: 8,
-  },
   titleText: {
     fontSize: 32,
     fontWeight: '800',

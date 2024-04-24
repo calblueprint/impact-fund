@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -15,7 +15,6 @@ import {
 } from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
-
 enum linkingEvents {
   ADD_CASE = 'addCase',
   NOTIFICATION = 'notification',

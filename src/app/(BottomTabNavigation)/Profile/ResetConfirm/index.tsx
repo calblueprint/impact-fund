@@ -31,13 +31,6 @@ export default function ResetConfirm() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <TouchableOpacity
-          style={styles.backContainer}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-
         <Text style={styles.titleText}>Reset Password</Text>
 
         <View style={styles.instructionContainer}>
