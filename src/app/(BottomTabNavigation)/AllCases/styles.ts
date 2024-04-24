@@ -31,6 +31,13 @@ export default StyleSheet.create({
     lineHeight: 33,
     color: colors.black,
   },
+  instructionText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 22,
+    color: colors.darkGrey,
+  },
   cameraContainer: {
     width: '100%',
     height: 57,

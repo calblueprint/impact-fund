@@ -29,13 +29,6 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="QRCodeScanner/index"
-          options={{
-            headerLeft: () => <BackButtonNoText />,
-            headerTitle: () => <HeaderImage />,
-          }}
-        />
-        <Stack.Screen
           name="AddCase/[caseUid]"
           options={{
             headerLeft: () => <BackButtonNoText />,

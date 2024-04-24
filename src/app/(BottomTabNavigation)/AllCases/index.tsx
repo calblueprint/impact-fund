@@ -88,15 +88,6 @@ function CasesScreen() {
                 <View style={styles.headerContainer}>
                   <Text style={styles.titleText}>My Cases</Text>
                 </View>
-                <TouchableOpacity
-                  onPress={() => router.push('/AllCases/QRCodeScanner')}
-                  style={[styles.cameraContainer, globalStyles.shadowBorder]}
-                >
-                  <View style={styles.buttonInfoContainer}>
-                    <Camera />
-                    <Text style={styles.cameraText}>Add Case with QR code</Text>
-                  </View>
-                </TouchableOpacity>
               </>
             )}
             data={allCases}
@@ -104,7 +95,9 @@ function CasesScreen() {
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
-              <Text>Scan your first case using the QR code above!</Text>
+              <Text style={styles.instructionText}>
+                No cases? Scan a QR code or ask a friend to share one.
+              </Text>
             }
           />
         )}
