@@ -105,9 +105,3 @@ export enum YellowStatusOptions {
 export enum RedStatusOptions {
   'Action Required',
 }
-
-export const StatusOptions: string[] = [
-  ...(Object.values(GreenStatusOptions) as string[]),
-  ...(Object.values(YellowStatusOptions) as string[]),
-  ...(Object.values(RedStatusOptions) as string[]),
-];

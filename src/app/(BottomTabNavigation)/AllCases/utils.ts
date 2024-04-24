@@ -11,7 +11,6 @@ import {
   YellowStatusOptions,
   RedStatusOptions,
   UserUid,
-  StatusOptions,
 } from '../../../types/types';
 
 /**
@@ -54,10 +53,6 @@ export function formatDate(dateObject: Date) {
 }
 
 export function getStatusColor(status: string) {
-  if (!StatusOptions.includes(status)) {
-    throw new Error(`Invalid status: ${status}`);
-  }
-
   if (Object.values(GreenStatusOptions).includes(status)) {
     return {
       background: {
