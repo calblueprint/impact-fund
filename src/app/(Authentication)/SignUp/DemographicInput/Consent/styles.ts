@@ -60,7 +60,7 @@ export default StyleSheet.create({
     marginBottom: 34,
   },
   titleText: {
-    fontSize: 36,
+    fontSize: 35,
     fontWeight: '800',
     color: colors.black,
   },

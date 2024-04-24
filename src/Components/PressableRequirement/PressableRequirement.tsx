@@ -15,7 +15,7 @@ export default function PressableRequirement({
   requirement,
   checkCount,
   setCheckCount,
-}: requirementProps): ReactNode {
+}: requirementProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const onCheck = () => {
