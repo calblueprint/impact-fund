@@ -9,9 +9,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     rowGap: 12,
     paddingVertical: 23,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderColor: colors.darkGrey,
   },
   topContainer: {
     height: 32,

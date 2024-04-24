@@ -14,6 +14,7 @@ import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
 import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { useSession } from '../../../context/AuthContext';
+import globalStyles from '../../../styles/global';
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ function ProfileScreen() {
           <View style={styles.headerLine} />
         </View>
         <Text style={styles.titleText}>Settings</Text>
-        <View style={styles.actionsContainer}>
+        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
             <View style={styles.textContainer}>
@@ -82,7 +83,7 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.actionsContainer}>
+        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
           <TouchableOpacity
             style={[styles.profileDetailsBox, styles.centerAlign]}
             onPress={() =>
