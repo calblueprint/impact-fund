@@ -108,6 +108,11 @@ export default function SignUpScreen() {
           <Arrow />
         </View>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => router.push('SignUp/DemographicInput/Consent')}
+      >
+        <Text>Hello</Text>
+      </TouchableOpacity>
     </View>
   );
 }
