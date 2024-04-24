@@ -6,7 +6,6 @@ import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import ShowBottomNav from '../../../Components/ShowBottomNav/ShowBottomNav';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import {
@@ -59,8 +58,6 @@ function CasesScreen() {
       urlRedirect(parsed);
     }
   }
-
-  ShowBottomNav();
 
   return (
     <View style={styles.container}>
