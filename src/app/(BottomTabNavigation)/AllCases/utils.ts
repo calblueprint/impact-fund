@@ -49,22 +49,8 @@ export function formatDate(dateObject: Date) {
       timeZone: userTimeZone,
     }),
   );
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  const monthName = months[date.getMonth()];
-  return `${monthName} ${date.getDate()}, ${date.getFullYear()}`;
+  const dateSplit: string[] = date.toDateString().split(' ');
+  return `${dateSplit[1]} ${dateSplit[2]}, ${dateSplit[3]}`;
 }
 
 export function getStatusColor(status: string) {
