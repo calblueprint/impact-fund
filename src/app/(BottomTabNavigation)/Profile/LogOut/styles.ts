@@ -27,11 +27,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     columnGap: 15,
   },
-  cancelButton: {
+  halfButton: {
+    height: 45,
     width: '48%',
-  },
-  confirmButton: {
-    width: '48%',
+    justifyContent: 'center',
   },
   topText: {
     fontSize: 38,

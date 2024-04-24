@@ -122,6 +122,7 @@ function ProfileScreen() {
         </View>
 
         <ButtonBlack
+          style={{ height: 45 }}
           onPress={() => {
             router.push('/Profile/LogOut');
           }}

@@ -7,8 +7,9 @@ const ButtonBase = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
+  min-height: 41px;
   width: 100%;
-  padding: 15px;
+  padding-horizontal: 15px;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;
 

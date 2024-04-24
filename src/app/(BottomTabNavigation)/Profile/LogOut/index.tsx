@@ -22,17 +22,16 @@ function LogOutConfirmation() {
         <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
 
         <View style={styles.buttonsContainer}>
-          <ButtonWhite
-            onPress={() => router.push('/Profile')}
-            style={styles.cancelButton}
-          >
-            {/* <View style={styles.buttonContent}> */}
-            {/* <X /> */}
-            <ButtonTextBlack style={styles.cancelText}>Cancel</ButtonTextBlack>
-            {/* </View> */}
+          <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
+            <View style={styles.buttonContent}>
+              <X />
+              <ButtonTextBlack style={styles.cancelText}>
+                Cancel
+              </ButtonTextBlack>
+            </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={() => signOut()} style={styles.confirmButton}>
+          <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
             <View style={styles.buttonContent}>
               <SignOut />
               <Text style={styles.confirmText}>Confirm</Text>
