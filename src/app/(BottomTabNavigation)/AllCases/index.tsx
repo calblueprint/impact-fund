@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -59,6 +59,21 @@ function CasesScreen() {
       urlRedirect(parsed);
     }
   }
+
+  useEffect(() => {
+    // will detect any incoming link requests, assuming the app is already open
+    Linking.addEventListener('url', handleDeepLink);
+    if (!url) {
+      // if the link opened the app, must route to the initial incoming route
+      getInitialUrl();
+    }
+
+    if (session?.user) {
+      registerForPushNotifications().then(async (token: string) => {
+        updatePushToken(session.user.id, token);
+      });
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
