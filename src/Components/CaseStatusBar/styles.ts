@@ -8,19 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: colors.white,
     paddingHorizontal: 20,
-
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderStyle: 'solid',
-    borderColor: colors.midGrey,
-
-    shadowColor: colors.black,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   statusContainer: {
     height: 29,

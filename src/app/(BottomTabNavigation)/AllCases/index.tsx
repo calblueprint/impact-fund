@@ -8,6 +8,7 @@ import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
+import globalStyles from '../../../styles/global';
 import {
   registerForPushNotifications,
   updatePushToken,
@@ -90,7 +91,7 @@ function CasesScreen() {
                 </View>
                 <TouchableOpacity
                   onPress={() => router.push('/AllCases/QRCodeScanner')}
-                  style={styles.cameraContainer}
+                  style={[styles.cameraContainer, globalStyles.shadowBorder]}
                 >
                   <View style={styles.buttonInfoContainer}>
                     <Camera />

@@ -5,13 +5,10 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    display: 'flex',
     height: 55,
-    paddingHorizontal: 20,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderColor: colors.darkGrey,
+    display: 'flex',
     flexDirection: 'row',
+    paddingHorizontal: 20,
   },
   button: {
     width: '100%',

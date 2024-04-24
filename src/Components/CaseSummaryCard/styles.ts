@@ -6,16 +6,6 @@ export default StyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'column',
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderStyle: 'solid',
-    borderColor: colors.midGrey,
-    backgroundColor: colors.white,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   imageContainer: {
     aspectRatio: 1.9,
