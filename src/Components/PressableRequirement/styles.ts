@@ -5,13 +5,13 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   requirementContainer: {
     flexDirection: 'row',
-    paddingTop: 20,
     columnGap: 20,
-    paddingHorizontal: '6%',
+    paddingHorizontal: 25,
+    paddingVertical: 20,
   },
   innerRequirementBox: {
     flex: 1,
-    paddingBottom: 20,
+    justifyContent: 'center',
   },
   buttonBase: {
     flexDirection: 'row',
@@ -29,9 +29,9 @@ export default StyleSheet.create({
     fontWeight: '300',
   },
   activeText: {
-    color: colors.black,
+    color: colors.darkGrey,
   },
   inactiveText: {
-    color: colors.midGrey,
+    color: colors.black,
   },
 });

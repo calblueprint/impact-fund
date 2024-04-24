@@ -88,3 +88,20 @@ export interface Update {
   summary: string;
   lawFirm: string;
 }
+
+export enum GreenStatusOptions {
+  'In Progress',
+  'New Case',
+  'Settled',
+  'Appeal',
+  'Payment Processing',
+  'Payment Distributed',
+}
+
+export enum YellowStatusOptions {
+  'Pending',
+}
+
+export enum RedStatusOptions {
+  'Action Required',
+}

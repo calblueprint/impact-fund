@@ -5,7 +5,13 @@ import {
   getCaseIdsFromUserId,
   getCasesByIds,
 } from '../../../supabase/queries/cases';
-import { Case, UserUid } from '../../../types/types';
+import {
+  Case,
+  GreenStatusOptions,
+  YellowStatusOptions,
+  RedStatusOptions,
+  UserUid,
+} from '../../../types/types';
 
 /**
  * Fetches all Cases associated with a specific `userUid` from supabase. Formats Case data and returns an array of `Case` objects.
@@ -36,19 +42,18 @@ export async function fetchAllCases(userUid: UserUid): Promise<Case[]> {
  * @returns readable date string
  */
 export function formatDate(dateObject: Date) {
-  const date = new Date(dateObject).toDateString().split(' ');
-  return `${date[1]} ${date[2]}, ${date[3]}`;
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const date = new Date(
+    dateObject.toLocaleString('en-US', {
+      timeZone: userTimeZone,
+    }),
+  );
+  const dateSplit: string[] = date.toDateString().split(' ');
+  return `${dateSplit[1]} ${dateSplit[2]}, ${dateSplit[3]}`;
 }
 
 export function getStatusColor(status: string) {
-  if (
-    status === 'In Progress' ||
-    status === 'New Case' ||
-    status === 'Settled' ||
-    status === 'Appeal' ||
-    status === 'Payment Processing' ||
-    status === 'Payment Distributed'
-  ) {
+  if (Object.values(GreenStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightGreen,
@@ -57,7 +62,7 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkGreen },
     };
-  } else if (status === 'Pending') {
+  } else if (Object.values(YellowStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightYellow,
@@ -66,7 +71,7 @@ export function getStatusColor(status: string) {
       },
       text: { color: colors.darkYellow },
     };
-  } else if (status === 'Action Required') {
+  } else if (Object.values(RedStatusOptions).includes(status)) {
     return {
       background: {
         backgroundColor: colors.lightRed,

@@ -8,85 +8,68 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
-  iconTitle: {
-    flexDirection: 'row',
+  contentContainer: {
+    width: '84%',
     alignItems: 'center',
   },
-  actionElementTop: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 15,
-    marginLeft: 10,
-    marginRight: 20,
-  },
-  userText: {
-    marginLeft: 35,
-    marginTop: 5,
-    marginBottom: 15,
-    color: colors.darkGrey,
-  },
-  userTextMargin: {
-    marginLeft: 34,
-    marginTop: 5,
-    color: colors.darkGrey,
-  },
-  line: {
-    borderBottom: 'solid',
-    borderBottomColor: colors.midGrey,
-    borderBottomWidth: 1,
-    marginLeft: 32,
-  },
-  actionsContainer: {
-    paddingLeft: 10,
-    width: '100%',
-    border: 'solid',
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: colors.white,
-    marginBottom: 22,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
-  },
-  bottomPush: {
-    paddingBottom: 15,
-  },
-  title: {
+  titleText: {
     fontSize: 32,
     fontWeight: '800',
     lineHeight: 33,
     color: colors.black,
     alignSelf: 'flex-start',
     marginTop: 39,
-    marginBottom: 15,
+    marginBottom: 18,
   },
-  userInfo: {
+
+  actionsContainer: {
+    width: '100%',
+    backgroundColor: colors.white,
+    marginBottom: 22,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+
+  profileDetailsBox: {
+    flexDirection: 'row',
+    columnGap: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
+  textContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    rowGap: 5,
+  },
+  spreadInlineContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  line: {
+    borderBottom: 'solid',
+    borderBottomColor: colors.midGrey,
+    borderBottomWidth: 1,
+    marginLeft: 50,
+  },
+  centerAlign: {
+    alignItems: 'center',
+  },
+  userText: {
+    fontSize: 13,
+    fontWeight: '300',
     color: colors.darkGrey,
-    fontSize: 20,
   },
-  textElements: {
+  profileLabelText: {
     color: colors.black,
-    marginLeft: 10,
-    marginTop: 0,
     fontSize: 16,
     fontWeight: '400',
   },
-  redTextElements: {
+  redText: {
     color: colors.darkRed,
-    marginLeft: 10,
-    marginTop: 0,
-    fontSize: 16,
-    fontWeight: '400',
   },
-  resetIcon: {
-    marginBottom: 15,
-  },
+
   signOutButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -101,10 +84,6 @@ export default StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
     fontSize: 15,
-  },
-  contentContainer: {
-    width: '84%',
-    alignItems: 'center',
   },
   signOutInstructions: {
     flexDirection: 'row',
