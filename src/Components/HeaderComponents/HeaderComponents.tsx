@@ -28,6 +28,6 @@ export function LeftAlignedHeaderLine() {
   );
 }
 
-export function BlankHeader() {
+export function EmptyHeader() {
   return <View />;
 }
