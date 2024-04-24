@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import globalStyles from '../../styles/global';
 import { CaseUid } from '../../types/types';
 
 interface CaseStatusBarProps {
@@ -20,7 +21,7 @@ export default function StatusUpdatesBar({
 
   return (
     <TouchableOpacity
-      style={styles.updatesButton}
+      style={[styles.updatesButton, globalStyles.shadowBorder]}
       onPress={() => {
         router.push({ pathname: `AllCases/Updates/${caseUid}` });
       }}
