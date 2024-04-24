@@ -10,6 +10,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
   },
   contentContainer: {
+    height: '100%',
     width: '84%',
   },
   innerScroll: {

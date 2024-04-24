@@ -36,7 +36,7 @@ export default function AuthInput({
 
   const offClick = () => {
     setIsFocused(false);
-    if (input.trim() === '' && !isPassword) {
+    if (input && input.trim() === '' && !isPassword) {
       setPlaceholder(placeholderText);
       setIsLabelDisplayed(false);
     } else {
