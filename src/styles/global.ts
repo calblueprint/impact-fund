@@ -8,7 +8,7 @@ export const SafeArea = styled(SafeAreaView)`
   width: 100%;
   min-height: 100%;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   flex: 1;
 `;

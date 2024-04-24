@@ -12,6 +12,10 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
+import {
+  GroupButtonContent,
+  InlineInputContainer,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
 import { SafeArea } from '../../../../styles/global';
 
@@ -40,23 +44,21 @@ function DeleteAccountScreen() {
           </View>
         </View>
 
-        <View style={styles.buttonContainer}>
+        <InlineInputContainer>
           <ButtonWhite onPress={() => router.back()} style={styles.buttonView}>
-            <View style={styles.buttonContent}>
+            <GroupButtonContent>
               <X />
-              <ButtonTextBlack style={styles.cancelText}>
-                Cancel
-              </ButtonTextBlack>
-            </View>
+              <ButtonTextBlack>Cancel</ButtonTextBlack>
+            </GroupButtonContent>
           </ButtonWhite>
 
           <ButtonBlack onPress={deleteAccount} style={styles.buttonView}>
-            <View style={styles.buttonContent}>
+            <GroupButtonContent>
               <WhiteTrash />
               <ButtonTextWhite>Confirm</ButtonTextWhite>
-            </View>
+            </GroupButtonContent>
           </ButtonBlack>
-        </View>
+        </InlineInputContainer>
       </View>
     </SafeArea>
   );

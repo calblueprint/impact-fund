@@ -9,14 +9,16 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
 import {
+  GroupButtonContent,
   InlineInputContainer,
   InputBoxContainer,
+  InputScreenGap,
   InstructionContainer,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -130,6 +132,8 @@ export default function SignUpScreen() {
           </InlineInputContainer>
         </InputBoxContainer>
 
+        <InputScreenGap />
+
         <ButtonBlack
           disabled={
             streetAddress.trim() === '' ||
@@ -138,11 +142,12 @@ export default function SignUpScreen() {
             zipcode.trim() === ''
           }
           onPress={() => handleSubmit()}
+          style={{ justifyContent: 'center' }}
         >
-          <View style={{ flexDirection: 'row', columnGap: 15 }}>
+          <GroupButtonContent>
             <ButtonTextWhite>Sign Up</ButtonTextWhite>
             <Check />
-          </View>
+          </GroupButtonContent>
         </ButtonBlack>
       </ContentContainer>
     </SafeArea>

@@ -5,9 +5,21 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  GroupButtonContent,
+  InlineInputContainer,
+  InputBoxContainer,
+  InputScreenGap,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { ContentContainer, SafeArea } from '../../../../styles/global';
 
 function EditNameScreen() {
   const { updateUser, session } = useSession();
@@ -62,17 +74,17 @@ function EditNameScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.push('/Profile/')}
-        >
+    <SafeArea>
+      <ContentContainer>
+        <TouchableOpacity onPress={() => router.back()}>
           <BackButton />
         </TouchableOpacity>
-        <Text style={styles.instructionText}>Edit account details</Text>
 
-        <View style={styles.inputBox}>
+        <InstructionContainer>
+          <TitleText>Edit account details</TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -82,8 +94,7 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
-        <View style={styles.inputBox}>
+
           <AuthInput
             input={city}
             onChangeInput={onChangeCity}
@@ -93,9 +104,7 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
-        <View style={styles.stateLine}>
-          <View style={styles.smallInput}>
+          <InlineInputContainer>
             <AuthInput
               input={usState}
               onChangeInput={onChangeState}
@@ -104,10 +113,7 @@ function EditNameScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
-              isHalfWidth
             />
-          </View>
-          <View style={styles.smallInput}>
             <AuthInput
               input={zipcode}
               onChangeInput={onChangeZipcode}
@@ -116,23 +122,24 @@ function EditNameScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
-              isHalfWidth
             />
-          </View>
-        </View>
+          </InlineInputContainer>
+        </InputBoxContainer>
+
+        <InputScreenGap />
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
-          style={styles.submitButton}
+          style={{ justifyContent: 'center' }}
           onPress={handleSubmit}
         >
-          <Text style={styles.submitText}>
-            Submit
-            <Submit style={styles.submitIcon} />
-          </Text>
+          <GroupButtonContent>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+            <Submit />
+          </GroupButtonContent>
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }
 export default EditNameScreen;

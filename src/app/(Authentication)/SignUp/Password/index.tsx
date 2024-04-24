@@ -7,10 +7,9 @@ import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonTextBlack,
+  ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
-import supabase from '../../../../supabase/createClient';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -18,6 +17,8 @@ import {
   InstructionContainer,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
+import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -122,8 +123,8 @@ export default function SignUpScreen() {
           disabled={password === '' || confirmPassword === '' || disableButton}
           onPress={handleSubmit}
         >
-          <ButtonTextBlack>Continue</ButtonTextBlack>
-          <Arrow style={{ marginRight: 15 }} />
+          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Arrow />
         </ButtonBlack>
       </ContentContainer>
     </SafeArea>

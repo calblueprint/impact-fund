@@ -14,7 +14,7 @@ export default StyleSheet.create({
     paddingVertical: 32,
     paddingHorizontal: 29,
     borderColor: colors.midGrey,
-    borderWidth: 0.5,
+    borderTopWidth: 0.5,
     justifyContent: 'space-between',
     rowGap: 25,
   },

@@ -28,6 +28,10 @@ export const ErrorMessageContainer = styled.View({
   paddingTop: 10,
 });
 
+export const InputScreenGap = styled.View({
+  height: 40,
+});
+
 export const GroupButtonContent = styled.View({
   flexDirection: 'row',
   alignItems: 'center',

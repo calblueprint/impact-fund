@@ -14,6 +14,7 @@ import {
   ErrorMessageContainer,
   GroupButtonContent,
   InputBoxContainer,
+  InputScreenGap,
   InstructionContainer,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
@@ -60,7 +61,7 @@ function EditNameScreen() {
           />
         </InputBoxContainer>
 
-        <ErrorMessageContainer />
+        <InputScreenGap />
 
         <ButtonBlack
           disabled={!fullName || fullName.trim() === ''}
