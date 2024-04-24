@@ -58,14 +58,6 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
       <Text style={styles.instructionText}>Create your account.</Text>
       <View style={styles.inputBox}>
         <AuthInput
