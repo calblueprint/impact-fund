@@ -1,9 +1,9 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
+import { BackButtonText } from '../../../Components/BackButtons/BackButtons';
 import {
   AllCasesHeader,
-  BackButton,
   ShareIcon,
   CasesHeader,
 } from '../../../Components/HeaderComponents/HeaderComponents';
@@ -41,7 +41,7 @@ export default function CasesLayout() {
           name="CaseScreen/[caseUid]"
           options={{
             headerTitle: props => <CasesHeader />,
-            headerLeft: () => <BackButton backText="Cases" />,
+            headerLeft: () => <BackButtonText backText="Cases" />,
             headerRight: () => <ShareIcon />,
             navigationBarHidden: true,
           }}

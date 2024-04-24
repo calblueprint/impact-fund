@@ -1,8 +1,6 @@
-import { router } from 'expo-router';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import BackArrow from '../../../assets/red-left-caret.svg';
 import ShareButton from '../../../assets/red-share-button.svg';
 import { colors } from '../../styles/colors';
 
@@ -22,20 +20,7 @@ export const AllCasesHeader = () => {
     </View>
   );
 };
-interface backButtonProps {
-  backText: string;
-}
-export const BackButton = ({ backText }: backButtonProps) => {
-  return (
-    <TouchableOpacity
-      onPress={() => router.back()}
-      style={styles.backButtonContainer}
-    >
-      <BackArrow />
-      <Text style={styles.headerText}>{backText}</Text>
-    </TouchableOpacity>
-  );
-};
+
 export const ShareIcon = () => {
   return (
     <TouchableOpacity style={styles.backButtonContainer}>
