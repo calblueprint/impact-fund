@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   innerScroll: {
     rowGap: 20,
-    paddingTop: 50,
+    paddingTop: 39,
     paddingBottom: 20,
   },
   headerContainer: {
@@ -37,19 +37,8 @@ export default StyleSheet.create({
     marginTop: 18,
     backgroundColor: colors.white,
 
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 5,
-
     justifyContent: 'center',
     alignItems: 'center',
-
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1,
-    shadowRadius: 0.75,
-    elevation: 1,
   },
   buttonInfoContainer: {
     width: '66%',

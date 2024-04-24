@@ -6,12 +6,13 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import globalStyles from '../../styles/global';
 import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummaryCard({
   id,
   imageUrl,
-  blurb,
+  briefSummary,
   lawFirm,
   date,
 }: CaseSummaryProps) {
@@ -23,7 +24,7 @@ export default function CaseSummaryCard({
         });
       }}
     >
-      <View style={styles.container}>
+      <View style={[styles.container, globalStyles.shadowBorder]}>
         <Image
           style={styles.imageContainer}
           source={imageUrl}
@@ -38,7 +39,7 @@ export default function CaseSummaryCard({
               • {formatDate(date)}
             </Text>
           </View>
-          <Text style={styles.blurbText}>{blurb}</Text>
+          <Text style={styles.blurbText}>{briefSummary}</Text>
         </View>
         <View style={styles.bottomContainer}>
           <Text style={styles.bottomText}>Read full case summary</Text>

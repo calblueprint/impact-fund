@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
@@ -8,13 +8,13 @@ import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
+import globalStyles from '../../../styles/global';
 import {
   registerForPushNotifications,
   updatePushToken,
 } from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
-
 enum linkingEvents {
   ADD_CASE = 'addCase',
   NOTIFICATION = 'notification',
@@ -90,7 +90,7 @@ function CasesScreen() {
                 </View>
                 <TouchableOpacity
                   onPress={() => router.push('/AllCases/QRCodeScanner')}
-                  style={styles.cameraContainer}
+                  style={[styles.cameraContainer, globalStyles.shadowBorder]}
                 >
                   <View style={styles.buttonInfoContainer}>
                     <Camera />
