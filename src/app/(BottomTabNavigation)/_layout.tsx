@@ -3,9 +3,10 @@ import React from 'react';
 
 import GreyHomeIcon from '../../../assets/bottom-tab-home-inactive.svg';
 import RedHomeIcon from '../../../assets/bottom-tab-home.svg';
+import GreyScannerIcon from '../../../assets/bottom-tab-scanner-inactive.svg';
+import RedScannerIcon from '../../../assets/bottom-tab-scanner.svg';
 import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg';
 import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
-import GreyBellIcon from '../../../assets/bottom-tab-updates-bell-inactive.svg';
 import RedBellIcon from '../../../assets/bottom-tab-updates-bell.svg';
 import TabBarItem from '../../Components/TabBarItem/TabBarItem';
 
@@ -37,7 +38,7 @@ export default function AppLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
-              icon={focused ? <RedBellIcon /> : <GreyBellIcon />}
+              icon={focused ? <RedScannerIcon /> : <GreyScannerIcon />}
               label="QR Scanner"
               focused={focused}
             />
