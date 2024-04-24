@@ -10,6 +10,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
 import {
   ContentContainer,
@@ -17,9 +18,8 @@ import {
   ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
-  SafeArea,
   TitleText,
-} from '../../styles';
+} from '../../AuthFlowStyles';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');

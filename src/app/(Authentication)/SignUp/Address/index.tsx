@@ -10,14 +10,14 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea } from '../../../../styles/global';
 import {
   ContentContainer,
   InlineInputContainer,
   InputBoxContainer,
   InstructionContainer,
-  SafeArea,
   TitleText,
-} from '../../styles';
+} from '../../AuthFlowStyles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };

@@ -10,15 +10,15 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea } from '../../../../styles/global';
 import {
   ContentContainer,
   ErrorMessageContainer,
   ErrorMessageText,
   InputBoxContainer,
   InstructionContainer,
-  SafeArea,
   TitleText,
-} from '../../styles';
+} from '../../AuthFlowStyles';
 
 export default function OTPNewPassword() {
   const [password, setPassword] = useState<string>('');

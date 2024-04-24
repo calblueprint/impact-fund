@@ -9,6 +9,7 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { SafeArea } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
 import {
   ContentContainer,
@@ -18,9 +19,8 @@ import {
   InputBoxContainer,
   InstructionContainer,
   InstructionText,
-  SafeArea,
   TitleText,
-} from '../../styles';
+} from '../../AuthFlowStyles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');

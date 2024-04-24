@@ -10,6 +10,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea } from '../../../../styles/global';
 import {
   ContentContainer,
   ErrorMessageContainer,
@@ -18,9 +19,8 @@ import {
   InputBoxContainer,
   InstructionContainer,
   InstructionText,
-  SafeArea,
   TitleText,
-} from '../../styles';
+} from '../../AuthFlowStyles';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
