@@ -7,19 +7,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: colors.white,
     padding: 16,
     rowGap: 10,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderStyle: 'solid',
-    borderColor: colors.midGrey,
-
-    shadowColor: colors.black,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   textContainer: {
     width: '100%',
@@ -43,7 +32,6 @@ export default StyleSheet.create({
   },
   updatesContainer: {
     flexDirection: 'row',
-
     columnGap: 10,
   },
   statusText: {
