@@ -17,7 +17,7 @@ import {
   InputBoxContainer,
   InstructionContainer,
   TitleText,
-} from '../../styles';
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 
 export default function OTPNewPassword() {
   const [password, setPassword] = useState<string>('');

@@ -21,7 +21,7 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../styles';
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {

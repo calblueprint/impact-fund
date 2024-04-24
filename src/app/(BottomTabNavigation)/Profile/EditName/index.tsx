@@ -5,30 +5,50 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  ErrorMessageContainer,
+  GroupButtonContent,
+  InputBoxContainer,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { ContentContainer, SafeArea } from '../../../../styles/global';
 
 function EditNameScreen() {
   const { updateUser, session } = useSession();
   const [fullName, setFullName] = useState<string>('');
+
+  function updateName() {
+    updateUser({
+      data: {
+        fullName,
+      },
+    });
+    router.back();
+  }
 
   useEffect(() => {
     setFullName(session?.user?.user_metadata.fullName);
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.push('/Profile/')}
-        >
+    <SafeArea>
+      <ContentContainer>
+        <TouchableOpacity onPress={() => router.back()}>
           <BackButton />
         </TouchableOpacity>
-        <Text style={styles.instructionText}>Edit account details</Text>
 
-        <View style={styles.inputBox}>
+        <InstructionContainer>
+          <TitleText>Edit account details</TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
           <AuthInput
             input={fullName}
             onChangeInput={setFullName}
@@ -38,30 +58,22 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
-        </View>
+        </InputBoxContainer>
+
+        <ErrorMessageContainer />
+
         <ButtonBlack
-          style={styles.submitButton}
           disabled={!fullName || fullName.trim() === ''}
-          onPress={() => {
-            if (fullName) {
-              updateUser({
-                data: {
-                  fullName,
-                },
-              });
-              router.push('/Profile/');
-            } else {
-              //ask josh about what should appear in invalid name event
-            }
-          }}
+          onPress={updateName}
+          style={{ justifyContent: 'center' }}
         >
-          <Text style={styles.submitText}>
-            Submit
-            <Submit style={styles.submitIcon} />
-          </Text>
+          <GroupButtonContent>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+            <Submit />
+          </GroupButtonContent>
         </ButtonBlack>
-      </View>
-    </View>
+      </ContentContainer>
+    </SafeArea>
   );
 }
 export default EditNameScreen;

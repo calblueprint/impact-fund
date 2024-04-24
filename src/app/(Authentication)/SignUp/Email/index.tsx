@@ -18,7 +18,7 @@ import {
   InputBoxContainer,
   InstructionContainer,
   TitleText,
-} from '../../styles';
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');

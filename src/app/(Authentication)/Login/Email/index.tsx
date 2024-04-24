@@ -19,7 +19,7 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../styles';
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');

@@ -28,6 +28,12 @@ export const ErrorMessageContainer = styled.View({
   paddingTop: 10,
 });
 
+export const GroupButtonContent = styled.View({
+  flexDirection: 'row',
+  alignItems: 'center',
+  columnGap: 15,
+});
+
 export const TitleText = styled.Text({
   color: colors.black,
   fontSize: 24,
