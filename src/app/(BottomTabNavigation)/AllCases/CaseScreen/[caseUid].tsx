@@ -9,6 +9,7 @@ import EducationalBar from '../../../../Components/EducationalBar/EducationalBar
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
+import ToggleOptionsButton from '../../../../Components/ToggleOptionsButton/ToggleOptionsButton';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -61,6 +62,7 @@ function CaseScreen() {
             caseUid={caseData.id}
             status={caseData.caseStatus}
           />
+          <ToggleOptionsButton />
 
           {status === Eligibility.ELIGIBLE && (
             <EligibilityCard caseData={caseData} status={status} />
