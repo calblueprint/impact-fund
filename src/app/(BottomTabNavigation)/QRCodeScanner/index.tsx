@@ -10,15 +10,15 @@ import Toast, {
 } from 'react-native-toast-message';
 
 import styles from './styles';
-import Arrow from '../../../../../assets/black-right-arrow.svg';
-import CheckIcon from '../../../../../assets/green-check.svg';
-import ErrorIcon from '../../../../../assets/warning.svg';
+import Arrow from '../../../../assets/black-right-arrow.svg';
+import CheckIcon from '../../../../assets/green-check.svg';
+import ErrorIcon from '../../../../assets/warning.svg';
 import {
   getAllCaseIds,
   getCaseById,
   getCaseIdsFromUserId,
-} from '../../../../supabase/queries/cases';
-import { Case, CaseUid } from '../../../../types/types';
+} from '../../../supabase/queries/cases';
+import { Case, CaseUid } from '../../../types/types';
 
 enum permissions {
   UNDETERMINED,

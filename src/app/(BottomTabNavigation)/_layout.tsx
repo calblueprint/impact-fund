@@ -33,12 +33,12 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="Updates"
+        name="QRCodeScanner"
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
               icon={focused ? <RedBellIcon /> : <GreyBellIcon />}
-              label="Updates"
+              label="QR Scanner"
               focused={focused}
             />
           ),
