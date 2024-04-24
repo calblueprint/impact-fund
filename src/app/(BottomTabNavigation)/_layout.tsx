@@ -7,7 +7,7 @@ import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg'
 import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
 import GreyBellIcon from '../../../assets/bottom-tab-updates-bell-inactive.svg';
 import RedBellIcon from '../../../assets/bottom-tab-updates-bell.svg';
-import { TabBarItem } from '../../Components/HeaderComponents/HeaderComponents';
+import TabBarItem from '../../Components/TabBarItem/TabBarItem';
 
 export default function AppLayout() {
   return (

@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import CircleBackButton from '../../../assets/grey-circle-back-arrow.svg';

@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import ShareButton from '../../../assets/red-share-button.svg';
-import { colors } from '../../styles/colors';
 
 export const CasesHeader = () => {
   return (
@@ -29,44 +28,3 @@ export const ShareIcon = () => {
     </TouchableOpacity>
   );
 };
-
-interface TabBarItemProps {
-  icon: React.ReactNode;
-  label: string;
-  focused: boolean;
-}
-
-//Inline styling required --> can't make a styles.ts in this directory otherwise it'll make a new bottom tab idk why
-export const TabBarItem = ({ icon, label, focused }: TabBarItemProps) => (
-  <View
-    style={{
-      backgroundColor: focused ? colors.lightRed : 'transparent',
-      borderRadius: 10,
-      height: 55,
-      width: 66,
-      marginTop: 10,
-    }}
-  >
-    <View
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 8,
-      }}
-    >
-      {icon}
-      <Text
-        style={{
-          fontSize: 9,
-          fontStyle: 'normal',
-          fontWeight: '600',
-          lineHeight: 21,
-          color: focused ? colors.midRed : colors.midGrey,
-        }}
-      >
-        {label}
-      </Text>
-    </View>
-  </View>
-);
