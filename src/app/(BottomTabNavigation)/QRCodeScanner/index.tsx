@@ -100,7 +100,7 @@ function QRCodeScannerScreen() {
     Toast.hide();
   }
 
-  const debouncedFetchData = useCallback(debounce(resetScanner, 1500), []);
+  const debouncedResetScanner = useCallback(debounce(resetScanner, 1500), []);
 
   // function called after every `BarCodeScanningResult` event triggered by scanner
   async function handleBarCodeScanned(result: BarCodeScanningResult) {
@@ -136,7 +136,7 @@ function QRCodeScannerScreen() {
         break;
       }
     }
-    debouncedFetchData();
+    debouncedResetScanner();
   }
 
   async function processBarCodeData(data: string) {
