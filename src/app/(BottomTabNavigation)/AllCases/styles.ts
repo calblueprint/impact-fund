@@ -11,6 +11,7 @@ export default StyleSheet.create({
   },
   casesContainer: {
     width: '85%',
+    height: '100%',
     flexDirection: 'column',
   },
   innerScroll: {
@@ -29,6 +30,13 @@ export default StyleSheet.create({
     fontWeight: '700',
     lineHeight: 33,
     color: colors.black,
+  },
+  instructionText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 22,
+    color: colors.darkGrey,
   },
   cameraContainer: {
     width: '100%',

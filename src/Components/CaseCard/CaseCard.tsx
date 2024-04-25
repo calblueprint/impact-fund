@@ -46,9 +46,6 @@ function CaseCard(caseData: Case) {
         <Text style={styles.bottomText}>
           {formatDate(caseData.date)} • {caseData.lawFirm}
         </Text>
-        <View style={styles.threeDots}>
-          <ThreeDots />
-        </View>
       </View>
     </TouchableOpacity>
   );
