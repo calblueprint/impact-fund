@@ -6,24 +6,41 @@ export default StyleSheet.create({
   toggleButtonContainer: {
     width: '100%',
     height: 43,
-    backgroundColor: colors.midGrey,
+    backgroundColor: colors.lightGrey,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    padding: 2,
+    flexDirection: 'column',
+    position: 'relative',
+    overflow: 'hidden',
   },
   toggleItem: {
-    width: ' 50%',
+    position: 'absolute',
+    marginLeft: 4,
+    marginRight: 4,
+    width: '50%',
     height: 35,
+    backgroundColor: colors.white,
+
+    borderColor: colors.white,
+    borderWidth: 1,
+    borderStyle: 'solid',
     borderRadius: 20,
-    backgroundColor: 'white',
+
+    shadowColor: colors.midGrey,
+    shadowOffset: { width: 0.05, height: 0.75 },
+    shadowOpacity: 1,
+    shadowRadius: 0.75,
+    elevation: 1,
   },
-  arrow: {
-    marginLeft: 120,
-    marginTop: 5,
+  toggleSwitchCheckedButtonContainer: {
+    backgroundColor: colors.lightGrey,
   },
-  arrowWhite: {
-    marginLeft: 132,
-    marginTop: 5,
+  toggleSwitchCheckedItem: {
+    right: 0,
+  },
+  blackText: {
+    color: colors.black,
+    fontWeight: '400',
   },
 });

@@ -1,14 +1,29 @@
-import { Link } from 'expo-router';
-import React, { useState, ChangeEvent } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
 
 function ToggleOptionsButton() {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = () => {
+    setIsChecked(prevState => !prevState);
+  };
+
   return (
-    <View style={styles.toggleButtonContainer}>
-      <View style={styles.toggleItem} />
-    </View>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={[
+        styles.toggleButtonContainer,
+        isChecked && styles.toggleSwitchCheckedButtonContainer,
+      ]}
+      onPress={handleToggle}
+    >
+      <View
+        style={[styles.toggleItem, isChecked && styles.toggleSwitchCheckedItem]}
+      />
+      {isChecked}
+    </TouchableOpacity>
   );
 }
 
