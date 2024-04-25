@@ -36,6 +36,17 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inactiveTextContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 4,
+  },
+  inactiveTextStandardBox: {
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   toggleSwitchCheckedButtonContainer: {
     backgroundColor: colors.lightGrey,
   },
@@ -44,7 +55,8 @@ export default StyleSheet.create({
   },
   lightText: {
     color: colors.black,
-    fontWeight: '400',
+    fontSize: 18,
+    fontWeight: '300',
   },
   boldText: {
     color: colors.black,

@@ -19,6 +19,14 @@ function ToggleOptionsButton() {
       ]}
       onPress={handleToggle}
     >
+      <View style={styles.inactiveTextContainer}>
+        <View style={styles.inactiveTextStandardBox}>
+          <Text style={styles.lightText}>File a claim</Text>
+        </View>
+        <View style={styles.inactiveTextStandardBox}>
+          <Text style={styles.lightText}>Opt out</Text>
+        </View>
+      </View>
       <View
         style={[
           styles.toggleItem,
