@@ -10,7 +10,6 @@ import {
   HeaderImage,
   EmptyHeader,
 } from '../../../Components/HeaderComponents/HeaderComponents';
-import { CaseContextProvider } from '../../../context/CaseContext';
 
 export default function CasesLayout() {
   return (
@@ -27,13 +26,6 @@ export default function CasesLayout() {
           headerTitle: () => <LeftAlignedHeaderLine />,
         }}
       />
-      {/* <Stack.Screen
-          name="AddCase/[caseUid]"
-          options={{
-            headerLeft: () => <BackButtonNoText />,
-            headerTitle: () => <HeaderImage />,
-          }}
-        /> */}
       <Stack.Screen
         name="CaseScreen/[caseUid]"
         options={{
