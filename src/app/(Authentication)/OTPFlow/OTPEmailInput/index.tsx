@@ -45,12 +45,6 @@ export default function OTPEmailInput() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
         <View>
           <Text style={styles.instructionText}>
             Please enter the email you used to create your account.

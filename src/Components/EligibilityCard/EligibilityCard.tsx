@@ -9,6 +9,7 @@ import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
 import OptOut from '../../../assets/opt-out.svg';
 import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import globalStyles from '../../styles/global';
 import { Case, Eligibility } from '../../types/types';
 
 interface EligibilityCardProps {
@@ -35,7 +36,7 @@ export default function EligibilityCard({
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={() => {
             router.push({
               pathname: `/AllCases/EligibilityForm/${caseData.id}`,
@@ -67,7 +68,7 @@ export default function EligibilityCard({
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={onPressHandler}
         >
           <View style={styles.leftContainer}>
@@ -94,7 +95,7 @@ export default function EligibilityCard({
         </View>
 
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={() => {
             router.push({
               pathname: `/AllCases/OptOut/${caseData.id}`,

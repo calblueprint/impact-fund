@@ -71,6 +71,49 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
+type ScannerQueryResponse =
+  | {
+      data: { case: Case };
+      error: null;
+    }
+  | {
+      data: null;
+      error: any;
+    };
+
+/**
+ * Query supabase according to the QR code scanner result.
+ * @param scannedData
+ * @returns `Case` or indicate that none exists.
+ */
+export async function getScannedData(
+  scannedData: string,
+): Promise<ScannerQueryResponse> {
+  try {
+    const { data } = await supabase
+      .from('cases')
+      .select()
+      .eq('caseId', scannedData);
+    if (!data) {
+      throw new Error('case not found');
+    }
+    const caseData: Case = await formatCase(data[0]);
+    const res: ScannerQueryResponse = {
+      data: {
+        case: caseData,
+      },
+      error: null,
+    };
+    return res;
+  } catch (error) {
+    const res: ScannerQueryResponse = {
+      data: null,
+      error,
+    };
+    return res;
+  }
+}
+
 /**
  * Create a case-user association on supabase.
  * @param caseId case being added.
@@ -157,8 +200,8 @@ export function formatPartialCaseFromQuery(item: any): CasePartial {
     id: item.caseId,
     approved: item.approved,
     title: item.title,
-    blurb: item.blurb,
-    summary: item.summary,
+    briefSummary: item.briefSummary,
+    description: item.description,
     caseSite: item.caseSite,
     claimLink: item.claimLink,
     optOutLink: item.optOutLink,

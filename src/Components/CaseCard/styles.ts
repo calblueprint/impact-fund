@@ -7,16 +7,6 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     paddingHorizontal: 20,
-
-    backgroundColor: colors.white,
-    border: 'solid',
-    borderColor: colors.darkGrey,
-    borderWidth: 0.25,
-    borderRadius: 5,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   mainContentContainer: {
     flexDirection: 'row',

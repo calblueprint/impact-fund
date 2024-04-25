@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
-import Error from '../../../../../assets/exclamation.svg';
+import RedWarning from '../../../../../assets/red-warning.svg';
 import Ex from '../../../../../assets/x.svg';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import {
@@ -77,7 +77,7 @@ export default function EligibilityForm() {
                 transition={300}
               />
               <View style={styles.infoRow}>
-                <Error />
+                <RedWarning />
                 <View style={{ flex: 1 }}>
                   <Text style={styles.bodyText}>
                     You must meet every requirement to be eligible for this

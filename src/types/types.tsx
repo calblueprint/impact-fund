@@ -9,8 +9,8 @@ export interface CasePartial {
   id: CaseUid;
   approved: boolean;
   title: string;
-  blurb: string;
-  summary: string;
+  briefSummary: string;
+  description: string;
   caseSite: string;
   claimLink: string;
   optOutLink: string;
@@ -28,9 +28,9 @@ export interface Case extends CasePartial {
 export interface CaseSummaryProps {
   id: CaseUid;
   imageUrl: string;
-  blurb: string;
+  briefSummary: string;
   lawFirm: string;
-  summary: string;
+  description: string;
   date: Date;
 }
 
@@ -87,4 +87,21 @@ export interface Update {
   date: Date;
   summary: string;
   lawFirm: string;
+}
+
+export enum GreenStatusOptions {
+  'In Progress',
+  'New Case',
+  'Settled',
+  'Appeal',
+  'Payment Processing',
+  'Payment Distributed',
+}
+
+export enum YellowStatusOptions {
+  'Pending',
+}
+
+export enum RedStatusOptions {
+  'Action Required',
 }

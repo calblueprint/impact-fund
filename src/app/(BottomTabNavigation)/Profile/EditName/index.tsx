@@ -17,12 +17,6 @@ function EditNameScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.push('/Profile/')}
-      >
-        <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity>
       <Text style={styles.instructionText}>Edit account details</Text>
 
       <View style={styles.inputBox}>

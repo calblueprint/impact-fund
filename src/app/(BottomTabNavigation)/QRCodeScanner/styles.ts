@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../../styles/colors';
+import { colors } from '../../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -21,9 +21,19 @@ export default StyleSheet.create({
     height: 300,
     width: 300,
     border: 'solid',
-    borderWidth: 2,
-    borderRadius: 5,
+    borderWidth: 5,
+    borderRadius: 10,
     marginVertical: 20,
+    overflow: 'hidden',
+  },
+  validScan: {
+    borderColor: colors.green,
+  },
+  invalidScan: {
+    borderColor: colors.midRed,
+  },
+  notScanned: {
+    borderColor: colors.black,
   },
   viewCaseButton: {
     border: 'solid',
