@@ -71,17 +71,15 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
-type Response = {
-  res:
-    | {
-        data: Case;
-        error: null;
-      }
-    | {
-        data: null;
-        error: any;
-      };
-};
+type Response =
+  | {
+      data: { case: Case };
+      error: null;
+    }
+  | {
+      data: null;
+      error: any;
+    };
 
 // Fetch a single case using its ID
 export async function getCaseOrError(caseId: CaseUid): Promise<Response> {
@@ -92,19 +90,17 @@ export async function getCaseOrError(caseId: CaseUid): Promise<Response> {
     }
     const caseData: Case = await formatCase(data[0]);
     const res: Response = {
-      res: {
-        data: caseData,
-        error: null,
+      data: {
+        case: caseData,
       },
+      error: null,
     };
     return res;
   } catch (error) {
     // console.warn('(getCaseById)', error);
     const res: Response = {
-      res: {
-        data: null,
-        error,
-      },
+      data: null,
+      error,
     };
     return res;
   }

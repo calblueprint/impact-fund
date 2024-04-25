@@ -36,6 +36,9 @@ function QRCodeScannerScreen() {
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [recentScan, setRecentScan] = useState<string>('');
+  const [scannerState, setScannerState] = useState<'valid' | 'invalid' | ''>(
+    '',
+  );
   const { allCases } = useContext(CaseContext);
 
   const navigation = useNavigation();
@@ -126,64 +129,96 @@ function QRCodeScannerScreen() {
     });
   }, [navigation]);
 
-  // const handleBarCodeScanned = (result: BarCodeScanningResult) => {
-  //   if (result.data !== recentScan) {
-  //     processBarCodeData(result.data);
-  //   }
-  //   setRecentScan(result.data);
-  //   // console.log(result.data, typeof result.data);
-  // };
-
-  const processBarCodeData = async (result: BarCodeScanningResult) => {
-    // const result = await getCaseOrError(data);
-
-    // // if result doesn't exist
-
-    // console.log(result);
-
-    // if (result.res.error) {
-    //   console.log(result.res.error);
-    //   return;
-    // }
-
-    // const caseData: Case = result.res.data as Case;
-    // console.log(caseData);
-
-    // if (allCases.includes(caseData)) {
-    //   console.log("You've already scanned this QR code");
-    //   return;
-    // }
-
-    // console.log('should be good to go!');
-
-    const caseId = result.data;
-
-    if (!validIds.includes(caseId)) {
-      setUserCase(undefined);
-      setInvalidBarcodeStyle();
-      Toast.show({
-        type: 'error',
-        text1: 'Sorry! This QR code is invalid.',
-        visibilityTime: 1500,
-      });
-    } else if (userIds.includes(caseId)) {
-      setUserCase(undefined);
-      setInvalidBarcodeStyle();
-      Toast.show({
-        type: 'error',
-        text1: "You've already scanned this QR code.",
-        visibilityTime: 1500,
-      });
-    } else {
-      const caseData: Case = await getCaseById(caseId);
-      setUserCase(caseData);
-      setValidBarcodeStyle();
-      Toast.show({
-        type: 'success',
-        text1: 'QR code successfully scanned',
-        visibilityTime: 1500,
-      });
+  const handleBarCodeScanned = (result: BarCodeScanningResult) => {
+    if (result.data !== recentScan) {
+      processBarCodeData(result.data);
     }
+    setRecentScan(result.data);
+
+    switch (scannerState) {
+      case 'invalid': {
+        // setUserCase(undefined);
+        // setInvalidBarcodeStyle();
+        Toast.show({
+          type: 'error',
+          text1: 'Sorry! This QR code is invalid.',
+          visibilityTime: 1500,
+        });
+        // setBorderStyle(styles.invalidScan);
+        // // setIsActive(true);
+        // setTimeout(() => {
+        //   // setBorderStyle(styles.notScanned);
+        //   setIsActive(false);
+        // }, 1500);
+        break;
+      }
+      case 'valid': {
+        Toast.show({
+          type: 'success',
+          text1: 'QR code successfully scanned',
+          visibilityTime: 1500,
+        });
+        break;
+      }
+    }
+  };
+
+  const processBarCodeData = async (data: string) => {
+    const result = await getCaseOrError(data);
+
+    // if result doesn't exist
+
+    console.log(result);
+
+    if (result.error) {
+      console.log('This code is invalid');
+      setScannerState('invalid');
+      return;
+    }
+
+    if (result.data) {
+      const newCase: Case = result.data.case;
+      console.log(allCases);
+      console.log(newCase);
+
+      for (const existingCase of allCases) {
+        if (existingCase.id === newCase.id) {
+          console.log("You've already scanned this QR code");
+          setScannerState('invalid');
+          return;
+        }
+      }
+      console.log('should be good to go!');
+    }
+
+    // const caseId = result.data;
+
+    // if (!validIds.includes(caseId)) {
+    //   setUserCase(undefined);
+    //   setInvalidBarcodeStyle();
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Sorry! This QR code is invalid.',
+    //     visibilityTime: 1500,
+    //   });
+    // } else if (userIds.includes(caseId)) {
+    //   setUserCase(undefined);
+    //   setInvalidBarcodeStyle();
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: "You've already scanned this QR code.",
+    //     visibilityTime: 1500,
+    //   });
+    // } else {
+    //   const caseData: Case = await getCaseById(caseId);
+    //   setUserCase(caseData);
+    //   setValidBarcodeStyle();
+    //   Toast.show({
+    //     type: 'success',
+    //     text1: 'QR code successfully scanned',
+    //     visibilityTime: 1500,
+    //   });
+    // }
   };
 
   const routeToAddCase = () => {
@@ -204,7 +239,7 @@ function QRCodeScannerScreen() {
       <Toast position="top" topOffset={20} config={toastConfig} />
       <Text style={styles.topText}>Point your Camera at the QR code.</Text>
       <Camera
-        onBarCodeScanned={processBarCodeData}
+        onBarCodeScanned={handleBarCodeScanned}
         barCodeScannerSettings={{
           barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
           interval: 1000,
