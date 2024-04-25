@@ -84,9 +84,11 @@ function QRCodeScannerScreen() {
   useEffect(() => {
     navigation.addListener('blur', async () => {
       resetScanner();
+      setScannedCase(undefined);
     });
     navigation.addListener('focus', async () => {
       resetScanner();
+      setScannedCase(undefined);
       setTimeout(() => {}, 1000);
     });
   }, [navigation]);

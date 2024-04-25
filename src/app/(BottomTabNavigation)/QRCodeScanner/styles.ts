@@ -21,9 +21,10 @@ export default StyleSheet.create({
     height: 300,
     width: 300,
     border: 'solid',
-    borderWidth: 3,
-    borderRadius: 5,
+    borderWidth: 5,
+    borderRadius: 10,
     marginVertical: 20,
+    overflow: 'hidden',
   },
   validScan: {
     borderColor: colors.green,

@@ -17,6 +17,7 @@ export default function AddCase() {
 
   const addToCases = async (newCase: Case) => {
     await joinCase(newCase);
+    router.back();
     router.replace('/AllCases');
   };
 
