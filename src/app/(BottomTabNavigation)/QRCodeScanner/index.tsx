@@ -33,7 +33,7 @@ function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [validIds, setValidIds] = useState<CaseUid[]>([]);
   const [userIds, setUserIds] = useState<CaseUid[]>([]);
-  const [userCase, setUserCase] = useState<Case>();
+  const [scannedCase, setScannedCase] = useState<Case>();
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [recentScan, setRecentScan] = useState<string>('');
@@ -121,22 +121,22 @@ function QRCodeScannerScreen() {
 
   useEffect(() => {
     navigation.addListener('blur', async () => {
-      setUserCase(undefined);
+      setScannedCase(undefined);
       setBorderStyle(styles.notScanned);
     });
     navigation.addListener('focus', async () => {
-      setUserCase(undefined);
+      setScannedCase(undefined);
       setBorderStyle(styles.notScanned);
     });
   }, [navigation]);
 
-  function resetBorderStyle() {
+  function resetScanner() {
     setScannerState('');
     setRecentScan('');
     setBorderStyle(styles.notScanned);
   }
 
-  const debouncedFetchData = useCallback(debounce(resetBorderStyle, 1500), []);
+  const debouncedFetchData = useCallback(debounce(resetScanner, 1500), []);
 
   const handleBarCodeScanned = (result: BarCodeScanningResult) => {
     if (result.data !== recentScan) {
@@ -161,6 +161,14 @@ function QRCodeScannerScreen() {
         });
         break;
       }
+      case 'valid': {
+        Toast.show({
+          type: 'success',
+          text1: 'QR code successfully scanned',
+          visibilityTime: 1500,
+        });
+        break;
+      }
     }
     debouncedFetchData();
   };
@@ -173,24 +181,30 @@ function QRCodeScannerScreen() {
     if (result.error) {
       console.log('This code is invalid');
       setScannerState('invalid');
+      setScannedCase(undefined);
       setBorderStyle(styles.invalidScan);
       return;
     }
 
     if (result.data) {
       const newCase: Case = result.data.case;
-      console.log(allCases);
-      console.log(newCase);
+      // console.log(allCases);
+      // console.log(newCase);
 
       for (const existingCase of allCases) {
         if (existingCase.id === newCase.id) {
           console.log("You've already scanned this QR code");
           setScannerState('scanned');
+          setScannedCase(undefined);
           setBorderStyle(styles.invalidScan);
           return;
         }
       }
+
       console.log('should be good to go!');
+      setScannedCase(newCase);
+      setScannerState('valid');
+      setBorderStyle(styles.validScan);
     }
 
     // const caseId = result.data;
@@ -224,12 +238,10 @@ function QRCodeScannerScreen() {
   };
 
   const routeToAddCase = () => {
-    if (!userCase) {
-      return;
+    if (scannedCase) {
+      router.push(`/QRCodeScanner/AddCase/${scannedCase.id}`);
+      resetScanner();
     }
-    router.push({
-      pathname: `/QRCodeScanner/AddCase/${userCase.id}`,
-    });
   };
 
   if (hasPermission === permissions.DENIED) {
@@ -249,7 +261,7 @@ function QRCodeScannerScreen() {
         style={[styles.scanner, borderStyle]}
       />
 
-      {userCase && (
+      {scannedCase && (
         <TouchableOpacity
           style={styles.viewCaseButton}
           onPress={() => routeToAddCase()}
