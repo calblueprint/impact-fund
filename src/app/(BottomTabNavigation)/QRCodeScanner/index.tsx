@@ -15,13 +15,8 @@ import Arrow from '../../../../assets/black-right-arrow.svg';
 import CheckIcon from '../../../../assets/green-check.svg';
 import ErrorIcon from '../../../../assets/warning.svg';
 import { CaseContext } from '../../../context/CaseContext';
-import {
-  getAllCaseIds,
-  getCaseById,
-  getCaseIdsFromUserId,
-  getCaseOrError,
-} from '../../../supabase/queries/cases';
-import { Case, CaseUid } from '../../../types/types';
+import { getScannedData } from '../../../supabase/queries/cases';
+import { Case } from '../../../types/types';
 
 enum permissions {
   UNDETERMINED,
@@ -31,11 +26,8 @@ enum permissions {
 
 function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
-  const [validIds, setValidIds] = useState<CaseUid[]>([]);
-  const [userIds, setUserIds] = useState<CaseUid[]>([]);
   const [scannedCase, setScannedCase] = useState<Case>();
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
-  const [isActive, setIsActive] = useState<boolean>(false);
   const [recentScan, setRecentScan] = useState<string>('');
   const [scannerState, setScannerState] = useState<
     'valid' | 'invalid' | 'scanned' | ''
@@ -78,13 +70,6 @@ function QRCodeScannerScreen() {
     ),
   };
 
-  const getAllCasesAndValidCases = async () => {
-    const allCases = await getAllCaseIds();
-    setValidIds(allCases);
-    const userCases = await getCaseIdsFromUserId('NO_ID');
-    setUserIds(userCases);
-  };
-
   const getBarCodeScannerPermissions = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
     setHasPermission(
@@ -92,31 +77,8 @@ function QRCodeScannerScreen() {
     );
   };
 
-  // const setValidBarcodeStyle = () => {
-  //   if (!isActive) {
-  //     setBorderStyle(styles.validScan);
-  //     setIsActive(true);
-  //     setTimeout(() => {
-  //       setBorderStyle(styles.notScanned);
-  //       setIsActive(false);
-  //     }, 1500);
-  //   }
-  // };
-
-  // const setInvalidBarcodeStyle = async () => {
-  //   if (!isActive) {
-  //     setBorderStyle(styles.invalidScan);
-  //     setIsActive(true);
-  //     setTimeout(() => {
-  //       setBorderStyle(styles.notScanned);
-  //       setIsActive(false);
-  //     }, 1500);
-  //   }
-  // };
-
   useEffect(() => {
     getBarCodeScannerPermissions();
-    getAllCasesAndValidCases();
   }, []);
 
   useEffect(() => {
@@ -138,12 +100,15 @@ function QRCodeScannerScreen() {
 
   const debouncedFetchData = useCallback(debounce(resetScanner, 1500), []);
 
+  // function called after every `BarCodeScanningResult` event triggered by scanner
   const handleBarCodeScanned = (result: BarCodeScanningResult) => {
     if (result.data !== recentScan) {
+      // process the barcode data if different from previous scans
       processBarCodeData(result.data);
     }
     setRecentScan(result.data);
 
+    // trigger scanner feedback depending on scanning result
     switch (scannerState) {
       case 'invalid': {
         Toast.show({
@@ -174,12 +139,9 @@ function QRCodeScannerScreen() {
   };
 
   const processBarCodeData = async (data: string) => {
-    const result = await getCaseOrError(data);
-
-    console.log(result);
+    const result = await getScannedData(data);
 
     if (result.error) {
-      console.log('This code is invalid');
       setScannerState('invalid');
       setScannedCase(undefined);
       setBorderStyle(styles.invalidScan);
@@ -188,12 +150,10 @@ function QRCodeScannerScreen() {
 
     if (result.data) {
       const newCase: Case = result.data.case;
-      // console.log(allCases);
-      // console.log(newCase);
 
+      // check whether the case has already been scanned
       for (const existingCase of allCases) {
         if (existingCase.id === newCase.id) {
-          console.log("You've already scanned this QR code");
           setScannerState('scanned');
           setScannedCase(undefined);
           setBorderStyle(styles.invalidScan);
@@ -201,40 +161,11 @@ function QRCodeScannerScreen() {
         }
       }
 
-      console.log('should be good to go!');
+      // valid case scanned if this point reached
       setScannedCase(newCase);
       setScannerState('valid');
       setBorderStyle(styles.validScan);
     }
-
-    // const caseId = result.data;
-
-    // if (!validIds.includes(caseId)) {
-    //   setUserCase(undefined);
-    //   setInvalidBarcodeStyle();
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: 'Sorry! This QR code is invalid.',
-    //     visibilityTime: 1500,
-    //   });
-    // } else if (userIds.includes(caseId)) {
-    //   setUserCase(undefined);
-    //   setInvalidBarcodeStyle();
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: "You've already scanned this QR code.",
-    //     visibilityTime: 1500,
-    //   });
-    // } else {
-    //   const caseData: Case = await getCaseById(caseId);
-    //   setUserCase(caseData);
-    //   setValidBarcodeStyle();
-    //   Toast.show({
-    //     type: 'success',
-    //     text1: 'QR code successfully scanned',
-    //     visibilityTime: 1500,
-    //   });
-    // }
   };
 
   const routeToAddCase = () => {

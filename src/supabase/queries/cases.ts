@@ -71,7 +71,7 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
-type Response =
+type ScannerQueryResponse =
   | {
       data: { case: Case };
       error: null;
@@ -81,15 +81,24 @@ type Response =
       error: any;
     };
 
-// Fetch a single case using its ID
-export async function getCaseOrError(caseId: CaseUid): Promise<Response> {
+/**
+ * Query supabase according to the QR code scanner result.
+ * @param scannedData
+ * @returns `Case` or indicate that none exists.
+ */
+export async function getScannedData(
+  scannedData: string,
+): Promise<ScannerQueryResponse> {
   try {
-    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    const { data } = await supabase
+      .from('cases')
+      .select()
+      .eq('caseId', scannedData);
     if (!data) {
       throw new Error('case not found');
     }
     const caseData: Case = await formatCase(data[0]);
-    const res: Response = {
+    const res: ScannerQueryResponse = {
       data: {
         case: caseData,
       },
@@ -97,8 +106,7 @@ export async function getCaseOrError(caseId: CaseUid): Promise<Response> {
     };
     return res;
   } catch (error) {
-    // console.warn('(getCaseById)', error);
-    const res: Response = {
+    const res: ScannerQueryResponse = {
       data: null,
       error,
     };
