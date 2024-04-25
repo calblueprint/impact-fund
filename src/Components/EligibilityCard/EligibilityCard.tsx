@@ -69,7 +69,11 @@ export default function EligibilityCard({
       <View style={styles.container}>
         <TouchableOpacity
           style={[styles.buttonContainer, globalStyles.shadowBorder]}
-          onPress={onPressHandler}
+          onPress={() => {
+            router.push({
+              pathname: `/AllCases/FileClaim/${caseData.id}`,
+            });
+          }}
         >
           <View style={styles.topContainer}>
             <View style={styles.leftContainer}>

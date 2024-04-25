@@ -58,10 +58,6 @@ function CaseScreen() {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
-          <StatusUpdatesBar
-            caseUid={caseData.id}
-            status={caseData.caseStatus}
-          />
           <ToggleOptionsButton />
 
           {status === Eligibility.ELIGIBLE && (
@@ -72,6 +68,10 @@ function CaseScreen() {
             status === Eligibility.UNDETERMINED) && (
             <EligibilityCard caseData={caseData} status={status} />
           )}
+          <StatusUpdatesBar
+            caseUid={caseData.id}
+            status={caseData.caseStatus}
+          />
           <FormsCard {...caseData} />
           <EducationalBar />
         </ScrollView>
