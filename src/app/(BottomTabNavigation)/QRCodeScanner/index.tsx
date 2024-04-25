@@ -1,7 +1,7 @@
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Toast, {
   ErrorToast,
@@ -13,10 +13,12 @@ import styles from './styles';
 import Arrow from '../../../../assets/black-right-arrow.svg';
 import CheckIcon from '../../../../assets/green-check.svg';
 import ErrorIcon from '../../../../assets/warning.svg';
+import { CaseContext } from '../../../context/CaseContext';
 import {
   getAllCaseIds,
   getCaseById,
   getCaseIdsFromUserId,
+  getCaseOrError,
 } from '../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../types/types';
 
@@ -33,6 +35,9 @@ function QRCodeScannerScreen() {
   const [userCase, setUserCase] = useState<Case>();
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [recentScan, setRecentScan] = useState<string>('');
+  const { allCases } = useContext(CaseContext);
+
   const navigation = useNavigation();
 
   const toastConfig: ToastConfig = {
@@ -121,8 +126,38 @@ function QRCodeScannerScreen() {
     });
   }, [navigation]);
 
-  const handleBarCodeScanned = async (result: BarCodeScanningResult) => {
+  // const handleBarCodeScanned = (result: BarCodeScanningResult) => {
+  //   if (result.data !== recentScan) {
+  //     processBarCodeData(result.data);
+  //   }
+  //   setRecentScan(result.data);
+  //   // console.log(result.data, typeof result.data);
+  // };
+
+  const processBarCodeData = async (result: BarCodeScanningResult) => {
+    // const result = await getCaseOrError(data);
+
+    // // if result doesn't exist
+
+    // console.log(result);
+
+    // if (result.res.error) {
+    //   console.log(result.res.error);
+    //   return;
+    // }
+
+    // const caseData: Case = result.res.data as Case;
+    // console.log(caseData);
+
+    // if (allCases.includes(caseData)) {
+    //   console.log("You've already scanned this QR code");
+    //   return;
+    // }
+
+    // console.log('should be good to go!');
+
     const caseId = result.data;
+
     if (!validIds.includes(caseId)) {
       setUserCase(undefined);
       setInvalidBarcodeStyle();
@@ -156,7 +191,7 @@ function QRCodeScannerScreen() {
       return;
     }
     router.push({
-      pathname: `/AllCases/AddCase/${userCase.id}`,
+      pathname: `/QRCodeScanner/AddCase/${userCase.id}`,
     });
   };
 
@@ -169,7 +204,7 @@ function QRCodeScannerScreen() {
       <Toast position="top" topOffset={20} config={toastConfig} />
       <Text style={styles.topText}>Point your Camera at the QR code.</Text>
       <Camera
-        onBarCodeScanned={handleBarCodeScanned}
+        onBarCodeScanned={processBarCodeData}
         barCodeScannerSettings={{
           barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
           interval: 1000,

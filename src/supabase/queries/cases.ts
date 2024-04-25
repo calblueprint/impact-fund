@@ -71,6 +71,45 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
   }
 }
 
+type Response = {
+  res:
+    | {
+        data: Case;
+        error: null;
+      }
+    | {
+        data: null;
+        error: any;
+      };
+};
+
+// Fetch a single case using its ID
+export async function getCaseOrError(caseId: CaseUid): Promise<Response> {
+  try {
+    const { data } = await supabase.from('cases').select().eq('caseId', caseId);
+    if (!data) {
+      throw new Error('case not found');
+    }
+    const caseData: Case = await formatCase(data[0]);
+    const res: Response = {
+      res: {
+        data: caseData,
+        error: null,
+      },
+    };
+    return res;
+  } catch (error) {
+    // console.warn('(getCaseById)', error);
+    const res: Response = {
+      res: {
+        data: null,
+        error,
+      },
+    };
+    return res;
+  }
+}
+
 /**
  * Create a case-user association on supabase.
  * @param caseId case being added.
