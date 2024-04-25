@@ -30,32 +30,8 @@ function CasesScreen() {
     }),
   });
 
-  const [notification, setNotification] =
-    useState<Notifications.Notification>();
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
-
-  // useEffect(() => {
-  //   notificationListener.current =
-  //     Notifications.addNotificationReceivedListener(notification => {
-  //       setNotification(notification);
-  //       console.log(notification);
-  //     });
-
-  //   responseListener.current =
-  //     Notifications.addNotificationResponseReceivedListener(response => {
-  //       setNotification(notification);
-  //       console.log(response);
-  //     });
-
-  //   return () => {
-  //     Notifications.removeNotificationSubscription(
-  //       notificationListener.current!,
-  //     );
-
-  //     Notifications.removeNotificationSubscription(responseListener.current!);
-  //   };
-  // }, []);
 
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
@@ -111,16 +87,14 @@ function CasesScreen() {
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener(notification => {
-        setNotification(notification);
-        console.log('recieved notification while in app');
-        console.log(notification);
+        const updateId = notification.request.content.data['id'];
+        router.push(`/AllCases/Updates/UpdateView/${updateId}`);
       });
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
-        console.log('recieved notification');
-        setNotification(notification);
-        console.log(response);
+        const updateId = response.notification.request.content.data['id'];
+        router.push(`/AllCases/Updates/UpdateView/${updateId}`);
       });
 
     return () => {
@@ -152,7 +126,6 @@ function CasesScreen() {
                   <View style={styles.buttonInfoContainer}>
                     <Camera />
                     <Text style={styles.cameraText}>Add Case with QR code</Text>
-                    <Text>{notification?.request.content.body}</Text>
                   </View>
                 </TouchableOpacity>
               </>
