@@ -71,30 +71,27 @@ export default function EligibilityCard({
           style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={onPressHandler}
         >
-          <View style={styles.leftContainer}>
-            <Fileclaim />
+          <View style={styles.topContainer}>
+            <View style={styles.leftContainer}>
+              <Fileclaim />
+            </View>
+            <View style={styles.middleContainer}>
+              <Text style={styles.bodyText}>
+                Eligible class members can submit a claim electronically to
+                receive a settlement.
+              </Text>
+            </View>
           </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>File a case claim</Text>
-            <Text style={styles.bodyText}>
-              Eligible class members can submit a claim electronically to
-              receive a settlement.
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
+
+          <View style={styles.horizontalLine} />
+
+          <View style={styles.bottomContainer}>
+            <Text style={styles.smallText}>File or update my claim</Text>
             <Arrow />
           </View>
         </TouchableOpacity>
 
-        <View style={styles.separatorComponent}>
-          <View style={styles.horizontalLine} />
-          <View style={styles.textContainer}>
-            <Text style={styles.separatorText}>OR</Text>
-          </View>
-          <View style={styles.horizontalLine} />
-        </View>
-
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={() => {
             router.push({
@@ -102,20 +99,25 @@ export default function EligibilityCard({
             });
           }}
         >
-          <View style={styles.leftContainer}>
-            <OptOut />
+          <View style={styles.topContainer}>
+            <View style={styles.leftContainer}>
+              <OptOut />
+            </View>
+            <View style={styles.middleContainer}>
+              <Text style={styles.bodyText}>
+                Opt out to remove yourself from this class action and deactivate
+                this case.
+              </Text>
+            </View>
           </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>Opt out of case</Text>
-            <Text style={styles.bodyText}>
-              Opt out of this case to do something you can still file private
-              claim yada yada
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
+
+          <View style={styles.horizontalLine} />
+
+          <View style={styles.bottomContainer}>
+            <Text style={styles.smallText}>View options for opting out</Text>
             <Arrow />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   } else {

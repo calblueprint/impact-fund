@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Directions } from 'react-native-gesture-handler';
 
 import { colors } from '../../styles/colors';
 
@@ -11,7 +12,7 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignSelf: 'center',
     justifyContent: 'space-evenly',
     padding: 20,
@@ -20,10 +21,9 @@ export default StyleSheet.create({
     flex: 0.15,
   },
   middleContainer: {
-    flex: 0.8,
+    flex: 0.9,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    rowGap: 12,
   },
   rightContainer: {
     flex: 0.05,
@@ -40,9 +40,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   horizontalLine: {
-    flex: 1,
     height: 0.5,
-    backgroundColor: colors.black,
+    marginVertical: 15,
+    backgroundColor: colors.midGrey,
   },
   headerText: {
     fontSize: 20,
@@ -52,11 +52,11 @@ export default StyleSheet.create({
     color: colors.black,
   },
   bodyText: {
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 16,
-    color: colors.darkGrey,
+    color: colors.black,
   },
   separatorText: {
     fontSize: 12,
@@ -64,5 +64,22 @@ export default StyleSheet.create({
     fontWeight: '300',
     lineHeight: 16,
     color: colors.black,
+  },
+  topContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  bottomContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  smallText: {
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 16,
+    color: colors.darkGrey,
   },
 });
