@@ -1,7 +1,8 @@
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
-import React, { useEffect, useState, useContext } from 'react';
+import { debounce } from 'lodash';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Toast, {
   ErrorToast,
@@ -36,9 +37,9 @@ function QRCodeScannerScreen() {
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [recentScan, setRecentScan] = useState<string>('');
-  const [scannerState, setScannerState] = useState<'valid' | 'invalid' | ''>(
-    '',
-  );
+  const [scannerState, setScannerState] = useState<
+    'valid' | 'invalid' | 'scanned' | ''
+  >('');
   const { allCases } = useContext(CaseContext);
 
   const navigation = useNavigation();
@@ -91,27 +92,27 @@ function QRCodeScannerScreen() {
     );
   };
 
-  const setValidBarcodeStyle = () => {
-    if (!isActive) {
-      setBorderStyle(styles.validScan);
-      setIsActive(true);
-      setTimeout(() => {
-        setBorderStyle(styles.notScanned);
-        setIsActive(false);
-      }, 1500);
-    }
-  };
+  // const setValidBarcodeStyle = () => {
+  //   if (!isActive) {
+  //     setBorderStyle(styles.validScan);
+  //     setIsActive(true);
+  //     setTimeout(() => {
+  //       setBorderStyle(styles.notScanned);
+  //       setIsActive(false);
+  //     }, 1500);
+  //   }
+  // };
 
-  const setInvalidBarcodeStyle = async () => {
-    if (!isActive) {
-      setBorderStyle(styles.invalidScan);
-      setIsActive(true);
-      setTimeout(() => {
-        setBorderStyle(styles.notScanned);
-        setIsActive(false);
-      }, 1500);
-    }
-  };
+  // const setInvalidBarcodeStyle = async () => {
+  //   if (!isActive) {
+  //     setBorderStyle(styles.invalidScan);
+  //     setIsActive(true);
+  //     setTimeout(() => {
+  //       setBorderStyle(styles.notScanned);
+  //       setIsActive(false);
+  //     }, 1500);
+  //   }
+  // };
 
   useEffect(() => {
     getBarCodeScannerPermissions();
@@ -129,6 +130,14 @@ function QRCodeScannerScreen() {
     });
   }, [navigation]);
 
+  function resetBorderStyle() {
+    setScannerState('');
+    setRecentScan('');
+    setBorderStyle(styles.notScanned);
+  }
+
+  const debouncedFetchData = useCallback(debounce(resetBorderStyle, 1500), []);
+
   const handleBarCodeScanned = (result: BarCodeScanningResult) => {
     if (result.data !== recentScan) {
       processBarCodeData(result.data);
@@ -137,42 +146,34 @@ function QRCodeScannerScreen() {
 
     switch (scannerState) {
       case 'invalid': {
-        // setUserCase(undefined);
-        // setInvalidBarcodeStyle();
         Toast.show({
           type: 'error',
           text1: 'Sorry! This QR code is invalid.',
           visibilityTime: 1500,
         });
-        // setBorderStyle(styles.invalidScan);
-        // // setIsActive(true);
-        // setTimeout(() => {
-        //   // setBorderStyle(styles.notScanned);
-        //   setIsActive(false);
-        // }, 1500);
         break;
       }
-      case 'valid': {
+      case 'scanned': {
         Toast.show({
-          type: 'success',
-          text1: 'QR code successfully scanned',
+          type: 'error',
+          text1: "You've already scanned this QR code",
           visibilityTime: 1500,
         });
         break;
       }
     }
+    debouncedFetchData();
   };
 
   const processBarCodeData = async (data: string) => {
     const result = await getCaseOrError(data);
-
-    // if result doesn't exist
 
     console.log(result);
 
     if (result.error) {
       console.log('This code is invalid');
       setScannerState('invalid');
+      setBorderStyle(styles.invalidScan);
       return;
     }
 
@@ -184,7 +185,8 @@ function QRCodeScannerScreen() {
       for (const existingCase of allCases) {
         if (existingCase.id === newCase.id) {
           console.log("You've already scanned this QR code");
-          setScannerState('invalid');
+          setScannerState('scanned');
+          setBorderStyle(styles.invalidScan);
           return;
         }
       }
