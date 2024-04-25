@@ -4,10 +4,10 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
 function ToggleOptionsButton() {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isSwitched, setIsSwitched] = useState(false);
 
   const handleToggle = () => {
-    setIsChecked(prevState => !prevState);
+    setIsSwitched(prevState => !prevState);
   };
 
   return (
@@ -15,14 +15,20 @@ function ToggleOptionsButton() {
       activeOpacity={1}
       style={[
         styles.toggleButtonContainer,
-        isChecked && styles.toggleSwitchCheckedButtonContainer,
+        isSwitched && styles.toggleSwitchCheckedButtonContainer,
       ]}
       onPress={handleToggle}
     >
       <View
-        style={[styles.toggleItem, isChecked && styles.toggleSwitchCheckedItem]}
-      />
-      {isChecked}
+        style={[
+          styles.toggleItem,
+          isSwitched && styles.toggleSwitchCheckedItem,
+        ]}
+      >
+        <Text style={styles.boldText}>
+          {isSwitched ? 'Opt out' : 'File a claim'}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 }

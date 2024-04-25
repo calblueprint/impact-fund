@@ -5,9 +5,9 @@ import { colors } from '../../styles/colors';
 export default StyleSheet.create({
   toggleButtonContainer: {
     width: '100%',
-    height: 43,
+    height: 50,
     backgroundColor: colors.lightGrey,
-    borderRadius: 20,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'flex-start',
     flexDirection: 'column',
@@ -19,19 +19,22 @@ export default StyleSheet.create({
     marginLeft: 4,
     marginRight: 4,
     width: '50%',
-    height: 35,
+    height: 42,
     backgroundColor: colors.white,
 
     borderColor: colors.white,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderRadius: 20,
+    borderRadius: 30,
 
     shadowColor: colors.midGrey,
     shadowOffset: { width: 0.05, height: 0.75 },
     shadowOpacity: 1,
     shadowRadius: 0.75,
     elevation: 1,
+
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   toggleSwitchCheckedButtonContainer: {
     backgroundColor: colors.lightGrey,
@@ -39,8 +42,13 @@ export default StyleSheet.create({
   toggleSwitchCheckedItem: {
     right: 0,
   },
-  blackText: {
+  lightText: {
     color: colors.black,
     fontWeight: '400',
+  },
+  boldText: {
+    color: colors.black,
+    fontSize: 18,
+    fontWeight: '500',
   },
 });
