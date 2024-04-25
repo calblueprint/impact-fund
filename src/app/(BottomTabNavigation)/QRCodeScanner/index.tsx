@@ -1,7 +1,7 @@
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
-import { debounce } from 'lodash';
+import { debounce, delay } from 'lodash';
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Toast, {
@@ -83,12 +83,11 @@ function QRCodeScannerScreen() {
 
   useEffect(() => {
     navigation.addListener('blur', async () => {
-      setScannedCase(undefined);
-      setBorderStyle(styles.notScanned);
+      resetScanner();
     });
     navigation.addListener('focus', async () => {
-      setScannedCase(undefined);
-      setBorderStyle(styles.notScanned);
+      resetScanner();
+      setTimeout(() => {}, 1000);
     });
   }, [navigation]);
 
@@ -96,15 +95,18 @@ function QRCodeScannerScreen() {
     setScannerState('');
     setRecentScan('');
     setBorderStyle(styles.notScanned);
+    Toast.hide();
   }
 
   const debouncedFetchData = useCallback(debounce(resetScanner, 1500), []);
 
   // function called after every `BarCodeScanningResult` event triggered by scanner
-  const handleBarCodeScanned = (result: BarCodeScanningResult) => {
+  async function handleBarCodeScanned(result: BarCodeScanningResult) {
     if (result.data !== recentScan) {
       // process the barcode data if different from previous scans
-      processBarCodeData(result.data);
+      resetScanner();
+      setScannedCase(undefined);
+      await processBarCodeData(result.data);
     }
     setRecentScan(result.data);
 
@@ -114,7 +116,6 @@ function QRCodeScannerScreen() {
         Toast.show({
           type: 'error',
           text1: 'Sorry! This QR code is invalid.',
-          visibilityTime: 1500,
         });
         break;
       }
@@ -122,7 +123,6 @@ function QRCodeScannerScreen() {
         Toast.show({
           type: 'error',
           text1: "You've already scanned this QR code",
-          visibilityTime: 1500,
         });
         break;
       }
@@ -130,15 +130,14 @@ function QRCodeScannerScreen() {
         Toast.show({
           type: 'success',
           text1: 'QR code successfully scanned',
-          visibilityTime: 1500,
         });
         break;
       }
     }
     debouncedFetchData();
-  };
+  }
 
-  const processBarCodeData = async (data: string) => {
+  async function processBarCodeData(data: string) {
     const result = await getScannedData(data);
 
     if (result.error) {
@@ -166,12 +165,11 @@ function QRCodeScannerScreen() {
       setScannerState('valid');
       setBorderStyle(styles.validScan);
     }
-  };
+  }
 
   const routeToAddCase = () => {
     if (scannedCase) {
       router.push(`/QRCodeScanner/AddCase/${scannedCase.id}`);
-      resetScanner();
     }
   };
 
