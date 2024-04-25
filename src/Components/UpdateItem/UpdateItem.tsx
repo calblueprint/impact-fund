@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import NotificationBell from '../../../assets/notification-bell.svg';
+import NotificationBell from '../../../assets/grey-notification-bell.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import { Update } from '../../types/types';
 
@@ -19,13 +19,13 @@ export default function UpdateItem(updateData: Update) {
     >
       <NotificationBell />
       <View style={styles.contentContainer}>
+        <Text style={styles.categoryText}>
+          {updateData.category.toUpperCase()}
+        </Text>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText} numberOfLines={2}>
             {updateData.title}
           </Text>
-        </View>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.updateText}>VIEW UPDATE</Text>
         </View>
         <Text style={styles.bottomText}>
           {formatDate(updateData.date)} • {updateData.lawFirm}

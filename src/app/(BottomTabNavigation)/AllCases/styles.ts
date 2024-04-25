@@ -11,11 +11,12 @@ export default StyleSheet.create({
   },
   casesContainer: {
     width: '85%',
+    height: '100%',
     flexDirection: 'column',
   },
   innerScroll: {
     rowGap: 20,
-    paddingTop: 50,
+    paddingTop: 39,
     paddingBottom: 20,
   },
   headerContainer: {
@@ -30,25 +31,21 @@ export default StyleSheet.create({
     lineHeight: 33,
     color: colors.black,
   },
+  instructionText: {
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '300',
+    lineHeight: 22,
+    color: colors.darkGrey,
+  },
   cameraContainer: {
     width: '100%',
     height: 57,
     marginTop: 18,
     backgroundColor: colors.white,
 
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 5,
-
     justifyContent: 'center',
     alignItems: 'center',
-
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1,
-    shadowRadius: 0.75,
-    elevation: 1,
   },
   buttonInfoContainer: {
     width: '66%',

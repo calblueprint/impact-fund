@@ -15,18 +15,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-evenly',
     padding: 20,
-    backgroundColor: colors.white,
-
-    border: 'solid',
-    borderWidth: 0.5,
-    borderRadius: 5,
-    borderColor: colors.midGrey,
-
-    shadowColor: colors.black,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
   leftContainer: {
     flex: 0.15,
