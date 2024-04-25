@@ -23,11 +23,6 @@ Deno.serve(async req => {
       title: category,
       body: update,
       data: { updateId: updateId },
-      // data: [
-      //   {
-      //     updateId: updateId,
-      //   },
-      // ],
     }),
   }).then(res => res.json());
 

@@ -33,6 +33,7 @@ function CasesScreen() {
 
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
+  const [notificationResponse, setNotificationResponse] = useState<string>('');
 
   const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
@@ -86,12 +87,36 @@ function CasesScreen() {
     notificationListener.current =
       Notifications.addNotificationReceivedListener(notification => {
         const updateId = notification.request.content.data['id'];
+        const debugString =
+          'NotificationRecieved: ' +
+          notification +
+          ', ' +
+          notification.request +
+          ', ' +
+          notification.request.content +
+          ', ' +
+          notification.request.content.data;
+        console.log(debugString);
+        setNotificationResponse(debugString);
         router.push(`/AllCases/Updates/UpdateView/${updateId}`);
       });
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
         const updateId = response.notification.request.content.data['id'];
+        const debugString =
+          'NotificationResponseRecieved: ' +
+          response +
+          ', ' +
+          response.notification +
+          ', ' +
+          response.notification.request +
+          ', ' +
+          response.notification.request.content +
+          ', ' +
+          response.notification.request.content.data;
+        console.log(debugString);
+        setNotificationResponse(debugString);
         router.push(`/AllCases/Updates/UpdateView/${updateId}`);
       });
 
@@ -115,6 +140,7 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
+                  <Text>{notificationResponse}</Text>
                   <Text style={styles.titleText}>My Cases</Text>
                 </View>
               </>
