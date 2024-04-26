@@ -84,22 +84,22 @@ function CasesScreen() {
       });
     }
 
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener(notification => {
-        const updateId = notification.request.content.data.updateId;
-        const debugString =
-          'NotificationRecieved: ' +
-          notification +
-          ', ' +
-          notification.request +
-          ', ' +
-          notification.request.content +
-          ', ' +
-          notification.request.content.data;
-        console.log(debugString);
-        setNotificationResponse(debugString);
-        router.push(`/AllCases/Updates/UpdateView/${updateId}`);
-      });
+    // notificationListener.current =
+    //   Notifications.addNotificationReceivedListener(notification => {
+    //     const updateId = notification.request.content.data.updateId;
+    //     const debugString =
+    //       'NotificationRecieved: ' +
+    //       notification +
+    //       ', ' +
+    //       notification.request +
+    //       ', ' +
+    //       notification.request.content +
+    //       ', ' +
+    //       notification.request.content.data;
+    //     console.log(debugString);
+    //     setNotificationResponse(debugString);
+    //     router.push(`/AllCases/Updates/UpdateView/${updateId}`);
+    //   });
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
@@ -121,9 +121,9 @@ function CasesScreen() {
       });
 
     return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current!,
-      );
+      // Notifications.removeNotificationSubscription(
+      //   notificationListener.current!,
+      // );
 
       Notifications.removeNotificationSubscription(responseListener.current!);
     };
