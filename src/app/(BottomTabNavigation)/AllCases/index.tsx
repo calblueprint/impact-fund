@@ -28,7 +28,7 @@ function CasesScreen() {
     }),
   });
 
-  const notificationListener = useRef<Notifications.Subscription>();
+  // const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
   const { allCases, loading } = useContext(CaseContext);
