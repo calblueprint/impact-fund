@@ -13,7 +13,6 @@
     "ts:check": "tsc"
   },
   "dependencies": {
-    "@expo/metro-config": "~0.10.0",
     "@expo/ngrok": "^4.1.1",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/checkbox": "^0.5.17",
@@ -27,7 +26,6 @@
     "expo-barcode-scanner": "~12.5.3",
     "expo-camera": "~13.4.4",
     "expo-checkbox": "~2.4.0",
-    "expo-cli": "^6.3.10",
     "expo-constants": "~14.4.2",
     "expo-device": "~5.4.0",
     "expo-image": "~1.3.5",
@@ -72,7 +70,9 @@
   },
   "private": true,
   "resolutions": {
-    "@expo/config-plugins": "~6.0.0",
-    "@expo/prebuild-config": "~6.0.0"
+    "@expo/cli": "~0.10.0",
+    "@expo/config-plugins": "~7.2.0",
+    "@expo/prebuild-config": "~6.2.0",
+    "@expo/metro-config": "~0.10.0"
   }
 }
