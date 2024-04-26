@@ -86,7 +86,7 @@ function CasesScreen() {
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener(notification => {
-        const updateId = notification.request.content.data['id'];
+        const updateId = notification.request.content.data.updateId;
         const debugString =
           'NotificationRecieved: ' +
           notification +
@@ -103,7 +103,7 @@ function CasesScreen() {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
-        const updateId = response.notification.request.content.data['id'];
+        const updateId = response.notification.request.content.data.updateId;
         const debugString =
           'NotificationResponseRecieved: ' +
           response +
@@ -140,7 +140,7 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
-                  <Text>{notificationResponse}</Text>
+                  {/* <Text>{notificationResponse}</Text> */}
                   <Text style={styles.titleText}>My Cases</Text>
                 </View>
               </>
