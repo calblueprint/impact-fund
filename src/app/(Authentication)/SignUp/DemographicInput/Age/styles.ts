@@ -16,18 +16,23 @@ export default StyleSheet.create({
   backButton: {
     marginBottom: 65,
   },
-  titleContainer: {
-    marginBottom: 22,
-  },
   titleText: {
     fontSize: 24,
     fontWeight: '800',
     color: colors.black,
-    lineHeight: 28,
+  },
+  instructionTextContainer: {
+    marginTop: 16,
+    marginBottom: 22,
+  },
+  instructionText: {
+    fontSize: 16,
+    fontWeight: '300',
+    color: colors.darkGrey,
   },
   pronounsContainer: {
-    height: 240,
-    width: '100%',
+    height: 365,
+    width: 320,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: colors.offWhite,
@@ -38,7 +43,7 @@ export default StyleSheet.create({
     shadowRadius: 0.05,
     elevation: 1,
     padding: 30,
-    marginBottom: 285,
+    marginBottom: 100,
   },
   continueButton: {
     width: '100%',
@@ -66,6 +71,5 @@ export default StyleSheet.create({
   selectText: {
     fontSize: 16,
     fontWeight: '300',
-    color: colors.darkGrey,
   },
 });

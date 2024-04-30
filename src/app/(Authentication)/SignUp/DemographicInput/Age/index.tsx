@@ -7,10 +7,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import BackButton from '../../../../../../assets/back-button-in-grey-circle.svg';
 import ContinueArrow from '../../../../../../assets/right-arrow-white.svg';
-import PressableRequirement from '../../../../../Components/PressableRequirement/PressableRequirement';
 import { colors } from '../../../../../styles/colors';
 
-export default function Pronouns() {
+export default function Age() {
   const [isHe, setHe] = useState(false);
   const [isShe, setShe] = useState(false);
   const [isThey, setThey] = useState(false);
@@ -26,9 +25,13 @@ export default function Pronouns() {
         >
           <BackButton />
         </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Optional questions:</Text>
-          <Text style={styles.titleText}>What are your pronouns?</Text>
+        <Text style={styles.titleText}>Optional questions:</Text>
+        <Text style={styles.titleText}>What is your age cohort?</Text>
+        <View style={styles.instructionTextContainer}>
+          <Text style={styles.instructionText}>
+            While not always necessary, it may be relevant in certain class
+            actions.
+          </Text>
         </View>
         <View style={styles.pronounsContainer}>
           <TouchableOpacity

@@ -19,22 +19,24 @@ export default StyleSheet.create({
     borderColor: colors.black,
     display: 'flex',
     flexDirection: 'row',
+    paddingHorizontal: 20,
   },
   smallerButtonContainer: {
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 20,
   },
   button: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 50,
-    width: 150,
+    width: 162,
     borderWidth: 1,
     borderColor: colors.black,
     borderRadius: 5,
-    paddingHorizontal: 32,
+    paddingHorizontal: 35,
   },
   buttonText: {
     fontSize: 17,
@@ -63,6 +65,7 @@ export default StyleSheet.create({
     fontSize: 35,
     fontWeight: '800',
     color: colors.black,
+    lineHeight: 33,
   },
   instructionContainer: {
     flexDirection: 'row',
@@ -71,7 +74,7 @@ export default StyleSheet.create({
   instructionText: {
     fontSize: 16,
     fontWeight: '300',
-    color: colors.black,
+    color: colors.darkGrey,
     flex: 1,
   },
 });
