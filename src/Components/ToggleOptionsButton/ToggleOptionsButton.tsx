@@ -3,11 +3,17 @@ import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
 
-function ToggleOptionsButton() {
-  const [isSwitched, setIsSwitched] = useState(false);
+interface ToggleOptionsProps {
+  isSwitched: boolean;
+  setIsSwitched: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+function ToggleOptionsButton({
+  isSwitched,
+  setIsSwitched,
+}: ToggleOptionsProps) {
   const handleToggle = () => {
-    setIsSwitched(prevState => !prevState);
+    setIsSwitched(!isSwitched);
   };
 
   return (

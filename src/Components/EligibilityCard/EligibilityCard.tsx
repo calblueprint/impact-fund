@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -26,10 +26,12 @@ const ensureURLFormat = (url: string | null | undefined) => {
   return `https://${url}`;
 };
 
-export default function EligibilityCard({
+export default function EligibleFilingOptions({
   caseData,
   status,
 }: EligibilityCardProps) {
+  const [isSwitched, setIsSwitched] = useState<boolean>(false);
+
   const claimLink = caseData.claimLink
     ? ensureURLFormat(caseData.claimLink)
     : null;
@@ -37,6 +39,13 @@ export default function EligibilityCard({
 
   return (
     <View style={styles.container}>
+      <ToggleOptionsButton
+        isSwitched={isSwitched}
+        setIsSwitched={setIsSwitched}
+      />
+
+      <Text>{isSwitched ? 'true' : 'false'}</Text>
+
       <TouchableOpacity
         style={[styles.buttonContainer, globalStyles.shadowBorder]}
         onPress={() => {

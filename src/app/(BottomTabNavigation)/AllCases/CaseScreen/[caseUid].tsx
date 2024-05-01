@@ -62,7 +62,7 @@ function CaseScreen() {
 
           {status === Eligibility.ELIGIBLE && (
             <>
-              <ToggleOptionsButton />
+              {/* <ToggleOptionsButton /> */}
               <EligibilityCard caseData={caseData} status={status} />
             </>
           )}
