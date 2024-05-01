@@ -6,7 +6,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummaryCard({
@@ -24,7 +24,7 @@ export default function CaseSummaryCard({
         });
       }}
     >
-      <View style={[styles.container, globalStyles.shadowBorder]}>
+      <View style={[styles.container, shawdowStyles.shadowBorder]}>
         <Image
           style={styles.imageContainer}
           source={imageUrl}

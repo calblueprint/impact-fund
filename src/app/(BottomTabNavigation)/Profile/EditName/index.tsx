@@ -1,60 +1,74 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  GroupButtonContent,
+  InputBoxContainer,
+  InputScreenGap,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { ContentContainer, SafeArea } from '../../../../styles/global';
 
 function EditNameScreen() {
   const { updateUser, session } = useSession();
   const [fullName, setFullName] = useState<string>('');
+
+  function updateName() {
+    updateUser({
+      data: {
+        fullName,
+      },
+    });
+    router.back();
+  }
 
   useEffect(() => {
     setFullName(session?.user?.user_metadata.fullName);
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Edit account details</Text>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Edit account details</TitleText>
+        </InstructionContainer>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={fullName}
-          onChangeInput={setFullName}
-          labelText="Full Name"
-          placeholderText="Full Name"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <TouchableOpacity
-        style={
-          fullName
-            ? styles.submitButton
-            : [styles.submitButton, styles.submitButtonDisabled]
-        }
-        onPress={() => {
-          if (fullName) {
-            updateUser({
-              data: {
-                fullName,
-              },
-            });
-            router.push('/Profile/');
-          } else {
-            //ask josh about what should appear in invalid name event
-          }
-        }}
-      >
-        <Text style={styles.submitText}>
-          Submit
-          <Submit style={styles.submitIcon} />
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <InputBoxContainer>
+          <AuthInput
+            input={fullName}
+            onChangeInput={setFullName}
+            labelText="Full name"
+            placeholderText="Full name"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization
+          />
+        </InputBoxContainer>
+
+        <InputScreenGap />
+
+        <ButtonBlack
+          disabled={!fullName || fullName.trim() === ''}
+          onPress={updateName}
+          style={{ justifyContent: 'center' }}
+        >
+          <GroupButtonContent>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+            <Submit />
+          </GroupButtonContent>
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }
 export default EditNameScreen;

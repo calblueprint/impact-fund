@@ -12,8 +12,13 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../Components/AuthButton/AuthButton';
+import { GroupButtonContent } from '../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../context/AuthContext';
-import globalStyles from '../../../styles/global';
+import { shawdowStyles } from '../../../styles/global';
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -28,7 +33,7 @@ function ProfileScreen() {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.titleText}>Settings</Text>
-        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
             <View style={styles.textContainer}>
@@ -78,7 +83,7 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <TouchableOpacity
             style={[styles.profileDetailsBox, styles.centerAlign]}
             onPress={() =>
@@ -113,18 +118,17 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
+        <ButtonBlack
           onPress={() => {
             router.push('/Profile/LogOut');
           }}
-          style={styles.signOutButton}
         >
-          <View style={styles.signOutInstructions}>
+          <GroupButtonContent>
             <SignOut />
-            <Text style={styles.signOutText}>Log out</Text>
-          </View>
+            <ButtonTextWhite>Log out</ButtonTextWhite>
+          </GroupButtonContent>
           <WhiteRightCarrot />
-        </TouchableOpacity>
+        </ButtonBlack>
       </View>
     </View>
   );

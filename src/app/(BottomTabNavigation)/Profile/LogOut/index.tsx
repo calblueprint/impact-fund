@@ -1,11 +1,18 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
 import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonTextBlack,
+  ButtonTextWhite,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
+
 function LogOutConfirmation() {
   const { signOut } = useSession();
 
@@ -15,25 +22,19 @@ function LogOutConfirmation() {
         <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
 
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            onPress={() => router.push('/Profile')}
-            style={styles.cancelButton}
-          >
+          <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
             <View style={styles.buttonContent}>
               <X />
-              <Text style={styles.cancelText}>Cancel</Text>
+              <ButtonTextBlack>Cancel</ButtonTextBlack>
             </View>
-          </TouchableOpacity>
+          </ButtonWhite>
 
-          <TouchableOpacity
-            onPress={() => signOut()}
-            style={styles.confirmButton}
-          >
+          <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
             <View style={styles.buttonContent}>
               <SignOut />
-              <Text style={styles.confirmText}>Confirm</Text>
+              <ButtonTextWhite>Confirm</ButtonTextWhite>
             </View>
-          </TouchableOpacity>
+          </ButtonBlack>
         </View>
       </View>
     </View>

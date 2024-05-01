@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
@@ -22,7 +22,6 @@ export default function AuthInput({
   isPassword,
   keyboard,
   autoCapitalization,
-  isHalfWidth,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(placeholderText);
@@ -36,7 +35,10 @@ export default function AuthInput({
 
   const offClick = () => {
     setIsFocused(false);
-    if (input && input.trim() === '' && !isPassword) {
+    if ((!input || input.trim() === '') && !isPassword) {
+      setPlaceholder(placeholderText);
+      setIsLabelDisplayed(false);
+    } else if (isPassword && !input) {
       setPlaceholder(placeholderText);
       setIsLabelDisplayed(false);
     } else {
@@ -44,16 +46,18 @@ export default function AuthInput({
     }
   };
 
+  useEffect(() => {
+    if (!isPassword && input && input.trim() !== '') {
+      setIsLabelDisplayed(true);
+    }
+  }, [input]);
+
   return (
-    <View>
+    <View style={styles.outerContainer}>
       <Text style={styles.labelText}>{isLabelDisplayed ? labelText : ' '}</Text>
 
       <TextInput
-        style={[
-          styles.inputBox,
-          isHalfWidth && styles.halfWidth,
-          isFocused && styles.inputFocused,
-        ]}
+        style={[styles.inputBox, isFocused && styles.inputFocused]}
         value={input}
         onChangeText={onChangeInput}
         onFocus={onClick}

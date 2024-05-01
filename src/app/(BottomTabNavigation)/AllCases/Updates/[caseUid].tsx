@@ -54,6 +54,9 @@ export default function UpdatesScreen() {
                 <CaseStatusBar status={caseData.caseStatus} />
               </View>
             }
+            ListEmptyComponent={
+              <Text>There are no updates associated with this case.</Text>
+            }
           />
         </View>
       )}

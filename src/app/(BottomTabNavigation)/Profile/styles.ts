@@ -75,7 +75,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: 45,
+    height: 52,
     paddingHorizontal: 20,
     borderRadius: 5,
     backgroundColor: colors.black,
@@ -83,7 +83,7 @@ export default StyleSheet.create({
   signOutText: {
     color: colors.white,
     fontWeight: '700',
-    fontSize: 15,
+    fontSize: 16,
   },
   signOutInstructions: {
     flexDirection: 'row',

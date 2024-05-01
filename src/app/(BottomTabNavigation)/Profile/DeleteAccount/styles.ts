@@ -12,16 +12,15 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   screenContainer: {
-    width: '85%',
-    height: '95%', // 100% results in buttons touching bottom tab nav rn but i assume we can use 100% after we remove bottom tab from this page
+    flexDirection: 'column',
     justifyContent: 'space-between',
-  },
-  headerContainer: {
-    marginTop: 63, // copied this value from profile screen
+    height: '100%',
+    width: '84%',
+    paddingVertical: 40,
   },
   textContainer: {
     rowGap: 20,
-    height: '60%', // this is a bit of a guess
+    marginTop: 85,
   },
   topText: {
     fontSize: 38,
@@ -38,41 +37,16 @@ export default StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '5%',
+    height: 48,
   },
   buttonView: {
     width: '48%',
+    justifyContent: 'center',
   },
   buttonContent: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '60%',
-  },
-  cancelButton: {
-    flex: 1,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: colors.black,
-    alignItems: 'center',
-  },
-  cancelText: {
-    color: colors.black,
-    fontSize: 17,
-    fontStyle: 'normal',
-    fontWeight: '500',
-  },
-  confirmButton: {
-    flex: 1,
-    backgroundColor: colors.black,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  confirmText: {
-    color: colors.white,
-    fontSize: 17,
-    fontStyle: 'normal',
-    fontWeight: '500',
+    columnGap: 15,
   },
 });

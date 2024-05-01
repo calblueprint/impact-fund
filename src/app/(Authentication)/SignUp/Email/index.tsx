@@ -1,11 +1,23 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { z } from 'zod';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InputBoxContainer,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
@@ -57,49 +69,47 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Create your account.</Text>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={name}
-          onChangeInput={onChangeName}
-          labelText="Full Name"
-          placeholderText="Full Name"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={email}
-          onChangeInput={onChangeEmail}
-          labelText="Email address"
-          placeholderText="Email address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-      <View>
-        <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
-      <TouchableOpacity
-        disabled={name.trim() === '' || email.trim() === '' || errorExists}
-        style={
-          name.trim() === '' || email.trim() === '' || errorExists
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
-        onPress={handleSubmit}
-      >
-        <Text style={styles.nextText}>Continue</Text>
-        <View>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Create your account.</TitleText>
+        </InstructionContainer>
+
+        <InputBoxContainer>
+          <AuthInput
+            input={name}
+            onChangeInput={onChangeName}
+            labelText="Full Name"
+            placeholderText="Full Name"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization
+          />
+          <AuthInput
+            input={email}
+            onChangeInput={onChangeEmail}
+            labelText="Email address"
+            placeholderText="Email address"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </InputBoxContainer>
+
+        <ErrorMessageContainer>
+          <ErrorMessageText>
+            {errorExists ? errorMessage : ' '}
+          </ErrorMessageText>
+        </ErrorMessageContainer>
+
+        <ButtonBlack
+          disabled={name.trim() === '' || email.trim() === '' || errorExists}
+          onPress={handleSubmit}
+        >
+          <ButtonTextWhite>Continue</ButtonTextWhite>
           <Arrow />
-        </View>
-      </TouchableOpacity>
-    </View>
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }

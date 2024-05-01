@@ -9,14 +9,14 @@ import {
   formatDate,
   getStatusColor,
 } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
   const statusColor = getStatusColor(caseData.caseStatus);
   return (
     <TouchableOpacity
-      style={[styles.caseCard, globalStyles.shadowBorder]}
+      style={[styles.caseCard, shawdowStyles.shadowBorder]}
       onPress={() =>
         router.push({
           pathname: `/AllCases/CaseScreen/${caseData.id}`,

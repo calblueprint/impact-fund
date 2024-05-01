@@ -1,10 +1,23 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import {
+  ButtonBlack,
+  ButtonTextBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InputBoxContainer,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
@@ -68,53 +81,48 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Next, make a password.</Text>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Next, make a password.</TitleText>
+        </InstructionContainer>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
+        <InputBoxContainer>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={confirmPassword}
-          onChangeInput={onChangeConfirmPassword}
-          labelText="Confirm password"
-          placeholderText="Confirm password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
+          <AuthInput
+            input={confirmPassword}
+            onChangeInput={onChangeConfirmPassword}
+            labelText="Confirm password"
+            placeholderText="Confirm password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </InputBoxContainer>
 
-      <View>
-        <Text style={styles.errorMessage}>
-          {disableButton ? errorMessage : ' '}
-        </Text>
-      </View>
+        <ErrorMessageContainer>
+          <ErrorMessageText>
+            {disableButton ? errorMessage : ' '}
+          </ErrorMessageText>
+        </ErrorMessageContainer>
 
-      <TouchableOpacity
-        disabled={password === '' || confirmPassword === '' || disableButton}
-        style={
-          password === '' || confirmPassword === '' || disableButton
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
-        onPress={handleSubmit}
-      >
-        <Text style={styles.nextText}>Continue</Text>
-        <View>
+        <ButtonBlack
+          disabled={password === '' || confirmPassword === '' || disableButton}
+          onPress={handleSubmit}
+        >
+          <ButtonTextWhite>Continue</ButtonTextWhite>
           <Arrow />
-        </View>
-      </TouchableOpacity>
-    </View>
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }

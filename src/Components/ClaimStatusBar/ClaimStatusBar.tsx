@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 import CircleCheck from '../../../assets/circle-check-black.svg';
 import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 
 interface ClaimStatusBarProps {
   status: string;
@@ -13,7 +13,7 @@ interface ClaimStatusBarProps {
 export default function CaseStatusBar({ status }: ClaimStatusBarProps) {
   const statusColor = getStatusColor(status);
   return (
-    <View style={[styles.container, globalStyles.shadowBorder]}>
+    <View style={[styles.container, shawdowStyles.shadowBorder]}>
       <Text style={styles.claimText}>Claim Status:</Text>
       <View style={[statusColor.background, styles.statusContainer]}>
         <CircleCheck style={styles.icon} />

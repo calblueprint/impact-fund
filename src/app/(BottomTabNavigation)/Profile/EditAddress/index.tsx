@@ -1,11 +1,24 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  GroupButtonContent,
+  InlineInputContainer,
+  InputBoxContainer,
+  InputScreenGap,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { ContentContainer, SafeArea } from '../../../../styles/global';
 
 function EditNameScreen() {
   const { updateUser, session } = useSession();
@@ -60,73 +73,68 @@ function EditNameScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Edit account details</Text>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Edit account details</TitleText>
+        </InstructionContainer>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={streetAddress}
-          onChangeInput={onChangeStreetAddress}
-          labelText="Street address"
-          placeholderText="Street address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={city}
-          onChangeInput={onChangeCity}
-          labelText="City"
-          placeholderText="City"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-      <View style={styles.stateLine}>
-        <View>
+        <InputBoxContainer>
           <AuthInput
-            input={usState}
-            onChangeInput={onChangeState}
-            labelText="State"
-            placeholderText="State"
+            input={streetAddress}
+            onChangeInput={onChangeStreetAddress}
+            labelText="Street address"
+            placeholderText="Street address"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
-        </View>
-        <View>
+
           <AuthInput
-            input={zipcode}
-            onChangeInput={onChangeZipcode}
-            labelText="Zipcode"
-            placeholderText="Zipcode"
+            input={city}
+            onChangeInput={onChangeCity}
+            labelText="City"
+            placeholderText="City"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
-        </View>
-      </View>
+          <InlineInputContainer>
+            <AuthInput
+              input={usState}
+              onChangeInput={onChangeState}
+              labelText="State"
+              placeholderText="State"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+            />
+            <AuthInput
+              input={zipcode}
+              onChangeInput={onChangeZipcode}
+              labelText="Zipcode"
+              placeholderText="Zipcode"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+            />
+          </InlineInputContainer>
+        </InputBoxContainer>
 
-      <TouchableOpacity
-        disabled={!streetAddress || !city || !usState || !zipcode}
-        style={
-          streetAddress && city && usState && zipcode
-            ? styles.submitButton
-            : [styles.submitButton, styles.submitButtonDisabled]
-        }
-        onPress={handleSubmit}
-      >
-        <Text style={styles.submitText}>
-          Submit
-          <Submit style={styles.submitIcon} />
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <InputScreenGap />
+
+        <ButtonBlack
+          disabled={!streetAddress || !city || !usState || !zipcode}
+          style={{ justifyContent: 'center' }}
+          onPress={handleSubmit}
+        >
+          <GroupButtonContent>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+            <Submit />
+          </GroupButtonContent>
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }
 export default EditNameScreen;

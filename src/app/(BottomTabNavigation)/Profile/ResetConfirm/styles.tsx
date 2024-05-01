@@ -3,22 +3,13 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-  },
   contentContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
     width: '84%',
-    marginTop: 110,
-  },
-  backText: {
-    color: colors.midGrey,
-    fontSize: 16,
-    fontWeight: '400',
-  },
-  backContainer: {
-    marginBottom: 40,
+    paddingTop: 40,
+    paddingBottom: 60,
   },
   instructionContainer: {
     marginTop: 34,
@@ -44,32 +35,16 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '800',
     color: colors.black,
-  },
-  nextButtonBase: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: 5,
-    width: '100%',
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  nextButtonDisabled: {
-    backgroundColor: colors.midGrey,
-    borderColor: colors.midGrey,
-  },
-  nextButtonActive: {
-    backgroundColor: colors.black,
-    borderColor: colors.black,
+    marginTop: 60,
   },
   nextText: {
     color: colors.white,
     fontSize: 16,
     opacity: 1,
     fontWeight: '600',
+    marginLeft: 10,
   },
   nextButton: {
-    marginTop: 100,
+    marginTop: 400,
   },
 });

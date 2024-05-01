@@ -1,31 +1,50 @@
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
-import StyledButton from '../../../Components/StyledButton/StyledButton';
+import RightArrowWhite from '../../../../assets/right-arrow-white.svg';
+import RightArrow from '../../../../assets/right-arrow.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../Components/AuthButton/AuthButton';
+import { SafeArea } from '../../../styles/global';
 
 function WelcomeScreen() {
   return (
-    <View style={styles.container}>
+    <SafeArea>
       <View style={styles.contentContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.welcomeText}>Welcome to the Impact Fund!</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <StyledButton
-            text="Create an account"
-            file="/SignUp/Email"
-            color="white"
-          />
-          <StyledButton
-            text="Log in with email"
-            file="/Login/Email"
-            color="black"
-          />
+        <View>
+          <Text style={styles.welcomeText}>Welcome to the Impact Fund.</Text>
+
+          <View style={styles.buttonContainer}>
+            <ButtonWhite
+              style={styles.baseButton}
+              onPress={() => router.push('/SignUp/Email')}
+            >
+              <Text style={styles.nextTextBlack}>Create an account</Text>
+              <RightArrow />
+            </ButtonWhite>
+
+            <View style={styles.orContainer}>
+              <View style={styles.horizontalLine} />
+              <Text style={styles.orTextContainer}> OR </Text>
+              <View style={styles.horizontalLine} />
+            </View>
+
+            <ButtonBlack
+              style={styles.baseButton}
+              onPress={() => router.push('/Login/Email')}
+            >
+              <Text style={styles.nextTextWhite}>Log in with email</Text>
+              <RightArrowWhite />
+            </ButtonBlack>
+          </View>
         </View>
       </View>
-    </View>
+    </SafeArea>
   );
 }
 

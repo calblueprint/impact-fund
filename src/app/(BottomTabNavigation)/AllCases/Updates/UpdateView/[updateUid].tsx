@@ -4,7 +4,7 @@ import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import NotificationBell from '../../../../../../assets/red-notification-bell.svg';
-import globalStyles from '../../../../../styles/global';
+import { shawdowStyles } from '../../../../../styles/global';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
 import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
@@ -36,7 +36,7 @@ export default function UpdateView() {
             style={styles.outerScroll}
             showsVerticalScrollIndicator={false}
           >
-            <View style={[globalStyles.shadowBorder, styles.innerScroll]}>
+            <View style={[shawdowStyles.shadowBorder, styles.innerScroll]}>
               <View style={styles.titleContainer}>
                 <NotificationBell />
                 <View style={styles.headerText}>

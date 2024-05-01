@@ -1,11 +1,25 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  ErrorMessageContainer,
+  ErrorMessageText,
+  InlineInputContainer,
+  InputBoxContainer,
+  InstructionContainer,
+  InstructionText,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
@@ -28,51 +42,55 @@ export default function LoginScreen() {
         'Oh no! The password you entered is incorrect, please try again.',
       );
     } else {
+      //erroring!!!
       setErrorExists(false);
       setPassword('');
     }
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Please enter your password.</Text>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Please enter your password.</TitleText>
+        </InstructionContainer>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
+        <InputBoxContainer>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </InputBoxContainer>
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessageText}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
+        <ErrorMessageContainer>
+          <ErrorMessageText>
+            {errorExists ? errorMessage : ' '}
+          </ErrorMessageText>
+        </ErrorMessageContainer>
 
-      <View style={styles.nextLine}>
-        <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-        </TouchableOpacity>
+        <InlineInputContainer>
+          <TouchableOpacity
+            onPress={() => router.push('/OTPFlow/OTPEmailInput')}
+          >
+            <InstructionText>Forgot password?</InstructionText>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          disabled={password === '' || errorExists}
-          style={
-            password === '' || errorExists
-              ? [styles.nextButtonBase, styles.nextButtonDisabled]
-              : [styles.nextButtonBase, styles.nextButtonActive]
-          }
-          onPress={() => signIn()}
-        >
-          <Text style={styles.nextText}>Next</Text>
-          <Arrow />
-        </TouchableOpacity>
-      </View>
-    </View>
+          <View style={{ width: '50%' }}>
+            <ButtonBlack
+              onPress={() => signIn()}
+              disabled={password === '' || errorExists}
+            >
+              <ButtonTextWhite>Next</ButtonTextWhite>
+              <Arrow />
+            </ButtonBlack>
+          </View>
+        </InlineInputContainer>
+      </ContentContainer>
+    </SafeArea>
   );
 }

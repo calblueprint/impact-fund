@@ -1,11 +1,24 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';
+import {
+  ButtonBlack,
+  ButtonTextWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import {
+  GroupButtonContent,
+  InlineInputContainer,
+  InputBoxContainer,
+  InputScreenGap,
+  InstructionContainer,
+  TitleText,
+} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -65,84 +78,74 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Last, enter your address.</Text>
+    <SafeArea>
+      <ContentContainer>
+        <InstructionContainer>
+          <TitleText>Last, enter your address.</TitleText>
+        </InstructionContainer>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={streetAddress}
-          onChangeInput={onChangeStreetAddress}
-          labelText="Street address"
-          placeholderText="Street address"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={city}
-          onChangeInput={onChangeCity}
-          labelText="City"
-          placeholderText="City"
-          isPassword={false}
-          keyboard="default"
-          autoCapitalization
-        />
-      </View>
-
-      <View style={styles.stateLine}>
-        <View>
+        <InputBoxContainer>
           <AuthInput
-            input={state}
-            onChangeInput={onChangeState}
-            labelText="State"
-            placeholderText="State"
+            input={streetAddress}
+            onChangeInput={onChangeStreetAddress}
+            labelText="Street address"
+            placeholderText="Street address"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
-        </View>
 
-        <View>
           <AuthInput
-            input={zipcode}
-            onChangeInput={onChangeZipcode}
-            labelText="Zipcode"
-            placeholderText="Zipcode"
+            input={city}
+            onChangeInput={onChangeCity}
+            labelText="City"
+            placeholderText="City"
             isPassword={false}
             keyboard="default"
             autoCapitalization
-            isHalfWidth
           />
-        </View>
-      </View>
-      <Text style={styles.space}> </Text>
 
-      <TouchableOpacity
-        disabled={
-          streetAddress.trim() === '' ||
-          city.trim() === '' ||
-          state.trim() === '' ||
-          zipcode.trim() === ''
-        }
-        style={
-          streetAddress.trim() === '' ||
-          city.trim() === '' ||
-          state.trim() === '' ||
-          zipcode.trim() === ''
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
-        onPress={() => handleSubmit()}
-      >
-        <Text style={styles.nextText}>Sign Up</Text>
-        <View style={styles.check}>
-          <Check />
-        </View>
-      </TouchableOpacity>
-    </View>
+          <InlineInputContainer>
+            <AuthInput
+              input={state}
+              onChangeInput={onChangeState}
+              labelText="State"
+              placeholderText="State"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+            />
+
+            <AuthInput
+              input={zipcode}
+              onChangeInput={onChangeZipcode}
+              labelText="Zipcode"
+              placeholderText="Zipcode"
+              isPassword={false}
+              keyboard="default"
+              autoCapitalization
+            />
+          </InlineInputContainer>
+        </InputBoxContainer>
+
+        <InputScreenGap />
+
+        <ButtonBlack
+          disabled={
+            streetAddress.trim() === '' ||
+            city.trim() === '' ||
+            state.trim() === '' ||
+            zipcode.trim() === ''
+          }
+          onPress={() => handleSubmit()}
+          style={{ justifyContent: 'center' }}
+        >
+          <GroupButtonContent>
+            <ButtonTextWhite>Sign Up</ButtonTextWhite>
+            <Check />
+          </GroupButtonContent>
+        </ButtonBlack>
+      </ContentContainer>
+    </SafeArea>
   );
 }
