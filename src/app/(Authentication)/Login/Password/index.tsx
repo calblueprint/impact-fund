@@ -51,10 +51,6 @@ export default function LoginScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>Please enter your password.</TitleText>
         </InstructionContainer>

@@ -38,10 +38,6 @@ export default function ResetConfirm() {
     <SafeArea>
       <View style={styles.contentContainer}>
         <View>
-          <TouchableOpacity onPress={() => router.back()}>
-            <BackButton />
-          </TouchableOpacity>
-
           <Text style={styles.titleText}>Reset Password</Text>
 
           <View style={styles.instructionContainer}>

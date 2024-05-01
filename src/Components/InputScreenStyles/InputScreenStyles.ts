@@ -4,7 +4,7 @@ import { colors } from '../../styles/colors';
 
 export const InstructionContainer = styled.View({
   flexDirection: 'column',
-  marginTop: 35,
+  marginTop: 20,
   rowGap: 10,
 });
 

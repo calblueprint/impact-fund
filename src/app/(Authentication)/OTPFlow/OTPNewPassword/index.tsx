@@ -77,10 +77,6 @@ export default function OTPNewPassword() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>Create a new password.</TitleText>
         </InstructionContainer>

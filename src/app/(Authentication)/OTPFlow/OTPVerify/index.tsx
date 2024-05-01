@@ -63,10 +63,6 @@ export default function OTPFlow() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>Enter verification code.</TitleText>
           <InstructionText>We've sent it to {email}</InstructionText>

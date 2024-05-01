@@ -75,10 +75,6 @@ function EditNameScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>Edit account details</TitleText>
         </InstructionContainer>

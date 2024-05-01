@@ -57,10 +57,6 @@ export default function OTPEmailInput() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>
             Please enter the email you used to create your account.

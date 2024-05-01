@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import styles from './styles';
 import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 
 interface CaseStatusBarProps {
   status: string;
@@ -12,7 +12,7 @@ interface CaseStatusBarProps {
 export default function CaseStatusBar({ status }: CaseStatusBarProps) {
   const statusColor = getStatusColor(status);
   return (
-    <View style={[styles.container, globalStyles.shadowBorder]}>
+    <View style={[styles.container, shawdowStyles.shadowBorder]}>
       <Text style={styles.statusText}>Case Status:</Text>
       <View style={[styles.statusContainer, statusColor.background]}>
         <Text style={[styles.statusTextColor, statusColor.text]}>{status}</Text>

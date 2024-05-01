@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Arrow from '../../../assets/next.svg';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 import { CaseUid } from '../../types/types';
 
 interface CheckEligibilityProps {
@@ -18,7 +18,7 @@ export default function CheckEligibilityButton({
 }: CheckEligibilityProps) {
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, globalStyles.shadowBorder]}
+      style={[styles.buttonContainer, shawdowStyles.shadowBorder]}
       onPress={() => {
         router.push(`/AllCases/EligibilityForm/${caseUid}`);
       }}

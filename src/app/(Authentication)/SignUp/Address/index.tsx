@@ -80,10 +80,6 @@ export default function SignUpScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <BackButton />
-        </TouchableOpacity>
-
         <InstructionContainer>
           <TitleText>Last, enter your address.</TitleText>
         </InstructionContainer>
