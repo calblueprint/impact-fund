@@ -7,7 +7,7 @@ export default StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
   },
   statusContainer: {
