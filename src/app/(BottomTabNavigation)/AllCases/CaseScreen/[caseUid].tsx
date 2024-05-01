@@ -4,13 +4,13 @@ import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
 // eslint-disable-next-line import/namespace
+import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import CheckEligibilityButton from '../../../../Components/CheckEligibilityButton/CheckEligibilityButton';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
-import ToggleOptionsButton from '../../../../Components/ToggleOptionsButton/ToggleOptionsButton';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -29,6 +29,7 @@ function CaseScreen() {
 
   const getStatus = async (uid: string) => {
     const caseStatus = await getCaseStatus(uid);
+    console.log(caseStatus);
     setStatus(caseStatus);
   };
 
@@ -61,9 +62,11 @@ function CaseScreen() {
           </View>
 
           {status === Eligibility.ELIGIBLE && (
-            <>
-              <EligibilityCard caseUid={caseData.id} />
-            </>
+            <EligibilityCard caseUid={caseData.id} />
+          )}
+
+          {status === Eligibility.CLAIM_FILED && (
+            <CaseStatusBar status="Claim Filed" />
           )}
 
           <CaseSummaryCard {...caseData} />

@@ -8,8 +8,11 @@ import Document from '../../../../../assets/document-add.svg';
 import Checkbox from '../../../../../assets/double-checkbox.svg';
 import Fileclaim from '../../../../../assets/file-claim-small.svg';
 import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
-import { getCaseById } from '../../../../supabase/queries/cases';
-import { Case, CaseUid } from '../../../../types/types';
+import {
+  getCaseById,
+  updateCaseStatus,
+} from '../../../../supabase/queries/cases';
+import { Case, CaseUid, Eligibility } from '../../../../types/types';
 import { openUrl } from '../utils';
 
 const ensureURLFormat = (url: string | null | undefined) => {
@@ -24,6 +27,20 @@ export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
 
+  async function confirmClaimFiled() {
+    if (caseUid !== undefined) {
+      await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
+      router.back();
+    }
+  }
+
+  function navigateToClaimLink() {
+    const claimLink = caseData?.claimLink;
+    if (claimLink) {
+      openUrl(claimLink);
+    }
+  }
+
   async function fetchCaseData() {
     if (caseUid) {
       const caseData = await getCaseById(caseUid);
@@ -34,11 +51,6 @@ export default function FileClaimScreen() {
   useEffect(() => {
     fetchCaseData();
   }, []);
-
-  const claimLink = caseData?.claimLink
-    ? ensureURLFormat(caseData.claimLink)
-    : null;
-  const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
 
   return (
     <View style={styles.container}>
@@ -85,7 +97,7 @@ export default function FileClaimScreen() {
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
               style={[styles.buttonBase, styles.buttonWhite]}
-              onPress={onPressHandler}
+              onPress={() => navigateToClaimLink()}
             >
               <Text style={[styles.buttonText, styles.blackText]}>
                 Take me to claim filing site
@@ -94,9 +106,7 @@ export default function FileClaimScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.buttonBase, styles.buttonBlack]}
-              onPress={() =>
-                router.push(`/AllCases/OptOut/ConfirmOptOut/${caseUid}`)
-              }
+              onPress={() => confirmClaimFiled()}
             >
               <Text style={[styles.buttonText, styles.whiteText]}>
                 I’ve already filed a claim!

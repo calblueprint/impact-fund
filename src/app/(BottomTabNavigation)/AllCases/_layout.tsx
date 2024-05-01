@@ -55,6 +55,13 @@ export default function CasesLayout() {
         }}
       />
       <Stack.Screen
+        name="FileClaim/[caseUid]"
+        options={{
+          headerLeft: () => <BackButtonNoText />,
+          headerTitle: () => <HeaderImage />,
+        }}
+      />
+      <Stack.Screen
         name="Forms/[caseUid]"
         options={{
           headerLeft: () => <BackButtonNoText />,

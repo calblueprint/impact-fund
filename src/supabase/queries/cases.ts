@@ -226,6 +226,7 @@ export async function updateCaseStatus(
   status: Eligibility,
 ): Promise<void> {
   try {
+    console.log('update status to: ' + status);
     const {
       data: { user },
     } = await supabase.auth.getUser();

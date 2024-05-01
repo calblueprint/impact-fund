@@ -1,16 +1,8 @@
-import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View } from 'react-native';
 
 import styles from './styles';
-import CheckEligibility from '../../../assets/check-eligibility.svg';
-import Fileclaim from '../../../assets/file-claim.svg';
-import Arrow from '../../../assets/next.svg';
-import OptOut from '../../../assets/opt-out.svg';
-import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import globalStyles from '../../styles/global';
-import { Case, CaseUid, Eligibility } from '../../types/types';
+import { CaseUid } from '../../types/types';
 import EligibleFilingButton from '../EligibilityFilingButton/EligibilityFilingButton';
 import ToggleOptionsButton from '../ToggleOptionsButton/ToggleOptionsButton';
 
