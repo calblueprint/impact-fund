@@ -27,7 +27,7 @@ export default function StatusUpdatesBar({
       }}
     >
       <View style={styles.textContainer}>
-        <Text style={styles.statusText}>Case Status:</Text>
+        <Text style={styles.statusText}>Case Status</Text>
 
         <View style={styles.updatesContainer}>
           <Text style={styles.buttonText}>View all updates</Text>
