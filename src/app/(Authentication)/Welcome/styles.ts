@@ -13,14 +13,10 @@ export default StyleSheet.create({
   },
   contentContainer: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     height: '84%',
     width: '81%',
     paddingVertical: 40,
-  },
-  image: {
-    width: 130,
-    height: 16,
   },
   textContainer: {
     marginTop: 275,

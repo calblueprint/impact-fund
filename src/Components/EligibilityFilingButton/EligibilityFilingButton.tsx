@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
-import globalStyles from '../../styles/global';
+import { shawdowStyles } from '../../styles/global';
 
 interface EligibilityCardProps {
   mainText: string;
@@ -21,7 +21,7 @@ export default function EligibleFilingButton({
 }: EligibilityCardProps) {
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, globalStyles.shadowBorder]}
+      style={[styles.buttonContainer, shawdowStyles.shadowBorder]}
       onPress={() => {
         router.push(route);
       }}
