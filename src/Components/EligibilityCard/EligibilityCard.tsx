@@ -11,6 +11,7 @@ import OptOut from '../../../assets/opt-out.svg';
 import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import globalStyles from '../../styles/global';
 import { Case, Eligibility } from '../../types/types';
+import EligibleFilingButton from '../EligibilityFilingButton/EligibilityFilingButton';
 import ToggleOptionsButton from '../ToggleOptionsButton/ToggleOptionsButton';
 
 interface EligibilityCardProps {
@@ -46,33 +47,12 @@ export default function EligibleFilingOptions({
 
       <Text>{isSwitched ? 'true' : 'false'}</Text>
 
-      <TouchableOpacity
-        style={[styles.buttonContainer, globalStyles.shadowBorder]}
-        onPress={() => {
-          router.push({
-            pathname: `/AllCases/FileClaim/${caseData.id}`,
-          });
-        }}
-      >
-        <View style={styles.topContainer}>
-          <View style={styles.leftContainer}>
-            <Fileclaim />
-          </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.bodyText}>
-              Eligible class members can submit a claim electronically to
-              receive a settlement.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.horizontalLine} />
-
-        <View style={styles.bottomContainer}>
-          <Text style={styles.smallText}>File or update my claim</Text>
-          <Arrow />
-        </View>
-      </TouchableOpacity>
+      <EligibleFilingButton
+        mainText="Eligible class members can submit a claim electronically to
+              receive a settlement."
+        instructionText="File or update my claim"
+        route={`/AllCases/FileClaim/${caseData.id}`}
+      />
 
       {/* <TouchableOpacity
           style={[styles.buttonContainer, globalStyles.shadowBorder]}
