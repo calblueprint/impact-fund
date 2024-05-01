@@ -16,9 +16,9 @@ import {
   ButtonBlack,
   ButtonTextWhite,
 } from '../../../Components/AuthButton/AuthButton';
-import CasesHeader from '../../../Components/CasesHeader/CasesHeader';
 import { GroupButtonContent } from '../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../context/AuthContext';
+import { shawdowStyles } from '../../../styles/global';
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -32,12 +32,8 @@ function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <View style={styles.headerContainer}>
-          <CasesHeader />
-          <View style={styles.headerLine} />
-        </View>
         <Text style={styles.titleText}>Settings</Text>
-        <View style={styles.actionsContainer}>
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
             <View style={styles.textContainer}>
@@ -87,7 +83,7 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.actionsContainer}>
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <TouchableOpacity
             style={[styles.profileDetailsBox, styles.centerAlign]}
             onPress={() =>

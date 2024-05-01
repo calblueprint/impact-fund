@@ -1,8 +1,7 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import styles from './styles';
 import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
 import {
@@ -11,7 +10,6 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import {
-  ErrorMessageContainer,
   GroupButtonContent,
   InputBoxContainer,
   InputScreenGap,

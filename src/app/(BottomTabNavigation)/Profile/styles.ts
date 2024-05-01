@@ -12,17 +12,6 @@ export default StyleSheet.create({
     width: '84%',
     alignItems: 'center',
   },
-
-  headerContainer: {
-    marginTop: 63,
-    width: '100%',
-  },
-  headerLine: {
-    borderBottom: 'solid',
-    borderBottomColor: colors.midGrey,
-    borderBottomWidth: 0.5,
-    marginTop: 8,
-  },
   titleText: {
     fontSize: 32,
     fontWeight: '800',
@@ -35,19 +24,10 @@ export default StyleSheet.create({
 
   actionsContainer: {
     width: '100%',
-    border: 'solid',
-    borderColor: colors.midGrey,
-    borderWidth: 1,
-    borderRadius: 5,
     backgroundColor: colors.white,
     marginBottom: 22,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    shadowColor: colors.midGrey,
-    shadowOffset: { width: 0.05, height: 0.75 },
-    shadowOpacity: 1.25,
-    shadowRadius: 0.05,
-    elevation: 1,
   },
 
   profileDetailsBox: {

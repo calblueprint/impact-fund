@@ -11,7 +11,6 @@ import {
   ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
-import CasesHeader from '../../../../Components/CasesHeader/CasesHeader';
 import {
   GroupButtonContent,
   InlineInputContainer,
@@ -33,8 +32,6 @@ function DeleteAccountScreen() {
     <SafeArea>
       <View style={styles.screenContainer}>
         <View>
-          <CasesHeader />
-
           <View style={styles.textContainer}>
             <Text style={styles.topText}>Delete account?</Text>
             <Text style={styles.blurb}>

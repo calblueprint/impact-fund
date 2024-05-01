@@ -1,6 +1,6 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';

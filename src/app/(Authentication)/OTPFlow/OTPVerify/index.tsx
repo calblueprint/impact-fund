@@ -11,9 +11,6 @@ import {
   ButtonBlack,
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
-import { useSession } from '../../../../context/AuthContext';
-import { colors } from '../../../../styles/colors';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -22,6 +19,9 @@ import {
   InstructionText,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { useSession } from '../../../../context/AuthContext';
+import { colors } from '../../../../styles/colors';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {

@@ -9,9 +9,6 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { emailExists } from '../../../../supabase/queries/auth';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -19,6 +16,9 @@ import {
   InstructionContainer,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');

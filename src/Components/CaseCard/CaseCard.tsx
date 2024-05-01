@@ -9,13 +9,14 @@ import {
   formatDate,
   getStatusColor,
 } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import globalStyles from '../../styles/global';
 import { Case } from '../../types/types';
 
 function CaseCard(caseData: Case) {
   const statusColor = getStatusColor(caseData.caseStatus);
   return (
     <TouchableOpacity
-      style={styles.caseCard}
+      style={[styles.caseCard, globalStyles.shadowBorder]}
       onPress={() =>
         router.push({
           pathname: `/AllCases/CaseScreen/${caseData.id}`,
@@ -45,9 +46,6 @@ function CaseCard(caseData: Case) {
         <Text style={styles.bottomText}>
           {formatDate(caseData.date)} • {caseData.lawFirm}
         </Text>
-        <View style={styles.threeDots}>
-          <ThreeDots />
-        </View>
       </View>
     </TouchableOpacity>
   );

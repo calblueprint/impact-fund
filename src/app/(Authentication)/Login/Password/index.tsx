@@ -9,8 +9,6 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -20,6 +18,8 @@ import {
   InstructionText,
   TitleText,
 } from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
