@@ -28,20 +28,10 @@ export default StyleSheet.create({
     flex: 0.05,
     alignItems: 'flex-end',
   },
-  separatorComponent: {
-    height: 33,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   textContainer: {
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  horizontalLine: {
-    height: 0.5,
-    marginVertical: 15,
-    backgroundColor: colors.midGrey,
   },
   headerText: {
     fontSize: 20,
@@ -56,29 +46,5 @@ export default StyleSheet.create({
     fontWeight: '300',
     lineHeight: 16,
     color: colors.black,
-  },
-  separatorText: {
-    fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.black,
-  },
-  topContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  bottomContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  smallText: {
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.darkGrey,
   },
 });

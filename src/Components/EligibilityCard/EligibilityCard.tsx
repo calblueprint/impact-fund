@@ -11,6 +11,7 @@ import OptOut from '../../../assets/opt-out.svg';
 import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
 import globalStyles from '../../styles/global';
 import { Case, Eligibility } from '../../types/types';
+import ToggleOptionsButton from '../ToggleOptionsButton/ToggleOptionsButton';
 
 interface EligibilityCardProps {
   caseData: Case;
@@ -29,73 +30,42 @@ export default function EligibilityCard({
   caseData,
   status,
 }: EligibilityCardProps) {
-  if (
-    status === Eligibility.INELIGIBLE ||
-    status === Eligibility.UNDETERMINED
-  ) {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={[styles.buttonContainer, globalStyles.shadowBorder]}
-          onPress={() => {
-            router.push({
-              pathname: `/AllCases/EligibilityForm/${caseData.id}`,
-            });
-          }}
-        >
+  const claimLink = caseData.claimLink
+    ? ensureURLFormat(caseData.claimLink)
+    : null;
+  const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={[styles.buttonContainer, globalStyles.shadowBorder]}
+        onPress={() => {
+          router.push({
+            pathname: `/AllCases/FileClaim/${caseData.id}`,
+          });
+        }}
+      >
+        <View style={styles.topContainer}>
           <View style={styles.leftContainer}>
-            <CheckEligibility />
+            <Fileclaim />
           </View>
           <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>Check eligibility</Text>
             <Text style={styles.bodyText}>
-              Check your eligibility for this case if you would like to file a
-              claim or opt out.
+              Eligible class members can submit a claim electronically to
+              receive a settlement.
             </Text>
           </View>
-          <View style={styles.rightContainer}>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  } else if (status === Eligibility.ELIGIBLE) {
-    const claimLink = caseData.claimLink
-      ? ensureURLFormat(caseData.claimLink)
-      : null;
-    const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
+        </View>
 
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={[styles.buttonContainer, globalStyles.shadowBorder]}
-          onPress={() => {
-            router.push({
-              pathname: `/AllCases/FileClaim/${caseData.id}`,
-            });
-          }}
-        >
-          <View style={styles.topContainer}>
-            <View style={styles.leftContainer}>
-              <Fileclaim />
-            </View>
-            <View style={styles.middleContainer}>
-              <Text style={styles.bodyText}>
-                Eligible class members can submit a claim electronically to
-                receive a settlement.
-              </Text>
-            </View>
-          </View>
+        <View style={styles.horizontalLine} />
 
-          <View style={styles.horizontalLine} />
+        <View style={styles.bottomContainer}>
+          <Text style={styles.smallText}>File or update my claim</Text>
+          <Arrow />
+        </View>
+      </TouchableOpacity>
 
-          <View style={styles.bottomContainer}>
-            <Text style={styles.smallText}>File or update my claim</Text>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
-
-        {/* <TouchableOpacity
+      {/* <TouchableOpacity
           style={[styles.buttonContainer, globalStyles.shadowBorder]}
           onPress={() => {
             router.push({
@@ -122,9 +92,6 @@ export default function EligibilityCard({
             <Arrow />
           </View>
         </TouchableOpacity> */}
-      </View>
-    );
-  } else {
-    return <View />;
-  }
+    </View>
+  );
 }

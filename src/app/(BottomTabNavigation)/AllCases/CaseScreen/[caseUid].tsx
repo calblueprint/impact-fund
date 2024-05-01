@@ -5,6 +5,7 @@ import { View, ScrollView, Text } from 'react-native';
 import styles from './styles';
 // eslint-disable-next-line import/namespace
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
+import CheckEligibilityButton from '../../../../Components/CheckEligibilityButton/CheckEligibilityButton';
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
@@ -58,15 +59,19 @@ function CaseScreen() {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{caseData.title}</Text>
           </View>
-          <ToggleOptionsButton />
 
           {status === Eligibility.ELIGIBLE && (
-            <EligibilityCard caseData={caseData} status={status} />
+            <>
+              <ToggleOptionsButton />
+              <EligibilityCard caseData={caseData} status={status} />
+            </>
           )}
+
           <CaseSummaryCard {...caseData} />
+
           {(status === Eligibility.INELIGIBLE ||
             status === Eligibility.UNDETERMINED) && (
-            <EligibilityCard caseData={caseData} status={status} />
+            <CheckEligibilityButton caseUid={caseData.id} />
           )}
           <StatusUpdatesBar
             caseUid={caseData.id}
