@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
 import styles from './styles';
-// eslint-disable-next-line import/namespace
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
 import CheckEligibilityButton from '../../../../Components/CheckEligibilityButton/CheckEligibilityButton';
 import ClaimStatusBar from '../../../../Components/ClaimStatusBar/ClaimStatusBar';
@@ -29,7 +28,6 @@ function CaseScreen() {
 
   const getStatus = async (uid: string) => {
     const caseStatus = await getCaseStatus(uid);
-    console.log(caseStatus);
     setStatus(caseStatus);
   };
 
@@ -41,9 +39,11 @@ function CaseScreen() {
 
   useEffect(() => {
     navigation.addListener('focus', async () => {
+      setIsLoading(true);
       if (caseUid !== undefined) {
-        getStatus(caseUid);
+        await getStatus(caseUid);
       }
+      setIsLoading(false);
     });
   }, [navigation]);
 
