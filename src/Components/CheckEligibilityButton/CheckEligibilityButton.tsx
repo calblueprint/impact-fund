@@ -17,29 +17,23 @@ export default function CheckEligibilityButton({
   caseUid,
 }: CheckEligibilityProps) {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.buttonContainer, globalStyles.shadowBorder]}
-        onPress={() => {
-          router.push({
-            pathname: `/AllCases/EligibilityForm/${caseUid}`,
-          });
-        }}
-      >
-        <View style={styles.leftContainer}>
-          <CheckEligibility />
-        </View>
-        <View style={styles.middleContainer}>
+    <TouchableOpacity
+      style={[styles.buttonContainer, globalStyles.shadowBorder]}
+      onPress={() => {
+        router.push(`/AllCases/EligibilityForm/${caseUid}`);
+      }}
+    >
+      <CheckEligibility />
+      <View style={styles.rightContainer}>
+        <View style={styles.topRow}>
           <Text style={styles.headerText}>Check eligibility</Text>
-          <Text style={styles.bodyText}>
-            Check your eligibility for this case if you would like to file a
-            claim or opt out.
-          </Text>
-        </View>
-        <View style={styles.rightContainer}>
           <Arrow />
         </View>
-      </TouchableOpacity>
-    </View>
+        <Text style={styles.bodyText}>
+          Check your eligibility for this case if you would like to file a claim
+          or opt out.
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }

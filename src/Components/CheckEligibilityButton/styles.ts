@@ -3,35 +3,25 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    width: '100%',
-    height: 'auto',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
   buttonContainer: {
     width: '100%',
-    flexDirection: 'column',
-    alignSelf: 'center',
-    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: 12,
     padding: 20,
   },
-  leftContainer: {
-    flex: 0.15,
-  },
-  middleContainer: {
-    flex: 0.9,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
   rightContainer: {
-    flex: 0.05,
-    alignItems: 'flex-end',
+    flexDirection: 'column',
+    flex: 1,
+    rowGap: 15,
   },
-  textContainer: {
-    width: 50,
-    justifyContent: 'center',
+  topRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.midGrey,
+    paddingBottom: 5,
   },
   headerText: {
     fontSize: 20,
