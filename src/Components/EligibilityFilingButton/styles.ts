@@ -3,12 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    width: '100%',
-    height: 'auto',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
   buttonContainer: {
     width: '100%',
     flexDirection: 'column',

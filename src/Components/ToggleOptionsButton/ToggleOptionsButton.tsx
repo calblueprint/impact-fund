@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
 
 interface ToggleOptionsProps {
-  isSwitched: boolean;
-  setIsSwitched: React.Dispatch<React.SetStateAction<boolean>>;
+  isDefaultSelected: boolean;
+  setSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ToggleOptionsButton({
-  isSwitched,
-  setIsSwitched,
+  isDefaultSelected,
+  setSelected,
 }: ToggleOptionsProps) {
-  const handleToggle = () => {
-    setIsSwitched(!isSwitched);
-  };
-
   return (
     <TouchableOpacity
       activeOpacity={1}
       style={[
         styles.toggleButtonContainer,
-        isSwitched && styles.toggleSwitchCheckedButtonContainer,
+        !isDefaultSelected && styles.toggleSwitchCheckedButtonContainer,
       ]}
-      onPress={handleToggle}
+      onPress={() => setSelected(!isDefaultSelected)}
     >
       <View style={styles.inactiveTextContainer}>
         <View style={styles.inactiveTextStandardBox}>
@@ -36,11 +32,11 @@ function ToggleOptionsButton({
       <View
         style={[
           styles.toggleItem,
-          isSwitched && styles.toggleSwitchCheckedItem,
+          !isDefaultSelected && styles.toggleSwitchCheckedItem,
         ]}
       >
         <Text style={styles.boldText}>
-          {isSwitched ? 'Opt out' : 'File a claim'}
+          {isDefaultSelected ? 'File a claim' : 'Opt out'}
         </Text>
       </View>
     </TouchableOpacity>
