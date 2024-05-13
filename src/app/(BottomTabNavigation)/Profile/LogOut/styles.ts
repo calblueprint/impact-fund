@@ -28,9 +28,9 @@ export default StyleSheet.create({
     columnGap: 15,
   },
   halfButton: {
-    height: 45,
-    width: '48%',
-    justifyContent: 'center',
+    // height: 45,
+    // width: '48%',
+    // justifyContent: 'center',
   },
   topText: {
     fontSize: 38,

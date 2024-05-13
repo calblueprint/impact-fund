@@ -71,15 +71,14 @@ export default function LoginScreen() {
             <InstructionText>Forgot password?</InstructionText>
           </TouchableOpacity>
 
-          <View style={{ width: '50%' }}>
-            <ButtonBlack
-              onPress={emailFind}
-              disabled={email.trim() === '' || errorExists}
-            >
-              <ButtonTextWhite>Next</ButtonTextWhite>
-              <Arrow />
-            </ButtonBlack>
-          </View>
+          <ButtonBlack
+            onPress={emailFind}
+            disabled={email.trim() === '' || errorExists}
+            $halfWidth
+          >
+            <ButtonTextWhite>Next</ButtonTextWhite>
+            <Arrow />
+          </ButtonBlack>
         </View>
       </ContentContainer>
     </SafeArea>

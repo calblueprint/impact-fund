@@ -2,13 +2,17 @@ import styled from 'styled-components/native';
 
 import { colors } from '../../styles/colors';
 
-const ButtonBase = styled.TouchableOpacity`
+const ButtonBase = styled.TouchableOpacity<{
+  $centeredContent?: boolean;
+  $halfWidth?: boolean;
+}>`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props =>
+    props.$centeredContent ? 'center' : 'space-between'};
   align-items: center;
   border-radius: 5px;
   min-height: 45px;
-  width: 100%;
+  width: ${props => (props.$halfWidth ? '47%' : '100%')};
   padding-horizontal: 20px;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
 `;

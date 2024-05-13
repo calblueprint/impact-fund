@@ -54,7 +54,7 @@ function EditNameScreen() {
         <ButtonBlack
           disabled={!fullName || fullName.trim() === ''}
           onPress={updateName}
-          style={{ justifyContent: 'center' }}
+          $centeredContent
         >
           <View style={inputScreenStyles.groupButtonContent}>
             <ButtonTextWhite>Submit</ButtonTextWhite>

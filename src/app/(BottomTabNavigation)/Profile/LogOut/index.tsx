@@ -23,14 +23,18 @@ function LogOutConfirmation() {
         <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
 
         <View style={inputScreenStyles.inlineInputContainer}>
-          <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $centeredContent
+            $halfWidth
+          >
             <View style={inputScreenStyles.groupButtonContent}>
               <X />
               <ButtonTextBlack>Cancel</ButtonTextBlack>
             </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
+          <ButtonBlack onPress={() => signOut()} $centeredContent $halfWidth>
             <View style={inputScreenStyles.groupButtonContent}>
               <SignOut />
               <ButtonTextWhite>Confirm</ButtonTextWhite>

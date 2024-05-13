@@ -118,7 +118,7 @@ function EditNameScreen() {
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
-          style={{ justifyContent: 'center' }}
+          $centeredContent
           onPress={handleSubmit}
         >
           <View style={inputScreenStyles.groupButtonContent}>
