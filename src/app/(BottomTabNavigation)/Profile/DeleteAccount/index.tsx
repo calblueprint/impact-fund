@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
+import { inputScreenStyles } from '../../../(Authentication)/styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import {
@@ -12,10 +13,6 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
-import {
-  GroupButtonContent,
-  InlineInputContainer,
-} from '../../../../styles/InputScreenStyles';
 import { SafeArea } from '../../../../styles/global';
 
 function DeleteAccountScreen() {
@@ -31,31 +28,29 @@ function DeleteAccountScreen() {
   return (
     <SafeArea>
       <View style={styles.screenContainer}>
-        <View>
-          <View style={styles.textContainer}>
-            <Text style={styles.topText}>Delete account?</Text>
-            <Text style={styles.blurb}>
-              Deleting your account will also permanently delete any data
-              associated with it. This action cannot be undone.
-            </Text>
-          </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.topText}>Delete account?</Text>
+          <Text style={styles.blurb}>
+            Deleting your account will also permanently delete any data
+            associated with it. This action cannot be undone.
+          </Text>
         </View>
 
-        <InlineInputContainer>
+        <View style={inputScreenStyles.inlineInputContainer}>
           <ButtonWhite onPress={() => router.back()} style={styles.buttonView}>
-            <GroupButtonContent>
+            <View style={inputScreenStyles.groupButtonContent}>
               <X />
               <ButtonTextBlack>Cancel</ButtonTextBlack>
-            </GroupButtonContent>
+            </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={deleteAccount} style={styles.buttonView}>
-            <GroupButtonContent>
+            <View style={inputScreenStyles.groupButtonContent}>
               <WhiteTrash />
               <ButtonTextWhite>Confirm</ButtonTextWhite>
-            </GroupButtonContent>
+            </View>
           </ButtonBlack>
-        </InlineInputContainer>
+        </View>
       </View>
     </SafeArea>
   );

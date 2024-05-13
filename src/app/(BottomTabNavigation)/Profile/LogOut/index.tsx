@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
+import { inputScreenStyles } from '../../../(Authentication)/styles';
 import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
 import {
@@ -21,16 +22,16 @@ function LogOutConfirmation() {
       <View style={styles.screenContainer}>
         <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
 
-        <View style={styles.buttonsContainer}>
+        <View style={inputScreenStyles.inlineInputContainer}>
           <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
-            <View style={styles.buttonContent}>
+            <View style={inputScreenStyles.groupButtonContent}>
               <X />
               <ButtonTextBlack>Cancel</ButtonTextBlack>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
-            <View style={styles.buttonContent}>
+            <View style={inputScreenStyles.groupButtonContent}>
               <SignOut />
               <ButtonTextWhite>Confirm</ButtonTextWhite>
             </View>

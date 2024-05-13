@@ -1,23 +1,16 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
+import { inputScreenStyles } from '../../../(Authentication)/styles';
 import Submit from '../../../../../assets/submit.svg';
 import {
   ButtonBlack,
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  GroupButtonContent,
-  InlineInputContainer,
-  InputBoxContainer,
-  InputScreenGap,
-  InstructionContainer,
-  TitleText,
-} from '../../../../styles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
+import { TitleText } from '../../../../styles/InputScreenStyles';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
 
 function EditNameScreen() {
@@ -75,11 +68,11 @@ function EditNameScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>Edit account details</TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -99,7 +92,7 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
-          <InlineInputContainer>
+          <View style={inputScreenStyles.inlineInputContainer}>
             <AuthInput
               input={usState}
               onChangeInput={onChangeState}
@@ -118,20 +111,20 @@ function EditNameScreen() {
               keyboard="default"
               autoCapitalization
             />
-          </InlineInputContainer>
-        </InputBoxContainer>
+          </View>
+        </View>
 
-        <InputScreenGap />
+        <View style={inputScreenStyles.inputScreenGap} />
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
           style={{ justifyContent: 'center' }}
           onPress={handleSubmit}
         >
-          <GroupButtonContent>
+          <View style={inputScreenStyles.groupButtonContent}>
             <ButtonTextWhite>Submit</ButtonTextWhite>
             <Submit />
-          </GroupButtonContent>
+          </View>
         </ButtonBlack>
       </ContentContainer>
     </SafeArea>
