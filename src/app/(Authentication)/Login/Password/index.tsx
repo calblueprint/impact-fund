@@ -9,13 +9,13 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
 import {
   ErrorMessageText,
   InstructionText,
   TitleText,
-} from '../../../../styles/InputScreenStyles';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../styles';
+} from '../../../../styles/textStyles';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };

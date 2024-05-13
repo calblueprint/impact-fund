@@ -5,20 +5,13 @@ import { View } from 'react-native';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
-  ButtonTextBlack,
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  ErrorMessageContainer,
-  ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
-  TitleText,
-} from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { ErrorMessageText, TitleText } from '../../../../styles/textStyles';
 import supabase from '../../../../supabase/createClient';
-import { inputScreenStyles } from '../../styles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };

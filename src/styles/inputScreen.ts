@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../styles/colors';
-
 export const inputScreenStyles = StyleSheet.create({
   instructionContainer: {
     flexDirection: 'column',
@@ -34,22 +32,3 @@ export const inputScreenStyles = StyleSheet.create({
     columnGap: 15,
   },
 });
-
-// export const TitleText = styled.Text({
-//   color: colors.black,
-//   fontSize: 24,
-//   fontWeight: '800',
-// });
-
-// export const InstructionText = styled.Text({
-//   color: colors.darkGrey,
-//   fontSize: 14,
-//   fontStyle: 'normal',
-//   fontWeight: '300',
-// });
-
-// export const ErrorMessageText = styled.Text({
-//   color: colors.darkRed,
-//   fontSize: 14,
-//   fontWeight: '400',
-// });

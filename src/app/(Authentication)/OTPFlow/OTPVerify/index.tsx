@@ -11,14 +11,14 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
+import { colors } from '../../../../styles/colors';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
 import {
   ErrorMessageText,
   InstructionText,
   TitleText,
-} from '../../../../styles/InputScreenStyles';
-import { colors } from '../../../../styles/colors';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../styles';
+} from '../../../../styles/textStyles';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {

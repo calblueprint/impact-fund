@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { inputScreenStyles } from '../../../(Authentication)/styles';
 import Submit from '../../../../../assets/submit.svg';
 import {
   ButtonBlack,
@@ -10,8 +9,9 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import { TitleText } from '../../../../styles/InputScreenStyles';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { TitleText } from '../../../../styles/textStyles';
 
 function EditNameScreen() {
   const { updateUser, session } = useSession();

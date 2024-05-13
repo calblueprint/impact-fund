@@ -8,14 +8,14 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
 import {
   ErrorMessageText,
   InstructionText,
   TitleText,
-} from '../../../../styles/InputScreenStyles';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+} from '../../../../styles/textStyles';
 import { emailExists } from '../../../../supabase/queries/auth';
-import { inputScreenStyles } from '../../styles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');

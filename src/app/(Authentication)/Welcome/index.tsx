@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';

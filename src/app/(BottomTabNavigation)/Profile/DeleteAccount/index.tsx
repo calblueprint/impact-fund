@@ -3,7 +3,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
-import { inputScreenStyles } from '../../../(Authentication)/styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import {
@@ -14,6 +13,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { SafeArea } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
 
 function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();

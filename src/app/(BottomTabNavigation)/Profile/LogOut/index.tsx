@@ -3,7 +3,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from './styles';
-import { inputScreenStyles } from '../../../(Authentication)/styles';
 import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
 import {
@@ -13,6 +12,7 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
 
 function LogOutConfirmation() {
   const { signOut } = useSession();

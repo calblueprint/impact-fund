@@ -9,13 +9,10 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import {
-  ErrorMessageText,
-  TitleText,
-} from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { ErrorMessageText, TitleText } from '../../../../styles/textStyles';
 import { emailExists } from '../../../../supabase/queries/auth';
-import { inputScreenStyles } from '../../styles';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');

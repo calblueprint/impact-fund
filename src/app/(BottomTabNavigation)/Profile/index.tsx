@@ -17,8 +17,8 @@ import {
   ButtonTextWhite,
 } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
-import { GroupButtonContent } from '../../../styles/InputScreenStyles';
 import { shawdowStyles } from '../../../styles/global';
+import { inputScreenStyles } from '../../../styles/inputScreen';
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -123,10 +123,10 @@ function ProfileScreen() {
             router.push('/Profile/LogOut');
           }}
         >
-          <GroupButtonContent>
+          <View style={inputScreenStyles.groupButtonContent}>
             <SignOut />
             <ButtonTextWhite>Log out</ButtonTextWhite>
-          </GroupButtonContent>
+          </View>
           <WhiteRightCarrot />
         </ButtonBlack>
       </View>

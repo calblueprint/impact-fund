@@ -1,10 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import BackButton from '../../../../../assets/back-button.svg';
 import Envelope from '../../../../../assets/reset-password-envelope.svg';
 import Refresh from '../../../../../assets/reset-password-refresh.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';

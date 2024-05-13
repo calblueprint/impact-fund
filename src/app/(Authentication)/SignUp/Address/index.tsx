@@ -9,9 +9,9 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import { TitleText } from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../styles';
+import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { TitleText } from '../../../../styles/textStyles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
