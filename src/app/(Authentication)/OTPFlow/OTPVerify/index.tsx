@@ -5,7 +5,6 @@ import { View, TouchableOpacity } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -13,15 +12,13 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import {
-  ErrorMessageContainer,
   ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
   InstructionText,
   TitleText,
 } from '../../../../styles/InputScreenStyles';
 import { colors } from '../../../../styles/colors';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../styles';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
@@ -63,12 +60,12 @@ export default function OTPFlow() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>Enter verification code.</TitleText>
           <InstructionText>We've sent it to {email}</InstructionText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <OTPTextInput
             inputCount={6}
             tintColor={colors.darkGrey}
@@ -89,11 +86,11 @@ export default function OTPFlow() {
               </InstructionText>
             </TouchableOpacity>
           </InstructionText>
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>{errorMessage}</ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
         <ButtonBlack
           disabled={token.length !== 6 || errorExists}

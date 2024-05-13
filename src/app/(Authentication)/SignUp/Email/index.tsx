@@ -1,9 +1,8 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { z } from 'zod';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -11,14 +10,12 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import {
-  ErrorMessageContainer,
   ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
   TitleText,
 } from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
+import { inputScreenStyles } from '../../styles';
 
 export default function SignUpScreen() {
   const [name, setName] = useState<string>('');
@@ -71,11 +68,11 @@ export default function SignUpScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>Create your account.</TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={name}
             onChangeInput={onChangeName}
@@ -94,13 +91,13 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>
             {errorExists ? errorMessage : ' '}
           </ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
         <ButtonBlack
           disabled={name.trim() === '' || email.trim() === '' || errorExists}

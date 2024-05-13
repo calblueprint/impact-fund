@@ -1,8 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -19,6 +18,7 @@ import {
 } from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import supabase from '../../../../supabase/createClient';
+import { inputScreenStyles } from '../../styles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -83,11 +83,11 @@ export default function SignUpScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>Next, make a password.</TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -107,13 +107,13 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>
             {disableButton ? errorMessage : ' '}
           </ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
         <ButtonBlack
           disabled={password === '' || confirmPassword === '' || disableButton}

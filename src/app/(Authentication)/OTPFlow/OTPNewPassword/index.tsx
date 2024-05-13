@@ -1,8 +1,7 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -11,13 +10,11 @@ import {
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import {
-  ErrorMessageContainer,
   ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
   TitleText,
 } from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { inputScreenStyles } from '../../styles';
 
 export default function OTPNewPassword() {
   const [password, setPassword] = useState<string>('');
@@ -77,11 +74,11 @@ export default function OTPNewPassword() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <TitleText>Create a new password.</TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -101,13 +98,13 @@ export default function OTPNewPassword() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>
             {disableButton ? errorMessage : ' '}
           </ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
         <ButtonBlack
           disabled={password === '' || confirmPassword === '' || disableButton}

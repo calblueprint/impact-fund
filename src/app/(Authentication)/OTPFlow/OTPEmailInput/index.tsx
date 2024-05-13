@@ -1,8 +1,7 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -11,14 +10,12 @@ import {
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import {
-  ErrorMessageContainer,
   ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
   TitleText,
 } from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
+import { inputScreenStyles } from '../../styles';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');
@@ -57,13 +54,13 @@ export default function OTPEmailInput() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>
             Please enter the email you used to create your account.
           </TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -73,13 +70,13 @@ export default function OTPEmailInput() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>
             {errorExists ? errorMessage : ' '}
           </ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
         <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
           <ButtonTextWhite>Continue</ButtonTextWhite>

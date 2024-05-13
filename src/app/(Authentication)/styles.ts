@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import {
-  GroupButtonContent,
-  InputScreenGap,
-} from '../../styles/InputScreenStyles';
 import { colors } from '../../styles/colors';
 
 export const inputScreenStyles = StyleSheet.create({

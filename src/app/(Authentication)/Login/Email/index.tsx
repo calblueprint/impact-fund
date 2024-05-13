@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
@@ -10,11 +9,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import {
-  ErrorMessageContainer,
   ErrorMessageText,
-  InlineInputContainer,
-  InputBoxContainer,
-  InstructionContainer,
   InstructionText,
   TitleText,
 } from '../../../../styles/InputScreenStyles';
