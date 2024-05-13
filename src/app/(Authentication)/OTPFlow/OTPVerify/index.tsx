@@ -11,6 +11,7 @@ import {
   ButtonBlack,
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import { useSession } from '../../../../context/AuthContext';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -18,8 +19,7 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
-import { useSession } from '../../../../context/AuthContext';
+} from '../../../../styles/InputScreenStyles';
 import { colors } from '../../../../styles/colors';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 

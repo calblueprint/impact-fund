@@ -16,7 +16,7 @@ import {
   InputBoxContainer,
   InstructionContainer,
   TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+} from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import supabase from '../../../../supabase/createClient';
 

@@ -11,11 +11,11 @@ import {
   ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import { useSession } from '../../../../context/AuthContext';
 import {
   GroupButtonContent,
   InlineInputContainer,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
-import { useSession } from '../../../../context/AuthContext';
+} from '../../../../styles/InputScreenStyles';
 import { SafeArea } from '../../../../styles/global';
 
 function DeleteAccountScreen() {

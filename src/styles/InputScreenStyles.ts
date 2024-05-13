@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colors } from '../../styles/colors';
+import { colors } from './colors';
 
 export const InstructionContainer = styled.View({
   flexDirection: 'column',

@@ -16,8 +16,8 @@ import {
   ButtonBlack,
   ButtonTextWhite,
 } from '../../../Components/AuthButton/AuthButton';
-import { GroupButtonContent } from '../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../context/AuthContext';
+import { GroupButtonContent } from '../../../styles/InputScreenStyles';
 import { shawdowStyles } from '../../../styles/global';
 
 function ProfileScreen() {

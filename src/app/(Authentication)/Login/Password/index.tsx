@@ -9,6 +9,7 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { useSession } from '../../../../context/AuthContext';
 import {
   ErrorMessageContainer,
   ErrorMessageText,
@@ -17,8 +18,7 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
-import { useSession } from '../../../../context/AuthContext';
+} from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 
 export default function LoginScreen() {

@@ -16,7 +16,7 @@ import {
   InputScreenGap,
   InstructionContainer,
   TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+} from '../../../../styles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
 

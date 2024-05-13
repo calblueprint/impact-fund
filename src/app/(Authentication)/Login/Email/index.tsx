@@ -17,9 +17,10 @@ import {
   InstructionContainer,
   InstructionText,
   TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+} from '../../../../styles/InputScreenStyles';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { emailExists } from '../../../../supabase/queries/auth';
+import { inputScreenStyles } from '../../styles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');
@@ -46,11 +47,11 @@ export default function LoginScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <InstructionContainer>
+        <View style={inputScreenStyles.instructionContainer}>
           <TitleText>Please enter your email address.</TitleText>
-        </InstructionContainer>
+        </View>
 
-        <InputBoxContainer>
+        <View style={inputScreenStyles.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -60,15 +61,15 @@ export default function LoginScreen() {
             keyboard="email-address"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
+        <View style={inputScreenStyles.errorMessageContainer}>
           <ErrorMessageText>
             {errorExists ? errorMessage : ' '}
           </ErrorMessageText>
-        </ErrorMessageContainer>
+        </View>
 
-        <InlineInputContainer>
+        <View style={inputScreenStyles.inlineInputContainer}>
           <TouchableOpacity
             onPress={() => router.push('/OTPFlow/OTPEmailInput')}
           >
@@ -84,7 +85,7 @@ export default function LoginScreen() {
               <Arrow />
             </ButtonBlack>
           </View>
-        </InlineInputContainer>
+        </View>
       </ContentContainer>
     </SafeArea>
   );
