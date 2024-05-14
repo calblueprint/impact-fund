@@ -55,7 +55,7 @@ export default function CasesLayout() {
         }}
       />
       <Stack.Screen
-        name="FileClaim/[caseUid]"
+        name="ClaimActions/FileClaim/[caseUid]"
         options={{
           headerLeft: () => <BackButtonNoText />,
           headerTitle: () => <HeaderImage />,
@@ -90,14 +90,14 @@ export default function CasesLayout() {
         }}
       />
       <Stack.Screen
-        name="OptOut/[caseUid]"
+        name="ClaimActions/OptOut/[caseUid]"
         options={{
           headerLeft: () => <BackButtonNoText />,
           headerTitle: () => <EmptyHeader />,
         }}
       />
       <Stack.Screen
-        name="OptOut/ConfirmOptOut/[caseUid]"
+        name="ClaimActions/OptOut/ConfirmOptOut/[caseUid]"
         options={{
           headerLeft: () => <BackButtonNoText />,
           headerTitle: () => <EmptyHeader />,
