@@ -40,7 +40,7 @@ const baseFonts = StyleSheet.create({
     color: colors.black,
   },
   button: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '600',
     fontStyle: 'normal',
   },

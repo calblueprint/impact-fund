@@ -7,15 +7,14 @@ import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
-  ButtonTextBlack,
-  ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
 
-function DeleteAccountScreen() {
+export default function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
 
   const deleteAccount = () => {
@@ -29,25 +28,29 @@ function DeleteAccountScreen() {
     <SafeArea>
       <View style={styles.screenContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.topText}>Delete account?</Text>
-          <Text style={styles.blurb}>
+          <Text style={fonts.tabHeading}>Delete account?</Text>
+          <Text style={fonts.greyBody}>
             Deleting your account will also permanently delete any data
             associated with it. This action cannot be undone.
           </Text>
         </View>
 
         <View style={inputScreenStyles.inlineInputContainer}>
-          <ButtonWhite onPress={() => router.back()} style={styles.buttonView}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $halfWidth
+            $centeredContent
+          >
             <View style={inputScreenStyles.groupButtonContent}>
               <X />
-              <ButtonTextBlack>Cancel</ButtonTextBlack>
+              <Text style={fonts.blackButton}>Cancel</Text>
             </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={deleteAccount} style={styles.buttonView}>
+          <ButtonBlack onPress={deleteAccount} $halfWidth $centeredContent>
             <View style={inputScreenStyles.groupButtonContent}>
               <WhiteTrash />
-              <ButtonTextWhite>Confirm</ButtonTextWhite>
+              <Text style={fonts.whiteButton}>Confirm</Text>
             </View>
           </ButtonBlack>
         </View>
@@ -55,4 +58,3 @@ function DeleteAccountScreen() {
     </SafeArea>
   );
 }
-export default DeleteAccountScreen;

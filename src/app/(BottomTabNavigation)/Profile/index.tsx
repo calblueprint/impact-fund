@@ -12,17 +12,14 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
+import { fonts } from '../../../styles/fonts';
 import { shawdowStyles } from '../../../styles/global';
 import { inputScreenStyles } from '../../../styles/inputScreen';
 
-function ProfileScreen() {
+export default function ProfileScreen() {
   const navigation = useNavigation();
-
   const { session } = useSession();
 
   useEffect(() => {
@@ -32,7 +29,10 @@ function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>Settings</Text>
+        <View style={styles.titleContainer}>
+          <Text style={fonts.tabHeading}>Settings</Text>
+        </View>
+
         <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
@@ -43,6 +43,7 @@ function ProfileScreen() {
           </View>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditName')}
@@ -60,6 +61,7 @@ function ProfileScreen() {
           </TouchableOpacity>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditAddress')}
@@ -125,7 +127,7 @@ function ProfileScreen() {
         >
           <View style={inputScreenStyles.groupButtonContent}>
             <SignOut />
-            <ButtonTextWhite>Log out</ButtonTextWhite>
+            <Text style={fonts.whiteButton}>Log out</Text>
           </View>
           <WhiteRightCarrot />
         </ButtonBlack>
@@ -133,5 +135,3 @@ function ProfileScreen() {
     </View>
   );
 }
-
-export default ProfileScreen;

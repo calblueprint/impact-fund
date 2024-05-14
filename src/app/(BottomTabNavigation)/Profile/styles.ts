@@ -12,16 +12,11 @@ export default StyleSheet.create({
     width: '84%',
     alignItems: 'center',
   },
-  titleText: {
-    fontSize: 32,
-    fontWeight: '800',
-    lineHeight: 33,
-    color: colors.black,
+  titleContainer: {
     alignSelf: 'flex-start',
     marginTop: 39,
     marginBottom: 18,
   },
-
   actionsContainer: {
     width: '100%',
     backgroundColor: colors.white,
@@ -29,7 +24,6 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
-
   profileDetailsBox: {
     flexDirection: 'row',
     columnGap: 15,
@@ -68,29 +62,5 @@ export default StyleSheet.create({
   },
   redText: {
     color: colors.darkRed,
-  },
-
-  signOutButton: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    height: 52,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    backgroundColor: colors.black,
-  },
-  signOutText: {
-    color: colors.white,
-    fontWeight: '700',
-    fontSize: 16,
-  },
-  signOutInstructions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 15,
-  },
-  signOutContentContainer: {
-    flexDirection: 'row',
   },
 });

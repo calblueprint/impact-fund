@@ -1,19 +1,16 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Submit from '../../../../../assets/submit.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import { TitleText } from '../../../../styles/textStyles';
 
-function EditNameScreen() {
+export default function EditAddressScreen() {
   const { updateUser, session } = useSession();
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [usState, setUsState] = useState<string>('');
@@ -69,7 +66,7 @@ function EditNameScreen() {
     <SafeArea>
       <ContentContainer>
         <View style={inputScreenStyles.instructionContainer}>
-          <TitleText>Edit account details</TitleText>
+          <Text style={fonts.headline}>Edit account details</Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -92,6 +89,7 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
+
           <View style={inputScreenStyles.inlineInputContainer}>
             <AuthInput
               input={usState}
@@ -118,11 +116,11 @@ function EditNameScreen() {
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
-          $centeredContent
           onPress={handleSubmit}
+          $centeredContent
         >
           <View style={inputScreenStyles.groupButtonContent}>
-            <ButtonTextWhite>Submit</ButtonTextWhite>
+            <Text style={fonts.whiteButton}>Submit</Text>
             <Submit />
           </View>
         </ButtonBlack>
@@ -130,4 +128,3 @@ function EditNameScreen() {
     </SafeArea>
   );
 }
-export default EditNameScreen;
