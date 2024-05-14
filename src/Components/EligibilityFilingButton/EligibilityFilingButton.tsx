@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import Fileclaim from '../../../assets/file-claim.svg';
 import Arrow from '../../../assets/next.svg';
+import { fonts } from '../../styles/fonts';
 import { shawdowStyles } from '../../styles/global';
 
 interface EligibilityCardProps {
@@ -31,14 +32,14 @@ export default function EligibleFilingButton({
           <Fileclaim />
         </View>
         <View style={styles.middleContainer}>
-          <Text style={styles.bodyText}>{mainText}</Text>
+          <Text style={fonts.small}>{mainText}</Text>
         </View>
       </View>
 
       <View style={styles.horizontalLine} />
 
       <View style={styles.bottomContainer}>
-        <Text style={styles.smallText}>{instructionText}</Text>
+        <Text style={fonts.greySmall}>{instructionText}</Text>
         <Arrow />
       </View>
     </TouchableOpacity>

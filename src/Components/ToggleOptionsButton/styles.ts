@@ -4,20 +4,19 @@ import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
   toggleButtonContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+
     width: '100%',
     height: 50,
-    backgroundColor: colors.lightGrey,
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    position: 'relative',
-    overflow: 'hidden',
+    paddingHorizontal: '1%',
+    backgroundColor: colors.lightGrey,
   },
-  toggleItem: {
-    position: 'absolute',
-    marginLeft: 4,
-    marginRight: 4,
+  activeItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '50%',
     height: 42,
     backgroundColor: colors.white,
@@ -32,29 +31,14 @@ export default StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0.75,
     elevation: 1,
-
+  },
+  inactiveItem: {
+    width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  inactiveTextContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingHorizontal: 4,
-  },
-  inactiveTextStandardBox: {
-    width: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  toggleSwitchCheckedButtonContainer: {
-    backgroundColor: colors.lightGrey,
-  },
-  toggleSwitchCheckedItem: {
-    right: 0,
   },
   lightText: {
-    color: colors.black,
+    color: colors.darkGrey,
     fontSize: 18,
     fontWeight: '300',
   },

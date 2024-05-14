@@ -15,28 +15,17 @@ function ToggleOptionsButton({
   return (
     <TouchableOpacity
       activeOpacity={1}
-      style={[
-        styles.toggleButtonContainer,
-        !isDefaultSelected && styles.toggleSwitchCheckedButtonContainer,
-      ]}
+      style={styles.toggleButtonContainer}
       onPress={() => setSelected(!isDefaultSelected)}
     >
-      <View style={styles.inactiveTextContainer}>
-        <View style={styles.inactiveTextStandardBox}>
-          <Text style={styles.lightText}>File a claim</Text>
-        </View>
-        <View style={styles.inactiveTextStandardBox}>
-          <Text style={styles.lightText}>Opt out</Text>
-        </View>
+      <View style={isDefaultSelected ? styles.activeItem : styles.inactiveItem}>
+        <Text style={isDefaultSelected ? styles.boldText : styles.lightText}>
+          File a claim
+        </Text>
       </View>
-      <View
-        style={[
-          styles.toggleItem,
-          !isDefaultSelected && styles.toggleSwitchCheckedItem,
-        ]}
-      >
-        <Text style={styles.boldText}>
-          {isDefaultSelected ? 'File a claim' : 'Opt out'}
+      <View style={isDefaultSelected ? styles.inactiveItem : styles.activeItem}>
+        <Text style={isDefaultSelected ? styles.lightText : styles.boldText}>
+          Opt out
         </Text>
       </View>
     </TouchableOpacity>
