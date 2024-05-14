@@ -19,7 +19,7 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
   },
-  blurbContainer: {
+  summaryContainer: {
     width: '100%',
     borderBottomWidth: 1,
     marginBottom: 28,
@@ -41,11 +41,6 @@ export default StyleSheet.create({
     marginTop: 15,
     marginBottom: 6,
   },
-  blurbText: {
-    color: colors.black,
-    fontSize: 22,
-    fontWeight: '700',
-  },
   subText: {
     fontSize: 12,
     fontStyle: 'normal',
@@ -59,9 +54,7 @@ export default StyleSheet.create({
     color: colors.darkGrey,
     fontWeight: '300',
   },
-  summaryText: {
-    color: colors.black,
-    fontSize: 16,
+  descriptionText: {
     fontWeight: '200',
     lineHeight: 24,
     marginBottom: 30,

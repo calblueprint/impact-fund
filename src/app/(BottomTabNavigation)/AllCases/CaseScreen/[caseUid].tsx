@@ -10,6 +10,7 @@ import EducationalBar from '../../../../Components/EducationalBar/EducationalBar
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
+import { fonts } from '../../../../styles/fonts';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -58,7 +59,9 @@ function CaseScreen() {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{caseData.title}</Text>
+            <Text style={[fonts.tabHeading, styles.title]}>
+              {caseData.title}
+            </Text>
           </View>
 
           {status === Eligibility.ELIGIBLE && (

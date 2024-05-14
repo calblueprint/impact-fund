@@ -22,16 +22,4 @@ export default StyleSheet.create({
     borderRadius: 5,
     columnGap: 10,
   },
-  bodyText: {
-    fontSize: 16,
-    lineHeight: 16,
-    fontStyle: 'normal',
-    fontWeight: '300',
-  },
-  activeText: {
-    color: colors.darkGrey,
-  },
-  inactiveText: {
-    color: colors.black,
-  },
 });

@@ -32,9 +32,6 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    flex: 1,
-    color: colors.black,
-    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
   },

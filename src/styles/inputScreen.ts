@@ -29,6 +29,6 @@ export const inputScreenStyles = StyleSheet.create({
   groupButtonContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: 15,
+    columnGap: 12,
   },
 });
