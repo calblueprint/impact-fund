@@ -40,8 +40,8 @@ const baseFonts = StyleSheet.create({
     color: colors.black,
   },
   button: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 17,
+    fontWeight: '500',
     fontStyle: 'normal',
   },
 });
