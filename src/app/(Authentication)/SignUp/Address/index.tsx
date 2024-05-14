@@ -1,17 +1,14 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Check from '../../../../../assets/check-circle.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import { TitleText } from '../../../../styles/textStyles';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -74,7 +71,7 @@ export default function SignUpScreen() {
     <SafeArea>
       <ContentContainer>
         <View style={inputScreenStyles.instructionContainer}>
-          <TitleText>Last, enter your address.</TitleText>
+          <Text style={fonts.headline}>Last, enter your address.</Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -131,10 +128,10 @@ export default function SignUpScreen() {
             zipcode.trim() === ''
           }
           onPress={() => handleSubmit()}
-          style={{ justifyContent: 'center' }}
+          $centeredContent
         >
           <View style={inputScreenStyles.groupButtonContent}>
-            <ButtonTextWhite>Sign Up</ButtonTextWhite>
+            <Text style={fonts.whiteButton}>Sign Up</Text>
             <Check />
           </View>
         </ButtonBlack>

@@ -1,17 +1,14 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import { ErrorMessageText, TitleText } from '../../../../styles/textStyles';
 
 export default function OTPNewPassword() {
   const [password, setPassword] = useState<string>('');
@@ -71,8 +68,8 @@ export default function OTPNewPassword() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.errorMessageContainer}>
-          <TitleText>Create a new password.</TitleText>
+        <View style={inputScreenStyles.instructionContainer}>
+          <Text style={fonts.headline}>Create a new password.</Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -98,16 +95,16 @@ export default function OTPNewPassword() {
         </View>
 
         <View style={inputScreenStyles.errorMessageContainer}>
-          <ErrorMessageText>
+          <Text style={fonts.errorMessage}>
             {disableButton ? errorMessage : ' '}
-          </ErrorMessageText>
+          </Text>
         </View>
 
         <ButtonBlack
           disabled={password === '' || confirmPassword === '' || disableButton}
           onPress={handleSubmit}
         >
-          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
       </ContentContainer>

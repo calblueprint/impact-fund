@@ -9,13 +9,14 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../Components/AuthButton/AuthButton';
+import { fonts } from '../../../styles/fonts';
 import { SafeArea } from '../../../styles/global';
 
-function WelcomeScreen() {
+export default function WelcomeScreen() {
   return (
     <SafeArea>
       <View style={styles.contentContainer}>
-        <View>
+        <>
           <Text style={styles.welcomeText}>Welcome to the Impact Fund.</Text>
 
           <View style={styles.buttonContainer}>
@@ -41,10 +42,8 @@ function WelcomeScreen() {
               <RightArrowWhite />
             </ButtonBlack>
           </View>
-        </View>
+        </>
       </View>
     </SafeArea>
   );
 }
-
-export default WelcomeScreen;

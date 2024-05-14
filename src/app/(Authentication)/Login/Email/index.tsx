@@ -1,20 +1,13 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import {
-  ErrorMessageText,
-  InstructionText,
-  TitleText,
-} from '../../../../styles/textStyles';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
@@ -43,7 +36,7 @@ export default function LoginScreen() {
     <SafeArea>
       <ContentContainer>
         <View style={inputScreenStyles.instructionContainer}>
-          <TitleText>Please enter your email address.</TitleText>
+          <Text style={fonts.headline}>Please enter your email address.</Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -59,16 +52,16 @@ export default function LoginScreen() {
         </View>
 
         <View style={inputScreenStyles.errorMessageContainer}>
-          <ErrorMessageText>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
-          </ErrorMessageText>
+          </Text>
         </View>
 
         <View style={inputScreenStyles.inlineInputContainer}>
           <TouchableOpacity
             onPress={() => router.push('/OTPFlow/OTPEmailInput')}
           >
-            <InstructionText>Forgot password?</InstructionText>
+            <Text style={fonts.greyBody}>Forgot password?</Text>
           </TouchableOpacity>
 
           <ButtonBlack
@@ -76,7 +69,7 @@ export default function LoginScreen() {
             disabled={email.trim() === '' || errorExists}
             $halfWidth
           >
-            <ButtonTextWhite>Next</ButtonTextWhite>
+            <Text style={fonts.whiteButton}>Next</Text>
             <Arrow />
           </ButtonBlack>
         </View>

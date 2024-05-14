@@ -1,16 +1,13 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import { ErrorMessageText, TitleText } from '../../../../styles/textStyles';
 import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
@@ -77,7 +74,7 @@ export default function SignUpScreen() {
     <SafeArea>
       <ContentContainer>
         <View style={inputScreenStyles.instructionContainer}>
-          <TitleText>Next, make a password.</TitleText>
+          <Text style={fonts.headline}>Next, make a password.</Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -103,16 +100,16 @@ export default function SignUpScreen() {
         </View>
 
         <View style={inputScreenStyles.errorMessageContainer}>
-          <ErrorMessageText>
+          <Text style={fonts.errorMessage}>
             {disableButton ? errorMessage : ' '}
-          </ErrorMessageText>
+          </Text>
         </View>
 
         <ButtonBlack
           disabled={password === '' || confirmPassword === '' || disableButton}
           onPress={handleSubmit}
         >
-          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
       </ContentContainer>

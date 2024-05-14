@@ -1,17 +1,14 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
 import { inputScreenStyles } from '../../../../styles/inputScreen';
-import { ErrorMessageText, TitleText } from '../../../../styles/textStyles';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
@@ -52,9 +49,9 @@ export default function OTPEmailInput() {
     <SafeArea>
       <ContentContainer>
         <View style={inputScreenStyles.instructionContainer}>
-          <TitleText>
+          <Text style={fonts.headline}>
             Please enter the email you used to create your account.
-          </TitleText>
+          </Text>
         </View>
 
         <View style={inputScreenStyles.inputBoxContainer}>
@@ -70,13 +67,13 @@ export default function OTPEmailInput() {
         </View>
 
         <View style={inputScreenStyles.errorMessageContainer}>
-          <ErrorMessageText>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
-          </ErrorMessageText>
+          </Text>
         </View>
 
         <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
-          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
       </ContentContainer>

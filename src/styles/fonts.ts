@@ -27,10 +27,11 @@ const baseFonts = StyleSheet.create({
     fontStyle: 'normal',
     color: colors.black,
   },
-  button: {
-    fontSize: 16,
-    fontWeight: '600',
+  small: {
+    fontSize: 14,
+    fontWeight: '300',
     fontStyle: 'normal',
+    color: colors.black,
   },
   verySmall: {
     fontSize: 12,
@@ -38,11 +39,10 @@ const baseFonts = StyleSheet.create({
     fontStyle: 'normal',
     color: colors.black,
   },
-  errorMessage: {
-    fontSize: 14,
-    fontWeight: '300',
+  button: {
+    fontSize: 17,
+    fontWeight: '600',
     fontStyle: 'normal',
-    color: colors.midRed,
   },
 });
 
@@ -50,6 +50,10 @@ export const fonts = StyleSheet.create({
   ...baseFonts,
   greyBody: {
     ...baseFonts.body,
+    color: colors.darkGrey,
+  },
+  greySmall: {
+    ...baseFonts.small,
     color: colors.darkGrey,
   },
   greyVerySmall: {
@@ -63,5 +67,9 @@ export const fonts = StyleSheet.create({
   whiteButton: {
     ...baseFonts.button,
     color: colors.white,
+  },
+  errorMessage: {
+    ...baseFonts.small,
+    color: colors.midRed,
   },
 });
