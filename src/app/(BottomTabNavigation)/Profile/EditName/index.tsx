@@ -8,7 +8,7 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function EditNameScreen() {
   const { updateUser, session } = useSession();
@@ -30,11 +30,11 @@ export default function EditNameScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Edit account details</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={fullName}
             onChangeInput={setFullName}
@@ -46,14 +46,14 @@ export default function EditNameScreen() {
           />
         </View>
 
-        <View style={inputScreenStyles.inputScreenGap} />
+        <View style={input.inputScreenGap} />
 
         <ButtonBlack
           disabled={!fullName || fullName.trim() === ''}
           onPress={updateName}
           $centeredContent
         >
-          <View style={inputScreenStyles.groupButtonContent}>
+          <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Submit</Text>
             <Submit />
           </View>

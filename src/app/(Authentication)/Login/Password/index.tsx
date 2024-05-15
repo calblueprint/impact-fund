@@ -8,7 +8,7 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
@@ -40,11 +40,11 @@ export default function LoginScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Please enter your password.</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -56,13 +56,13 @@ export default function LoginScreen() {
           />
         </View>
 
-        <View style={inputScreenStyles.errorMessageContainer}>
+        <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
           </Text>
         </View>
 
-        <View style={inputScreenStyles.inlineInputContainer}>
+        <View style={input.inlineInputContainer}>
           <TouchableOpacity
             onPress={() => router.push('/OTPFlow/OTPEmailInput')}
           >

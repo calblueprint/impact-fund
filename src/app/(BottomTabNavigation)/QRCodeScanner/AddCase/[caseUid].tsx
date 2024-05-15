@@ -12,7 +12,7 @@ import {
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
@@ -51,7 +51,7 @@ export default function AddCase() {
               $halfWidth
               $centeredContent
             >
-              <View style={inputScreenStyles.groupButtonContent}>
+              <View style={input.groupButtonContent}>
                 <CancelIcon />
                 <Text style={fonts.blackButton}>Cancel</Text>
               </View>
@@ -62,7 +62,7 @@ export default function AddCase() {
               $halfWidth
               $centeredContent
             >
-              <View style={inputScreenStyles.groupButtonContent}>
+              <View style={input.groupButtonContent}>
                 <AddCaseIcon />
                 <Text style={fonts.whiteButton}>Add Case</Text>
               </View>

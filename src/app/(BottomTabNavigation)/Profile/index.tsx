@@ -16,7 +16,7 @@ import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
 import { fonts } from '../../../styles/fonts';
 import { shawdowStyles } from '../../../styles/global';
-import { inputScreenStyles } from '../../../styles/inputScreen';
+import { input } from '../../../styles/input';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -125,7 +125,7 @@ export default function ProfileScreen() {
             router.push('/Profile/LogOut');
           }}
         >
-          <View style={inputScreenStyles.groupButtonContent}>
+          <View style={input.groupButtonContent}>
             <SignOut />
             <Text style={fonts.whiteButton}>Log out</Text>
           </View>

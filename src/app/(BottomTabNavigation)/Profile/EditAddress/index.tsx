@@ -8,7 +8,7 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { ContentContainer, SafeArea } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function EditAddressScreen() {
   const { updateUser, session } = useSession();
@@ -65,11 +65,11 @@ export default function EditAddressScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Edit account details</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -90,7 +90,7 @@ export default function EditAddressScreen() {
             autoCapitalization
           />
 
-          <View style={inputScreenStyles.inlineInputContainer}>
+          <View style={input.inlineInputContainer}>
             <AuthInput
               input={usState}
               onChangeInput={onChangeState}
@@ -112,14 +112,14 @@ export default function EditAddressScreen() {
           </View>
         </View>
 
-        <View style={inputScreenStyles.inputScreenGap} />
+        <View style={input.inputScreenGap} />
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
           onPress={handleSubmit}
           $centeredContent
         >
-          <View style={inputScreenStyles.groupButtonContent}>
+          <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Submit</Text>
             <Submit />
           </View>

@@ -12,7 +12,7 @@ import {
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
@@ -35,20 +35,20 @@ export default function DeleteAccountScreen() {
           </Text>
         </View>
 
-        <View style={inputScreenStyles.inlineInputContainer}>
+        <View style={input.inlineInputContainer}>
           <ButtonWhite
             onPress={() => router.back()}
             $halfWidth
             $centeredContent
           >
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <X />
               <Text style={fonts.blackButton}>Cancel</Text>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={deleteAccount} $halfWidth $centeredContent>
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <WhiteTrash />
               <Text style={fonts.whiteButton}>Confirm</Text>
             </View>

@@ -8,7 +8,7 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
@@ -48,13 +48,13 @@ export default function OTPEmailInput() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>
             Please enter the email you used to create your account.
           </Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -66,7 +66,7 @@ export default function OTPEmailInput() {
           />
         </View>
 
-        <View style={inputScreenStyles.errorMessageContainer}>
+        <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
           </Text>

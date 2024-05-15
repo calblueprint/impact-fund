@@ -13,7 +13,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import { fonts } from '../../../../styles/fonts';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 import {
   updateCaseStatus,
   getCaseById,
@@ -116,7 +116,7 @@ export default function EligibilityForm() {
                   $halfWidth
                   $centeredContent
                 >
-                  <View style={inputScreenStyles.groupButtonContent}>
+                  <View style={input.groupButtonContent}>
                     <Ex />
                     <Text style={fonts.blackButton}>No, I don't</Text>
                   </View>
@@ -127,7 +127,7 @@ export default function EligibilityForm() {
                   $halfWidth
                   $centeredContent
                 >
-                  <View style={inputScreenStyles.groupButtonContent}>
+                  <View style={input.groupButtonContent}>
                     <Check />
                     <Text style={fonts.whiteButton}>Yes, I do</Text>
                   </View>

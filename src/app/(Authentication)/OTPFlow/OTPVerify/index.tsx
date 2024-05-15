@@ -11,7 +11,7 @@ import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
@@ -53,12 +53,12 @@ export default function OTPFlow() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Enter verification code.</Text>
           <Text style={fonts.greySmall}>We've sent it to {email}</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <OTPTextInput
             inputCount={6}
             tintColor={colors.darkGrey}
@@ -82,7 +82,7 @@ export default function OTPFlow() {
           </TouchableOpacity>
         </View>
 
-        <View style={inputScreenStyles.errorMessageContainer}>
+        <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>{errorMessage}</Text>
         </View>
 

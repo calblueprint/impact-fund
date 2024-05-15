@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const inputScreenStyles = StyleSheet.create({
+export const input = StyleSheet.create({
   instructionContainer: {
     flexDirection: 'column',
     marginTop: 20,

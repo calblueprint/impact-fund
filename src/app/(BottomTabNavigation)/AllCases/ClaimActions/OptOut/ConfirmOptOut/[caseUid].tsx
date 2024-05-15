@@ -12,8 +12,8 @@ import {
 } from '../../../../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../../context/CaseContext';
 import { fonts } from '../../../../../../styles/fonts';
-import { inputScreenStyles } from '../../../../../../styles/inputScreen';
-import instructionScreen from '../../../../../../styles/instructionScreen';
+import { input } from '../../../../../../styles/input';
+import { instruction } from '../../../../../../styles/instruction';
 import { CaseUid } from '../../../../../../types/types';
 
 function ConfirmOptOut() {
@@ -30,24 +30,26 @@ function ConfirmOptOut() {
   }
 
   return (
-    <View style={instructionScreen.container}>
-      <View style={instructionScreen.screenContainer}>
-        <View style={instructionScreen.contentContainer}>
-          <Text style={fonts.tabHeading}>Indicate that you've opted out?</Text>
+    <View style={instruction.container}>
+      <View style={instruction.screenContainer}>
+        <View style={instruction.contentContainer}>
+          <Text style={fonts.instructionHeading}>
+            Indicate that you've opted out?
+          </Text>
 
-          <View style={instructionScreen.instructionContainer}>
-            <View style={instructionScreen.instructionRow}>
+          <View style={instruction.instructionContainer}>
+            <View style={instruction.instructionRow}>
               <Warning />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   Once you’ve opted out, this case will become inactive.
                 </Text>
               </View>
             </View>
 
-            <View style={instructionScreen.instructionRow}>
+            <View style={instruction.instructionRow}>
               <LittlePerson />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   You can still view and share case details, but won’t be able
                   to change file a claim.
@@ -57,20 +59,20 @@ function ConfirmOptOut() {
           </View>
         </View>
 
-        <View style={instructionScreen.inLineButtons}>
+        <View style={instruction.inLineButtons}>
           <ButtonWhite
             onPress={() => router.back()}
             $halfWidth
             $centeredContent
           >
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <X />
               <Text style={fonts.blackButton}>Cancel</Text>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={deleteCase} $halfWidth $centeredContent>
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <CircleCheckWhite />
               <Text style={fonts.whiteButton}>Continue</Text>
             </View>

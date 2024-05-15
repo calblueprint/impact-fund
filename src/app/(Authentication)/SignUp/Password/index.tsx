@@ -7,7 +7,7 @@ import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 import supabase from '../../../../supabase/createClient';
 
 export default function SignUpScreen() {
@@ -73,11 +73,11 @@ export default function SignUpScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Next, make a password.</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}
@@ -99,7 +99,7 @@ export default function SignUpScreen() {
           />
         </View>
 
-        <View style={inputScreenStyles.errorMessageContainer}>
+        <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>
             {disableButton ? errorMessage : ' '}
           </Text>

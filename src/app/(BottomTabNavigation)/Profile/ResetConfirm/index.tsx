@@ -12,7 +12,7 @@ import {
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea } from '../../../../styles/global';
-import instructionScreen from '../../../../styles/instructionScreen';
+import { instruction } from '../../../../styles/instruction';
 
 export default function ResetConfirm() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
@@ -35,14 +35,14 @@ export default function ResetConfirm() {
   };
   return (
     <SafeArea>
-      <View style={instructionScreen.screenContainer}>
-        <View style={instructionScreen.contentContainer}>
-          <Text style={fonts.tabHeading}>Reset Password</Text>
+      <View style={instruction.screenContainer}>
+        <View style={instruction.contentContainer}>
+          <Text style={fonts.instructionHeading}>Reset Password</Text>
 
-          <View style={instructionScreen.instructionContainer}>
-            <View style={instructionScreen.instructionRow}>
+          <View style={instruction.instructionContainer}>
+            <View style={instruction.instructionRow}>
               <Envelope />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   We will send a six-digit verification code to the email that
                   is registered with your account.
@@ -50,9 +50,9 @@ export default function ResetConfirm() {
               </View>
             </View>
 
-            <View style={instructionScreen.instructionRow}>
+            <View style={instruction.instructionRow}>
               <Refresh />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   Enter the code in the following screen to create your new
                   password.
@@ -62,7 +62,7 @@ export default function ResetConfirm() {
           </View>
         </View>
 
-        <View style={instructionScreen.buttonsContainer}>
+        <View style={instruction.buttonsContainer}>
           <ButtonBlack
             disabled={email === '' || errorExists}
             onPress={resetPassword}

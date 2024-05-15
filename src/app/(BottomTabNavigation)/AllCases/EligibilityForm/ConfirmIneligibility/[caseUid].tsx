@@ -12,8 +12,8 @@ import {
 } from '../../../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
-import { inputScreenStyles } from '../../../../../styles/inputScreen';
-import instructionScreen from '../../../../../styles/instructionScreen';
+import { input } from '../../../../../styles/input';
+import { instruction } from '../../../../../styles/instruction';
 import { CaseUid } from '../../../../../types/types';
 
 export default function ConfirmEligibility() {
@@ -30,17 +30,17 @@ export default function ConfirmEligibility() {
   }
 
   return (
-    <View style={instructionScreen.container}>
-      <View style={instructionScreen.screenContainer}>
-        <View style={instructionScreen.contentContainer}>
+    <View style={instruction.container}>
+      <View style={instruction.screenContainer}>
+        <View style={instruction.contentContainer}>
           <Text style={fonts.instructionHeading}>
             Do you want to mark your status as ineligible?
           </Text>
 
-          <View style={instructionScreen.instructionContainer}>
-            <View style={instructionScreen.instructionRow}>
+          <View style={instruction.instructionContainer}>
+            <View style={instruction.instructionRow}>
               <Alarm />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   Once you indicate ineligibility, this case will become
                   inactive.{' '}
@@ -48,9 +48,9 @@ export default function ConfirmEligibility() {
               </View>
             </View>
 
-            <View style={instructionScreen.instructionRow}>
+            <View style={instruction.instructionRow}>
               <PersonCross />
-              <View style={instructionScreen.textContainer}>
+              <View style={instruction.textContainer}>
                 <Text style={fonts.greyBody}>
                   You can still view and share case details, but won’t be able
                   to change your eligibility status or file a claim.{' '}
@@ -60,20 +60,20 @@ export default function ConfirmEligibility() {
           </View>
         </View>
 
-        <View style={instructionScreen.inLineButtons}>
+        <View style={instruction.inLineButtons}>
           <ButtonWhite
             onPress={() => router.back()}
             $halfWidth
             $centeredContent
           >
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <Ex />
               <Text style={fonts.blackButton}>No, I don't</Text>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={() => deleteCase()} $halfWidth $centeredContent>
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <Check />
               <Text style={fonts.whiteButton}>Yes, I do</Text>
             </View>

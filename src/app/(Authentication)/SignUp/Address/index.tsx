@@ -8,7 +8,7 @@ import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea, ContentContainer } from '../../../../styles/global';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -70,11 +70,11 @@ export default function SignUpScreen() {
   return (
     <SafeArea>
       <ContentContainer>
-        <View style={inputScreenStyles.instructionContainer}>
+        <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Last, enter your address.</Text>
         </View>
 
-        <View style={inputScreenStyles.inputBoxContainer}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -95,7 +95,7 @@ export default function SignUpScreen() {
             autoCapitalization
           />
 
-          <View style={inputScreenStyles.inlineInputContainer}>
+          <View style={input.inlineInputContainer}>
             <AuthInput
               input={state}
               onChangeInput={onChangeState}
@@ -118,7 +118,7 @@ export default function SignUpScreen() {
           </View>
         </View>
 
-        <View style={inputScreenStyles.inputScreenGap} />
+        <View style={input.inputScreenGap} />
 
         <ButtonBlack
           disabled={
@@ -130,7 +130,7 @@ export default function SignUpScreen() {
           onPress={() => handleSubmit()}
           $centeredContent
         >
-          <View style={inputScreenStyles.groupButtonContent}>
+          <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Sign Up</Text>
             <Check />
           </View>

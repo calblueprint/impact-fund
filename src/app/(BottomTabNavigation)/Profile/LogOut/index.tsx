@@ -11,7 +11,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { inputScreenStyles } from '../../../../styles/inputScreen';
+import { input } from '../../../../styles/input';
 
 export default function LogOutConfirmation() {
   const { signOut } = useSession();
@@ -23,20 +23,20 @@ export default function LogOutConfirmation() {
           Are you sure you'd like to log out?
         </Text>
 
-        <View style={inputScreenStyles.inlineInputContainer}>
+        <View style={input.inlineInputContainer}>
           <ButtonWhite
             onPress={() => router.back()}
             $centeredContent
             $halfWidth
           >
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <X />
               <Text style={fonts.blackButton}>Cancel</Text>
             </View>
           </ButtonWhite>
 
           <ButtonBlack onPress={() => signOut()} $centeredContent $halfWidth>
-            <View style={inputScreenStyles.groupButtonContent}>
+            <View style={input.groupButtonContent}>
               <SignOut />
               <Text style={fonts.whiteButton}>Confirm</Text>
             </View>
