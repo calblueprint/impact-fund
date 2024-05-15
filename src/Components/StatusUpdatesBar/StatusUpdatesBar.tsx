@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import { fonts } from '../../styles/fonts';
 import { shawdowStyles } from '../../styles/global';
 import { CaseUid } from '../../types/types';
 
@@ -27,11 +28,11 @@ export default function StatusUpdatesBar({
       }}
     >
       <View style={styles.textContainer}>
-        <Text style={styles.statusText}>Case Status</Text>
+        <Text style={fonts.condensedHeadline}>Case Status</Text>
 
         <View style={styles.updatesContainer}>
-          <Text style={styles.buttonText}>View all updates</Text>
-          <RightCaret style={styles.icon} />
+          <Text style={fonts.greySmall}>View all updates</Text>
+          <RightCaret />
         </View>
       </View>
 

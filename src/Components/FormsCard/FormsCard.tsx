@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { getFeaturedForm } from '../../app/(BottomTabNavigation)/AllCases/Forms/utils';
+import { fonts } from '../../styles/fonts';
 import { shawdowStyles } from '../../styles/global';
 import { Case, Form } from '../../types/types';
 import FormListItem from '../FormListItem/FormListItem';
@@ -31,7 +32,7 @@ export default function FormsCard(caseData: Case) {
   return (
     <View style={[styles.container, shawdowStyles.shadowBorder]}>
       <View style={styles.topContainer}>
-        <Text style={styles.titleText}>Documents</Text>
+        <Text style={fonts.condensedHeadline}>Documents</Text>
         <TouchableOpacity
           disabled={Number(caseData.formCount) === 0}
           onPress={() =>
@@ -41,16 +42,12 @@ export default function FormsCard(caseData: Case) {
           }
         >
           <View style={styles.formRouteButton}>
-            <Text style={styles.bodyText}>View all ({caseData.formCount})</Text>
+            <Text style={fonts.greySmall}>View all ({caseData.formCount})</Text>
             <RightCaret />
           </View>
         </TouchableOpacity>
       </View>
-      {featuredForm === undefined ? null : (
-        <View style={styles.bottomContainer}>
-          <FormListItem {...featuredForm} />
-        </View>
-      )}
+      {featuredForm === undefined ? null : <FormListItem {...featuredForm} />}
     </View>
   );
 }

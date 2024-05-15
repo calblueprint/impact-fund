@@ -6,6 +6,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
+import { fonts } from '../../../../styles/fonts';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';
 import { Update, CaseUid, Case } from '../../../../types/types';
@@ -50,12 +51,14 @@ export default function UpdatesScreen() {
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <View style={styles.headerContainer}>
-                <Text style={styles.titleText}>Case Updates</Text>
+                <Text style={fonts.tabHeading}>Case Updates</Text>
                 <CaseStatusBar status={caseData.caseStatus} />
               </View>
             }
             ListEmptyComponent={
-              <Text>There are no updates associated with this case.</Text>
+              <Text style={fonts.body}>
+                There are no updates associated with this case.
+              </Text>
             }
           />
         </View>

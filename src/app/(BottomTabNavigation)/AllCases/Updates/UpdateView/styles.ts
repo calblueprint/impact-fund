@@ -34,19 +34,9 @@ export default StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: colors.midGrey,
   },
-  titleText: {
-    fontSize: 20,
-    lineHeight: 24,
-    fontWeight: '600',
-    fontStyle: 'normal',
-    color: colors.black,
-  },
   bodyText: {
-    fontSize: 16,
     lineHeight: 24,
-    fontStyle: 'normal',
     fontWeight: '200',
-    color: colors.black,
   },
   subText: {
     fontSize: 12,
