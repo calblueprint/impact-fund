@@ -1,13 +1,19 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
-import styles from './styles';
+import Alarm from '../../../../../../assets/alarm-triangle.svg';
 import Ex from '../../../../../../assets/cancel-x-icon.svg';
 import Check from '../../../../../../assets/check-circle.svg';
-import Alarm from '../../../../../../assets/noIdea.svg';
-import LittlePerson from '../../../../../../assets/noIdea2.svg';
+import PersonCross from '../../../../../../assets/person-cross.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../context/CaseContext';
+import { fonts } from '../../../../../styles/fonts';
+import { inputScreenStyles } from '../../../../../styles/inputScreen';
+import instructionScreen from '../../../../../styles/instructionScreen';
 import { CaseUid } from '../../../../../types/types';
 
 export default function ConfirmEligibility() {
@@ -24,46 +30,54 @@ export default function ConfirmEligibility() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.centerContainer}>
-        <Text style={styles.titleText}>
-          Do you want to mark your status as ineligible?
-        </Text>
-        <View style={styles.infoContainer}>
-          <Alarm style={{ marginTop: 5 }} />
-
-          <Text style={styles.infoText}>
-            Once you indicate ineligibility, this case will become inactive.{' '}
+    <View style={instructionScreen.container}>
+      <View style={instructionScreen.screenContainer}>
+        <View style={instructionScreen.contentContainer}>
+          <Text style={fonts.instructionHeading}>
+            Do you want to mark your status as ineligible?
           </Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <LittlePerson style={{ marginTop: 5 }} />
 
-          <Text style={styles.infoText}>
-            You can still view and share case details, but won’t be able to
-            change your eligibility status or file a claim.{' '}
-          </Text>
-        </View>
-      </View>
+          <View style={instructionScreen.instructionContainer}>
+            <View style={instructionScreen.instructionRow}>
+              <Alarm />
+              <View style={instructionScreen.textContainer}>
+                <Text style={fonts.greyBody}>
+                  Once you indicate ineligibility, this case will become
+                  inactive.{' '}
+                </Text>
+              </View>
+            </View>
 
-      <View style={styles.footerContainer}>
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            style={[styles.buttonBase, styles.ineligbleButton]}
+            <View style={instructionScreen.instructionRow}>
+              <PersonCross />
+              <View style={instructionScreen.textContainer}>
+                <Text style={fonts.greyBody}>
+                  You can still view and share case details, but won’t be able
+                  to change your eligibility status or file a claim.{' '}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={instructionScreen.inLineButtons}>
+          <ButtonWhite
             onPress={() => router.back()}
+            $halfWidth
+            $centeredContent
           >
-            <Ex />
-            <Text style={styles.buttonText}>No, I don't</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.buttonBase, styles.eligibleButton]}
-            onPress={() => deleteCase()}
-          >
-            <Check />
-            <Text style={[styles.buttonText, styles.eligibleButtonText]}>
-              Yes, I do
-            </Text>
-          </TouchableOpacity>
+            <View style={inputScreenStyles.groupButtonContent}>
+              <Ex />
+              <Text style={fonts.blackButton}>No, I don't</Text>
+            </View>
+          </ButtonWhite>
+
+          <ButtonBlack onPress={() => deleteCase()} $halfWidth $centeredContent>
+            <View style={inputScreenStyles.groupButtonContent}>
+              <Check />
+              <Text style={fonts.whiteButton}>Yes, I do</Text>
+            </View>
+          </ButtonBlack>
         </View>
       </View>
     </View>

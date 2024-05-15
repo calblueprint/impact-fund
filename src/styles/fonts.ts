@@ -3,6 +3,12 @@ import { StyleSheet } from 'react-native';
 import { colors } from './colors';
 
 const baseFonts = StyleSheet.create({
+  instructionHeading: {
+    fontSize: 32,
+    fontWeight: '800',
+    fontStyle: 'normal',
+    color: colors.black,
+  },
   tabHeading: {
     fontSize: 32,
     fontWeight: '800',
