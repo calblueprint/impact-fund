@@ -12,13 +12,13 @@ import {
   ButtonWhite,
 } from '../../../../../Components/AuthButton/AuthButton';
 import { fonts } from '../../../../../styles/fonts';
+import instructionScreen from '../../../../../styles/instructionScreen';
 import {
   getCaseById,
   updateCaseStatus,
 } from '../../../../../supabase/queries/cases';
 import { Case, CaseUid, Eligibility } from '../../../../../types/types';
 import { openUrl } from '../../utils';
-import styles from '../styles';
 
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -50,18 +50,18 @@ export default function FileClaimScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={instructionScreen.container}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <View style={styles.screenContainer}>
-          <View style={styles.contentContainer}>
+        <View style={instructionScreen.screenContainer}>
+          <View style={instructionScreen.contentContainer}>
             <Text style={fonts.tabHeading}>Filing a claim</Text>
 
-            <View style={styles.infoContainer}>
-              <View style={styles.infoRow}>
+            <View style={instructionScreen.instructionContainer}>
+              <View style={instructionScreen.instructionRow}>
                 <Fileclaim />
-                <View style={styles.textContainer}>
+                <View style={instructionScreen.textContainer}>
                   <Text style={fonts.greyBody}>
                     Filing a claim commits you to the class action and any
                     potential compensation awarded
@@ -69,9 +69,9 @@ export default function FileClaimScreen() {
                 </View>
               </View>
 
-              <View style={styles.infoRow}>
+              <View style={instructionScreen.instructionRow}>
                 <Document />
-                <View style={styles.textContainer}>
+                <View style={instructionScreen.textContainer}>
                   <Text style={fonts.greyBody}>
                     Complete the required claim form on the official claim
                     filing site to submit your claim
@@ -79,9 +79,9 @@ export default function FileClaimScreen() {
                 </View>
               </View>
 
-              <View style={styles.infoRow}>
+              <View style={instructionScreen.instructionRow}>
                 <Checkbox />
-                <View style={styles.textContainer}>
+                <View style={instructionScreen.textContainer}>
                   <Text style={fonts.greyBody}>
                     Come back to this screen to update your claim filing status
                   </Text>
@@ -90,7 +90,7 @@ export default function FileClaimScreen() {
             </View>
           </View>
 
-          <View style={styles.buttonsContainer}>
+          <View style={instructionScreen.buttonsContainer}>
             <ButtonWhite onPress={() => navigateToClaimLink()}>
               <Text style={fonts.blackButton}>
                 Take me to claim filing site

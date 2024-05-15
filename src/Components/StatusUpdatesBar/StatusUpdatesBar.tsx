@@ -37,7 +37,7 @@ export default function StatusUpdatesBar({
       </View>
 
       <View style={[styles.statusContainer, statusColor.background]}>
-        <Text style={[styles.statusTextColor, statusColor.text]}>{status}</Text>
+        <Text style={[styles.statusText, statusColor.text]}>{status}</Text>
       </View>
     </TouchableOpacity>
   );

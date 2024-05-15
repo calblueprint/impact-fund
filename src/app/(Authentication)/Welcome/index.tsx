@@ -9,7 +9,6 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../Components/AuthButton/AuthButton';
-import { fonts } from '../../../styles/fonts';
 import { SafeArea } from '../../../styles/global';
 
 export default function WelcomeScreen() {

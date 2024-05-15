@@ -13,8 +13,8 @@ import {
 import { CaseContext } from '../../../../../../context/CaseContext';
 import { fonts } from '../../../../../../styles/fonts';
 import { inputScreenStyles } from '../../../../../../styles/inputScreen';
+import instructionScreen from '../../../../../../styles/instructionScreen';
 import { CaseUid } from '../../../../../../types/types';
-import styles from '../../styles';
 
 function ConfirmOptOut() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -30,24 +30,24 @@ function ConfirmOptOut() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screenContainer}>
-        <View style={styles.contentContainer}>
+    <View style={instructionScreen.container}>
+      <View style={instructionScreen.screenContainer}>
+        <View style={instructionScreen.contentContainer}>
           <Text style={fonts.tabHeading}>Indicate that you've opted out?</Text>
 
-          <View style={styles.infoContainer}>
-            <View style={styles.infoRow}>
+          <View style={instructionScreen.instructionContainer}>
+            <View style={instructionScreen.instructionRow}>
               <Warning />
-              <View style={styles.textContainer}>
+              <View style={instructionScreen.textContainer}>
                 <Text style={fonts.greyBody}>
                   Once you’ve opted out, this case will become inactive.
                 </Text>
               </View>
             </View>
 
-            <View style={styles.infoRow}>
+            <View style={instructionScreen.instructionRow}>
               <LittlePerson />
-              <View style={styles.textContainer}>
+              <View style={instructionScreen.textContainer}>
                 <Text style={fonts.greyBody}>
                   You can still view and share case details, but won’t be able
                   to change file a claim.
@@ -57,7 +57,7 @@ function ConfirmOptOut() {
           </View>
         </View>
 
-        <View style={styles.inLineButtons}>
+        <View style={instructionScreen.inLineButtons}>
           <ButtonWhite
             onPress={() => router.back()}
             $halfWidth

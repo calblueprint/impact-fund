@@ -24,40 +24,4 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
   },
-  titleText: {
-    fontSize: 32,
-    fontStyle: 'normal',
-    fontWeight: '700',
-    lineHeight: 33,
-    color: colors.black,
-  },
-  instructionText: {
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 22,
-    color: colors.darkGrey,
-  },
-  cameraContainer: {
-    width: '100%',
-    height: 57,
-    marginTop: 18,
-    backgroundColor: colors.white,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonInfoContainer: {
-    width: '66%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  cameraText: {
-    fontSize: 18,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 24,
-    color: colors.black,
-  },
 });

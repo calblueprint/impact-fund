@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../../styles/colors';
+import { colors } from '../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -19,11 +19,11 @@ export default StyleSheet.create({
     rowGap: 34,
     marginTop: 40,
   },
-  infoContainer: {
+  instructionContainer: {
     flexDirection: 'column',
     rowGap: 24,
   },
-  infoRow: {
+  instructionRow: {
     columnGap: 20,
     flexDirection: 'row',
   },

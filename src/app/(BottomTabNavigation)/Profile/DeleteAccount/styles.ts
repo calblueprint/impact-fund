@@ -22,31 +22,4 @@ export default StyleSheet.create({
     rowGap: 20,
     marginTop: 85,
   },
-  topText: {
-    fontSize: 38,
-    fontStyle: 'normal',
-    fontWeight: '800',
-    color: colors.black,
-  },
-  blurb: {
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    color: colors.black,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 48,
-  },
-  buttonView: {
-    width: '48%',
-    justifyContent: 'center',
-  },
-  buttonContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    columnGap: 15,
-  },
 });

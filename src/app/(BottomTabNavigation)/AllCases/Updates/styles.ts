@@ -25,10 +25,4 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
   },
-  titleText: {
-    fontSize: 32,
-    lineHeight: 33,
-    fontStyle: 'normal',
-    fontWeight: '600',
-  },
 });

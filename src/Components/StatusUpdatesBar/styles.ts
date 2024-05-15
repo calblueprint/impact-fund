@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { colors } from '../../styles/colors';
+
 export default StyleSheet.create({
   updatesButton: {
     width: '100%',
@@ -36,7 +37,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     columnGap: 10,
   },
-  statusTextColor: {
+  statusText: {
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: '500',

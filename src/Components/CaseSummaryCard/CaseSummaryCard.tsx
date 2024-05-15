@@ -19,11 +19,7 @@ export default function CaseSummaryCard({
 }: CaseSummaryProps) {
   return (
     <TouchableOpacity
-      onPress={() => {
-        router.push({
-          pathname: `/AllCases/CaseSummaryScreen/${id}`,
-        });
-      }}
+      onPress={() => router.push(`/AllCases/CaseSummaryScreen/${id}`)}
     >
       <View style={[styles.container, shawdowStyles.shadowBorder]}>
         <Image

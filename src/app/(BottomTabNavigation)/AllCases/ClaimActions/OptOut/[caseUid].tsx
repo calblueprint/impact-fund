@@ -11,10 +11,10 @@ import {
   ButtonWhite,
 } from '../../../../../Components/AuthButton/AuthButton';
 import { fonts } from '../../../../../styles/fonts';
+import instructionScreen from '../../../../../styles/instructionScreen';
 import { getCaseById } from '../../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../../types/types';
 import { openUrl } from '../../utils';
-import styles from '../styles';
 
 export default function OptOutScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -39,18 +39,18 @@ export default function OptOutScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={instructionScreen.container}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
-        <View style={styles.screenContainer}>
-          <View style={styles.contentContainer}>
+        <View style={instructionScreen.screenContainer}>
+          <View style={instructionScreen.contentContainer}>
             <Text style={fonts.tabHeading}>Opting out of a case</Text>
 
-            <View style={styles.infoContainer}>
-              <View style={styles.infoRow}>
+            <View style={instructionScreen.instructionContainer}>
+              <View style={instructionScreen.instructionRow}>
                 <Mail />
-                <View style={styles.textContainer}>
+                <View style={instructionScreen.textContainer}>
                   <Text style={fonts.greyBody}>
                     You must first Opt-Out on the official case website linked
                     below.{' '}
@@ -58,9 +58,9 @@ export default function OptOutScreen() {
                 </View>
               </View>
 
-              <View style={styles.infoRow}>
+              <View style={instructionScreen.instructionRow}>
                 <Reset />
-                <View style={styles.textContainer}>
+                <View style={instructionScreen.textContainer}>
                   <Text style={fonts.greyBody}>
                     Once you opt-out online, please confirm that you've opted
                     out on the following screen.{' '}
@@ -70,7 +70,7 @@ export default function OptOutScreen() {
             </View>
           </View>
 
-          <View style={styles.buttonsContainer}>
+          <View style={instructionScreen.buttonsContainer}>
             <ButtonWhite onPress={navigateToOptOutLink}>
               <Text style={fonts.blackButton}>Take Me to Opt Out Link</Text>
               <BlackRightArrow />

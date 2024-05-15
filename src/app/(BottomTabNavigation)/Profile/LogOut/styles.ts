@@ -18,36 +18,4 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     rowGap: 25,
   },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  buttonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 15,
-  },
-  halfButton: {
-    // height: 45,
-    // width: '48%',
-    // justifyContent: 'center',
-  },
-  topText: {
-    fontSize: 38,
-    fontStyle: 'normal',
-    fontWeight: '800',
-    color: colors.black,
-  },
-  cancelText: {
-    color: colors.black,
-    fontSize: 17,
-    fontStyle: 'normal',
-    fontWeight: '500',
-  },
-  confirmText: {
-    color: colors.white,
-    fontSize: 17,
-    fontStyle: 'normal',
-    fontWeight: '500',
-  },
 });

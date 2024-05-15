@@ -19,13 +19,6 @@ export default StyleSheet.create({
     rowGap: 20,
     paddingBottom: 20,
   },
-  headerContainer: {
-    flex: 0.2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
   titleContainer: {
     flexDirection: 'row',
     paddingVertical: 12,
