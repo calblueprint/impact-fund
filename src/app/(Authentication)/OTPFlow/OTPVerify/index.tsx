@@ -6,11 +6,11 @@ import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function OTPFlow() {
@@ -51,8 +51,8 @@ export default function OTPFlow() {
   };
 
   return (
-    <SafeArea>
-      <ContentContainer>
+    <View style={device.safeArea}>
+      <View style={device.content}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Enter verification code.</Text>
           <Text style={fonts.greySmall}>We've sent it to {email}</Text>
@@ -93,7 +93,7 @@ export default function OTPFlow() {
           <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

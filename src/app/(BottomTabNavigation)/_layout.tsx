@@ -7,7 +7,7 @@ import GreyScannerIcon from '../../../assets/bottom-tab-scanner-inactive.svg';
 import RedScannerIcon from '../../../assets/bottom-tab-scanner.svg';
 import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg';
 import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
-import TabBarItem from '../../Components/TabBarItem/TabBarItem';
+import TabBarItem from '../../components/TabBarItem/TabBarItem';
 import { CaseContextProvider } from '../../context/CaseContext';
 
 export default function AppLayout() {

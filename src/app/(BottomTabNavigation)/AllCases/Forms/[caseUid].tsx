@@ -4,8 +4,8 @@ import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import { getAllForms } from './utils';
-import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
-import FormListItem from '../../../../Components/FormListItem/FormListItem';
+import ExternalSiteLink from '../../../../components/ExternalSiteLink/ExternalSiteLink';
+import FormListItem from '../../../../components/FormListItem/FormListItem';
 import { fonts } from '../../../../styles/fonts';
 import { Form, CaseUid } from '../../../../types/types';
 

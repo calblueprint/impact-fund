@@ -4,7 +4,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
-import CaseCard from '../../../Components/CaseCard/CaseCard';
+import CaseCard from '../../../components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';

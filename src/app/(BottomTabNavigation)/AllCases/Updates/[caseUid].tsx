@@ -4,8 +4,8 @@ import { View, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
-import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
+import CaseStatusBar from '../../../../components/CaseStatusBar/CaseStatusBar';
+import UpdateItem from '../../../../components/UpdateItem/UpdateItem';
 import { fonts } from '../../../../styles/fonts';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';

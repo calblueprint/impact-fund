@@ -5,18 +5,17 @@ import { colors } from '../../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
+    minheight: '100%',
     backgroundColor: colors.white,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   contentContainer: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    height: '84%',
     width: '81%',
-    paddingVertical: 40,
+    marginBottom: 200,
   },
   textContainer: {
     marginTop: 275,

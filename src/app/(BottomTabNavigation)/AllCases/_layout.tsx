@@ -4,12 +4,12 @@ import React from 'react';
 import {
   BackButtonNoText,
   BackButtonText,
-} from '../../../Components/BackButtons/BackButtons';
+} from '../../../components/BackButtons/BackButtons';
 import {
   LeftAlignedHeaderLine,
   HeaderImage,
   EmptyHeader,
-} from '../../../Components/HeaderComponents/HeaderComponents';
+} from '../../../components/HeaderComponents/HeaderComponents';
 
 export default function CasesLayout() {
   return (

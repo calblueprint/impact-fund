@@ -1,11 +1,11 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import { BackButtonNoText } from '../../Components/BackButtons/BackButtons';
+import { BackButtonNoText } from '../../components/BackButtons/BackButtons';
 import {
   LeftAlignedHeader,
   EmptyHeader,
-} from '../../Components/HeaderComponents/HeaderComponents';
+} from '../../components/HeaderComponents/HeaderComponents';
 import { CaseContextProvider } from '../../context/CaseContext';
 
 export default function CasesLayout() {

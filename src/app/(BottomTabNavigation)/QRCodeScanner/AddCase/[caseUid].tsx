@@ -8,8 +8,8 @@ import CancelIcon from '../../../../../assets/cancel-x-icon.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../Components/AuthButton/AuthButton';
-import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
+} from '../../../../components/AuthButton/AuthButton';
+import CaseSummaryContent from '../../../../components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { input } from '../../../../styles/input';

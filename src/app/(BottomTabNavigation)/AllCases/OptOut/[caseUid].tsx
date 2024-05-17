@@ -9,7 +9,7 @@ import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+} from '../../../../components/AuthButton/AuthButton';
 import { fonts } from '../../../../styles/fonts';
 import { instruction } from '../../../../styles/instruction';
 import { getCaseById } from '../../../../supabase/queries/cases';

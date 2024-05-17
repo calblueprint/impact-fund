@@ -4,10 +4,10 @@ import { Text, View } from 'react-native';
 import { z } from 'zod';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
-import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
+import AuthInput from '../../../../components/AuthInput/AuthInput';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
@@ -60,8 +60,8 @@ export default function SignUpScreen() {
   };
 
   return (
-    <SafeArea>
-      <ContentContainer>
+    <View style={device.safeArea}>
+      <View style={device.content}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Create your account.</Text>
         </View>
@@ -100,7 +100,7 @@ export default function SignUpScreen() {
           <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
-import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
+import AuthInput from '../../../../components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function LoginScreen() {
@@ -38,8 +38,8 @@ export default function LoginScreen() {
   }
 
   return (
-    <SafeArea>
-      <ContentContainer>
+    <View style={device.safeArea}>
+      <View style={device.content}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Please enter your password.</Text>
         </View>
@@ -78,7 +78,7 @@ export default function LoginScreen() {
             <Arrow />
           </ButtonBlack>
         </View>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

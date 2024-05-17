@@ -1,12 +1,12 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import { BackButtonNoText } from '../../../Components/BackButtons/BackButtons';
+import { BackButtonNoText } from '../../../components/BackButtons/BackButtons';
 import {
   EmptyHeader,
   LeftAlignedHeader,
   LeftAlignedHeaderLine,
-} from '../../../Components/HeaderComponents/HeaderComponents';
+} from '../../../components/HeaderComponents/HeaderComponents';
 
 export default function ProfileLayout() {
   return (

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
 import styles from './styles';
-import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
-import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
+import CaseSummaryContent from '../../../../components/CaseSummaryContent/CaseSummaryContent';
+import ExternalSiteLink from '../../../../components/ExternalSiteLink/ExternalSiteLink';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case } from '../../../../types/types';
 

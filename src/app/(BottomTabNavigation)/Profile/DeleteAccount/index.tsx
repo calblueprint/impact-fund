@@ -8,7 +8,7 @@ import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+} from '../../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { SafeArea } from '../../../../styles/global';

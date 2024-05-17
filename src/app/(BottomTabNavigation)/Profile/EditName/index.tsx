@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
 import Submit from '../../../../../assets/submit.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
-import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
+import AuthInput from '../../../../components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { ContentContainer, SafeArea } from '../../../../styles/global';

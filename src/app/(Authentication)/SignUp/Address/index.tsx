@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 
 import Check from '../../../../../assets/check-circle.svg';
-import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
-import AuthInput from '../../../../Components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
+import AuthInput from '../../../../components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
@@ -68,8 +68,8 @@ export default function SignUpScreen() {
   };
 
   return (
-    <SafeArea>
-      <ContentContainer>
+    <View style={device.safeArea}>
+      <View style={device.content}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Last, enter your address.</Text>
         </View>
@@ -135,7 +135,7 @@ export default function SignUpScreen() {
             <Check />
           </View>
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }
