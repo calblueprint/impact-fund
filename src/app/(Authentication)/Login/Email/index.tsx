@@ -34,7 +34,7 @@ export default function LoginScreen() {
 
   return (
     <View style={device.safeArea}>
-      <View style={device.content}>
+      <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Please enter your email address.</Text>
         </View>
