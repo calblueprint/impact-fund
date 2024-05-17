@@ -3,6 +3,6 @@
     "strict": true
   },
   "extends": "expo/tsconfig.base",
-  "include": ["custom.d.ts", "src/"],
+  "include": ["custom.d.ts", "App.tsx", "src/**/*"],
   "exclude": ["supabase/functions/*"]
 }
