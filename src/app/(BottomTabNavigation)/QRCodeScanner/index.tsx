@@ -17,6 +17,7 @@ import ErrorIcon from '../../../../assets/warning.svg';
 import { ButtonBlack } from '../../../components/AuthButton/AuthButton';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import { getScannedData } from '../../../supabase/queries/cases';
 import { Case } from '../../../types/types';
 
@@ -176,10 +177,12 @@ export default function QRCodeScannerScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[device.safeArea, styles.centered]}>
       <Toast position="top" topOffset={20} config={toastConfig} />
 
-      <Text style={styles.topText}>Point your Camera at the QR code.</Text>
+      <Text style={fonts.condensedHeadline}>
+        Point your Camera at the QR code.
+      </Text>
       <Camera
         onBarCodeScanned={handleBarCodeScanned}
         barCodeScannerSettings={{

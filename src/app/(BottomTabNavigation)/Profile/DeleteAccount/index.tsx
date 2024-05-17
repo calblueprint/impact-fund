@@ -11,7 +11,7 @@ import {
 } from '../../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function DeleteAccountScreen() {
@@ -25,7 +25,7 @@ export default function DeleteAccountScreen() {
   };
 
   return (
-    <SafeArea>
+    <View style={device.safeArea}>
       <View style={styles.screenContainer}>
         <View style={styles.textContainer}>
           <Text style={fonts.instructionHeading}>Delete account?</Text>
@@ -55,6 +55,6 @@ export default function DeleteAccountScreen() {
           </ButtonBlack>
         </View>
       </View>
-    </SafeArea>
+    </View>
   );
 }

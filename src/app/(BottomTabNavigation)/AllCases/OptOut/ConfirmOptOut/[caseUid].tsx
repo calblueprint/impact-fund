@@ -12,6 +12,7 @@ import {
 } from '../../../../../components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
+import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
 import { instruction } from '../../../../../styles/instruction';
 import { CaseUid } from '../../../../../types/types';
@@ -30,7 +31,7 @@ function ConfirmOptOut() {
   }
 
   return (
-    <View style={instruction.container}>
+    <View style={device.safeArea}>
       <View style={instruction.screenContainer}>
         <View style={instruction.contentContainer}>
           <Text style={fonts.instructionHeading}>

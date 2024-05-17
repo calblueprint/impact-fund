@@ -5,7 +5,7 @@ import { View, Text, ScrollView } from 'react-native';
 import styles from './styles';
 import NotificationBell from '../../../../../../assets/red-notification-bell.svg';
 import { fonts } from '../../../../../styles/fonts';
-import { shawdowStyles } from '../../../../../styles/global';
+import { device, shawdowStyles } from '../../../../../styles/global';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
 import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
@@ -28,7 +28,7 @@ export default function UpdateView() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {update === undefined ? (
         <Text>Loading...</Text>
       ) : (

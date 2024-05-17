@@ -13,6 +13,7 @@ import {
 } from '../../../../components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../components/PressableRequirement/PressableRequirement';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 import {
   updateCaseStatus,
@@ -65,7 +66,7 @@ export default function EligibilityForm() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (

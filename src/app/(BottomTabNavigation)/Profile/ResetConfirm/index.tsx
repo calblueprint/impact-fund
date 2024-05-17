@@ -11,7 +11,7 @@ import {
 } from '../../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { SafeArea } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
 
 export default function ResetConfirm() {
@@ -34,7 +34,7 @@ export default function ResetConfirm() {
     setErrorExists(false);
   };
   return (
-    <SafeArea>
+    <View style={device.safeArea}>
       <View style={instruction.screenContainer}>
         <View style={instruction.contentContainer}>
           <Text style={fonts.instructionHeading}>Reset Password</Text>
@@ -72,6 +72,6 @@ export default function ResetConfirm() {
           </ButtonBlack>
         </View>
       </View>
-    </SafeArea>
+    </View>
   );
 }

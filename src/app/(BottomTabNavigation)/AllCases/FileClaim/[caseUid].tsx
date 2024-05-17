@@ -12,6 +12,7 @@ import {
   ButtonWhite,
 } from '../../../../components/AuthButton/AuthButton';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
 import {
   getCaseById,
@@ -50,7 +51,7 @@ export default function FileClaimScreen() {
   }, []);
 
   return (
-    <View style={instruction.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (

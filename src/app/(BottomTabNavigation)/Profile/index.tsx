@@ -15,7 +15,7 @@ import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
 import { ButtonBlack } from '../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
 import { fonts } from '../../../styles/fonts';
-import { shawdowStyles } from '../../../styles/global';
+import { device, shawdowStyles } from '../../../styles/global';
 import { input } from '../../../styles/input';
 
 export default function ProfileScreen() {
@@ -27,7 +27,7 @@ export default function ProfileScreen() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.contentContainer}>
         <View style={styles.titleContainer}>
           <Text style={fonts.tabHeading}>Settings</Text>

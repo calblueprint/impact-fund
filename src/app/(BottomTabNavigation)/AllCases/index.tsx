@@ -8,6 +8,7 @@ import CaseCard from '../../../components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import {
   registerForPushNotifications,
   updatePushToken,
@@ -75,7 +76,7 @@ function CasesScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.casesContainer}>
         {loading ? (
           <Text>Loading...</Text>

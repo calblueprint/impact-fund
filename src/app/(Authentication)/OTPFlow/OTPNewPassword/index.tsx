@@ -67,7 +67,7 @@ export default function OTPNewPassword() {
 
   return (
     <View style={device.safeArea}>
-      <View style={device.content}>
+      <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Create a new password.</Text>
         </View>

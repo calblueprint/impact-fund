@@ -10,10 +10,6 @@ export const device = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
   },
-  content: {
-    paddingTop: 40,
-    width: '84%',
-  },
 });
 
 export const shawdowStyles = StyleSheet.create({

@@ -1,17 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../../styles/colors';
-
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    backgroundColor: colors.white,
-  },
   outerScroll: {
-    height: '84%',
+    height: '100%',
     width: '92%',
   },
   innerScroll: {

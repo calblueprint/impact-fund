@@ -12,6 +12,7 @@ import {
 import CaseSummaryContent from '../../../../components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
@@ -39,7 +40,7 @@ export default function AddCase() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (

@@ -7,6 +7,7 @@ import styles from './styles';
 import CaseStatusBar from '../../../../components/CaseStatusBar/CaseStatusBar';
 import UpdateItem from '../../../../components/UpdateItem/UpdateItem';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';
 import { Update, CaseUid, Case } from '../../../../types/types';
@@ -37,7 +38,7 @@ export default function UpdatesScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {isLoading || caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (

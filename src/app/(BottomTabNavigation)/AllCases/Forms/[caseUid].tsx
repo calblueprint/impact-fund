@@ -7,6 +7,7 @@ import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../components/FormListItem/FormListItem';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { Form, CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
@@ -32,7 +33,7 @@ export default function FormsScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <Text style={fonts.tabHeading}>Documents</Text>

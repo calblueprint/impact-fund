@@ -11,6 +11,7 @@ import EligibilityCard from '../../../../components/EligibilityCard/EligibilityC
 import FormsCard from '../../../../components/FormsCard/FormsCard';
 import StatusUpdatesBar from '../../../../components/StatusUpdatesBar/StatusUpdatesBar';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
@@ -49,7 +50,7 @@ function CaseScreen() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {isLoading || caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (

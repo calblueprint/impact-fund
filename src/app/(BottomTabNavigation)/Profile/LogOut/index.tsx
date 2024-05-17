@@ -11,13 +11,14 @@ import {
 } from '../../../../components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function LogOutConfirmation() {
   const { signOut } = useSession();
 
   return (
-    <View style={styles.container}>
+    <View style={[device.safeArea, { justifyContent: 'flex-end' }]}>
       <View style={styles.screenContainer}>
         <Text style={fonts.tabHeading}>
           Are you sure you'd like to log out?

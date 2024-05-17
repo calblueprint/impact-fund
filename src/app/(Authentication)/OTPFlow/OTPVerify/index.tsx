@@ -52,7 +52,7 @@ export default function OTPFlow() {
 
   return (
     <View style={device.safeArea}>
-      <View style={device.content}>
+      <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Enter verification code.</Text>
           <Text style={fonts.greySmall}>We've sent it to {email}</Text>

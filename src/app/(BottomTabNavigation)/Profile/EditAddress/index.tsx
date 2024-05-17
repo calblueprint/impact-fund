@@ -7,7 +7,7 @@ import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
 import AuthInput from '../../../../components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
-import { ContentContainer, SafeArea } from '../../../../styles/global';
+import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function EditAddressScreen() {
@@ -63,8 +63,8 @@ export default function EditAddressScreen() {
   }, []);
 
   return (
-    <SafeArea>
-      <ContentContainer>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Edit account details</Text>
         </View>
@@ -124,7 +124,7 @@ export default function EditAddressScreen() {
             <Submit />
           </View>
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

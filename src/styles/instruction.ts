@@ -1,14 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from './colors';
-
 export const instruction = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    rowGap: 10,
-  },
   screenContainer: {
     width: '84%',
     height: '100%',

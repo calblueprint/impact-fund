@@ -61,7 +61,7 @@ export default function SignUpScreen() {
 
   return (
     <View style={device.safeArea}>
-      <View style={device.content}>
+      <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Create your account.</Text>
         </View>

@@ -11,6 +11,7 @@ import {
   ButtonWhite,
 } from '../../../../components/AuthButton/AuthButton';
 import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
@@ -39,7 +40,7 @@ export default function OptOutScreen() {
   }, []);
 
   return (
-    <View style={instruction.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
