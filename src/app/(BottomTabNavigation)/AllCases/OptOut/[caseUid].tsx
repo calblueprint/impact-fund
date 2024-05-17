@@ -2,19 +2,19 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-import Mail from '../../../../../../assets/big-envelope.svg';
-import BlackRightArrow from '../../../../../../assets/black-right-arrow.svg';
-import Reset from '../../../../../../assets/reset-password-refresh.svg';
-import RightWhiteArrow from '../../../../../../assets/right-arrow-white.svg';
+import Mail from '../../../../../assets/big-envelope.svg';
+import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
+import Reset from '../../../../../assets/reset-password-refresh.svg';
+import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../../Components/AuthButton/AuthButton';
-import { fonts } from '../../../../../styles/fonts';
-import { instruction } from '../../../../../styles/instruction';
-import { getCaseById } from '../../../../../supabase/queries/cases';
-import { Case, CaseUid } from '../../../../../types/types';
-import { openUrl } from '../../utils';
+} from '../../../../Components/AuthButton/AuthButton';
+import { fonts } from '../../../../styles/fonts';
+import { instruction } from '../../../../styles/instruction';
+import { getCaseById } from '../../../../supabase/queries/cases';
+import { Case, CaseUid } from '../../../../types/types';
+import { openUrl } from '../utils';
 
 export default function OptOutScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -78,9 +78,7 @@ export default function OptOutScreen() {
 
             <ButtonBlack
               onPress={() =>
-                router.push(
-                  `/AllCases/ClaimActions/OptOut/ConfirmOptOut/${caseUid}`,
-                )
+                router.push(`/AllCases/OptOut/ConfirmOptOut/${caseUid}`)
               }
             >
               <Text style={fonts.whiteButton}>I've Already Opted Out</Text>

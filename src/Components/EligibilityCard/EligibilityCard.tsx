@@ -27,14 +27,14 @@ export default function EligibleFilingOptions({
           mainText="Eligible class members can submit a claim electronically to
         receive a settlement."
           instructionText="File or update my claim"
-          route={`/AllCases/ClaimActions/FileClaim/${caseUid}`}
+          route={`/AllCases/FileClaim/${caseUid}`}
         />
       ) : (
         <EligibleFilingButton
           mainText="Opt out to remove yourself from this class action and deactivate
           this case."
           instructionText="View options for opting out"
-          route={`/AllCases/ClaimActions/OptOut/${caseUid}`}
+          route={`/AllCases/OptOut/${caseUid}`}
         />
       )}
     </View>

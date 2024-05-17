@@ -28,7 +28,7 @@ export default function DeleteAccountScreen() {
     <SafeArea>
       <View style={styles.screenContainer}>
         <View style={styles.textContainer}>
-          <Text style={fonts.tabHeading}>Delete account?</Text>
+          <Text style={fonts.instructionHeading}>Delete account?</Text>
           <Text style={fonts.greyBody}>
             Deleting your account will also permanently delete any data
             associated with it. This action cannot be undone.

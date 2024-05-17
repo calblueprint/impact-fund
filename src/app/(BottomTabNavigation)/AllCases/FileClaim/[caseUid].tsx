@@ -2,23 +2,23 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-import BlackRightArrow from '../../../../../../assets/black-right-arrow.svg';
-import Document from '../../../../../../assets/document-add.svg';
-import Checkbox from '../../../../../../assets/double-checkbox.svg';
-import Fileclaim from '../../../../../../assets/file-claim-small.svg';
-import RightWhiteArrow from '../../../../../../assets/right-arrow-white.svg';
+import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
+import Document from '../../../../../assets/document-add.svg';
+import Checkbox from '../../../../../assets/double-checkbox.svg';
+import Fileclaim from '../../../../../assets/file-claim-small.svg';
+import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../../Components/AuthButton/AuthButton';
-import { fonts } from '../../../../../styles/fonts';
-import { instruction } from '../../../../../styles/instruction';
+} from '../../../../Components/AuthButton/AuthButton';
+import { fonts } from '../../../../styles/fonts';
+import { instruction } from '../../../../styles/instruction';
 import {
   getCaseById,
   updateCaseStatus,
-} from '../../../../../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../../../../../types/types';
-import { openUrl } from '../../utils';
+} from '../../../../supabase/queries/cases';
+import { Case, CaseUid, Eligibility } from '../../../../types/types';
+import { openUrl } from '../utils';
 
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();

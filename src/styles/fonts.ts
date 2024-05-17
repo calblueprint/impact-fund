@@ -4,7 +4,7 @@ import { colors } from './colors';
 
 const baseFonts = StyleSheet.create({
   instructionHeading: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: '800',
     fontStyle: 'normal',
     color: colors.black,

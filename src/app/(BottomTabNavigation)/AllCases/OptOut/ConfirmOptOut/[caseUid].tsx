@@ -2,19 +2,19 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 
-import CircleCheckWhite from '../../../../../../../assets/circle-check-white.svg';
-import LittlePerson from '../../../../../../../assets/little-person.svg';
-import Warning from '../../../../../../../assets/open-warning.svg';
-import X from '../../../../../../../assets/x.svg';
+import CircleCheckWhite from '../../../../../../assets/circle-check-white.svg';
+import LittlePerson from '../../../../../../assets/little-person.svg';
+import Warning from '../../../../../../assets/open-warning.svg';
+import X from '../../../../../../assets/x.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../../../../context/CaseContext';
-import { fonts } from '../../../../../../styles/fonts';
-import { input } from '../../../../../../styles/input';
-import { instruction } from '../../../../../../styles/instruction';
-import { CaseUid } from '../../../../../../types/types';
+} from '../../../../../Components/AuthButton/AuthButton';
+import { CaseContext } from '../../../../../context/CaseContext';
+import { fonts } from '../../../../../styles/fonts';
+import { input } from '../../../../../styles/input';
+import { instruction } from '../../../../../styles/instruction';
+import { CaseUid } from '../../../../../types/types';
 
 function ConfirmOptOut() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
