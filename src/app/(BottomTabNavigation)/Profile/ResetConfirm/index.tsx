@@ -8,7 +8,7 @@ import Arrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonTextWhite,
-} from '../../../../components/AuthButton/AuthButton';
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';

@@ -12,7 +12,7 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
-import { ButtonBlack } from '../../../components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
 import { fonts } from '../../../styles/fonts';
 import { device, shawdowStyles } from '../../../styles/global';

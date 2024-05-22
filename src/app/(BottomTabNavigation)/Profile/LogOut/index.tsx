@@ -8,7 +8,7 @@ import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../components/AuthButton/AuthButton';
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';

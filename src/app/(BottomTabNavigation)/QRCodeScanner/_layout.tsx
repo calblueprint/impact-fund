@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 
-import { BackButtonNoText } from '../../../components/BackButtons/BackButtons';
-import { HeaderImage } from '../../../components/HeaderComponents/HeaderComponents';
+import { BackButtonNoText } from '../../../Components/BackButtons/BackButtons';
+import { HeaderImage } from '../../../Components/HeaderComponents/HeaderComponents';
 
 export default function QRCodeScannerLayout() {
   return (

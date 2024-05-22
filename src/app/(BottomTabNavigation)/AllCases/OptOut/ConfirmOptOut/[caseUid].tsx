@@ -9,7 +9,7 @@ import X from '../../../../../../assets/x.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../../components/AuthButton/AuthButton';
+} from '../../../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';

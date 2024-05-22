@@ -8,7 +8,7 @@ import RightArrow from '../../../../assets/right-arrow.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../components/AuthButton/AuthButton';
+} from '../../../Components/AuthButton/AuthButton';
 import { device } from '../../../styles/global';
 
 export default function WelcomeScreen() {

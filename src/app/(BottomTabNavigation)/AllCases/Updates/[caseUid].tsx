@@ -1,11 +1,10 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
-import CaseStatusBar from '../../../../components/CaseStatusBar/CaseStatusBar';
-import UpdateItem from '../../../../components/UpdateItem/UpdateItem';
+import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
+import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { getCaseById } from '../../../../supabase/queries/cases';

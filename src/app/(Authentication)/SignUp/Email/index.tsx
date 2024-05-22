@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import { z } from 'zod';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
-import AuthInput from '../../../../components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';

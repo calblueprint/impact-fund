@@ -6,7 +6,7 @@ import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
 import { fonts } from '../../../../styles/fonts';

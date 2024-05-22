@@ -9,7 +9,7 @@ import RightWhiteArrow from '../../../../../assets/right-arrow-white.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../components/AuthButton/AuthButton';
+} from '../../../../Components/AuthButton/AuthButton';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';

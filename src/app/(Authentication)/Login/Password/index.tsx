@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import { ButtonBlack } from '../../../../components/AuthButton/AuthButton';
-import AuthInput from '../../../../components/AuthInput/AuthInput';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
+import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';

@@ -10,8 +10,8 @@ import Ex from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
   ButtonWhite,
-} from '../../../../components/AuthButton/AuthButton';
-import PressableRequirement from '../../../../components/PressableRequirement/PressableRequirement';
+} from '../../../../Components/AuthButton/AuthButton';
+import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
