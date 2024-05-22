@@ -18,45 +18,10 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  rightContainer: {
-    flex: 0.05,
-    alignItems: 'flex-end',
-  },
-  separatorComponent: {
-    height: 33,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  textContainer: {
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   horizontalLine: {
     height: 0.5,
     marginVertical: 15,
     backgroundColor: colors.midGrey,
-  },
-  headerText: {
-    fontSize: 20,
-    fontStyle: 'normal',
-    fontWeight: '600',
-    lineHeight: 21,
-    color: colors.black,
-  },
-  bodyText: {
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.black,
-  },
-  separatorText: {
-    fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.black,
   },
   topContainer: {
     justifyContent: 'space-between',
@@ -67,12 +32,5 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-  },
-  smallText: {
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.darkGrey,
   },
 });

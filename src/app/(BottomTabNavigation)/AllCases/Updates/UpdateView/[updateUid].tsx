@@ -4,7 +4,8 @@ import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import NotificationBell from '../../../../../../assets/red-notification-bell.svg';
-import { shawdowStyles } from '../../../../../styles/global';
+import { fonts } from '../../../../../styles/fonts';
+import { device, shawdowStyles } from '../../../../../styles/global';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
 import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
@@ -27,7 +28,7 @@ export default function UpdateView() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {update === undefined ? (
         <Text>Loading...</Text>
       ) : (
@@ -43,7 +44,7 @@ export default function UpdateView() {
                   <Text style={styles.categoryText}>
                     {update.category.toUpperCase()}
                   </Text>
-                  <Text style={styles.titleText}>{update.title}</Text>
+                  <Text style={fonts.condensedHeadline}>{update.title}</Text>
                 </View>
               </View>
               <View style={styles.inLineSubInfo}>
@@ -55,7 +56,9 @@ export default function UpdateView() {
                   • {formatDate(update.date)}
                 </Text>
               </View>
-              <Text style={styles.bodyText}>{update.summary}</Text>
+              <Text style={[fonts.body, styles.bodyText]}>
+                {update.summary}
+              </Text>
             </View>
           </ScrollView>
         </>

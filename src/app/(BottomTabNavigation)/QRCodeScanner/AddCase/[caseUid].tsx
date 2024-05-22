@@ -1,12 +1,19 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useContext, useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
 import AddCaseIcon from '../../../../../assets/add-case-icon.svg';
 import CancelIcon from '../../../../../assets/cancel-x-icon.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import { CaseContext } from '../../../../context/CaseContext';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
@@ -33,29 +40,34 @@ export default function AddCase() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
         <>
           <CaseSummaryContent {...caseData} />
           <View style={styles.linkContainer}>
-            <TouchableOpacity
+            <ButtonWhite
               onPress={() => router.back()}
-              style={[styles.buttonBase, styles.cancelButton]}
+              $halfWidth
+              $centeredContent
             >
-              <CancelIcon />
-              <Text style={[styles.buttonText, styles.blackText]}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              <View style={input.groupButtonContent}>
+                <CancelIcon />
+                <Text style={fonts.blackButton}>Cancel</Text>
+              </View>
+            </ButtonWhite>
+
+            <ButtonBlack
               onPress={() => addToCases(caseData)}
-              style={[styles.buttonBase, styles.addCaseButton]}
+              $halfWidth
+              $centeredContent
             >
-              <AddCaseIcon />
-              <Text style={[styles.buttonText, styles.whiteText]}>
-                Add Case
-              </Text>
-            </TouchableOpacity>
+              <View style={input.groupButtonContent}>
+                <AddCaseIcon />
+                <Text style={fonts.whiteButton}>Add Case</Text>
+              </View>
+            </ButtonBlack>
           </View>
         </>
       )}

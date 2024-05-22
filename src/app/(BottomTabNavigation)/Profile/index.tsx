@@ -12,17 +12,14 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../Components/AuthButton/AuthButton';
-import { GroupButtonContent } from '../../../Components/InputScreenStyles/InputScreenStyles';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
-import { shawdowStyles } from '../../../styles/global';
+import { fonts } from '../../../styles/fonts';
+import { device, shawdowStyles } from '../../../styles/global';
+import { input } from '../../../styles/input';
 
-function ProfileScreen() {
+export default function ProfileScreen() {
   const navigation = useNavigation();
-
   const { session } = useSession();
 
   useEffect(() => {
@@ -30,9 +27,12 @@ function ProfileScreen() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>Settings</Text>
+        <View style={styles.titleContainer}>
+          <Text style={fonts.tabHeading}>Settings</Text>
+        </View>
+
         <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
@@ -43,6 +43,7 @@ function ProfileScreen() {
           </View>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditName')}
@@ -60,6 +61,7 @@ function ProfileScreen() {
           </TouchableOpacity>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditAddress')}
@@ -123,15 +125,13 @@ function ProfileScreen() {
             router.push('/Profile/LogOut');
           }}
         >
-          <GroupButtonContent>
+          <View style={input.groupButtonContent}>
             <SignOut />
-            <ButtonTextWhite>Log out</ButtonTextWhite>
-          </GroupButtonContent>
+            <Text style={fonts.whiteButton}>Log out</Text>
+          </View>
           <WhiteRightCarrot />
         </ButtonBlack>
       </View>
     </View>
   );
 }
-
-export default ProfileScreen;

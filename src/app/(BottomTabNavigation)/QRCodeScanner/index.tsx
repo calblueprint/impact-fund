@@ -1,9 +1,9 @@
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BarCodeScanningResult, Camera } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
-import { debounce, delay } from 'lodash';
+import { debounce } from 'lodash';
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Toast, {
   ErrorToast,
   SuccessToast,
@@ -11,10 +11,13 @@ import Toast, {
 } from 'react-native-toast-message';
 
 import styles from './styles';
-import Arrow from '../../../../assets/black-right-arrow.svg';
 import CheckIcon from '../../../../assets/green-check.svg';
+import Arrow from '../../../../assets/right-arrow-white.svg';
 import ErrorIcon from '../../../../assets/warning.svg';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../context/CaseContext';
+import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import { getScannedData } from '../../../supabase/queries/cases';
 import { Case } from '../../../types/types';
 
@@ -24,7 +27,7 @@ enum permissions {
   GRANTED,
 }
 
-function QRCodeScannerScreen() {
+export default function QRCodeScannerScreen() {
   const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
   const [scannedCase, setScannedCase] = useState<Case>();
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
@@ -40,10 +43,7 @@ function QRCodeScannerScreen() {
     success: (props: any) => (
       <SuccessToast
         {...props}
-        text1Style={{
-          fontSize: 14,
-          fontWeight: '400',
-        }}
+        text1Style={fonts.small}
         renderLeadingIcon={CheckIcon}
         style={{
           justifyContent: 'center',
@@ -56,10 +56,7 @@ function QRCodeScannerScreen() {
     error: (props: any) => (
       <ErrorToast
         {...props}
-        text1Style={{
-          fontSize: 14,
-          fontWeight: '400',
-        }}
+        text1Style={fonts.small}
         renderLeadingIcon={ErrorIcon}
         style={{
           justifyContent: 'center',
@@ -180,9 +177,12 @@ function QRCodeScannerScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[device.safeArea, styles.centered]}>
       <Toast position="top" topOffset={20} config={toastConfig} />
-      <Text style={styles.topText}>Point your Camera at the QR code.</Text>
+
+      <Text style={fonts.condensedHeadline}>
+        Point your Camera at the QR code.
+      </Text>
       <Camera
         onBarCodeScanned={handleBarCodeScanned}
         barCodeScannerSettings={{
@@ -193,16 +193,14 @@ function QRCodeScannerScreen() {
       />
 
       {scannedCase && (
-        <TouchableOpacity
+        <ButtonBlack
           style={styles.viewCaseButton}
           onPress={() => routeToAddCase()}
         >
-          <Text style={styles.caseButtonText}>View Case</Text>
+          <Text style={fonts.whiteButton}>View Case</Text>
           <Arrow />
-        </TouchableOpacity>
+        </ButtonBlack>
       )}
     </View>
   );
 }
-
-export default QRCodeScannerScreen;

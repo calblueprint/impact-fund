@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 import { colors } from '../../styles/colors';
+
 export default StyleSheet.create({
   updatesButton: {
     width: '100%',
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 19,
     rowGap: 10,
   },
   textContainer: {
@@ -32,28 +34,13 @@ export default StyleSheet.create({
   },
   updatesContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     columnGap: 10,
   },
   statusText: {
-    fontSize: 20,
-    lineHeight: 21,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    color: colors.midnightBlack,
-  },
-  statusTextColor: {
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: '500',
     lineHeight: 21,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 21,
-  },
-  icon: {
-    marginTop: 5,
   },
 });

@@ -1,27 +1,17 @@
 import { useLocalSearchParams } from 'expo-router';
 import { router } from 'expo-router/src/imperative-api';
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
-import {
-  ErrorMessageContainer,
-  ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
-  InstructionText,
-  TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
@@ -61,14 +51,14 @@ export default function OTPFlow() {
   };
 
   return (
-    <SafeArea>
-      <ContentContainer>
-        <InstructionContainer>
-          <TitleText>Enter verification code.</TitleText>
-          <InstructionText>We've sent it to {email}</InstructionText>
-        </InstructionContainer>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Enter verification code.</Text>
+          <Text style={fonts.greySmall}>We've sent it to {email}</Text>
+        </View>
 
-        <InputBoxContainer>
+        <View style={input.inputBoxContainer}>
           <OTPTextInput
             inputCount={6}
             tintColor={colors.darkGrey}
@@ -80,31 +70,30 @@ export default function OTPFlow() {
             keyboardType="number-pad"
             autoFocus={false}
           />
-          <InstructionText>
+          <Text style={fonts.greySmall}>
             Didn't receive a code? Go back to confirm your email or
-            <TouchableOpacity onPress={() => resendOtp(email)}>
-              <InstructionText style={{ textDecorationLine: 'underline' }}>
-                {' '}
-                tap here to resend it.
-              </InstructionText>
-            </TouchableOpacity>
-          </InstructionText>
-        </InputBoxContainer>
+          </Text>
+          <TouchableOpacity onPress={() => resendOtp(email)}>
+            <Text
+              style={[fonts.greySmall, { textDecorationLine: 'underline' }]}
+            >
+              tap here to resend it.
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        <ErrorMessageContainer>
-          <ErrorMessageText>{errorMessage}</ErrorMessageText>
-        </ErrorMessageContainer>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>{errorMessage}</Text>
+        </View>
 
         <ButtonBlack
           disabled={token.length !== 6 || errorExists}
           onPress={() => verifyToken(token)}
         >
-          <ButtonTextWhite>Continue</ButtonTextWhite>
-          <View>
-            <Arrow style={{ marginRight: 10 }} />
-          </View>
+          <Text style={fonts.whiteButton}>Continue</Text>
+          <Arrow />
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

@@ -1,10 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import styles from './styles';
-import BackButton from '../../../../../assets/back-button.svg';
 import Envelope from '../../../../../assets/reset-password-envelope.svg';
 import Refresh from '../../../../../assets/reset-password-refresh.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
@@ -13,7 +10,9 @@ import {
   ButtonTextWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
-import { SafeArea } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { instruction } from '../../../../styles/instruction';
 
 export default function ResetConfirm() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
@@ -35,38 +34,44 @@ export default function ResetConfirm() {
     setErrorExists(false);
   };
   return (
-    <SafeArea>
-      <View style={styles.contentContainer}>
-        <View>
-          <Text style={styles.titleText}>Reset Password</Text>
+    <View style={device.safeArea}>
+      <View style={instruction.screenContainer}>
+        <View style={instruction.contentContainer}>
+          <Text style={fonts.instructionHeading}>Reset Password</Text>
 
-          <View style={styles.instructionContainer}>
-            <View style={styles.instructionRow}>
+          <View style={instruction.instructionContainer}>
+            <View style={instruction.instructionRow}>
               <Envelope />
-              <Text style={styles.instructionText}>
-                We will send a six-digit verification code to the email that is
-                registered with your account.
-              </Text>
+              <View style={instruction.textContainer}>
+                <Text style={fonts.greyBody}>
+                  We will send a six-digit verification code to the email that
+                  is registered with your account.
+                </Text>
+              </View>
             </View>
 
-            <View style={styles.instructionRow}>
+            <View style={instruction.instructionRow}>
               <Refresh />
-              <Text style={styles.instructionText}>
-                Enter the code in the following screen to create your new
-                password.
-              </Text>
+              <View style={instruction.textContainer}>
+                <Text style={fonts.greyBody}>
+                  Enter the code in the following screen to create your new
+                  password.
+                </Text>
+              </View>
             </View>
           </View>
         </View>
 
-        <ButtonBlack
-          disabled={email === '' || errorExists}
-          onPress={resetPassword}
-        >
-          <ButtonTextWhite>Continue</ButtonTextWhite>
-          <Arrow />
-        </ButtonBlack>
+        <View style={instruction.buttonsContainer}>
+          <ButtonBlack
+            disabled={email === '' || errorExists}
+            onPress={resetPassword}
+          >
+            <ButtonTextWhite>Continue</ButtonTextWhite>
+            <Arrow />
+          </ButtonBlack>
+        </View>
       </View>
-    </SafeArea>
+    </View>
   );
 }

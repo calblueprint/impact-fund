@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
+import { colors } from '../../styles/colors';
+import { fonts } from '../../styles/fonts';
 
 interface AuthInputProps {
   input: string;
@@ -54,15 +56,18 @@ export default function AuthInput({
 
   return (
     <View style={styles.outerContainer}>
-      <Text style={styles.labelText}>{isLabelDisplayed ? labelText : ' '}</Text>
+      <Text style={fonts.greyVerySmall}>
+        {isLabelDisplayed ? labelText : ' '}
+      </Text>
 
       <TextInput
-        style={[styles.inputBox, isFocused && styles.inputFocused]}
+        style={[styles.inputBox, fonts.body, isFocused && styles.inputFocused]}
         value={input}
         onChangeText={onChangeInput}
         onFocus={onClick}
         onBlur={offClick}
         placeholder={placeholder}
+        placeholderTextColor={colors.darkGrey}
         secureTextEntry={isPassword}
         keyboardType={keyboard}
         autoCapitalize={autoCapitalization ? 'words' : 'none'}

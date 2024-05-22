@@ -1,23 +1,14 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  ErrorMessageContainer,
-  ErrorMessageText,
-  InputBoxContainer,
-  InstructionContainer,
-  TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
@@ -55,15 +46,15 @@ export default function OTPEmailInput() {
   }
 
   return (
-    <SafeArea>
-      <ContentContainer>
-        <InstructionContainer>
-          <TitleText>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>
             Please enter the email you used to create your account.
-          </TitleText>
-        </InstructionContainer>
+          </Text>
+        </View>
 
-        <InputBoxContainer>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -73,19 +64,19 @@ export default function OTPEmailInput() {
             keyboard="default"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
-          <ErrorMessageText>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
-          </ErrorMessageText>
-        </ErrorMessageContainer>
+          </Text>
+        </View>
 
         <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
-          <ButtonTextWhite>Continue</ButtonTextWhite>
+          <Text style={fonts.whiteButton}>Continue</Text>
           <Arrow />
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

@@ -1,11 +1,11 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import CheckEligibility from '../../../assets/check-eligibility.svg';
 import Arrow from '../../../assets/next.svg';
+import { fonts } from '../../styles/fonts';
 import { shawdowStyles } from '../../styles/global';
 import { CaseUid } from '../../types/types';
 
@@ -26,10 +26,10 @@ export default function CheckEligibilityButton({
       <CheckEligibility />
       <View style={styles.rightContainer}>
         <View style={styles.topRow}>
-          <Text style={styles.headerText}>Check eligibility</Text>
+          <Text style={fonts.condensedHeadline}>Check eligibility</Text>
           <Arrow />
         </View>
-        <Text style={styles.bodyText}>
+        <Text style={fonts.greySmall}>
           Check your eligibility for this case if you would like to file a claim
           or opt out.
         </Text>

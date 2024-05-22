@@ -1,24 +1,13 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  ErrorMessageContainer,
-  ErrorMessageText,
-  InlineInputContainer,
-  InputBoxContainer,
-  InstructionContainer,
-  InstructionText,
-  TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function LoginScreen() {
@@ -44,13 +33,13 @@ export default function LoginScreen() {
   }
 
   return (
-    <SafeArea>
-      <ContentContainer>
-        <InstructionContainer>
-          <TitleText>Please enter your email address.</TitleText>
-        </InstructionContainer>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Please enter your email address.</Text>
+        </View>
 
-        <InputBoxContainer>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -60,32 +49,31 @@ export default function LoginScreen() {
             keyboard="email-address"
             autoCapitalization={false}
           />
-        </InputBoxContainer>
+        </View>
 
-        <ErrorMessageContainer>
-          <ErrorMessageText>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
-          </ErrorMessageText>
-        </ErrorMessageContainer>
+          </Text>
+        </View>
 
-        <InlineInputContainer>
+        <View style={input.inlineInputContainer}>
           <TouchableOpacity
             onPress={() => router.push('/OTPFlow/OTPEmailInput')}
           >
-            <InstructionText>Forgot password?</InstructionText>
+            <Text style={fonts.greyBody}>Forgot password?</Text>
           </TouchableOpacity>
 
-          <View style={{ width: '50%' }}>
-            <ButtonBlack
-              onPress={emailFind}
-              disabled={email.trim() === '' || errorExists}
-            >
-              <ButtonTextWhite>Next</ButtonTextWhite>
-              <Arrow />
-            </ButtonBlack>
-          </View>
-        </InlineInputContainer>
-      </ContentContainer>
-    </SafeArea>
+          <ButtonBlack
+            onPress={emailFind}
+            disabled={email.trim() === '' || errorExists}
+            $halfWidth
+          >
+            <Text style={fonts.whiteButton}>Next</Text>
+            <Arrow />
+          </ButtonBlack>
+        </View>
+      </View>
+    </View>
   );
 }

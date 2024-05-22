@@ -1,11 +1,12 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
 import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';
 import { Update, CaseUid, Case } from '../../../../types/types';
@@ -36,7 +37,7 @@ export default function UpdatesScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {isLoading || caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
@@ -50,12 +51,14 @@ export default function UpdatesScreen() {
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <View style={styles.headerContainer}>
-                <Text style={styles.titleText}>Case Updates</Text>
+                <Text style={fonts.tabHeading}>Case Updates</Text>
                 <CaseStatusBar status={caseData.caseStatus} />
               </View>
             }
             ListEmptyComponent={
-              <Text>There are no updates associated with this case.</Text>
+              <Text style={fonts.body}>
+                There are no updates associated with this case.
+              </Text>
             }
           />
         </View>

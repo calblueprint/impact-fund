@@ -7,18 +7,14 @@ import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
-  ButtonTextBlack,
-  ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
-import {
-  GroupButtonContent,
-  InlineInputContainer,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
-import { SafeArea } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
-function DeleteAccountScreen() {
+export default function DeleteAccountScreen() {
   const { signOut, deleteCurrentUser, session } = useSession();
 
   const deleteAccount = () => {
@@ -29,35 +25,36 @@ function DeleteAccountScreen() {
   };
 
   return (
-    <SafeArea>
+    <View style={device.safeArea}>
       <View style={styles.screenContainer}>
-        <View>
-          <View style={styles.textContainer}>
-            <Text style={styles.topText}>Delete account?</Text>
-            <Text style={styles.blurb}>
-              Deleting your account will also permanently delete any data
-              associated with it. This action cannot be undone.
-            </Text>
-          </View>
+        <View style={styles.textContainer}>
+          <Text style={fonts.instructionHeading}>Delete account?</Text>
+          <Text style={fonts.greyBody}>
+            Deleting your account will also permanently delete any data
+            associated with it. This action cannot be undone.
+          </Text>
         </View>
 
-        <InlineInputContainer>
-          <ButtonWhite onPress={() => router.back()} style={styles.buttonView}>
-            <GroupButtonContent>
+        <View style={input.inlineInputContainer}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $halfWidth
+            $centeredContent
+          >
+            <View style={input.groupButtonContent}>
               <X />
-              <ButtonTextBlack>Cancel</ButtonTextBlack>
-            </GroupButtonContent>
+              <Text style={fonts.blackButton}>Cancel</Text>
+            </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={deleteAccount} style={styles.buttonView}>
-            <GroupButtonContent>
+          <ButtonBlack onPress={deleteAccount} $halfWidth $centeredContent>
+            <View style={input.groupButtonContent}>
               <WhiteTrash />
-              <ButtonTextWhite>Confirm</ButtonTextWhite>
-            </GroupButtonContent>
+              <Text style={fonts.whiteButton}>Confirm</Text>
+            </View>
           </ButtonBlack>
-        </InlineInputContainer>
+        </View>
       </View>
-    </SafeArea>
+    </View>
   );
 }
-export default DeleteAccountScreen;

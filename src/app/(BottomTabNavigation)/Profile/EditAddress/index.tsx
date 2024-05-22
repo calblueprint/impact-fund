@@ -1,26 +1,16 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Submit from '../../../../../assets/submit.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  GroupButtonContent,
-  InlineInputContainer,
-  InputBoxContainer,
-  InputScreenGap,
-  InstructionContainer,
-  TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
-import { ContentContainer, SafeArea } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
-function EditNameScreen() {
+export default function EditAddressScreen() {
   const { updateUser, session } = useSession();
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [usState, setUsState] = useState<string>('');
@@ -73,13 +63,13 @@ function EditNameScreen() {
   }, []);
 
   return (
-    <SafeArea>
-      <ContentContainer>
-        <InstructionContainer>
-          <TitleText>Edit account details</TitleText>
-        </InstructionContainer>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Edit account details</Text>
+        </View>
 
-        <InputBoxContainer>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -99,7 +89,8 @@ function EditNameScreen() {
             keyboard="default"
             autoCapitalization
           />
-          <InlineInputContainer>
+
+          <View style={input.inlineInputContainer}>
             <AuthInput
               input={usState}
               onChangeInput={onChangeState}
@@ -118,23 +109,22 @@ function EditNameScreen() {
               keyboard="default"
               autoCapitalization
             />
-          </InlineInputContainer>
-        </InputBoxContainer>
+          </View>
+        </View>
 
-        <InputScreenGap />
+        <View style={input.inputScreenGap} />
 
         <ButtonBlack
           disabled={!streetAddress || !city || !usState || !zipcode}
-          style={{ justifyContent: 'center' }}
           onPress={handleSubmit}
+          $centeredContent
         >
-          <GroupButtonContent>
-            <ButtonTextWhite>Submit</ButtonTextWhite>
+          <View style={input.groupButtonContent}>
+            <Text style={fonts.whiteButton}>Submit</Text>
             <Submit />
-          </GroupButtonContent>
+          </View>
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }
-export default EditNameScreen;

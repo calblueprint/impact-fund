@@ -3,24 +3,10 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.white,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   contentContainer: {
     flexDirection: 'column',
-    justifyContent: 'flex-end',
-    height: '84%',
     width: '81%',
-    paddingVertical: 40,
-  },
-  textContainer: {
-    marginTop: 275,
-    justifyContent: 'center',
+    marginBottom: '50%',
   },
   welcomeText: {
     color: colors.black,

@@ -1,24 +1,14 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
-import BackButton from '../../../../../assets/back-button.svg';
 import Check from '../../../../../assets/check-circle.svg';
-import {
-  ButtonBlack,
-  ButtonTextWhite,
-} from '../../../../Components/AuthButton/AuthButton';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import {
-  GroupButtonContent,
-  InlineInputContainer,
-  InputBoxContainer,
-  InputScreenGap,
-  InstructionContainer,
-  TitleText,
-} from '../../../../Components/InputScreenStyles/InputScreenStyles';
 import { useSession } from '../../../../context/AuthContext';
-import { SafeArea, ContentContainer } from '../../../../styles/global';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -78,13 +68,13 @@ export default function SignUpScreen() {
   };
 
   return (
-    <SafeArea>
-      <ContentContainer>
-        <InstructionContainer>
-          <TitleText>Last, enter your address.</TitleText>
-        </InstructionContainer>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Last, enter your address.</Text>
+        </View>
 
-        <InputBoxContainer>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
             onChangeInput={onChangeStreetAddress}
@@ -105,7 +95,7 @@ export default function SignUpScreen() {
             autoCapitalization
           />
 
-          <InlineInputContainer>
+          <View style={input.inlineInputContainer}>
             <AuthInput
               input={state}
               onChangeInput={onChangeState}
@@ -125,10 +115,10 @@ export default function SignUpScreen() {
               keyboard="default"
               autoCapitalization
             />
-          </InlineInputContainer>
-        </InputBoxContainer>
+          </View>
+        </View>
 
-        <InputScreenGap />
+        <View style={input.inputScreenGap} />
 
         <ButtonBlack
           disabled={
@@ -138,14 +128,14 @@ export default function SignUpScreen() {
             zipcode.trim() === ''
           }
           onPress={() => handleSubmit()}
-          style={{ justifyContent: 'center' }}
+          $centeredContent
         >
-          <GroupButtonContent>
-            <ButtonTextWhite>Sign Up</ButtonTextWhite>
+          <View style={input.groupButtonContent}>
+            <Text style={fonts.whiteButton}>Sign Up</Text>
             <Check />
-          </GroupButtonContent>
+          </View>
         </ButtonBlack>
-      </ContentContainer>
-    </SafeArea>
+      </View>
+    </View>
   );
 }

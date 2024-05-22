@@ -6,6 +6,8 @@ import styles from './styles';
 import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
 import { Form, CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
@@ -31,10 +33,10 @@ export default function FormsScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.contentContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Documents</Text>
+          <Text style={fonts.tabHeading}>Documents</Text>
         </View>
         <View style={styles.formsContainer}>
           <FlatList

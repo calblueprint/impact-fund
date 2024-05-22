@@ -7,32 +7,39 @@ import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
 import {
   ButtonBlack,
-  ButtonTextBlack,
-  ButtonTextWhite,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
-function LogOutConfirmation() {
+export default function LogOutConfirmation() {
   const { signOut } = useSession();
 
   return (
-    <View style={styles.container}>
+    <View style={[device.safeArea, { justifyContent: 'flex-end' }]}>
       <View style={styles.screenContainer}>
-        <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
+        <Text style={fonts.tabHeading}>
+          Are you sure you'd like to log out?
+        </Text>
 
-        <View style={styles.buttonsContainer}>
-          <ButtonWhite onPress={() => router.back()} style={styles.halfButton}>
-            <View style={styles.buttonContent}>
+        <View style={input.inlineInputContainer}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $centeredContent
+            $halfWidth
+          >
+            <View style={input.groupButtonContent}>
               <X />
-              <ButtonTextBlack>Cancel</ButtonTextBlack>
+              <Text style={fonts.blackButton}>Cancel</Text>
             </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={() => signOut()} style={styles.halfButton}>
-            <View style={styles.buttonContent}>
+          <ButtonBlack onPress={() => signOut()} $centeredContent $halfWidth>
+            <View style={input.groupButtonContent}>
               <SignOut />
-              <ButtonTextWhite>Confirm</ButtonTextWhite>
+              <Text style={fonts.whiteButton}>Confirm</Text>
             </View>
           </ButtonBlack>
         </View>
@@ -40,4 +47,3 @@ function LogOutConfirmation() {
     </View>
   );
 }
-export default LogOutConfirmation;

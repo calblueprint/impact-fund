@@ -7,6 +7,8 @@ import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
+import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import {
   registerForPushNotifications,
   updatePushToken,
@@ -74,7 +76,7 @@ function CasesScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.casesContainer}>
         {loading ? (
           <Text>Loading...</Text>
@@ -84,7 +86,7 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
-                  <Text style={styles.titleText}>My Cases</Text>
+                  <Text style={fonts.tabHeading}>My Cases</Text>
                 </View>
               </>
             )}
@@ -93,7 +95,7 @@ function CasesScreen() {
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
-              <Text style={styles.instructionText}>
+              <Text style={fonts.greyBody}>
                 No cases? Scan a QR code or ask a friend to share one.
               </Text>
             }

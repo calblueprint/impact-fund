@@ -23,18 +23,4 @@ export default StyleSheet.create({
     borderBottomColor: colors.midGrey,
     paddingBottom: 5,
   },
-  headerText: {
-    fontSize: 20,
-    fontStyle: 'normal',
-    fontWeight: '600',
-    lineHeight: 21,
-    color: colors.black,
-  },
-  bodyText: {
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 16,
-    color: colors.black,
-  },
 });
