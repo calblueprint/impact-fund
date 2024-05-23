@@ -5,6 +5,7 @@ import {
   User,
   UserAttributes,
   UserResponse,
+  isAuthError,
 } from '@supabase/supabase-js';
 import React, {
   createContext,
@@ -16,6 +17,17 @@ import React, {
 
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
+
+type SimpleAuthResponse =
+  | {
+      data: any;
+      error: null;
+    }
+  | { data: null; error: SimpleAuthError };
+
+type SimpleAuthError = {
+  message: string;
+};
 
 /**
  * To use AuthContext, import useSession() in whichever file you prefer.
@@ -46,7 +58,7 @@ export interface AuthState {
     zip: string,
   ) => Promise<UserResponse>;
   sendOtp: (email: string) => Promise<AuthResponse>;
-  verifyOtp: (email: string, token: string) => Promise<AuthError>;
+  verifyOtp: (email: string, token: string) => Promise<SimpleAuthResponse>;
   resendOtp: (email: string) => Promise<AuthResponse>;
   updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
   resetPassword: (email: string) => Promise<
@@ -192,20 +204,27 @@ export function AuthContextProvider({
     }
   };
 
-  const verifyOtp = async (email: string, token: string) => {
+  const verifyOtp = async (
+    email: string,
+    token: string,
+  ): Promise<SimpleAuthResponse> => {
     try {
-      const value = await supabase.auth.verifyOtp({
+      await supabase.auth.verifyOtp({
         email,
         token,
         type: 'email',
       });
-      if (value.error) {
-        throw value.error;
-      }
-      return null;
+      return { data: null, error: null };
     } catch (error) {
-      console.warn('otp not working uh oh');
-      return error;
+      if (isAuthError(error)) {
+        return {
+          data: null,
+          error: {
+            message: error.message,
+          },
+        };
+      }
+      throw error;
     }
   };
 

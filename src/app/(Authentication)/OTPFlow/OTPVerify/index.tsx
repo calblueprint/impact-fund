@@ -34,11 +34,11 @@ export default function OTPFlow() {
   };
 
   const verifyToken = async (token: string) => {
-    const err = await verifyOtp(email, token);
-    console.log(err);
-    if (err.message) {
+    const { error } = await verifyOtp(email, token);
+
+    if (error) {
       setErrorExists(true);
-      setErrorMessage('Sorry! The verification code was incorrect.');
+      setErrorMessage(error.message);
       return;
     }
     if (changePassword === 'yes') {
