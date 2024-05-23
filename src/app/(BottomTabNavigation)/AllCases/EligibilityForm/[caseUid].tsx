@@ -1,13 +1,20 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
-import Error from '../../../../../assets/exclamation.svg';
+import RedWarning from '../../../../../assets/red-warning.svg';
 import Ex from '../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import {
   updateCaseStatus,
   getCaseById,
@@ -59,7 +66,7 @@ export default function EligibilityForm() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {caseData === undefined ? (
         <Text>Loading...</Text>
       ) : (
@@ -69,7 +76,9 @@ export default function EligibilityForm() {
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <View style={styles.headerContainer}>
-              <Text style={styles.titleText}>{caseData.title}</Text>
+              <Text style={[fonts.tabHeading, styles.titleText]}>
+                {caseData.title}
+              </Text>
               <Image
                 style={styles.imageContainer}
                 source={{ uri: caseData.imageUrl }}
@@ -77,9 +86,9 @@ export default function EligibilityForm() {
                 transition={300}
               />
               <View style={styles.infoRow}>
-                <Error />
+                <RedWarning />
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.bodyText}>
+                  <Text style={fonts.body}>
                     You must meet every requirement to be eligible for this
                     class-action.
                   </Text>
@@ -99,37 +108,37 @@ export default function EligibilityForm() {
           ItemSeparatorComponent={() => <View style={styles.separatorLine} />}
           ListFooterComponent={
             <View style={styles.footerContainer}>
-              <Text style={styles.bodyText}>
+              <Text style={fonts.body}>
                 Do you meet the following requirements?
               </Text>
               <View style={styles.buttonsContainer}>
-                <TouchableOpacity
-                  style={[styles.buttonBase, styles.ineligbleButton]}
+                <ButtonWhite
                   onPress={() => confirmIneligibility()}
+                  $halfWidth
+                  $centeredContent
                 >
-                  <Ex />
-                  <Text style={styles.bodyText}>No, I don't</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                  <View style={input.groupButtonContent}>
+                    <Ex />
+                    <Text style={fonts.blackButton}>No, I don't</Text>
+                  </View>
+                </ButtonWhite>
+                <ButtonBlack
                   disabled={checkCount !== eligibilityRequirements.length}
-                  style={
-                    checkCount === eligibilityRequirements.length
-                      ? [styles.buttonBase, styles.eligibleButton]
-                      : [styles.buttonBase, styles.inactiveEligibleButton]
-                  }
                   onPress={() => confirmEligibility()}
+                  $halfWidth
+                  $centeredContent
                 >
-                  <Check />
-                  <Text style={[styles.bodyText, styles.eligibleButtonText]}>
-                    Yes, I do
-                  </Text>
-                </TouchableOpacity>
+                  <View style={input.groupButtonContent}>
+                    <Check />
+                    <Text style={fonts.whiteButton}>Yes, I do</Text>
+                  </View>
+                </ButtonBlack>
               </View>
             </View>
           }
           ListEmptyComponent={
             <View style={styles.listEmptyContainer}>
-              <Text style={styles.bodyText}>
+              <Text style={fonts.body}>
                 There are no requirements for this case.
               </Text>
             </View>

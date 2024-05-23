@@ -1,13 +1,20 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useContext } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-import styles from './styles';
 import CircleCheckWhite from '../../../../../../assets/circle-check-white.svg';
 import LittlePerson from '../../../../../../assets/little-person.svg';
 import Warning from '../../../../../../assets/open-warning.svg';
 import X from '../../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../../../context/CaseContext';
+import { fonts } from '../../../../../styles/fonts';
+import { device } from '../../../../../styles/global';
+import { input } from '../../../../../styles/input';
+import { instruction } from '../../../../../styles/instruction';
 import { CaseUid } from '../../../../../types/types';
 
 function ConfirmOptOut() {
@@ -24,23 +31,27 @@ function ConfirmOptOut() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screenContainer}>
-        <View style={styles.contentContainer}>
-          <Text style={styles.topText}>Indicate that you've opted out?</Text>
-          <View style={styles.infoContainer}>
-            <View style={styles.textIconContainer}>
-              <Warning style={styles.icon} />
-              <View style={styles.textContainer}>
-                <Text style={styles.blurb}>
+    <View style={device.safeArea}>
+      <View style={instruction.screenContainer}>
+        <View style={instruction.contentContainer}>
+          <Text style={fonts.instructionHeading}>
+            Indicate that you've opted out?
+          </Text>
+
+          <View style={instruction.instructionContainer}>
+            <View style={instruction.instructionRow}>
+              <Warning />
+              <View style={instruction.textContainer}>
+                <Text style={fonts.greyBody}>
                   Once you’ve opted out, this case will become inactive.
                 </Text>
               </View>
             </View>
-            <View style={styles.textIconContainer}>
-              <LittlePerson style={styles.icon} />
-              <View style={styles.textContainer}>
-                <Text style={styles.blurb}>
+
+            <View style={instruction.instructionRow}>
+              <LittlePerson />
+              <View style={instruction.textContainer}>
+                <Text style={fonts.greyBody}>
                   You can still view and share case details, but won’t be able
                   to change file a claim.
                 </Text>
@@ -49,27 +60,24 @@ function ConfirmOptOut() {
           </View>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.cancelButton}
-            >
-              <View style={styles.buttonContent}>
-                <X />
-                <Text style={styles.cancelText}>Cancel</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <View style={instruction.inLineButtons}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $halfWidth
+            $centeredContent
+          >
+            <View style={input.groupButtonContent}>
+              <X />
+              <Text style={fonts.blackButton}>Cancel</Text>
+            </View>
+          </ButtonWhite>
 
-          <View style={styles.buttonView}>
-            <TouchableOpacity onPress={deleteCase} style={styles.confirmButton}>
-              <View style={styles.buttonContent}>
-                <CircleCheckWhite />
-                <Text style={styles.confirmText}>Continue</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+          <ButtonBlack onPress={deleteCase} $halfWidth $centeredContent>
+            <View style={input.groupButtonContent}>
+              <CircleCheckWhite />
+              <Text style={fonts.whiteButton}>Continue</Text>
+            </View>
+          </ButtonBlack>
         </View>
       </View>
     </View>

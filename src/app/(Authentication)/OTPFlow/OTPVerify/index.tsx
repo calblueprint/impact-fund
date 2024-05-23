@@ -1,13 +1,17 @@
 import { useLocalSearchParams } from 'expo-router';
 import { router } from 'expo-router/src/imperative-api';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
 import { colors } from '../../../../styles/colors';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
 export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
@@ -33,9 +37,7 @@ export default function OTPFlow() {
     const { error } = await verifyOtp(email, token);
     if (error) {
       setErrorExists(true);
-      setErrorMessage(
-        'Sorry! The verification code was incorrect. Try again, or make sure you used a valid email.',
-      );
+      setErrorMessage('Sorry! The verification code was incorrect.');
       return;
     }
     if (changePassword === 'yes') {
@@ -49,61 +51,48 @@ export default function OTPFlow() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.headerText}>Enter verification code.</Text>
-          <Text style={styles.instructionText}>
-            We've just emailed it to you at {email}
-          </Text>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Enter verification code.</Text>
+          <Text style={fonts.greySmall}>We've sent it to {email}</Text>
         </View>
 
-        <OTPTextInput
-          inputCount={6}
-          tintColor={colors.darkGrey}
-          defaultValue={token}
-          inputCellLength={1}
-          handleTextChange={onChangeToken}
-          containerStyle={styles.otpContainer}
-          textInputStyle={styles.otpInputBoxes}
-          keyboardType="number-pad"
-          autoFocus={false}
-        />
-
-        <Text style={styles.instructionText}>
-          Didn't receive a code? Go back to confirm your email or{' '}
+        <View style={input.inputBoxContainer}>
+          <OTPTextInput
+            inputCount={6}
+            tintColor={colors.darkGrey}
+            defaultValue={token}
+            inputCellLength={1}
+            handleTextChange={onChangeToken}
+            containerStyle={styles.otpContainer}
+            textInputStyle={styles.otpInputBoxes}
+            keyboardType="number-pad"
+            autoFocus={false}
+          />
+          <Text style={fonts.greySmall}>
+            Didn't receive a code? Go back to confirm your email or
+          </Text>
           <TouchableOpacity onPress={() => resendOtp(email)}>
-            <Text style={[styles.instructionText, styles.underlineText]}>
-              press here to resend code.
+            <Text
+              style={[fonts.greySmall, { textDecorationLine: 'underline' }]}
+            >
+              tap here to resend it.
             </Text>
           </TouchableOpacity>
-        </Text>
-
-        <View style={styles.errorContainer}>
-          <Text style={[styles.instructionText, styles.errorText]}>
-            {errorMessage}
-          </Text>
         </View>
 
-        <TouchableOpacity
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>{errorMessage}</Text>
+        </View>
+
+        <ButtonBlack
           disabled={token.length !== 6 || errorExists}
-          style={
-            token.length !== 6 || errorExists
-              ? [styles.nextButtonBase, styles.nextButtonDisabled]
-              : [styles.nextButtonBase, styles.nextButtonActive]
-          }
           onPress={() => verifyToken(token)}
         >
-          <Text style={styles.buttonText}>Verify</Text>
-          <View>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
+          <Text style={fonts.whiteButton}>Continue</Text>
+          <Arrow />
+        </ButtonBlack>
       </View>
     </View>
   );

@@ -7,8 +7,8 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     columnGap: 16,
-    paddingTop: 24,
-    paddingBottom: 8,
+    paddingTop: 20,
+    paddingBottom: 12,
   },
   contentContainer: {
     flex: 1,
@@ -16,32 +16,20 @@ export default StyleSheet.create({
     height: '100%',
   },
   titleContainer: {
-    height: 41,
-  },
-  instructionContainer: {
-    width: 130,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.midGrey,
-
-    marginTop: 20,
-    marginBottom: 11,
+    height: 40,
+    marginTop: 5,
+    marginBottom: 20,
   },
   titleText: {
     fontSize: 16,
     fontStyle: 'normal',
-    fontWeight: '600',
+    fontWeight: '500',
     lineHeight: 18,
     color: colors.midnightBlack,
     overflow: 'hidden',
   },
   bottomText: {
-    fontSize: 10,
+    fontSize: 12,
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 21,
@@ -52,5 +40,11 @@ export default StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '300',
     color: colors.darkGrey,
+  },
+  categoryText: {
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    color: colors.midGrey,
   },
 });

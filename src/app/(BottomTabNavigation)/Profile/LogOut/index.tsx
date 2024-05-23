@@ -1,42 +1,49 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
 import SignOut from '../../../../../assets/sign-out.svg';
 import X from '../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
-function LogOutConfirmation() {
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
+
+export default function LogOutConfirmation() {
   const { signOut } = useSession();
 
   return (
-    <View style={styles.container}>
+    <View style={[device.safeArea, { justifyContent: 'flex-end' }]}>
       <View style={styles.screenContainer}>
-        <Text style={styles.topText}>Are you sure you'd like to log out?</Text>
+        <Text style={fonts.tabHeading}>
+          Are you sure you'd like to log out?
+        </Text>
 
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            onPress={() => router.push('/Profile')}
-            style={styles.cancelButton}
+        <View style={input.inlineInputContainer}>
+          <ButtonWhite
+            onPress={() => router.back()}
+            $centeredContent
+            $halfWidth
           >
-            <View style={styles.buttonContent}>
+            <View style={input.groupButtonContent}>
               <X />
-              <Text style={styles.cancelText}>Cancel</Text>
+              <Text style={fonts.blackButton}>Cancel</Text>
             </View>
-          </TouchableOpacity>
+          </ButtonWhite>
 
-          <TouchableOpacity
-            onPress={() => signOut()}
-            style={styles.confirmButton}
-          >
-            <View style={styles.buttonContent}>
+          <ButtonBlack onPress={() => signOut()} $centeredContent $halfWidth>
+            <View style={input.groupButtonContent}>
               <SignOut />
-              <Text style={styles.confirmText}>Confirm</Text>
+              <Text style={fonts.whiteButton}>Confirm</Text>
             </View>
-          </TouchableOpacity>
+          </ButtonBlack>
         </View>
       </View>
     </View>
   );
 }
-export default LogOutConfirmation;

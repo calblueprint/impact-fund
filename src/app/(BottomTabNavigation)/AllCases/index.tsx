@@ -1,20 +1,20 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, Text, View, TouchableOpacity } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
-import Camera from '../../../../assets/camera.svg';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
+import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import {
   registerForPushNotifications,
   updatePushToken,
 } from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
-
 enum linkingEvents {
   ADD_CASE = 'addCase',
   NOTIFICATION = 'notification',
@@ -76,7 +76,7 @@ function CasesScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.casesContainer}>
         {loading ? (
           <Text>Loading...</Text>
@@ -86,17 +86,8 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
-                  <Text style={styles.titleText}>My Cases</Text>
+                  <Text style={fonts.tabHeading}>My Cases</Text>
                 </View>
-                <TouchableOpacity
-                  onPress={() => router.push('/AllCases/QRCodeScanner')}
-                  style={styles.cameraContainer}
-                >
-                  <View style={styles.buttonInfoContainer}>
-                    <Camera />
-                    <Text style={styles.cameraText}>Add Case with QR code</Text>
-                  </View>
-                </TouchableOpacity>
               </>
             )}
             data={allCases}
@@ -104,7 +95,9 @@ function CasesScreen() {
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
-              <Text>Scan your first case using the QR code above!</Text>
+              <Text style={fonts.greyBody}>
+                No cases? Scan a QR code or ask a friend to share one.
+              </Text>
             }
           />
         )}

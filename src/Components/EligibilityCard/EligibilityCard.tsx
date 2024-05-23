@@ -1,123 +1,42 @@
-import { router } from 'expo-router';
-import React from 'react';
-import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 
 import styles from './styles';
-import CheckEligibility from '../../../assets/check-eligibility.svg';
-import Fileclaim from '../../../assets/file-claim.svg';
-import Arrow from '../../../assets/next.svg';
-import OptOut from '../../../assets/opt-out.svg';
-import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
-import { Case, Eligibility } from '../../types/types';
+import { CaseUid } from '../../types/types';
+import EligibleFilingButton from '../EligibilityFilingButton/EligibilityFilingButton';
+import ToggleOptionsButton from '../ToggleOptionsButton/ToggleOptionsButton';
 
 interface EligibilityCardProps {
-  caseData: Case;
-  status: Eligibility;
+  caseUid: CaseUid;
 }
 
-const ensureURLFormat = (url: string | null | undefined) => {
-  if (!url) return null;
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url;
-  }
-  return `https://${url}`;
-};
-
-export default function EligibilityCard({
-  caseData,
-  status,
+export default function EligibleFilingOptions({
+  caseUid,
 }: EligibilityCardProps) {
-  if (
-    status === Eligibility.INELIGIBLE ||
-    status === Eligibility.UNDETERMINED
-  ) {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => {
-            router.push({
-              pathname: `/AllCases/EligibilityForm/${caseData.id}`,
-            });
-          }}
-        >
-          <View style={styles.leftContainer}>
-            <CheckEligibility />
-          </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>Check eligibility</Text>
-            <Text style={styles.bodyText}>
-              Check your eligibility for this case if you would like to file a
-              claim or opt out.
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  } else if (status === Eligibility.ELIGIBLE) {
-    const claimLink = caseData.claimLink
-      ? ensureURLFormat(caseData.claimLink)
-      : null;
-    const onPressHandler = claimLink ? () => openUrl(claimLink) : undefined;
+  const [isFileClaimSelected, setSelected] = useState<boolean>(true);
 
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={onPressHandler}
-        >
-          <View style={styles.leftContainer}>
-            <Fileclaim />
-          </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>File a case claim</Text>
-            <Text style={styles.bodyText}>
-              Eligible class members can submit a claim electronically to
-              receive a settlement.
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
+  return (
+    <View style={styles.container}>
+      <ToggleOptionsButton
+        isDefaultSelected={isFileClaimSelected}
+        setSelected={setSelected}
+      />
 
-        <View style={styles.separatorComponent}>
-          <View style={styles.horizontalLine} />
-          <View style={styles.textContainer}>
-            <Text style={styles.separatorText}>OR</Text>
-          </View>
-          <View style={styles.horizontalLine} />
-        </View>
-
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => {
-            router.push({
-              pathname: `/AllCases/OptOut/${caseData.id}`,
-            });
-          }}
-        >
-          <View style={styles.leftContainer}>
-            <OptOut />
-          </View>
-          <View style={styles.middleContainer}>
-            <Text style={styles.headerText}>Opt out of case</Text>
-            <Text style={styles.bodyText}>
-              Opt out of this case to do something you can still file private
-              claim yada yada
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Arrow />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  } else {
-    return <View />;
-  }
+      {isFileClaimSelected ? (
+        <EligibleFilingButton
+          mainText="Eligible class members can submit a claim electronically to
+        receive a settlement."
+          instructionText="File or update my claim"
+          route={`/AllCases/FileClaim/${caseUid}`}
+        />
+      ) : (
+        <EligibleFilingButton
+          mainText="Opt out to remove yourself from this class action and deactivate
+          this case."
+          instructionText="View options for opting out"
+          route={`/AllCases/OptOut/${caseUid}`}
+        />
+      )}
+    </View>
+  );
 }

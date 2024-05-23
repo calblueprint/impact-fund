@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from './styles';
 import InformationIcon from '../../../assets/information-icon.svg';
 import RightCaret from '../../../assets/right-caret.svg';
 import { openUrl } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import { fonts } from '../../styles/fonts';
+import { ButtonWhite } from '../AuthButton/AuthButton';
 
 type ExternalLinkProps = {
   text: string;
@@ -13,16 +15,14 @@ type ExternalLinkProps = {
 
 export default function ExternalSiteLink({ text, url }: ExternalLinkProps) {
   return (
-    <TouchableOpacity onPress={() => openUrl(url)}>
-      <View style={styles.container}>
-        <View style={styles.iconContainer}>
-          <InformationIcon />
-        </View>
-        <Text style={styles.messageText}>{text}</Text>
-        <View style={styles.iconContainer}>
-          <RightCaret />
-        </View>
+    <ButtonWhite onPress={() => openUrl(url)} style={styles.buttonContainer}>
+      <View style={styles.iconContainer}>
+        <InformationIcon />
       </View>
-    </TouchableOpacity>
+      <Text style={fonts.blackButton}>{text}</Text>
+      <View style={styles.iconContainer}>
+        <RightCaret />
+      </View>
+    </ButtonWhite>
   );
 }

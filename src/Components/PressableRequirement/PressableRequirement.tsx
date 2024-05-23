@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import { colors } from '../../styles/colors';
+import { fonts } from '../../styles/fonts';
 
 interface requirementProps {
   requirement: string;
@@ -31,13 +32,7 @@ export default function PressableRequirement({
     <TouchableOpacity style={styles.requirementContainer} onPress={onCheck}>
       <CheckBox value={isChecked} color={colors.darkGrey} />
       <View style={styles.innerRequirementBox}>
-        <Text
-          style={
-            isChecked
-              ? [styles.bodyText, styles.inactiveText]
-              : [styles.bodyText, styles.activeText]
-          }
-        >
+        <Text style={isChecked ? [fonts.body] : [fonts.greyBody]}>
           {requirement}
         </Text>
       </View>

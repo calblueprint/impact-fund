@@ -1,11 +1,14 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View, Text } from 'react-native';
 
-import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
@@ -43,21 +46,15 @@ export default function OTPEmailInput() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-        <View>
-          <Text style={styles.instructionText}>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>
             Please enter the email you used to create your account.
           </Text>
         </View>
 
-        <View style={styles.inputBox}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -69,26 +66,16 @@ export default function OTPEmailInput() {
           />
         </View>
 
-        <View style={styles.errorMessageBox}>
-          <Text style={styles.errorMessageText}>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
           </Text>
         </View>
 
-        <View style={styles.nextLine}>
-          <TouchableOpacity
-            disabled={email === '' || errorExists}
-            style={
-              email === '' || errorExists
-                ? [styles.nextButtonBase, styles.nextButtonDisabled]
-                : [styles.nextButtonBase, styles.nextButtonActive]
-            }
-            onPress={getOTP}
-          >
-            <Text style={styles.nextText}>Continue</Text>
-            <Arrow />
-          </TouchableOpacity>
-        </View>
+        <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
+          <Text style={fonts.whiteButton}>Continue</Text>
+          <Arrow />
+        </ButtonBlack>
       </View>
     </View>
   );

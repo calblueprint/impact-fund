@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
-import NotificationBell from '../../../../../../assets/notification-bell.svg';
+import NotificationBell from '../../../../../../assets/red-notification-bell.svg';
+import { fonts } from '../../../../../styles/fonts';
+import { device, shawdowStyles } from '../../../../../styles/global';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
 import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
@@ -26,30 +28,38 @@ export default function UpdateView() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       {update === undefined ? (
         <Text>Loading...</Text>
       ) : (
         <>
           <ScrollView
             style={styles.outerScroll}
-            contentContainerStyle={styles.innerScroll}
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.titleContainer}>
-              <NotificationBell />
-              <Text style={styles.titleText}>{update.title}</Text>
-            </View>
-            <View style={styles.inLineSubInfo}>
-              <Text style={[styles.subText, styles.lawFirmText]}>
-                {update.lawFirm}
+            <View style={[shawdowStyles.shadowBorder, styles.innerScroll]}>
+              <View style={styles.titleContainer}>
+                <NotificationBell />
+                <View style={styles.headerText}>
+                  <Text style={styles.categoryText}>
+                    {update.category.toUpperCase()}
+                  </Text>
+                  <Text style={fonts.condensedHeadline}>{update.title}</Text>
+                </View>
+              </View>
+              <View style={styles.inLineSubInfo}>
+                <Text style={[styles.subText, styles.lawFirmText]}>
+                  {update.lawFirm}
+                </Text>
+                <Text style={[styles.subText, styles.dateText]}>
+                  {' '}
+                  • {formatDate(update.date)}
+                </Text>
+              </View>
+              <Text style={[fonts.body, styles.bodyText]}>
+                {update.summary}
               </Text>
-              <Text style={[styles.subText, styles.dateText]}>
-                {' '}
-                • {formatDate(update.date)}
-              </Text>
             </View>
-            <Text style={styles.bodyText}>{update.summary}</Text>
           </ScrollView>
         </>
       )}

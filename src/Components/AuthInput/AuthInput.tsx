@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
+import { colors } from '../../styles/colors';
+import { fonts } from '../../styles/fonts';
 
 interface AuthInputProps {
   input: string;
@@ -22,7 +24,6 @@ export default function AuthInput({
   isPassword,
   keyboard,
   autoCapitalization,
-  isHalfWidth,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(placeholderText);
@@ -36,7 +37,10 @@ export default function AuthInput({
 
   const offClick = () => {
     setIsFocused(false);
-    if (input.trim() === '' && !isPassword) {
+    if ((!input || input.trim() === '') && !isPassword) {
+      setPlaceholder(placeholderText);
+      setIsLabelDisplayed(false);
+    } else if (isPassword && !input) {
       setPlaceholder(placeholderText);
       setIsLabelDisplayed(false);
     } else {
@@ -44,21 +48,26 @@ export default function AuthInput({
     }
   };
 
+  useEffect(() => {
+    if (!isPassword && input && input.trim() !== '') {
+      setIsLabelDisplayed(true);
+    }
+  }, [input]);
+
   return (
-    <View>
-      <Text style={styles.labelText}>{isLabelDisplayed ? labelText : ' '}</Text>
+    <View style={styles.outerContainer}>
+      <Text style={fonts.greyVerySmall}>
+        {isLabelDisplayed ? labelText : ' '}
+      </Text>
 
       <TextInput
-        style={[
-          styles.inputBox,
-          isHalfWidth && styles.halfWidth,
-          isFocused && styles.inputFocused,
-        ]}
+        style={[styles.inputBox, fonts.body, isFocused && styles.inputFocused]}
         value={input}
         onChangeText={onChangeInput}
         onFocus={onClick}
         onBlur={offClick}
         placeholder={placeholder}
+        placeholderTextColor={colors.darkGrey}
         secureTextEntry={isPassword}
         keyboardType={keyboard}
         autoCapitalize={autoCapitalization ? 'words' : 'none'}

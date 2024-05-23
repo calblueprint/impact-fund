@@ -1,12 +1,14 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
-import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
-import supabase from '../../../../supabase/createClient';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
@@ -70,61 +72,48 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.instructionText}>Next, make a password.</Text>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={confirmPassword}
-          onChangeInput={onChangeConfirmPassword}
-          labelText="Confirm password"
-          placeholderText="Confirm password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
-
-      <View style={styles.errorMessageContainer}>
-        <Text style={styles.errorMessage}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
-
-      <TouchableOpacity
-        disabled={password === '' || confirmPassword === '' || errorExists}
-        style={
-          password === '' || confirmPassword === '' || errorExists
-            ? styles.nextButtonGray
-            : styles.nextButton
-        }
-        onPress={handleSubmit}
-      >
-        <Text style={styles.nextText}>Continue</Text>
-        <View>
-          <Arrow />
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Next, make a password.</Text>
         </View>
-      </TouchableOpacity>
+
+        <View style={input.inputBoxContainer}>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+
+          <AuthInput
+            input={confirmPassword}
+            onChangeInput={onChangeConfirmPassword}
+            labelText="Confirm password"
+            placeholderText="Confirm password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
+
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ' '}
+          </Text>
+        </View>
+
+        <ButtonBlack
+          disabled={errorExists || password === '' || confirmPassword === ''}
+          onPress={handleSubmit}
+        >
+          <Text style={fonts.whiteButton}>Continue</Text>
+          <Arrow />
+        </ButtonBlack>
+      </View>
     </View>
   );
 }

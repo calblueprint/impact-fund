@@ -5,6 +5,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import RightCaret from '../../../assets/right-caret.svg';
 import { getStatusColor } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import { fonts } from '../../styles/fonts';
+import { shawdowStyles } from '../../styles/global';
 import { CaseUid } from '../../types/types';
 
 interface CaseStatusBarProps {
@@ -19,22 +21,24 @@ export default function StatusUpdatesBar({
   const statusColor = getStatusColor(status);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <Text style={styles.statusText}>Case Status:</Text>
-        <TouchableOpacity
-          style={styles.updatesButton}
-          onPress={() => {
-            router.push({ pathname: `AllCases/Updates/${caseUid}` });
-          }}
-        >
-          <Text style={styles.buttonText}>View all updates</Text>
+    <TouchableOpacity
+      style={[styles.updatesButton, shawdowStyles.shadowBorder]}
+      onPress={() => {
+        router.push({ pathname: `AllCases/Updates/${caseUid}` });
+      }}
+    >
+      <View style={styles.textContainer}>
+        <Text style={fonts.condensedHeadline}>Case Status</Text>
+
+        <View style={styles.updatesContainer}>
+          <Text style={fonts.greySmall}>View all updates</Text>
           <RightCaret />
-        </TouchableOpacity>
+        </View>
       </View>
+
       <View style={[styles.statusContainer, statusColor.background]}>
-        <Text style={[styles.statusTextColor, statusColor.text]}>{status}</Text>
+        <Text style={[styles.statusText, statusColor.text]}>{status}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

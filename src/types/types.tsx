@@ -66,6 +66,7 @@ export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
+  CLAIM_FILED = 'CLAIM_FILED',
 }
 
 export const userInstance: User = {
@@ -87,4 +88,21 @@ export interface Update {
   date: Date;
   summary: string;
   lawFirm: string;
+}
+
+export enum GreenStatusOptions {
+  'In Progress',
+  'New Case',
+  'Settled',
+  'Appeal',
+  'Payment Processing',
+  'Payment Distributed',
+}
+
+export enum YellowStatusOptions {
+  'Pending',
+}
+
+export enum RedStatusOptions {
+  'Action Required',
 }
