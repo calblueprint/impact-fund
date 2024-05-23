@@ -34,8 +34,9 @@ export default function OTPFlow() {
   };
 
   const verifyToken = async (token: string) => {
-    const { error } = await verifyOtp(email, token);
-    if (error) {
+    const err = await verifyOtp(email, token);
+    console.log(err);
+    if (err.message) {
       setErrorExists(true);
       setErrorMessage('Sorry! The verification code was incorrect.');
       return;
