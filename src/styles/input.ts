@@ -4,7 +4,6 @@ export const input = StyleSheet.create({
   screenContainer: {
     width: '84%',
     height: '100%',
-    borderWidth: 1,
   },
   instructionContainer: {
     flexDirection: 'column',

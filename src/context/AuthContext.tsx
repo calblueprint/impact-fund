@@ -5,7 +5,6 @@ import {
   User,
   UserAttributes,
   UserResponse,
-  isAuthError,
 } from '@supabase/supabase-js';
 import React, {
   createContext,
@@ -19,10 +18,8 @@ import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
 
 type SimpleAuthResponse =
-  | {
-      data: any;
-      error: null;
-    }
+  | { data: null; error: null }
+  | { data: object; error: null }
   | { data: null; error: SimpleAuthError };
 
 type SimpleAuthError = {
@@ -204,25 +201,31 @@ export function AuthContextProvider({
     }
   };
 
+  function hasErrorMessage(error: unknown): error is Error {
+    return typeof error === 'object' && error !== null && 'message' in error;
+  }
+
   const verifyOtp = async (
     email: string,
     token: string,
   ): Promise<SimpleAuthResponse> => {
     try {
-      await supabase.auth.verifyOtp({
+      const { error } = await supabase.auth.verifyOtp({
         email,
         token,
         type: 'email',
       });
+
+      console.log(error);
+      if (error) {
+        throw error;
+      }
+
       return { data: null, error: null };
     } catch (error) {
-      if (isAuthError(error)) {
-        return {
-          data: null,
-          error: {
-            message: error.message,
-          },
-        };
+      console.log('error thrown: ', error);
+      if (hasErrorMessage(error)) {
+        return { data: null, error: { message: error.message } };
       }
       throw error;
     }
