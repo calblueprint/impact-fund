@@ -28,7 +28,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 
-    border: 'solid',
     borderWidth: 0.3,
     borderRadius: 5,
   },
