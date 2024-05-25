@@ -1,3 +1,4 @@
 /.expo
 node_modules
 supabase/functions
+metro.config.js
