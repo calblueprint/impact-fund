@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -14,6 +14,7 @@ export default function LoginScreen() {
   const [email, setEmail] = useState<string>('');
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangeEmail = (text: string) => {
     setErrorExists(false);
@@ -21,6 +22,7 @@ export default function LoginScreen() {
   };
 
   async function emailFind() {
+    setQueryLoading(true);
     const isEmail = await emailExists(email);
     if (!isEmail) {
       setErrorExists(true);
@@ -30,6 +32,7 @@ export default function LoginScreen() {
     } else {
       router.push({ pathname: 'Login/Password', params: { email } });
     }
+    setQueryLoading(false);
   }
 
   return (
@@ -66,11 +69,11 @@ export default function LoginScreen() {
 
           <ButtonBlack
             onPress={emailFind}
-            disabled={email.trim() === '' || errorExists}
+            disabled={email.trim() === '' || errorExists || queryLoading}
             $halfWidth
           >
             <Text style={fonts.whiteButton}>Next</Text>
-            <Arrow />
+            {queryLoading ? <ActivityIndicator /> : <Arrow />}
           </ButtonBlack>
         </View>
       </View>
