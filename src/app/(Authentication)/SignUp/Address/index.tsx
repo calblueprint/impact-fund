@@ -1,79 +1,60 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Check from '../../../../../assets/check-circle.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
-  // const { email } = useLocalSearchParams() as unknown as { email: string };
-  // const { password } = useLocalSearchParams() as unknown as {
-  //   password: string;
-  // };
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
-  // const { fullySignUpUser } = useSession();
 
-  const onChangeStreetAddress = (text: string) => {
-    setStreetAddress(text);
-  };
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  const onChangeCity = (text: string) => {
-    setCity(text);
-  };
-
-  const onChangeState = (text: string) => {
-    setState(text);
-  };
-
-  const onChangeZipcode = (text: string) => {
-    setZipcode(text);
-  };
-
-  const validateAddressInputs = () => {
-    if (
+  const validateAddressInputs = (): boolean => {
+    return (
       streetAddress.trim() !== '' ||
       city.trim() !== '' ||
       state.trim() !== '' ||
       zipcode.trim() !== ''
-    )
-      return true;
+    );
   };
 
   const handleSubmit = () => {
+    setQueryLoading(true);
     if (validateAddressInputs()) {
       router.push({
         pathname: 'SignUp/Password',
         params: {
           name,
-          streetAddress,
-          city,
-          state,
-          zipcode,
+          streetAddress: streetAddress.trim(),
+          city: city.trim(),
+          state: state.trim(),
+          zipcode: zipcode.trim(),
         },
       });
     }
+    setQueryLoading(false);
   };
 
   return (
     <View style={device.safeArea}>
       <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
-          <Text style={fonts.headline}>Last, enter your address.</Text>
+          <Text style={fonts.headline}>Next, enter your address.</Text>
         </View>
 
         <View style={input.inputBoxContainer}>
           <AuthInput
             input={streetAddress}
-            onChangeInput={onChangeStreetAddress}
+            onChangeInput={setStreetAddress}
             labelText="Street address"
             placeholderText="Street address"
             isPassword={false}
@@ -83,7 +64,7 @@ export default function SignUpScreen() {
 
           <AuthInput
             input={city}
-            onChangeInput={onChangeCity}
+            onChangeInput={setCity}
             labelText="City"
             placeholderText="City"
             isPassword={false}
@@ -94,7 +75,7 @@ export default function SignUpScreen() {
           <View style={input.inlineInputContainer}>
             <AuthInput
               input={state}
-              onChangeInput={onChangeState}
+              onChangeInput={setState}
               labelText="State"
               placeholderText="State"
               isPassword={false}
@@ -104,7 +85,7 @@ export default function SignUpScreen() {
 
             <AuthInput
               input={zipcode}
-              onChangeInput={onChangeZipcode}
+              onChangeInput={setZipcode}
               labelText="Zipcode"
               placeholderText="Zipcode"
               isPassword={false}
@@ -121,14 +102,15 @@ export default function SignUpScreen() {
             streetAddress.trim() === '' ||
             city.trim() === '' ||
             state.trim() === '' ||
-            zipcode.trim() === ''
+            zipcode.trim() === '' ||
+            queryLoading
           }
           onPress={() => handleSubmit()}
           $centeredContent
         >
           <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Sign Up</Text>
-            <Check />
+            {queryLoading ? <ActivityIndicator /> : <Check />}
           </View>
         </ButtonBlack>
       </View>

@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { z } from 'zod';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
@@ -20,14 +20,15 @@ export default function SignUpScreen() {
   const { state } = useLocalSearchParams() as unknown as { state: string };
   const { zipcode } = useLocalSearchParams() as unknown as { zipcode: string };
 
-  const { sendOtp } = useSession();
-
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
+
+  const { sendOtp } = useSession();
 
   const onChangeEmail = (text: string) => {
     setErrorExists(false);
@@ -50,15 +51,14 @@ export default function SignUpScreen() {
       emailSchema.parse(email);
       setErrorExists(false);
       return true;
-    } catch (error) {
-      console.log(error);
+    } catch {
       setErrorExists(true);
       setErrorMessage('Sorry! Invalid email address.');
       return false;
     }
   };
 
-  const validatePassword = () => {
+  const validatePassword = (): boolean => {
     const lengthRegex = /^.{6,}$/;
     if (!lengthRegex.test(password)) {
       setErrorExists(true);
@@ -69,7 +69,7 @@ export default function SignUpScreen() {
     return true;
   };
 
-  const validateConfirmPassword = () => {
+  const validateConfirmPassword = (): boolean => {
     if (confirmPassword !== password) {
       setErrorExists(true);
       setErrorMessage('Your passwords should match each other.');
@@ -80,7 +80,7 @@ export default function SignUpScreen() {
   };
 
   const handleSubmit = async () => {
-    setErrorExists(true);
+    setQueryLoading(true);
     if (validateEmail() && validateConfirmPassword() && validatePassword()) {
       const { error } = await sendOtp(email);
       if (error) {
@@ -91,7 +91,7 @@ export default function SignUpScreen() {
           pathname: 'OTPFlow/OTPVerify',
           params: {
             name,
-            email,
+            email: email.trim(),
             password,
             streetAddress,
             city,
@@ -103,13 +103,16 @@ export default function SignUpScreen() {
         setConfirmPassword('');
       }
     }
+    setQueryLoading(false);
   };
 
   return (
     <View style={device.safeArea}>
       <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
-          <Text style={fonts.headline}>Next, make a password.</Text>
+          <Text style={fonts.headline}>
+            Please provide an email and password.
+          </Text>
         </View>
 
         <View style={input.inputBoxContainer}>
@@ -151,11 +154,17 @@ export default function SignUpScreen() {
         </View>
 
         <ButtonBlack
-          disabled={errorExists || password === '' || confirmPassword === ''}
+          disabled={
+            queryLoading ||
+            errorExists ||
+            email.trim() === '' ||
+            password === '' ||
+            confirmPassword === ''
+          }
           onPress={handleSubmit}
         >
           <Text style={fonts.whiteButton}>Continue</Text>
-          <Arrow />
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>
