@@ -37,7 +37,6 @@ export default StyleSheet.create({
     flexGrow: 1,
   },
   line: {
-    borderBottom: 'solid',
     borderBottomColor: colors.midGrey,
     borderBottomWidth: 1,
     marginLeft: 50,

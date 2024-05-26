@@ -1,5 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
-import { router } from 'expo-router/src/imperative-api';
+import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';

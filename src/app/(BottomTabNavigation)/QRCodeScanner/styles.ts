@@ -10,11 +10,20 @@ export default StyleSheet.create({
   scanner: {
     height: 300,
     width: 300,
-    border: 'solid',
     borderWidth: 5,
     borderRadius: 10,
     marginVertical: 20,
     overflow: 'hidden',
+  },
+  permissionDenied: {
+    padding: 20,
+    flexDirection: 'column',
+    rowGap: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  alignedText: {
+    textAlign: 'center',
   },
   validScan: {
     borderColor: colors.green,
@@ -26,7 +35,6 @@ export default StyleSheet.create({
     borderColor: colors.black,
   },
   viewCaseButton: {
-    border: 'solid',
     flexDirection: 'row',
     borderColor: colors.black,
     borderWidth: 1,
