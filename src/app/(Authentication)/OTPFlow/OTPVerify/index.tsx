@@ -21,10 +21,23 @@ export default function OTPFlow() {
   const { password } = useLocalSearchParams() as unknown as {
     password: string;
   };
+  const { streetAddress } = useLocalSearchParams() as unknown as {
+    streetAddress: string;
+  };
+  const { city } = useLocalSearchParams() as unknown as {
+    city: string;
+  };
+  const { state } = useLocalSearchParams() as unknown as {
+    state: string;
+  };
+  const { zipcode } = useLocalSearchParams() as unknown as {
+    zipcode: string;
+  };
+
   const [token, setToken] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errorExists, setErrorExists] = useState(true);
-  const { verifyOtp, resendOtp } = useSession();
+  const { verifyOtp, fullySignUpUser, resendOtp } = useSession();
 
   const onChangeToken = (text: string) => {
     setErrorExists(false);
@@ -43,10 +56,16 @@ export default function OTPFlow() {
     if (changePassword === 'yes') {
       router.push('OTPFlow/OTPNewPassword');
     } else {
-      router.push({
-        pathname: 'SignUp/Address',
-        params: { email, password, name },
-      });
+      fullySignUpUser(
+        name,
+        email,
+        password,
+        streetAddress,
+        city,
+        state,
+        zipcode,
+      );
+      router.push('/');
     }
   };
 

@@ -12,15 +12,15 @@ import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
-  const { email } = useLocalSearchParams() as unknown as { email: string };
-  const { password } = useLocalSearchParams() as unknown as {
-    password: string;
-  };
+  // const { email } = useLocalSearchParams() as unknown as { email: string };
+  // const { password } = useLocalSearchParams() as unknown as {
+  //   password: string;
+  // };
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [zipcode, setZipcode] = useState<string>('');
-  const { fullySignUpUser } = useSession();
+  // const { fullySignUpUser } = useSession();
 
   const onChangeStreetAddress = (text: string) => {
     setStreetAddress(text);
@@ -50,20 +50,16 @@ export default function SignUpScreen() {
 
   const handleSubmit = () => {
     if (validateAddressInputs()) {
-      fullySignUpUser(
-        name,
-        email,
-        password,
-        streetAddress,
-        city,
-        state,
-        zipcode,
-      );
-      setStreetAddress('');
-      setCity('');
-      setState('');
-      setZipcode('');
-      router.push('/');
+      router.push({
+        pathname: 'SignUp/Password',
+        params: {
+          name,
+          streetAddress,
+          city,
+          state,
+          zipcode,
+        },
+      });
     }
   };
 

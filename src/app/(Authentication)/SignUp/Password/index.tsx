@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
+import { z } from 'zod';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -12,15 +13,26 @@ import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
   const { name } = useLocalSearchParams() as unknown as { name: string };
-  const { email } = useLocalSearchParams() as unknown as { email: string };
+  const { streetAddress } = useLocalSearchParams() as unknown as {
+    streetAddress: string;
+  };
+  const { city } = useLocalSearchParams() as unknown as { city: string };
+  const { state } = useLocalSearchParams() as unknown as { state: string };
+  const { zipcode } = useLocalSearchParams() as unknown as { zipcode: string };
 
   const { sendOtp } = useSession();
 
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const onChangeEmail = (text: string) => {
+    setErrorExists(false);
+    setEmail(text);
+  };
 
   const onChangePassword = (text: string) => {
     setErrorExists(false);
@@ -30,6 +42,20 @@ export default function SignUpScreen() {
   const onChangeConfirmPassword = (text: string) => {
     setErrorExists(false);
     setConfirmPassword(text);
+  };
+
+  const validateEmail = (): boolean => {
+    try {
+      const emailSchema = z.string().email();
+      emailSchema.parse(email);
+      setErrorExists(false);
+      return true;
+    } catch (error) {
+      console.log(error);
+      setErrorExists(true);
+      setErrorMessage('Sorry! Invalid email address.');
+      return false;
+    }
   };
 
   const validatePassword = () => {
@@ -55,7 +81,7 @@ export default function SignUpScreen() {
 
   const handleSubmit = async () => {
     setErrorExists(true);
-    if (validateConfirmPassword() && validatePassword()) {
+    if (validateEmail() && validateConfirmPassword() && validatePassword()) {
       const { error } = await sendOtp(email);
       if (error) {
         setErrorExists(true);
@@ -63,7 +89,15 @@ export default function SignUpScreen() {
       } else {
         router.push({
           pathname: 'OTPFlow/OTPVerify',
-          params: { name, email, password },
+          params: {
+            name,
+            email,
+            password,
+            streetAddress,
+            city,
+            state,
+            zipcode,
+          },
         });
         setPassword('');
         setConfirmPassword('');
@@ -79,6 +113,16 @@ export default function SignUpScreen() {
         </View>
 
         <View style={input.inputBoxContainer}>
+          <AuthInput
+            input={email}
+            onChangeInput={onChangeEmail}
+            labelText="Email address"
+            placeholderText="Email address"
+            isPassword={false}
+            keyboard="default"
+            autoCapitalization={false}
+          />
+
           <AuthInput
             input={password}
             onChangeInput={onChangePassword}

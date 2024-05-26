@@ -23,35 +23,36 @@ export default function SignUpScreen() {
     setName(text);
   };
 
-  const onChangeEmail = (text: string) => {
-    setErrorExists(false);
-    setEmail(text);
-  };
+  // const onChangeEmail = (text: string) => {
+  //   setErrorExists(false);
+  //   setEmail(text);
+  // };
 
   const validateName = (): boolean => {
     return name.length !== 0;
   };
 
-  const validateEmail = (): boolean => {
-    try {
-      const emailSchema = z.string().email();
-      emailSchema.parse(email);
-      setErrorExists(false);
-      return true;
-    } catch (error) {
-      console.log(error);
-      setErrorExists(true);
-      setErrorMessage('Sorry! Invalid email address.');
-      return false;
-    }
-  };
+  // const validateEmail = (): boolean => {
+  //   try {
+  //     const emailSchema = z.string().email();
+  //     emailSchema.parse(email);
+  //     setErrorExists(false);
+  //     return true;
+  //   } catch (error) {
+  //     console.log(error);
+  //     setErrorExists(true);
+  //     setErrorMessage('Sorry! Invalid email address.');
+  //     return false;
+  //   }
+  // };
 
   const handleSubmit = async () => {
-    const emailDoesExist = await emailExists(email);
-    if (validateName() && validateEmail() && !emailDoesExist) {
+    // const emailDoesExist = await emailExists(email);
+    // if (validateName() && validateEmail() && !emailDoesExist) {
+    if (validateName()) {
       router.push({
-        pathname: 'SignUp/Password',
-        params: { name, email },
+        pathname: 'SignUp/Address',
+        params: { name },
       });
     } else {
       setErrorExists(true);
@@ -64,6 +65,10 @@ export default function SignUpScreen() {
       <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
           <Text style={fonts.headline}>Create your account.</Text>
+          <Text style={fonts.greySmall}>
+            We need to collect some of your information in the following
+            screens.
+          </Text>
         </View>
 
         <View style={input.inputBoxContainer}>
@@ -76,7 +81,7 @@ export default function SignUpScreen() {
             keyboard="default"
             autoCapitalization
           />
-          <AuthInput
+          {/* <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
             labelText="Email address"
@@ -84,7 +89,7 @@ export default function SignUpScreen() {
             isPassword={false}
             keyboard="default"
             autoCapitalization={false}
-          />
+          /> */}
         </View>
 
         <View style={input.errorMessageContainer}>
@@ -94,7 +99,7 @@ export default function SignUpScreen() {
         </View>
 
         <ButtonBlack
-          disabled={name.trim() === '' || email.trim() === '' || errorExists}
+          disabled={name.trim() === '' || errorExists}
           onPress={handleSubmit}
         >
           <Text style={fonts.whiteButton}>Continue</Text>
