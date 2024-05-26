@@ -5,6 +5,7 @@ import {
   User,
   UserAttributes,
   UserResponse,
+  isAuthError,
 } from '@supabase/supabase-js';
 import React, {
   createContext,
@@ -44,7 +45,10 @@ export interface AuthState {
     password: string,
     options: object,
   ) => Promise<AuthResponse>;
-  signInWithEmail: (email: string, password: string) => Promise<AuthError>;
+  signInWithEmail: (
+    email: string,
+    password: string,
+  ) => Promise<AuthError | void>;
   fullySignUpUser: (
     fullName: string,
     email: string,
@@ -110,7 +114,10 @@ export function AuthContextProvider({
     setSession(newSession);
   };
 
-  const signInWithEmail = async (email: string, password: string) => {
+  const signInWithEmail = async (
+    email: string,
+    password: string,
+  ): Promise<AuthError | void> => {
     try {
       const value = await supabase.auth.signInWithPassword({
         email,
@@ -120,10 +127,11 @@ export function AuthContextProvider({
         throw value.error;
       }
       setUser(value.data.user);
-      return null;
     } catch (error) {
-      console.warn(error);
-      return error;
+      if (isAuthError(error)) {
+        return error;
+      }
+      throw error;
     }
   };
 

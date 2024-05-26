@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -17,6 +17,7 @@ export default function LoginScreen() {
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangePassword = (text: string) => {
     setErrorExists(false);
@@ -24,9 +25,9 @@ export default function LoginScreen() {
   };
 
   async function signIn() {
+    setQueryLoading(true);
     const error = await sessionHandler.signInWithEmail(email, password);
-    console.log(error);
-    if (error != null) {
+    if (error) {
       setErrorExists(true);
       if (error.message === 'Invalid login credentials') {
         setErrorMessage(
@@ -36,10 +37,10 @@ export default function LoginScreen() {
         setErrorMessage(error.message);
       }
     } else {
-      //erroring!!!
       setErrorExists(false);
       setPassword('');
     }
+    setQueryLoading(false);
   }
 
   return (
@@ -76,11 +77,11 @@ export default function LoginScreen() {
 
           <ButtonBlack
             onPress={() => signIn()}
-            disabled={password === '' || errorExists}
+            disabled={password === '' || errorExists || queryLoading}
             $halfWidth
           >
             <Text style={fonts.whiteButton}>Next</Text>
-            <Arrow />
+            {queryLoading ? <ActivityIndicator /> : <Arrow />}
           </ButtonBlack>
         </View>
       </View>
