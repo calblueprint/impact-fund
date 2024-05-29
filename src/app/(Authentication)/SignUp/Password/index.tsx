@@ -18,7 +18,7 @@ export default function SignUpScreen() {
   };
   const { city } = useLocalSearchParams() as unknown as { city: string };
   const { state } = useLocalSearchParams() as unknown as { state: string };
-  const { zipcode } = useLocalSearchParams() as unknown as { zipcode: string };
+  const { zipCode } = useLocalSearchParams() as unknown as { zipCode: string };
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -88,7 +88,7 @@ export default function SignUpScreen() {
         streetAddress,
         city,
         state,
-        zipcode,
+        zipCode,
       });
       if (error) {
         setErrorExists(true);

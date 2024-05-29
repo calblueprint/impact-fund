@@ -15,7 +15,7 @@ export default function EditAddressScreen() {
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [zipcode, setZipcode] = useState<string>('');
+  const [zipCode, setZipCode] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
 
@@ -36,17 +36,17 @@ export default function EditAddressScreen() {
 
   const onChangeZipcode = (text: string) => {
     setErrorExists(false);
-    setZipcode(text);
+    setZipCode(text);
   };
 
   const handleSubmit = () => {
-    if (streetAddress && city && usState && zipcode && !errorExists) {
+    if (streetAddress && city && usState && zipCode && !errorExists) {
       updateUser({
         data: {
           streetName: streetAddress,
           city,
           state: usState,
-          zipcode,
+          zipCode,
         },
       });
       router.push('/Profile/');
@@ -56,10 +56,10 @@ export default function EditAddressScreen() {
   };
 
   useEffect(() => {
-    setStreetAddress(session?.user?.user_metadata.streetName);
+    setStreetAddress(session?.user?.user_metadata.streetAddress);
     setUsState(session?.user?.user_metadata.state);
     setCity(session?.user?.user_metadata.city);
-    setZipcode(session?.user?.user_metadata.zip);
+    setZipCode(session?.user?.user_metadata.zipCode);
   }, []);
 
   return (
@@ -101,7 +101,7 @@ export default function EditAddressScreen() {
               autoCapitalization
             />
             <AuthInput
-              input={zipcode}
+              input={zipCode}
               onChangeInput={onChangeZipcode}
               labelText="Zipcode"
               placeholderText="Zipcode"
@@ -115,7 +115,7 @@ export default function EditAddressScreen() {
         <View style={input.inputScreenGap} />
 
         <ButtonBlack
-          disabled={!streetAddress || !city || !usState || !zipcode}
+          disabled={!streetAddress || !city || !usState || !zipCode}
           onPress={handleSubmit}
           $centeredContent
         >

@@ -14,7 +14,7 @@ export default function SignUpScreen() {
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
-  const [zipcode, setZipcode] = useState<string>('');
+  const [zipCode, setZipCode] = useState<string>('');
 
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export default function SignUpScreen() {
       streetAddress.trim() !== '' ||
       city.trim() !== '' ||
       state.trim() !== '' ||
-      zipcode.trim() !== ''
+      zipCode.trim() !== ''
     );
   };
 
@@ -37,7 +37,7 @@ export default function SignUpScreen() {
           streetAddress: streetAddress.trim(),
           city: city.trim(),
           state: state.trim(),
-          zipcode: zipcode.trim(),
+          zipcode: zipCode.trim(),
         },
       });
     }
@@ -84,8 +84,8 @@ export default function SignUpScreen() {
             />
 
             <AuthInput
-              input={zipcode}
-              onChangeInput={setZipcode}
+              input={zipCode}
+              onChangeInput={setZipCode}
               labelText="Zipcode"
               placeholderText="Zipcode"
               isPassword={false}
@@ -102,7 +102,7 @@ export default function SignUpScreen() {
             streetAddress.trim() === '' ||
             city.trim() === '' ||
             state.trim() === '' ||
-            zipcode.trim() === '' ||
+            zipCode.trim() === '' ||
             queryLoading
           }
           onPress={() => handleSubmit()}
