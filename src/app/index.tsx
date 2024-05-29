@@ -20,6 +20,7 @@ function StartScreen() {
     //   }
     // });
     supabase.auth.onAuthStateChange((_event, session) => {
+      console.log(_event);
       if (session) {
         if (_event !== 'USER_UPDATED') {
           //if user password doesn't exist, send to /Password

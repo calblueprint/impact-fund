@@ -39,7 +39,7 @@ export default function SignUpScreen() {
           streetAddress: streetAddress.trim(),
           city: city.trim(),
           state: state.trim(),
-          zipcode: zipCode.trim(),
+          zipCode: zipCode.trim(),
         },
       });
     }
