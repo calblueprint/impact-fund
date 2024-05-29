@@ -10,7 +10,7 @@ import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function NameScreen() {
-  const [name, setName] = useState<string>('');
+  const [fullName, setFullName] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -18,16 +18,16 @@ export default function NameScreen() {
 
   const onChangeName = (text: string) => {
     setErrorExists(false);
-    setName(text);
+    setFullName(text);
   };
 
   const handleSubmit = () => {
     setQueryLoading(true);
-    const trimmed = name.trim();
+    const trimmed = fullName.trim();
     if (trimmed.length !== 0) {
       router.push({
         pathname: 'SignUp/Address',
-        params: { name: trimmed },
+        params: { fullName: trimmed },
       });
     } else {
       setErrorExists(true);
@@ -48,7 +48,7 @@ export default function NameScreen() {
 
         <View style={input.inputBoxContainer}>
           <AuthInput
-            input={name}
+            input={fullName}
             onChangeInput={onChangeName}
             labelText="Full Name"
             placeholderText="Full Name"
@@ -65,7 +65,7 @@ export default function NameScreen() {
         </View>
 
         <ButtonBlack
-          disabled={name.trim() === '' || errorExists || queryLoading}
+          disabled={fullName.trim() === '' || errorExists || queryLoading}
           onPress={handleSubmit}
         >
           <Text style={fonts.whiteButton}>Continue</Text>

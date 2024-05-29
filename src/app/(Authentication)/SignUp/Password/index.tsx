@@ -12,7 +12,9 @@ import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
-  const { name } = useLocalSearchParams() as unknown as { name: string };
+  const { fullName } = useLocalSearchParams() as unknown as {
+    fullName: string;
+  };
   const { streetAddress } = useLocalSearchParams() as unknown as {
     streetAddress: string;
   };
@@ -83,7 +85,7 @@ export default function SignUpScreen() {
     setQueryLoading(true);
     if (validateEmail() && validateConfirmPassword() && validatePassword()) {
       const error = await sendSignUpOtp(email, {
-        name,
+        fullName,
         password,
         streetAddress,
         city,

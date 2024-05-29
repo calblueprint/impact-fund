@@ -10,7 +10,9 @@ import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function SignUpScreen() {
-  const { name } = useLocalSearchParams() as unknown as { name: string };
+  const { fullName } = useLocalSearchParams() as unknown as {
+    fullName: string;
+  };
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
@@ -33,7 +35,7 @@ export default function SignUpScreen() {
       router.push({
         pathname: 'SignUp/Password',
         params: {
-          name,
+          fullName,
           streetAddress: streetAddress.trim(),
           city: city.trim(),
           state: state.trim(),
