@@ -97,8 +97,8 @@ export default function SignUpScreen() {
         router.push({
           pathname: 'OTPFlow/OTPVerify',
           params: {
-            name,
             email: email.trim(),
+            password: password.trim(),
           },
         });
         setPassword('');
