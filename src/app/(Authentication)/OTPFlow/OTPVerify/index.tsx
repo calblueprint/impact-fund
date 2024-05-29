@@ -31,7 +31,7 @@ export default function OTPFlow() {
   };
 
   const resendToken = async (email: string) => {
-    const { error } = await resendOtp(email);
+    const error = await resendOtp(email);
     if (error) {
       setErrorExists(true);
       setErrorMessage(error.message);
@@ -41,9 +41,7 @@ export default function OTPFlow() {
   const verifyToken = async (token: string) => {
     const verifyError = await verifyOtp(email, token);
 
-    console.log(verifyError);
     if (verifyError) {
-      console.log('(verifyToken) verify error caught');
       setErrorExists(true);
       setErrorMessage(verifyError.message);
       return;

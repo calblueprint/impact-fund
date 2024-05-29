@@ -51,7 +51,7 @@ export interface AuthState {
     email: string,
     password: string,
   ) => Promise<AuthError | void>;
-  finishAccountSignup: (
+  finishAccountSignUp: (
     email: string,
     password: string,
   ) => Promise<AuthError | void>;
@@ -61,7 +61,7 @@ export interface AuthState {
   ) => Promise<AuthError | void>;
   sendResetOtp: (email: string) => Promise<AuthError | void>;
   verifyOtp: (email: string, token: string) => Promise<AuthError | void>;
-  resendOtp: (email: string) => Promise<AuthResponse>;
+  resendOtp: (email: string) => Promise<AuthError | void>;
   updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
   resetPassword: (email: string) => Promise<
     | {
@@ -256,7 +256,7 @@ export function AuthContextProvider({
         throw value.error;
       }
     } catch (error) {
-      console.log('resent otp error: ', error);
+      console.warn('(resendOtp)', error);
       if (isAuthError(error)) {
         return error;
       }
