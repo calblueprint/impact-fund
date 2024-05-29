@@ -2,7 +2,7 @@ import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
-import Check from '../../../../../assets/check-circle.svg';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { fonts } from '../../../../styles/fonts';
@@ -108,12 +108,9 @@ export default function SignUpScreen() {
             queryLoading
           }
           onPress={() => handleSubmit()}
-          $centeredContent
         >
-          <View style={input.groupButtonContent}>
-            <Text style={fonts.whiteButton}>Sign Up</Text>
-            {queryLoading ? <ActivityIndicator /> : <Check />}
-          </View>
+          <Text style={fonts.whiteButton}>Continue</Text>
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>
