@@ -18,16 +18,6 @@ import React, {
 
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
-import { UserUid } from '../types/types';
-
-type SimpleAuthResponse =
-  | { data: null; error: null }
-  | { data: object; error: null }
-  | { data: null; error: SimpleAuthError };
-
-type SimpleAuthError = {
-  message: string;
-};
 
 /**
  * To use AuthContext, import useSession() in whichever file you prefer.
@@ -35,7 +25,6 @@ type SimpleAuthError = {
  * Write all supabase queries regarding authenthication in this file, and write
  * its name and type in the AuthState interface.
  */
-
 export interface AuthState {
   session: Session | null;
   user: User | null;
@@ -133,23 +122,29 @@ export function AuthContextProvider({
       if (isAuthError(error)) {
         return error;
       }
+      console.warn('(signInWithEmail)', error);
       throw error;
     }
   };
 
   const signUp = async (email: string, password: string, metaData: object) => {
-    const value = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          ...metaData,
+    try {
+      const value = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            ...metaData,
+          },
         },
-      },
-    });
+      });
 
-    setUser(value.data.user);
-    return value;
+      setUser(value.data.user);
+      return value;
+    } catch (error) {
+      console.warn('(signUp)', error);
+      throw error;
+    }
   };
 
   const finishAccountSignUp = async (
@@ -170,10 +165,10 @@ export function AuthContextProvider({
         email,
       });
     } catch (error) {
-      console.warn('(signUpUser)', error);
       if (isAuthError(error)) {
         return error;
       }
+      console.warn('(finishAccountSignUp)', error);
       throw error;
     }
   };
@@ -197,10 +192,10 @@ export function AuthContextProvider({
         throw value.error;
       }
     } catch (error) {
-      console.warn('(sendSignUpOtp)', error);
       if (isAuthError(error)) {
         return error;
       }
+      console.warn('(sendSignUpOtp)', error);
       throw error;
     }
   };
@@ -238,10 +233,10 @@ export function AuthContextProvider({
         throw new AuthError('User data not found');
       }
     } catch (error) {
-      console.warn('(verifyOtpError)', error);
       if (isAuthError(error)) {
         return error;
       }
+      console.warn('(verifyOtp)', error);
       throw error;
     }
   };
@@ -256,10 +251,10 @@ export function AuthContextProvider({
         throw value.error;
       }
     } catch (error) {
-      console.warn('(resendOtp)', error);
       if (isAuthError(error)) {
         return error;
       }
+      console.warn('(resendOtp)', error);
       throw error;
     }
   };
@@ -279,16 +274,18 @@ export function AuthContextProvider({
       user,
       session,
       isLoading,
-      signUp,
+      // sign in/out
       signIn,
       signInWithEmail,
       signOut,
+      // account creation/edit
+      signUp,
       finishAccountSignUp,
       sendSignUpOtp,
       sendResetOtp,
       verifyOtp,
       resendOtp,
-      // createPublicUserEntry,
+      // helper functions
       updateUser,
       resetPassword,
       deleteCurrentUser,
