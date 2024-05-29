@@ -18,26 +18,11 @@ export default function OTPFlow() {
   };
   const { name } = useLocalSearchParams() as unknown as { name: string };
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const { password } = useLocalSearchParams() as unknown as {
-    password: string;
-  };
-  const { streetAddress } = useLocalSearchParams() as unknown as {
-    streetAddress: string;
-  };
-  const { city } = useLocalSearchParams() as unknown as {
-    city: string;
-  };
-  const { state } = useLocalSearchParams() as unknown as {
-    state: string;
-  };
-  const { zipcode } = useLocalSearchParams() as unknown as {
-    zipcode: string;
-  };
 
   const [token, setToken] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errorExists, setErrorExists] = useState(true);
-  const { verifyOtp, fullySignUpUser, resendOtp } = useSession();
+  const { verifyOtp, resendOtp, finishAccountSignup } = useSession();
 
   const onChangeToken = (text: string) => {
     setErrorExists(false);
@@ -45,28 +30,38 @@ export default function OTPFlow() {
     setToken(text);
   };
 
-  const verifyToken = async (token: string) => {
-    const { error } = await verifyOtp(email, token);
-
+  const resendToken = async (email: string) => {
+    const { error } = await resendOtp(email);
     if (error) {
       setErrorExists(true);
       setErrorMessage(error.message);
+    }
+  };
+
+  const verifyToken = async (token: string) => {
+    const verifyError = await verifyOtp(email, token);
+
+    console.log(verifyError);
+    if (verifyError) {
+      console.log('(verifyToken) verify error caught');
+      setErrorExists(true);
+      setErrorMessage(verifyError.message);
       return;
     }
+
     if (changePassword === 'yes') {
       router.push('OTPFlow/OTPNewPassword');
-    } else {
-      fullySignUpUser(
-        name,
-        email,
-        password,
-        streetAddress,
-        city,
-        state,
-        zipcode,
-      );
-      router.push('/');
+      return;
     }
+
+    const publicError = await finishAccountSignup(email, name);
+    if (publicError) {
+      setErrorExists(true);
+      setErrorMessage(publicError.message);
+      return;
+    }
+
+    router.push('/');
   };
 
   return (
@@ -92,7 +87,7 @@ export default function OTPFlow() {
           <Text style={fonts.greySmall}>
             Didn't receive a code? Go back to confirm your email or
           </Text>
-          <TouchableOpacity onPress={() => resendOtp(email)}>
+          <TouchableOpacity onPress={() => resendToken(email)}>
             <Text
               style={[fonts.greySmall, { textDecorationLine: 'underline' }]}
             >
@@ -102,7 +97,9 @@ export default function OTPFlow() {
         </View>
 
         <View style={input.errorMessageContainer}>
-          <Text style={fonts.errorMessage}>{errorMessage}</Text>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ''}
+          </Text>
         </View>
 
         <ButtonBlack

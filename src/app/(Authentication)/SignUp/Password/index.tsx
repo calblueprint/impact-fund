@@ -28,7 +28,7 @@ export default function SignUpScreen() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  const { sendOtp } = useSession();
+  const { sendSignUpOtp } = useSession();
 
   const onChangeEmail = (text: string) => {
     setErrorExists(false);
@@ -82,7 +82,14 @@ export default function SignUpScreen() {
   const handleSubmit = async () => {
     setQueryLoading(true);
     if (validateEmail() && validateConfirmPassword() && validatePassword()) {
-      const { error } = await sendOtp(email);
+      const error = await sendSignUpOtp(email, {
+        name,
+        password,
+        streetAddress,
+        city,
+        state,
+        zipcode,
+      });
       if (error) {
         setErrorExists(true);
         setErrorMessage(error.message);
@@ -92,11 +99,6 @@ export default function SignUpScreen() {
           params: {
             name,
             email: email.trim(),
-            password,
-            streetAddress,
-            city,
-            state,
-            zipcode,
           },
         });
         setPassword('');
