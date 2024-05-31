@@ -27,7 +27,8 @@ export default function OTPFlow() {
   const [verifyLoading, setVerifyLoading] = useState<boolean>(false);
   const [resendLoading, setResendLoading] = useState<boolean>(false);
 
-  const { verifyOtp, resendOtp, finishAccountSignUp } = useSession();
+  const { verifyOtp, resendOtp, finishAccountSignUp, sendResetOtp } =
+    useSession();
 
   const onChangeToken = (text: string) => {
     setErrorExists(false);
@@ -38,7 +39,12 @@ export default function OTPFlow() {
   const resendToken = async (email: string) => {
     setResendLoading(true);
     setErrorExists(false);
-    const error = await resendOtp(email);
+    let error;
+    if (changePassword === 'yes') {
+      error = await sendResetOtp(email);
+    } else {
+      error = await resendOtp(email);
+    }
     if (error) {
       setErrorExists(true);
       setErrorMessage(error.message);

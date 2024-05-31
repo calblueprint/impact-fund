@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -15,17 +15,18 @@ export default function OTPNewPassword() {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const { updateUser } = useSession();
 
-  const [disableButton, setDisableButton] = useState<boolean>(false);
+  const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangePassword = (text: string) => {
-    setDisableButton(false);
+    setErrorExists(false);
     setErrorMessage('');
     setPassword(text);
   };
 
   const onChangeConfirmPassword = (text: string) => {
-    setDisableButton(false);
+    setErrorExists(false);
     setErrorMessage('');
     setConfirmPassword(text);
   };
@@ -33,7 +34,7 @@ export default function OTPNewPassword() {
   const validatePassword = () => {
     const lengthRegex = /^.{6,}$/;
     if (!lengthRegex.test(password)) {
-      setDisableButton(true);
+      setErrorExists(true);
       setErrorMessage('Your password needs at least six characters!');
       return false;
     }
@@ -42,7 +43,7 @@ export default function OTPNewPassword() {
 
   const validateConfirmPassword = () => {
     if (confirmPassword !== password) {
-      setDisableButton(true);
+      setErrorExists(true);
       setErrorMessage('Your passwords should match each other.');
       return false;
     }
@@ -50,19 +51,21 @@ export default function OTPNewPassword() {
   };
 
   const handleSubmit = async () => {
-    setDisableButton(true);
+    setQueryLoading(true);
     if (validatePassword() && validateConfirmPassword()) {
       const { error } = await updateUser({ password });
       if (error) {
+        setErrorExists(true);
         setErrorMessage(error.message);
-        return;
+      } else {
+        router.push({
+          pathname: '/(BottomTabNavigation)/AllCases/',
+        });
+        setPassword('');
+        setConfirmPassword('');
       }
-      router.push({
-        pathname: '/(BottomTabNavigation)/AllCases/',
-      });
-      setPassword('');
-      setConfirmPassword('');
     }
+    setQueryLoading(false);
   };
 
   return (
@@ -96,16 +99,21 @@ export default function OTPNewPassword() {
 
         <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>
-            {disableButton ? errorMessage : ' '}
+            {errorExists ? errorMessage : ' '}
           </Text>
         </View>
 
         <ButtonBlack
-          disabled={password === '' || confirmPassword === '' || disableButton}
+          disabled={
+            password === '' ||
+            confirmPassword === '' ||
+            errorExists ||
+            queryLoading
+          }
           onPress={handleSubmit}
         >
           <Text style={fonts.whiteButton}>Continue</Text>
-          <Arrow />
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>
