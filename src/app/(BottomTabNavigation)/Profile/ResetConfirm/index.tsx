@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Envelope from '../../../../../assets/reset-password-envelope.svg';
 import Refresh from '../../../../../assets/reset-password-refresh.svg';
@@ -12,27 +12,32 @@ import {
 import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { instruction } from '../../../../styles/instruction';
 
 export default function ResetConfirm() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const { session, sendOtp } = useSession();
-  const [errorExists, setErrorExists] = useState(false);
+  const { session, sendResetOtp } = useSession();
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const resetPassword = async () => {
-    setErrorExists(true);
-    const { error } = await sendOtp(session?.user?.email as string);
-    if (error) {
-      console.log(error.message);
-      setErrorExists(false);
-      return;
-    }
-    router.push({
-      pathname: '/(Authentication)/OTPFlow/OTPVerify',
-      params: { email: session?.user?.email, changePassword: 'yes' },
-    });
+    setQueryLoading(true);
     setErrorExists(false);
+    const error = await sendResetOtp(session?.user?.email as string);
+    if (error) {
+      setErrorExists(true);
+      setErrorMessage(error.message);
+    } else {
+      router.push({
+        pathname: '/(Authentication)/OTPFlow/OTPVerify',
+        params: { email: session?.user?.email, changePassword: 'yes' },
+      });
+    }
+    setQueryLoading(false);
   };
+
   return (
     <View style={device.safeArea}>
       <View style={instruction.screenContainer}>
@@ -63,12 +68,18 @@ export default function ResetConfirm() {
         </View>
 
         <View style={instruction.buttonsContainer}>
+          <View style={input.errorMessageContainer}>
+            <Text style={fonts.errorMessage}>
+              {errorExists ? errorMessage : ''}
+            </Text>
+          </View>
+
           <ButtonBlack
-            disabled={email === '' || errorExists}
+            disabled={email === '' || queryLoading}
             onPress={resetPassword}
           >
             <ButtonTextWhite>Continue</ButtonTextWhite>
-            <Arrow />
+            {queryLoading ? <ActivityIndicator /> : <Arrow />}
           </ButtonBlack>
         </View>
       </View>

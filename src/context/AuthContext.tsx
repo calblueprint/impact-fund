@@ -104,6 +104,12 @@ export function AuthContextProvider({
     setSession(newSession);
   };
 
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setSession(null);
+  };
+
   const signInWithEmail = async (
     email: string,
     password: string,
@@ -173,12 +179,6 @@ export function AuthContextProvider({
     }
   };
 
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setSession(null);
-  };
-
   const sendSignUpOtp = async (
     email: string,
     userData: UserMetadata,
@@ -200,20 +200,22 @@ export function AuthContextProvider({
     }
   };
 
-  const sendResetOtp = async (email: string) => {
-    // try {
-    //   const value = await supabase.auth.signInWithOtp({
-    //     email,
-    //     options: { shouldCreateUser: false },
-    //   });
-    //   if (value.error) {
-    //     throw value.error;
-    //   }
-    //   return value;
-    // } catch (error) {
-    //   console.warn('there was an error sending your one time passcode');
-    //   return error;
-    // }
+  const sendResetOtp = async (email: string): Promise<AuthError | void> => {
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: false },
+      });
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(sendResetOtp)', error);
+      throw error;
+    }
   };
 
   const verifyOtp = async (
