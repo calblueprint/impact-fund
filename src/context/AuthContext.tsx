@@ -221,6 +221,7 @@ export function AuthContextProvider({
         userId: data.user.id,
         email,
       });
+      setUser(data.user);
     } catch (error) {
       if (isAuthError(error)) {
         return error;
@@ -234,10 +235,11 @@ export function AuthContextProvider({
     userId: string,
   ): Promise<AuthError | void> => {
     try {
-      const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
-      if (error) {
-        throw error;
+      const signOutError = await signOut();
+      if (signOutError) {
+        throw signOutError;
       }
+      await supabaseAdmin.auth.admin.deleteUser(userId);
     } catch (error) {
       if (isAuthError(error)) {
         return error;

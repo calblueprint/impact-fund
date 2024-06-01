@@ -15,13 +15,12 @@ import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
 export default function DeleteAccountScreen() {
-  const { signOut, deleteCurrentUser, session } = useSession();
+  const { deleteCurrentUser, session } = useSession();
 
   const deleteAccount = () => {
     if (session?.user.id) {
-      deleteCurrentUser(session.user.id);
+      deleteCurrentUser(session?.user.id);
     }
-    signOut();
   };
 
   return (

@@ -67,8 +67,6 @@ export default function OTPFlow() {
         if (publicError) {
           setErrorExists(true);
           setErrorMessage(publicError.message);
-        } else {
-          router.push('/');
         }
       }
     }
