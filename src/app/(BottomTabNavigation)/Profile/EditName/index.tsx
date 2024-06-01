@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Submit from '../../../../../assets/submit.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -14,14 +14,26 @@ export default function EditNameScreen() {
   const { updateUser, session } = useSession();
   const [fullName, setFullName] = useState<string>('');
 
-  function updateName() {
-    updateUser({
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
+
+  const updateName = async () => {
+    setQueryLoading(true);
+    setErrorExists(false);
+    const error = await updateUser({
       data: {
         fullName,
       },
     });
-    router.back();
-  }
+    if (error) {
+      setErrorExists(true);
+      setErrorMessage(error.message);
+    } else {
+      router.back();
+    }
+    setQueryLoading(false);
+  };
 
   useEffect(() => {
     setFullName(session?.user?.user_metadata.fullName);
@@ -46,16 +58,20 @@ export default function EditNameScreen() {
           />
         </View>
 
-        <View style={input.inputScreenGap} />
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ''}
+          </Text>
+        </View>
 
         <ButtonBlack
-          disabled={!fullName || fullName.trim() === ''}
+          disabled={!fullName || fullName.trim() === '' || queryLoading}
           onPress={updateName}
           $centeredContent
         >
           <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Submit</Text>
-            <Submit />
+            {queryLoading ? <ActivityIndicator /> : <Submit />}
           </View>
         </ButtonBlack>
       </View>

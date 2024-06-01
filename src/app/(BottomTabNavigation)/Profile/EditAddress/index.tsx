@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Submit from '../../../../../assets/submit.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -18,6 +18,8 @@ export default function EditAddressScreen() {
   const [zipCode, setZipCode] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangeStreetAddress = (text: string) => {
     setErrorExists(false);
@@ -39,9 +41,11 @@ export default function EditAddressScreen() {
     setZipCode(text);
   };
 
-  const handleSubmit = () => {
-    if (streetAddress && city && usState && zipCode && !errorExists) {
-      updateUser({
+  const handleSubmit = async () => {
+    setQueryLoading(true);
+    setErrorExists(false);
+    if (streetAddress && city && usState && zipCode) {
+      const error = await updateUser({
         data: {
           streetAddress,
           city,
@@ -49,10 +53,14 @@ export default function EditAddressScreen() {
           zipCode,
         },
       });
-      router.push('/Profile/');
-    } else {
-      //ask josh about case of invalid address
+      if (error) {
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      } else {
+        router.back();
+      }
     }
+    setQueryLoading(false);
   };
 
   useEffect(() => {
@@ -112,16 +120,22 @@ export default function EditAddressScreen() {
           </View>
         </View>
 
-        <View style={input.inputScreenGap} />
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ''}
+          </Text>
+        </View>
 
         <ButtonBlack
-          disabled={!streetAddress || !city || !usState || !zipCode}
+          disabled={
+            !streetAddress || !city || !usState || !zipCode || queryLoading
+          }
           onPress={handleSubmit}
           $centeredContent
         >
           <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Submit</Text>
-            <Submit />
+            {queryLoading ? <ActivityIndicator /> : <Submit />}
           </View>
         </ButtonBlack>
       </View>
