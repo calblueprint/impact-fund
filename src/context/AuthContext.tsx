@@ -51,9 +51,7 @@ export interface AuthState {
 const AuthContext = createContext({} as AuthState);
 
 export function useSession() {
-  const value = useContext(AuthContext);
-
-  return value;
+  return useContext(AuthContext);
 }
 
 export function AuthContextProvider({
