@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
-  screenContainer: {
+  logOutContainer: {
     paddingVertical: 32,
     paddingHorizontal: 29,
     borderColor: colors.midGrey,

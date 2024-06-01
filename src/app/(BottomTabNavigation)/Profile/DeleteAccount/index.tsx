@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import styles from './styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
@@ -13,14 +13,28 @@ import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
+import { instruction } from '../../../../styles/instruction';
 
 export default function DeleteAccountScreen() {
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
   const { deleteCurrentUser, session } = useSession();
 
-  const deleteAccount = () => {
+  const deleteAccount = async () => {
+    setQueryLoading(true);
+    setErrorExists(false);
     if (session?.user.id) {
-      deleteCurrentUser(session?.user.id);
+      const error = await deleteCurrentUser(session?.user.id);
+      if (error) {
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      }
+    } else {
+      setErrorExists(true);
+      setErrorMessage("Error. User doesn't exist.");
     }
+    setQueryLoading(false);
   };
 
   return (
@@ -34,24 +48,37 @@ export default function DeleteAccountScreen() {
           </Text>
         </View>
 
-        <View style={input.inlineInputContainer}>
-          <ButtonWhite
-            onPress={() => router.back()}
-            $halfWidth
-            $centeredContent
-          >
-            <View style={input.groupButtonContent}>
-              <X />
-              <Text style={fonts.blackButton}>Cancel</Text>
-            </View>
-          </ButtonWhite>
+        <View style={instruction.buttonsContainer}>
+          <View style={input.errorMessageContainer}>
+            <Text style={fonts.errorMessage}>
+              {errorExists ? errorMessage : ''}
+            </Text>
+          </View>
 
-          <ButtonBlack onPress={deleteAccount} $halfWidth $centeredContent>
-            <View style={input.groupButtonContent}>
-              <WhiteTrash />
-              <Text style={fonts.whiteButton}>Confirm</Text>
-            </View>
-          </ButtonBlack>
+          <View style={input.inlineInputContainer}>
+            <ButtonWhite
+              onPress={() => router.back()}
+              $halfWidth
+              $centeredContent
+            >
+              <View style={input.groupButtonContent}>
+                <X />
+                <Text style={fonts.blackButton}>Cancel</Text>
+              </View>
+            </ButtonWhite>
+
+            <ButtonBlack
+              onPress={deleteAccount}
+              disabled={queryLoading}
+              $halfWidth
+              $centeredContent
+            >
+              <View style={input.groupButtonContent}>
+                {queryLoading ? <ActivityIndicator /> : <WhiteTrash />}
+                <Text style={fonts.whiteButton}>Confirm</Text>
+              </View>
+            </ButtonBlack>
+          </View>
         </View>
       </View>
     </View>
