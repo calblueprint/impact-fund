@@ -12,7 +12,7 @@ import { input } from '../../../../styles/input';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const sessionHandler = useSession();
+  const { signInWithEmail } = useSession();
   const [password, setPassword] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export default function LoginScreen() {
 
   async function signIn() {
     setQueryLoading(true);
-    const error = await sessionHandler.signInWithEmail(email, password);
+    const error = await signInWithEmail(email, password);
     if (error) {
       setErrorExists(true);
       if (error.message === 'Invalid login credentials') {

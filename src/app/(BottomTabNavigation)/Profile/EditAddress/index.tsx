@@ -43,7 +43,7 @@ export default function EditAddressScreen() {
     if (streetAddress && city && usState && zipCode && !errorExists) {
       updateUser({
         data: {
-          streetName: streetAddress,
+          streetAddress,
           city,
           state: usState,
           zipCode,

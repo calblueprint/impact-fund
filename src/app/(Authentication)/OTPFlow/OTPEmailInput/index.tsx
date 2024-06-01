@@ -37,7 +37,6 @@ export default function OTPEmailInput() {
         'The email you entered is either incorrect or not registered with the Impact Fund.',
       );
     } else {
-      // setErrorExists(false);
       const error = await sendResetOtp(email);
       if (error) {
         setErrorExists(true);

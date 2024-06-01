@@ -23,8 +23,8 @@ export default function LoginScreen() {
 
   async function emailFind() {
     setQueryLoading(true);
-    const isEmail = await emailExists(email);
-    if (!isEmail) {
+    const emailRegistered = await emailExists(email);
+    if (!emailRegistered) {
       setErrorExists(true);
       setErrorMessage(
         'The email you entered is either incorrect or not registered with the Impact Fund.',

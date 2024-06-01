@@ -1,11 +1,9 @@
 import {
   AuthError,
-  AuthResponse,
   Session,
   User,
   UserAttributes,
   UserMetadata,
-  UserResponse,
   isAuthError,
 } from '@supabase/supabase-js';
 import React, {
@@ -30,20 +28,11 @@ export interface AuthState {
   user: User | null;
   isLoading: boolean;
 
-  signIn: (newSession: Session | null) => void;
-  signUp: (
-    email: string,
-    password: string,
-    options: object,
-  ) => Promise<AuthResponse>;
   signInWithEmail: (
     email: string,
     password: string,
   ) => Promise<AuthError | void>;
-  finishAccountSignUp: (
-    email: string,
-    password: string,
-  ) => Promise<AuthError | void>;
+  signOut: () => Promise<AuthError | void>;
   sendSignUpOtp: (
     email: string,
     userData: UserMetadata,
@@ -51,20 +40,12 @@ export interface AuthState {
   sendResetOtp: (email: string) => Promise<AuthError | void>;
   verifyOtp: (email: string, token: string) => Promise<AuthError | void>;
   resendOtp: (email: string) => Promise<AuthError | void>;
-  updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
-  resetPassword: (email: string) => Promise<
-    | {
-        data: object;
-        error: null;
-      }
-    | {
-        data: null;
-        error: AuthError;
-      }
-  >;
-
-  signOut: () => Promise<void>;
-  deleteCurrentUser: (userId: string) => Promise<void>;
+  finishAccountSignUp: (
+    email: string,
+    password: string,
+  ) => Promise<AuthError | void>;
+  deleteCurrentUser: (userId: string) => Promise<AuthError | void>;
+  updateUser: (attributes: UserAttributes) => Promise<AuthError | void>;
 }
 
 const AuthContext = createContext({} as AuthState);
@@ -100,29 +81,20 @@ export function AuthContextProvider({
     });
   }, []);
 
-  const signIn = (newSession: Session | null) => {
-    setSession(newSession);
-  };
-
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setSession(null);
-  };
-
   const signInWithEmail = async (
     email: string,
     password: string,
   ): Promise<AuthError | void> => {
     try {
-      const value = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
-      }); // will trigger the use effect to update the session
-      if (value.error) {
-        throw value.error;
+      });
+      if (error) {
+        throw error;
       } else {
-        setUser(value.data.user);
+        // will trigger the use effect to update the session
+        setUser(data.user);
       }
     } catch (error) {
       if (isAuthError(error)) {
@@ -133,48 +105,19 @@ export function AuthContextProvider({
     }
   };
 
-  const signUp = async (email: string, password: string, metaData: object) => {
+  const signOut = async (): Promise<AuthError | void> => {
     try {
-      const value = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            ...metaData,
-          },
-        },
-      });
-
-      setUser(value.data.user);
-      return value;
-    } catch (error) {
-      console.warn('(signUp)', error);
-      throw error;
-    }
-  };
-
-  const finishAccountSignUp = async (
-    email: string,
-    password: string,
-  ): Promise<AuthError | void> => {
-    try {
-      const { data, error } = await updateUser({
-        email,
-        password,
-      });
+      const { error } = await supabase.auth.signOut();
       if (error) {
         throw error;
       }
-      // add user information to the public table
-      await supabase.from('users').insert({
-        userId: data.user.id,
-        email,
-      });
+      setUser(null);
+      setSession(null);
     } catch (error) {
       if (isAuthError(error)) {
         return error;
       }
-      console.warn('(finishAccountSignUp)', error);
+      console.warn('(signOut)', error);
       throw error;
     }
   };
@@ -261,14 +204,64 @@ export function AuthContextProvider({
     }
   };
 
-  const resetPassword = async (email: string) =>
-    await supabase.auth.resetPasswordForEmail(email);
+  const finishAccountSignUp = async (
+    email: string,
+    password: string,
+  ): Promise<AuthError | void> => {
+    try {
+      const { data, error } = await supabase.auth.updateUser({
+        email,
+        password,
+      });
+      if (error) {
+        throw error;
+      }
+      // add user information to the public table
+      await supabase.from('users').insert({
+        userId: data.user.id,
+        email,
+      });
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(finishAccountSignUp)', error);
+      throw error;
+    }
+  };
 
-  const updateUser = async (attributes: UserAttributes) =>
-    await supabase.auth.updateUser(attributes);
+  const deleteCurrentUser = async (
+    userId: string,
+  ): Promise<AuthError | void> => {
+    try {
+      const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(deleteCurrentUser)', error);
+      throw error;
+    }
+  };
 
-  const deleteCurrentUser = async (userId: string) => {
-    await supabaseAdmin.auth.admin.deleteUser(userId);
+  const updateUser = async (
+    attributes: UserAttributes,
+  ): Promise<AuthError | void> => {
+    try {
+      const { error } = await supabase.auth.updateUser(attributes);
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(updateUser)', error);
+      throw error;
+    }
   };
 
   const authContextValue = useMemo(
@@ -277,19 +270,16 @@ export function AuthContextProvider({
       session,
       isLoading,
       // sign in/out
-      signIn,
       signInWithEmail,
       signOut,
       // account creation/edit
-      signUp,
       finishAccountSignUp,
       sendSignUpOtp,
       sendResetOtp,
       verifyOtp,
       resendOtp,
-      // helper functions
+      // utils
       updateUser,
-      resetPassword,
       deleteCurrentUser,
     }),
     [session, user, isLoading],

@@ -9,7 +9,7 @@ export const emailExists = async (email: string): Promise<boolean> => {
       return true;
     }
   } catch (error) {
-    console.warn('Could not access Supabase!');
+    console.warn('(emailExists) could not access Supabase!');
     throw error;
   }
 };
