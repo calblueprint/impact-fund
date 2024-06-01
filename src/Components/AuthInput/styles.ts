@@ -3,9 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../styles/colors';
 
 export default StyleSheet.create({
-  outerContainer: {
-    flexGrow: 1,
-  },
   inputBox: {
     height: 40,
     width: '100%',

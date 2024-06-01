@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -13,37 +13,43 @@ import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');
-  const { sendOtp } = useSession();
+  const { sendResetOtp } = useSession();
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangeEmail = (text: string) => {
     setErrorExists(false);
+    setDisableButton(false);
     setErrorMessage(' ');
     setEmail(text);
   };
 
-  async function getOTP() {
-    setErrorExists(true);
-    const isEmail = await emailExists(email);
-    if (!isEmail) {
+  const handleSubmit = async () => {
+    setQueryLoading(true);
+    const emailRegistered = await emailExists(email);
+    if (!emailRegistered) {
+      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage(
         'The email you entered is either incorrect or not registered with the Impact Fund.',
       );
     } else {
-      const { error } = await sendOtp(email);
+      const error = await sendResetOtp(email);
       if (error) {
-        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
-        return;
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      } else {
+        router.push({
+          pathname: '/OTPFlow/OTPVerify',
+          params: { email, changePassword: 'yes' },
+        });
       }
-      router.push({
-        pathname: '/OTPFlow/OTPVerify',
-        params: { email, changePassword: 'yes' },
-      });
-      setErrorExists(false);
     }
-  }
+    setQueryLoading(false);
+  };
 
   return (
     <View style={device.safeArea}>
@@ -72,9 +78,12 @@ export default function OTPEmailInput() {
           </Text>
         </View>
 
-        <ButtonBlack disabled={email === '' || errorExists} onPress={getOTP}>
+        <ButtonBlack
+          disabled={email === '' || queryLoading || disableButton}
+          onPress={handleSubmit}
+        >
           <Text style={fonts.whiteButton}>Continue</Text>
-          <Arrow />
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>

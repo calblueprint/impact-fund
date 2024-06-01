@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native';
 
 import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -12,11 +12,12 @@ import { input } from '../../../../styles/input';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const sessionHandler = useSession();
+  const { signInWithEmail } = useSession();
   const [password, setPassword] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangePassword = (text: string) => {
     setErrorExists(false);
@@ -24,17 +25,22 @@ export default function LoginScreen() {
   };
 
   async function signIn() {
-    const isPassword = await sessionHandler.signInWithEmail(email, password);
-    if (!isPassword) {
+    setQueryLoading(true);
+    const error = await signInWithEmail(email, password);
+    if (error) {
       setErrorExists(true);
-      setErrorMessage(
-        'Oh no! The password you entered is incorrect, please try again.',
-      );
+      if (error.message === 'Invalid login credentials') {
+        setErrorMessage(
+          'Oh no! The password you entered is incorrect, please try again.',
+        );
+      } else {
+        setErrorMessage(error.message);
+      }
     } else {
-      //erroring!!!
       setErrorExists(false);
       setPassword('');
     }
+    setQueryLoading(false);
   }
 
   return (
@@ -71,11 +77,11 @@ export default function LoginScreen() {
 
           <ButtonBlack
             onPress={() => signIn()}
-            disabled={password === '' || errorExists}
+            disabled={password === '' || errorExists || queryLoading}
             $halfWidth
           >
             <Text style={fonts.whiteButton}>Next</Text>
-            <Arrow />
+            {queryLoading ? <ActivityIndicator /> : <Arrow />}
           </ButtonBlack>
         </View>
       </View>

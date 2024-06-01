@@ -20,7 +20,7 @@ export default function WelcomeScreen() {
         <View style={styles.buttonContainer}>
           <ButtonWhite
             style={styles.baseButton}
-            onPress={() => router.push('/SignUp/Email')}
+            onPress={() => router.push('/SignUp/Name')}
           >
             <Text style={styles.nextTextBlack}>Create an account</Text>
             <RightArrow />

@@ -73,13 +73,13 @@ export default function ProfileScreen() {
                 <Pencil />
               </View>
               <Text style={styles.userText}>
-                {session?.user?.user_metadata.streetName +
+                {session?.user?.user_metadata.streetAddress +
                   '\n' +
                   session?.user?.user_metadata.city +
                   ', ' +
                   session?.user?.user_metadata.state +
                   ' ' +
-                  session?.user?.user_metadata.zip}
+                  session?.user?.user_metadata.zipCode}
               </Text>
             </View>
           </TouchableOpacity>

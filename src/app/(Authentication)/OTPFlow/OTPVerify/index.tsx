@@ -1,6 +1,6 @@
 import { useLocalSearchParams, router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 
 import styles from './styles';
@@ -16,15 +16,19 @@ export default function OTPFlow() {
   const { changePassword } = useLocalSearchParams() as unknown as {
     changePassword: string;
   };
-  const { name } = useLocalSearchParams() as unknown as { name: string };
   const { email } = useLocalSearchParams() as unknown as { email: string };
   const { password } = useLocalSearchParams() as unknown as {
     password: string;
   };
-  const [token, setToken] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errorExists, setErrorExists] = useState(true);
-  const { verifyOtp, resendOtp } = useSession();
+
+  const [token, setToken] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorExists, setErrorExists] = useState<boolean>(true);
+  const [verifyLoading, setVerifyLoading] = useState<boolean>(false);
+  const [resendLoading, setResendLoading] = useState<boolean>(false);
+
+  const { verifyOtp, resendOtp, finishAccountSignUp, sendResetOtp } =
+    useSession();
 
   const onChangeToken = (text: string) => {
     setErrorExists(false);
@@ -32,21 +36,41 @@ export default function OTPFlow() {
     setToken(text);
   };
 
-  const verifyToken = async (token: string) => {
-    const { error } = await verifyOtp(email, token);
+  const resendToken = async (email: string) => {
+    setResendLoading(true);
+    setErrorExists(false);
+    let error;
+    if (changePassword === 'yes') {
+      error = await sendResetOtp(email);
+    } else {
+      error = await resendOtp(email);
+    }
     if (error) {
       setErrorExists(true);
-      setErrorMessage('Sorry! The verification code was incorrect.');
-      return;
+      setErrorMessage(error.message);
     }
-    if (changePassword === 'yes') {
-      router.push('OTPFlow/OTPNewPassword');
+    setResendLoading(false);
+  };
+
+  const verifyToken = async (token: string) => {
+    setVerifyLoading(true);
+    const verifyError = await verifyOtp(email, token);
+
+    if (verifyError) {
+      setErrorExists(true);
+      setErrorMessage(verifyError.message);
     } else {
-      router.push({
-        pathname: 'SignUp/Address',
-        params: { email, password, name },
-      });
+      if (changePassword === 'yes') {
+        router.push('OTPFlow/OTPNewPassword');
+      } else {
+        const publicError = await finishAccountSignUp(email, password);
+        if (publicError) {
+          setErrorExists(true);
+          setErrorMessage(publicError.message);
+        }
+      }
     }
+    setVerifyLoading(false);
   };
 
   return (
@@ -69,28 +93,37 @@ export default function OTPFlow() {
             keyboardType="number-pad"
             autoFocus={false}
           />
-          <Text style={fonts.greySmall}>
-            Didn't receive a code? Go back to confirm your email or
-          </Text>
-          <TouchableOpacity onPress={() => resendOtp(email)}>
-            <Text
-              style={[fonts.greySmall, { textDecorationLine: 'underline' }]}
+
+          <View style={styles.resendContainer}>
+            <Text style={fonts.greySmall}>Didn't receive a code? </Text>
+            <TouchableOpacity
+              disabled={resendLoading}
+              onPress={() => resendToken(email)}
             >
-              tap here to resend it.
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[fonts.greySmall, { textDecorationLine: 'underline' }]}
+              >
+                tap here to resend it.
+              </Text>
+            </TouchableOpacity>
+            {resendLoading ? <ActivityIndicator size="small" /> : null}
+          </View>
         </View>
 
         <View style={input.errorMessageContainer}>
-          <Text style={fonts.errorMessage}>{errorMessage}</Text>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ''}
+          </Text>
         </View>
 
         <ButtonBlack
-          disabled={token.length !== 6 || errorExists}
+          disabled={
+            token.length !== 6 || errorExists || verifyLoading || resendLoading
+          }
           onPress={() => verifyToken(token)}
         >
           <Text style={fonts.whiteButton}>Continue</Text>
-          <Arrow />
+          {verifyLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>

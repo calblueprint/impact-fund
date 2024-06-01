@@ -13,4 +13,10 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
   },
+  resendContainer: {
+    height: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    columnGap: 5,
+  },
 });

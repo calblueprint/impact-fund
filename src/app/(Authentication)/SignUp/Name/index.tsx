@@ -1,57 +1,57 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 
-import Submit from '../../../../../assets/submit.svg';
+import Arrow from '../../../../../assets/right-arrow-white.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
-import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 
-export default function EditNameScreen() {
-  const { updateUser, session } = useSession();
+export default function NameScreen() {
   const [fullName, setFullName] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  const updateName = async () => {
-    setQueryLoading(true);
+  const onChangeName = (text: string) => {
     setErrorExists(false);
-    const error = await updateUser({
-      data: {
-        fullName,
-      },
-    });
-    if (error) {
-      setErrorExists(true);
-      setErrorMessage(error.message);
+    setFullName(text);
+  };
+
+  const handleSubmit = () => {
+    setQueryLoading(true);
+    const trimmed = fullName.trim();
+    if (trimmed.length !== 0) {
+      router.push({
+        pathname: 'SignUp/Address',
+        params: { fullName: trimmed },
+      });
     } else {
-      router.back();
+      setErrorExists(true);
+      setErrorMessage('You must input a valid name!');
     }
     setQueryLoading(false);
   };
-
-  useEffect(() => {
-    setFullName(session?.user?.user_metadata.fullName);
-  }, []);
 
   return (
     <View style={device.safeArea}>
       <View style={input.screenContainer}>
         <View style={input.instructionContainer}>
-          <Text style={fonts.headline}>Edit account details</Text>
+          <Text style={fonts.headline}>Begin by entering your name.</Text>
+          <Text style={fonts.greySmall}>
+            We must collect some of your information in the following screens.
+          </Text>
         </View>
 
         <View style={input.inputBoxContainer}>
           <AuthInput
             input={fullName}
-            onChangeInput={setFullName}
-            labelText="Full name"
-            placeholderText="Full name"
+            onChangeInput={onChangeName}
+            labelText="Full Name"
+            placeholderText="Full Name"
             isPassword={false}
             keyboard="default"
             autoCapitalization
@@ -60,19 +60,16 @@ export default function EditNameScreen() {
 
         <View style={input.errorMessageContainer}>
           <Text style={fonts.errorMessage}>
-            {errorExists ? errorMessage : ''}
+            {errorExists ? errorMessage : ' '}
           </Text>
         </View>
 
         <ButtonBlack
-          disabled={!fullName || fullName.trim() === '' || queryLoading}
-          onPress={updateName}
-          $centeredContent
+          disabled={fullName.trim() === '' || errorExists || queryLoading}
+          onPress={handleSubmit}
         >
-          <View style={input.groupButtonContent}>
-            <Text style={fonts.whiteButton}>Submit</Text>
-            {queryLoading ? <ActivityIndicator /> : <Submit />}
-          </View>
+          <Text style={fonts.whiteButton}>Continue</Text>
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       </View>
     </View>

@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Submit from '../../../../../assets/submit.svg';
 import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
@@ -15,9 +15,11 @@ export default function EditAddressScreen() {
   const [streetAddress, setStreetAddress] = useState<string>('');
   const [usState, setUsState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [zipcode, setZipcode] = useState<string>('');
+  const [zipCode, setZipCode] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangeStreetAddress = (text: string) => {
     setErrorExists(false);
@@ -36,30 +38,36 @@ export default function EditAddressScreen() {
 
   const onChangeZipcode = (text: string) => {
     setErrorExists(false);
-    setZipcode(text);
+    setZipCode(text);
   };
 
-  const handleSubmit = () => {
-    if (streetAddress && city && usState && zipcode && !errorExists) {
-      updateUser({
+  const handleSubmit = async () => {
+    setQueryLoading(true);
+    setErrorExists(false);
+    if (streetAddress && city && usState && zipCode) {
+      const error = await updateUser({
         data: {
-          streetName: streetAddress,
+          streetAddress,
           city,
           state: usState,
-          zipcode,
+          zipCode,
         },
       });
-      router.push('/Profile/');
-    } else {
-      //ask josh about case of invalid address
+      if (error) {
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      } else {
+        router.back();
+      }
     }
+    setQueryLoading(false);
   };
 
   useEffect(() => {
-    setStreetAddress(session?.user?.user_metadata.streetName);
+    setStreetAddress(session?.user?.user_metadata.streetAddress);
     setUsState(session?.user?.user_metadata.state);
     setCity(session?.user?.user_metadata.city);
-    setZipcode(session?.user?.user_metadata.zip);
+    setZipCode(session?.user?.user_metadata.zipCode);
   }, []);
 
   return (
@@ -99,29 +107,37 @@ export default function EditAddressScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
             <AuthInput
-              input={zipcode}
+              input={zipCode}
               onChangeInput={onChangeZipcode}
               labelText="Zipcode"
               placeholderText="Zipcode"
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
           </View>
         </View>
 
-        <View style={input.inputScreenGap} />
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ''}
+          </Text>
+        </View>
 
         <ButtonBlack
-          disabled={!streetAddress || !city || !usState || !zipcode}
+          disabled={
+            !streetAddress || !city || !usState || !zipCode || queryLoading
+          }
           onPress={handleSubmit}
           $centeredContent
         >
           <View style={input.groupButtonContent}>
             <Text style={fonts.whiteButton}>Submit</Text>
-            <Submit />
+            {queryLoading ? <ActivityIndicator /> : <Submit />}
           </View>
         </ButtonBlack>
       </View>
