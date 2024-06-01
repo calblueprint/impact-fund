@@ -83,6 +83,7 @@ export default function SignUpScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
 
             <AuthInput
@@ -93,6 +94,7 @@ export default function SignUpScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
           </View>
         </View>

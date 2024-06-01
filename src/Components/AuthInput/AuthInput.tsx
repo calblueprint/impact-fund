@@ -24,6 +24,7 @@ export default function AuthInput({
   isPassword,
   keyboard,
   autoCapitalization,
+  isHalfWidth,
 }: AuthInputProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(placeholderText);
@@ -55,7 +56,7 @@ export default function AuthInput({
   }, [input]);
 
   return (
-    <View style={styles.outerContainer}>
+    <View style={isHalfWidth ? { width: '47%' } : { width: '100%' }}>
       <Text style={fonts.greyVerySmall}>
         {isLabelDisplayed ? labelText : ' '}
       </Text>

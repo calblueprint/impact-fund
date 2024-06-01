@@ -107,6 +107,7 @@ export default function EditAddressScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
             <AuthInput
               input={zipCode}
@@ -116,6 +117,7 @@ export default function EditAddressScreen() {
               isPassword={false}
               keyboard="default"
               autoCapitalization
+              isHalfWidth
             />
           </View>
         </View>
