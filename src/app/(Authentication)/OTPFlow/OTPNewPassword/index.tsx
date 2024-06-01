@@ -53,7 +53,7 @@ export default function OTPNewPassword() {
   const handleSubmit = async () => {
     setQueryLoading(true);
     if (validatePassword() && validateConfirmPassword()) {
-      const { error } = await updateUser({ password });
+      const error = await updateUser({ password });
       if (error) {
         setErrorExists(true);
         setErrorMessage(error.message);
