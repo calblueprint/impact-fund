@@ -3,28 +3,10 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.white,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   contentContainer: {
-    height: '84%',
-    width: '82%',
-  },
-  imageContainer: {
-    width: '100%',
-  },
-  image: {
-    width: 130,
-    height: 16,
-  },
-  textContainer: {
-    width: '100%',
-    marginTop: 310,
+    flexDirection: 'column',
+    width: '81%',
+    marginBottom: '50%',
   },
   welcomeText: {
     color: colors.black,
@@ -34,7 +16,37 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
+    marginTop: 55,
+  },
+  orContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 60,
+    width: '100%',
+    height: 35,
+  },
+  orTextContainer: {
+    fontSize: 12,
+    lineHeight: 15,
+    fontWeight: '300',
+    fontStyle: 'normal',
+  },
+  horizontalLine: {
+    flex: 1,
+    height: 0.5,
+    backgroundColor: colors.black,
+  },
+  nextTextWhite: {
+    color: colors.white,
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  nextTextBlack: {
+    color: colors.black,
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  baseButton: {
+    height: 55,
+    borderBottomWidth: 2.25,
   },
 });

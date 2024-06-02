@@ -4,6 +4,7 @@ import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import { fonts } from '../../styles/fonts';
 import { CaseSummaryProps } from '../../types/types';
 
 export default function CaseSummaryContent({
@@ -25,8 +26,8 @@ export default function CaseSummaryContent({
           contentFit="cover"
           transition={300}
         />
-        <View style={styles.blurbContainer}>
-          <Text style={styles.blurbText}>{briefSummary}</Text>
+        <View style={styles.summaryContainer}>
+          <Text style={fonts.headline}>{briefSummary}</Text>
           <View style={styles.inLineSubInfo}>
             <Text style={[styles.subText, styles.lawFirmText]}>{lawFirm}</Text>
             <Text style={[styles.subText, styles.dateText]}>
@@ -35,7 +36,7 @@ export default function CaseSummaryContent({
             </Text>
           </View>
         </View>
-        <Text style={styles.summaryText}>{description}</Text>
+        <Text style={[fonts.body, styles.descriptionText]}>{description}</Text>
       </ScrollView>
     </View>
   );

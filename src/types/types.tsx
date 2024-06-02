@@ -66,6 +66,7 @@ export enum Eligibility {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
+  CLAIM_FILED = 'CLAIM_FILED',
 }
 
 export const userInstance: User = {

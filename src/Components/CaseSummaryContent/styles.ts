@@ -19,32 +19,17 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
   },
-  blurbContainer: {
+  summaryContainer: {
     width: '100%',
     borderBottomWidth: 1,
     marginBottom: 28,
     borderColor: colors.midGrey,
-  },
-  linkContainer: {
-    height: '16%',
-    width: '100%',
-    justifyContent: 'center',
-    paddingHorizontal: '7%',
-
-    borderTopWidth: 0.5,
-    borderColor: colors.darkGrey,
-    zIndex: 2,
   },
   inLineSubInfo: {
     flexDirection: 'row',
     height: 20,
     marginTop: 15,
     marginBottom: 6,
-  },
-  blurbText: {
-    color: colors.black,
-    fontSize: 22,
-    fontWeight: '700',
   },
   subText: {
     fontSize: 12,
@@ -59,9 +44,7 @@ export default StyleSheet.create({
     color: colors.darkGrey,
     fontWeight: '300',
   },
-  summaryText: {
-    color: colors.black,
-    fontSize: 16,
+  descriptionText: {
     fontWeight: '200',
     lineHeight: 24,
     marginBottom: 30,

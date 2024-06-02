@@ -1,10 +1,10 @@
 import {
   AuthError,
-  AuthResponse,
   Session,
   User,
   UserAttributes,
-  UserResponse,
+  UserMetadata,
+  isAuthError,
 } from '@supabase/supabase-js';
 import React, {
   createContext,
@@ -23,53 +23,35 @@ import supabase from '../supabase/createClient';
  * Write all supabase queries regarding authenthication in this file, and write
  * its name and type in the AuthState interface.
  */
-
 export interface AuthState {
   session: Session | null;
   user: User | null;
   isLoading: boolean;
 
-  signIn: (newSession: Session | null) => void;
-  signUp: (
+  signInWithEmail: (
     email: string,
     password: string,
-    options: object,
-  ) => Promise<AuthResponse>;
-  signInWithEmail: (email: string, password: string) => Promise<AuthResponse>;
-  fullySignUpUser: (
-    fullName: string,
+  ) => Promise<AuthError | void>;
+  signOut: () => Promise<AuthError | void>;
+  sendSignUpOtp: (
+    email: string,
+    userData: UserMetadata,
+  ) => Promise<AuthError | void>;
+  sendResetOtp: (email: string) => Promise<AuthError | void>;
+  verifyOtp: (email: string, token: string) => Promise<AuthError | void>;
+  resendOtp: (email: string) => Promise<AuthError | void>;
+  finishAccountSignUp: (
     email: string,
     password: string,
-    streetName: string,
-    city: string,
-    state: string,
-    zip: string,
-  ) => Promise<UserResponse>;
-  sendOtp: (email: string) => Promise<AuthResponse>;
-  verifyOtp: (email: string, token: string) => Promise<AuthResponse>;
-  resendOtp: (email: string) => Promise<AuthResponse>;
-  updateUser: (attributes: UserAttributes) => Promise<UserResponse>;
-  resetPassword: (email: string) => Promise<
-    | {
-        data: object;
-        error: null;
-      }
-    | {
-        data: null;
-        error: AuthError;
-      }
-  >;
-
-  signOut: () => Promise<void>;
-  deleteCurrentUser: (userId: string) => Promise<void>;
+  ) => Promise<AuthError | void>;
+  deleteCurrentUser: (userId: string) => Promise<AuthError | void>;
+  updateUser: (attributes: UserAttributes) => Promise<AuthError | void>;
 }
 
 const AuthContext = createContext({} as AuthState);
 
 export function useSession() {
-  const value = useContext(AuthContext);
-
-  return value;
+  return useContext(AuthContext);
 }
 
 export function AuthContextProvider({
@@ -97,118 +79,189 @@ export function AuthContextProvider({
     });
   }, []);
 
-  const signIn = (newSession: Session | null) => {
-    setSession(newSession);
-  };
-
-  const signInWithEmail = async (email: string, password: string) => {
-    const value = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    }); // will trigger the use effect to update the session
-
-    setUser(value.data.user);
-    return value;
-  };
-
-  const signUp = async (email: string, password: string, metaData: object) => {
-    const value = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          ...metaData,
-        },
-      },
-    });
-
-    setUser(value.data.user);
-    return value;
-  };
-
-  const fullySignUpUser = async (
-    fullName: string,
+  const signInWithEmail = async (
     email: string,
     password: string,
-    streetName: string,
-    city: string,
-    state: string,
-    zip: string,
-  ) => {
+  ): Promise<AuthError | void> => {
     try {
-      const value = await updateUser({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        data: {
-          fullName,
-          streetName,
-          city,
-          state,
-          zip,
-        },
       });
-      // add user information to the public table
-      if (value.data.user) {
-        await supabase.from('users').insert({
-          userId: value.data.user.id,
-          email,
-          fullName,
-        });
+      if (error) {
+        throw error;
+      } else {
+        // will trigger the use effect to update the session
+        setUser(data.user);
       }
-      return value;
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('(signUpUser)', error);
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(signInWithEmail)', error);
       throw error;
     }
   };
 
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setSession(null);
-  };
-
-  const sendOtp = async (email: string) => {
+  const signOut = async (): Promise<AuthError | void> => {
     try {
-      return await supabase.auth.signInWithOtp({ email });
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        throw error;
+      }
+      setUser(null);
+      setSession(null);
     } catch (error) {
-      console.warn('there was an error sending your one time passcode');
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(signOut)', error);
       throw error;
     }
   };
 
-  const verifyOtp = async (email: string, token: string) => {
-    const value = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email',
-    });
-
-    // if (value.data.user) setUser(value.data.user);
-    return value;
+  const sendSignUpOtp = async (
+    email: string,
+    userData: UserMetadata,
+  ): Promise<AuthError | void> => {
+    try {
+      const value = await supabase.auth.signInWithOtp({
+        email,
+        options: { data: userData },
+      });
+      if (value.error) {
+        throw value.error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(sendSignUpOtp)', error);
+      throw error;
+    }
   };
 
-  const resendOtp = async (email: string) => {
+  const sendResetOtp = async (email: string): Promise<AuthError | void> => {
     try {
-      return await supabase.auth.resend({
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: false },
+      });
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(sendResetOtp)', error);
+      throw error;
+    }
+  };
+
+  const verifyOtp = async (
+    email: string,
+    token: string,
+  ): Promise<AuthError | void> => {
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: 'email',
+      });
+      if (error) {
+        throw error;
+      }
+      if (!data.user) {
+        throw new AuthError('User data not found');
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(verifyOtp)', error);
+      throw error;
+    }
+  };
+
+  const resendOtp = async (email: string): Promise<AuthError | void> => {
+    try {
+      const value = await supabase.auth.resend({
         type: 'signup',
         email,
       });
+      if (value.error) {
+        throw value.error;
+      }
     } catch (error) {
-      console.warn('there was an error resending your one time passcode');
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(resendOtp)', error);
       throw error;
     }
   };
 
-  const resetPassword = async (email: string) =>
-    await supabase.auth.resetPasswordForEmail(email);
+  const finishAccountSignUp = async (
+    email: string,
+    password: string,
+  ): Promise<AuthError | void> => {
+    try {
+      const { data, error } = await supabase.auth.updateUser({
+        email,
+        password,
+      });
+      if (error) {
+        throw error;
+      }
+      // add user information to the public table
+      await supabase.from('users').insert({
+        userId: data.user.id,
+        email,
+      });
+      setUser(data.user);
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(finishAccountSignUp)', error);
+      throw error;
+    }
+  };
 
-  const updateUser = async (attributes: UserAttributes) =>
-    await supabase.auth.updateUser(attributes);
+  const deleteCurrentUser = async (
+    userId: string,
+  ): Promise<AuthError | void> => {
+    try {
+      const signOutError = await signOut();
+      if (signOutError) {
+        throw signOutError;
+      }
+      await supabaseAdmin.auth.admin.deleteUser(userId);
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(deleteCurrentUser)', error);
+      throw error;
+    }
+  };
 
-  const deleteCurrentUser = async (userId: string) => {
-    await supabaseAdmin.auth.admin.deleteUser(userId);
+  const updateUser = async (
+    attributes: UserAttributes,
+  ): Promise<AuthError | void> => {
+    try {
+      const { error } = await supabase.auth.updateUser(attributes);
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        return error;
+      }
+      console.warn('(updateUser)', error);
+      throw error;
+    }
   };
 
   const authContextValue = useMemo(
@@ -216,16 +269,17 @@ export function AuthContextProvider({
       user,
       session,
       isLoading,
-      signUp,
-      signIn,
+      // sign in/out
       signInWithEmail,
       signOut,
-      fullySignUpUser,
-      sendOtp,
+      // account creation/edit
+      finishAccountSignUp,
+      sendSignUpOtp,
+      sendResetOtp,
       verifyOtp,
-      updateUser,
-      resetPassword,
       resendOtp,
+      // utils
+      updateUser,
       deleteCurrentUser,
     }),
     [session, user, isLoading],

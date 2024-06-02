@@ -12,12 +12,14 @@ import RedTrash from '../../../../assets/red-trash.svg';
 import Reset from '../../../../assets/reset.svg';
 import SignOut from '../../../../assets/sign-out.svg';
 import WhiteRightCarrot from '../../../../assets/white-right-carrot.svg';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../context/AuthContext';
-import globalStyles from '../../../styles/global';
+import { fonts } from '../../../styles/fonts';
+import { device, shawdowStyles } from '../../../styles/global';
+import { input } from '../../../styles/input';
 
-function ProfileScreen() {
+export default function ProfileScreen() {
   const navigation = useNavigation();
-
   const { session } = useSession();
 
   useEffect(() => {
@@ -25,10 +27,13 @@ function ProfileScreen() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>Settings</Text>
-        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
+        <View style={styles.titleContainer}>
+          <Text style={fonts.tabHeading}>Settings</Text>
+        </View>
+
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <View style={styles.profileDetailsBox}>
             <Envelope />
             <View style={styles.textContainer}>
@@ -38,6 +43,7 @@ function ProfileScreen() {
           </View>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditName')}
@@ -55,6 +61,7 @@ function ProfileScreen() {
           </TouchableOpacity>
 
           <View style={styles.line} />
+
           <TouchableOpacity
             style={styles.profileDetailsBox}
             onPress={() => router.push('/Profile/EditAddress')}
@@ -66,19 +73,19 @@ function ProfileScreen() {
                 <Pencil />
               </View>
               <Text style={styles.userText}>
-                {session?.user?.user_metadata.streetName +
+                {session?.user?.user_metadata.streetAddress +
                   '\n' +
                   session?.user?.user_metadata.city +
                   ', ' +
                   session?.user?.user_metadata.state +
                   ' ' +
-                  session?.user?.user_metadata.zip}
+                  session?.user?.user_metadata.zipCode}
               </Text>
             </View>
           </TouchableOpacity>
         </View>
 
-        <View style={[styles.actionsContainer, globalStyles.shadowBorder]}>
+        <View style={[styles.actionsContainer, shawdowStyles.shadowBorder]}>
           <TouchableOpacity
             style={[styles.profileDetailsBox, styles.centerAlign]}
             onPress={() =>
@@ -113,21 +120,18 @@ function ProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
+        <ButtonBlack
           onPress={() => {
             router.push('/Profile/LogOut');
           }}
-          style={styles.signOutButton}
         >
-          <View style={styles.signOutInstructions}>
+          <View style={input.groupButtonContent}>
             <SignOut />
-            <Text style={styles.signOutText}>Log out</Text>
+            <Text style={fonts.whiteButton}>Log out</Text>
           </View>
           <WhiteRightCarrot />
-        </TouchableOpacity>
+        </ButtonBlack>
       </View>
     </View>
   );
 }
-
-export default ProfileScreen;

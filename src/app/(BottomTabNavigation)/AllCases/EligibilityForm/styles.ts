@@ -3,12 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   contentContainer: {
     width: '100%',
   },
@@ -41,28 +35,11 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'column',
     rowGap: 16,
-    padding: 25,
+    paddingTop: 20,
+    paddingBottom: 25,
+    paddingHorizontal: 25,
     borderTopWidth: 2,
     borderTopColor: colors.midGrey,
-  },
-  buttonBase: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    height: 47,
-    borderRadius: 5,
-    columnGap: 10,
-  },
-  eligibleButton: {
-    backgroundColor: colors.black,
-  },
-  inactiveEligibleButton: {
-    backgroundColor: colors.midGrey,
-  },
-  ineligbleButton: {
-    borderColor: colors.black,
-    borderWidth: 0.5,
   },
   infoRow: {
     flexDirection: 'row',
@@ -76,18 +53,8 @@ export default StyleSheet.create({
     borderRadius: 5,
   },
   titleText: {
-    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  bodyText: {
-    fontSize: 16,
-    lineHeight: 16,
-    fontStyle: 'normal',
-    fontWeight: '300',
-  },
-  eligibleButtonText: {
-    color: colors.white,
   },
   listEmptyContainer: {
     justifyContent: 'center',

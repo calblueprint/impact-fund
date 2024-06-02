@@ -3,11 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.white,
-  },
   contentContainer: {
     width: '82%',
     height: '84%',
@@ -41,19 +36,5 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.midGrey,
     marginVertical: 12,
-  },
-  headerText: {
-    fontSize: 32,
-    fontWeight: '800',
-  },
-  formTitle: {
-    fontSize: 16,
-    fontWeight: '300',
-    lineHeight: 21,
-  },
-  dateText: {
-    fontSize: 12,
-    fontWeight: '100',
-    lineHeight: 21,
   },
 });

@@ -1,9 +1,12 @@
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { BarCodeScanningResult, Camera } from 'expo-camera';
+import {
+  CameraView,
+  useCameraPermissions,
+  BarcodeScanningResult,
+} from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
-import { debounce, delay } from 'lodash';
+import { debounce } from 'lodash';
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Toast, {
   ErrorToast,
   SuccessToast,
@@ -11,21 +14,46 @@ import Toast, {
 } from 'react-native-toast-message';
 
 import styles from './styles';
-import Arrow from '../../../../assets/black-right-arrow.svg';
+import Camera from '../../../../assets/camera-disabled.svg';
 import CheckIcon from '../../../../assets/green-check.svg';
+import Arrow from '../../../../assets/right-arrow-white.svg';
 import ErrorIcon from '../../../../assets/warning.svg';
+import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
 import { CaseContext } from '../../../context/CaseContext';
+import { fonts } from '../../../styles/fonts';
+import { device } from '../../../styles/global';
 import { getScannedData } from '../../../supabase/queries/cases';
 import { Case } from '../../../types/types';
 
-enum permissions {
-  UNDETERMINED,
-  DENIED,
-  GRANTED,
-}
+const toastConfig: ToastConfig = {
+  success: (props: any) => (
+    <SuccessToast
+      {...props}
+      text1Style={fonts.small}
+      renderLeadingIcon={CheckIcon}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: 20,
+      }}
+    />
+  ),
 
-function QRCodeScannerScreen() {
-  const [hasPermission, setHasPermission] = useState(permissions.UNDETERMINED);
+  error: (props: any) => (
+    <ErrorToast
+      {...props}
+      text1Style={fonts.small}
+      renderLeadingIcon={ErrorIcon}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: 20,
+      }}
+    />
+  ),
+};
+
+export default function QRCodeScannerScreen() {
   const [scannedCase, setScannedCase] = useState<Case>();
   const [borderStyle, setBorderStyle] = useState(styles.notScanned);
   const [recentScan, setRecentScan] = useState<string>('');
@@ -36,62 +64,7 @@ function QRCodeScannerScreen() {
 
   const navigation = useNavigation();
 
-  const toastConfig: ToastConfig = {
-    success: (props: any) => (
-      <SuccessToast
-        {...props}
-        text1Style={{
-          fontSize: 14,
-          fontWeight: '400',
-        }}
-        renderLeadingIcon={CheckIcon}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingLeft: 20,
-        }}
-      />
-    ),
-
-    error: (props: any) => (
-      <ErrorToast
-        {...props}
-        text1Style={{
-          fontSize: 14,
-          fontWeight: '400',
-        }}
-        renderLeadingIcon={ErrorIcon}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingLeft: 20,
-        }}
-      />
-    ),
-  };
-
-  const getBarCodeScannerPermissions = async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync();
-    setHasPermission(
-      status === 'granted' ? permissions.GRANTED : permissions.DENIED,
-    );
-  };
-
-  useEffect(() => {
-    getBarCodeScannerPermissions();
-  }, []);
-
-  useEffect(() => {
-    navigation.addListener('blur', async () => {
-      resetScanner();
-      setScannedCase(undefined);
-    });
-    navigation.addListener('focus', async () => {
-      resetScanner();
-      setScannedCase(undefined);
-      setTimeout(() => {}, 1000);
-    });
-  }, [navigation]);
+  const [permission, requestPermission] = useCameraPermissions();
 
   function resetScanner() {
     setScannerState('');
@@ -103,7 +76,7 @@ function QRCodeScannerScreen() {
   const debouncedResetScanner = useCallback(debounce(resetScanner, 1500), []);
 
   // function called after every `BarCodeScanningResult` event triggered by scanner
-  async function handleBarCodeScanned(result: BarCodeScanningResult) {
+  async function handleBarCodeScanned(result: BarcodeScanningResult) {
     if (result.data !== recentScan) {
       // process the barcode data if different from previous scans
       resetScanner();
@@ -175,34 +148,59 @@ function QRCodeScannerScreen() {
     }
   };
 
-  if (hasPermission === permissions.DENIED) {
-    return <Text>CANNOT ACCESS CAMERA!</Text>;
-  }
+  useEffect(() => {
+    requestPermission();
+  });
 
-  return (
-    <View style={styles.container}>
+  useEffect(() => {
+    navigation.addListener('blur', async () => {
+      resetScanner();
+      setScannedCase(undefined);
+    });
+    navigation.addListener('focus', async () => {
+      resetScanner();
+      setScannedCase(undefined);
+      setTimeout(() => {}, 1000);
+    });
+  }, [navigation]);
+
+  return !permission ? (
+    <Text>Loading Permissions...</Text>
+  ) : (
+    <View style={[device.safeArea, styles.centered]}>
       <Toast position="top" topOffset={20} config={toastConfig} />
-      <Text style={styles.topText}>Point your Camera at the QR code.</Text>
-      <Camera
-        onBarCodeScanned={handleBarCodeScanned}
-        barCodeScannerSettings={{
-          barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
-          interval: 1000,
-        }}
-        style={[styles.scanner, borderStyle]}
-      />
+
+      {!permission.granted ? (
+        <View style={[styles.scanner, styles.permissionDenied]}>
+          <Text style={[fonts.small, styles.alignedText]}>
+            You must enable camera permissions to use the QR code scanner.
+          </Text>
+          <Camera />
+        </View>
+      ) : (
+        <>
+          <Text style={fonts.condensedHeadline}>
+            Point your Camera at the QR code.
+          </Text>
+          <CameraView
+            onBarcodeScanned={handleBarCodeScanned}
+            barcodeScannerSettings={{
+              barcodeTypes: ['qr'],
+            }}
+            style={[styles.scanner, borderStyle]}
+          />
+        </>
+      )}
 
       {scannedCase && (
-        <TouchableOpacity
+        <ButtonBlack
           style={styles.viewCaseButton}
           onPress={() => routeToAddCase()}
         >
-          <Text style={styles.caseButtonText}>View Case</Text>
+          <Text style={fonts.whiteButton}>View Case</Text>
           <Arrow />
-        </TouchableOpacity>
+        </ButtonBlack>
       )}
     </View>
   );
 }
-
-export default QRCodeScannerScreen;
