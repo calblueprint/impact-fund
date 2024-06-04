@@ -23,7 +23,6 @@
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       },
       "bundleIdentifier": "org.calblueprint.impactfund",
-      //   icon: './assets/images/appstore.png',
       "buildNumber": "4"
     },
     "android": {

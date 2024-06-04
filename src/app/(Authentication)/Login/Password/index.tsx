@@ -1,19 +1,23 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native';
 
-import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 
 export default function LoginScreen() {
   const { email } = useLocalSearchParams() as unknown as { email: string };
-  const sessionHandler = useSession();
+  const { signInWithEmail } = useSession();
   const [password, setPassword] = useState<string>('');
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangePassword = (text: string) => {
     setErrorExists(false);
@@ -21,57 +25,65 @@ export default function LoginScreen() {
   };
 
   async function signIn() {
-    const isPassword = await sessionHandler.signInWithEmail(email, password);
-    if (!isPassword) {
+    setQueryLoading(true);
+    const error = await signInWithEmail(email, password);
+    if (error) {
       setErrorExists(true);
-      setErrorMessage(
-        'Oh no! The password you entered is incorrect, please try again.',
-      );
+      if (error.message === 'Invalid login credentials') {
+        setErrorMessage(
+          'Oh no! The password you entered is incorrect, please try again.',
+        );
+      } else {
+        setErrorMessage(error.message);
+      }
     } else {
       setErrorExists(false);
       setPassword('');
     }
+    setQueryLoading(false);
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructionText}>Please enter your password.</Text>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>Please enter your password.</Text>
+        </View>
 
-      <View style={styles.inputBox}>
-        <AuthInput
-          input={password}
-          onChangeInput={onChangePassword}
-          labelText="Password"
-          placeholderText="Password"
-          isPassword
-          keyboard="default"
-          autoCapitalization={false}
-        />
-      </View>
+        <View style={input.inputBoxContainer}>
+          <AuthInput
+            input={password}
+            onChangeInput={onChangePassword}
+            labelText="Password"
+            placeholderText="Password"
+            isPassword
+            keyboard="default"
+            autoCapitalization={false}
+          />
+        </View>
 
-      <View style={styles.errorMessageBox}>
-        <Text style={styles.errorMessageText}>
-          {errorExists ? errorMessage : ' '}
-        </Text>
-      </View>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
+            {errorExists ? errorMessage : ' '}
+          </Text>
+        </View>
 
-      <View style={styles.nextLine}>
-        <TouchableOpacity onPress={() => router.push('/OTPFlow/OTPEmailInput')}>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-        </TouchableOpacity>
+        <View style={input.inlineInputContainer}>
+          <TouchableOpacity
+            onPress={() => router.push('/OTPFlow/OTPEmailInput')}
+          >
+            <Text style={fonts.greyBody}>Forgot password?</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          disabled={password === '' || errorExists}
-          style={
-            password === '' || errorExists
-              ? [styles.nextButtonBase, styles.nextButtonDisabled]
-              : [styles.nextButtonBase, styles.nextButtonActive]
-          }
-          onPress={() => signIn()}
-        >
-          <Text style={styles.nextText}>Next</Text>
-          <Arrow />
-        </TouchableOpacity>
+          <ButtonBlack
+            onPress={() => signIn()}
+            disabled={password === '' || errorExists || queryLoading}
+            $halfWidth
+          >
+            <Text style={fonts.whiteButton}>Next</Text>
+            {queryLoading ? <ActivityIndicator /> : <Arrow />}
+          </ButtonBlack>
+        </View>
       </View>
     </View>
   );

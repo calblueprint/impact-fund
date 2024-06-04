@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../styles/colors';
-
 export default StyleSheet.create({
   container: {
     width: '100%',
@@ -20,19 +18,6 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     height: '100%',
-  },
-  titleText: {
-    fontSize: 15,
-    fontStyle: 'normal',
-    fontWeight: '300',
-    lineHeight: 21,
-    color: colors.black,
-  },
-  dateText: {
-    fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: '200',
-    lineHeight: 21,
-    color: colors.black,
+    rowGap: 3,
   },
 });

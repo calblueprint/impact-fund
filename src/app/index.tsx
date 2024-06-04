@@ -12,25 +12,15 @@ const resetAndPushToRouter = (path: string) => {
 
 function StartScreen() {
   useEffect(() => {
-    // supabase.auth.getSession().then(({ data: { session } }) => {
-    //   if (session) {
-    //     router.replace('/Cases');
-    //   } else {
-    //     router.replace('/Welcome');
-    //   }
-    // });
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         if (_event !== 'USER_UPDATED') {
-          //if user password doesn't exist, send to /Password
-          //if user address doesn't exist, send to /Address
           resetAndPushToRouter('/AllCases');
         }
       } else {
         resetAndPushToRouter('/Welcome');
       }
     });
-    // return () => authListener.subscription.unsubscribe();
   }, []);
 }
 

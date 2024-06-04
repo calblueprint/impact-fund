@@ -39,7 +39,7 @@ export default function CasesLayout() {
           }}
         />
         <Stack.Screen
-          name="SignUp/Email/index"
+          name="SignUp/Name/index"
           options={{
             headerLeft: () => <BackButtonNoText />,
             headerTitle: () => <EmptyHeader />,
@@ -55,6 +55,7 @@ export default function CasesLayout() {
         <Stack.Screen
           name="SignUp/Address/index"
           options={{
+            headerLeft: () => <BackButtonNoText />,
             headerTitle: () => <EmptyHeader />,
           }}
         />

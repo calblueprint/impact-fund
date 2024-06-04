@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import PdfIcon from '../../../assets/pdf.svg';
 import { formatDate } from '../../app/(BottomTabNavigation)/AllCases/utils';
+import { fonts } from '../../styles/fonts';
 import { Form } from '../../types/types';
 
 export default function FormListItem(formData: Form) {
@@ -18,15 +19,14 @@ export default function FormListItem(formData: Form) {
           },
         })
       }
+      style={styles.container}
     >
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <PdfIcon />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.titleText}>{formData.title}</Text>
-          <Text style={styles.dateText}>{formatDate(formData.date)}</Text>
-        </View>
+      <View style={styles.imageContainer}>
+        <PdfIcon />
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={fonts.body}>{formData.title}</Text>
+        <Text style={fonts.greyVerySmall}>{formatDate(formData.date)}</Text>
       </View>
     </TouchableOpacity>
   );

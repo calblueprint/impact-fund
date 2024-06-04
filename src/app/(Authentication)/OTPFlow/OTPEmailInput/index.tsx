@@ -1,57 +1,66 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
-import styles from './styles';
 import Arrow from '../../../../../assets/right-arrow-white.svg';
+import { ButtonBlack } from '../../../../Components/AuthButton/AuthButton';
 import AuthInput from '../../../../Components/AuthInput/AuthInput';
 import { useSession } from '../../../../context/AuthContext';
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
 import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function OTPEmailInput() {
   const [email, setEmail] = useState<string>('');
-  const { sendOtp } = useSession();
+  const { sendResetOtp } = useSession();
 
   const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const onChangeEmail = (text: string) => {
     setErrorExists(false);
+    setDisableButton(false);
     setErrorMessage(' ');
     setEmail(text);
   };
 
-  async function getOTP() {
-    setErrorExists(true);
-    const isEmail = await emailExists(email);
-    if (!isEmail) {
+  const handleSubmit = async () => {
+    setQueryLoading(true);
+    const emailRegistered = await emailExists(email);
+    if (!emailRegistered) {
+      setErrorExists(true);
+      setDisableButton(true);
       setErrorMessage(
         'The email you entered is either incorrect or not registered with the Impact Fund.',
       );
     } else {
-      const { error } = await sendOtp(email);
+      const error = await sendResetOtp(email);
       if (error) {
-        setErrorMessage('Sorry, you can only send a code every 60 seconds!');
-        return;
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      } else {
+        router.push({
+          pathname: '/OTPFlow/OTPVerify',
+          params: { email, changePassword: 'yes' },
+        });
       }
-      router.push({
-        pathname: '/OTPFlow/OTPVerify',
-        params: { email, changePassword: 'yes' },
-      });
-      setErrorExists(false);
     }
-  }
+    setQueryLoading(false);
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <View>
-          <Text style={styles.instructionText}>
+    <View style={device.safeArea}>
+      <View style={input.screenContainer}>
+        <View style={input.instructionContainer}>
+          <Text style={fonts.headline}>
             Please enter the email you used to create your account.
           </Text>
         </View>
 
-        <View style={styles.inputBox}>
+        <View style={input.inputBoxContainer}>
           <AuthInput
             input={email}
             onChangeInput={onChangeEmail}
@@ -63,26 +72,19 @@ export default function OTPEmailInput() {
           />
         </View>
 
-        <View style={styles.errorMessageBox}>
-          <Text style={styles.errorMessageText}>
+        <View style={input.errorMessageContainer}>
+          <Text style={fonts.errorMessage}>
             {errorExists ? errorMessage : ' '}
           </Text>
         </View>
 
-        <View style={styles.nextLine}>
-          <TouchableOpacity
-            disabled={email === '' || errorExists}
-            style={
-              email === '' || errorExists
-                ? [styles.nextButtonBase, styles.nextButtonDisabled]
-                : [styles.nextButtonBase, styles.nextButtonActive]
-            }
-            onPress={getOTP}
-          >
-            <Text style={styles.nextText}>Continue</Text>
-            <Arrow />
-          </TouchableOpacity>
-        </View>
+        <ButtonBlack
+          disabled={email === '' || queryLoading || disableButton}
+          onPress={handleSubmit}
+        >
+          <Text style={fonts.whiteButton}>Continue</Text>
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
+        </ButtonBlack>
       </View>
     </View>
   );

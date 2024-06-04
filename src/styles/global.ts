@@ -2,7 +2,17 @@ import { StyleSheet } from 'react-native';
 
 import { colors } from './colors';
 
-export default StyleSheet.create({
+export const device = StyleSheet.create({
+  safeArea: {
+    width: '100%',
+    minHeight: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
+});
+
+export const shawdowStyles = StyleSheet.create({
   shadowBorder: {
     backgroundColor: colors.white,
     borderColor: colors.midGrey,

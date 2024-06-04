@@ -7,8 +7,8 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     columnGap: 16,
-    paddingTop: 24,
-    paddingBottom: 8,
+    paddingTop: 20,
+    paddingBottom: 12,
   },
   contentContainer: {
     flex: 1,

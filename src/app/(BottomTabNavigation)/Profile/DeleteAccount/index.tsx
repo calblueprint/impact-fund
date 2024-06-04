@@ -1,59 +1,86 @@
 import { router } from 'expo-router';
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import styles from './styles';
 import WhiteTrash from '../../../../../assets/white-trash.svg';
 import X from '../../../../../assets/x.svg';
+import {
+  ButtonBlack,
+  ButtonWhite,
+} from '../../../../Components/AuthButton/AuthButton';
 import { useSession } from '../../../../context/AuthContext';
-function DeleteAccountScreen() {
-  const { signOut, deleteCurrentUser, session } = useSession();
+import { fonts } from '../../../../styles/fonts';
+import { device } from '../../../../styles/global';
+import { input } from '../../../../styles/input';
+import { instruction } from '../../../../styles/instruction';
 
-  const deleteAccount = () => {
+export default function DeleteAccountScreen() {
+  const [errorExists, setErrorExists] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
+  const { deleteCurrentUser, session } = useSession();
+
+  const deleteAccount = async () => {
+    setQueryLoading(true);
+    setErrorExists(false);
     if (session?.user.id) {
-      deleteCurrentUser(session.user.id);
+      const error = await deleteCurrentUser(session?.user.id);
+      if (error) {
+        setErrorExists(true);
+        setErrorMessage(error.message);
+      }
+    } else {
+      setErrorExists(true);
+      setErrorMessage("Error. User doesn't exist.");
     }
-    signOut();
+    setQueryLoading(false);
   };
 
   return (
-    <View style={styles.container}>
+    <View style={device.safeArea}>
       <View style={styles.screenContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.topText}>Delete account?</Text>
-          <Text style={styles.blurb}>
+          <Text style={fonts.instructionHeading}>Delete account?</Text>
+          <Text style={fonts.greyBody}>
             Deleting your account will also permanently delete any data
-            assoicated with it. This action cannot be undone.
+            associated with it. This action cannot be undone.
           </Text>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              onPress={() => router.back()}
-              style={styles.cancelButton}
-            >
-              <View style={styles.buttonContent}>
-                <X />
-                <Text style={styles.cancelText}>Cancel</Text>
-              </View>
-            </TouchableOpacity>
+        <View style={instruction.buttonsContainer}>
+          <View style={input.errorMessageContainer}>
+            <Text style={fonts.errorMessage}>
+              {errorExists ? errorMessage : ''}
+            </Text>
           </View>
 
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              onPress={deleteAccount}
-              style={styles.confirmButton}
+          <View style={input.inlineInputContainer}>
+            <ButtonWhite
+              onPress={() => router.back()}
+              $halfWidth
+              $centeredContent
             >
-              <View style={styles.buttonContent}>
-                <WhiteTrash />
-                <Text style={styles.confirmText}>Confirm</Text>
+              <View style={input.groupButtonContent}>
+                <X />
+                <Text style={fonts.blackButton}>Cancel</Text>
               </View>
-            </TouchableOpacity>
+            </ButtonWhite>
+
+            <ButtonBlack
+              onPress={deleteAccount}
+              disabled={queryLoading}
+              $halfWidth
+              $centeredContent
+            >
+              <View style={input.groupButtonContent}>
+                {queryLoading ? <ActivityIndicator /> : <WhiteTrash />}
+                <Text style={fonts.whiteButton}>Confirm</Text>
+              </View>
+            </ButtonBlack>
           </View>
         </View>
       </View>
     </View>
   );
 }
-export default DeleteAccountScreen;
