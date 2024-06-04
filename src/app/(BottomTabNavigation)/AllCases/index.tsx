@@ -1,4 +1,4 @@
-import * as Linking from 'expo-linking';
+// import * as Linking from 'expo-linking';
 import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
 import React, { useContext, useState, useEffect, useRef } from 'react';
@@ -16,20 +16,21 @@ import {
 } from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
-enum linkingEvents {
-  ADD_CASE = 'addCase',
-  NOTIFICATION = 'notification',
-}
+
+// enum linkingEvents {
+//   ADD_CASE = 'addCase',
+//   NOTIFICATION = 'notification',
+// }
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 function CasesScreen() {
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
-    }),
-  });
-
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
@@ -37,48 +38,48 @@ function CasesScreen() {
   const { session } = useSession();
   const [notificationResponse, setNotificationResponse] = useState<string>('');
 
-  const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
+  // const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
-  function urlRedirect(parsedUrl: Linking.ParsedURL) {
-    if (!parsedUrl) return;
-    // parse query params and determine routing
-    const { queryParams } = parsedUrl;
-    // determine routing from the event variable
-    if (queryParams?.event) {
-      const event = queryParams.event.toString();
-      // TODO: determine a way to validate required parameters
-      // TODO: prevent users from routing to a case they're already involved in
-      if (event === linkingEvents.ADD_CASE)
-        router.push({
-          pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
-        });
-    }
-  }
+  // function urlRedirect(parsedUrl: Linking.ParsedURL) {
+  //   if (!parsedUrl) return;
+  //   // parse query params and determine routing
+  //   const { queryParams } = parsedUrl;
+  //   // determine routing from the event variable
+  //   if (queryParams?.event) {
+  //     const event = queryParams.event.toString();
+  //     // TODO: determine a way to validate required parameters
+  //     // TODO: prevent users from routing to a case they're already involved in
+  //     if (event === linkingEvents.ADD_CASE)
+  //       router.push({
+  //         pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
+  //       });
+  //   }
+  // }
 
-  function handleDeepLink(event: any) {
-    const parsedUrl = Linking.parse(event.url);
-    if (parsedUrl) {
-      setUrl(parsedUrl);
-      urlRedirect(parsedUrl);
-    }
-  }
+  // function handleDeepLink(event: any) {
+  //   const parsedUrl = Linking.parse(event.url);
+  //   if (parsedUrl) {
+  //     setUrl(parsedUrl);
+  //     urlRedirect(parsedUrl);
+  //   }
+  // }
 
-  async function getInitialUrl() {
-    const initialUrl = await Linking.getInitialURL();
-    if (initialUrl) {
-      const parsed = Linking.parse(initialUrl);
-      setUrl(parsed);
-      urlRedirect(parsed);
-    }
-  }
+  // async function getInitialUrl() {
+  //   const initialUrl = await Linking.getInitialURL();
+  //   if (initialUrl) {
+  //     const parsed = Linking.parse(initialUrl);
+  //     setUrl(parsed);
+  //     urlRedirect(parsed);
+  //   }
+  // }
 
   useEffect(() => {
-    // will detect any incoming link requests, assuming the app is already open
-    Linking.addEventListener('url', handleDeepLink);
-    if (!url) {
-      // if the link opened the app, must route to the initial incoming route
-      getInitialUrl();
-    }
+    // // will detect any incoming link requests, assuming the app is already open
+    // Linking.addEventListener('url', handleDeepLink);
+    // if (!url) {
+    //   // if the link opened the app, must route to the initial incoming route
+    //   getInitialUrl();
+    // }
 
     if (session?.user) {
       registerForPushNotifications().then(async (token: string) => {
@@ -142,7 +143,7 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
-                  <Text>{notificationResponse}</Text>
+                  <Text>Notifications Debug: {notificationResponse}</Text>
                   <Text style={fonts.tabHeading}>My Cases</Text>
                 </View>
               </>
