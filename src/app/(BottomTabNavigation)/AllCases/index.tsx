@@ -1,7 +1,7 @@
 // import * as Linking from 'expo-linking';
 import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
@@ -31,12 +31,10 @@ Notifications.setNotificationHandler({
 });
 
 function CasesScreen() {
-  const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
   const { allCases, loading } = useContext(CaseContext);
   const { session } = useSession();
-  const [notificationResponse, setNotificationResponse] = useState<string>('');
 
   // const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
@@ -87,49 +85,18 @@ function CasesScreen() {
       });
     }
 
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener(notification => {
-        const updateId = notification.request.content.data.updateId;
-        const debugString =
-          'NotificationRecieved: ' +
-          notification +
-          ', ' +
-          notification.request +
-          ', ' +
-          notification.request.content +
-          ', ' +
-          notification.request.content.data;
-        console.log(debugString);
-        setNotificationResponse(debugString);
-        router.push(`/AllCases/Updates/UpdateView/${updateId}`);
-      });
-
+    // triggered when a user presses on the notification
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
         const updateId = response.notification.request.content.data.updateId;
-        const debugString =
-          'NotificationResponseRecieved: ' +
-          response +
-          ', ' +
-          response.notification +
-          ', ' +
-          response.notification.request +
-          ', ' +
-          response.notification.request.content +
-          ', ' +
-          response.notification.request.content.data;
-        console.log(debugString);
-        setNotificationResponse(debugString);
+        const caseId = response.notification.request.content.data.updateId;
+        router.push(`/AllCases/CaseScreen/${caseId}`);
+        router.push(`/AllCases/Updates/${caseId}`);
         router.push(`/AllCases/Updates/UpdateView/${updateId}`);
       });
 
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current!,
-      );
-
+    return () =>
       Notifications.removeNotificationSubscription(responseListener.current!);
-    };
   }, []);
 
   return (
@@ -143,7 +110,6 @@ function CasesScreen() {
             ListHeaderComponent={() => (
               <>
                 <View style={styles.headerContainer}>
-                  <Text>Notifications Debug: {notificationResponse}</Text>
                   <Text style={fonts.tabHeading}>My Cases</Text>
                 </View>
               </>
