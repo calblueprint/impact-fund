@@ -9,7 +9,7 @@
  */
 Deno.serve(async req => {
   // fetch the notifcation request from the supabase edge function
-  const { update, expoPushToken, category, updateId, caseUUID } =
+  const { update, expoPushToken, category, updateId, caseId } =
     await req.json();
 
   const res = await fetch('https://exp.host/--/api/v2/push/send', {
@@ -23,7 +23,7 @@ Deno.serve(async req => {
       sound: 'default',
       title: category,
       body: update,
-      data: { updateId: updateId, caseId: caseUUID },
+      data: { updateId: updateId, caseId: caseId },
     }),
   }).then(res => res.json());
 
