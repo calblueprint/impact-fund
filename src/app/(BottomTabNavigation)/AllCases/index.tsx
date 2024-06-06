@@ -89,7 +89,7 @@ function CasesScreen() {
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(response => {
         const updateId = response.notification.request.content.data.updateId;
-        const caseId = response.notification.request.content.data.updateId;
+        const caseId = response.notification.request.content.data.caseId;
         router.push(`/AllCases/CaseScreen/${caseId}`);
         router.push(`/AllCases/Updates/${caseId}`);
         router.push(`/AllCases/Updates/UpdateView/${updateId}`);
