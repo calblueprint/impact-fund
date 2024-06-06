@@ -3,6 +3,7 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
 import supabase from './createClient';
+import { UserUid } from '../types/types';
 
 /**
  * Register a user to recieve push notifications. Create an expo push notification token if they consent.
@@ -32,7 +33,7 @@ export async function registerForPushNotifications(): Promise<string> {
       finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
+      alert('Failed to generate token for push notifications!');
       return '';
     }
     // creates a user-specific push notification token to associate with the user's account
@@ -52,11 +53,26 @@ export async function registerForPushNotifications(): Promise<string> {
  * @param userId Target user that we won't to associate the token with.
  * @param token Expo push token used as a device address for sending push notifications.
  */
-export async function updatePushToken(userId: string, token: string) {
+export async function updatePushToken(userId: UserUid, token: string) {
   try {
     await supabase.from('users').upsert({ userId, expo_push_token: token });
   } catch (error) {
-    console.warn(error);
+    console.warn('(updatePushToken)', error);
+    throw error;
+  }
+}
+
+/**
+ * Update the user's expo push token. If it already exists, overwrite the value with the provided token.
+ *
+ * @param userId Target user that we won't to associate the token with.
+ * @param token Expo push token used as a device address for sending push notifications.
+ */
+export async function removePushToken(userId: string) {
+  try {
+    await supabase.from('users').upsert({ userId, expo_push_token: null });
+  } catch (error) {
+    console.warn('(removePushToken)', error);
     throw error;
   }
 }

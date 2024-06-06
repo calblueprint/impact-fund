@@ -16,6 +16,8 @@ import React, {
 
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
+import { removePushToken } from '../supabase/pushNotifications';
+import { UserUid } from '../types/types';
 
 /**
  * To use AuthContext, import useSession() in whichever file you prefer.
@@ -105,9 +107,13 @@ export function AuthContextProvider({
 
   const signOut = async (): Promise<AuthError | void> => {
     try {
+      const userId = user?.id;
       const { error } = await supabase.auth.signOut();
       if (error) {
         throw error;
+      }
+      if (userId) {
+        await removePushToken(userId);
       }
       setUser(null);
       setSession(null);
