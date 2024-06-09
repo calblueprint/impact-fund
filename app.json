@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "impact-fund",
+    "name": "Impact Fund",
     "slug": "impact-fund",
-    "version": "1.0.0",
+    "owner": "impactfunddev",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,15 +12,27 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "updates": {
+      "fallbackToCacheTimeout": 3000
+    },
+    "assetBundlePatterns": ["assets/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      },
+      "bundleIdentifier": "org.calblueprint.impactfund",
+      "buildNumber": "4"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": ["android.permission.CAMERA"],
+      "package": "org.calblueprint.impactfund",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +43,13 @@
         "expo-barcode-scanner",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-logo.png",
+          "color": "#ffffff"
         }
       ]
     ],

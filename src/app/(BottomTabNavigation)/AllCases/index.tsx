@@ -1,78 +1,94 @@
-import * as Linking from 'expo-linking';
+// import * as Linking from 'expo-linking';
+import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
 import { device } from '../../../styles/global';
-import {
-  registerForPushNotifications,
-  updatePushToken,
-} from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
-enum linkingEvents {
-  ADD_CASE = 'addCase',
-  NOTIFICATION = 'notification',
-}
+
+// enum linkingEvents {
+//   ADD_CASE = 'addCase',
+//   NOTIFICATION = 'notification',
+// }
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 function CasesScreen() {
-  const { allCases } = useContext(CaseContext);
-  const { loading } = useContext(CaseContext);
-  const { session } = useSession();
+  const responseListener = useRef<Notifications.Subscription>();
 
-  const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
+  const { allCases, loading } = useContext(CaseContext);
 
-  function urlRedirect(parsedUrl: Linking.ParsedURL) {
-    if (!parsedUrl) return;
-    // parse query params and determine routing
-    const { queryParams } = parsedUrl;
-    // determine routing from the event variable
-    if (queryParams?.event) {
-      const event = queryParams.event.toString();
-      // TODO: determine a way to validate required parameters
-      // TODO: prevent users from routing to a case they're already involved in
-      if (event === linkingEvents.ADD_CASE)
-        router.push({
-          pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
-        });
-    }
-  }
+  // const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
-  function handleDeepLink(event: any) {
-    const parsedUrl = Linking.parse(event.url);
-    if (parsedUrl) {
-      setUrl(parsedUrl);
-      urlRedirect(parsedUrl);
-    }
-  }
+  // function urlRedirect(parsedUrl: Linking.ParsedURL) {
+  //   if (!parsedUrl) return;
+  //   // parse query params and determine routing
+  //   const { queryParams } = parsedUrl;
+  //   // determine routing from the event variable
+  //   if (queryParams?.event) {
+  //     const event = queryParams.event.toString();
+  //     // TODO: determine a way to validate required parameters
+  //     // TODO: prevent users from routing to a case they're already involved in
+  //     if (event === linkingEvents.ADD_CASE)
+  //       router.push({
+  //         pathname: `/AllCases/AddCase/${queryParams.caseUid}`,
+  //       });
+  //   }
+  // }
 
-  async function getInitialUrl() {
-    const initialUrl = await Linking.getInitialURL();
-    if (initialUrl) {
-      const parsed = Linking.parse(initialUrl);
-      setUrl(parsed);
-      urlRedirect(parsed);
-    }
+  // function handleDeepLink(event: any) {
+  //   const parsedUrl = Linking.parse(event.url);
+  //   if (parsedUrl) {
+  //     setUrl(parsedUrl);
+  //     urlRedirect(parsedUrl);
+  //   }
+  // }
+
+  // async function getInitialUrl() {
+  //   const initialUrl = await Linking.getInitialURL();
+  //   if (initialUrl) {
+  //     const parsed = Linking.parse(initialUrl);
+  //     setUrl(parsed);
+  //     urlRedirect(parsed);
+  //   }
+  // }
+
+  function routeUserToUpdate(response: Notifications.NotificationResponse) {
+    const updateId = response.notification.request.content.data.updateId;
+    const caseId = response.notification.request.content.data.caseId;
+    router.push(`/AllCases/CaseScreen/${caseId}`);
+    router.push(`/AllCases/Updates/${caseId}`);
+    router.push(`/AllCases/Updates/UpdateView/${updateId}`);
   }
 
   useEffect(() => {
-    // will detect any incoming link requests, assuming the app is already open
-    Linking.addEventListener('url', handleDeepLink);
-    if (!url) {
-      // if the link opened the app, must route to the initial incoming route
-      getInitialUrl();
-    }
+    // // will detect any incoming link requests, assuming the app is already open
+    // Linking.addEventListener('url', handleDeepLink);
+    // if (!url) {
+    //   // if the link opened the app, must route to the initial incoming route
+    //   getInitialUrl();
+    // }
 
-    if (session?.user) {
-      registerForPushNotifications().then(async (token: string) => {
-        updatePushToken(session.user.id, token);
-      });
-    }
+    // triggered when a user presses on the notification
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener(response =>
+        routeUserToUpdate(response),
+      );
+
+    return () =>
+      Notifications.removeNotificationSubscription(responseListener.current!);
   }, []);
 
   return (

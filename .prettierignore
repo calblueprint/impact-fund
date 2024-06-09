@@ -1,3 +1,4 @@
 # Ignore the PR template
 /.github
 /ios
+/supabase
