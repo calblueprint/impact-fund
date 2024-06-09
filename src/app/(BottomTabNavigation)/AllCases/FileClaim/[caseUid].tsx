@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
 import Document from '../../../../../assets/document-add.svg';
@@ -24,11 +24,12 @@ import { openUrl } from '../utils';
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  async function confirmClaimFiled() {
-    if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
-      router.back();
+  async function fetchCaseData() {
+    if (caseUid) {
+      const caseData = await getCaseById(caseUid);
+      setCaseData(caseData);
     }
   }
 
@@ -39,11 +40,13 @@ export default function FileClaimScreen() {
     }
   }
 
-  async function fetchCaseData() {
-    if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
+  async function confirmClaimFiled() {
+    setQueryLoading(true);
+    if (caseUid !== undefined) {
+      await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
+      router.back();
     }
+    setQueryLoading(false);
   }
 
   useEffect(() => {
@@ -99,9 +102,12 @@ export default function FileClaimScreen() {
               <BlackRightArrow />
             </ButtonWhite>
 
-            <ButtonBlack onPress={() => confirmClaimFiled()}>
+            <ButtonBlack
+              onPress={() => confirmClaimFiled()}
+              disabled={queryLoading}
+            >
               <Text style={fonts.whiteButton}>I’ve already filed a claim!</Text>
-              <RightWhiteArrow />
+              {queryLoading ? <ActivityIndicator /> : <RightWhiteArrow />}
             </ButtonBlack>
           </View>
         </View>
