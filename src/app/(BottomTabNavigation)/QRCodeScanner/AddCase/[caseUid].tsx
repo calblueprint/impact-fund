@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useContext, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import styles from './styles';
 import AddCaseIcon from '../../../../../assets/add-case-icon.svg';
@@ -21,16 +21,19 @@ export default function AddCase() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const { joinCase } = useContext(CaseContext);
   const [caseData, setCaseData] = useState<Case>();
-
-  const addToCases = async (newCase: Case) => {
-    await joinCase(newCase);
-    router.back();
-    router.replace('/AllCases');
-  };
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const getCase = async (uid: CaseUid) => {
     const caseData = await getCaseById(uid);
     setCaseData(caseData);
+  };
+
+  const addToCases = async (newCase: Case) => {
+    setQueryLoading(true);
+    await joinCase(newCase);
+    router.back();
+    router.replace('/AllCases');
+    setQueryLoading(false);
   };
 
   useEffect(() => {
@@ -60,11 +63,12 @@ export default function AddCase() {
 
             <ButtonBlack
               onPress={() => addToCases(caseData)}
+              disabled={queryLoading}
               $halfWidth
               $centeredContent
             >
               <View style={input.groupButtonContent}>
-                <AddCaseIcon />
+                {queryLoading ? <ActivityIndicator /> : <AddCaseIcon />}
                 <Text style={fonts.whiteButton}>Add Case</Text>
               </View>
             </ButtonBlack>
