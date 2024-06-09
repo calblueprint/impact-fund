@@ -214,34 +214,6 @@ export function formatPartialCaseFromQuery(item: any): CasePartial {
   return formattedPartial;
 }
 
-/**
- * Update a specific User/Case status
- *
- * @param caseId specified caseId
- * @param status status to be updated in the specific User/Case row
- * @returns nothing
- */
-export async function updateCaseStatus(
-  caseId: CaseUid,
-  status: Eligibility,
-): Promise<void> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    await supabase
-      .from('status')
-      .update({ eligibility: status })
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(updateCaseStatus)', error);
-    throw error;
-  }
-}
-
 export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
   try {
     const {

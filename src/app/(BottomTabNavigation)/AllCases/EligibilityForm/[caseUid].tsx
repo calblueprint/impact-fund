@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
@@ -12,13 +12,11 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
+import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
-import {
-  updateCaseStatus,
-  getCaseById,
-} from '../../../../supabase/queries/cases';
+import { getCaseById } from '../../../../supabase/queries/cases';
 import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibility';
 import {
   Case,
@@ -26,6 +24,7 @@ import {
   Eligibility,
   EligibilityRequirement,
 } from '../../../../types/types';
+import { resetAndPushToRouter } from '../utils';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -35,6 +34,8 @@ export default function EligibilityForm() {
   >([]);
   const [checkCount, setCheckCount] = useState(0);
   const [queryLoading, setQueryLoading] = useState(false);
+
+  const { updateCaseStatus } = useContext(CaseContext);
 
   async function fetchCaseData() {
     if (caseUid) {
@@ -54,7 +55,8 @@ export default function EligibilityForm() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
-      router.back();
+      resetAndPushToRouter('/AllCases');
+      router.push(`/AllCases/CaseScreen/${caseUid}`);
     }
     setQueryLoading(false);
   }

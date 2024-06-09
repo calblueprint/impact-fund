@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
 import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
@@ -11,20 +11,20 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
-import {
-  getCaseById,
-  updateCaseStatus,
-} from '../../../../supabase/queries/cases';
+import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid, Eligibility } from '../../../../types/types';
-import { openUrl } from '../utils';
+import { openUrl, resetAndPushToRouter } from '../utils';
 
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
+
+  const { updateCaseStatus } = useContext(CaseContext);
 
   async function fetchCaseData() {
     if (caseUid) {
@@ -44,7 +44,8 @@ export default function FileClaimScreen() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
-      router.back();
+      resetAndPushToRouter('/AllCases');
+      router.push(`/AllCases/CaseScreen/${caseUid}`);
     }
     setQueryLoading(false);
   }

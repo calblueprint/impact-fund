@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
@@ -19,39 +19,27 @@ function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
   const [status, setStatus] = useState<Eligibility>();
   const [caseData, setCaseData] = useState<Case>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const navigation = useNavigation();
 
-  const getCase = async (uid: string) => {
-    const caseData = await getCaseById(uid);
+  const getCase = async (caseUid: string) => {
+    const caseData = await getCaseById(caseUid);
     setCaseData(caseData);
-    setIsLoading(false);
   };
 
-  const getStatus = async (uid: string) => {
-    const caseStatus = await getCaseStatus(uid);
+  const getStatus = async (caseUid: string) => {
+    const caseStatus = await getCaseStatus(caseUid);
     setStatus(caseStatus);
   };
 
   useEffect(() => {
     if (caseUid !== undefined) {
       getCase(caseUid);
+      getStatus(caseUid);
     }
   }, []);
 
-  useEffect(() => {
-    navigation.addListener('focus', async () => {
-      setIsLoading(true);
-      if (caseUid !== undefined) {
-        await getStatus(caseUid);
-      }
-      setIsLoading(false);
-    });
-  }, [navigation]);
-
   return (
     <View style={device.safeArea}>
-      {isLoading || caseData === undefined ? (
+      {!caseData || !status ? (
         <Text>Loading...</Text>
       ) : (
         <ScrollView
