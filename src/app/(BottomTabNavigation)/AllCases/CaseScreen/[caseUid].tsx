@@ -10,15 +10,18 @@ import EducationalBar from '../../../../Components/EducationalBar/EducationalBar
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
-import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
+import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, Eligibility } from '../../../../types/types';
 
 function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
   const [status, setStatus] = useState<Eligibility>();
   const [caseData, setCaseData] = useState<Case>();
+
+  const { getCaseStatus } = useCaseContext();
 
   const getCase = async (caseUid: string) => {
     const caseData = await getCaseById(caseUid);

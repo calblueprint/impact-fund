@@ -1,10 +1,4 @@
-import {
-  Case,
-  CasePartial,
-  CaseUid,
-  Eligibility,
-  UserUid,
-} from '../../types/types';
+import { Case, CasePartial, CaseUid, UserUid } from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -212,28 +206,6 @@ export function formatPartialCaseFromQuery(item: any): CasePartial {
     featuredFormName: item.featuredFormName,
   };
   return formattedPartial;
-}
-
-export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    const { data } = await supabase
-      .from('status')
-      .select()
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-    if (!data) {
-      throw new Error('Status not found');
-    }
-    return data[0].eligibility;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(getCaseStatus)', error);
-    throw error;
-  }
 }
 
 /**

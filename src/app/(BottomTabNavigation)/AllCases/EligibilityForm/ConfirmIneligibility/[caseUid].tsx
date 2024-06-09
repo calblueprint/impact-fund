@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
 import Alarm from '../../../../../../assets/alarm-triangle.svg';
@@ -10,7 +10,7 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../../../context/CaseContext';
+import { useCaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
@@ -20,7 +20,7 @@ import { resetAndPushToRouter } from '../../utils';
 
 export default function ConfirmEligibility() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { leaveCase } = useContext(CaseContext);
+  const { leaveCase } = useCaseContext();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   async function deleteCase() {

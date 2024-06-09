@@ -1,18 +1,23 @@
-import React, { createContext, useEffect, useMemo } from 'react';
+import React, { createContext, useEffect, useMemo, useContext } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
 import { addCase, removeCase } from '../supabase/queries/cases';
 import { Case, CaseUid, Eligibility } from '../types/types';
 
-export const CaseContext = createContext<CaseState>({} as CaseState);
-
 export interface CaseState {
   allCases: Case[];
   loading: boolean;
   joinCase: (newCase: Case) => Promise<void>;
   leaveCase: (targetCase: CaseUid) => Promise<void>;
+  getCaseStatus: (caseId: CaseUid) => Promise<Eligibility>;
   updateCaseStatus: (caseId: CaseUid, status: Eligibility) => Promise<void>;
+}
+
+export const CaseContext = createContext<CaseState>({} as CaseState);
+
+export function useCaseContext() {
+  return useContext(CaseContext);
 }
 
 export function CaseContextProvider({
@@ -83,6 +88,28 @@ export function CaseContextProvider({
     }
   }
 
+  async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userId = user?.id;
+      const { data } = await supabase
+        .from('status')
+        .select()
+        .eq('userId', userId)
+        .eq('caseId', caseId);
+      if (!data) {
+        throw new Error('Status not found');
+      }
+      return data[0].eligibility;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn('(getCaseStatus)', error);
+      throw error;
+    }
+  }
+
   /**
    * Update a specific User/Case status
    *
@@ -116,6 +143,7 @@ export function CaseContextProvider({
       loading: isLoading,
       joinCase,
       leaveCase,
+      getCaseStatus,
       updateCaseStatus,
     }),
     [cases, setCases, isLoading],

@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
 import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
@@ -11,7 +11,7 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../../context/CaseContext';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
@@ -24,7 +24,7 @@ export default function FileClaimScreen() {
   const [caseData, setCaseData] = useState<Case>();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  const { updateCaseStatus } = useContext(CaseContext);
+  const { updateCaseStatus } = useCaseContext();
 
   async function fetchCaseData() {
     if (caseUid) {
