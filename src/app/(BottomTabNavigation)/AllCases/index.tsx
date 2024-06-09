@@ -6,14 +6,9 @@ import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import { useSession } from '../../../context/AuthContext';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
 import { device } from '../../../styles/global';
-import {
-  registerForPushNotifications,
-  updatePushToken,
-} from '../../../supabase/pushNotifications';
 
 import 'react-native-url-polyfill/auto';
 
@@ -34,7 +29,6 @@ function CasesScreen() {
   const responseListener = useRef<Notifications.Subscription>();
 
   const { allCases, loading } = useContext(CaseContext);
-  const { session } = useSession();
 
   // const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 
@@ -71,6 +65,14 @@ function CasesScreen() {
   //   }
   // }
 
+  function routeUserToUpdate(response: Notifications.NotificationResponse) {
+    const updateId = response.notification.request.content.data.updateId;
+    const caseId = response.notification.request.content.data.caseId;
+    router.push(`/AllCases/CaseScreen/${caseId}`);
+    router.push(`/AllCases/Updates/${caseId}`);
+    router.push(`/AllCases/Updates/UpdateView/${updateId}`);
+  }
+
   useEffect(() => {
     // // will detect any incoming link requests, assuming the app is already open
     // Linking.addEventListener('url', handleDeepLink);
@@ -79,21 +81,11 @@ function CasesScreen() {
     //   getInitialUrl();
     // }
 
-    if (session?.user) {
-      registerForPushNotifications().then(async (token: string) => {
-        updatePushToken(session.user.id, token);
-      });
-    }
-
     // triggered when a user presses on the notification
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener(response => {
-        const updateId = response.notification.request.content.data.updateId;
-        const caseId = response.notification.request.content.data.caseId;
-        router.push(`/AllCases/CaseScreen/${caseId}`);
-        router.push(`/AllCases/Updates/${caseId}`);
-        router.push(`/AllCases/Updates/UpdateView/${updateId}`);
-      });
+      Notifications.addNotificationResponseReceivedListener(response =>
+        routeUserToUpdate(response),
+      );
 
     return () =>
       Notifications.removeNotificationSubscription(responseListener.current!);
