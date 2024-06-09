@@ -50,7 +50,7 @@ export async function registerForPushNotifications(): Promise<string> {
 /**
  * Update the user's expo push token. If it already exists, overwrite the value with the provided token.
  *
- * @param userId Target user that we won't to associate the token with.
+ * @param userId Target user that we want to associate the token with.
  * @param token Expo push token used as a device address for sending push notifications.
  */
 export async function updatePushToken(userId: UserUid, token: string) {
@@ -63,10 +63,8 @@ export async function updatePushToken(userId: UserUid, token: string) {
 }
 
 /**
- * Update the user's expo push token. If it already exists, overwrite the value with the provided token.
- *
- * @param userId Target user that we won't to associate the token with.
- * @param token Expo push token used as a device address for sending push notifications.
+ * Remove the user's expo push token to prevent users from recieving notification after signing out.
+ * @param userId Target user whose token we want to remove.
  */
 export async function removePushToken(userId: string) {
   try {

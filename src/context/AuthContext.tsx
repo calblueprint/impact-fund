@@ -17,7 +17,6 @@ import React, {
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
 import { removePushToken } from '../supabase/pushNotifications';
-import { UserUid } from '../types/types';
 
 /**
  * To use AuthContext, import useSession() in whichever file you prefer.
