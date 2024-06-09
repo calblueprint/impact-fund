@@ -17,7 +17,6 @@ const resetAndPushToRouter = (path: string) => {
 function StartScreen() {
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
-      console.log(_event);
       // determine routing based on supabase auth events
       if (session) {
         if (_event !== 'USER_UPDATED') {
