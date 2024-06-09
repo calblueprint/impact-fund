@@ -6,7 +6,7 @@ import {
 import { router, useNavigation } from 'expo-router';
 import { debounce } from 'lodash';
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import Toast, {
   ErrorToast,
   SuccessToast,
@@ -60,6 +60,7 @@ export default function QRCodeScannerScreen() {
   const [scannerState, setScannerState] = useState<
     'valid' | 'invalid' | 'scanned' | ''
   >('');
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
   const { allCases } = useContext(CaseContext);
 
   const navigation = useNavigation();
@@ -143,25 +144,32 @@ export default function QRCodeScannerScreen() {
   }
 
   const routeToAddCase = () => {
+    setQueryLoading(true);
     if (scannedCase) {
       router.push(`/QRCodeScanner/AddCase/${scannedCase.id}`);
     }
+    setQueryLoading(false);
   };
 
   useEffect(() => {
     requestPermission();
-  });
+  }, []);
 
   useEffect(() => {
-    navigation.addListener('blur', async () => {
+    const blurListener = navigation.addListener('blur', async () => {
       resetScanner();
       setScannedCase(undefined);
     });
-    navigation.addListener('focus', async () => {
+    const focusListener = navigation.addListener('focus', async () => {
       resetScanner();
       setScannedCase(undefined);
       setTimeout(() => {}, 1000);
     });
+    // unsubscribe listeners
+    return () => {
+      blurListener();
+      focusListener();
+    };
   }, [navigation]);
 
   return !permission ? (
@@ -196,9 +204,10 @@ export default function QRCodeScannerScreen() {
         <ButtonBlack
           style={styles.viewCaseButton}
           onPress={() => routeToAddCase()}
+          disabled={queryLoading}
         >
           <Text style={fonts.whiteButton}>View Case</Text>
-          <Arrow />
+          {queryLoading ? <ActivityIndicator /> : <Arrow />}
         </ButtonBlack>
       )}
     </View>
