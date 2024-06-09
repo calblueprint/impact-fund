@@ -23,16 +23,16 @@
     "auth": "^1.0.2",
     "babel-preset-expo": "~11.0.0",
     "cliui": "^7.0.4",
-    "expo": "~51.0.9",
+    "expo": "~51.0.11",
     "expo-auth-session": "~5.5.2",
     "expo-barcode-scanner": "~13.0.1",
     "expo-camera": "~15.0.10",
     "expo-checkbox": "~3.0.0",
     "expo-constants": "~16.0.2",
     "expo-device": "~6.0.2",
-    "expo-image": "~1.12.9",
+    "expo-image": "~1.12.11",
     "expo-linking": "~6.3.1",
-    "expo-notifications": "~0.28.6",
+    "expo-notifications": "~0.28.7",
     "expo-router": "~3.5.15",
     "expo-status-bar": "~1.12.1",
     "linking": "^0.1.0-beta.5",
@@ -40,7 +40,7 @@
     "metro-react-native-babel-transformer": "^0.77.0",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "0.74.1",
+    "react-native": "0.74.2",
     "react-native-dotenv": "^3.4.9",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.16.1",
@@ -72,7 +72,7 @@
     "typescript": "~5.3.3"
   },
   "overrides": {
-    "react-native": "0.74.1"
+    "react-native": "0.74.2"
   },
   "private": true,
   "resolutions": {
