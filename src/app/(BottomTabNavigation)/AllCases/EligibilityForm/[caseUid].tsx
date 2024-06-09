@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
@@ -34,6 +34,7 @@ export default function EligibilityForm() {
     EligibilityRequirement[]
   >([]);
   const [checkCount, setCheckCount] = useState(0);
+  const [queryLoading, setQueryLoading] = useState(false);
 
   async function fetchCaseData() {
     if (caseUid) {
@@ -50,10 +51,12 @@ export default function EligibilityForm() {
   }
 
   async function confirmEligibility() {
+    setQueryLoading(true);
     if (caseUid !== undefined) {
       await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
       router.back();
     }
+    setQueryLoading(false);
   }
 
   function confirmIneligibility() {
@@ -123,13 +126,16 @@ export default function EligibilityForm() {
                   </View>
                 </ButtonWhite>
                 <ButtonBlack
-                  disabled={checkCount !== eligibilityRequirements.length}
+                  disabled={
+                    checkCount !== eligibilityRequirements.length ||
+                    queryLoading
+                  }
                   onPress={() => confirmEligibility()}
                   $halfWidth
                   $centeredContent
                 >
                   <View style={input.groupButtonContent}>
-                    <Check />
+                    {queryLoading ? <ActivityIndicator /> : <Check />}
                     <Text style={fonts.whiteButton}>Yes, I do</Text>
                   </View>
                 </ButtonBlack>
