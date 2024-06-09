@@ -14,14 +14,14 @@ import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { getCaseById } from '../../../../supabase/queries/cases';
-import { Case, Eligibility } from '../../../../types/types';
+import { Case, ClaimStatus } from '../../../../types/types';
 
 function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
-  const [status, setStatus] = useState<Eligibility>();
+  const [status, setStatus] = useState<ClaimStatus>();
   const [caseData, setCaseData] = useState<Case>();
 
-  const { getCaseStatus } = useCaseContext();
+  const { getClaimStatus } = useCaseContext();
 
   const getCase = async (caseUid: string) => {
     const caseData = await getCaseById(caseUid);
@@ -29,7 +29,7 @@ function CaseScreen() {
   };
 
   const getStatus = async (caseUid: string) => {
-    const caseStatus = await getCaseStatus(caseUid);
+    const caseStatus = await getClaimStatus(caseUid);
     setStatus(caseStatus);
   };
 
@@ -56,18 +56,18 @@ function CaseScreen() {
             </Text>
           </View>
 
-          {status === Eligibility.ELIGIBLE && (
+          {status === ClaimStatus.ELIGIBLE && (
             <EligibilityCard caseUid={caseData.id} />
           )}
 
-          {status === Eligibility.CLAIM_FILED && (
+          {status === ClaimStatus.CLAIM_FILED && (
             <ClaimStatusBar status="Claim Filed" />
           )}
 
           <CaseSummaryCard {...caseData} />
 
-          {(status === Eligibility.INELIGIBLE ||
-            status === Eligibility.UNDETERMINED) && (
+          {(status === ClaimStatus.INELIGIBLE ||
+            status === ClaimStatus.UNDETERMINED) && (
             <CheckEligibilityButton caseUid={caseData.id} />
           )}
           <StatusUpdatesBar

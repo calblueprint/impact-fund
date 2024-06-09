@@ -21,7 +21,7 @@ import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibili
 import {
   Case,
   CaseUid,
-  Eligibility,
+  ClaimStatus,
   EligibilityRequirement,
 } from '../../../../types/types';
 import { resetAndPushToRouter } from '../utils';
@@ -35,7 +35,7 @@ export default function EligibilityForm() {
   const [checkCount, setCheckCount] = useState(0);
   const [queryLoading, setQueryLoading] = useState(false);
 
-  const { updateCaseStatus } = useContext(CaseContext);
+  const { updateClaimStatus } = useContext(CaseContext);
 
   async function fetchCaseData() {
     if (caseUid) {
@@ -54,7 +54,7 @@ export default function EligibilityForm() {
   async function confirmEligibility() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
+      await updateClaimStatus(caseUid, ClaimStatus.ELIGIBLE);
       resetAndPushToRouter('/AllCases');
       router.push(`/AllCases/CaseScreen/${caseUid}`);
     }

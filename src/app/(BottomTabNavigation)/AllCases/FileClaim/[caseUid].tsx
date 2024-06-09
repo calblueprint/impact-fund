@@ -16,7 +16,7 @@ import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
 import { getCaseById } from '../../../../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../../../../types/types';
+import { Case, CaseUid, ClaimStatus } from '../../../../types/types';
 import { openUrl, resetAndPushToRouter } from '../utils';
 
 export default function FileClaimScreen() {
@@ -24,7 +24,7 @@ export default function FileClaimScreen() {
   const [caseData, setCaseData] = useState<Case>();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  const { updateCaseStatus } = useCaseContext();
+  const { updateClaimStatus } = useCaseContext();
 
   async function fetchCaseData() {
     if (caseUid) {
@@ -43,7 +43,7 @@ export default function FileClaimScreen() {
   async function confirmClaimFiled() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
+      await updateClaimStatus(caseUid, ClaimStatus.CLAIM_FILED);
       resetAndPushToRouter('/AllCases');
       router.push(`/AllCases/CaseScreen/${caseUid}`);
     }

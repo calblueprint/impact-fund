@@ -3,15 +3,15 @@ import React, { createContext, useEffect, useMemo, useContext } from 'react';
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
 import { addCase, removeCase } from '../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../types/types';
+import { Case, CaseUid, ClaimStatus } from '../types/types';
 
 export interface CaseState {
   allCases: Case[];
   loading: boolean;
   joinCase: (newCase: Case) => Promise<void>;
   leaveCase: (targetCase: CaseUid) => Promise<void>;
-  getCaseStatus: (caseId: CaseUid) => Promise<Eligibility>;
-  updateCaseStatus: (caseId: CaseUid, status: Eligibility) => Promise<void>;
+  getClaimStatus: (caseId: CaseUid) => Promise<ClaimStatus>;
+  updateClaimStatus: (caseId: CaseUid, status: ClaimStatus) => Promise<void>;
 }
 
 export const CaseContext = createContext<CaseState>({} as CaseState);
@@ -88,7 +88,7 @@ export function CaseContextProvider({
     }
   }
 
-  async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
+  async function getClaimStatus(caseId: CaseUid): Promise<ClaimStatus> {
     try {
       const {
         data: { user },
@@ -100,25 +100,25 @@ export function CaseContextProvider({
         .eq('userId', userId)
         .eq('caseId', caseId);
       if (!data) {
-        throw new Error('Status not found');
+        throw new Error('Claim status not found');
       }
-      return data[0].eligibility;
+      return data[0].claimStatus;
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.warn('(getCaseStatus)', error);
+      console.warn('(getClaimStatus)', error);
       throw error;
     }
   }
 
   /**
-   * Update a specific User/Case status
+   * Update the user's claim status for `caseId`.
    *
    * @param caseId specified caseId
    * @param status status to be updated in the specific User/Case row
    */
-  async function updateCaseStatus(
+  async function updateClaimStatus(
     caseId: CaseUid,
-    status: Eligibility,
+    status: ClaimStatus,
   ): Promise<void> {
     try {
       const {
@@ -127,12 +127,12 @@ export function CaseContextProvider({
       const userId = user?.id;
       await supabase
         .from('status')
-        .update({ eligibility: status })
+        .update({ claimStatus: status })
         .eq('userId', userId)
         .eq('caseId', caseId);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.warn('(updateCaseStatus)', error);
+      console.warn('(updateClaimStatus)', error);
       throw error;
     }
   }
@@ -143,8 +143,8 @@ export function CaseContextProvider({
       loading: isLoading,
       joinCase,
       leaveCase,
-      getCaseStatus,
-      updateCaseStatus,
+      getClaimStatus,
+      updateClaimStatus,
     }),
     [cases, setCases, isLoading],
   );

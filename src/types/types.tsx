@@ -62,7 +62,7 @@ export interface EligibilityRequirement {
   requirement: string;
 }
 
-export enum Eligibility {
+export enum ClaimStatus {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
