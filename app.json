@@ -3,7 +3,7 @@
     "name": "Impact Fund",
     "slug": "impact-fund",
     "owner": "impactfunddev",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +23,7 @@
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       },
       "bundleIdentifier": "org.calblueprint.impactfund",
-      "buildNumber": "18"
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
