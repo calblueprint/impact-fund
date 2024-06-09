@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import Alarm from '../../../../../../assets/alarm-triangle.svg';
 import Ex from '../../../../../../assets/cancel-x-icon.svg';
@@ -16,18 +16,20 @@ import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
 import { instruction } from '../../../../../styles/instruction';
 import { CaseUid } from '../../../../../types/types';
+import { resetAndPushToRouter } from '../../utils';
 
 export default function ConfirmEligibility() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const { leaveCase } = useContext(CaseContext);
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   async function deleteCase() {
+    setQueryLoading(true);
     if (caseUid !== undefined) {
       await leaveCase(caseUid);
-      router.push({
-        pathname: '/AllCases',
-      });
+      resetAndPushToRouter('/AllCases');
     }
+    setQueryLoading(false);
   }
 
   return (
@@ -73,9 +75,14 @@ export default function ConfirmEligibility() {
             </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={() => deleteCase()} $halfWidth $centeredContent>
+          <ButtonBlack
+            onPress={() => deleteCase()}
+            disabled={queryLoading}
+            $halfWidth
+            $centeredContent
+          >
             <View style={input.groupButtonContent}>
-              <Check />
+              {queryLoading ? <ActivityIndicator /> : <Check />}
               <Text style={fonts.whiteButton}>Yes, I do</Text>
             </View>
           </ButtonBlack>
