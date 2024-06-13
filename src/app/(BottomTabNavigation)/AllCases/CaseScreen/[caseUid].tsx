@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 import styles from './styles';
 import CaseSummaryCard from '../../../../Components/CaseSummaryCard/CaseSummaryCard';
@@ -9,6 +10,7 @@ import ClaimStatusBar from '../../../../Components/ClaimStatusBar/ClaimStatusBar
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
+import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
 import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
@@ -43,7 +45,8 @@ function CaseScreen() {
   return (
     <View style={device.safeArea}>
       {!caseData || !status ? (
-        <Text>Loading...</Text>
+        // <Text>Loading...</Text>
+        <LoadingComponent />
       ) : (
         <ScrollView
           style={styles.outerScroll}
