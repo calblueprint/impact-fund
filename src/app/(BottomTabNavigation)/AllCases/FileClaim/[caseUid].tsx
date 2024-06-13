@@ -11,6 +11,7 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
@@ -57,7 +58,7 @@ export default function FileClaimScreen() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <LoadingComponent />
       ) : (
         <View style={instruction.screenContainer}>
           <View style={instruction.contentContainer}>

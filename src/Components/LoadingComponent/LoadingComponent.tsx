@@ -6,7 +6,7 @@ import { colors } from '../../styles/colors';
 export default function LoadingComponent() {
   return (
     <View style={{ marginTop: 20 }}>
-      <ActivityIndicator color={colors.midRed} />
+      <ActivityIndicator size="small" color={colors.midRed} />
     </View>
   );
 }

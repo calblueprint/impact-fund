@@ -10,6 +10,7 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
+import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
@@ -45,7 +46,7 @@ export default function AddCase() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <LoadingComponent />
       ) : (
         <>
           <CaseSummaryContent {...caseData} />

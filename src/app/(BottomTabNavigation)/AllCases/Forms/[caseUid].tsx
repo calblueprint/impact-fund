@@ -6,6 +6,7 @@ import styles from './styles';
 import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
+import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { Form, CaseUid } from '../../../../types/types';
@@ -38,14 +39,18 @@ export default function FormsScreen() {
         <View style={styles.headerContainer}>
           <Text style={fonts.tabHeading}>Documents</Text>
         </View>
-        <View style={styles.formsContainer}>
-          <FlatList
-            data={forms}
-            keyExtractor={item => item.formUid}
-            ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
-            renderItem={({ item }) => <FormListItem {...item} />}
-          />
-        </View>
+        {forms.length === 0 ? (
+          <LoadingComponent />
+        ) : (
+          <View style={styles.formsContainer}>
+            <FlatList
+              data={forms}
+              keyExtractor={item => item.formUid}
+              ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
+              renderItem={({ item }) => <FormListItem {...item} />}
+            />
+          </View>
+        )}
       </View>
       {caseSite === undefined ? null : (
         <View style={styles.linkContainer}>

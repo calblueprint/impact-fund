@@ -10,6 +10,7 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
@@ -42,7 +43,7 @@ export default function OptOutScreen() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <LoadingComponent />
       ) : (
         <View style={instruction.screenContainer}>
           <View style={instruction.contentContainer}>
