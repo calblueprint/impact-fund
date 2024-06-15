@@ -1,13 +1,13 @@
 // import * as Linking from 'expo-linking';
 import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
 import ScreenLoadingComponent from '../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
-import { CaseContext } from '../../../context/CaseContext';
+import { useCaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
 import { device } from '../../../styles/global';
 
@@ -29,7 +29,7 @@ Notifications.setNotificationHandler({
 function CasesScreen() {
   const responseListener = useRef<Notifications.Subscription>();
 
-  const { allCases, loading } = useContext(CaseContext);
+  const { allCases, loading } = useCaseContext();
 
   // const [url, setUrl] = useState<Linking.ParsedURL | null>(null);
 

@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 import styles from './styles';
@@ -11,7 +11,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
-import { CaseContext } from '../../../../context/CaseContext';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
@@ -20,7 +20,7 @@ import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { joinCase } = useContext(CaseContext);
+  const { joinCase } = useCaseContext();
   const [caseData, setCaseData] = useState<Case>();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 

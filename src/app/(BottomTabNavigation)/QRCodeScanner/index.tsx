@@ -5,7 +5,7 @@ import {
 } from 'expo-camera';
 import { router, useNavigation } from 'expo-router';
 import { debounce } from 'lodash';
-import React, { useEffect, useState, useContext, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import Toast, {
   ErrorToast,
@@ -19,7 +19,7 @@ import CheckIcon from '../../../../assets/green-check.svg';
 import Arrow from '../../../../assets/right-arrow-white.svg';
 import ErrorIcon from '../../../../assets/warning.svg';
 import { ButtonBlack } from '../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../context/CaseContext';
+import { useCaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
 import { device } from '../../../styles/global';
 import { getScannedData } from '../../../supabase/queries/cases';
@@ -61,7 +61,7 @@ export default function QRCodeScannerScreen() {
     'valid' | 'invalid' | 'scanned' | ''
   >('');
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
-  const { allCases } = useContext(CaseContext);
+  const { allCases } = useCaseContext();
 
   const navigation = useNavigation();
 

@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 import CircleCheckWhite from '../../../../../../assets/circle-check-white.svg';
@@ -10,7 +10,7 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../../../context/CaseContext';
+import { useCaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
@@ -20,7 +20,7 @@ import { resetAndPushToRouter } from '../../utils';
 
 function ConfirmOptOut() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { leaveCase } = useContext(CaseContext);
+  const { leaveCase } = useCaseContext();
   const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   async function deleteCase() {

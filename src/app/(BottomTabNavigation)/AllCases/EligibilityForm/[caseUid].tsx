@@ -13,7 +13,7 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
-import { CaseContext } from '../../../../context/CaseContext';
+import { CaseContext, useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
@@ -36,7 +36,7 @@ export default function EligibilityForm() {
   const [checkCount, setCheckCount] = useState(0);
   const [queryLoading, setQueryLoading] = useState(false);
 
-  const { updateClaimStatus } = useContext(CaseContext);
+  const { updateClaimStatus } = useCaseContext();
 
   async function fetchCaseData() {
     if (caseUid) {
