@@ -11,8 +11,8 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
-import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
@@ -74,7 +74,7 @@ export default function EligibilityForm() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <LoadingComponent />
+        <ScreenLoadingComponent />
       ) : (
         <FlatList
           style={styles.contentContainer}

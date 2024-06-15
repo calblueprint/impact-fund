@@ -10,7 +10,7 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
-import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
+import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { CaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';

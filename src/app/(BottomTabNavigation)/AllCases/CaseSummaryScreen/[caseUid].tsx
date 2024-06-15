@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import styles from './styles';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
-import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { device } from '../../../../styles/global';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case } from '../../../../types/types';
@@ -28,7 +28,7 @@ export default function CaseSummaryScreen() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <LoadingComponent />
+        <ScreenLoadingComponent />
       ) : (
         <>
           <CaseSummaryContent {...caseData} />

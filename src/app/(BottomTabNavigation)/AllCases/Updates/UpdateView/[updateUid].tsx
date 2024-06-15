@@ -4,7 +4,7 @@ import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
 import NotificationBell from '../../../../../../assets/red-notification-bell.svg';
-import LoadingComponent from '../../../../../Components/LoadingComponent/LoadingComponent';
+import LoadingComponent from '../../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../../styles/fonts';
 import { device, shawdowStyles } from '../../../../../styles/global';
 import { getUpdateById } from '../../../../../supabase/queries/updates';

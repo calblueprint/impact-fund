@@ -6,7 +6,7 @@ import { FlatList, Text, View } from 'react-native';
 
 import styles from './styles';
 import CaseCard from '../../../Components/CaseCard/CaseCard';
-import LoadingComponent from '../../../Components/LoadingComponent/LoadingComponent';
+import ScreenLoadingComponent from '../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { CaseContext } from '../../../context/CaseContext';
 import { fonts } from '../../../styles/fonts';
 import { device } from '../../../styles/global';
@@ -96,7 +96,7 @@ function CasesScreen() {
     <View style={device.safeArea}>
       <View style={styles.casesContainer}>
         {loading ? (
-          <LoadingComponent />
+          <ScreenLoadingComponent />
         ) : (
           <FlatList
             contentContainerStyle={styles.innerScroll}

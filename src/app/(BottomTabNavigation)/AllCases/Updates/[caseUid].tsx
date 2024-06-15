@@ -4,7 +4,7 @@ import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
 import CaseStatusBar from '../../../../Components/CaseStatusBar/CaseStatusBar';
-import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
@@ -40,7 +40,7 @@ export default function UpdatesScreen() {
   return (
     <View style={device.safeArea}>
       {isLoading || caseData === undefined ? (
-        <LoadingComponent />
+        <ScreenLoadingComponent />
       ) : (
         <View style={styles.contentContainer}>
           <FlatList

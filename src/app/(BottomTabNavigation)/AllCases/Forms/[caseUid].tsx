@@ -6,7 +6,7 @@ import styles from './styles';
 import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
-import LoadingComponent from '../../../../Components/LoadingComponent/LoadingComponent';
+import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { Form, CaseUid } from '../../../../types/types';
