@@ -109,41 +109,6 @@ export async function getScannedData(
 }
 
 /**
- * Create a case-user association on supabase.
- * @param caseId case being added.
- * @param userId user joining that case.
- */
-export async function addCase(caseId: CaseUid, userId: UserUid): Promise<void> {
-  try {
-    await supabase.from('status').insert({ caseId, userId });
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
-/**
- * Remove a case-user association from supabase.
- * @param caseId case to be removed.
- * @param userId user leaving the case.
- */
-export async function removeCase(
-  caseId: CaseUid,
-  userId: UserUid,
-): Promise<void> {
-  try {
-    await supabase
-      .from('status')
-      .delete()
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
-/**
  * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
  * @param caseIds list of `CaseId`s

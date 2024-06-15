@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useMemo, useContext } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
-import { addCase, removeCase } from '../supabase/queries/cases';
+import { removeCase } from '../supabase/queries/cases';
 import { Case, CaseUid, ClaimStatus } from '../types/types';
 
 export interface CaseState {
@@ -53,7 +53,9 @@ export function CaseContextProvider({
       } = await supabase.auth.getUser();
       const userUid = user?.id;
       if (userUid) {
-        await addCase(newCase.id, userUid);
+        await supabase
+          .from('status')
+          .insert({ caseId: newCase.id, userId: userUid });
         setCases([...cases, newCase]);
       }
     } catch (error) {
@@ -72,7 +74,13 @@ export function CaseContextProvider({
       } = await supabase.auth.getUser();
       const userUid = user?.id;
       if (userUid) {
-        await removeCase(caseUid, userUid);
+        // await removeCase(caseUid, userUid);
+        await supabase
+          .from('status')
+          .delete()
+          .eq('userId', userUid)
+          .eq('caseId', caseUid);
+
         let targetIndex = -1;
         for (let i = 0; i < cases.length; i++) {
           if (cases[i].id === caseUid) {
