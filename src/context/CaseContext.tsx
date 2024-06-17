@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useMemo, useContext } from 'react';
 
 import { fetchAllCases } from '../app/(BottomTabNavigation)/AllCases/utils';
 import supabase from '../supabase/createClient';
-import { removeCase } from '../supabase/queries/cases';
 import { Case, CaseUid, ClaimStatus } from '../types/types';
 
 export interface CaseState {
