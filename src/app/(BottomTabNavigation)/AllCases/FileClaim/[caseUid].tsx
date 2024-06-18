@@ -16,9 +16,10 @@ import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
+import { resetAndPushToRoute } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid, ClaimStatus } from '../../../../types/types';
-import { openUrl, resetAndPushToRouter } from '../utils';
+import { openUrl } from '../utils';
 
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -45,7 +46,7 @@ export default function FileClaimScreen() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
       await updateClaimStatus(caseUid, ClaimStatus.CLAIM_FILED);
-      resetAndPushToRouter('/AllCases');
+      resetAndPushToRoute('/AllCases');
       router.push(`/AllCases/CaseScreen/${caseUid}`);
     }
     setQueryLoading(false);

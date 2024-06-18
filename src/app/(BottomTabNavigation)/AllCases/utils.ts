@@ -1,4 +1,3 @@
-import { router } from 'expo-router';
 import { Linking } from 'react-native';
 
 import { colors } from '../../../styles/colors';
@@ -103,15 +102,4 @@ export async function openUrl(url: string) {
   if (supported) {
     await Linking.openURL(url); // It will open the URL on browser.
   }
-}
-
-/**
- * Clear the stack to prevent users going back. Allows push animation to be used.
- * @param path
- */
-export async function resetAndPushToRouter(path: string) {
-  while (router.canGoBack()) {
-    router.back();
-  }
-  router.replace(path);
 }

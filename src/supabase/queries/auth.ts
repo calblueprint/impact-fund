@@ -1,3 +1,5 @@
+import { router } from 'expo-router';
+
 import supabase from '../createClient';
 
 export const emailExists = async (email: string): Promise<boolean> => {
@@ -13,3 +15,14 @@ export const emailExists = async (email: string): Promise<boolean> => {
     throw error;
   }
 };
+
+/**
+ * Clear the stack to prevent users going back. Allows push animation to be used.
+ * @param path
+ */
+export async function resetAndPushToRoute(path: string) {
+  while (router.canGoBack()) {
+    router.back();
+  }
+  router.replace(path);
+}

@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
@@ -13,10 +13,11 @@ import {
 } from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
 import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
-import { CaseContext, useCaseContext } from '../../../../context/CaseContext';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
+import { resetAndPushToRoute } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibility';
 import {
@@ -25,7 +26,6 @@ import {
   ClaimStatus,
   EligibilityRequirement,
 } from '../../../../types/types';
-import { resetAndPushToRouter } from '../utils';
 
 export default function EligibilityForm() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -56,7 +56,7 @@ export default function EligibilityForm() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
       await updateClaimStatus(caseUid, ClaimStatus.ELIGIBLE);
-      resetAndPushToRouter('/AllCases');
+      resetAndPushToRoute('/AllCases');
       router.push(`/AllCases/CaseScreen/${caseUid}`);
     }
     setQueryLoading(false);

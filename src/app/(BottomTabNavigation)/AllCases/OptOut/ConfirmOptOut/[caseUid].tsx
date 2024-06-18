@@ -15,8 +15,8 @@ import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
 import { instruction } from '../../../../../styles/instruction';
+import { resetAndPushToRoute } from '../../../../../supabase/queries/auth';
 import { CaseUid } from '../../../../../types/types';
-import { resetAndPushToRouter } from '../../utils';
 
 function ConfirmOptOut() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
@@ -27,7 +27,7 @@ function ConfirmOptOut() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
       await leaveCase(caseUid);
-      resetAndPushToRouter('/AllCases');
+      resetAndPushToRoute('/AllCases');
     }
     setQueryLoading(false);
   }
