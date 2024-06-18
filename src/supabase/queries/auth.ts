@@ -20,9 +20,26 @@ export const emailExists = async (email: string): Promise<boolean> => {
  * Clear the stack to prevent users going back. Allows push animation to be used.
  * @param path
  */
-export async function resetAndPushToRoute(path: string) {
+export function resetAndPushToRoute(path: string) {
   while (router.canGoBack()) {
     router.back();
   }
   router.replace(path);
+}
+
+/**
+ * Clear the stack to prevent users going back. Allows push animation to be used.
+ * @param path
+ */
+export async function resetAndPushToHome() {
+  const { data } = await supabase.auth.getSession();
+  console.log(data, data.session);
+  while (router.canGoBack()) {
+    router.back();
+  }
+  if (data.session) {
+    router.replace('/AllCases');
+  } else {
+    router.replace('/Welcome');
+  }
 }
