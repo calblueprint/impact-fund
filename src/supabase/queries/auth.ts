@@ -1,4 +1,6 @@
 import { router } from 'expo-router';
+import { isError } from 'lodash';
+import { Alert } from 'react-native';
 
 import supabase from '../createClient';
 
@@ -33,7 +35,6 @@ export function resetAndPushToRoute(path: string) {
  */
 export async function resetAndPushToHome() {
   const { data } = await supabase.auth.getSession();
-  console.log(data, data.session);
   while (router.canGoBack()) {
     router.back();
   }
@@ -42,4 +43,20 @@ export async function resetAndPushToHome() {
   } else {
     router.replace('/Welcome');
   }
+}
+
+export function fullStopErrorHandler(response: any) {
+  let alertMessage: string;
+  if (isError(response)) {
+    alertMessage = 'Message: ' + response.message;
+  } else {
+    alertMessage = 'Unknown Error';
+  }
+  Alert.alert('An Error Has Occurred', alertMessage, [
+    {
+      text: 'Navigate Home',
+      onPress: () => resetAndPushToHome(),
+      style: 'cancel',
+    },
+  ]);
 }

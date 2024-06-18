@@ -1,30 +1,38 @@
-import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
+import styles from './styles';
 import { colors } from '../../styles/colors';
-import { resetAndPushToHome } from '../../supabase/queries/auth';
+import { fonts } from '../../styles/fonts';
 
 export default function ScreenLoadingComponent() {
-  const [timeoutExists, setTimeoutExists] = useState<boolean>(false);
+  const [loadingPromptExists, setLoadingPromptExists] =
+    useState<boolean>(false);
+  const [timeoutReached, setTimeoutReached] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log('timeout useeffect begins');
     setTimeout(() => {
-      setTimeoutExists(true);
-    }, 5000);
+      setLoadingPromptExists(true);
+      setTimeout(() => {
+        setTimeoutReached(true);
+      }, 10000);
+    }, 7000);
   }, []);
 
   return (
-    <View style={{ marginTop: 20 }}>
+    <View style={styles.container}>
       <ActivityIndicator size="small" color={colors.midRed} />
-      {timeoutExists && (
+      {loadingPromptExists && (
         <View>
-          <Text>This is taking a while...</Text>
-          <TouchableOpacity onPress={() => resetAndPushToHome()}>
-            <Text>Press Here to Navigate back to the home screen</Text>
-          </TouchableOpacity>
+          {!timeoutReached ? (
+            <Text style={fonts.body}>This is taking longer than usual...</Text>
+          ) : (
+            <Text style={fonts.body}>
+              Failing to connect with Impact Fund servers. Please check your
+              connection or try again later.
+            </Text>
+          )}
         </View>
       )}
     </View>
