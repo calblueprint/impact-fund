@@ -1,4 +1,10 @@
-import { Case, CasePartial, CaseUid, UserUid } from '../../types/types';
+import {
+  Case,
+  CasePartial,
+  CaseUid,
+  UserUid,
+  ScannerQueryResponse,
+} from '../../types/types';
 import supabase from '../createClient';
 
 /**
@@ -46,12 +52,16 @@ export async function getAllCaseIds(): Promise<CaseUid[]> {
     }
     return data.map(item => item.caseId as CaseUid);
   } catch (error) {
-    console.warn(error);
+    console.warn('(getAllCaseIds)', error);
     throw error;
   }
 }
 
-// Fetch a single case using its ID
+/**
+ * Fetch a single `Case` by it's id.
+ * @param caseId target case id.
+ * @returns `Case` data.
+ */
 export async function getCaseById(caseId: CaseUid): Promise<Case> {
   try {
     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
@@ -64,16 +74,6 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
     throw error;
   }
 }
-
-type ScannerQueryResponse =
-  | {
-      data: { case: Case };
-      error: null;
-    }
-  | {
-      data: null;
-      error: any;
-    };
 
 /**
  * Query supabase according to the QR code scanner result.
@@ -139,6 +139,12 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+/**
+ * Format raw case data from supabase into `Case` object.
+ *
+ * @param item raw supabase data.
+ * @returns `Case` object.
+ */
 export async function formatCase(item: any): Promise<Case> {
   const partialCase = formatPartialCaseFromQuery(item);
   const imageUrl = await getImageUrl(partialCase.id);
@@ -148,6 +154,7 @@ export async function formatCase(item: any): Promise<Case> {
   };
   return caseData;
 }
+
 /**
  * Parse supabase case query and return `CasePartial` object.
  *

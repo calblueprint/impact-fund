@@ -106,3 +106,13 @@ export enum YellowStatusOptions {
 export enum RedStatusOptions {
   'Action Required',
 }
+
+export type ScannerQueryResponse =
+  | {
+      data: { case: Case };
+      error: null;
+    }
+  | {
+      data: null;
+      error: any;
+    };

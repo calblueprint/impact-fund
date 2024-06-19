@@ -14,13 +14,9 @@ export default function FormsCard(caseData: Case) {
   const [featuredForm, setFeaturedForm] = useState<Form>();
 
   const getForm = async () => {
-    const formData = await getFeaturedForm(
-      caseData.id,
-      caseData.featuredFormName,
-    );
-    if (formData) {
-      setFeaturedForm(formData);
-    }
+    await getFeaturedForm(caseData.id, caseData.featuredFormName)
+      .then(formData => setFeaturedForm(formData))
+      .catch(response => console.warn(response));
   };
 
   useEffect(() => {
