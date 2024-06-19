@@ -18,7 +18,7 @@ import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, ClaimStatus } from '../../../../types/types';
 
-function CaseScreen() {
+export default function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
   const [status, setStatus] = useState<ClaimStatus>();
   const [caseData, setCaseData] = useState<Case>();
@@ -27,18 +27,18 @@ function CaseScreen() {
 
   const getCase = async (caseUid: string) => {
     await getCaseById(caseUid)
-      .then((caseData: Case) => setCaseData(caseData))
-      .catch((response: any) => fullStopErrorHandler(response));
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   };
 
   const getStatus = async (caseUid: string) => {
     await getClaimStatus(caseUid)
-      .then((claimStatus: ClaimStatus) => setStatus(claimStatus))
-      .catch((response: any) => fullStopErrorHandler(response));
+      .then(claimStatus => setStatus(claimStatus))
+      .catch(response => fullStopErrorHandler(response));
   };
 
   useEffect(() => {
-    if (caseUid !== undefined) {
+    if (caseUid) {
       getCase(caseUid);
       getStatus(caseUid);
     }
@@ -85,5 +85,3 @@ function CaseScreen() {
     </View>
   );
 }
-
-export default CaseScreen;

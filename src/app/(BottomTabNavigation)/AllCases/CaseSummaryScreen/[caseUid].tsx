@@ -17,12 +17,12 @@ export default function CaseSummaryScreen() {
 
   const getCase = async (uid: string) => {
     await getCaseById(uid)
-      .then((caseData: Case) => setCaseData(caseData))
-      .catch((error: any) => fullStopErrorHandler(error));
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   };
 
   useEffect(() => {
-    if (caseUid !== undefined) {
+    if (caseUid) {
       getCase(caseUid);
     }
   }, []);

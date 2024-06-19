@@ -17,7 +17,10 @@ import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
-import { resetAndPushToRoute } from '../../../../supabase/queries/auth';
+import {
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibility';
 import {
@@ -38,26 +41,27 @@ export default function EligibilityForm() {
 
   const { updateClaimStatus } = useCaseContext();
 
-  async function fetchCaseData() {
-    if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
-    }
+  async function fetchCaseData(caseUid: CaseUid) {
+    await getCaseById(caseUid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   }
 
-  async function fetchEligibilityRequirments() {
-    if (caseUid) {
-      const requirements = await getRequirementsByCaseUid(caseUid);
-      setEligibilityRequirements(requirements);
-    }
+  async function fetchEligibilityRequirments(caseUid: CaseUid) {
+    await getRequirementsByCaseUid(caseUid)
+      .then(requirements => setEligibilityRequirements(requirements))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   async function confirmEligibility() {
     setQueryLoading(true);
     if (caseUid !== undefined) {
-      await updateClaimStatus(caseUid, ClaimStatus.ELIGIBLE);
-      resetAndPushToRoute('/AllCases');
-      router.push(`/AllCases/CaseScreen/${caseUid}`);
+      await updateClaimStatus(caseUid, ClaimStatus.ELIGIBLE)
+        .then(() => {
+          resetAndPushToRoute('/AllCases');
+          router.push(`/AllCases/CaseScreen/${caseUid}`);
+        })
+        .catch(response => fullStopErrorHandler(response));
     }
     setQueryLoading(false);
   }
@@ -67,8 +71,10 @@ export default function EligibilityForm() {
   }
 
   useEffect(() => {
-    fetchCaseData();
-    fetchEligibilityRequirments();
+    if (caseUid) {
+      fetchCaseData(caseUid);
+      fetchEligibilityRequirments(caseUid);
+    }
   }, []);
 
   return (
