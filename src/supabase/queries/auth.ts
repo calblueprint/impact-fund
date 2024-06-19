@@ -4,6 +4,11 @@ import { Alert } from 'react-native';
 
 import supabase from '../createClient';
 
+/**
+ * Checks whether the provided email is associated with an account in the public users table.
+ * @param email
+ * @returns whether the email exists
+ */
 export const emailExists = async (email: string): Promise<boolean> => {
   try {
     const { data } = await supabase.from('users').select().eq('email', email);
@@ -30,8 +35,7 @@ export function resetAndPushToRoute(path: string) {
 }
 
 /**
- * Clear the stack to prevent users going back. Allows push animation to be used.
- * @param path
+ * Clear the stack and route users to their home screen (relative to their login status).
  */
 export async function resetAndPushToHome() {
   const { data } = await supabase.auth.getSession();
@@ -47,7 +51,7 @@ export async function resetAndPushToHome() {
 
 /**
  * Alerts the user that an error has occurred. Routes them away from the erroring screen.
- * @param path
+ * @param response error object caught and passed to this handler.
  */
 export function fullStopErrorHandler(response: any) {
   let alertMessage: string;
