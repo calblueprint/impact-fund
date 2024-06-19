@@ -40,7 +40,7 @@ export default function FileClaimScreen() {
 
   async function fetchCaseData(caseUid: CaseUid) {
     await getCaseById(caseUid)
-      .then(() => setCaseData(caseData))
+      .then(caseData => setCaseData(caseData))
       .catch(response => fullStopErrorHandler(response));
   }
 
