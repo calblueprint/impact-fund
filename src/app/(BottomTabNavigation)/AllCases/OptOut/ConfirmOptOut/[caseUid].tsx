@@ -15,7 +15,10 @@ import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
 import { instruction } from '../../../../../styles/instruction';
-import { resetAndPushToRoute } from '../../../../../supabase/queries/auth';
+import {
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../../supabase/queries/auth';
 import { CaseUid } from '../../../../../types/types';
 
 function ConfirmOptOut() {
@@ -25,9 +28,10 @@ function ConfirmOptOut() {
 
   async function deleteCase() {
     setQueryLoading(true);
-    if (caseUid !== undefined) {
-      await leaveCase(caseUid);
-      resetAndPushToRoute('/AllCases');
+    if (caseUid) {
+      await leaveCase(caseUid)
+        .then(() => resetAndPushToRoute('/AllCases'))
+        .catch(response => fullStopErrorHandler(response));
     }
     setQueryLoading(false);
   }

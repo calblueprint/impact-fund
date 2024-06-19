@@ -9,6 +9,7 @@ import FormListItem from '../../../../Components/FormListItem/FormListItem';
 import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { Form, CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
@@ -20,15 +21,17 @@ export default function FormsScreen() {
   const [forms, setForms] = useState<Form[]>([]);
 
   async function getFormsOnLoad(uid: CaseUid) {
-    getAllForms(uid).then(data => {
-      if (data.length > 0) {
-        setForms(data);
-      }
-    });
+    getAllForms(uid)
+      .then(data => {
+        if (data.length > 0) {
+          setForms(data);
+        }
+      })
+      .catch(response => fullStopErrorHandler(response));
   }
 
   useEffect(() => {
-    if (caseUid !== undefined) {
+    if (caseUid) {
       getFormsOnLoad(caseUid);
     }
   }, []);

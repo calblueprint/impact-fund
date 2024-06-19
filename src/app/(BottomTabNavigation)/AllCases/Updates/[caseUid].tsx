@@ -8,6 +8,7 @@ import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponen
 import UpdateItem from '../../../../Components/UpdateItem/UpdateItem';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { fetchAllUpdates } from '../../../../supabase/queries/updates';
 import { Update, CaseUid, Case } from '../../../../types/types';
@@ -19,14 +20,15 @@ export default function UpdatesScreen() {
   const [updates, setUpdates] = useState<Update[]>([]);
 
   async function getUpdatesOnLoad(uid: CaseUid) {
-    fetchAllUpdates(uid).then(data => {
-      setUpdates(data);
-    });
+    fetchAllUpdates(uid)
+      .then(data => setUpdates(data))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   async function getCaseData(uid: CaseUid) {
-    const caseData = await getCaseById(uid);
-    setCaseData(caseData);
+    await getCaseById(uid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   useEffect(() => {

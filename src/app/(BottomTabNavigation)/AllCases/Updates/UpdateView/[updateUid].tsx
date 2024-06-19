@@ -7,6 +7,7 @@ import NotificationBell from '../../../../../../assets/red-notification-bell.svg
 import LoadingComponent from '../../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../../styles/fonts';
 import { device, shawdowStyles } from '../../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../../supabase/queries/auth';
 import { getUpdateById } from '../../../../../supabase/queries/updates';
 import { Update, UpdateUid } from '../../../../../types/types';
 import { formatDate } from '../../utils';
@@ -18,8 +19,9 @@ export default function UpdateView() {
   const [update, setUpdate] = useState<Update>();
 
   async function getUpdate(uid: UpdateUid) {
-    const update = await getUpdateById(uid);
-    setUpdate(update);
+    await getUpdateById(uid)
+      .then(update => setUpdate(update))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   useEffect(() => {

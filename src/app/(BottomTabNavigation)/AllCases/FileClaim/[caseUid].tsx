@@ -16,7 +16,10 @@ import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
-import { resetAndPushToRoute } from '../../../../supabase/queries/auth';
+import {
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid, ClaimStatus } from '../../../../types/types';
 import { openUrl } from '../utils';
@@ -28,13 +31,6 @@ export default function FileClaimScreen() {
 
   const { updateClaimStatus } = useCaseContext();
 
-  async function fetchCaseData() {
-    if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
-    }
-  }
-
   function navigateToClaimLink() {
     const claimLink = caseData?.claimLink;
     if (claimLink) {
@@ -42,18 +38,29 @@ export default function FileClaimScreen() {
     }
   }
 
+  async function fetchCaseData(caseUid: CaseUid) {
+    await getCaseById(caseUid)
+      .then(() => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
+  }
+
   async function confirmClaimFiled() {
     setQueryLoading(true);
-    if (caseUid !== undefined) {
-      await updateClaimStatus(caseUid, ClaimStatus.CLAIM_FILED);
-      resetAndPushToRoute('/AllCases');
-      router.push(`/AllCases/CaseScreen/${caseUid}`);
+    if (caseUid) {
+      await updateClaimStatus(caseUid, ClaimStatus.CLAIM_FILED)
+        .then(() => {
+          resetAndPushToRoute('/AllCases');
+          router.push(`/AllCases/CaseScreen/${caseUid}`);
+        })
+        .catch(response => fullStopErrorHandler(response));
     }
     setQueryLoading(false);
   }
 
   useEffect(() => {
-    fetchCaseData();
+    if (caseUid) {
+      fetchCaseData(caseUid);
+    }
   }, []);
 
   return (

@@ -15,6 +15,7 @@ import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
@@ -31,10 +32,13 @@ export default function AddCase() {
 
   const addToCases = async (newCase: Case) => {
     setQueryLoading(true);
-    await joinCase(newCase);
-    router.back();
-    router.replace('/AllCases');
-    setQueryLoading(false);
+    await joinCase(newCase)
+      .then(() => {
+        router.back();
+        router.replace('/AllCases');
+        setQueryLoading(false);
+      })
+      .catch(response => fullStopErrorHandler(response));
   };
 
   useEffect(() => {
