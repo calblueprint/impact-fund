@@ -14,6 +14,7 @@ import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpda
 import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, ClaimStatus } from '../../../../types/types';
 
@@ -25,13 +26,15 @@ function CaseScreen() {
   const { getClaimStatus } = useCaseContext();
 
   const getCase = async (caseUid: string) => {
-    const caseData = await getCaseById(caseUid);
-    setCaseData(caseData);
+    await getCaseById(caseUid)
+      .then((caseData: Case) => setCaseData(caseData))
+      .catch((response: any) => fullStopErrorHandler(response));
   };
 
   const getStatus = async (caseUid: string) => {
-    const caseStatus = await getClaimStatus(caseUid);
-    setStatus(caseStatus);
+    await getClaimStatus(caseUid)
+      .then((claimStatus: ClaimStatus) => setStatus(claimStatus))
+      .catch((response: any) => fullStopErrorHandler(response));
   };
 
   useEffect(() => {

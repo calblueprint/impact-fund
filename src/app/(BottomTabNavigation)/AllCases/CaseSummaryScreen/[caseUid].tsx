@@ -7,6 +7,7 @@ import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSu
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { device } from '../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case } from '../../../../types/types';
 
@@ -15,8 +16,9 @@ export default function CaseSummaryScreen() {
   const [caseData, setCaseData] = useState<Case>();
 
   const getCase = async (uid: string) => {
-    const caseData = await getCaseById(uid);
-    setCaseData(caseData);
+    await getCaseById(uid)
+      .then((caseData: Case) => setCaseData(caseData))
+      .catch((error: any) => fullStopErrorHandler(error));
   };
 
   useEffect(() => {
