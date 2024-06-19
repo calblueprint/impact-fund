@@ -106,7 +106,7 @@ export async function formatForm(
     };
     return completeForm;
   } catch (error) {
-    // propogate error downward for handling
+    console.warn('(formatForm)', error);
     throw error;
   }
 }

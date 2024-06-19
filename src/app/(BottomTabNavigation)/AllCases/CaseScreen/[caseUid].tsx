@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 
@@ -9,50 +9,45 @@ import ClaimStatusBar from '../../../../Components/ClaimStatusBar/ClaimStatusBar
 import EducationalBar from '../../../../Components/EducationalBar/EducationalBar';
 import EligibilityCard from '../../../../Components/EligibilityCard/EligibilityCard';
 import FormsCard from '../../../../Components/FormsCard/FormsCard';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import StatusUpdatesBar from '../../../../Components/StatusUpdatesBar/StatusUpdatesBar';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
-import { getCaseStatus, getCaseById } from '../../../../supabase/queries/cases';
-import { Case, Eligibility } from '../../../../types/types';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
+import { getCaseById } from '../../../../supabase/queries/cases';
+import { Case, ClaimStatus } from '../../../../types/types';
 
-function CaseScreen() {
+export default function CaseScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: string }>();
-  const [status, setStatus] = useState<Eligibility>();
+  const [status, setStatus] = useState<ClaimStatus>();
   const [caseData, setCaseData] = useState<Case>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const navigation = useNavigation();
 
-  const getCase = async (uid: string) => {
-    const caseData = await getCaseById(uid);
-    setCaseData(caseData);
-    setIsLoading(false);
+  const { getClaimStatus } = useCaseContext();
+
+  const getCase = async (caseUid: string) => {
+    await getCaseById(caseUid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   };
 
-  const getStatus = async (uid: string) => {
-    const caseStatus = await getCaseStatus(uid);
-    setStatus(caseStatus);
+  const getStatus = async (caseUid: string) => {
+    await getClaimStatus(caseUid)
+      .then(claimStatus => setStatus(claimStatus))
+      .catch(response => fullStopErrorHandler(response));
   };
 
   useEffect(() => {
-    if (caseUid !== undefined) {
+    if (caseUid) {
       getCase(caseUid);
+      getStatus(caseUid);
     }
   }, []);
 
-  useEffect(() => {
-    navigation.addListener('focus', async () => {
-      setIsLoading(true);
-      if (caseUid !== undefined) {
-        await getStatus(caseUid);
-      }
-      setIsLoading(false);
-    });
-  }, [navigation]);
-
   return (
     <View style={device.safeArea}>
-      {isLoading || caseData === undefined ? (
-        <Text>Loading...</Text>
+      {!caseData || !status ? (
+        <ScreenLoadingComponent />
       ) : (
         <ScrollView
           style={styles.outerScroll}
@@ -65,18 +60,18 @@ function CaseScreen() {
             </Text>
           </View>
 
-          {status === Eligibility.ELIGIBLE && (
+          {status === ClaimStatus.ELIGIBLE && (
             <EligibilityCard caseUid={caseData.id} />
           )}
 
-          {status === Eligibility.CLAIM_FILED && (
+          {status === ClaimStatus.CLAIM_FILED && (
             <ClaimStatusBar status="Claim Filed" />
           )}
 
           <CaseSummaryCard {...caseData} />
 
-          {(status === Eligibility.INELIGIBLE ||
-            status === Eligibility.UNDETERMINED) && (
+          {(status === ClaimStatus.INELIGIBLE ||
+            status === ClaimStatus.UNDETERMINED) && (
             <CheckEligibilityButton caseUid={caseData.id} />
           )}
           <StatusUpdatesBar
@@ -90,5 +85,3 @@ function CaseScreen() {
     </View>
   );
 }
-
-export default CaseScreen;

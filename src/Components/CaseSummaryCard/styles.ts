@@ -14,6 +14,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     borderTopRightRadius: 4,
     borderTopLeftRadius: 4,
+    backgroundColor: colors.lightGrey,
   },
   infoContainer: {
     flexDirection: 'column',

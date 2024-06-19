@@ -2,8 +2,8 @@ import {
   Case,
   CasePartial,
   CaseUid,
-  Eligibility,
   UserUid,
+  ScannerQueryResponse,
 } from '../../types/types';
 import supabase from '../createClient';
 
@@ -52,12 +52,16 @@ export async function getAllCaseIds(): Promise<CaseUid[]> {
     }
     return data.map(item => item.caseId as CaseUid);
   } catch (error) {
-    console.warn(error);
+    console.warn('(getAllCaseIds)', error);
     throw error;
   }
 }
 
-// Fetch a single case using its ID
+/**
+ * Fetch a single `Case` by it's id.
+ * @param caseId target case id.
+ * @returns `Case` data.
+ */
 export async function getCaseById(caseId: CaseUid): Promise<Case> {
   try {
     const { data } = await supabase.from('cases').select().eq('caseId', caseId);
@@ -70,16 +74,6 @@ export async function getCaseById(caseId: CaseUid): Promise<Case> {
     throw error;
   }
 }
-
-type ScannerQueryResponse =
-  | {
-      data: { case: Case };
-      error: null;
-    }
-  | {
-      data: null;
-      error: any;
-    };
 
 /**
  * Query supabase according to the QR code scanner result.
@@ -115,41 +109,6 @@ export async function getScannedData(
 }
 
 /**
- * Create a case-user association on supabase.
- * @param caseId case being added.
- * @param userId user joining that case.
- */
-export async function addCase(caseId: CaseUid, userId: UserUid): Promise<void> {
-  try {
-    await supabase.from('status').insert({ caseId, userId });
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
-/**
- * Remove a case-user association from supabase.
- * @param caseId case to be removed.
- * @param userId user leaving the case.
- */
-export async function removeCase(
-  caseId: CaseUid,
-  userId: UserUid,
-): Promise<void> {
-  try {
-    await supabase
-      .from('status')
-      .delete()
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-  } catch (error) {
-    console.warn(error);
-    throw error;
-  }
-}
-
-/**
  * Fetch the Case objects corresponding to an array of `CaseId`s. Fetches cases from `cases` table.
  *
  * @param caseIds list of `CaseId`s
@@ -180,6 +139,12 @@ export async function getCasesByIds(caseIds: CaseUid[]): Promise<Case[]> {
   }
 }
 
+/**
+ * Format raw case data from supabase into `Case` object.
+ *
+ * @param item raw supabase data.
+ * @returns `Case` object.
+ */
 export async function formatCase(item: any): Promise<Case> {
   const partialCase = formatPartialCaseFromQuery(item);
   const imageUrl = await getImageUrl(partialCase.id);
@@ -189,6 +154,7 @@ export async function formatCase(item: any): Promise<Case> {
   };
   return caseData;
 }
+
 /**
  * Parse supabase case query and return `CasePartial` object.
  *
@@ -212,56 +178,6 @@ export function formatPartialCaseFromQuery(item: any): CasePartial {
     featuredFormName: item.featuredFormName,
   };
   return formattedPartial;
-}
-
-/**
- * Update a specific User/Case status
- *
- * @param caseId specified caseId
- * @param status status to be updated in the specific User/Case row
- * @returns nothing
- */
-export async function updateCaseStatus(
-  caseId: CaseUid,
-  status: Eligibility,
-): Promise<void> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    await supabase
-      .from('status')
-      .update({ eligibility: status })
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(updateCaseStatus)', error);
-    throw error;
-  }
-}
-
-export async function getCaseStatus(caseId: CaseUid): Promise<Eligibility> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    const { data } = await supabase
-      .from('status')
-      .select()
-      .eq('userId', userId)
-      .eq('caseId', caseId);
-    if (!data) {
-      throw new Error('Status not found');
-    }
-    return data[0].eligibility;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('(getCaseStatus)', error);
-    throw error;
-  }
 }
 
 /**

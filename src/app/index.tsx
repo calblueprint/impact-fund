@@ -1,5 +1,3 @@
-import 'react-native-gesture-handler';
-import { router } from 'expo-router';
 import { useEffect } from 'react';
 
 import supabase from '../supabase/createClient';
@@ -7,13 +5,7 @@ import {
   registerForPushNotifications,
   updatePushToken,
 } from '../supabase/pushNotifications';
-
-const resetAndPushToRouter = (path: string) => {
-  while (router.canGoBack()) {
-    router.back();
-  }
-  router.replace(path);
-};
+import { resetAndPushToRoute } from '../supabase/queries/auth';
 
 function StartScreen() {
   useEffect(() => {
@@ -21,10 +13,10 @@ function StartScreen() {
       // determine routing based on supabase auth events
       if (session) {
         if (_event !== 'USER_UPDATED') {
-          resetAndPushToRouter('/AllCases');
+          resetAndPushToRoute('/AllCases');
         }
       } else {
-        resetAndPushToRouter('/Welcome');
+        resetAndPushToRoute('/Welcome');
       }
       // generate a new push token on sign in
       if (session && _event === 'SIGNED_IN') {

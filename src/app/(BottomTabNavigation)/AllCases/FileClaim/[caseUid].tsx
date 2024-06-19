@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import BlackRightArrow from '../../../../../assets/black-right-arrow.svg';
 import Document from '../../../../../assets/document-add.svg';
@@ -11,26 +11,25 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
 import {
-  getCaseById,
-  updateCaseStatus,
-} from '../../../../supabase/queries/cases';
-import { Case, CaseUid, Eligibility } from '../../../../types/types';
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../supabase/queries/auth';
+import { getCaseById } from '../../../../supabase/queries/cases';
+import { Case, CaseUid, ClaimStatus } from '../../../../types/types';
 import { openUrl } from '../utils';
 
 export default function FileClaimScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
-  async function confirmClaimFiled() {
-    if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, Eligibility.CLAIM_FILED);
-      router.back();
-    }
-  }
+  const { updateClaimStatus } = useCaseContext();
 
   function navigateToClaimLink() {
     const claimLink = caseData?.claimLink;
@@ -39,21 +38,35 @@ export default function FileClaimScreen() {
     }
   }
 
-  async function fetchCaseData() {
+  async function fetchCaseData(caseUid: CaseUid) {
+    await getCaseById(caseUid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
+  }
+
+  async function confirmClaimFiled() {
+    setQueryLoading(true);
     if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
+      await updateClaimStatus(caseUid, ClaimStatus.CLAIM_FILED)
+        .then(() => {
+          resetAndPushToRoute('/AllCases');
+          router.push(`/AllCases/CaseScreen/${caseUid}`);
+        })
+        .catch(response => fullStopErrorHandler(response));
     }
+    setQueryLoading(false);
   }
 
   useEffect(() => {
-    fetchCaseData();
+    if (caseUid) {
+      fetchCaseData(caseUid);
+    }
   }, []);
 
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <ScreenLoadingComponent />
       ) : (
         <View style={instruction.screenContainer}>
           <View style={instruction.contentContainer}>
@@ -99,9 +112,12 @@ export default function FileClaimScreen() {
               <BlackRightArrow />
             </ButtonWhite>
 
-            <ButtonBlack onPress={() => confirmClaimFiled()}>
+            <ButtonBlack
+              onPress={() => confirmClaimFiled()}
+              disabled={queryLoading}
+            >
               <Text style={fonts.whiteButton}>I’ve already filed a claim!</Text>
-              <RightWhiteArrow />
+              {queryLoading ? <ActivityIndicator /> : <RightWhiteArrow />}
             </ButtonBlack>
           </View>
         </View>

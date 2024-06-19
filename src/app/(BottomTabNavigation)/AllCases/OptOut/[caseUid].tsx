@@ -10,9 +10,11 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { instruction } from '../../../../styles/instruction';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { Case, CaseUid } from '../../../../types/types';
 import { openUrl } from '../utils';
@@ -21,11 +23,10 @@ export default function OptOutScreen() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
   const [caseData, setCaseData] = useState<Case>();
 
-  async function fetchCaseData() {
-    if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
-    }
+  async function fetchCaseData(caseUid: CaseUid) {
+    await getCaseById(caseUid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   function navigateToOptOutLink() {
@@ -36,13 +37,15 @@ export default function OptOutScreen() {
   }
 
   useEffect(() => {
-    fetchCaseData();
+    if (caseUid) {
+      fetchCaseData(caseUid);
+    }
   }, []);
 
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <ScreenLoadingComponent />
       ) : (
         <View style={instruction.screenContainer}>
           <View style={instruction.contentContainer}>

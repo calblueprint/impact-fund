@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useContext, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import styles from './styles';
 import AddCaseIcon from '../../../../../assets/add-case-icon.svg';
@@ -10,27 +10,35 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import CaseSummaryContent from '../../../../Components/CaseSummaryContent/CaseSummaryContent';
-import { CaseContext } from '../../../../context/CaseContext';
+import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { getCaseById } from '../../../../supabase/queries/cases';
 import { CaseUid, Case } from '../../../../types/types';
 
 export default function AddCase() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { joinCase } = useContext(CaseContext);
+  const { joinCase } = useCaseContext();
   const [caseData, setCaseData] = useState<Case>();
-
-  const addToCases = async (newCase: Case) => {
-    await joinCase(newCase);
-    router.back();
-    router.replace('/AllCases');
-  };
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   const getCase = async (uid: CaseUid) => {
     const caseData = await getCaseById(uid);
     setCaseData(caseData);
+  };
+
+  const addToCases = async (newCase: Case) => {
+    setQueryLoading(true);
+    await joinCase(newCase)
+      .then(() => {
+        router.back();
+        router.replace('/AllCases');
+        setQueryLoading(false);
+      })
+      .catch(response => fullStopErrorHandler(response));
   };
 
   useEffect(() => {
@@ -42,7 +50,7 @@ export default function AddCase() {
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <LoadingComponent />
       ) : (
         <>
           <CaseSummaryContent {...caseData} />
@@ -60,11 +68,12 @@ export default function AddCase() {
 
             <ButtonBlack
               onPress={() => addToCases(caseData)}
+              disabled={queryLoading}
               $halfWidth
               $centeredContent
             >
               <View style={input.groupButtonContent}>
-                <AddCaseIcon />
+                {queryLoading ? <ActivityIndicator /> : <AddCaseIcon />}
                 <Text style={fonts.whiteButton}>Add Case</Text>
               </View>
             </ButtonBlack>

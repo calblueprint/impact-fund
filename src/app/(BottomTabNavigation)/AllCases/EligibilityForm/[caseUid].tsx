@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 import Check from '../../../../../assets/check-circle.svg';
@@ -12,18 +12,21 @@ import {
   ButtonWhite,
 } from '../../../../Components/AuthButton/AuthButton';
 import PressableRequirement from '../../../../Components/PressableRequirement/PressableRequirement';
+import ScreenLoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
+import { useCaseContext } from '../../../../context/CaseContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
 import {
-  updateCaseStatus,
-  getCaseById,
-} from '../../../../supabase/queries/cases';
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../supabase/queries/auth';
+import { getCaseById } from '../../../../supabase/queries/cases';
 import { getRequirementsByCaseUid } from '../../../../supabase/queries/eligibility';
 import {
   Case,
   CaseUid,
-  Eligibility,
+  ClaimStatus,
   EligibilityRequirement,
 } from '../../../../types/types';
 
@@ -34,26 +37,33 @@ export default function EligibilityForm() {
     EligibilityRequirement[]
   >([]);
   const [checkCount, setCheckCount] = useState(0);
+  const [queryLoading, setQueryLoading] = useState(false);
 
-  async function fetchCaseData() {
-    if (caseUid) {
-      const caseData = await getCaseById(caseUid);
-      setCaseData(caseData);
-    }
+  const { updateClaimStatus } = useCaseContext();
+
+  async function fetchCaseData(caseUid: CaseUid) {
+    await getCaseById(caseUid)
+      .then(caseData => setCaseData(caseData))
+      .catch(response => fullStopErrorHandler(response));
   }
 
-  async function fetchEligibilityRequirments() {
-    if (caseUid) {
-      const requirements = await getRequirementsByCaseUid(caseUid);
-      setEligibilityRequirements(requirements);
-    }
+  async function fetchEligibilityRequirments(caseUid: CaseUid) {
+    await getRequirementsByCaseUid(caseUid)
+      .then(requirements => setEligibilityRequirements(requirements))
+      .catch(response => fullStopErrorHandler(response));
   }
 
   async function confirmEligibility() {
+    setQueryLoading(true);
     if (caseUid !== undefined) {
-      await updateCaseStatus(caseUid, Eligibility.ELIGIBLE);
-      router.back();
+      await updateClaimStatus(caseUid, ClaimStatus.ELIGIBLE)
+        .then(() => {
+          resetAndPushToRoute('/AllCases');
+          router.push(`/AllCases/CaseScreen/${caseUid}`);
+        })
+        .catch(response => fullStopErrorHandler(response));
     }
+    setQueryLoading(false);
   }
 
   function confirmIneligibility() {
@@ -61,14 +71,16 @@ export default function EligibilityForm() {
   }
 
   useEffect(() => {
-    fetchCaseData();
-    fetchEligibilityRequirments();
+    if (caseUid) {
+      fetchCaseData(caseUid);
+      fetchEligibilityRequirments(caseUid);
+    }
   }, []);
 
   return (
     <View style={device.safeArea}>
       {caseData === undefined ? (
-        <Text>Loading...</Text>
+        <ScreenLoadingComponent />
       ) : (
         <FlatList
           style={styles.contentContainer}
@@ -123,13 +135,16 @@ export default function EligibilityForm() {
                   </View>
                 </ButtonWhite>
                 <ButtonBlack
-                  disabled={checkCount !== eligibilityRequirements.length}
+                  disabled={
+                    checkCount !== eligibilityRequirements.length ||
+                    queryLoading
+                  }
                   onPress={() => confirmEligibility()}
                   $halfWidth
                   $centeredContent
                 >
                   <View style={input.groupButtonContent}>
-                    <Check />
+                    {queryLoading ? <ActivityIndicator /> : <Check />}
                     <Text style={fonts.whiteButton}>Yes, I do</Text>
                   </View>
                 </ButtonBlack>
