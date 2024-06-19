@@ -17,7 +17,7 @@ export default function ScreenLoadingComponent() {
       setTimeout(() => {
         setTimeoutReached(true);
       }, 10000);
-    }, 7000);
+    }, 5000);
   }, []);
 
   return (
@@ -29,8 +29,10 @@ export default function ScreenLoadingComponent() {
             <Text style={fonts.body}>This is taking longer than usual...</Text>
           ) : (
             <Text style={fonts.body}>
-              Failing to connect with Impact Fund servers. Please check your
-              connection or try again later.
+              There seems to be an issue connecting with Impact Fund servers...{' '}
+              {'\n'}
+              {'\n'}
+              Please check your internet connection or try again later.
             </Text>
           )}
         </View>

@@ -45,6 +45,10 @@ export async function resetAndPushToHome() {
   }
 }
 
+/**
+ * Alerts the user that an error has occurred. Routes them away from the erroring screen.
+ * @param path
+ */
 export function fullStopErrorHandler(response: any) {
   let alertMessage: string;
   if (isError(response)) {
