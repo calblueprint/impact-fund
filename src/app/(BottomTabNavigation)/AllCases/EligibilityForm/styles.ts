@@ -51,6 +51,7 @@ export default StyleSheet.create({
   imageContainer: {
     aspectRatio: 1.75,
     borderRadius: 5,
+    backgroundColor: colors.lightGrey,
   },
   titleText: {
     fontWeight: 'bold',

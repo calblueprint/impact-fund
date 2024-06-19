@@ -62,7 +62,7 @@ export interface EligibilityRequirement {
   requirement: string;
 }
 
-export enum Eligibility {
+export enum ClaimStatus {
   ELIGIBLE = 'ELIGIBLE',
   INELIGIBLE = 'INELIGIBLE',
   UNDETERMINED = 'UNDETERMINED',
@@ -106,3 +106,13 @@ export enum YellowStatusOptions {
 export enum RedStatusOptions {
   'Action Required',
 }
+
+export type ScannerQueryResponse =
+  | {
+      data: { case: Case };
+      error: null;
+    }
+  | {
+      data: null;
+      error: any;
+    };

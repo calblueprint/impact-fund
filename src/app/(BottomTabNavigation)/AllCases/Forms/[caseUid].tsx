@@ -6,8 +6,10 @@ import styles from './styles';
 import { getAllForms } from './utils';
 import ExternalSiteLink from '../../../../Components/ExternalSiteLink/ExternalSiteLink';
 import FormListItem from '../../../../Components/FormListItem/FormListItem';
+import LoadingComponent from '../../../../Components/ScreenLoadingComponent/ScreenLoadingComponent';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
+import { fullStopErrorHandler } from '../../../../supabase/queries/auth';
 import { Form, CaseUid } from '../../../../types/types';
 
 export default function FormsScreen() {
@@ -19,15 +21,17 @@ export default function FormsScreen() {
   const [forms, setForms] = useState<Form[]>([]);
 
   async function getFormsOnLoad(uid: CaseUid) {
-    getAllForms(uid).then(data => {
-      if (data.length > 0) {
-        setForms(data);
-      }
-    });
+    getAllForms(uid)
+      .then(data => {
+        if (data.length > 0) {
+          setForms(data);
+        }
+      })
+      .catch(response => fullStopErrorHandler(response));
   }
 
   useEffect(() => {
-    if (caseUid !== undefined) {
+    if (caseUid) {
       getFormsOnLoad(caseUid);
     }
   }, []);
@@ -38,14 +42,18 @@ export default function FormsScreen() {
         <View style={styles.headerContainer}>
           <Text style={fonts.tabHeading}>Documents</Text>
         </View>
-        <View style={styles.formsContainer}>
-          <FlatList
-            data={forms}
-            keyExtractor={item => item.formUid}
-            ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
-            renderItem={({ item }) => <FormListItem {...item} />}
-          />
-        </View>
+        {forms.length === 0 ? (
+          <LoadingComponent />
+        ) : (
+          <View style={styles.formsContainer}>
+            <FlatList
+              data={forms}
+              keyExtractor={item => item.formUid}
+              ItemSeparatorComponent={() => <View style={styles.lineStyle} />}
+              renderItem={({ item }) => <FormListItem {...item} />}
+            />
+          </View>
+        )}
       </View>
       {caseSite === undefined ? null : (
         <View style={styles.linkContainer}>

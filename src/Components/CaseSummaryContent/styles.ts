@@ -18,6 +18,7 @@ export default StyleSheet.create({
     borderRadius: 5,
     marginTop: 30,
     marginBottom: 20,
+    backgroundColor: colors.lightGrey,
   },
   summaryContainer: {
     width: '100%',

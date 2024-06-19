@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useContext } from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import CircleCheckWhite from '../../../../../../assets/circle-check-white.svg';
 import LittlePerson from '../../../../../../assets/little-person.svg';
@@ -10,24 +10,30 @@ import {
   ButtonBlack,
   ButtonWhite,
 } from '../../../../../Components/AuthButton/AuthButton';
-import { CaseContext } from '../../../../../context/CaseContext';
+import { useCaseContext } from '../../../../../context/CaseContext';
 import { fonts } from '../../../../../styles/fonts';
 import { device } from '../../../../../styles/global';
 import { input } from '../../../../../styles/input';
 import { instruction } from '../../../../../styles/instruction';
+import {
+  fullStopErrorHandler,
+  resetAndPushToRoute,
+} from '../../../../../supabase/queries/auth';
 import { CaseUid } from '../../../../../types/types';
 
 function ConfirmOptOut() {
   const { caseUid } = useLocalSearchParams<{ caseUid: CaseUid }>();
-  const { leaveCase } = useContext(CaseContext);
+  const { leaveCase } = useCaseContext();
+  const [queryLoading, setQueryLoading] = useState<boolean>(false);
 
   async function deleteCase() {
-    if (caseUid !== undefined) {
-      await leaveCase(caseUid);
-      router.push({
-        pathname: '/AllCases',
-      });
+    setQueryLoading(true);
+    if (caseUid) {
+      await leaveCase(caseUid)
+        .then(() => resetAndPushToRoute('/AllCases'))
+        .catch(response => fullStopErrorHandler(response));
     }
+    setQueryLoading(false);
   }
 
   return (
@@ -72,9 +78,14 @@ function ConfirmOptOut() {
             </View>
           </ButtonWhite>
 
-          <ButtonBlack onPress={deleteCase} $halfWidth $centeredContent>
+          <ButtonBlack
+            onPress={deleteCase}
+            disabled={queryLoading}
+            $halfWidth
+            $centeredContent
+          >
             <View style={input.groupButtonContent}>
-              <CircleCheckWhite />
+              {queryLoading ? <ActivityIndicator /> : <CircleCheckWhite />}
               <Text style={fonts.whiteButton}>Continue</Text>
             </View>
           </ButtonBlack>
