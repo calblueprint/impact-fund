@@ -15,7 +15,7 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   infoContainer: {
-    width: '62%',
+    width: '56%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     paddingVertical: 7,
@@ -28,7 +28,7 @@ export default StyleSheet.create({
   },
   statusContainer: {
     height: 27,
-    width: 129,
+    paddingHorizontal: 3,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',

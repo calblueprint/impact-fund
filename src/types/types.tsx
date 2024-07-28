@@ -101,6 +101,7 @@ export enum GreenStatusOptions {
 
 export enum YellowStatusOptions {
   'Pending',
+  'Opt-Out Deadline Approaching',
 }
 
 export enum RedStatusOptions {
