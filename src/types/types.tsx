@@ -82,12 +82,13 @@ export const userInstance: User = {
 export interface Update {
   updateUid: UpdateUid;
   caseUid: CaseUid;
-  title: string;
-  blurb: string;
-  category: string;
   date: Date;
-  summary: string;
-  lawFirm: string;
+  title: string;
+  category: string;
+  description: string;
+  notificationTitle: string;
+  notificaitonBody: string;
+  sender: string;
 }
 
 export enum GreenStatusOptions {

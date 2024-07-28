@@ -28,7 +28,7 @@ export default function UpdateItem(updateData: Update) {
           </Text>
         </View>
         <Text style={styles.bottomText}>
-          {formatDate(updateData.date)} • {updateData.lawFirm}
+          {formatDate(updateData.date)} • {updateData.sender}
         </Text>
       </View>
     </TouchableOpacity>
