@@ -52,7 +52,7 @@ export default function UpdateView() {
               </View>
               <View style={styles.inLineSubInfo}>
                 <Text style={[styles.subText, styles.lawFirmText]}>
-                  {update.lawFirm}
+                  {update.sender}
                 </Text>
                 <Text style={[styles.subText, styles.dateText]}>
                   {' '}
@@ -60,7 +60,7 @@ export default function UpdateView() {
                 </Text>
               </View>
               <Text style={[fonts.body, styles.bodyText]}>
-                {update.summary}
+                {update.description}
               </Text>
             </View>
           </ScrollView>

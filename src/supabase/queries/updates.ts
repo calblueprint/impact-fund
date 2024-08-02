@@ -13,10 +13,10 @@ export async function fetchAllUpdates(caseUid: CaseUid): Promise<Update[]> {
     const { data } = await supabase
       .from('updates')
       .select()
-      .eq('caseUUID', caseUid);
+      .eq('caseId', caseUid);
 
     if (!data) {
-      throw new Error(`no updates found for the given case: ${caseUid}`);
+      return [];
     }
     // return a list of properly formatted `Updates`s
     const unsortedUpdates = await Promise.all(
@@ -40,13 +40,14 @@ export async function fetchAllUpdates(caseUid: CaseUid): Promise<Update[]> {
 export function formatUpdate(item: any): Update {
   const updateData: Update = {
     updateUid: item.updateId,
-    caseUid: item.caseUUID,
+    caseUid: item.caseId,
     title: item.title,
-    blurb: item.blurb,
     category: item.category,
     date: item.date,
-    summary: item.summary,
-    lawFirm: item.lawFirm,
+    description: item.description,
+    notificationTitle: item.notification_title,
+    notificaitonBody: item.notifcation_body,
+    sender: item.sender,
   };
   return updateData;
 }

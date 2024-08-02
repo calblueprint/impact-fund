@@ -10,6 +10,7 @@ import { useSession } from '../../../../context/AuthContext';
 import { fonts } from '../../../../styles/fonts';
 import { device } from '../../../../styles/global';
 import { input } from '../../../../styles/input';
+import { emailExists } from '../../../../supabase/queries/auth';
 
 export default function SignUpScreen() {
   const { fullName } = useLocalSearchParams() as unknown as {
@@ -47,8 +48,9 @@ export default function SignUpScreen() {
     setConfirmPassword(text);
   };
 
-  const validateEmail = (): boolean => {
+  const validateEmailString = (): boolean => {
     try {
+      // email string validation
       const emailSchema = z.string().email();
       emailSchema.parse(email);
       setErrorExists(false);
@@ -58,6 +60,16 @@ export default function SignUpScreen() {
       setErrorMessage('Sorry! Invalid email address.');
       return false;
     }
+  };
+
+  const validateDuplicateEmail = async (): Promise<boolean> => {
+    if (await emailExists(email)) {
+      setErrorExists(true);
+      setErrorMessage('An account with this email already exists!');
+      return false;
+    }
+    setErrorExists(false);
+    return true;
   };
 
   const validatePassword = (): boolean => {
@@ -83,10 +95,14 @@ export default function SignUpScreen() {
 
   const handleSubmit = async () => {
     setQueryLoading(true);
-    if (validateEmail() && validateConfirmPassword() && validatePassword()) {
+    if (
+      validateEmailString() &&
+      (await validateDuplicateEmail()) &&
+      validateConfirmPassword() &&
+      validatePassword()
+    ) {
       const error = await sendSignUpOtp(email, {
         fullName,
-        password,
         streetAddress,
         city,
         state,
