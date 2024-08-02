@@ -18,6 +18,7 @@ export default StyleSheet.create({
 
     borderWidth: 0.3,
     borderRadius: 5,
+    paddingHorizontal: 3,
   },
   statusText: {
     fontSize: 18,

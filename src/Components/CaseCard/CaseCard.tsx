@@ -29,7 +29,11 @@ function CaseCard(caseData: Case) {
           </Text>
 
           <View style={[styles.statusContainer, statusColor.background]}>
-            <Text style={[styles.statusText, statusColor.text]}>
+            <Text
+              style={[styles.statusText, statusColor.text]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {caseData.caseStatus}
             </Text>
           </View>
