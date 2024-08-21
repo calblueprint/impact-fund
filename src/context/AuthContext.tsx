@@ -6,12 +6,15 @@ import {
   UserMetadata,
   isAuthError,
 } from '@supabase/supabase-js';
+import * as Notifications from 'expo-notifications';
+import { router } from 'expo-router';
 import React, {
   createContext,
   useContext,
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
 
 import supabaseAdmin from '../supabase/createAdminClient';
@@ -51,6 +54,22 @@ export interface AuthState {
 
 const AuthContext = createContext({} as AuthState);
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+function routeUserToUpdate(response: Notifications.NotificationResponse) {
+  const updateId = response.notification.request.content.data.updateId;
+  const caseId = response.notification.request.content.data.caseId;
+  router.push(`/AllCases/CaseScreen/${caseId}`);
+  router.push(`/AllCases/Updates/${caseId}`);
+  router.push(`/AllCases/Updates/UpdateView/${updateId}`);
+}
+
 export function useSession() {
   return useContext(AuthContext);
 }
@@ -63,6 +82,7 @@ export function AuthContextProvider({
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const responseListener = useRef<Notifications.Subscription>();
 
   useEffect(() => {
     supabase.auth
@@ -70,6 +90,11 @@ export function AuthContextProvider({
       .then(({ data: { session: newSession } }) => {
         setSession(newSession);
         setUser(newSession ? newSession.user : null);
+
+        responseListener.current =
+          Notifications.addNotificationResponseReceivedListener(response => {
+            routeUserToUpdate(response);
+          });
       })
       .finally(() => {
         setIsLoading(false);
@@ -78,6 +103,9 @@ export function AuthContextProvider({
     supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
     });
+
+    return () =>
+      Notifications.removeNotificationSubscription(responseListener.current!);
   }, []);
 
   const signInWithEmail = async (
