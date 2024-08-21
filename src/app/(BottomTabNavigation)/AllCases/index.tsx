@@ -1,5 +1,5 @@
-import * as Notifications from 'expo-notifications';
-import { router } from 'expo-router';
+// import * as Notifications from 'expo-notifications';
+// import { router } from 'expo-router';
 import React, { useEffect, useRef } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
@@ -12,37 +12,37 @@ import { device } from '../../../styles/global';
 
 import 'react-native-url-polyfill/auto';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
 
 function CasesScreen() {
-  const responseListener = useRef<Notifications.Subscription>();
+  // const responseListener = useRef<Notifications.Subscription>();
 
   const { allCases, loading } = useCaseContext();
 
-  function routeUserToUpdate(response: Notifications.NotificationResponse) {
-    const updateId = response.notification.request.content.data.updateId;
-    const caseId = response.notification.request.content.data.caseId;
-    router.push(`/AllCases/CaseScreen/${caseId}`);
-    router.push(`/AllCases/Updates/${caseId}`);
-    router.push(`/AllCases/Updates/UpdateView/${updateId}`);
-  }
+  // function routeUserToUpdate(response: Notifications.NotificationResponse) {
+  //   const updateId = response.notification.request.content.data.updateId;
+  //   const caseId = response.notification.request.content.data.caseId;
+  //   router.push(`/AllCases/CaseScreen/${caseId}`);
+  //   router.push(`/AllCases/Updates/${caseId}`);
+  //   router.push(`/AllCases/Updates/UpdateView/${updateId}`);
+  // }
 
-  useEffect(() => {
-    // triggered when a user presses on the notification
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener(response =>
-        routeUserToUpdate(response),
-      );
+  // useEffect(() => {
+  //   // triggered when a user presses on the notification
+  //   responseListener.current =
+  //     Notifications.addNotificationResponseReceivedListener(response => {
+  //       routeUserToUpdate(response);
+  //     });
 
-    return () =>
-      Notifications.removeNotificationSubscription(responseListener.current!);
-  }, []);
+  //   return () =>
+  //     Notifications.removeNotificationSubscription(responseListener.current!);
+  // }, []);
 
   return (
     <View style={device.safeArea}>
