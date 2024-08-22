@@ -7,7 +7,6 @@ import {
   isAuthError,
 } from '@supabase/supabase-js';
 import * as Notifications from 'expo-notifications';
-import { router } from 'expo-router';
 import React, {
   createContext,
   useContext,
@@ -19,7 +18,10 @@ import React, {
 
 import supabaseAdmin from '../supabase/createAdminClient';
 import supabase from '../supabase/createClient';
-import { removePushToken } from '../supabase/pushNotifications';
+import {
+  removePushToken,
+  routeUserToUpdate,
+} from '../supabase/pushNotifications';
 
 /**
  * To use AuthContext, import useSession() in whichever file you prefer.
@@ -62,14 +64,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-function routeUserToUpdate(response: Notifications.NotificationResponse) {
-  const updateId = response.notification.request.content.data.updateId;
-  const caseId = response.notification.request.content.data.caseId;
-  router.push(`/AllCases/CaseScreen/${caseId}`);
-  router.push(`/AllCases/Updates/${caseId}`);
-  router.push(`/AllCases/Updates/UpdateView/${updateId}`);
-}
-
 export function useSession() {
   return useContext(AuthContext);
 }
@@ -90,14 +84,16 @@ export function AuthContextProvider({
       .then(({ data: { session: newSession } }) => {
         setSession(newSession);
         setUser(newSession ? newSession.user : null);
-
-        responseListener.current =
-          Notifications.addNotificationResponseReceivedListener(response => {
-            routeUserToUpdate(response);
-          });
       })
       .finally(() => {
         setIsLoading(false);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener(response => {
+        supabase.auth.getSession().then(() => {
+          routeUserToUpdate(response);
+        });
       });
 
     supabase.auth.onAuthStateChange((_event, newSession) => {

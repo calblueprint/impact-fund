@@ -15,14 +15,15 @@ function StartScreen() {
         if (_event !== 'USER_UPDATED') {
           resetAndPushToRoute('/AllCases');
         }
+
+        // generate a new push token on sign in
+        if (_event === 'SIGNED_IN') {
+          registerForPushNotifications().then(async (token: string) => {
+            updatePushToken(session.user.id, token);
+          });
+        }
       } else {
         resetAndPushToRoute('/Welcome');
-      }
-      // generate a new push token on sign in
-      if (session && _event === 'SIGNED_IN') {
-        registerForPushNotifications().then(async (token: string) => {
-          updatePushToken(session.user.id, token);
-        });
       }
     });
   }, []);
