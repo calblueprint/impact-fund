@@ -31,15 +31,15 @@ function useNotificationObserver() {
       routeUserToUpdate(response);
     });
 
-    const subscription = Notifications.addNotificationResponseReceivedListener(
-      response => {
-        routeUserToUpdate(response);
-      },
-    );
+    // const subscription = Notifications.addNotificationResponseReceivedListener(
+    //   response => {
+    //     routeUserToUpdate(response);
+    //   },
+    // );
 
     return () => {
       isMounted = false;
-      subscription.remove();
+      // subscription.remove();
     };
   }, []);
 }
