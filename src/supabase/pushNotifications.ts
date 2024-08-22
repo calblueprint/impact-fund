@@ -1,5 +1,6 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { router } from 'expo-router';
 import { Platform } from 'react-native';
 
 import supabase from './createClient';
@@ -73,4 +74,18 @@ export async function removePushToken(userId: string) {
     console.warn('(removePushToken)', error);
     throw error;
   }
+}
+
+/**
+ * Route user to the correct update upon pressing a notification.
+ * @param response response generated when a user presses a notification.
+ */
+export function routeUserToUpdate(
+  response: Notifications.NotificationResponse,
+) {
+  const updateId = response.notification.request.content.data.updateId;
+  const caseId = response.notification.request.content.data.caseId;
+  router.push(`/AllCases/CaseScreen/${caseId}`);
+  router.push(`/AllCases/Updates/${caseId}`);
+  router.push(`/AllCases/Updates/UpdateView/${updateId}`);
 }
