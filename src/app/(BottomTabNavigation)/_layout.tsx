@@ -1,5 +1,6 @@
+import * as Notifications from 'expo-notifications';
 import { Tabs } from 'expo-router/tabs';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import GreyHomeIcon from '../../../assets/bottom-tab-home-inactive.svg';
 import RedHomeIcon from '../../../assets/bottom-tab-home.svg';
@@ -9,8 +10,43 @@ import GreyGearIcon from '../../../assets/bottom-tab-settings-gear-inactive.svg'
 import RedGearIcon from '../../../assets/bottom-tab-settings-gear.svg';
 import TabBarItem from '../../Components/TabBarItem/TabBarItem';
 import { CaseContextProvider } from '../../context/CaseContext';
+import { routeUserToUpdate } from '../../supabase/pushNotifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+function useNotificationObserver() {
+  useEffect(() => {
+    let isMounted = true;
+
+    Notifications.getLastNotificationResponseAsync().then(response => {
+      if (!isMounted || !response?.notification) {
+        return;
+      }
+      routeUserToUpdate(response);
+    });
+
+    const subscription = Notifications.addNotificationResponseReceivedListener(
+      response => {
+        routeUserToUpdate(response);
+      },
+    );
+
+    return () => {
+      isMounted = false;
+      subscription.remove();
+    };
+  }, []);
+}
 
 export default function AppLayout() {
+  useNotificationObserver();
+
   return (
     <CaseContextProvider>
       <Tabs
